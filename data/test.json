@@ -1,0 +1,52 @@
+[
+    {
+        "type": "CLASS",
+        "name": "Class A-A",
+        "metrics": {
+            "loc": 100,
+            "cc": 0.81,
+            "moc": 4
+        },
+        "children": []
+    },
+    {
+        "type": "CLASS",
+        "name": "Class A-B",
+        "metrics": {
+            "loc": 200,
+            "cc": 0.55,
+            "moc": 15
+        },
+        "children": []
+    },
+    {
+        "type": "CLASS",
+        "name": "Class A-C",
+        "metrics": {
+            "loc": 34,
+            "cc": 0.3,
+            "moc": 2
+        },
+        "children": []
+    },
+    {
+        "type": "CLASS",
+        "name": "Class A-D",
+        "metrics": {
+            "loc": 150,
+            "cc": 0.65,
+            "moc": 10
+        },
+        "children": []
+    },
+    {
+        "type": "CLASS",
+        "name": "Class A-E",
+        "metrics": {
+            "loc": 50,
+            "cc": 0.65,
+            "moc": 10
+        },
+        "children": []
+    }
+]
