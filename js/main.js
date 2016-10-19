@@ -5,6 +5,66 @@ import {Block} from './Block.js';
     var application = new Application();
     const BLOCK_SPACING = 50;
 
+    d3.json('data/metrics.json', (error, data) => {
+        calculate(data.children);
+        draw(data.children);
+    });
+
+    function draw(elements, parent) {
+        elements.forEach((element) => {
+            var color = getRandomColor();
+
+            var cube = new Block(color);
+            cube.position.x = element.fit.x + (parent ? parent.fit.x : 0);
+            cube.position.y = element.height;
+            cube.position.z = element.fit.y + (parent ? parent.fit.y : 0);
+
+            cube.scale.x = element.w - BLOCK_SPACING;
+            cube.scale.y = 100;
+            cube.scale.z = element.h - BLOCK_SPACING;
+
+            application.getScene().add(cube);
+
+            if (element.children && element.children.length > 0) {
+                draw(element.children, element);
+            }
+        });
+    }
+
+    function calculate(elements, height = 0) {
+        elements.forEach((element) => {
+            element.w = 0;
+            element.h = 0;
+            element.height = height;
+
+            if (element.type == 'FILE') {
+                element.w = element.metrics.loc * 10;
+                element.h = element.metrics.loc * 10;
+            }
+
+            if (element.children && element.children.length > 0) {
+                var result = calculate(element.children, height + 100);
+                element.w = result.w;
+                element.h = result.h;
+            }
+        });
+
+        var packer = new GrowingPacker();
+
+        elements.sort(function (a, b) {
+            return (b.w > a.w);
+        });
+
+        packer.fit(elements);
+        return {
+            packer: packer.root,
+            w: packer.root.w,
+            h: packer.root.h
+        };
+
+    }
+
+    /*
     d3.json('data/test.json', function (error, data) {
         var packer = new GrowingPacker();
 
@@ -51,6 +111,7 @@ import {Block} from './Block.js';
         floor.scale.z = packer.root.h + 50;
         application.getScene().add(floor);
     });
+    */
 
     function drawPreviewElement(block, color) {
         var $div = $('<div/>');

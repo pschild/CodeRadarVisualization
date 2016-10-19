@@ -1,66 +1,109 @@
 {
-    "datetime": "2016-10-15 16:21:00",
-    "result": {
-        "type": "PROJECT",
-        "name": "Test-Projekt",
-        "children": [
+  "type": "PROJECT",
+  "name": "Test-Projekt",
+  "children": [
+    {
+      "type": "MODULE",
+      "name": "Module A",
+      "children": [
+        {
+          "type": "FILE",
+          "name": "Class A-A",
+          "metrics": {
+            "loc": 100
+          },
+          "children": []
+        },
+        {
+          "type": "FILE",
+          "name": "Class A-B",
+          "metrics": {
+            "loc": 200
+          },
+          "children": []
+        },
+        {
+          "type": "FILE",
+          "name": "Class A-C",
+          "metrics": {
+            "loc": 34
+          },
+          "children": []
+        },
+        {
+          "type": "MODULE",
+          "name": "Module A-A",
+          "children": [
             {
-                "type": "MODULE",
-                "name": "Module A",
-                "children": [
-                    {
-                        "type": "CLASS",
-                        "name": "Class A-A",
-                        "metrics": {
-                            "loc": 100,
-                            "cc": 0.81,
-                            "moc": 4
-                        },
-                        "children": []
-                    },
-                    {
-                        "type": "CLASS",
-                        "name": "Class A-B",
-                        "metrics": {
-                            "loc": 200,
-                            "cc": 0.55,
-                            "moc": 15
-                        },
-                        "children": []
-                    },
-                    {
-                        "type": "CLASS",
-                        "name": "Class A-C",
-                        "metrics": {
-                            "loc": 34,
-                            "cc": 0.3,
-                            "moc": 2
-                        },
-                        "children": []
-                    }
-                ]
+              "type": "FILE",
+              "name": "Class A-A-A",
+              "metrics": {
+                "loc": 120
+              },
+              "children": []
             },
             {
-                "type": "MODULE",
-                "name": "Module B",
-                "children": [
-                    {
-                        "type": "CLASS",
-                        "name": "Class B-A",
-                        "metrics": {
-                            "loc": 554,
-                            "cc": 0.95,
-                            "moc": 15
-                        },
-                        "children": []
-                    }
-                ]
+              "type": "FILE",
+              "name": "Class A-A-B",
+              "metrics": {
+                "loc": 60
+              },
+              "children": []
             },
             {
-                "type": "MODULE",
-                "name": "Module C",
-                "children": []
+              "type": "FILE",
+              "name": "Class A-A-B",
+              "metrics": {
+                "loc": 60
+              },
+              "children": []
+            },
+            {
+              "type": "FILE",
+              "name": "Class A-A-B",
+              "metrics": {
+                "loc": 60
+              },
+              "children": []
+            },
+            {
+              "type": "FILE",
+              "name": "Class A-A-B",
+              "metrics": {
+                "loc": 60
+              },
+              "children": []
             }
-        ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "MODULE",
+      "name": "Module B",
+      "children": [
+        {
+          "type": "FILE",
+          "name": "Class B-A",
+          "metrics": {
+            "loc": 20
+          },
+          "children": []
+        },
+        {
+          "type": "FILE",
+          "name": "Class B-B",
+          "metrics": {
+            "loc": 150
+          },
+          "children": []
+        }
+      ]
+    },
+    {
+      "type": "MODULE",
+      "name": "Module C",
+      "children": []
     }
+  ]
 }
