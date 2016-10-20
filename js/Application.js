@@ -15,6 +15,9 @@ export class Application {
 
     createScene() {
         this.scene = new THREE.Scene();
+
+        // expose scene to global window object to be able to work with inspector plugins
+        window.scene = this.scene;
     }
 
     createCamera() {

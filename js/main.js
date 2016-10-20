@@ -6,12 +6,17 @@ import {Block} from './Block.js';
     const BLOCK_SPACING = 50;
 
     d3.json('data/metrics.json', (error, data) => {
-        calculate(data.children);
-        draw(data.children);
+        calculateDimensions(data.children);
+        drawElements(data.children);
     });
 
-    function draw(elements, parent) {
+    function drawElements(elements, parent) {
         elements.forEach((element) => {
+            // don't draw empty modules
+            if (element.type == 'MODULE' && (!element.children || element.children.length == 0)) {
+                return;
+            }
+
             var color = getRandomColor();
 
             var cube = new Block(color);
@@ -26,12 +31,12 @@ import {Block} from './Block.js';
             application.getScene().add(cube);
 
             if (element.children && element.children.length > 0) {
-                draw(element.children, element);
+                drawElements(element.children, element);
             }
         });
     }
 
-    function calculate(elements, height = 0) {
+    function calculateDimensions(elements, height = 0) {
         elements.forEach((element) => {
             element.w = 0;
             element.h = 0;
@@ -43,7 +48,7 @@ import {Block} from './Block.js';
             }
 
             if (element.children && element.children.length > 0) {
-                var result = calculate(element.children, height + 100);
+                var result = calculateDimensions(element.children, height + 100);
                 element.w = result.w;
                 element.h = result.h;
             }
