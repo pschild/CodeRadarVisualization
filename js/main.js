@@ -4,6 +4,7 @@ import {Block} from './Block.js';
 (function () {
     var application = new Application();
     const BLOCK_SPACING = 50;
+    const DEFAULT_BLOCK_HEIGHT = 100;
 
     d3.json('data/metrics.json', (error, data) => {
         calculateDimensions(data.children);
@@ -21,11 +22,11 @@ import {Block} from './Block.js';
 
             var cube = new Block(color);
             cube.position.x = element.fit.x + (parent ? parent.fit.x : 0);
-            cube.position.y = element.height;
+            cube.position.y = element.bottom;
             cube.position.z = element.fit.y + (parent ? parent.fit.y : 0);
 
             cube.scale.x = element.w - BLOCK_SPACING;
-            cube.scale.y = 100;
+            cube.scale.y = element.height;
             cube.scale.z = element.h - BLOCK_SPACING;
 
             application.getScene().add(cube);
@@ -36,19 +37,21 @@ import {Block} from './Block.js';
         });
     }
 
-    function calculateDimensions(elements, height = 0) {
+    function calculateDimensions(elements, bottom = 0) {
         elements.forEach((element) => {
             element.w = 0;
             element.h = 0;
-            element.height = height;
+            element.height = DEFAULT_BLOCK_HEIGHT;
+            element.bottom = bottom;
 
             if (element.type == 'FILE') {
-                element.w = element.metrics.loc * 10;
-                element.h = element.metrics.loc * 10;
+                element.w = element.metrics.moc * 10;
+                element.h = element.metrics.moc * 10;
+                element.height = element.metrics.loc * 10;
             }
 
             if (element.children && element.children.length > 0) {
-                var result = calculateDimensions(element.children, height + 100);
+                var result = calculateDimensions(element.children, bottom + element.height);
                 element.w = result.w;
                 element.h = result.h;
             }
