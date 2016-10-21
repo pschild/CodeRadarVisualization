@@ -11,6 +11,21 @@ import {Block} from './Block.js';
         drawElements(data.children);
     });
 
+    // example call for coderadar API:
+    // $.ajax({
+    //     url: 'http://localhost:8080/projects/1/metricvalues/tree',
+    //     type: 'POST',
+    //     data: JSON.stringify({
+    //         'commit': 'edf099c97575ec9e1001054886010fd8fe15b8b0',
+    //         'metrics': ['coderadar:javaLoc']
+    //     }),
+    //     contentType: 'application/json',
+    //     success: (data) => {
+    //         calculateDimensions(data.children);
+    //         drawElements(data.children);
+    //     }
+    // });
+
     function drawElements(elements, parent) {
         elements.forEach((element) => {
             // don't draw empty modules
@@ -45,9 +60,9 @@ import {Block} from './Block.js';
             element.bottom = bottom;
 
             if (element.type == 'FILE') {
-                element.w = element.metrics.moc * 10;
-                element.h = element.metrics.moc * 10;
-                element.height = element.metrics.loc * 10;
+                element.w = element.metricValues.moc * 10;
+                element.h = element.metricValues.moc * 10;
+                element.height = element.metricValues.loc * 10;
             }
 
             if (element.children && element.children.length > 0) {
@@ -77,8 +92,8 @@ import {Block} from './Block.js';
         var packer = new GrowingPacker();
 
         data.forEach(function (element) {
-            element.w = element.metrics.moc * 100;
-            element.h = element.metrics.moc * 100;
+            element.w = element.metricValues.moc * 100;
+            element.h = element.metricValues.moc * 100;
         });
 
         data.sort(function (a, b) {
@@ -101,7 +116,7 @@ import {Block} from './Block.js';
                 cube.position.z = block.fit.y;
 
                 cube.scale.x = block.w - BLOCK_SPACING;
-                cube.scale.y = block.metrics.loc * 10;
+                cube.scale.y = block.metricValues.loc * 10;
                 cube.scale.z = block.h - BLOCK_SPACING;
 
                 application.getScene().add(cube);
