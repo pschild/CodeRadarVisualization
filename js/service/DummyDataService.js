@@ -4,8 +4,12 @@ export class DummyDataService extends AbstractDataService {
 
     // override
     load(callbackFn) {
-        d3.json('data/metrics.json', (error, data) => {
-            callbackFn(data, error);
-        });
+        axios.get('data/metrics.json')
+            .then(function (response) {
+                callbackFn(response.data);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
 }
