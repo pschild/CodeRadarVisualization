@@ -34,9 +34,7 @@ export class Application {
     }
 
     createControls() {
-        this.controls = new THREE.TrackballControls(this.camera);
-        this.controls.rotateSpeed = 10.0;
-        this.controls.zoomSpeed = 0.2;
+        this.controls = new THREE.OrbitControls(this.camera);
     }
 
     createRenderer() {

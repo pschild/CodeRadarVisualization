@@ -1,8 +1,8 @@
-import {Application} from './Application.js';
-import {Block} from './Block.js';
+import {Application} from './Application';
+import {Block} from './Block';
 
-import {CoderadarDataService} from './service/CoderadarDataService.js';
-import {DummyDataService} from './service/DummyDataService.js';
+import {CoderadarDataService} from './service/CoderadarDataService';
+import {DummyDataService} from './service/DummyDataService';
 
 (function () {
     var application = new Application();
