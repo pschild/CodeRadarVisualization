@@ -1,5 +1,5 @@
 export class Block extends THREE.Mesh {
-    constructor(color) {
+    constructor(color, name) {
         var color = color || Math.random() * 0xffffff;
 
         var geometry = new THREE.BoxGeometry(1, 1, 1);
@@ -10,5 +10,7 @@ export class Block extends THREE.Mesh {
         var material = new THREE.MeshLambertMaterial({color: color});
 
         super(geometry, material);
+
+        this.name = name;
     }
 }

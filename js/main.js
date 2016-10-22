@@ -10,8 +10,8 @@ import {DummyDataService} from './service/DummyDataService.js';
     const DEFAULT_BLOCK_HEIGHT = 100;
     const DEFAULT_BLOCK_DIMENSIONS = 100;
 
-    let dataService = new CoderadarDataService();
-    // let dataService = new DummyDataService();
+    // let dataService = new CoderadarDataService();
+    let dataService = new DummyDataService();
     dataService.load((data) => {
         calculateDimensions(data.children);
         drawElements(data.children);
@@ -26,7 +26,7 @@ import {DummyDataService} from './service/DummyDataService.js';
 
             var color = getRandomColor();
 
-            var cube = new Block(color);
+            var cube = new Block(color, element.name);
             cube.position.x = element.fit.x + (parent ? parent.fit.x : 0);
             cube.position.y = element.bottom;
             cube.position.z = element.fit.y + (parent ? parent.fit.y : 0);

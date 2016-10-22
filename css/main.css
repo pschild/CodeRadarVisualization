@@ -1,3 +1,14 @@
+#tooltip {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 1px solid #000;
+    background: #fff;
+    padding: 5px;
+
+    display: none;
+}
+
 #top-view {
     position: absolute;
     left: 50px;

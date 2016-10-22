@@ -1,3 +1,5 @@
+import {InteractionHandler} from './InteractionHandler';
+
 export class Application {
     constructor() {
         this.createScene();
@@ -5,6 +7,8 @@ export class Application {
         this.createRenderer();
         this.createControls();
         this.createLight();
+
+        this.interactionHandler = new InteractionHandler(this.scene, this.renderer);
 
         this.initializeEventListeners();
 
@@ -57,16 +61,14 @@ export class Application {
             this.render();
         });
 
+        this.interactionHandler.update(this.camera);
+
         this.renderer.render(this.scene, this.camera);
         this.controls.update();
     }
 
     initializeEventListeners() {
         window.addEventListener('resize', this.onWindowResize.bind(this), false);
-
-        this.renderer.domElement.addEventListener('mousemove', this.onDocumentMouseMove, false);
-        this.renderer.domElement.addEventListener('mousedown', this.onDocumentMouseDown, false);
-        this.renderer.domElement.addEventListener('mouseup', this.onDocumentMouseUp, false);
     }
 
     onWindowResize() {
@@ -74,14 +76,5 @@ export class Application {
         this.camera.updateProjectionMatrix();
 
         this.renderer.setSize(window.innerWidth, window.innerHeight);
-    }
-
-    onDocumentMouseMove() {
-    }
-
-    onDocumentMouseDown() {
-    }
-
-    onDocumentMouseUp() {
     }
 }
