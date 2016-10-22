@@ -1,30 +1,21 @@
 import {Application} from './Application.js';
 import {Block} from './Block.js';
 
+import {CoderadarDataService} from './service/CoderadarDataService.js';
+import {DummyDataService} from './service/DummyDataService.js';
+
 (function () {
     var application = new Application();
     const BLOCK_SPACING = 50;
     const DEFAULT_BLOCK_HEIGHT = 100;
+    const DEFAULT_BLOCK_DIMENSIONS = 100;
 
-    d3.json('data/metrics.json', (error, data) => {
+    let dataService = new CoderadarDataService();
+    // let dataService = new DummyDataService();
+    dataService.load((data) => {
         calculateDimensions(data.children);
         drawElements(data.children);
     });
-
-    // example call for coderadar API:
-    // $.ajax({
-    //     url: 'http://localhost:8080/projects/1/metricvalues/tree',
-    //     type: 'POST',
-    //     data: JSON.stringify({
-    //         'commit': 'edf099c97575ec9e1001054886010fd8fe15b8b0',
-    //         'metrics': ['coderadar:javaLoc']
-    //     }),
-    //     contentType: 'application/json',
-    //     success: (data) => {
-    //         calculateDimensions(data.children);
-    //         drawElements(data.children);
-    //     }
-    // });
 
     function drawElements(elements, parent) {
         elements.forEach((element) => {
@@ -60,9 +51,9 @@ import {Block} from './Block.js';
             element.bottom = bottom;
 
             if (element.type == 'FILE') {
-                element.w = element.metricValues.moc * 10;
-                element.h = element.metricValues.moc * 10;
-                element.height = element.metricValues.loc * 10;
+                element.w = element.metricValues['coderadar:javaMoc'] * 10 || DEFAULT_BLOCK_DIMENSIONS;
+                element.h = element.metricValues['coderadar:javaMoc'] * 10 || DEFAULT_BLOCK_DIMENSIONS;
+                element.height = element.metricValues['coderadar:javaLoc'] * 10;
             }
 
             if (element.children && element.children.length > 0) {
