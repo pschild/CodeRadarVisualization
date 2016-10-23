@@ -12,4 +12,19 @@ export class DummyDataService extends AbstractDataService {
                 console.log(error);
             });
     }
+
+    loadTwoCommits(callbackFn) {
+        function getFirstCommit() {
+            return axios.get('data/metrics_1.json');
+        }
+
+        function getSecondCommit() {
+            return axios.get('data/metrics_50.json');
+        }
+
+        axios.all([getFirstCommit(), getSecondCommit()])
+            .then(axios.spread(function (firstCommitResult, secondCommitResult) {
+                callbackFn(firstCommitResult.data, secondCommitResult.data);
+            }));
+    }
 }

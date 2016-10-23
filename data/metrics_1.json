@@ -1,0 +1,48 @@
+{
+    "type": "MODULE",
+    "name": "root",
+    "children": [
+        {
+            "type": "MODULE",
+            "name": "Module A",
+            "children": [
+                {
+                    "type": "FILE",
+                    "name": "A.java",
+                    "metricValues": {
+                        "coderadar:javaLoc": 100,
+                        "coderadar:javaMoc": 100
+                    },
+                    "children": []
+                },
+                {
+                    "type": "FILE",
+                    "name": "B.java",
+                    "metricValues": {
+                        "coderadar:javaLoc": 200,
+                        "coderadar:javaMoc": 200
+                    },
+                    "children": []
+                },
+                {
+                    "type": "FILE",
+                    "name": "C.java",
+                    "metricValues": {
+                        "coderadar:javaLoc": 300,
+                        "coderadar:javaMoc": 300
+                    },
+                    "children": []
+                },
+                {
+                    "type": "FILE",
+                    "name": "ONLY_1.java",
+                    "metricValues": {
+                        "coderadar:javaLoc": 60,
+                        "coderadar:javaMoc": 60
+                    },
+                    "children": []
+                }
+            ]
+        }
+    ]
+}

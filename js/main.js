@@ -1,20 +1,26 @@
 import {Application} from './Application';
 import {Block} from './Block';
-
 import {CoderadarDataService} from './service/CoderadarDataService';
 import {DummyDataService} from './service/DummyDataService';
+import {CommitMerger} from './CommitMerger';
 
 (function () {
     var application = new Application();
-    const BLOCK_SPACING = 50;
-    const DEFAULT_BLOCK_HEIGHT = 100;
+    const BLOCK_SPACING = 200;
+    const DEFAULT_BLOCK_HEIGHT = 200;
     const DEFAULT_BLOCK_DIMENSIONS = 100;
 
     // let dataService = new CoderadarDataService();
     let dataService = new DummyDataService();
-    dataService.load((data) => {
-        calculateDimensions(data.children);
-        drawElements(data.children);
+    // dataService.load((data) => {
+    //     calculateDimensions(data.children);
+    //     drawElements(data.children);
+    // });
+    dataService.loadTwoCommits((firstCommitResult, secondCommitResult) => {
+        var result = CommitMerger.merge(firstCommitResult, secondCommitResult);
+        console.log('result', result);
+        calculateDimensions(result);
+        drawElements(result);
     });
 
     function drawElements(elements, parent) {
@@ -24,7 +30,7 @@ import {DummyDataService} from './service/DummyDataService';
                 return;
             }
 
-            var color = getRandomColor();
+            var color = element.type == 'MODULE' ? '#cccccc' : '#00cc00';
 
             var cube = new Block(color, element.name);
             cube.position.x = element.fit.x + (parent ? parent.fit.x : 0);
