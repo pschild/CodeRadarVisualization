@@ -17,10 +17,10 @@ import {CommitMerger} from './CommitMerger';
     //     drawElements(data.children);
     // });
     dataService.loadTwoCommits((firstCommitResult, secondCommitResult) => {
-        var result = CommitMerger.merge(firstCommitResult, secondCommitResult);
-        console.log('result', result);
-        calculateDimensions(result);
-        drawElements(result);
+        // var result = CommitMerger.merge(firstCommitResult, secondCommitResult);
+        // console.log('result', result);
+        // calculateDimensions(result);
+        // drawElements(result);
     });
 
     function drawElements(elements, parent) {

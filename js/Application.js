@@ -1,7 +1,10 @@
+import {Interface} from './interface/Interface';
 import {InteractionHandler} from './InteractionHandler';
+import * as PubSub from 'pubsub-js';
 
 export class Application {
     constructor() {
+        this.createInterface();
         this.createScene();
         this.createCamera();
         this.createRenderer();
@@ -17,6 +20,10 @@ export class Application {
 
     getScene() {
         return this.scene;
+    }
+
+    createInterface() {
+        this.interface = new Interface();
     }
 
     createScene() {
@@ -67,6 +74,10 @@ export class Application {
 
     initializeEventListeners() {
         window.addEventListener('resize', this.onWindowResize.bind(this), false);
+
+        PubSub.subscribe('commitChange', (eventName, args) => {
+            console.log(args);
+        });
     }
 
     onWindowResize() {

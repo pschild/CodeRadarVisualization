@@ -1,71 +1,17 @@
 {
     "type": "MODULE",
     "name": "root",
+    "commitId": 50,
     "children": [
         {
             "type": "MODULE",
             "name": "Module A",
+            "commitId": 50,
             "children": [
                 {
                     "type": "FILE",
                     "name": "A.java",
-                    "metricValues": {
-                        "coderadar:javaLoc": 200,
-                        "coderadar:javaMoc": 200
-                    },
-                    "children": []
-                },
-                {
-                    "type": "FILE",
-                    "name": "B.java",
-                    "metricValues": {
-                        "coderadar:javaLoc": 200,
-                        "coderadar:javaMoc": 200
-                    },
-                    "children": []
-                },
-                {
-                    "type": "FILE",
-                    "name": "C.java",
-                    "metricValues": {
-                        "coderadar:javaLoc": 200,
-                        "coderadar:javaMoc": 200
-                    },
-                    "children": []
-                },
-                {
-                    "type": "FILE",
-                    "name": "ONLY_50.java",
-                    "metricValues": {
-                        "coderadar:javaLoc": 50,
-                        "coderadar:javaMoc": 50
-                    },
-                    "children": []
-                },
-                {
-                    "type": "MODULE",
-                    "name": "Module A-A",
-                    "children": [
-                        {
-                            "type": "FILE",
-                            "name": "AA.java",
-                            "metricValues": {
-                                "coderadar:javaLoc": 200,
-                                "coderadar:javaMoc": 200
-                            },
-                            "children": []
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "type": "MODULE",
-            "name": "Module B",
-            "children": [
-                {
-                    "type": "FILE",
-                    "name": "BB.java",
+                    "commitId": 50,
                     "metricValues": {
                         "coderadar:javaLoc": 200,
                         "coderadar:javaMoc": 200
