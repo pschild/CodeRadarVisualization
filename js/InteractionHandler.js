@@ -21,10 +21,10 @@ export class InteractionHandler {
                     left: this._mouse.x + 5,
                     top: this._mouse.y + 5,
                 })
-                .html(intersects[0].object.name)
-                .show();
+                .html(intersects[0].object.userData.tooltipLabel)
+                .fadeIn();
         } else {
-            $('#tooltip').hide();
+            $('#tooltip').fadeOut();
         }
     }
 

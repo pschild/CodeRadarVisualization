@@ -83,22 +83,37 @@ export class Drawer {
     }
 
     drawBlock(element, parent, color, currentCommitSize, bottom, height, isHelper, helperSize) {
+        var finalX, finalY, finalZ;
+        var finalWidth, finalHeight, finalDepth;
+
         var cube = new Block(color, isHelper ? 'HELPER' : element.name);
-        cube.position.x = element.fit.x + (parent ? parent.fit.x : 0);
-        cube.position.y = bottom;
-        cube.position.z = element.fit.y + (parent ? parent.fit.y : 0);
+        finalX = element.fit.x + (parent ? parent.fit.x : 0);
+        finalY = bottom;
+        finalZ = element.fit.y + (parent ? parent.fit.y : 0);
 
         if (isHelper) {
-            cube.scale.x = helperSize - BLOCK_SPACING;
-            cube.scale.y = HELPER_BLOCK_HEIGHT;
-            cube.scale.z = helperSize - BLOCK_SPACING;
+            finalWidth = helperSize - BLOCK_SPACING;
+            finalHeight = HELPER_BLOCK_HEIGHT;
+            finalDepth = helperSize - BLOCK_SPACING;
         } else {
-            cube.scale.x = element.type == 'FILE' ? currentCommitSize - BLOCK_SPACING : element.w - BLOCK_SPACING;
-            cube.scale.y = height;
-            cube.scale.z = element.type == 'FILE' ? currentCommitSize - BLOCK_SPACING : element.w - BLOCK_SPACING;
+            finalWidth = element.type == 'FILE' ? currentCommitSize - BLOCK_SPACING : element.w - BLOCK_SPACING;
+            finalHeight = height;
+            finalDepth = element.type == 'FILE' ? currentCommitSize - BLOCK_SPACING : element.w - BLOCK_SPACING;
         }
 
+        cube.position.x = finalX;
+        cube.position.y = finalY;
+        cube.position.z = finalZ;
+
+        cube.scale.x = finalWidth;
+        cube.scale.y = finalHeight;
+        cube.scale.z = finalDepth;
+
         cube.material.wireframe = isHelper;
+
+        cube.userData = {
+            tooltipLabel: element.name + '<br>height=' + finalHeight + '<br>size=' + finalWidth + 'x' + finalDepth
+        };
 
         this.application.getScene().add(cube);
     }
