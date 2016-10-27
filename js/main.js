@@ -10,6 +10,14 @@ import {CommitMerger} from './CommitMerger';
     const DEFAULT_BLOCK_HEIGHT = 200;
     const DEFAULT_BLOCK_DIMENSIONS = 100;
 
+    const GROUND_AREA_METRIC_NAME = 'coderadar:javaMoc';
+    const GROUND_AREA_FACTOR = 10;
+
+    const HEIGHT_METRIC_NAME = 'coderadar:javaLoc';
+    const HEIGHT_FACTOR = 10;
+
+    var currentCommitId = 'def456';
+
     // let dataService = new CoderadarDataService();
     let dataService = new DummyDataService();
     // dataService.load((data) => {
@@ -17,53 +25,77 @@ import {CommitMerger} from './CommitMerger';
     //     drawElements(data.children);
     // });
     dataService.loadTwoCommits((firstCommitResult, secondCommitResult) => {
-        // var result = CommitMerger.merge(firstCommitResult, secondCommitResult);
-        // console.log('result', result);
-        // calculateDimensions(result);
-        // drawElements(result);
+        var result = CommitMerger.merge(firstCommitResult, secondCommitResult);
+        console.log('result', result);
+        calculateDimensions(result);
+        drawElements(result);
     });
 
-    function drawElements(elements, parent) {
+    function drawElements(elements, parent, bottom = 0) {
         elements.forEach((element) => {
             // don't draw empty modules
             if (element.type == 'MODULE' && (!element.children || element.children.length == 0)) {
                 return;
             }
 
-            var color = element.type == 'MODULE' ? '#cccccc' : '#00cc00';
+            var height, color;
+            if (element.type == 'FILE') {
+                color = '#00cc00';
+                height = element.metricValues[HEIGHT_METRIC_NAME] * HEIGHT_FACTOR || 1000;
+            } else {
+                color = '#cccccc';
+                height = DEFAULT_BLOCK_HEIGHT;
+            }
+
+            var greatestSize = element.w;
+            var currentCommitSize = getMetricValueOfElementAndCurrentCommit(element, currentCommitId) * GROUND_AREA_FACTOR;
+
+            if (!isNaN(currentCommitSize) && greatestSize != currentCommitSize) {
+                // draw a helper cube
+                var cube = new Block(color, element.name);
+                cube.position.x = element.fit.x + (parent ? parent.fit.x : 0);
+                cube.position.y = bottom;
+                cube.position.z = element.fit.y + (parent ? parent.fit.y : 0);
+
+                cube.scale.x = greatestSize - BLOCK_SPACING;
+                cube.scale.y = 100;
+                cube.scale.z = greatestSize - BLOCK_SPACING;
+
+                cube.material.wireframe = true;
+
+                application.getScene().add(cube);
+            }
 
             var cube = new Block(color, element.name);
             cube.position.x = element.fit.x + (parent ? parent.fit.x : 0);
-            cube.position.y = element.bottom;
+            cube.position.y = bottom;
             cube.position.z = element.fit.y + (parent ? parent.fit.y : 0);
 
-            cube.scale.x = element.w - BLOCK_SPACING;
-            cube.scale.y = element.height;
-            cube.scale.z = element.h - BLOCK_SPACING;
+            cube.scale.x = element.type == 'FILE' ? currentCommitSize - BLOCK_SPACING : element.w - BLOCK_SPACING;
+            cube.scale.y = height;
+            cube.scale.z = element.type == 'FILE' ? currentCommitSize - BLOCK_SPACING : element.w - BLOCK_SPACING;
 
             application.getScene().add(cube);
 
             if (element.children && element.children.length > 0) {
-                drawElements(element.children, element);
+                drawElements(element.children, element, bottom + height);
             }
         });
     }
 
-    function calculateDimensions(elements, bottom = 0) {
+    function calculateDimensions(elements) {
         elements.forEach((element) => {
             element.w = 0;
             element.h = 0;
-            element.height = DEFAULT_BLOCK_HEIGHT;
-            element.bottom = bottom;
 
             if (element.type == 'FILE') {
-                element.w = element.metricValues['coderadar:javaMoc'] * 10 || DEFAULT_BLOCK_DIMENSIONS;
-                element.h = element.metricValues['coderadar:javaMoc'] * 10 || DEFAULT_BLOCK_DIMENSIONS;
-                element.height = element.metricValues['coderadar:javaLoc'] * 10;
+                var greatestMetricValueForGroundArea = getGreatestMetricValueForGroundArea(element.metricValues);
+                element.w = greatestMetricValueForGroundArea * GROUND_AREA_FACTOR;
+                element.h = greatestMetricValueForGroundArea * GROUND_AREA_FACTOR;
             }
 
             if (element.children && element.children.length > 0) {
-                var result = calculateDimensions(element.children, bottom + element.height);
+                var result = calculateDimensions(element.children);
                 element.w = result.w;
                 element.h = result.h;
             }
@@ -84,54 +116,46 @@ import {CommitMerger} from './CommitMerger';
 
     }
 
-    /*
-    d3.json('data/test.json', function (error, data) {
-        var packer = new GrowingPacker();
-
-        data.forEach(function (element) {
-            element.w = element.metricValues.moc * 100;
-            element.h = element.metricValues.moc * 100;
-        });
-
-        data.sort(function (a, b) {
-            return (b.w > a.w);
-        });
-        packer.fit(data);
-
-        for (var n = 0; n < data.length; n++) {
-            var block = data[n];
-            if (block.fit) {
-                console.log('DrawCube', block.fit.x, block.fit.y, block.w, block.h);
-
-                var color = getRandomColor();
-
-                drawPreviewElement(block, color);
-
-                var cube = new Block(color);
-                cube.position.x = block.fit.x;
-                cube.position.y = 0;
-                cube.position.z = block.fit.y;
-
-                cube.scale.x = block.w - BLOCK_SPACING;
-                cube.scale.y = block.metricValues.loc * 10;
-                cube.scale.z = block.h - BLOCK_SPACING;
-
-                application.getScene().add(cube);
-            } else {
-                console.warn('Block does not fit!', block);
-            }
+    function getGreatestMetricValueForGroundArea(metricValues) {
+        if (typeof metricValues != 'object') {
+            throw 'metricValues is not an object!';
         }
 
-        var floor = new Block('#cccccc');
-        floor.position.x = -50;
-        floor.position.y = 0;
-        floor.position.z = -50;
-        floor.scale.x = packer.root.w + 50;
-        floor.scale.y = -50;
-        floor.scale.z = packer.root.h + 50;
-        application.getScene().add(floor);
-    });
-    */
+        for (let key in metricValues) {
+            if (typeof metricValues[key] == 'object') {
+                if (key == GROUND_AREA_METRIC_NAME) {
+                    let maxValue = -1;
+                    for (let commitId in metricValues[key]) {
+                        var metricValue = metricValues[key][commitId];
+                        if (maxValue < metricValue) {
+                            maxValue = metricValue;
+                        }
+                    }
+                    return maxValue;
+                }
+            } else if (typeof metricValues[key] == 'number') {
+                if (key == GROUND_AREA_METRIC_NAME) {
+                    return metricValues[key];
+                }
+            } else {
+                throw 'unknown type!';
+            }
+        }
+    }
+
+    function getMetricValueOfElementAndCurrentCommit(element, commitId) {
+        for (let key in element.metricValues) {
+            if (typeof element.metricValues[key] == 'object') {
+                return element.metricValues[GROUND_AREA_METRIC_NAME][commitId];
+            } else if (typeof element.metricValues[key] == 'number') {
+                if (key == GROUND_AREA_METRIC_NAME) {
+                    return element.metricValues[key];
+                }
+            } else {
+                throw 'unknown type!';
+            }
+        }
+    }
 
     function drawPreviewElement(block, color) {
         var $div = $('<div/>');

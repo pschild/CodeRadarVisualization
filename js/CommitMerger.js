@@ -10,14 +10,16 @@ export class CommitMerger {
         for (let element of elements) {
             // console.log('investigating ', element);
 
+            // foundElement is the element from #1
             var foundElement = this.search(element, this.firstRoot.children);
             if (foundElement) {
                 // console.log(element.name + ' found in 1st commit');
                 if (element.type === 'FILE') {
-                    if (element.metricValues['coderadar:javaLoc'] > foundElement.metricValues['coderadar:javaLoc']) {
-                        foundElement.metricValues = element.metricValues;
-                        foundElement.metricValues.note = 'applied';
-                    }
+                    // if (element.metricValues['coderadar:javaLoc'] > foundElement.metricValues['coderadar:javaLoc']) {
+                    //     foundElement.metricValues = element.metricValues;
+                    //     foundElement.metricValues.note = 'applied';
+                    // }
+                    foundElement.metricValues = this._mergeMetricValues(foundElement, element);
                 }
             } else {
                 // console.log('NOT found');
@@ -62,5 +64,17 @@ export class CommitMerger {
         }
 
         return null;
+    }
+
+    static _mergeMetricValues(element1, element2) {
+        let returnValue = {};
+        let metricValueKeys = Object.keys(element1.metricValues);
+        for (let key of metricValueKeys) {
+            returnValue[key] = {};
+            returnValue[key][element1.commitId] = element1.metricValues[key];
+            returnValue[key][element2.commitId] = element2.metricValues[key];
+        }
+
+        return returnValue;
     }
 }

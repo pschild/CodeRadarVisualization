@@ -15,11 +15,11 @@ export class DummyDataService extends AbstractDataService {
 
     loadTwoCommits(callbackFn) {
         function getFirstCommit() {
-            return axios.get('data/metrics_1.json');
+            return axios.get('data/metrics_abc123.json');
         }
 
         function getSecondCommit() {
-            return axios.get('data/metrics_50.json');
+            return axios.get('data/metrics_def456.json');
         }
 
         axios.all([getFirstCommit(), getSecondCommit()])

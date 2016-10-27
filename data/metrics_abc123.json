@@ -1,0 +1,41 @@
+{
+    "type": "MODULE",
+    "name": "root",
+    "commitId": "abc123",
+    "children": [
+        {
+            "type": "MODULE",
+            "name": "Module A",
+            "commitId": "abc123",
+            "children": [
+                {
+                    "type": "FILE",
+                    "name": "A.java",
+                    "commitId": "abc123",
+                    "metricValues": {
+                        "coderadar:javaLoc": 123,
+                        "coderadar:javaMoc": 123
+                    },
+                    "children": []
+                }
+            ]
+        },
+        {
+            "type": "MODULE",
+            "name": "Module B",
+            "commitId": "abc123",
+            "children": [
+                {
+                    "type": "FILE",
+                    "name": "C.java",
+                    "commitId": "abc123",
+                    "metricValues": {
+                        "coderadar:javaLoc": 123,
+                        "coderadar:javaMoc": 123
+                    },
+                    "children": []
+                }
+            ]
+        }
+    ]
+}
