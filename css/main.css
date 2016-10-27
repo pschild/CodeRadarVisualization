@@ -9,18 +9,6 @@
     display: none;
 }
 
-#top-view {
-    position: absolute;
-    left: 50px;
-    top: 50px;
-    zoom: 0.1;
-}
-
-.preview-element {
-    position: absolute;
-    box-sizing: border-box;
-}
-
 #control-panel {
     position: absolute;
     top: 0;

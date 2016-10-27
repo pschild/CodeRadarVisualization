@@ -16,6 +16,16 @@ export class Application {
         this.initializeEventListeners();
 
         this.render();
+
+        this.currentCommitId = undefined;
+    }
+
+    getCurrentCommitId() {
+        return this.currentCommitId;
+    }
+
+    setCurrentCommitId(commitId) {
+        this.currentCommitId = commitId;
     }
 
     getScene() {

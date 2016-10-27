@@ -8,11 +8,11 @@ export class Interface {
 
     bindEvents() {
         document.getElementById('first-commit-btn').addEventListener('click', () => {
-            PubSub.publish('commitChange', { commit: 1 });
+            PubSub.publish('commitChange', { commit: 'abc123' });
         });
 
         document.getElementById('second-commit-btn').addEventListener('click', () => {
-            PubSub.publish('commitChange', { commit: 50 });
+            PubSub.publish('commitChange', { commit: 'def456' });
         });
     }
 }
