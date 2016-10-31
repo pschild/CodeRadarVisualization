@@ -13,16 +13,12 @@ export class DummyDataService extends AbstractDataService {
             });
     }
 
-    loadTwoCommits(callbackFn) {
-        function getFirstCommit() {
-            return axios.get('data/metrics_abc123.json');
-        }
+    loadByCommitId(commitId) {
+        return axios.get('data/metrics_' + commitId + '.json');
+    }
 
-        function getSecondCommit() {
-            return axios.get('data/metrics_def456.json');
-        }
-
-        axios.all([getFirstCommit(), getSecondCommit()])
+    loadTwoCommits(firstCommitId, secondCommitId, callbackFn) {
+        axios.all([this.loadByCommitId(firstCommitId), this.loadByCommitId(secondCommitId)])
             .then(axios.spread(function (firstCommitResult, secondCommitResult) {
                 callbackFn(firstCommitResult.data, secondCommitResult.data);
             }));

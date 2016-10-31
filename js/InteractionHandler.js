@@ -1,8 +1,13 @@
+import {config} from './Config';
+
 export class InteractionHandler {
 
-    constructor(scene, renderer) {
+    constructor(scene, renderer, position) {
+        this._enabled = false;
+
         this._scene = scene;
         this._renderer = renderer;
+        this._position = position;
 
         this._raycaster = new THREE.Raycaster();
         this._mouse = new THREE.Vector2();
@@ -11,7 +16,15 @@ export class InteractionHandler {
         this.bindEvents();
     }
 
+    setEnabled(enabled) {
+        this._enabled = enabled;
+    }
+
     update(camera) {
+        if (!this._enabled) {
+            return;
+        }
+
         this._raycaster.setFromCamera(this._mouseForRaycaster, camera);
 
         var intersects = this._raycaster.intersectObjects(this._scene.children);
@@ -29,14 +42,24 @@ export class InteractionHandler {
     }
 
     _onDocumentMouseMove() {
+        if (!this._enabled) {
+            return;
+        }
+
         this._mouse.x = event.clientX;
         this._mouse.y = event.clientY;
 
-        this._mouseForRaycaster.x = (event.clientX / window.innerWidth) * 2 - 1;
+        var screenOffset = this._position == 'left' ? 0 : window.innerWidth / 2 - config.SCREEN_PADDING;
+
+        this._mouseForRaycaster.x = ((event.clientX - screenOffset) / (window.innerWidth / 2 - config.SCREEN_PADDING)) * 2 - 1;
         this._mouseForRaycaster.y = -(event.clientY / window.innerHeight) * 2 + 1;
     }
 
     _onDocumentMouseDown() {
+        if (!this._enabled) {
+            return;
+        }
+
         var intersects = this._raycaster.intersectObjects(this._scene.children);
         if (intersects.length > 0) {
             intersects[0].object.material.transparent = !intersects[0].object.material.transparent;

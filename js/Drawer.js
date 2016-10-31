@@ -1,21 +1,11 @@
-const BLOCK_SPACING = 200;
-const DEFAULT_BLOCK_HEIGHT = 200;
-const DEFAULT_BLOCK_DIMENSIONS = 100;
-const HELPER_BLOCK_HEIGHT = 100;
-
-const GROUND_AREA_METRIC_NAME = 'coderadar:javaMoc';
-const GROUND_AREA_FACTOR = 10;
-
-const HEIGHT_METRIC_NAME = 'coderadar:javaLoc';
-const HEIGHT_FACTOR = 10;
-
 import {Block} from './Block';
+import {config} from './Config';
 
 export class Drawer {
 
-    constructor(application) {
-        this.application = application;
-        this.currentCommitId = application.getCurrentCommitId();
+    constructor(scene, currentCommitId) {
+        this.scene = scene;
+        this.currentCommitId = currentCommitId;
     }
 
     calculateGroundAreas(elements) {
@@ -25,8 +15,8 @@ export class Drawer {
 
             if (element.type == 'FILE') {
                 var greatestMetricValueForGroundArea = this._getGreatestMetricValueForGroundArea(element.metricValues);
-                element.w = greatestMetricValueForGroundArea * GROUND_AREA_FACTOR;
-                element.h = greatestMetricValueForGroundArea * GROUND_AREA_FACTOR;
+                element.w = greatestMetricValueForGroundArea * config.GROUND_AREA_FACTOR;
+                element.h = greatestMetricValueForGroundArea * config.GROUND_AREA_FACTOR;
             }
 
             if (element.children && element.children.length > 0) {
@@ -60,14 +50,14 @@ export class Drawer {
             var height, color;
             if (element.type == 'FILE') {
                 color = '#00cc00';
-                height = this._getMetricValueOfElementAndCurrentCommit(element, HEIGHT_METRIC_NAME, this.currentCommitId) * HEIGHT_FACTOR;
+                height = this._getMetricValueOfElementAndCurrentCommit(element, config.HEIGHT_METRIC_NAME, this.currentCommitId) * config.HEIGHT_FACTOR;
             } else {
                 color = '#cccccc';
-                height = DEFAULT_BLOCK_HEIGHT;
+                height = config.DEFAULT_BLOCK_HEIGHT;
             }
 
             var greatestSize = element.w;
-            var currentCommitSize = this._getMetricValueOfElementAndCurrentCommit(element, GROUND_AREA_METRIC_NAME, this.currentCommitId) * GROUND_AREA_FACTOR;
+            var currentCommitSize = this._getMetricValueOfElementAndCurrentCommit(element, config.GROUND_AREA_METRIC_NAME, this.currentCommitId) * config.GROUND_AREA_FACTOR;
 
             if (!isNaN(currentCommitSize) && greatestSize != currentCommitSize) {
                 // drawElements a helper cube
@@ -92,13 +82,13 @@ export class Drawer {
         finalZ = element.fit.y + (parent ? parent.fit.y : 0);
 
         if (isHelper) {
-            finalWidth = helperSize - BLOCK_SPACING;
-            finalHeight = HELPER_BLOCK_HEIGHT;
-            finalDepth = helperSize - BLOCK_SPACING;
+            finalWidth = helperSize - config.BLOCK_SPACING;
+            finalHeight = config.HELPER_BLOCK_HEIGHT;
+            finalDepth = helperSize - config.BLOCK_SPACING;
         } else {
-            finalWidth = element.type == 'FILE' ? currentCommitSize - BLOCK_SPACING : element.w - BLOCK_SPACING;
+            finalWidth = element.type == 'FILE' ? currentCommitSize - config.BLOCK_SPACING : element.w - config.BLOCK_SPACING;
             finalHeight = height;
-            finalDepth = element.type == 'FILE' ? currentCommitSize - BLOCK_SPACING : element.h - BLOCK_SPACING;
+            finalDepth = element.type == 'FILE' ? currentCommitSize - config.BLOCK_SPACING : element.h - config.BLOCK_SPACING;
         }
 
         cube.position.x = finalX;
@@ -110,13 +100,13 @@ export class Drawer {
         cube.scale.z = finalDepth;
 
         cube.material.wireframe = isHelper;
-        cube.visible = !isHelper;
+        cube.visible = !isHelper || config.HELPER_BLOCK_VISIBLE;
 
         cube.userData = {
             tooltipLabel: element.name + '<br>height=' + finalHeight + '<br>size=' + finalWidth + 'x' + finalDepth
         };
 
-        this.application.getScene().add(cube);
+        this.scene.add(cube);
     }
 
     _getGreatestMetricValueForGroundArea(metricValues) {
@@ -126,7 +116,7 @@ export class Drawer {
 
         for (let key in metricValues) {
             if (typeof metricValues[key] == 'object') {
-                if (key == GROUND_AREA_METRIC_NAME) {
+                if (key == config.GROUND_AREA_METRIC_NAME) {
                     let maxValue = -1;
                     for (let commitId in metricValues[key]) {
                         var metricValue = metricValues[key][commitId];
@@ -137,7 +127,7 @@ export class Drawer {
                     return maxValue;
                 }
             } else if (typeof metricValues[key] == 'number') {
-                if (key == GROUND_AREA_METRIC_NAME) {
+                if (key == config.GROUND_AREA_METRIC_NAME) {
                     return metricValues[key];
                 }
             } else {

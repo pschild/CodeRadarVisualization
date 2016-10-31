@@ -1,25 +1,9 @@
 import {Application} from './Application';
-import {CoderadarDataService} from './service/CoderadarDataService';
-import {DummyDataService} from './service/DummyDataService';
-import {CommitMerger} from './CommitMerger';
-import {Drawer} from './Drawer';
 
 (function () {
     var application = new Application();
-    application.setCurrentCommitId('abc123');
-    // application.setCurrentCommitId('def456');
-
-    var drawer = new Drawer(application);
-
-    let dataService = new DummyDataService();
-
-    dataService.loadTwoCommits((firstCommitResult, secondCommitResult) => {
-        var result = CommitMerger.merge(firstCommitResult, secondCommitResult);
-        console.log('result', result);
-
-        drawer.calculateGroundAreas(result);
-        drawer.drawElements(result);
-    });
+    application.createLeftScreen('abc123');
+    application.createRightScreen('def456');
 
     function getRandomColor() {
         var letters = '0123456789ABCDEF';

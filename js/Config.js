@@ -1,0 +1,16 @@
+export var config = {
+    SCREEN_PADDING: 10,
+
+    GROUND_AREA_METRIC_NAME: 'coderadar:javaMoc',
+    GROUND_AREA_FACTOR: 10,
+
+    HEIGHT_METRIC_NAME: 'coderadar:javaLoc',
+    HEIGHT_FACTOR: 10,
+
+    BLOCK_SPACING: 200,
+    DEFAULT_BLOCK_HEIGHT: 200,
+    DEFAULT_BLOCK_DIMENSIONS: 100,
+
+    HELPER_BLOCK_HEIGHT: 100,
+    HELPER_BLOCK_VISIBLE: false
+};
