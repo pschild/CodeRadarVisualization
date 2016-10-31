@@ -3,6 +3,7 @@ export class CommitMerger {
     static merge(firstRoot, secondRoot) {
         this.firstRoot = firstRoot;
         this.walk(secondRoot.children, firstRoot);
+        // TODO: firstRoot.children contains elements that are not contained in secondRoot => remove those
         return firstRoot.children;
     }
 
@@ -15,24 +16,20 @@ export class CommitMerger {
             if (foundElement) {
                 // console.log(element.name + ' found in 1st commit');
                 if (element.type === 'FILE') {
-                    // if (element.metricValues['coderadar:javaLoc'] > foundElement.metricValues['coderadar:javaLoc']) {
-                    //     foundElement.metricValues = element.metricValues;
-                    //     foundElement.metricValues.note = 'applied';
-                    // }
                     foundElement.metricValues = this._mergeMetricValues(foundElement, element);
                 }
             } else {
                 // console.log('NOT found');
                 // console.log('parent of not found element: ', parent.name);
-                var foundParent = this.search(parent, this.firstRoot.children);
-                if (foundParent) {
-                    // console.log(parent.name + ' found in 1st commit. adding element to it');
-                    foundParent.children.push(element);
-                } else {
-                    // console.log(parent.name + ' NOT found in 1st commit. adding element to root');
-                    this.firstRoot.children.push(element);
-                    // console.log(this.firstRoot);
-                }
+                // var foundParent = this.search(parent, this.firstRoot.children);
+                // if (foundParent) {
+                //     // console.log(parent.name + ' found in 1st commit. adding element to it');
+                //     foundParent.children.push(element);
+                // } else {
+                //     // console.log(parent.name + ' NOT found in 1st commit. adding element to root');
+                //     this.firstRoot.children.push(element);
+                //     // console.log(this.firstRoot);
+                // }
             }
 
             if (element.children && element.children.length > 0) {

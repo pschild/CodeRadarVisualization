@@ -10,10 +10,10 @@
             "children": [
                 {
                     "type": "FILE",
-                    "name": "A.java",
+                    "name": "A1.java",
                     "commitId": "def456",
                     "metricValues": {
-                        "coderadar:javaLoc": 456,
+                        "coderadar:javaLoc": 100,
                         "coderadar:javaMoc": 456
                     },
                     "children": []
@@ -27,11 +27,58 @@
             "children": [
                 {
                     "type": "FILE",
-                    "name": "B.java",
+                    "name": "B1.java",
                     "commitId": "def456",
                     "metricValues": {
-                        "coderadar:javaLoc": 456,
+                        "coderadar:javaLoc": 100,
+                        "coderadar:javaMoc": 405
+                    },
+                    "children": []
+                },
+                {
+                    "type": "FILE",
+                    "name": "B2.java",
+                    "commitId": "def456",
+                    "metricValues": {
+                        "coderadar:javaLoc": 78,
                         "coderadar:javaMoc": 456
+                    },
+                    "children": []
+                },
+                {
+                    "type": "FILE",
+                    "name": "B4.java",
+                    "commitId": "def456",
+                    "metricValues": {
+                        "coderadar:javaLoc": 123,
+                        "coderadar:javaMoc": 12
+                    },
+                    "children": []
+                },
+                {
+                    "type": "FILE",
+                    "name": "B5.java",
+                    "commitId": "def456",
+                    "metricValues": {
+                        "coderadar:javaLoc": 785,
+                        "coderadar:javaMoc": 254
+                    },
+                    "children": []
+                }
+            ]
+        },
+        {
+            "type": "MODULE",
+            "name": "Module D",
+            "commitId": "def456",
+            "children": [
+                {
+                    "type": "FILE",
+                    "name": "D1.java",
+                    "commitId": "def456",
+                    "metricValues": {
+                        "coderadar:javaLoc": 72,
+                        "coderadar:javaMoc": 24
                     },
                     "children": []
                 }

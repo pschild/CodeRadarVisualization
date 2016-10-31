@@ -98,7 +98,7 @@ export class Drawer {
         } else {
             finalWidth = element.type == 'FILE' ? currentCommitSize - BLOCK_SPACING : element.w - BLOCK_SPACING;
             finalHeight = height;
-            finalDepth = element.type == 'FILE' ? currentCommitSize - BLOCK_SPACING : element.w - BLOCK_SPACING;
+            finalDepth = element.type == 'FILE' ? currentCommitSize - BLOCK_SPACING : element.h - BLOCK_SPACING;
         }
 
         cube.position.x = finalX;
@@ -110,6 +110,7 @@ export class Drawer {
         cube.scale.z = finalDepth;
 
         cube.material.wireframe = isHelper;
+        cube.visible = !isHelper;
 
         cube.userData = {
             tooltipLabel: element.name + '<br>height=' + finalHeight + '<br>size=' + finalWidth + 'x' + finalDepth

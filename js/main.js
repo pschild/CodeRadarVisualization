@@ -7,6 +7,7 @@ import {Drawer} from './Drawer';
 (function () {
     var application = new Application();
     application.setCurrentCommitId('abc123');
+    // application.setCurrentCommitId('def456');
 
     var drawer = new Drawer(application);
 
@@ -14,7 +15,7 @@ import {Drawer} from './Drawer';
 
     dataService.loadTwoCommits((firstCommitResult, secondCommitResult) => {
         var result = CommitMerger.merge(firstCommitResult, secondCommitResult);
-        // console.log('result', result);
+        console.log('result', result);
 
         drawer.calculateGroundAreas(result);
         drawer.drawElements(result);
