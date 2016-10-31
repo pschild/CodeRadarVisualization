@@ -55,7 +55,7 @@ export class Application {
     }
 
     createRenderer() {
-        this.renderer = new THREE.WebGLRenderer();
+        this.renderer = new THREE.WebGLRenderer({antialias: true});
         this.renderer.setClearColor(0xf0f0f0);
         this.renderer.setSize(window.innerWidth, window.innerHeight);
 
