@@ -35,6 +35,11 @@ export class Application {
         });
 
         PubSub.subscribe('synchronizeEnabledChange', (eventName, args) => {
+            if (args.enabled) {
+                this.screens['left'].getControls().reset();
+                this.screens['right'].getControls().reset();
+            }
+
             this.SYNCHRONIZE_ENABLED = args.enabled;
         });
 
