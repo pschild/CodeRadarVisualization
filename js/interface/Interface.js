@@ -7,6 +7,10 @@ export class Interface {
     }
 
     bindEvents() {
+        document.querySelector('#synchronize-enabled-checkbox').addEventListener('change', (event) => {
+            PubSub.publish('synchronizeEnabledChange', { enabled: event.target.checked });
+        });
+
         document.getElementById('first-commit-btn').addEventListener('click', () => {
             PubSub.publish('commitChange', { commit: 'abc123' });
         });

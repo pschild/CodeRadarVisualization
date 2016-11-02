@@ -3,7 +3,10 @@ import {Screen} from './Screen';
 import * as PubSub from 'pubsub-js';
 
 export class Application {
+
     constructor() {
+        this.SYNCHRONIZE_ENABLED = true;
+
         this.createInterface();
         this.initializeEventListeners();
 
@@ -31,15 +34,19 @@ export class Application {
             console.log(args);
         });
 
+        PubSub.subscribe('synchronizeEnabledChange', (eventName, args) => {
+            this.SYNCHRONIZE_ENABLED = args.enabled;
+        });
+
         PubSub.subscribe('mouseMove', (eventName, args) => {
             if (args.screen == 'left') {
                 this.screens['left'].getControls().enabled = true;
-                this.screens['right'].getControls().enabled = false;
+                this.screens['right'].getControls().enabled = this.SYNCHRONIZE_ENABLED;
 
                 this.screens['left'].getInteractionHandler().setEnabled(true);
                 this.screens['right'].getInteractionHandler().setEnabled(false);
             } else if (args.screen == 'right') {
-                this.screens['left'].getControls().enabled = false;
+                this.screens['left'].getControls().enabled = this.SYNCHRONIZE_ENABLED;
                 this.screens['right'].getControls().enabled = true;
 
                 this.screens['left'].getInteractionHandler().setEnabled(false);

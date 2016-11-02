@@ -12,5 +12,5 @@ export var config = {
     DEFAULT_BLOCK_DIMENSIONS: 100,
 
     HELPER_BLOCK_HEIGHT: 100,
-    HELPER_BLOCK_VISIBLE: false
+    HELPER_BLOCK_VISIBLE: true
 };
