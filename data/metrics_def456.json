@@ -51,7 +51,7 @@
                     "commitId": "def456",
                     "metricValues": {
                         "coderadar:javaLoc": 123,
-                        "coderadar:javaMoc": 12
+                        "coderadar:javaMoc": 30
                     },
                     "children": []
                 },
