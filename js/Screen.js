@@ -50,9 +50,9 @@ export class Screen {
 
     createCamera() {
         this.camera = new THREE.PerspectiveCamera(45, (window.innerWidth / 2 - config.SCREEN_PADDING) / window.innerHeight, 1, 100000);
-        this.camera.position.x = 10000;
-        this.camera.position.y = 10000;
-        this.camera.position.z = 10000;
+        this.camera.position.x = 30000;
+        this.camera.position.y = 30000;
+        this.camera.position.z = 30000;
     }
 
     createControls() {
