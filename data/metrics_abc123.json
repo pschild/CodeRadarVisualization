@@ -17,6 +17,33 @@
                         "coderadar:javaMoc": 289
                     },
                     "children": []
+                },
+                {
+                    "type": "MODULE",
+                    "name": "Module A-A",
+                    "commitId": "abc123",
+                    "children": [
+                        {
+                            "type": "FILE",
+                            "name": "A-A1.java",
+                            "commitId": "abc123",
+                            "metricValues": {
+                                "coderadar:javaLoc": 500,
+                                "coderadar:javaMoc": 289
+                            },
+                            "children": []
+                        },
+                        {
+                            "type": "FILE",
+                            "name": "A-A2.java",
+                            "commitId": "abc123",
+                            "metricValues": {
+                                "coderadar:javaLoc": 140,
+                                "coderadar:javaMoc": 150
+                            },
+                            "children": []
+                        }
+                    ]
                 }
             ]
         },

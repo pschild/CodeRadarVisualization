@@ -42,7 +42,7 @@ export class Drawer {
 
     drawElements(elements, parent, bottom = 0) {
         elements.forEach((element) => {
-            // don't drawElements empty modules
+            // don't draw empty modules
             if (element.type == 'MODULE' && (!element.children || element.children.length == 0)) {
                 return;
             }
@@ -60,7 +60,7 @@ export class Drawer {
             var currentCommitSize = this._getMetricValueOfElementAndCurrentCommit(element, config.GROUND_AREA_METRIC_NAME, this.currentCommitId) * config.GROUND_AREA_FACTOR;
 
             if (!isNaN(currentCommitSize) && greatestSize != currentCommitSize) {
-                // drawElements a helper cube
+                // draw a helper cube
                 this.drawBlock(element, parent, color, currentCommitSize, bottom, height, true, greatestSize);
             }
 
@@ -77,9 +77,13 @@ export class Drawer {
         var finalWidth, finalHeight, finalDepth;
 
         var cube = new Block(color, isHelper ? 'HELPER' : element.name);
-        finalX = element.fit.x + (parent ? parent.fit.x : 0);
+        finalX = element.fit.x + (parent ? parent.renderedX : 0);
         finalY = bottom;
-        finalZ = element.fit.y + (parent ? parent.fit.y : 0);
+        finalZ = element.fit.y + (parent ? parent.renderedY : 0);
+
+        // save the rendered positions to draw children relative to their parent
+        element.renderedX = finalX;
+        element.renderedY = finalZ;
 
         if (isHelper) {
             finalWidth = helperSize - config.BLOCK_SPACING;
