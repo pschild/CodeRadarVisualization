@@ -1,4 +1,5 @@
 import {config} from './Config';
+import * as PubSub from 'pubsub-js';
 
 export class InteractionHandler {
 
@@ -56,18 +57,17 @@ export class InteractionHandler {
     }
 
     _onDocumentMouseDown() {
+    }
+
+    _onDocumentMouseUp() {
         if (!this._enabled) {
             return;
         }
 
         var intersects = this._raycaster.intersectObjects(this._scene.children);
         if (intersects.length > 0) {
-            intersects[0].object.material.transparent = !intersects[0].object.material.transparent;
-            intersects[0].object.material.opacity = 0.2;
+            PubSub.publish('elementClicked', { name: intersects[0].object.name });
         }
-    }
-
-    _onDocumentMouseUp() {
     }
 
     bindEvents() {
