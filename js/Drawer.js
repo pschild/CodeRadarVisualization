@@ -89,6 +89,12 @@ export class Drawer {
             finalWidth = helperSize - config.BLOCK_SPACING;
             finalHeight = config.HELPER_BLOCK_HEIGHT;
             finalDepth = helperSize - config.BLOCK_SPACING;
+
+            // cube.material.wireframe = true;
+            cube.material.transparent = true;
+            cube.material.opacity = 0.4;
+            cube.material.color = new THREE.Color('#ffff00');
+            cube.visible = !isHelper || config.HELPER_BLOCK_VISIBLE;
         } else {
             finalWidth = element.type == 'FILE' ? currentCommitSize - config.BLOCK_SPACING : element.w - config.BLOCK_SPACING;
             finalHeight = height;
@@ -103,11 +109,9 @@ export class Drawer {
         cube.scale.y = finalHeight;
         cube.scale.z = finalDepth;
 
-        cube.material.wireframe = isHelper;
-        cube.visible = !isHelper || config.HELPER_BLOCK_VISIBLE;
-
         cube.userData = {
-            tooltipLabel: element.name + '<br>height=' + finalHeight + '<br>size=' + finalWidth + 'x' + finalDepth
+            tooltipLabel: element.name + '<br>height=' + finalHeight + '<br>size=' + finalWidth + 'x' + finalDepth,
+            isHelper: isHelper
         };
 
         this.scene.add(cube);

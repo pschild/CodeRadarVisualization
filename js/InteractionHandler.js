@@ -66,7 +66,14 @@ export class InteractionHandler {
 
         var intersects = this._raycaster.intersectObjects(this._scene.children);
         if (intersects.length > 0) {
-            PubSub.publish('elementClicked', { name: intersects[0].object.name });
+            for (let i = 0; i < intersects.length; i++) {
+                // find the first block that is not a helper block
+                // this lets the clicks go through the helper blocks
+                if (!intersects[i].object.userData.isHelper) {
+                    PubSub.publish('elementClicked', { name: intersects[i].object.name });
+                    break;
+                }
+            }
         }
     }
 
