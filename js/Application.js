@@ -21,8 +21,12 @@ export class Application {
         this.screens['right'] = new Screen('right', commitId);
     }
 
-    getScreen(name) {
-        return this.screens[name];
+    getLeftScreen() {
+        return this.screens['left'];
+    }
+
+    getRightScreen() {
+        return this.screens['right'];
     }
 
     createInterface() {
@@ -36,8 +40,8 @@ export class Application {
 
         PubSub.subscribe('synchronizeEnabledChange', (eventName, args) => {
             if (args.enabled) {
-                this.screens['left'].getControls().reset();
-                this.screens['right'].getControls().reset();
+                this.getLeftScreen().getControls().reset();
+                this.getRightScreen().getControls().reset();
             }
 
             this.SYNCHRONIZE_ENABLED = args.enabled;
@@ -45,17 +49,17 @@ export class Application {
 
         PubSub.subscribe('mouseMove', (eventName, args) => {
             if (args.screen == 'left') {
-                this.screens['left'].getControls().enabled = true;
-                this.screens['right'].getControls().enabled = this.SYNCHRONIZE_ENABLED;
+                this.getLeftScreen().getControls().enabled = true;
+                this.getRightScreen().getControls().enabled = this.SYNCHRONIZE_ENABLED;
 
-                this.screens['left'].getInteractionHandler().setEnabled(true);
-                this.screens['right'].getInteractionHandler().setEnabled(false);
+                this.getLeftScreen().getInteractionHandler().setEnabled(true);
+                this.getRightScreen().getInteractionHandler().setEnabled(false);
             } else if (args.screen == 'right') {
-                this.screens['left'].getControls().enabled = this.SYNCHRONIZE_ENABLED;
-                this.screens['right'].getControls().enabled = true;
+                this.getLeftScreen().getControls().enabled = this.SYNCHRONIZE_ENABLED;
+                this.getRightScreen().getControls().enabled = true;
 
-                this.screens['left'].getInteractionHandler().setEnabled(false);
-                this.screens['right'].getInteractionHandler().setEnabled(true);
+                this.getLeftScreen().getInteractionHandler().setEnabled(false);
+                this.getRightScreen().getInteractionHandler().setEnabled(true);
             }
         });
     }
