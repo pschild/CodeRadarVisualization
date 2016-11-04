@@ -11,11 +11,11 @@ export class Interface {
             PubSub.publish('synchronizeEnabledChange', { enabled: event.target.checked });
         });
 
-        document.getElementById('first-commit-btn').addEventListener('click', () => {
+        document.querySelector('#first-commit-btn').addEventListener('click', () => {
             PubSub.publish('commitChange', { commit: 'abc123' });
         });
 
-        document.getElementById('second-commit-btn').addEventListener('click', () => {
+        document.querySelector('#second-commit-btn').addEventListener('click', () => {
             PubSub.publish('commitChange', { commit: 'def456' });
         });
     }
