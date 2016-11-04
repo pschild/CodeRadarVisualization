@@ -13,11 +13,27 @@
 <body>
 
 <div id="control-panel">
-    <input type="checkbox" id="synchronize-enabled-checkbox" checked/>
-    <label for="synchronize-enabled-checkbox">synchronize?</label>
-    <button id="first-commit-btn">Commit #abc123</button>
-    <button id="second-commit-btn">Commit #def456</button>
+    <div>
+        <input type="checkbox" id="synchronize-enabled-checkbox" checked/>
+        <label for="synchronize-enabled-checkbox">synchronize?</label>
+    </div>
+
+    <div>
+        <select id="first-commit-select">
+            <option value="#abc123" selected>#abc123</option>
+            <option value="#def456">#def456</option>
+            <option value="#ghi789">#ghi789</option>
+        </select>
+
+        <select name="asd" id="second-commit-select">
+            <option value="#abc123">#abc123</option>
+            <option value="#def456" selected>#def456</option>
+            <option value="#ghi789">#ghi789</option>
+        </select>
+    </div>
 </div>
+
+<div id="stage"></div>
 
 <div id="tooltip"></div>
 

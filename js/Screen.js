@@ -56,7 +56,7 @@ export class Screen {
     }
 
     createControls() {
-        this.controls = new THREE.OrbitControls(this.camera);
+        this.controls = new THREE.OrbitControls(this.camera, document.querySelector('#stage'));
     }
 
     getControls() {
@@ -72,7 +72,7 @@ export class Screen {
         this.renderer.setClearColor(0xf0f0f0);
         this.renderer.setSize(window.innerWidth / 2 - config.SCREEN_PADDING, window.innerHeight);
 
-        document.body.appendChild(this.renderer.domElement);
+        document.querySelector('#stage').appendChild(this.renderer.domElement);
     }
 
     createLight() {

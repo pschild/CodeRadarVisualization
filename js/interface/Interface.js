@@ -11,12 +11,18 @@ export class Interface {
             PubSub.publish('synchronizeEnabledChange', { enabled: event.target.checked });
         });
 
-        document.querySelector('#first-commit-btn').addEventListener('click', () => {
-            PubSub.publish('commitChange', { commit: 'abc123' });
+        document.querySelector('#first-commit-select').addEventListener('change', function() {
+            PubSub.publish('commitChange', {
+                type: 'left',
+                commit: this.value
+            });
         });
 
-        document.querySelector('#second-commit-btn').addEventListener('click', () => {
-            PubSub.publish('commitChange', { commit: 'def456' });
+        document.querySelector('#second-commit-select').addEventListener('change', function() {
+            PubSub.publish('commitChange', {
+                type: 'right',
+                commit: this.value
+            });
         });
     }
 }
