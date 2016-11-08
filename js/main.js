@@ -2,8 +2,7 @@ import {Application} from './Application';
 
 (function () {
     var application = new Application();
-    application.createLeftScreen('abc123');
-    application.createRightScreen('def456');
+    application.loadCommitData();
 
     function getRandomColor() {
         var letters = '0123456789ABCDEF';

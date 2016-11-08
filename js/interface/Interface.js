@@ -6,6 +6,14 @@ export class Interface {
         this.bindEvents();
     }
 
+    showLoadingIndicator() {
+        document.querySelector('#loading-indicator').style.display = 'block';
+    }
+
+    hideLoadingIndicator() {
+        document.querySelector('#loading-indicator').style.display = 'none';
+    }
+
     bindEvents() {
         document.querySelector('#synchronize-enabled-checkbox').addEventListener('change', (event) => {
             PubSub.publish('synchronizeEnabledChange', { enabled: event.target.checked });

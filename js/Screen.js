@@ -1,8 +1,5 @@
 import {InteractionHandler} from './InteractionHandler';
 import {config} from './Config';
-import {CoderadarDataService} from './service/CoderadarDataService';
-import {DummyDataService} from './service/DummyDataService';
-import {CommitMerger} from './CommitMerger';
 import {Drawer} from './Drawer';
 import * as PubSub from 'pubsub-js';
 
@@ -21,24 +18,31 @@ export class Screen {
         this.interactionHandler = new InteractionHandler(this.scene, this.renderer, this.position);
 
         this.initializeEventListeners();
-
-        this.render();
-
-        var drawer = new Drawer(this.scene, commitId);
-
-        // TODO: dataService should only be called once, because data only needs to be loaded once.
-        let dataService = new DummyDataService();
-        dataService.loadTwoCommits('abc123', 'def456', (firstCommitResult, secondCommitResult) => {
-            var result = CommitMerger.merge(firstCommitResult, secondCommitResult);
-            console.log('result', result);
-
-            drawer.calculateGroundAreas(result);
-            drawer.drawElements(result);
-        });
     }
 
     getScene() {
         return this.scene;
+    }
+
+    setData(data) {
+        var drawer = new Drawer(this.scene, this.commitId);
+        drawer.calculateGroundAreas(data);
+        drawer.drawElements(data);
+    }
+
+    setCommitId(commitId) {
+        this.commitId = commitId;
+    }
+
+    reset() {
+        for (var i = this.scene.children.length - 1; i >= 0; i--) {
+            var child = this.scene.children[i];
+
+            // only remove Blocks. Don't remove lights, cameras etc.
+            if (child.type == 'Mesh') {
+                this.scene.remove(child);
+            }
+        }
     }
 
     createScene() {

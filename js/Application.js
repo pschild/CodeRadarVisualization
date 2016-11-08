@@ -1,5 +1,8 @@
 import {Interface} from './interface/Interface';
 import {Screen} from './Screen';
+import {CoderadarDataService} from './service/CoderadarDataService';
+import {DummyDataService} from './service/DummyDataService';
+import {CommitMerger} from './CommitMerger';
 import * as PubSub from 'pubsub-js';
 
 export class Application {
@@ -10,15 +13,41 @@ export class Application {
         this.createInterface();
         this.initializeEventListeners();
 
+        this.leftCommitId = this.getDefaultLeftCommitId();
+        this.rightCommitId = this.getDefaultRightCommitId();
+
         this.screens = {};
+        this.createLeftScreen();
+        this.createRightScreen();
     }
 
-    createLeftScreen(commitId) {
-        this.screens['left'] = new Screen('left', commitId);
+    loadCommitData() {
+        this.interface.showLoadingIndicator();
+
+        let dataService = new DummyDataService();
+        dataService.loadTwoCommits(this.leftCommitId, this.rightCommitId, (firstCommitResult, secondCommitResult) => {
+            this.getLeftScreen().reset();
+            this.getRightScreen().reset();
+
+            var result = CommitMerger.merge(firstCommitResult, secondCommitResult);
+            console.log('merging ' + this.leftCommitId + ' and ' + this.rightCommitId + ':', result);
+
+            this.getLeftScreen().setData(result);
+            this.getLeftScreen().render();
+
+            this.getRightScreen().setData(result);
+            this.getRightScreen().render();
+
+            this.interface.hideLoadingIndicator();
+        });
     }
 
-    createRightScreen(commitId) {
-        this.screens['right'] = new Screen('right', commitId);
+    createLeftScreen() {
+        this.screens['left'] = new Screen('left', this.leftCommitId);
+    }
+
+    createRightScreen() {
+        this.screens['right'] = new Screen('right', this.rightCommitId);
     }
 
     getLeftScreen() {
@@ -35,7 +64,15 @@ export class Application {
 
     initializeEventListeners() {
         PubSub.subscribe('commitChange', (eventName, args) => {
-            console.log(args);
+            if (args.type == 'left') {
+                this.leftCommitId = args.commit;
+                this.getLeftScreen().setCommitId(this.leftCommitId);
+            } else if (args.type == 'right') {
+                this.rightCommitId = args.commit;
+                this.getRightScreen().setCommitId(this.rightCommitId);
+            }
+
+            this.loadCommitData();
         });
 
         PubSub.subscribe('synchronizeEnabledChange', (eventName, args) => {
@@ -62,5 +99,13 @@ export class Application {
                 this.getRightScreen().getInteractionHandler().setEnabled(true);
             }
         });
+    }
+
+    getDefaultLeftCommitId() {
+        return 'abc123';
+    }
+
+    getDefaultRightCommitId() {
+        return 'def456';
     }
 }

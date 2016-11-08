@@ -12,6 +12,33 @@
 #control-panel {
     position: absolute;
     top: 0;
-    left: 50%;
-    padding: 20px;
+    width: 100%;
+    height: 100px;
+    background: #fff;
+    box-shadow: rgba(0,0,0,0.2) 0 2px 6px 0;
+}
+
+.commit-select {
+    position: absolute;
+    bottom: 10px;
+}
+
+#first-commit-select {
+    left: 25%;
+    transform: translateX(-50%);
+}
+
+#second-commit-select {
+    left: 75%;
+    transform: translateX(-50%);
+}
+
+#loading-indicator {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    top: 100px;
+    left: 0;
+    color: #fff;
 }

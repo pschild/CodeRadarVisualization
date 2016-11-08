@@ -7,30 +7,34 @@
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
     <link rel="stylesheet" type="text/css" media="screen" href="node_modules/normalize.css/normalize.css"/>
     <link rel="stylesheet" type="text/css" media="screen" href="css/main.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="css/loading-indicator.css"/>
 
 </head>
 
 <body>
 
 <div id="control-panel">
-    <div>
+    <div id="sync-settings">
         <input type="checkbox" id="synchronize-enabled-checkbox" checked/>
         <label for="synchronize-enabled-checkbox">synchronize?</label>
     </div>
 
-    <div>
-        <select id="first-commit-select">
-            <option value="#abc123" selected>#abc123</option>
-            <option value="#def456">#def456</option>
-            <option value="#ghi789">#ghi789</option>
-        </select>
+    <select id="first-commit-select" class="commit-select">
+        <option value="abc123" selected>#abc123</option>
+        <option value="def456">#def456</option>
+        <option value="ghi789">#ghi789</option>
+    </select>
 
-        <select name="asd" id="second-commit-select">
-            <option value="#abc123">#abc123</option>
-            <option value="#def456" selected>#def456</option>
-            <option value="#ghi789">#ghi789</option>
-        </select>
-    </div>
+    <select id="second-commit-select" class="commit-select">
+        <option value="abc123">#abc123</option>
+        <option value="def456" selected>#def456</option>
+        <option value="ghi789">#ghi789</option>
+    </select>
+</div>
+
+<div id="loading-indicator">
+    <div class="uil-cube-css left"><div></div><div></div><div></div><div></div></div>
+    <div class="uil-cube-css right"><div></div><div></div><div></div><div></div></div>
 </div>
 
 <div id="stage"></div>
