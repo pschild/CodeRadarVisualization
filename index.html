@@ -8,15 +8,20 @@
     <link rel="stylesheet" type="text/css" media="screen" href="node_modules/normalize.css/normalize.css"/>
     <link rel="stylesheet" type="text/css" media="screen" href="css/main.css"/>
     <link rel="stylesheet" type="text/css" media="screen" href="css/loading-indicator.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="css/checkbox.css"/>
 
 </head>
 
 <body>
 
 <div id="control-panel">
-    <div id="sync-settings">
-        <input type="checkbox" id="synchronize-enabled-checkbox" checked/>
-        <label for="synchronize-enabled-checkbox">synchronize?</label>
+
+    <div id="synchronize-checkbox-container">
+        <span>synchronize?</span>
+        <div class="onoffswitch">
+            <input type="checkbox" class="onoffswitch-checkbox" id="synchronize-enabled-checkbox" checked>
+            <label class="onoffswitch-label" for="synchronize-enabled-checkbox"></label>
+        </div>
     </div>
 
     <select id="first-commit-select" class="commit-select">

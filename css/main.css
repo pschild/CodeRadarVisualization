@@ -18,9 +18,16 @@
     box-shadow: rgba(0,0,0,0.2) 0 2px 6px 0;
 }
 
+#synchronize-checkbox-container {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
 .commit-select {
     position: absolute;
-    bottom: 10px;
+    bottom: 20px;
 }
 
 #first-commit-select {
