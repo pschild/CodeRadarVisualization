@@ -5,9 +5,9 @@ import * as PubSub from 'pubsub-js';
 
 export class Screen {
 
-    constructor(position, commitId) {
+    constructor(position) {
         this.position = position;
-        this.commitId = commitId;
+        this.commitId = undefined;
 
         this.createScene();
         this.createCamera();

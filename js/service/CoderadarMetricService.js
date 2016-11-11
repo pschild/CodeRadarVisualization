@@ -1,6 +1,6 @@
 import {AbstractDataService} from './AbstractDataService';
 
-export class CoderadarDataService extends AbstractDataService {
+export class CoderadarMetricService extends AbstractDataService {
 
     constructor() {
         super();

@@ -2,7 +2,7 @@ import {Application} from './Application';
 
 (function () {
     var application = new Application();
-    application.loadCommitData();
+    application.initialize();
 
     function getRandomColor() {
         var letters = '0123456789ABCDEF';

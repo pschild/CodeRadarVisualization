@@ -3,7 +3,12 @@ import * as PubSub from 'pubsub-js';
 export class Interface {
 
     constructor() {
-        this.bindEvents();
+        this.leftSelect = document.querySelector('#first-commit-select');
+        this.rightSelect = document.querySelector('#second-commit-select');
+
+        this.synchronizeCheckbox = document.querySelector('#synchronize-enabled-checkbox');
+
+        this._bindEvents();
     }
 
     showLoadingIndicator() {
@@ -14,23 +19,37 @@ export class Interface {
         document.querySelector('#loading-indicator').style.display = 'none';
     }
 
-    bindEvents() {
-        document.querySelector('#synchronize-enabled-checkbox').addEventListener('change', (event) => {
+    _createOptionElements(selectElement, data) {
+        for (let commit of data.commits) {
+            var option = document.createElement('option');
+            option.value = commit.getName();
+            option.innerHTML = commit.getName();
+            selectElement.appendChild(option);
+        }
+    }
+
+    _bindEvents() {
+        this.synchronizeCheckbox.addEventListener('change', (event) => {
             PubSub.publish('synchronizeEnabledChange', { enabled: event.target.checked });
         });
 
-        document.querySelector('#first-commit-select').addEventListener('change', function() {
+        this.leftSelect.addEventListener('change', function() {
             PubSub.publish('commitChange', {
                 type: 'left',
                 commit: this.value
             });
         });
 
-        document.querySelector('#second-commit-select').addEventListener('change', function() {
+        this.rightSelect.addEventListener('change', function() {
             PubSub.publish('commitChange', {
                 type: 'right',
                 commit: this.value
             });
+        });
+
+        PubSub.subscribe('commitsLoaded', (eventName, args) => {
+            this._createOptionElements(this.leftSelect, args);
+            this._createOptionElements(this.rightSelect, args);
         });
     }
 }

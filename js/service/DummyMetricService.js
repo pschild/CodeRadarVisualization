@@ -1,6 +1,6 @@
 import {AbstractDataService} from './AbstractDataService';
 
-export class DummyDataService extends AbstractDataService {
+export class DummyMetricService extends AbstractDataService {
 
     // override
     load(callbackFn) {
