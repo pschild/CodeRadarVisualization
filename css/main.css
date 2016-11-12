@@ -27,7 +27,6 @@
 
 canvas {
     position: absolute;
-    top: 100px;
 }
 
 canvas:first-child {

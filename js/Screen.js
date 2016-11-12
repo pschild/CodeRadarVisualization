@@ -74,7 +74,7 @@ export class Screen {
     createRenderer() {
         this.renderer = new THREE.WebGLRenderer({antialias: true});
         this.renderer.setClearColor(0xf0f0f0);
-        this.renderer.setSize(window.innerWidth / 2 - config.SCREEN_PADDING, window.innerHeight - config.INTERFACE_TOOLBAR_HEIGHT);
+        this.renderer.setSize(window.innerWidth / 2 - config.SCREEN_PADDING, window.innerHeight);
 
         document.querySelector('#stage').appendChild(this.renderer.domElement);
     }
@@ -118,9 +118,9 @@ export class Screen {
     }
 
     onWindowResize() {
-        this.camera.aspect = (window.innerWidth / 2 - config.SCREEN_PADDING) / (window.innerHeight - config.INTERFACE_TOOLBAR_HEIGHT);
+        this.camera.aspect = (window.innerWidth / 2 - config.SCREEN_PADDING) / window.innerHeight;
         this.camera.updateProjectionMatrix();
 
-        this.renderer.setSize(window.innerWidth / 2 - config.SCREEN_PADDING, window.innerHeight - config.INTERFACE_TOOLBAR_HEIGHT);
+        this.renderer.setSize(window.innerWidth / 2 - config.SCREEN_PADDING, window.innerHeight);
     }
 }

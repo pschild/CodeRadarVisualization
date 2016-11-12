@@ -1,6 +1,5 @@
 export var config = {
     SCREEN_PADDING: 0,
-    INTERFACE_TOOLBAR_HEIGHT: 100,
 
     GROUND_AREA_METRIC_NAME: 'coderadar:javaMoc',
     GROUND_AREA_FACTOR: 10,

@@ -53,7 +53,7 @@ export class InteractionHandler {
         var screenOffset = this._position == 'left' ? 0 : window.innerWidth / 2 - config.SCREEN_PADDING;
 
         this._mouseForRaycaster.x = ((event.clientX - screenOffset) / (window.innerWidth / 2 - config.SCREEN_PADDING)) * 2 - 1;
-        this._mouseForRaycaster.y = -((event.clientY - config.INTERFACE_TOOLBAR_HEIGHT) / (window.innerHeight - config.INTERFACE_TOOLBAR_HEIGHT)) * 2 + 1;
+        this._mouseForRaycaster.y = -(event.clientY / window.innerHeight) * 2 + 1;
     }
 
     _onDocumentMouseDown() {
