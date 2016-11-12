@@ -1,10 +1,58 @@
 export class CommitMerger {
 
     static merge(firstRoot, secondRoot) {
+        this.firstCommitId = firstRoot.commitId;
+        this.secondCommitId = secondRoot.commitId;
+
+        // do some preparations
+        this._createMetricValueObjects(firstRoot.children, this.firstCommitId);
+        this._createMetricValueObjects(secondRoot.children, this.secondCommitId);
+
         this.firstRoot = firstRoot;
         this.walk(secondRoot.children, firstRoot);
         // TODO: firstRoot.children contains elements that are not contained in secondRoot => remove those
         return firstRoot.children;
+    }
+
+    /**
+     * Recursively changes
+     *
+     * metricValues: {
+     *     METRIC_1_NAME: 500,
+     *     METRIC_2_NAME: 1000
+     * }
+     *
+     * to
+     *
+     * metricValues: {
+     *     METRIC_1_NAME: {
+     *         COMMIT_ID: 500
+     *     },
+     *     METRIC_2_NAME: {
+     *         COMMIT_ID: 1000
+     *     }
+     * }
+     *
+     * @param elements
+     * @param commitId
+     */
+    static _createMetricValueObjects(elements, commitId) {
+        for (let element of elements) {
+            if (element.type === 'FILE') {
+                var metricValues = element.metricValues;
+                for (let metricName in metricValues) {
+                    if (typeof metricValues[metricName] == 'number') {
+                        var tempValue = metricValues[metricName];
+                        metricValues[metricName] = {};
+                        metricValues[metricName][commitId] = tempValue;
+                    }
+                }
+            }
+
+            if (element.children && element.children.length > 0) {
+                this._createMetricValueObjects(element.children, commitId);
+            }
+        }
     }
 
     static walk(elements, parent) {
@@ -68,8 +116,8 @@ export class CommitMerger {
         let metricValueKeys = Object.keys(element1.metricValues);
         for (let key of metricValueKeys) {
             returnValue[key] = {};
-            returnValue[key][element1.commitId] = element1.metricValues[key];
-            returnValue[key][element2.commitId] = element2.metricValues[key];
+            returnValue[key][this.firstCommitId] = element1.metricValues[key][this.firstCommitId];
+            returnValue[key][this.secondCommitId] = element2.metricValues[key][this.secondCommitId];
         }
 
         return returnValue;

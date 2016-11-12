@@ -51,6 +51,10 @@ export class Application {
             this.getLeftScreen().reset();
             this.getRightScreen().reset();
 
+            // #3: set commitId dynamically
+            firstCommitResult.commitId = this.leftCommitId;
+            secondCommitResult.commitId = this.rightCommitId;
+
             var result = CommitMerger.merge(firstCommitResult, secondCommitResult);
             console.log('merging ' + this.leftCommitId + ' and ' + this.rightCommitId + ':', result);
 

@@ -148,12 +148,8 @@ export class Drawer {
         for (let key in element.metricValues) {
             if (typeof element.metricValues[key] == 'object') {
                 return element.metricValues[metricName][commitId];
-            } else if (typeof element.metricValues[key] == 'number') {
-                if (key == metricName) {
-                    return element.metricValues[key];
-                }
             } else {
-                throw 'unknown type!';
+                throw 'metricValues must be an object. current value: ' + (typeof element.metricValues[key]);
             }
         }
     }
