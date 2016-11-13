@@ -2,6 +2,9 @@
   "name": "CodeRadarVisualization",
   "description": "3D visualization for code structure and code quality",
   "author": "Philippe Schild",
+  "scripts": {
+    "test": "mocha --compilers js:babel-core/register test/test*.js"
+  },
   "dependencies": {
     "axios": "^0.15.2",
     "binpacking": "0.0.1",
@@ -16,6 +19,7 @@
     "browserify": "^13.1.0",
     "gulp": "^3.9.1",
     "gulp-sourcemaps": "^2.1.1",
+    "mocha": "^3.1.2",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.7.0"

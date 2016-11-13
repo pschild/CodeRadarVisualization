@@ -1,0 +1,36 @@
+{
+    "type": "MODULE",
+    "name": "root",
+    "children": [
+        {
+            "type": "MODULE",
+            "name": "Module A",
+            "children": [
+                {
+                    "type": "FILE",
+                    "name": "A1.java",
+                    "metricValues": {
+                        "coderadar:javaLoc": 100,
+                        "coderadar:javaMoc": 100
+                    },
+                    "children": []
+                },
+                {
+                    "type": "MODULE",
+                    "name": "Module B",
+                    "children": [
+                        {
+                            "type": "FILE",
+                            "name": "B1.java",
+                            "metricValues": {
+                                "coderadar:javaLoc": 100,
+                                "coderadar:javaMoc": 100
+                            },
+                            "children": []
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
