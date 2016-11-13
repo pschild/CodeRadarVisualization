@@ -8,8 +8,6 @@ export class CommitMerger {
         this._createMetricValueObjects(firstRoot.children, this.firstCommitId);
         this._createMetricValueObjects(secondRoot.children, this.secondCommitId);
 
-        console.log(firstRoot, secondRoot);
-
         this.firstRoot = firstRoot;
         this.walk(secondRoot.children, firstRoot);
 
@@ -39,6 +37,10 @@ export class CommitMerger {
      * @param commitId
      */
     static _createMetricValueObjects(elements, commitId) {
+        if (!Array.isArray(elements)) {
+            elements = [elements];
+        }
+
         for (let element of elements) {
             if (element.type === 'FILE') {
                 var metricValues = element.metricValues;
@@ -64,21 +66,25 @@ export class CommitMerger {
             // foundElement is the element from #1
             var searchResult = this.search(element, this.firstRoot.children, this.firstRoot);
             var foundElement = searchResult ? searchResult.foundElement : undefined;
+
             if (foundElement) {
                 // console.log(element.name + ' found in 1st commit');
                 if (parent.name != searchResult.foundElementsParent.name) {
                     console.log('we have different parents for ' + element.name + ': ', parent.name, searchResult.foundElementsParent.name);
                     console.log(element.name + ' should be added to ' + parent.name + ' in the result object');
-                    var searchResult = this.search(parent, this.firstRoot.children, this.firstRoot);
+                    var searchResult = this.search(parent, this.firstRoot, this.firstRoot);
                     var foundElement = searchResult ? searchResult.foundElement : undefined;
                     if (foundElement) {
                         foundElement.children.push(element);
+                        // IMPORTANT: continue, so that child elements of added element are not investigated. This ist not necessary.
+                        continue;
+                    }
+                } else {
+                    if (element.type === 'FILE') {
+                        foundElement.metricValues = this._mergeMetricValues(foundElement, element);
                     }
                 }
 
-                if (element.type === 'FILE') {
-                    foundElement.metricValues = this._mergeMetricValues(foundElement, element);
-                }
             } else {
                 console.log('NOT found:', element.name);
                 console.log('parent of not found element: ', parent.name);
@@ -109,6 +115,10 @@ export class CommitMerger {
      * @returns Object
      */
     static search(elementToFind, elementsToSearch, parent = undefined) {
+        if (!Array.isArray(elementsToSearch)) {
+            elementsToSearch = [elementsToSearch];
+        }
+
         for (let element of elementsToSearch) {
             if (element.name === elementToFind.name) {
                 return {
