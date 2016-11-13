@@ -9,3 +9,8 @@ npm install
 ```
 gulp
 ```
+
+## Execute tests
+```
+npm test
+```
