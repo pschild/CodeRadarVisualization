@@ -14,13 +14,19 @@
                         "coderadar:javaMoc": 1000
                     },
                     "children": []
-                },
+                }
+            ]
+        },
+        {
+            "type": "MODULE",
+            "name": "Module B",
+            "children": [
                 {
                     "type": "FILE",
-                    "name": "A2.java",
+                    "name": "B1.java",
                     "metricValues": {
-                        "coderadar:javaLoc": 500,
-                        "coderadar:javaMoc": 1000
+                        "coderadar:javaLoc": 300,
+                        "coderadar:javaMoc": 300
                     },
                     "children": []
                 }

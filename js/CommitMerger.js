@@ -8,9 +8,11 @@ export class CommitMerger {
         this._createMetricValueObjects(firstRoot.children, this.firstCommitId);
         this._createMetricValueObjects(secondRoot.children, this.secondCommitId);
 
+        console.log(firstRoot, secondRoot);
+
         this.firstRoot = firstRoot;
         this.walk(secondRoot.children, firstRoot);
-        // TODO: firstRoot.children contains elements that are not contained in secondRoot => remove those
+
         return firstRoot.children;
     }
 
@@ -60,24 +62,35 @@ export class CommitMerger {
             // console.log('investigating ', element);
 
             // foundElement is the element from #1
-            var foundElement = this.search(element, this.firstRoot.children);
+            var searchResult = this.search(element, this.firstRoot.children, this.firstRoot);
+            var foundElement = searchResult ? searchResult.foundElement : undefined;
             if (foundElement) {
                 // console.log(element.name + ' found in 1st commit');
+                if (parent.name != searchResult.foundElementsParent.name) {
+                    console.log('we have different parents for ' + element.name + ': ', parent.name, searchResult.foundElementsParent.name);
+                    console.log(element.name + ' should be added to ' + parent.name + ' in the result object');
+                    var searchResult = this.search(parent, this.firstRoot.children, this.firstRoot);
+                    var foundElement = searchResult ? searchResult.foundElement : undefined;
+                    if (foundElement) {
+                        foundElement.children.push(element);
+                    }
+                }
+
                 if (element.type === 'FILE') {
                     foundElement.metricValues = this._mergeMetricValues(foundElement, element);
                 }
             } else {
-                // console.log('NOT found');
-                // console.log('parent of not found element: ', parent.name);
-                // var foundParent = this.search(parent, this.firstRoot.children);
-                // if (foundParent) {
-                //     // console.log(parent.name + ' found in 1st commit. adding element to it');
-                //     foundParent.children.push(element);
-                // } else {
-                //     // console.log(parent.name + ' NOT found in 1st commit. adding element to root');
-                //     this.firstRoot.children.push(element);
-                //     // console.log(this.firstRoot);
-                // }
+                console.log('NOT found:', element.name);
+                console.log('parent of not found element: ', parent.name);
+                var searchResult = this.search(parent, this.firstRoot.children, this.firstRoot);
+                var foundParent = searchResult ? searchResult.foundElement : undefined;
+                if (foundParent) {
+                    console.log(parent.name + ' found in 1st commit. adding element to it');
+                    foundParent.children.push(element);
+                } else {
+                    console.log(parent.name + ' NOT found in 1st commit. adding element to root');
+                    this.firstRoot.children.push(element);
+                }
             }
 
             if (element.children && element.children.length > 0) {
@@ -92,16 +105,20 @@ export class CommitMerger {
      *
      * @param elementToFind
      * @param elementsToSearch
+     * @param parent
      * @returns Object
      */
-    static search(elementToFind, elementsToSearch) {
+    static search(elementToFind, elementsToSearch, parent = undefined) {
         for (let element of elementsToSearch) {
             if (element.name === elementToFind.name) {
-                return element;
+                return {
+                    foundElement: element,
+                    foundElementsParent: parent
+                };
             }
 
             if (element.children && element.children.length > 0) {
-                var resultFromChildrenSearch = this.search(elementToFind, element.children);
+                var resultFromChildrenSearch = this.search(elementToFind, element.children, element);
                 if (resultFromChildrenSearch) {
                     return resultFromChildrenSearch;
                 }

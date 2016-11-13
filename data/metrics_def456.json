@@ -10,10 +10,25 @@
                     "type": "FILE",
                     "name": "A1.java",
                     "metricValues": {
-                        "coderadar:javaLoc": 1000,
-                        "coderadar:javaMoc": 500
+                        "coderadar:javaLoc": 500,
+                        "coderadar:javaMoc": 1000
                     },
                     "children": []
+                },
+                {
+                    "type": "MODULE",
+                    "name": "Module B",
+                    "children": [
+                        {
+                            "type": "FILE",
+                            "name": "B1.java",
+                            "metricValues": {
+                                "coderadar:javaLoc": 300,
+                                "coderadar:javaMoc": 300
+                            },
+                            "children": []
+                        }
+                    ]
                 }
             ]
         }
