@@ -162,7 +162,7 @@ describe('Drawer', function () {
     describe('#_getMetricValueOfElementAndCurrentCommit(element, metricName)', function () {
         it('should throw an error when data is not valid', function () {
             assert.throws(() => {
-                drawer._getMetricValueOfElementAndCurrentCommit({
+                drawer._getMetricValueOfElementAndCommitType({
                     type: 'FILE',
                     metricValues: {
                         'metricName1': 42
@@ -183,16 +183,14 @@ describe('Drawer', function () {
         });
 
         it('should throw an error when commitId for given commitType is not found', function () {
-            assert.throws(() => {
-                drawer._getMetricValueOfElementAndCommitType({
-                    type: 'FILE',
-                    metricValues: {
-                        'metricName1': {
-                            'def456': 42
-                        }
+            assert.equal(drawer._getMetricValueOfElementAndCommitType({
+                type: 'FILE',
+                metricValues: {
+                    'metricName1': {
+                        'def456': 42
                     }
-                }, 'metricName1', 'current');
-            });
+                }
+            }, 'metricName1', 'current'), undefined);
         });
 
         it('should throw an error when metricName is not found', function () {

@@ -18,14 +18,14 @@ export class Drawer {
 
             if (element.type == 'FILE') {
                 var greatestMetricValueForGroundArea = this._getGreatestMetricValueForGroundArea(element.metricValues);
-                element.w = greatestMetricValueForGroundArea * config.GROUND_AREA_FACTOR;
-                element.h = greatestMetricValueForGroundArea * config.GROUND_AREA_FACTOR;
+                element.w = greatestMetricValueForGroundArea * config.GROUND_AREA_FACTOR + config.BLOCK_SPACING;
+                element.h = greatestMetricValueForGroundArea * config.GROUND_AREA_FACTOR + config.BLOCK_SPACING;
             }
 
             if (element.children && element.children.length > 0) {
                 var result = this.calculateGroundAreas(element.children);
-                element.w = result.w;
-                element.h = result.h;
+                element.w = result.w + config.BLOCK_SPACING * 3;
+                element.h = result.h + config.BLOCK_SPACING * 3;
             }
         });
 
@@ -60,7 +60,7 @@ export class Drawer {
             }
 
             var greatestSize = element.w;
-            var currentCommitSize = this._getMetricValueOfElementAndCommitType(element, config.GROUND_AREA_METRIC_NAME, COMMIT_TYPE_CURRENT) * config.GROUND_AREA_FACTOR;
+            var currentCommitSize = this._getMetricValueOfElementAndCommitType(element, config.GROUND_AREA_METRIC_NAME, COMMIT_TYPE_CURRENT) * config.GROUND_AREA_FACTOR + config.BLOCK_SPACING;
 
             if (!isNaN(currentCommitSize) && greatestSize != currentCommitSize) {
                 // draw a helper cube
@@ -80,9 +80,9 @@ export class Drawer {
         var finalWidth, finalHeight, finalDepth;
 
         var cube = new Block(color, isHelper ? 'HELPER' : element.name);
-        finalX = element.fit.x + (parent ? parent.renderedX : 0);
+        finalX = element.fit.x + (parent ? parent.renderedX : 0) + config.BLOCK_SPACING;
         finalY = bottom;
-        finalZ = element.fit.y + (parent ? parent.renderedY : 0);
+        finalZ = element.fit.y + (parent ? parent.renderedY : 0) + config.BLOCK_SPACING;
 
         // save the rendered positions to draw children relative to their parent
         element.renderedX = finalX;
@@ -99,9 +99,9 @@ export class Drawer {
             cube.material.color = new THREE.Color('#ffff00');
             cube.visible = !isHelper || config.HELPER_BLOCK_VISIBLE;
         } else {
-            finalWidth = element.type == 'FILE' ? currentCommitSize - config.BLOCK_SPACING : element.w - config.BLOCK_SPACING;
+            finalWidth = element.type == 'FILE' ? currentCommitSize - config.BLOCK_SPACING : element.w - config.BLOCK_SPACING * 2;
             finalHeight = height;
-            finalDepth = element.type == 'FILE' ? currentCommitSize - config.BLOCK_SPACING : element.h - config.BLOCK_SPACING;
+            finalDepth = element.type == 'FILE' ? currentCommitSize - config.BLOCK_SPACING : element.h - config.BLOCK_SPACING * 2;
         }
 
         cube.position.x = finalX;
@@ -144,21 +144,19 @@ export class Drawer {
     }
 
     _hasChildrenForCurrentCommit(element) {
-        if (!element.children || element.children.length == 0) {
-            return false;
-        }
+        var found = false;
 
         for (let child of element.children) {
             if (this._hasMetricValuesForCurrentCommit(child)) {
-                return true;
+                found = true;
             }
 
-            if (child.children && child.children.length > 0) {
-                return this._hasChildrenForCurrentCommit(child);
+            if (child.children && child.children.length > 0 && !found) {
+                found = this._hasChildrenForCurrentCommit(child);
             }
         }
 
-        return false;
+        return found;
     }
 
     _hasMetricValuesForCurrentCommit(element) {
@@ -191,7 +189,7 @@ export class Drawer {
                     }
                 }
 
-                throw new Error('no matching metricValue found for commitType ' + commitType);
+                console.info('no matching metricValue found for commitType ' + commitType);
             } else {
                 throw new Error('metricValues must be an object. current value: ' + (typeof element.metricValues[key]));
             }

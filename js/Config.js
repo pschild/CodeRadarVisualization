@@ -7,7 +7,7 @@ export var config = {
     HEIGHT_METRIC_NAME: 'coderadar:javaLoc',
     HEIGHT_FACTOR: 10,
 
-    BLOCK_SPACING: 200,
+    BLOCK_SPACING: 600,
     DEFAULT_BLOCK_HEIGHT: 500,
     DEFAULT_BLOCK_DIMENSIONS: 100,
 
