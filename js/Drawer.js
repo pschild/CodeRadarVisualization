@@ -72,24 +72,6 @@ export class Drawer {
         });
     }
 
-    _hasChildrenForCurrentCommit(element) {
-        if (!element.children || element.children.length == 0) {
-            return false;
-        }
-
-        for (let child of element.children) {
-            if (this._hasMetricValuesForCurrentCommit(child)) {
-                return true;
-            }
-
-            if (child.children && child.children.length > 0) {
-                this._hasChildrenForCurrentCommit(child);
-            }
-        }
-
-        return false;
-    }
-
     drawBlock(element, parent, color, currentCommitSize, bottom, height, isHelper, helperSize) {
         var finalX, finalY, finalZ;
         var finalWidth, finalHeight, finalDepth;
@@ -137,7 +119,7 @@ export class Drawer {
 
     _getGreatestMetricValueForGroundArea(metricValues) {
         if (typeof metricValues != 'object') {
-            throw 'metricValues is not an object!';
+            throw new Error('metricValues is not an object!');
         }
 
         for (let key in metricValues) {
@@ -157,9 +139,27 @@ export class Drawer {
                     return metricValues[key];
                 }
             } else {
-                throw 'unknown type!';
+                throw new Error('wrong type ' + typeof metricValues[key] + '!');
             }
         }
+    }
+
+    _hasChildrenForCurrentCommit(element) {
+        if (!element.children || element.children.length == 0) {
+            return false;
+        }
+
+        for (let child of element.children) {
+            if (this._hasMetricValuesForCurrentCommit(child)) {
+                return true;
+            }
+
+            if (child.children && child.children.length > 0) {
+                return this._hasChildrenForCurrentCommit(child);
+            }
+        }
+
+        return false;
     }
 
     _hasMetricValuesForCurrentCommit(element) {
@@ -169,9 +169,9 @@ export class Drawer {
                     return true;
                 }
 
-                return undefined;
+                return false;
             } else {
-                throw 'metricValues must be an object. current value: ' + (typeof element.metricValues[key]);
+                throw new Error('metricValues must be an object. current value: ' + (typeof element.metricValues[key]));
             }
         }
     }
@@ -179,9 +179,12 @@ export class Drawer {
     _getMetricValueOfElementAndCurrentCommit(element, metricName) {
         for (let key in element.metricValues) {
             if (typeof element.metricValues[key] == 'object') {
+                if (!element.metricValues[metricName]) {
+                    throw new Error(metricName + ' was not found in metricValues ' + JSON.stringify(element.metricValues));
+                }
                 return element.metricValues[metricName][this.currentCommitId];
             } else {
-                throw 'metricValues must be an object. current value: ' + (typeof element.metricValues[key]);
+                throw new Error('metricValues must be an object. current value: ' + (typeof element.metricValues[key]));
             }
         }
     }
