@@ -43,21 +43,21 @@ export class Drawer {
     drawElements(elements, parent, bottom = 0) {
         elements.forEach((element) => {
             // don't draw empty modules
-            if (element.type == 'MODULE' && (!element.children || element.children.length == 0)) {
+            if (element.type == 'MODULE' && !this._hasChildrenForCurrentCommit(element)) {
                 return;
             }
 
             var height, color;
             if (element.type == 'FILE') {
                 color = '#00cc00';
-                height = this._getMetricValueOfElementAndCurrentCommit(element, config.HEIGHT_METRIC_NAME, this.currentCommitId) * config.HEIGHT_FACTOR;
+                height = this._getMetricValueOfElementAndCurrentCommit(element, config.HEIGHT_METRIC_NAME) * config.HEIGHT_FACTOR;
             } else {
                 color = '#cccccc';
                 height = config.DEFAULT_BLOCK_HEIGHT;
             }
 
             var greatestSize = element.w;
-            var currentCommitSize = this._getMetricValueOfElementAndCurrentCommit(element, config.GROUND_AREA_METRIC_NAME, this.currentCommitId) * config.GROUND_AREA_FACTOR;
+            var currentCommitSize = this._getMetricValueOfElementAndCurrentCommit(element, config.GROUND_AREA_METRIC_NAME) * config.GROUND_AREA_FACTOR;
 
             if (!isNaN(currentCommitSize) && greatestSize != currentCommitSize) {
                 // draw a helper cube
@@ -70,6 +70,24 @@ export class Drawer {
                 this.drawElements(element.children, element, bottom + height);
             }
         });
+    }
+
+    _hasChildrenForCurrentCommit(element) {
+        if (!element.children || element.children.length == 0) {
+            return false;
+        }
+
+        for (let child of element.children) {
+            if (this._hasMetricValuesForCurrentCommit(child)) {
+                return true;
+            }
+
+            if (child.children && child.children.length > 0) {
+                this._hasChildrenForCurrentCommit(child);
+            }
+        }
+
+        return false;
     }
 
     drawBlock(element, parent, color, currentCommitSize, bottom, height, isHelper, helperSize) {
@@ -144,10 +162,24 @@ export class Drawer {
         }
     }
 
-    _getMetricValueOfElementAndCurrentCommit(element, metricName, commitId) {
+    _hasMetricValuesForCurrentCommit(element) {
         for (let key in element.metricValues) {
             if (typeof element.metricValues[key] == 'object') {
-                return element.metricValues[metricName][commitId];
+                if (Object.keys(element.metricValues[key]).indexOf(this.currentCommitId) >= 0) {
+                    return true;
+                }
+
+                return undefined;
+            } else {
+                throw 'metricValues must be an object. current value: ' + (typeof element.metricValues[key]);
+            }
+        }
+    }
+
+    _getMetricValueOfElementAndCurrentCommit(element, metricName) {
+        for (let key in element.metricValues) {
+            if (typeof element.metricValues[key] == 'object') {
+                return element.metricValues[metricName][this.currentCommitId];
             } else {
                 throw 'metricValues must be an object. current value: ' + (typeof element.metricValues[key]);
             }

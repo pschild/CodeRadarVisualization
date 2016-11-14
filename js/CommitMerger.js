@@ -88,7 +88,7 @@ export class CommitMerger {
             } else {
                 console.log('NOT found:', element.name);
                 console.log('parent of not found element: ', parent.name);
-                var searchResult = this.search(parent, this.firstRoot.children, this.firstRoot);
+                var searchResult = this.search(parent, this.firstRoot, this.firstRoot);
                 var foundParent = searchResult ? searchResult.foundElement : undefined;
                 if (foundParent) {
                     console.log(parent.name + ' found in 1st commit. adding element to it');
@@ -97,6 +97,9 @@ export class CommitMerger {
                     console.log(parent.name + ' NOT found in 1st commit. adding element to root');
                     this.firstRoot.children.push(element);
                 }
+
+                // IMPORTANT: continue, so that child elements of added element are not investigated. This ist not necessary.
+                continue;
             }
 
             if (element.children && element.children.length > 0) {
