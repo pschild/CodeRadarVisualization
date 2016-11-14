@@ -87,7 +87,7 @@ export class Drawer {
 
         if (isHelper) {
             finalWidth = helperSize - config.BLOCK_SPACING;
-            finalHeight = config.HELPER_BLOCK_HEIGHT;
+            finalHeight = this._getMetricValueOfElementAndOtherCommit(element, config.HEIGHT_METRIC_NAME) * config.HEIGHT_FACTOR;
             finalDepth = helperSize - config.BLOCK_SPACING;
 
             // cube.material.wireframe = true;
@@ -179,6 +179,27 @@ export class Drawer {
                     throw new Error(metricName + ' was not found in metricValues ' + JSON.stringify(element.metricValues));
                 }
                 return element.metricValues[metricName][this.currentCommitId];
+            } else {
+                throw new Error('metricValues must be an object. current value: ' + (typeof element.metricValues[key]));
+            }
+        }
+    }
+
+    _getMetricValueOfElementAndOtherCommit(element, metricName) {
+        for (let key in element.metricValues) {
+            if (typeof element.metricValues[key] == 'object') {
+                var metricValue = element.metricValues[metricName];
+                if (!metricValue) {
+                    throw new Error(metricName + ' was not found in metricValues ' + JSON.stringify(element.metricValues));
+                }
+
+                for (let commitKey in metricValue) {
+                    if (commitKey != this.currentCommitId) {
+                        return metricValue[commitKey];
+                    }
+                }
+
+                throw new Error('other commit id not found');
             } else {
                 throw new Error('metricValues must be an object. current value: ' + (typeof element.metricValues[key]));
             }
