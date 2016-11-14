@@ -29,17 +29,32 @@ export class InteractionHandler {
         this._raycaster.setFromCamera(this._mouseForRaycaster, camera);
 
         var intersects = this._raycaster.intersectObjects(this._scene.children);
-        if (intersects.length > 0) {
+        var target = this._findFirstNonHelperBlock(intersects);
+        if (target) {
             $('#tooltip')
                 .css({
                     left: this._mouse.x + 5,
                     top: this._mouse.y + 5,
                 })
-                .html(intersects[0].object.userData.tooltipLabel)
+                .html(target.userData.tooltipLabel)
                 .fadeIn();
         } else {
             $('#tooltip').fadeOut();
         }
+    }
+
+    _findFirstNonHelperBlock(intersects) {
+        if (intersects.length > 0) {
+            for (let i = 0; i < intersects.length; i++) {
+                // find the first block that is not a helper block
+                // this lets the clicks go through the helper blocks
+                if (!intersects[i].object.userData.isHelper) {
+                    return intersects[i].object;
+                }
+            }
+        }
+
+        return undefined;
     }
 
     _onDocumentMouseMove() {
@@ -65,15 +80,9 @@ export class InteractionHandler {
         }
 
         var intersects = this._raycaster.intersectObjects(this._scene.children);
-        if (intersects.length > 0) {
-            for (let i = 0; i < intersects.length; i++) {
-                // find the first block that is not a helper block
-                // this lets the clicks go through the helper blocks
-                if (!intersects[i].object.userData.isHelper) {
-                    PubSub.publish('elementClicked', { name: intersects[i].object.name });
-                    break;
-                }
-            }
+        var target = this._findFirstNonHelperBlock(intersects);
+        if (target) {
+            PubSub.publish('elementClicked', { name: target.name });
         }
     }
 
