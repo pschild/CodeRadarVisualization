@@ -118,8 +118,8 @@ export class Drawer {
     }
 
     _getGreatestMetricValueForGroundArea(metricValues) {
-        if (typeof metricValues != 'object') {
-            throw new Error('metricValues is not an object!');
+        if (typeof metricValues != 'object' || metricValues == null) {
+            throw new Error('metricValues is not an object or null!');
         }
 
         for (let key in metricValues) {
@@ -133,10 +133,6 @@ export class Drawer {
                         }
                     }
                     return maxValue;
-                }
-            } else if (typeof metricValues[key] == 'number') {
-                if (key == config.GROUND_AREA_METRIC_NAME) {
-                    return metricValues[key];
                 }
             } else {
                 throw new Error('wrong type ' + typeof metricValues[key] + '!');
