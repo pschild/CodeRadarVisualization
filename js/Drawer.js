@@ -1,6 +1,9 @@
 import {Block} from './Block';
 import {config} from './Config';
 
+const COMMIT_TYPE_CURRENT = 'current';
+const COMMIT_TYPE_OTHER = 'other';
+
 export class Drawer {
 
     constructor(scene, currentCommitId) {
@@ -50,14 +53,14 @@ export class Drawer {
             var height, color;
             if (element.type == 'FILE') {
                 color = '#00cc00';
-                height = this._getMetricValueOfElementAndCurrentCommit(element, config.HEIGHT_METRIC_NAME) * config.HEIGHT_FACTOR;
+                height = this._getMetricValueOfElementAndCommitType(element, config.HEIGHT_METRIC_NAME, COMMIT_TYPE_CURRENT) * config.HEIGHT_FACTOR;
             } else {
                 color = '#cccccc';
                 height = config.DEFAULT_BLOCK_HEIGHT;
             }
 
             var greatestSize = element.w;
-            var currentCommitSize = this._getMetricValueOfElementAndCurrentCommit(element, config.GROUND_AREA_METRIC_NAME) * config.GROUND_AREA_FACTOR;
+            var currentCommitSize = this._getMetricValueOfElementAndCommitType(element, config.GROUND_AREA_METRIC_NAME, COMMIT_TYPE_CURRENT) * config.GROUND_AREA_FACTOR;
 
             if (!isNaN(currentCommitSize) && greatestSize != currentCommitSize) {
                 // draw a helper cube
@@ -87,7 +90,7 @@ export class Drawer {
 
         if (isHelper) {
             finalWidth = helperSize - config.BLOCK_SPACING;
-            finalHeight = this._getMetricValueOfElementAndOtherCommit(element, config.HEIGHT_METRIC_NAME) * config.HEIGHT_FACTOR;
+            finalHeight = this._getMetricValueOfElementAndCommitType(element, config.HEIGHT_METRIC_NAME, COMMIT_TYPE_OTHER) * config.HEIGHT_FACTOR;
             finalDepth = helperSize - config.BLOCK_SPACING;
 
             // cube.material.wireframe = true;
@@ -172,20 +175,7 @@ export class Drawer {
         }
     }
 
-    _getMetricValueOfElementAndCurrentCommit(element, metricName) {
-        for (let key in element.metricValues) {
-            if (typeof element.metricValues[key] == 'object') {
-                if (!element.metricValues[metricName]) {
-                    throw new Error(metricName + ' was not found in metricValues ' + JSON.stringify(element.metricValues));
-                }
-                return element.metricValues[metricName][this.currentCommitId];
-            } else {
-                throw new Error('metricValues must be an object. current value: ' + (typeof element.metricValues[key]));
-            }
-        }
-    }
-
-    _getMetricValueOfElementAndOtherCommit(element, metricName) {
+    _getMetricValueOfElementAndCommitType(element, metricName, commitType) {
         for (let key in element.metricValues) {
             if (typeof element.metricValues[key] == 'object') {
                 var metricValue = element.metricValues[metricName];
@@ -194,12 +184,14 @@ export class Drawer {
                 }
 
                 for (let commitKey in metricValue) {
-                    if (commitKey != this.currentCommitId) {
+                    if (commitType == COMMIT_TYPE_OTHER && commitKey != this.currentCommitId) {
+                        return metricValue[commitKey];
+                    } else if (commitType == COMMIT_TYPE_CURRENT && commitKey == this.currentCommitId) {
                         return metricValue[commitKey];
                     }
                 }
 
-                throw new Error('other commit id not found');
+                throw new Error('no matching metricValue found for commitType ' + commitType);
             } else {
                 throw new Error('metricValues must be an object. current value: ' + (typeof element.metricValues[key]));
             }

@@ -172,37 +172,39 @@ describe('Drawer', function () {
         });
 
         it('should return metricValue when metric is found for current commit', function () {
-            assert.equal(drawer._getMetricValueOfElementAndCurrentCommit({
+            assert.equal(drawer._getMetricValueOfElementAndCommitType({
                 type: 'FILE',
                 metricValues: {
                     'metricName1': {
                         'abc123': 42
                     }
                 }
-            }, 'metricName1'), 42);
+            }, 'metricName1', 'current'), 42);
         });
 
-        it('should return undefined when metric is found for other commit', function () {
-            assert.equal(drawer._getMetricValueOfElementAndCurrentCommit({
-                type: 'FILE',
-                metricValues: {
-                    'metricName1': {
-                        'def456': 42
-                    }
-                }
-            }, 'metricName1'), undefined);
-        });
-
-        it('should throw an error when metric is not found at all', function () {
+        it('should throw an error when commitId for given commitType is not found', function () {
             assert.throws(() => {
-                drawer._getMetricValueOfElementAndCurrentCommit({
+                drawer._getMetricValueOfElementAndCommitType({
+                    type: 'FILE',
+                    metricValues: {
+                        'metricName1': {
+                            'def456': 42
+                        }
+                    }
+                }, 'metricName1', 'current');
+            });
+        });
+
+        it('should throw an error when metricName is not found', function () {
+            assert.throws(() => {
+                drawer._getMetricValueOfElementAndCommitType({
                     type: 'FILE',
                     metricValues: {
                         'metricName1': {
                             'abc123': 42
                         }
                     }
-                }, 'metricName2');
+                }, 'metricName2', 'current');
             });
         });
     });
