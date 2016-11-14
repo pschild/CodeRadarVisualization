@@ -107,6 +107,10 @@ export class Screen {
 
         PubSub.subscribe('elementClicked', (eventName, args) => {
             var block = this.scene.getObjectByName(args.name);
+            if (!block || !block.userData) {
+                return;
+            }
+
             if (block.userData.color) {
                 block.material.color = block.userData.color;
                 block.userData.color = undefined;
