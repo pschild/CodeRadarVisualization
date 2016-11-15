@@ -1,5 +1,7 @@
 import {Interface} from './interface/Interface';
 import {Screen} from './Screen';
+import {config} from './Config';
+import {ElementAnalyzer} from './ElementAnalyzer';
 import {CoderadarMetricService} from './service/CoderadarMetricService';
 import {DummyMetricService} from './service/DummyMetricService';
 import {CommitService} from './service/CommitService';
@@ -57,6 +59,8 @@ export class Application {
 
             var result = CommitMerger.merge(firstCommitResult, secondCommitResult);
             console.log('merging ' + this.leftCommitId + ' and ' + this.rightCommitId + ':', result);
+
+            var minMax = ElementAnalyzer.findSmallestAndBiggestMetricValueByMetricName(result, config.HEIGHT_METRIC_NAME);
 
             this.getLeftScreen().setData(result);
             this.getLeftScreen().render();

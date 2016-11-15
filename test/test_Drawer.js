@@ -1,7 +1,6 @@
 var assert = require('assert');
 
 import {Drawer} from '../js/Drawer';
-import {config} from '../js/Config';
 
 const CURRENT_COMMIT = 'abc123';
 var drawer = new Drawer(null, CURRENT_COMMIT);
@@ -204,55 +203,6 @@ describe('Drawer', function () {
                     }
                 }, 'metricName2', 'current');
             });
-        });
-    });
-
-    describe('#_getGreatestMetricValueForGroundArea(metricValues)', function () {
-        it('should throw an error when data is not valid', function () {
-            assert.throws(() => {
-                drawer._getGreatestMetricValueForGroundArea(null);
-            });
-
-            assert.throws(() => {
-                drawer._getGreatestMetricValueForGroundArea(42);
-            });
-        });
-
-        it('should return undefined when empty object is given', function () {
-            assert.equal(drawer._getGreatestMetricValueForGroundArea({}), undefined);
-        });
-
-        it('should return the biggest value', function () {
-            assert.equal(drawer._getGreatestMetricValueForGroundArea({
-                [config.GROUND_AREA_METRIC_NAME]: {
-                    'abc123': 111
-                },
-                'metricName2': {
-                    'abc123': 222
-                }
-            }), 111);
-
-            assert.equal(drawer._getGreatestMetricValueForGroundArea({
-                [config.GROUND_AREA_METRIC_NAME]: {
-                    'abc123': 111,
-                    'def456': 222
-                },
-                'metricName2': {
-                    'abc123': 333,
-                    'def456': 444
-                }
-            }), 222);
-
-            assert.equal(drawer._getGreatestMetricValueForGroundArea({
-                [config.GROUND_AREA_METRIC_NAME]: {
-                    'abc123': 111,
-                    'def456': 111
-                },
-                'metricName2': {
-                    'abc123': 333,
-                    'def456': 333
-                }
-            }), 111);
         });
     });
 });

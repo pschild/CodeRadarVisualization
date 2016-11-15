@@ -1,5 +1,6 @@
 import {Block} from './Block';
 import {config} from './Config';
+import {ElementAnalyzer} from './ElementAnalyzer';
 
 const COMMIT_TYPE_CURRENT = 'current';
 const COMMIT_TYPE_OTHER = 'other';
@@ -17,7 +18,7 @@ export class Drawer {
             element.h = 0;
 
             if (element.type == 'FILE') {
-                var greatestMetricValueForGroundArea = this._getGreatestMetricValueForGroundArea(element.metricValues);
+                var greatestMetricValueForGroundArea = ElementAnalyzer.getMaxMetricValueByMetricName(element.metricValues, config.GROUND_AREA_METRIC_NAME);
                 element.w = greatestMetricValueForGroundArea * config.GROUND_AREA_FACTOR + config.BLOCK_SPACING;
                 element.h = greatestMetricValueForGroundArea * config.GROUND_AREA_FACTOR + config.BLOCK_SPACING;
             }
@@ -118,29 +119,6 @@ export class Drawer {
         };
 
         this.scene.add(cube);
-    }
-
-    _getGreatestMetricValueForGroundArea(metricValues) {
-        if (typeof metricValues != 'object' || metricValues == null) {
-            throw new Error('metricValues is not an object or null!');
-        }
-
-        for (let key in metricValues) {
-            if (typeof metricValues[key] == 'object') {
-                if (key == config.GROUND_AREA_METRIC_NAME) {
-                    let maxValue = -1;
-                    for (let commitId in metricValues[key]) {
-                        var metricValue = metricValues[key][commitId];
-                        if (maxValue < metricValue) {
-                            maxValue = metricValue;
-                        }
-                    }
-                    return maxValue;
-                }
-            } else {
-                throw new Error('wrong type ' + typeof metricValues[key] + '!');
-            }
-        }
     }
 
     _hasChildrenForCurrentCommit(element) {
