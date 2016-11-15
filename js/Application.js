@@ -60,12 +60,12 @@ export class Application {
             var result = CommitMerger.merge(firstCommitResult, secondCommitResult);
             console.log('merging ' + this.leftCommitId + ' and ' + this.rightCommitId + ':', result);
 
-            var minMax = ElementAnalyzer.findSmallestAndBiggestMetricValueByMetricName(result, config.HEIGHT_METRIC_NAME);
+            var minMaxPairOfHeight = ElementAnalyzer.findSmallestAndBiggestMetricValueByMetricName(result, config.HEIGHT_METRIC_NAME);
 
-            this.getLeftScreen().setData(result);
+            this.getLeftScreen().setData(result, minMaxPairOfHeight);
             this.getLeftScreen().render();
 
-            this.getRightScreen().setData(result);
+            this.getRightScreen().setData(result, minMaxPairOfHeight);
             this.getRightScreen().render();
 
             this.interface.hideLoadingIndicator();

@@ -24,8 +24,8 @@ export class Screen {
         return this.scene;
     }
 
-    setData(data) {
-        var drawer = new Drawer(this.scene, this.commitId);
+    setData(data, minMaxPairOfHeight) {
+        var drawer = new Drawer(this.scene, this.commitId, minMaxPairOfHeight);
         drawer.calculateGroundAreas(data);
         drawer.drawElements(data);
     }

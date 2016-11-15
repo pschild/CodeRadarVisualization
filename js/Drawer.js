@@ -7,9 +7,11 @@ const COMMIT_TYPE_OTHER = 'other';
 
 export class Drawer {
 
-    constructor(scene, currentCommitId) {
+    constructor(scene, currentCommitId, minMaxPairOfHeight) {
         this.scene = scene;
         this.currentCommitId = currentCommitId;
+        this.minHeight = minMaxPairOfHeight.min;
+        this.maxHeight = minMaxPairOfHeight.max;
     }
 
     calculateGroundAreas(elements) {
@@ -53,11 +55,11 @@ export class Drawer {
 
             var height, color;
             if (element.type == 'FILE') {
-                color = '#00cc00';
                 height = this._getMetricValueOfElementAndCommitType(element, config.HEIGHT_METRIC_NAME, COMMIT_TYPE_CURRENT) * config.HEIGHT_FACTOR;
+                color = this._getColor(height);
             } else {
-                color = '#cccccc';
                 height = config.DEFAULT_BLOCK_HEIGHT;
+                color = '#cccccc';
             }
 
             var greatestSize = element.w;
@@ -119,6 +121,25 @@ export class Drawer {
         };
 
         this.scene.add(cube);
+    }
+
+    _getColor(value) {
+        var mid = (this.maxHeight * config.HEIGHT_FACTOR + this.minHeight * config.HEIGHT_FACTOR) / 2;
+        var blue = 0;
+        var red, green;
+
+        if (value <= mid) {
+            // green to yellow
+            red = Math.floor(255 * (value / mid));
+            green = 255;
+
+        } else {
+            // yellow to red
+            red = 255;
+            green = Math.floor(255 * ((mid - (value - 1) % mid) / mid));
+        }
+
+        return new THREE.Color('rgb(' + red + ',' + green + ',' + blue + ')');
     }
 
     _hasChildrenForCurrentCommit(element) {
