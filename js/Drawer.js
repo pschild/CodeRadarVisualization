@@ -10,8 +10,8 @@ export class Drawer {
     constructor(scene, currentCommitId, minMaxPairOfHeight) {
         this.scene = scene;
         this.currentCommitId = currentCommitId;
-        this.minHeight = minMaxPairOfHeight.min;
-        this.maxHeight = minMaxPairOfHeight.max;
+        this.minHeight = minMaxPairOfHeight ? minMaxPairOfHeight.min : 0;
+        this.maxHeight = minMaxPairOfHeight ? minMaxPairOfHeight.max : 0;
     }
 
     calculateGroundAreas(elements) {
