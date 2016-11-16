@@ -12,6 +12,7 @@ export class Drawer {
         this.currentCommitId = currentCommitId;
         this.minHeight = minMaxPairOfHeight ? minMaxPairOfHeight.min : 0;
         this.maxHeight = minMaxPairOfHeight ? minMaxPairOfHeight.max : 0;
+        this.packer = this._getPacker();
     }
 
     calculateGroundAreas(elements) {
@@ -32,18 +33,20 @@ export class Drawer {
             }
         });
 
-        var packer = new GrowingPacker();
-
         elements.sort(function (a, b) {
             return (b.w > a.w);
         });
 
-        packer.fit(elements);
+        this.packer.fit(elements);
         return {
-            packer: packer.root,
-            w: packer.root.w,
-            h: packer.root.h
+            packer: this.packer.root,
+            w: this.packer.root.w,
+            h: this.packer.root.h
         };
+    }
+
+    _getPacker() {
+        return new GrowingPacker();
     }
 
     drawElements(elements, parent, bottom = 0) {
@@ -65,11 +68,18 @@ export class Drawer {
             var greatestSize = element.w;
             var currentCommitSize = this._getMetricValueOfElementAndCommitType(element, config.GROUND_AREA_METRIC_NAME, COMMIT_TYPE_CURRENT) * config.GROUND_AREA_FACTOR + config.BLOCK_SPACING;
 
+            var helperBlockDrawn = false;
             if (!isNaN(currentCommitSize) && greatestSize != currentCommitSize) {
                 // draw a helper cube
                 this.drawBlock(element, parent, color, currentCommitSize, bottom, height, true, greatestSize);
+                helperBlockDrawn = true;
             }
 
+            if (helperBlockDrawn) {
+                console.log('helperBlock was drawn', element.name);
+                // element.fit.x += (greatestSize - element.w) / 2;
+                // element.fit.y += (greatestSize - element.h) / 2;
+            }
             this.drawBlock(element, parent, color, currentCommitSize, bottom, height);
 
             if (element.children && element.children.length > 0) {
