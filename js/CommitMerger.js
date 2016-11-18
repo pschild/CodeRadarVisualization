@@ -51,6 +51,8 @@ export class CommitMerger {
                         metricValues[metricName][commitId] = tempValue;
                     }
                 }
+            } else {
+                delete element.metricValues;
             }
 
             if (element.children && element.children.length > 0) {
