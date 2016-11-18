@@ -14,6 +14,9 @@ export class InteractionHandler {
         this._mouse = new THREE.Vector2();
         this._mouseForRaycaster = new THREE.Vector2();
 
+        this.tooltipElement = document.querySelector('#tooltip');
+        this._hoveredElementUuid = undefined;
+
         this.bindEvents();
     }
 
@@ -30,16 +33,27 @@ export class InteractionHandler {
 
         var intersects = this._raycaster.intersectObjects(this._scene.children);
         var target = this._findFirstNonHelperBlock(intersects);
+
+        this._updateTooltip(target);
+    }
+
+    _updateTooltip(target) {
         if (target) {
-            $('#tooltip')
-                .css({
-                    left: this._mouse.x + 5,
-                    top: this._mouse.y + 5,
-                })
-                .html(target.userData.tooltipLabel)
-                .fadeIn();
+            if (target.uuid != this._hoveredElementUuid) {
+                this.tooltipElement.innerHTML = target.userData.tooltipLabel;
+                this._hoveredElementUuid = target.uuid;
+            }
+
+            if (this.tooltipElement.style.display != 'block') {
+                this.tooltipElement.style.display = 'block';
+            }
+
+            this.tooltipElement.style.left = this._mouse.x + 5 + 'px';
+            this.tooltipElement.style.top = this._mouse.y + 5 + 'px';
         } else {
-            $('#tooltip').fadeOut();
+            if (this.tooltipElement.style.display == 'block') {
+                this.tooltipElement.style.display = 'none';
+            }
         }
     }
 
