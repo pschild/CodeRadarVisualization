@@ -76,9 +76,8 @@ export class Drawer {
             }
 
             if (helperBlockDrawn) {
-                console.log('helperBlock was drawn', element.name);
-                // element.fit.x += (greatestSize - element.w) / 2;
-                // element.fit.y += (greatestSize - element.h) / 2;
+                element.fit.x += (greatestSize - currentCommitSize) / 2;
+                element.fit.y += (greatestSize - currentCommitSize) / 2;
             }
             this.drawBlock(element, parent, color, currentCommitSize, bottom, height);
 
@@ -109,7 +108,7 @@ export class Drawer {
             // cube.material.wireframe = true;
             cube.material.transparent = true;
             cube.material.opacity = 0.4;
-            cube.material.color = new THREE.Color('#ffff00');
+            cube.material.color = new THREE.Color('#cccccc');
             cube.visible = !isHelper || config.HELPER_BLOCK_VISIBLE;
         } else {
             finalWidth = element.type == 'FILE' ? currentCommitSize - config.BLOCK_SPACING : element.w - config.BLOCK_SPACING * 2;
