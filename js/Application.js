@@ -4,7 +4,8 @@ import {config} from './Config';
 import {ElementAnalyzer} from './ElementAnalyzer';
 import {CoderadarMetricService} from './service/CoderadarMetricService';
 import {DummyMetricService} from './service/DummyMetricService';
-import {CommitService} from './service/CommitService';
+import {DummyCommitService} from './service/DummyCommitService';
+import {CoderadarCommitService} from './service/CoderadarCommitService';
 import {CommitMapper} from './domain/CommitMapper';
 import {CommitMerger} from './CommitMerger';
 import * as PubSub from 'pubsub-js';
@@ -26,7 +27,7 @@ export class Application {
     }
 
     initialize() {
-        var commitService = new CommitService();
+        var commitService = new DummyCommitService();
         // FIRST: load commits
         commitService.load((data) => {
             var commitMapper = new CommitMapper(data);
