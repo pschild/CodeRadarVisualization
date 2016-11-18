@@ -12,7 +12,7 @@ export class CoderadarCommitService extends AbstractDataService {
     load(callbackFn) {
         var params = {};
 
-        axios.post(this.URL, params)
+        axios.get(this.URL, params)
             .then(function (response) {
                 callbackFn(response.data);
             })
