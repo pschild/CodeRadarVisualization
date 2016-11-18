@@ -5,6 +5,7 @@
     border: 1px solid #000;
     background: #fff;
     padding: 5px;
+    z-index: 99;
 
     display: none;
 }
