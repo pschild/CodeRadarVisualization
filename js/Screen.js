@@ -25,9 +25,11 @@ export class Screen {
     }
 
     setData(data, minMaxPairOfHeight) {
+        console.time('drawing time ' + this.position);
         var drawer = new Drawer(this.scene, this.commitId, minMaxPairOfHeight);
         drawer.calculateGroundAreas(data);
         drawer.drawElements(data);
+        console.timeEnd('drawing time ' + this.position);
     }
 
     setCommitId(commitId) {

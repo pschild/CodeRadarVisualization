@@ -72,8 +72,8 @@ export class CommitMerger {
             if (foundElement) {
                 // console.log(element.name + ' found in 1st commit');
                 if (parent.name != searchResult.foundElementsParent.name) {
-                    console.log('we have different parents for ' + element.name + ': ', parent.name, searchResult.foundElementsParent.name);
-                    console.log(element.name + ' should be added to ' + parent.name + ' in the result object');
+                    // console.log('we have different parents for ' + element.name + ': ', parent.name, searchResult.foundElementsParent.name);
+                    // console.log(element.name + ' should be added to ' + parent.name + ' in the result object');
                     var searchResult = this.search(parent, this.firstRoot, this.firstRoot);
                     var foundElement = searchResult ? searchResult.foundElement : undefined;
                     if (foundElement) {
@@ -88,15 +88,15 @@ export class CommitMerger {
                 }
 
             } else {
-                console.log('NOT found:', element.name);
-                console.log('parent of not found element: ', parent.name);
+                // console.log('NOT found:', element.name);
+                // console.log('parent of not found element: ', parent.name);
                 var searchResult = this.search(parent, this.firstRoot, this.firstRoot);
                 var foundParent = searchResult ? searchResult.foundElement : undefined;
                 if (foundParent) {
-                    console.log(parent.name + ' found in 1st commit. adding element to it');
+                    // console.log(parent.name + ' found in 1st commit. adding element to it');
                     foundParent.children.push(element);
                 } else {
-                    console.log(parent.name + ' NOT found in 1st commit. adding element to root');
+                    // console.log(parent.name + ' NOT found in 1st commit. adding element to root');
                     this.firstRoot.children.push(element);
                 }
 

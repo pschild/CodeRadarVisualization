@@ -58,8 +58,10 @@ export class Application {
             firstCommitResult.commitId = this.leftCommitId;
             secondCommitResult.commitId = this.rightCommitId;
 
+            console.time('merging time');
             var result = CommitMerger.merge(firstCommitResult, secondCommitResult);
-            console.log('merging ' + this.leftCommitId + ' and ' + this.rightCommitId + ':', result);
+            console.timeEnd('merging time');
+            // console.log('merging ' + this.leftCommitId + ' and ' + this.rightCommitId + ':', result);
 
             var minMaxPairOfHeight = ElementAnalyzer.findSmallestAndBiggestMetricValueByMetricName(result, config.HEIGHT_METRIC_NAME);
 
