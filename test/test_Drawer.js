@@ -1,9 +1,16 @@
 var assert = require('assert');
 
 import {Drawer} from '../js/Drawer';
+import sinon from 'sinon';
+import packers from 'binpacking';
+
+// mock GrowingPacker because it's imported with script-tag
+Drawer.prototype._getPacker = sinon.stub().returns(packers.GrowingPacker.prototype);
 
 const CURRENT_COMMIT = 'abc123';
 var drawer = new Drawer(null, CURRENT_COMMIT);
+var firstDrawer;
+var secondDrawer;
 
 var invalidJson = {
     type: 'ROOT',
@@ -105,6 +112,7 @@ var validJsonNotContainingCommitId = {
         }
     ]
 };
+var mergedData = require('./data/mergedData.json');
 
 describe('Drawer', function () {
     describe('#_hasChildrenForCurrentCommit(element)', function () {
@@ -203,6 +211,51 @@ describe('Drawer', function () {
                     }
                 }, 'metricName2', 'current');
             });
+        });
+    });
+
+    describe('#calculateGroundAreas', function () {
+
+        beforeEach(function() {
+            Drawer.prototype._getPacker = sinon.stub().returns(packers.GrowingPacker.prototype);
+            Drawer.prototype._getColor = sinon.stub().returns('some color');
+            Drawer.prototype.drawBlock = sinon.stub().returns('nothing interesting');
+
+            firstDrawer = new Drawer(null, 'abc123');
+            secondDrawer = new Drawer(null, 'def456');
+        });
+
+        it('should create one packer for each drawer', function () {
+            firstDrawer.calculateGroundAreas(mergedData);
+
+            // _getPacker is called for each drawer, so twice:
+            sinon.assert.callCount(Drawer.prototype._getPacker, 2);
+        });
+    });
+
+    describe('#calculateGroundAreas', function () {
+
+        beforeEach(function() {
+            Drawer.prototype._getPacker = sinon.stub().returns(packers.GrowingPacker.prototype);
+            Drawer.prototype._getColor = sinon.stub().returns('some color');
+            Drawer.prototype.drawBlock = sinon.stub().returns('nothing interesting');
+
+            firstDrawer = new Drawer(null, 'abc123');
+            secondDrawer = new Drawer(null, 'def456');
+        });
+
+        it('should draw the expected amount of elements for first drawer', function () {
+            firstDrawer.drawElements(mergedData);
+
+            // the first drawer needs to draw 17 blocks (normal + helper):
+            sinon.assert.callCount(firstDrawer.drawBlock, 17);
+        });
+
+        it('should draw the expected amount of elements for second drawer', function () {
+            secondDrawer.drawElements(mergedData);
+
+            // the first drawer needs to draw 6 blocks (normal + helper):
+            sinon.assert.callCount(secondDrawer.drawBlock, 6);
         });
     });
 });

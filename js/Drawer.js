@@ -75,7 +75,8 @@ export class Drawer {
                 helperBlockDrawn = true;
             }
 
-            if (helperBlockDrawn) {
+            if (helperBlockDrawn && element.fit) {
+                // render the original element (not the helper block) in the center of helper block:
                 element.fit.x += (greatestSize - currentCommitSize) / 2;
                 element.fit.y += (greatestSize - currentCommitSize) / 2;
             }
