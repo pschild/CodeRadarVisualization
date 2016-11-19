@@ -10,7 +10,13 @@
     display: none;
 }
 
-#vertical-line {
+#stage {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+#stage.split > .vertical-line {
     position: absolute;
     top: 0;
     left: 50%;
@@ -20,21 +26,20 @@
     z-index: 98;
 }
 
-#stage {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-}
-
-canvas {
+#stage canvas {
     position: absolute;
 }
 
-canvas:first-child {
+#stage canvas:first-child {
     left: 0;
 }
 
-canvas:last-child {
+#stage canvas:last-child {
+    display: none;
+}
+
+#stage.split canvas:last-child {
+    display: block;
     left: 50%;
 }
 
@@ -48,11 +53,19 @@ canvas:last-child {
     z-index: 100;
 }
 
-#synchronize-checkbox-container {
+.checkbox-container {
     position: absolute;
-    bottom: 20px;
-    left: 50%;
     transform: translateX(-50%);
+}
+
+#synchronize-checkbox-container {
+    bottom: 20px;
+    left: 45%;
+}
+
+#fullscreen-checkbox-container {
+    bottom: 20px;
+    left: 55%;
 }
 
 .commit-select {

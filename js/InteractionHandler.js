@@ -5,6 +5,7 @@ export class InteractionHandler {
 
     constructor(scene, renderer, position) {
         this._enabled = false;
+        this._isFullscreen = false;
 
         this._scene = scene;
         this._renderer = renderer;
@@ -22,6 +23,14 @@ export class InteractionHandler {
 
     setEnabled(enabled) {
         this._enabled = enabled;
+    }
+
+    setFullscreen() {
+        this._isFullscreen = true;
+    }
+
+    setSplitscreen() {
+        this._isFullscreen = false;
     }
 
     update(camera) {
@@ -71,6 +80,13 @@ export class InteractionHandler {
         return undefined;
     }
 
+    _getScreenWidth() {
+        if (this._isFullscreen) {
+            return window.innerWidth - config.SCREEN_PADDING;
+        }
+        return window.innerWidth / 2 - config.SCREEN_PADDING;
+    }
+
     _onDocumentMouseMove() {
         if (!this._enabled) {
             return;
@@ -79,9 +95,9 @@ export class InteractionHandler {
         this._mouse.x = event.clientX;
         this._mouse.y = event.clientY;
 
-        var screenOffset = this._position == 'left' ? 0 : window.innerWidth / 2 - config.SCREEN_PADDING;
+        var screenOffset = this._position == 'left' ? 0 : this._getScreenWidth();
 
-        this._mouseForRaycaster.x = ((event.clientX - screenOffset) / (window.innerWidth / 2 - config.SCREEN_PADDING)) * 2 - 1;
+        this._mouseForRaycaster.x = ((event.clientX - screenOffset) / this._getScreenWidth()) * 2 - 1;
         this._mouseForRaycaster.y = -(event.clientY / window.innerHeight) * 2 + 1;
     }
 

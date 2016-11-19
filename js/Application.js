@@ -14,6 +14,7 @@ export class Application {
 
     constructor() {
         this.SYNCHRONIZE_ENABLED = true;
+        this.IS_FULLSCREEN = false;
 
         this.createInterface();
         this.initializeEventListeners();
@@ -75,6 +76,19 @@ export class Application {
         });
     }
 
+    _handleSingleSplitToggle(enabled) {
+        this.IS_FULLSCREEN = enabled;
+
+        if (this.IS_FULLSCREEN) {
+            document.querySelector('#stage').classList.remove('split');
+            this.getLeftScreen().setFullscreen();
+        } else {
+            document.querySelector('#stage').classList.add('split');
+            this.getLeftScreen().setSplitscreen();
+            this.getRightScreen().setSplitscreen();
+        }
+    }
+
     createLeftScreen() {
         this.screens['left'] = new Screen('left');
     }
@@ -115,6 +129,10 @@ export class Application {
             }
 
             this.SYNCHRONIZE_ENABLED = args.enabled;
+        });
+
+        PubSub.subscribe('fullSplitToggle', (eventName, args) => {
+            this._handleSingleSplitToggle(args.enabled);
         });
 
         PubSub.subscribe('mouseMove', (eventName, args) => {

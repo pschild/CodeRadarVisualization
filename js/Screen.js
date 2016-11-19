@@ -9,6 +9,11 @@ export class Screen {
         this.position = position;
         this.commitId = undefined;
 
+        this._isFullscreen = false;
+        this._cameraStartPosition = {
+            x: 30000, y: 30000, z: 30000
+        };
+
         this.createScene();
         this.createCamera();
         this.createRenderer();
@@ -24,6 +29,13 @@ export class Screen {
         return this.scene;
     }
 
+    _getScreenWidth() {
+        if (this._isFullscreen) {
+            return window.innerWidth;
+        }
+        return window.innerWidth / 2;
+    }
+
     setData(data, minMaxPairOfHeight) {
         console.time('drawing time ' + this.position);
         var drawer = new Drawer(this.scene, this.commitId, minMaxPairOfHeight);
@@ -34,6 +46,30 @@ export class Screen {
 
     setCommitId(commitId) {
         this.commitId = commitId;
+    }
+
+    setFullscreen() {
+        this._isFullscreen = true;
+        this.getInteractionHandler().setFullscreen();
+
+        this.updateCamera();
+        this.camera.position.x = this._cameraStartPosition.x;
+        this.camera.position.y = this._cameraStartPosition.y;
+        this.camera.position.z = this._cameraStartPosition.z;
+
+        this.updateRenderer();
+    }
+
+    setSplitscreen() {
+        this._isFullscreen = false;
+        this.getInteractionHandler().setSplitscreen();
+
+        this.updateCamera();
+        this.camera.position.x = this._cameraStartPosition.x;
+        this.camera.position.y = this._cameraStartPosition.y;
+        this.camera.position.z = this._cameraStartPosition.z;
+
+        this.updateRenderer();
     }
 
     reset() {
@@ -49,16 +85,18 @@ export class Screen {
 
     createScene() {
         this.scene = new THREE.Scene();
-
-        // expose scene to global window object to be able to work with inspector plugins
-        // window.scene = this.scene;
     }
 
     createCamera() {
-        this.camera = new THREE.PerspectiveCamera(45, (window.innerWidth / 2 - config.SCREEN_PADDING) / window.innerHeight, 1, 100000);
-        this.camera.position.x = 30000;
-        this.camera.position.y = 30000;
-        this.camera.position.z = 30000;
+        this.camera = new THREE.PerspectiveCamera(45, (this._getScreenWidth() - config.SCREEN_PADDING) / window.innerHeight, 1, 100000);
+        this.camera.position.x = this._cameraStartPosition.x;
+        this.camera.position.y = this._cameraStartPosition.y;
+        this.camera.position.z = this._cameraStartPosition.z;
+    }
+
+    updateCamera() {
+        this.camera.aspect = (this._getScreenWidth() - config.SCREEN_PADDING) / window.innerHeight;
+        this.camera.updateProjectionMatrix();
     }
 
     createControls() {
@@ -76,9 +114,13 @@ export class Screen {
     createRenderer() {
         this.renderer = new THREE.WebGLRenderer({antialias: true});
         this.renderer.setClearColor(0xf0f0f0);
-        this.renderer.setSize(window.innerWidth / 2 - config.SCREEN_PADDING, window.innerHeight);
+        this.renderer.setSize(this._getScreenWidth() - config.SCREEN_PADDING, window.innerHeight);
 
         document.querySelector('#stage').appendChild(this.renderer.domElement);
+    }
+
+    updateRenderer() {
+        this.renderer.setSize(this._getScreenWidth() - config.SCREEN_PADDING, window.innerHeight);
     }
 
     createLight() {
@@ -124,9 +166,7 @@ export class Screen {
     }
 
     onWindowResize() {
-        this.camera.aspect = (window.innerWidth / 2 - config.SCREEN_PADDING) / window.innerHeight;
-        this.camera.updateProjectionMatrix();
-
-        this.renderer.setSize(window.innerWidth / 2 - config.SCREEN_PADDING, window.innerHeight);
+        this.updateCamera();
+        this.updateRenderer();
     }
 }

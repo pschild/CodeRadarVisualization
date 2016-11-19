@@ -16,11 +16,19 @@
 
 <div id="control-panel">
 
-    <div id="synchronize-checkbox-container">
+    <div id="synchronize-checkbox-container" class="checkbox-container">
         <span>synchronize?</span>
         <div class="onoffswitch">
             <input type="checkbox" class="onoffswitch-checkbox" id="synchronize-enabled-checkbox" checked>
             <label class="onoffswitch-label" for="synchronize-enabled-checkbox"></label>
+        </div>
+    </div>
+
+    <div id="fullscreen-checkbox-container" class="checkbox-container">
+        <span>fullscreen?</span>
+        <div class="onoffswitch">
+            <input type="checkbox" class="onoffswitch-checkbox" id="fullscreen-enabled-checkbox">
+            <label class="onoffswitch-label" for="fullscreen-enabled-checkbox"></label>
         </div>
     </div>
 
@@ -42,9 +50,9 @@
     <div class="uil-cube-css right"><div></div><div></div><div></div><div></div></div>
 </div>
 
-<div id="vertical-line"></div>
-
-<div id="stage"></div>
+<div id="stage" class="split">
+    <div class="vertical-line"></div>
+</div>
 
 <div id="tooltip"></div>
 

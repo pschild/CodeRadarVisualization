@@ -38,3 +38,13 @@
     background-color: #2196F3;
     box-shadow: 3px 6px 18px 0px rgba(0, 0, 0, 0.2);
 }
+
+/* DISABLE STATES */
+.onoffswitch-checkbox:disabled + .onoffswitch-label {
+    background-color: #e4e1e1;
+}
+
+.onoffswitch-checkbox:disabled + .onoffswitch-label:before {
+    background: #efefef;
+    box-shadow: 0 6px 12px 0px #c7c7c7;
+}
