@@ -14,20 +14,31 @@
     position: absolute;
     width: 100%;
     height: 100%;
+    overflow-x: hidden;
 }
 
-#stage.split > .vertical-line {
+.vertical-line {
     position: absolute;
     top: 0;
-    left: 50%;
     height: 100%;
     width: 2px;
     background: #a3a3a3;
     z-index: 98;
+
+    transition: left 1s ease;
+}
+
+#stage > .vertical-line {
+    left: 100%;
+}
+
+#stage.split > .vertical-line {
+    left: 50%;
 }
 
 #stage canvas {
     position: absolute;
+    transition: all 1s ease;
 }
 
 #stage canvas:first-child {
@@ -35,11 +46,12 @@
 }
 
 #stage canvas:last-child {
-    display: none;
+    opacity: 0;
+    left: 100%;
 }
 
 #stage.split canvas:last-child {
-    display: block;
+    opacity: 1;
     left: 50%;
 }
 
