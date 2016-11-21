@@ -1,6 +1,5 @@
 import {InteractionHandler} from './InteractionHandler';
 import {config} from './Config';
-import {Drawer} from './Drawer';
 import * as PubSub from 'pubsub-js';
 
 export class Screen {
@@ -37,10 +36,19 @@ export class Screen {
     }
 
     setData(data, minMaxPairOfHeight) {
+        this.data = data;
+        this.minMaxPairOfHeight = minMaxPairOfHeight;
+    }
+
+    setDrawer(drawerClazz) {
+        if (typeof drawerClazz != 'function') {
+            throw new Error(`Drawer must be a class/function. Got ${typeof drawerClazz} instead.`);
+        }
+
         console.time('drawing time ' + this.position);
-        var drawer = new Drawer(this.scene, this.commitId, minMaxPairOfHeight);
-        drawer.calculateGroundAreas(data);
-        drawer.drawElements(data);
+        var drawer = new drawerClazz(this.scene, this.commitId, this.position, this.minMaxPairOfHeight);
+        drawer.calculateGroundAreas(this.data);
+        drawer.drawElements(this.data);
         console.timeEnd('drawing time ' + this.position);
     }
 

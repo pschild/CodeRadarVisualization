@@ -8,6 +8,8 @@ import {DummyCommitService} from './service/DummyCommitService';
 import {CoderadarCommitService} from './service/CoderadarCommitService';
 import {CommitMapper} from './domain/CommitMapper';
 import {CommitMerger} from './CommitMerger';
+import {MergedDrawer} from './drawer/MergedDrawer';
+import {SingleDrawer} from './drawer/SingleDrawer';
 import * as PubSub from 'pubsub-js';
 
 export class Application {
@@ -21,6 +23,9 @@ export class Application {
 
         this.leftCommitId = undefined;
         this.rightCommitId = undefined;
+
+        this.result = undefined;
+        this.minMaxPairOfHeight = undefined;
 
         this.screens = {};
         this.createLeftScreen();
@@ -66,14 +71,24 @@ export class Application {
 
             var minMaxPairOfHeight = ElementAnalyzer.findSmallestAndBiggestMetricValueByMetricName(result, config.HEIGHT_METRIC_NAME);
 
-            this.getLeftScreen().setData(result, minMaxPairOfHeight);
-            this.getLeftScreen().render();
+            this.result = result;
+            this.minMaxPairOfHeight = minMaxPairOfHeight;
 
-            this.getRightScreen().setData(result, minMaxPairOfHeight);
-            this.getRightScreen().render();
-
+            this._initializeScreens();
             this.interface.hideLoadingIndicator();
         });
+    }
+
+    _initializeScreens() {
+        this.getLeftScreen().reset();
+        this.getLeftScreen().setData(this.result, this.minMaxPairOfHeight);
+        this.getLeftScreen().setDrawer(SingleDrawer);
+        this.getLeftScreen().render();
+
+        this.getRightScreen().reset();
+        this.getRightScreen().setData(this.result, this.minMaxPairOfHeight);
+        this.getRightScreen().setDrawer(SingleDrawer);
+        this.getRightScreen().render();
     }
 
     _handleSingleSplitToggle(enabled) {
@@ -81,11 +96,18 @@ export class Application {
 
         if (this.IS_FULLSCREEN) {
             document.querySelector('#stage').classList.remove('split');
+            this.getLeftScreen().reset();
             this.getLeftScreen().setFullscreen();
+            this.getLeftScreen().setDrawer(MergedDrawer);
         } else {
             document.querySelector('#stage').classList.add('split');
+            this.getLeftScreen().reset();
             this.getLeftScreen().setSplitscreen();
+            this.getLeftScreen().setDrawer(SingleDrawer);
+
+            this.getRightScreen().reset();
             this.getRightScreen().setSplitscreen();
+            this.getRightScreen().setDrawer(SingleDrawer);
         }
     }
 

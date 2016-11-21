@@ -1,16 +1,20 @@
 export var config = {
     SCREEN_PADDING: 0,
 
-    GROUND_AREA_METRIC_NAME: 'coderadar:size:moc:java',
-    GROUND_AREA_FACTOR: 100,
+    GROUND_AREA_METRIC_NAME: 'coderadar:javaMoc',
+    GROUND_AREA_FACTOR: 10,
 
-    HEIGHT_METRIC_NAME: 'coderadar:size:loc:java',
-    HEIGHT_FACTOR: 100,
+    HEIGHT_METRIC_NAME: 'coderadar:javaLoc',
+    HEIGHT_FACTOR: 10,
 
     BLOCK_SPACING: 600,
     DEFAULT_BLOCK_HEIGHT: 500,
     DEFAULT_BLOCK_DIMENSIONS: 100,
 
     HELPER_BLOCK_HEIGHT: 100,
-    HELPER_BLOCK_VISIBLE: true
+    HELPER_BLOCK_VISIBLE: true,
+
+    COLOR_MODULE: '#cccccc',
+    COLOR_FIRST_COMMIT: '#0e8cf3',
+    COLOR_SECOND_COMMIT: '#ffb100'
 };
