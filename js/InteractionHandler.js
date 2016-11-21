@@ -18,6 +18,8 @@ export class InteractionHandler {
         this.tooltipElement = document.querySelector('#tooltip');
         this._hoveredElementUuid = undefined;
 
+        this._startingPosition = {};
+
         this.bindEvents();
     }
 
@@ -102,10 +104,22 @@ export class InteractionHandler {
     }
 
     _onDocumentMouseDown() {
+        this._renderer.domElement.style.cursor = '-webkit-grabbing';
+
+        this._startingPosition = {
+            x: event.clientX,
+            y: event.clientY
+        };
     }
 
     _onDocumentMouseUp() {
+        this._renderer.domElement.style.cursor = '-webkit-grab';
+
         if (!this._enabled) {
+            return;
+        }
+
+        if (Math.abs(event.clientX - this._startingPosition.x) > 0 || Math.abs(event.clientY - this._startingPosition.y) > 0) {
             return;
         }
 

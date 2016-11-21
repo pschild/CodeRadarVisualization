@@ -73,6 +73,7 @@
 
 #stage canvas {
     position: absolute;
+    cursor: -webkit-grab;
     transition: all 1s ease;
 }
 
