@@ -80,15 +80,22 @@ export class Application {
     }
 
     _initializeScreens() {
-        this.getLeftScreen().reset();
-        this.getLeftScreen().setData(this.result, this.minMaxPairOfHeight);
-        this.getLeftScreen().setDrawer(SingleDrawer);
-        this.getLeftScreen().render();
+        if (this.IS_FULLSCREEN) {
+            this.getLeftScreen().reset();
+            this.getLeftScreen().setData(this.result, this.minMaxPairOfHeight);
+            this.getLeftScreen().setDrawer(MergedDrawer);
+            this.getLeftScreen().render();
+        } else {
+            this.getLeftScreen().reset();
+            this.getLeftScreen().setData(this.result, this.minMaxPairOfHeight);
+            this.getLeftScreen().setDrawer(SingleDrawer);
+            this.getLeftScreen().render();
 
-        this.getRightScreen().reset();
-        this.getRightScreen().setData(this.result, this.minMaxPairOfHeight);
-        this.getRightScreen().setDrawer(SingleDrawer);
-        this.getRightScreen().render();
+            this.getRightScreen().reset();
+            this.getRightScreen().setData(this.result, this.minMaxPairOfHeight);
+            this.getRightScreen().setDrawer(SingleDrawer);
+            this.getRightScreen().render();
+        }
     }
 
     _handleSingleSplitToggle(enabled) {
@@ -99,15 +106,18 @@ export class Application {
             this.getLeftScreen().reset();
             this.getLeftScreen().setFullscreen();
             this.getLeftScreen().setDrawer(MergedDrawer);
+            this.getLeftScreen().render();
         } else {
             document.querySelector('#stage').classList.add('split');
             this.getLeftScreen().reset();
             this.getLeftScreen().setSplitscreen();
             this.getLeftScreen().setDrawer(SingleDrawer);
+            this.getLeftScreen().render();
 
             this.getRightScreen().reset();
             this.getRightScreen().setSplitscreen();
             this.getRightScreen().setDrawer(SingleDrawer);
+            this.getRightScreen().render();
         }
     }
 

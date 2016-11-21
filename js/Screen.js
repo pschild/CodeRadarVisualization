@@ -12,6 +12,7 @@ export class Screen {
         this._cameraStartPosition = {
             x: 30000, y: 30000, z: 30000
         };
+        this._requestAnimationFrameId = undefined;
 
         this.createScene();
         this.createCamera();
@@ -89,6 +90,10 @@ export class Screen {
                 this.scene.remove(child);
             }
         }
+
+        if (this._requestAnimationFrameId) {
+            cancelAnimationFrame(this._requestAnimationFrameId);
+        }
     }
 
     createScene() {
@@ -141,7 +146,8 @@ export class Screen {
     }
 
     render() {
-        requestAnimationFrame(() => {
+        this._requestAnimationFrameId = requestAnimationFrame(() => {
+            window.renderCalls++;
             this.render();
         });
 

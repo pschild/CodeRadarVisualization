@@ -10,6 +10,19 @@
     display: none;
 }
 
+#render-calls {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 10px;
+    z-index: 10000;
+}
+
+#render-calls.warning {
+    background: #f00;
+    color: #fff;
+}
+
 #stage {
     position: absolute;
     width: 100%;

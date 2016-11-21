@@ -10,6 +10,8 @@ export class Interface {
         this.fullscreenCheckbox = document.querySelector('#fullscreen-enabled-checkbox');
         this.colorcodeCheckbox = document.querySelector('#colorcode-checkbox');
 
+        this.renderCallsDisplay = document.querySelector('#render-calls');
+
         this._bindEvents();
     }
 
@@ -31,6 +33,17 @@ export class Interface {
     }
 
     _bindEvents() {
+        window.renderCalls = 0;
+        setInterval(() => {
+            this.renderCallsDisplay.innerHTML = renderCalls + ' renderings/s';
+            if (renderCalls < 110 || renderCalls > 130) {
+                this.renderCallsDisplay.classList.add('warning');
+            } else {
+                this.renderCallsDisplay.classList.remove('warning');
+            }
+            window.renderCalls = 0;
+        }, 1000);
+
         this.synchronizeCheckbox.addEventListener('change', (event) => {
             PubSub.publish('synchronizeEnabledChange', { enabled: event.target.checked });
         });
