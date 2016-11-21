@@ -1,6 +1,7 @@
 import {Block} from '../Block';
 import {config} from '../Config';
 import {AbstractDrawer} from './AbstractDrawer';
+import {ElementAnalyzer} from '../ElementAnalyzer';
 
 export class MergedDrawer extends AbstractDrawer {
 
@@ -8,53 +9,61 @@ export class MergedDrawer extends AbstractDrawer {
         super(scene, currentCommitId, position);
     }
 
+    // override
     drawElements(elements, parent, bottom = 0) {
         elements.forEach((element) => {
-            // don't draw empty modules
-            if (element.type == 'MODULE' && !this._hasChildrenForCurrentCommit(element)) {
-                return;
-            }
-
-            var myHeight;
+            var blueHeight;
             if (element.type == 'FILE') {
-                myHeight = this._getMetricValueOfElementAndCommitType(element, config.HEIGHT_METRIC_NAME, this.COMMIT_TYPE_CURRENT) * config.HEIGHT_FACTOR;
-                var otherHeight = this._getMetricValueOfElementAndCommitType(element, config.HEIGHT_METRIC_NAME, this.COMMIT_TYPE_OTHER) * config.HEIGHT_FACTOR;
+                blueHeight = this._getMetricValueOfElementAndCommitType(element, config.HEIGHT_METRIC_NAME, this.COMMIT_TYPE_CURRENT) * config.HEIGHT_FACTOR;
+                var orangeHeight = this._getMetricValueOfElementAndCommitType(element, config.HEIGHT_METRIC_NAME, this.COMMIT_TYPE_OTHER) * config.HEIGHT_FACTOR;
 
-                var myGA = this._getMetricValueOfElementAndCommitType(element, config.GROUND_AREA_METRIC_NAME, this.COMMIT_TYPE_CURRENT) * config.GROUND_AREA_FACTOR + config.BLOCK_SPACING;
-                var otherGA = this._getMetricValueOfElementAndCommitType(element, config.GROUND_AREA_METRIC_NAME, this.COMMIT_TYPE_OTHER) * config.GROUND_AREA_FACTOR + config.BLOCK_SPACING;
+                var blueGA = this._getMetricValueOfElementAndCommitType(element, config.GROUND_AREA_METRIC_NAME, this.COMMIT_TYPE_CURRENT) * config.GROUND_AREA_FACTOR + config.BLOCK_SPACING;
+                var orangeGA = this._getMetricValueOfElementAndCommitType(element, config.GROUND_AREA_METRIC_NAME, this.COMMIT_TYPE_OTHER) * config.GROUND_AREA_FACTOR + config.BLOCK_SPACING;
 
-                var myColor = this._getColorByPosition(this.position);
-                var otherColor = this._getContraryColorByColor(myColor);
+                var blueColor = this._getColorByPosition(this.position);
+                var orangeColor = this._getContraryColorByColor(blueColor);
 
-                var myTransparency = myHeight > otherHeight && myGA > otherGA;
-                var otherTransparency = otherHeight > myHeight || otherGA > myGA;
+                var blueTransparency = blueHeight > orangeHeight && blueGA > orangeGA;
+                var orangeTransparency = orangeHeight > blueHeight && orangeGA > blueGA;
 
-                if (myGA < otherGA) {
-                    this.drawBlock(element, parent, otherColor, otherGA, bottom, otherHeight, otherTransparency);
+                if (!isNaN(blueGA) && !isNaN(orangeGA)) {
+                    // both blocks
+                    if (blueGA < orangeGA) {
+                        this.drawBlock(element, parent, orangeColor, orangeGA, bottom, orangeHeight, orangeTransparency);
 
-                    element.fit.x += (otherGA - myGA) / 2;
-                    element.fit.y += (otherGA - myGA) / 2;
-                    this.drawBlock(element, parent, myColor, myGA, bottom, myHeight, myTransparency);
-                } else {
-                    this.drawBlock(element, parent, myColor, myGA, bottom, myHeight, myTransparency);
+                        element.fit.x += (orangeGA - blueGA) / 2;
+                        element.fit.y += (orangeGA - blueGA) / 2;
+                        this.drawBlock(element, parent, blueColor, blueGA, bottom, blueHeight, blueTransparency);
+                    } else {
+                        this.drawBlock(element, parent, blueColor, blueGA, bottom, blueHeight, blueTransparency);
 
-                    element.fit.x += (myGA - otherGA) / 2;
-                    element.fit.y += (myGA - otherGA) / 2;
-                    this.drawBlock(element, parent, otherColor, otherGA, bottom, otherHeight, otherTransparency);
+                        element.fit.x += (blueGA - orangeGA) / 2;
+                        element.fit.y += (blueGA - orangeGA) / 2;
+                        this.drawBlock(element, parent, orangeColor, orangeGA, bottom, orangeHeight, orangeTransparency);
+                    }
+
+                } else if (isNaN(orangeGA)) {
+                    // only blue block
+                    this.drawBlock(element, parent, blueColor, blueGA, bottom, blueHeight, false);
+
+                } else if (isNaN(blueGA)) {
+                    // only orange block
+                    this.drawBlock(element, parent, orangeColor, orangeGA, bottom, orangeHeight, false);
                 }
             } else {
-                myHeight = config.DEFAULT_BLOCK_HEIGHT;
+                blueHeight = config.DEFAULT_BLOCK_HEIGHT;
 
-                this.drawBlock(element, parent, config.COLOR_MODULE, undefined, bottom, myHeight);
+                this.drawBlock(element, parent, config.COLOR_MODULE, undefined, bottom, blueHeight);
             }
 
             // recursion
             if (element.children && element.children.length > 0) {
-                this.drawElements(element.children, element, bottom + myHeight);
+                this.drawElements(element.children, element, bottom + blueHeight);
             }
         });
     }
 
+    // override
     drawBlock(element, parent, color, currentCommitSize, bottom, height, isTransparent) {
         var finalX, finalY, finalZ;
         var finalWidth, finalHeight, finalDepth;
@@ -91,6 +100,16 @@ export class MergedDrawer extends AbstractDrawer {
         };
 
         this.scene.add(cube);
+    }
+
+    // override
+    _getValueForGroundArea(metricValues) {
+        var metricValueForGroundArea = ElementAnalyzer.getMetricValuesByMetricName(metricValues, config.GROUND_AREA_METRIC_NAME);
+        if (metricValueForGroundArea.length == 1) {
+            return metricValueForGroundArea[0];
+        } else if (metricValueForGroundArea.length == 2) {
+            return metricValueForGroundArea[0] > metricValueForGroundArea[1] ? metricValueForGroundArea[0] : metricValueForGroundArea[1];
+        }
     }
 
 }

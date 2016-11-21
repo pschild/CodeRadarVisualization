@@ -44,29 +44,24 @@ export class ElementAnalyzer {
     }
 
     static getMinMetricValueByMetricName(metricValues, metricName) {
-        if (typeof metricValues != 'object' || metricValues == null) {
-            throw new Error('metricValues is not an object or null!');
-        }
-
-        for (let key in metricValues) {
-            if (typeof metricValues[key] == 'object') {
-                if (key == metricName) {
-                    let minValue = Number.MAX_VALUE;
-                    for (let commitId in metricValues[key]) {
-                        var metricValue = metricValues[key][commitId];
-                        if (minValue > metricValue) {
-                            minValue = metricValue;
-                        }
-                    }
-                    return minValue;
-                }
-            } else {
-                throw new Error('wrong type ' + typeof metricValues[key] + '!');
-            }
+        var values = this.getMetricValuesByMetricName(metricValues, metricName);
+        if (values.length > 1) {
+            return values[0] > values[1] ? values[1] : values[0];
+        } else {
+            return values[0];
         }
     }
 
     static getMaxMetricValueByMetricName(metricValues, metricName) {
+        var values = this.getMetricValuesByMetricName(metricValues, metricName);
+        if (values.length > 1) {
+            return values[0] < values[1] ? values[1] : values[0];
+        } else {
+            return values[0];
+        }
+    }
+
+    static getMetricValuesByMetricName(metricValues, metricName) {
         if (typeof metricValues != 'object' || metricValues == null) {
             throw new Error('metricValues is not an object or null!');
         }
@@ -74,14 +69,16 @@ export class ElementAnalyzer {
         for (let key in metricValues) {
             if (typeof metricValues[key] == 'object') {
                 if (key == metricName) {
-                    let maxValue = Number.MIN_VALUE;
+                    let values = [];
                     for (let commitId in metricValues[key]) {
-                        var metricValue = metricValues[key][commitId];
-                        if (maxValue < metricValue) {
-                            maxValue = metricValue;
-                        }
+                        values.push(metricValues[key][commitId]);
                     }
-                    return maxValue;
+
+                    if (values.length == 0 || values.length > 2) {
+                        throw new Error(`found either no or too many metricValues for ${metricName}! found metricValues: ${values.length}`);
+                    }
+
+                    return values;
                 }
             } else {
                 throw new Error('wrong type ' + typeof metricValues[key] + '!');

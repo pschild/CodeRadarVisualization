@@ -25,9 +25,9 @@ export class AbstractDrawer {
             element.h = 0;
 
             if (element.type == 'FILE') {
-                var greatestMetricValueForGroundArea = ElementAnalyzer.getMaxMetricValueByMetricName(element.metricValues, config.GROUND_AREA_METRIC_NAME);
-                element.w = greatestMetricValueForGroundArea * config.GROUND_AREA_FACTOR + config.BLOCK_SPACING;
-                element.h = greatestMetricValueForGroundArea * config.GROUND_AREA_FACTOR + config.BLOCK_SPACING;
+                var groundArea = this._getValueForGroundArea(element.metricValues);
+                element.w = groundArea * config.GROUND_AREA_FACTOR + config.BLOCK_SPACING;
+                element.h = groundArea * config.GROUND_AREA_FACTOR + config.BLOCK_SPACING;
             }
 
             if (element.children && element.children.length > 0) {
@@ -47,6 +47,10 @@ export class AbstractDrawer {
             w: this.packer.root.w,
             h: this.packer.root.h
         };
+    }
+
+    _getValueForGroundArea(metricValues) {
+        return ElementAnalyzer.getMaxMetricValueByMetricName(metricValues, config.GROUND_AREA_METRIC_NAME);
     }
 
     drawElements(elements, parent, bottom = 0) {}

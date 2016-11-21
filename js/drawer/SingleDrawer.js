@@ -12,6 +12,7 @@ export class SingleDrawer extends AbstractDrawer {
         this.maxHeight = minMaxPairOfHeight ? minMaxPairOfHeight.max : 0;
     }
 
+    // override
     drawElements(elements, parent, bottom = 0) {
         elements.forEach((element) => {
             // don't draw empty modules
@@ -46,6 +47,7 @@ export class SingleDrawer extends AbstractDrawer {
         });
     }
 
+    // override
     drawBlock(element, parent, color, currentCommitSize, bottom, height, isTransparent) {
         var finalX, finalY, finalZ;
         var finalWidth, finalHeight, finalDepth;
@@ -89,6 +91,7 @@ export class SingleDrawer extends AbstractDrawer {
         this.scene.add(cube);
     }
 
+    // override
     initializeEventListeners() {
         PubSub.subscribe('colorcodeChange', (eventName, args) => {
             this._handleColorcodeChanged(args.colorcode);
