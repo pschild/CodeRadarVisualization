@@ -8,6 +8,7 @@ export class Interface {
 
         this.synchronizeCheckbox = document.querySelector('#synchronize-enabled-checkbox');
         this.fullscreenCheckbox = document.querySelector('#fullscreen-enabled-checkbox');
+        this.colorcodeCheckbox = document.querySelector('#colorcode-checkbox');
 
         this._bindEvents();
     }
@@ -36,8 +37,13 @@ export class Interface {
 
         this.fullscreenCheckbox.addEventListener('change', (event) => {
             this.synchronizeCheckbox.disabled = event.target.checked;
+            this.colorcodeCheckbox.disabled = event.target.checked;
 
             PubSub.publish('fullSplitToggle', { enabled: event.target.checked });
+        });
+
+        this.colorcodeCheckbox.addEventListener('change', (event) => {
+            PubSub.publish('colorcodeChange', { colorcode: event.target.checked ? 'commit' : 'metric' });
         });
 
         this.leftSelect.addEventListener('change', function() {

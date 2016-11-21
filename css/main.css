@@ -68,6 +68,11 @@
     left: 55%;
 }
 
+#colorcode-checkbox-container {
+    bottom: 20px;
+    left: 50%;
+}
+
 .commit-select {
     position: absolute;
     bottom: 20px;

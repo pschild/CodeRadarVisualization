@@ -15,6 +15,8 @@ export class AbstractDrawer {
         this.currentCommitId = currentCommitId;
         this.position = position;
         this.packer = this._getPacker();
+
+        this.initializeEventListeners();
     }
 
     calculateGroundAreas(elements) {
@@ -50,6 +52,8 @@ export class AbstractDrawer {
     drawElements(elements, parent, bottom = 0) {}
 
     drawBlock(element, parent, color, currentCommitSize, bottom, height, isTransparent) {}
+
+    initializeEventListeners() {}
 
     _getPacker() {
         return new GrowingPacker();
