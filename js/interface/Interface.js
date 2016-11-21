@@ -36,11 +36,6 @@ export class Interface {
         window.renderCalls = 0;
         setInterval(() => {
             this.renderCallsDisplay.innerHTML = renderCalls + ' renderings/s';
-            if (renderCalls < 110 || renderCalls > 130) {
-                this.renderCallsDisplay.classList.add('warning');
-            } else {
-                this.renderCallsDisplay.classList.remove('warning');
-            }
             window.renderCalls = 0;
         }, 1000);
 
