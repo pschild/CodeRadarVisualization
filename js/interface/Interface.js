@@ -16,11 +16,11 @@ export class Interface {
     }
 
     showLoadingIndicator() {
-        document.querySelector('#loading-indicator').style.display = 'block';
+        document.querySelector('.loading-indicator-container').style.display = 'block';
     }
 
     hideLoadingIndicator() {
-        document.querySelector('#loading-indicator').style.display = 'none';
+        document.querySelector('.loading-indicator-container').style.display = 'none';
     }
 
     _createOptionElements(selectElement, data) {

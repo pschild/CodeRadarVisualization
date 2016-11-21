@@ -8,13 +8,11 @@
 .uil-cube-css.left {
     -webkit-transform: scale(0.5) translateX(-50%);
     top: 40%;
-    left: 25%;
 }
 
 .uil-cube-css.right {
     -webkit-transform: scale(0.5) translateX(-50%);
     top: 40%;
-    left: 75%;
 }
 
 @-webkit-keyframes uil-cube-css {
