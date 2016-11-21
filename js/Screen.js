@@ -162,21 +162,6 @@ export class Screen {
         this.renderer.domElement.addEventListener('mousemove', () => {
             PubSub.publish('mouseMove', { screen: this.position });
         });
-
-        PubSub.subscribe('elementClicked', (eventName, args) => {
-            var block = this.scene.getObjectByName(args.name);
-            if (!block || !block.userData) {
-                return;
-            }
-
-            if (block.userData.color) {
-                block.material.color = block.userData.color;
-                block.userData.color = undefined;
-            } else {
-                block.userData.color = block.material.color;
-                block.material.color = new THREE.Color(0xff0000);
-            }
-        });
     }
 
     onWindowResize() {
