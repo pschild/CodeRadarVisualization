@@ -116,6 +116,7 @@ export class Application {
 
             this.getRightScreen().reset();
             this.getRightScreen().setSplitscreen();
+            this.getRightScreen().setData(this.result, this.minMaxPairOfHeight);
             this.getRightScreen().setDrawer(SingleDrawer);
             this.getRightScreen().render();
         }
