@@ -203,12 +203,23 @@ export class Screen {
         if (this._highlightedElement == elementName) {
             this._highlightedElement = undefined;
             doHighlight = false;
+
             this.resetCamera();
             this.resetControls();
+            PubSub.publish('closeComparisonContainer');
         } else {
             this._highlightedElement = elementName;
             doHighlight = true;
+
             this._focusElement(element);
+            PubSub.publish('openComparisonContainer', {
+                position: this.position,
+                element: element
+            });
+        }
+
+        if (!element) {
+            return;
         }
 
         for (var i = this.scene.children.length - 1; i >= 0; i--) {

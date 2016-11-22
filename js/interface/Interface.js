@@ -10,6 +10,8 @@ export class Interface {
         this.fullscreenCheckbox = document.querySelector('#fullscreen-enabled-checkbox');
         this.colorcodeCheckbox = document.querySelector('#colorcode-checkbox');
 
+        this.comparisonContainer = document.querySelector('#comparison-container');
+
         this.renderCallsDisplay = document.querySelector('#render-calls');
 
         this._bindEvents();
@@ -71,6 +73,26 @@ export class Interface {
         PubSub.subscribe('commitsLoaded', (eventName, args) => {
             this._createOptionElements(this.leftSelect, args);
             this._createOptionElements(this.rightSelect, args);
+        });
+
+        PubSub.subscribe('openComparisonContainer', (eventName, args) => {
+            var column = this.comparisonContainer.querySelector('.column.' + args.position);
+            if (args.element) {
+                column.innerHTML = [
+                    args.element.name,
+                    '<br/>',
+                    'LOC: ',
+                    'N/A',
+                ].join('');
+            } else {
+                column.innerHTML = 'Keine Metriken vorhanden.';
+            }
+
+            this.comparisonContainer.classList.add('open');
+        });
+
+        PubSub.subscribe('closeComparisonContainer', (eventName, args) => {
+            this.comparisonContainer.classList.remove('open');
         });
     }
 }
