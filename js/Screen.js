@@ -192,7 +192,11 @@ export class Screen {
         });
 
         PubSub.subscribe('elementClicked', (eventName, args) => {
-            this._toggleHighlighting(args.name);
+            if (!this._isFullscreen) {
+                this._toggleHighlighting(args.name);
+            } else {
+                // TOOD: handle click in fullscreen mode
+            }
         });
     }
 

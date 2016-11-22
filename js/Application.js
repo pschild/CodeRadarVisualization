@@ -107,6 +107,8 @@ export class Application {
             this.getLeftScreen().setFullscreen();
             this.getLeftScreen().setDrawer(MergedDrawer);
             this.getLeftScreen().render();
+
+            this.getRightScreen().setFullscreen();
         } else {
             document.querySelector('#stage').classList.add('split');
             this.getLeftScreen().reset();
