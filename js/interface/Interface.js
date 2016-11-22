@@ -79,11 +79,9 @@ export class Interface {
         PubSub.subscribe('openComparisonContainer', (eventName, args) => {
             var column = this.comparisonContainer.querySelector('.column.' + args.position);
             if (args.element) {
-                var html = [
-                    args.element.name,
-                    '<br/>'
-                ];
+                this.comparisonContainer.querySelector('h2').innerHTML = args.element.name;
 
+                var html = [];
                 let metricValues = args.element.userData.metrics;
                 for (let key of Object.keys(metricValues)) {
                     html.push('<div>' + key + ': ' + metricValues[key] + '</div>');

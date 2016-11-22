@@ -141,8 +141,8 @@
     bottom: 0;
     left: 50%;
     transform: translate3d(-50%, 100%, 0);
-    width: 40%;
-    height: 200px;
+    width: 25%;
+    height: 160px;
     background: #fff;
     box-shadow: rgba(0,0,0,0.2) 0 2px 6px 0;
     z-index: 100;
