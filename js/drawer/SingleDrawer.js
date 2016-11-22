@@ -10,8 +10,6 @@ export class SingleDrawer extends AbstractDrawer {
 
         this.minHeight = minMaxPairOfHeight ? minMaxPairOfHeight.min : 0;
         this.maxHeight = minMaxPairOfHeight ? minMaxPairOfHeight.max : 0;
-
-        this._highlightedElement = undefined;
     }
 
     // override
@@ -98,10 +96,6 @@ export class SingleDrawer extends AbstractDrawer {
         PubSub.subscribe('colorcodeChange', (eventName, args) => {
             this._handleColorcodeChanged(args.colorcode);
         });
-
-        PubSub.subscribe('elementClicked', (eventName, args) => {
-            this._toggleHighlighting(args.name);
-        });
     }
 
     _getColorByMetricValue(value) {
@@ -132,30 +126,6 @@ export class SingleDrawer extends AbstractDrawer {
                     child.material.color.set(this._getColorByPosition(this.position));
                 } else if (newColorcode == 'metric') {
                     child.material.color.set(this._getColorByMetricValue(child.userData.metrics.quality));
-                }
-            }
-        }
-    }
-
-    _toggleHighlighting(elementName) {
-        var doHighlight;
-        if (this._highlightedElement == elementName) {
-            this._highlightedElement = undefined;
-            doHighlight = false;
-        } else {
-            this._highlightedElement = elementName;
-            doHighlight = true;
-        }
-
-        for (var i = this.scene.children.length - 1; i >= 0; i--) {
-            var child = this.scene.children[i];
-
-            if (child.type == 'Mesh' && child.userData.type == 'FILE') {
-                if (child.name != this._highlightedElement) {
-                    child.material.transparent = doHighlight;
-                    child.material.opacity = 0.4;
-                } else {
-                    child.material.transparent = !doHighlight;
                 }
             }
         }

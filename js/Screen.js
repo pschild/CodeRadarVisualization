@@ -12,6 +12,11 @@ export class Screen {
         this._cameraStartPosition = {
             x: 30000, y: 30000, z: 30000
         };
+
+        this._highlightedElement = undefined;
+        this._animationDuration = 1500;
+        this._animationEasing = TWEEN.Easing.Sinusoidal.InOut;
+
         this._requestAnimationFrameId = undefined;
 
         this.createScene();
@@ -112,12 +117,34 @@ export class Screen {
         this.camera.updateProjectionMatrix();
     }
 
+    resetCamera() {
+        new TWEEN.Tween(this.camera.position)
+            .to({
+                x: this._cameraStartPosition.x,
+                y: this._cameraStartPosition.y,
+                z: this._cameraStartPosition.z
+            }, this._animationDuration)
+            .easing(this._animationEasing)
+            .start();
+    }
+
     createControls() {
         this.controls = new THREE.OrbitControls(this.camera, document.querySelector('#stage'));
     }
 
     getControls() {
         return this.controls;
+    }
+
+    resetControls() {
+        new TWEEN.Tween(this.controls.target)
+            .to({
+                x: 0,
+                y: 0,
+                z: 0
+            }, this._animationDuration)
+            .easing(this._animationEasing)
+            .start();
     }
 
     getInteractionHandler() {
@@ -154,6 +181,7 @@ export class Screen {
         this.interactionHandler.update(this.camera);
         this.renderer.render(this.scene, this.camera);
         this.controls.update();
+        TWEEN.update();
     }
 
     initializeEventListeners() {
@@ -162,6 +190,63 @@ export class Screen {
         this.renderer.domElement.addEventListener('mousemove', () => {
             PubSub.publish('mouseMove', { screen: this.position });
         });
+
+        PubSub.subscribe('elementClicked', (eventName, args) => {
+            this._toggleHighlighting(args.name);
+        });
+    }
+
+    _toggleHighlighting(elementName) {
+        var element = this.scene.getObjectByName(elementName);
+
+        var doHighlight;
+        if (this._highlightedElement == elementName) {
+            this._highlightedElement = undefined;
+            doHighlight = false;
+            this.resetCamera();
+            this.resetControls();
+        } else {
+            this._highlightedElement = elementName;
+            doHighlight = true;
+            this._focusElement(element);
+        }
+
+        for (var i = this.scene.children.length - 1; i >= 0; i--) {
+            var child = this.scene.children[i];
+
+            if (child.type == 'Mesh' && child.userData.type == 'FILE') {
+                if (child.name != this._highlightedElement) {
+                    child.material.transparent = doHighlight;
+                    child.material.opacity = 0.4;
+                } else {
+                    child.material.transparent = !doHighlight;
+                }
+            }
+        }
+    }
+
+    _focusElement(element) {
+        if (!element) {
+            return;
+        }
+
+        new TWEEN.Tween(this.camera.position)
+            .to({
+                x: this._cameraStartPosition.x,
+                y: this._cameraStartPosition.y,
+                z: this._cameraStartPosition.z
+            }, this._animationDuration)
+            .easing(this._animationEasing)
+            .start();
+
+        new TWEEN.Tween(this.controls.target)
+            .to({
+                x: element.position.x,
+                y: element.position.y,
+                z: element.position.z
+            }, this._animationDuration)
+            .easing(this._animationEasing)
+            .start();
     }
 
     onWindowResize() {
