@@ -10,25 +10,40 @@
                     "type": "FILE",
                     "name": "A1.java",
                     "metricValues": {
-                        "coderadar:javaLoc": 500,
-                        "coderadar:javaMoc": 1000
+                        "coderadar:javaLoc": 200,
+                        "coderadar:javaMoc": 200
                     },
                     "children": []
                 },
                 {
                     "type": "MODULE",
-                    "name": "Module B",
+                    "name": "Module G",
                     "children": [
                         {
                             "type": "FILE",
-                            "name": "B1.java",
+                            "name": "G1.java",
                             "metricValues": {
-                                "coderadar:javaLoc": 300,
-                                "coderadar:javaMoc": 300
+                                "coderadar:javaLoc": 800,
+                                "coderadar:javaMoc": 800
                             },
                             "children": []
                         }
                     ]
+                }
+            ]
+        },
+        {
+            "type": "MODULE",
+            "name": "Module B",
+            "children": [
+                {
+                    "type": "FILE",
+                    "name": "B1.java",
+                    "metricValues": {
+                        "coderadar:javaLoc": 2000,
+                        "coderadar:javaMoc": 200
+                    },
+                    "children": []
                 }
             ]
         }
