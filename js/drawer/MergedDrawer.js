@@ -14,11 +14,29 @@ export class MergedDrawer extends AbstractDrawer {
         elements.forEach((element) => {
             var blueHeight;
             if (element.type == 'FILE') {
-                blueHeight = this._getMetricValueOfElementAndCommitType(element, config.HEIGHT_METRIC_NAME, this.COMMIT_TYPE_CURRENT) * config.HEIGHT_FACTOR;
-                var orangeHeight = this._getMetricValueOfElementAndCommitType(element, config.HEIGHT_METRIC_NAME, this.COMMIT_TYPE_OTHER) * config.HEIGHT_FACTOR;
+                var blueHeightMetric = this._getMetricValueOfElementAndCommitType(element, config.HEIGHT_METRIC_NAME, this.COMMIT_TYPE_CURRENT);
+                var orangeHeightMetric = this._getMetricValueOfElementAndCommitType(element, config.HEIGHT_METRIC_NAME, this.COMMIT_TYPE_OTHER);
 
-                var blueGA = this._getMetricValueOfElementAndCommitType(element, config.GROUND_AREA_METRIC_NAME, this.COMMIT_TYPE_CURRENT) * config.GROUND_AREA_FACTOR + config.BLOCK_SPACING;
-                var orangeGA = this._getMetricValueOfElementAndCommitType(element, config.GROUND_AREA_METRIC_NAME, this.COMMIT_TYPE_OTHER) * config.GROUND_AREA_FACTOR + config.BLOCK_SPACING;
+                var blueGroundAreaMetric = this._getMetricValueOfElementAndCommitType(element, config.GROUND_AREA_METRIC_NAME, this.COMMIT_TYPE_CURRENT);
+                var orangeGroundAreaMetric = this._getMetricValueOfElementAndCommitType(element, config.GROUND_AREA_METRIC_NAME, this.COMMIT_TYPE_OTHER);
+
+                var blueMetrics = {
+                    [config.HEIGHT_METRIC_NAME]: blueHeightMetric,
+                    [config.GROUND_AREA_METRIC_NAME]: blueGroundAreaMetric,
+                    quality: blueHeightMetric
+                };
+
+                var orangeMetrics = {
+                    [config.HEIGHT_METRIC_NAME]: orangeHeightMetric,
+                    [config.GROUND_AREA_METRIC_NAME]: orangeGroundAreaMetric,
+                    quality: orangeHeightMetric
+                };
+
+                blueHeight = blueHeightMetric * config.HEIGHT_FACTOR;
+                var orangeHeight = orangeHeightMetric * config.HEIGHT_FACTOR;
+
+                var blueGA = blueGroundAreaMetric * config.GROUND_AREA_FACTOR + config.BLOCK_SPACING;
+                var orangeGA = orangeGroundAreaMetric * config.GROUND_AREA_FACTOR + config.BLOCK_SPACING;
 
                 var blueColor = this._getColorByPosition(this.position);
                 var orangeColor = this._getContraryColorByColor(blueColor);
@@ -29,26 +47,26 @@ export class MergedDrawer extends AbstractDrawer {
                 if (!isNaN(blueGA) && !isNaN(orangeGA)) {
                     // both blocks
                     if (blueGA < orangeGA) {
-                        this.drawBlock(element, parent, orangeColor, orangeGA, bottom, orangeHeight, orangeTransparency);
+                        this.drawBlock(element, parent, orangeColor, orangeGA, bottom, orangeHeight, orangeTransparency, orangeMetrics);
 
                         element.fit.x += (orangeGA - blueGA) / 2;
                         element.fit.y += (orangeGA - blueGA) / 2;
-                        this.drawBlock(element, parent, blueColor, blueGA, bottom, blueHeight, blueTransparency);
+                        this.drawBlock(element, parent, blueColor, blueGA, bottom, blueHeight, blueTransparency, blueMetrics);
                     } else {
-                        this.drawBlock(element, parent, blueColor, blueGA, bottom, blueHeight, blueTransparency);
+                        this.drawBlock(element, parent, blueColor, blueGA, bottom, blueHeight, blueTransparency, blueMetrics);
 
                         element.fit.x += (blueGA - orangeGA) / 2;
                         element.fit.y += (blueGA - orangeGA) / 2;
-                        this.drawBlock(element, parent, orangeColor, orangeGA, bottom, orangeHeight, orangeTransparency);
+                        this.drawBlock(element, parent, orangeColor, orangeGA, bottom, orangeHeight, orangeTransparency, orangeMetrics);
                     }
 
                 } else if (isNaN(orangeGA)) {
                     // only blue block
-                    this.drawBlock(element, parent, blueColor, blueGA, bottom, blueHeight, false);
+                    this.drawBlock(element, parent, blueColor, blueGA, bottom, blueHeight, false, blueMetrics);
 
                 } else if (isNaN(blueGA)) {
                     // only orange block
-                    this.drawBlock(element, parent, orangeColor, orangeGA, bottom, orangeHeight, false);
+                    this.drawBlock(element, parent, orangeColor, orangeGA, bottom, orangeHeight, false, orangeMetrics);
                 }
             } else {
                 blueHeight = config.DEFAULT_BLOCK_HEIGHT;
@@ -64,7 +82,7 @@ export class MergedDrawer extends AbstractDrawer {
     }
 
     // override
-    drawBlock(element, parent, color, currentCommitSize, bottom, height, isTransparent) {
+    drawBlock(element, parent, color, currentCommitSize, bottom, height, isTransparent, metrics) {
         var finalX, finalY, finalZ;
         var finalWidth, finalHeight, finalDepth;
 
@@ -95,7 +113,9 @@ export class MergedDrawer extends AbstractDrawer {
         cube.scale.z = finalDepth;
 
         cube.userData = {
-            tooltipLabel: element.name + '<br>height=' + finalHeight + '<br>size=' + finalWidth + 'x' + finalDepth,
+            metrics: metrics,
+            type: element.type,
+            tooltipLabel: this._generateTooltipHtml(element.name, metrics),
             isHelper: isTransparent
         };
 

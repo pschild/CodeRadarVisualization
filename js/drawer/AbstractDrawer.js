@@ -59,6 +59,21 @@ export class AbstractDrawer {
 
     initializeEventListeners() {}
 
+    _generateTooltipHtml(elementName, metrics) {
+        var tooltipHtml = [
+            elementName,
+            '<br/>'
+        ];
+
+        if (metrics) {
+            for (let key of Object.keys(metrics)) {
+                tooltipHtml.push('<div>' + key + ': ' + metrics[key] + '</div>');
+            }
+        }
+
+        return tooltipHtml.join('');
+    }
+
     _getPacker() {
         return new GrowingPacker();
     }

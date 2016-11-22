@@ -22,9 +22,17 @@ export class SingleDrawer extends AbstractDrawer {
 
             var myHeight;
             if (element.type == 'FILE') {
-                myHeight = this._getMetricValueOfElementAndCommitType(element, config.HEIGHT_METRIC_NAME, this.COMMIT_TYPE_CURRENT) * config.HEIGHT_FACTOR;
+                var heightMetric = this._getMetricValueOfElementAndCommitType(element, config.HEIGHT_METRIC_NAME, this.COMMIT_TYPE_CURRENT);
+                var groundAreaMetric = this._getMetricValueOfElementAndCommitType(element, config.GROUND_AREA_METRIC_NAME, this.COMMIT_TYPE_CURRENT);
+                var metrics = {
+                    [config.HEIGHT_METRIC_NAME]: heightMetric,
+                    [config.GROUND_AREA_METRIC_NAME]: groundAreaMetric,
+                    quality: heightMetric
+                };
 
-                var myGA = this._getMetricValueOfElementAndCommitType(element, config.GROUND_AREA_METRIC_NAME, this.COMMIT_TYPE_CURRENT) * config.GROUND_AREA_FACTOR + config.BLOCK_SPACING;
+                myHeight = heightMetric * config.HEIGHT_FACTOR;
+
+                var myGA = groundAreaMetric * config.GROUND_AREA_FACTOR + config.BLOCK_SPACING;
                 var otherGA = this._getMetricValueOfElementAndCommitType(element, config.GROUND_AREA_METRIC_NAME, this.COMMIT_TYPE_OTHER) * config.GROUND_AREA_FACTOR + config.BLOCK_SPACING;
 
                 var myColor = this._getColorByPosition(this.position);
@@ -33,7 +41,7 @@ export class SingleDrawer extends AbstractDrawer {
                     element.fit.x += (otherGA - myGA) / 2;
                     element.fit.y += (otherGA - myGA) / 2;
                 }
-                this.drawBlock(element, parent, myColor, myGA, bottom, myHeight);
+                this.drawBlock(element, parent, myColor, myGA, bottom, myHeight, false, metrics);
 
             } else {
                 myHeight = config.DEFAULT_BLOCK_HEIGHT;
@@ -48,7 +56,7 @@ export class SingleDrawer extends AbstractDrawer {
     }
 
     // override
-    drawBlock(element, parent, color, currentCommitSize, bottom, height, isTransparent) {
+    drawBlock(element, parent, color, currentCommitSize, bottom, height, isTransparent, metrics) {
         var finalX, finalY, finalZ;
         var finalWidth, finalHeight, finalDepth;
 
@@ -79,12 +87,9 @@ export class SingleDrawer extends AbstractDrawer {
         cube.scale.z = finalDepth;
 
         cube.userData = {
-            // TODO: add all metrics and change quality to new metric
-            metrics: {
-                quality: finalHeight
-            },
+            metrics: metrics,
             type: element.type,
-            tooltipLabel: element.name + '<br>height=' + finalHeight + '<br>size=' + finalWidth + 'x' + finalDepth,
+            tooltipLabel: this._generateTooltipHtml(element.name, metrics),
             isHelper: isTransparent
         };
 
@@ -99,7 +104,7 @@ export class SingleDrawer extends AbstractDrawer {
     }
 
     _getColorByMetricValue(value) {
-        var mid = (this.maxHeight * config.HEIGHT_FACTOR + this.minHeight * config.HEIGHT_FACTOR) / 2;
+        var mid = (this.maxHeight + this.minHeight) / 2;
         var blue = 0;
         var red, green;
 

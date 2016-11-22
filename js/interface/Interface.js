@@ -49,6 +49,7 @@ export class Interface {
             this.synchronizeCheckbox.disabled = event.target.checked;
             this.colorcodeCheckbox.disabled = event.target.checked;
 
+            PubSub.publish('closeComparisonContainer');
             PubSub.publish('fullSplitToggle', { enabled: event.target.checked });
         });
 
@@ -78,12 +79,17 @@ export class Interface {
         PubSub.subscribe('openComparisonContainer', (eventName, args) => {
             var column = this.comparisonContainer.querySelector('.column.' + args.position);
             if (args.element) {
-                column.innerHTML = [
+                var html = [
                     args.element.name,
-                    '<br/>',
-                    'LOC: ',
-                    'N/A',
-                ].join('');
+                    '<br/>'
+                ];
+
+                let metricValues = args.element.userData.metrics;
+                for (let key of Object.keys(metricValues)) {
+                    html.push('<div>' + key + ': ' + metricValues[key] + '</div>');
+                }
+
+                column.innerHTML = html.join('');
             } else {
                 column.innerHTML = 'Keine Metriken vorhanden.';
             }
