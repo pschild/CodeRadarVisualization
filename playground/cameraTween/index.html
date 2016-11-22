@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <title>CodeRadar Visualization - Playground</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+    <style>
+        body {
+            margin: 0;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="../../node_modules/three/build/three.min.js"></script>
+<script src="../../node_modules/three/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/16.3.5/Tween.min.js"></script>
+<script>
+    var scene = new THREE.Scene();
+    var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.x = -2;
+    camera.position.y = 2;
+    camera.position.z = 5;
+
+    var controls = new THREE.OrbitControls(camera);
+
+    var renderer = new THREE.WebGLRenderer({antialias: true});
+    renderer.setClearColor(0xcccccc);
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+
+    var light = new THREE.DirectionalLight(0xffffff, 1);
+    light.position.set(10, 10, 10).normalize();
+    scene.add(light);
+
+    var geometry = new THREE.BoxGeometry(1, 1, 1);
+    var material = new THREE.MeshLambertMaterial({color: 0xff0000});
+    var cube = new THREE.Mesh(geometry, material);
+    cube.position.x = 0;
+    cube.position.y = 0;
+    cube.position.z = 0;
+    scene.add(cube);
+
+    document.addEventListener('click', function() {
+        new TWEEN.Tween( camera.position ).to( {
+            x: cube.position.x,
+            y: 2,
+            z: cube.position.z + 2}, 1000 )
+                .easing( TWEEN.Easing.Linear.None).start();
+//        new TWEEN.Tween( controls.target ).to( {
+//            x: controls.target.x,
+//            y: controls.target.y,
+//            z: controls.target.z}, 1000 )
+//                .easing( TWEEN.Easing.Linear.None).start();
+    });
+
+    var render = function () {
+        requestAnimationFrame(render);
+
+        TWEEN.update();
+        renderer.render(scene, camera);
+        controls.update();
+    };
+
+    render();
+</script>
+</body>
+</html>
