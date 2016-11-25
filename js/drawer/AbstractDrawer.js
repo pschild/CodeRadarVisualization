@@ -20,6 +20,10 @@ export class AbstractDrawer {
     }
 
     calculateGroundAreas(elements) {
+        if (!Array.isArray(elements)) {
+            elements = [elements];
+        }
+
         elements.forEach((element) => {
             element.w = 0;
             element.h = 0;

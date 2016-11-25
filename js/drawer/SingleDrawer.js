@@ -14,6 +14,10 @@ export class SingleDrawer extends AbstractDrawer {
 
     // override
     drawElements(elements, parent, bottom = 0) {
+        if (!Array.isArray(elements)) {
+            elements = [elements];
+        }
+
         elements.forEach((element) => {
             // don't draw empty modules
             if (element.type == 'MODULE' && !this._hasChildrenForCurrentCommit(element)) {

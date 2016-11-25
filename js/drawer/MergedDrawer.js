@@ -11,6 +11,10 @@ export class MergedDrawer extends AbstractDrawer {
 
     // override
     drawElements(elements, parent, bottom = 0) {
+        if (!Array.isArray(elements)) {
+            elements = [elements];
+        }
+
         elements.forEach((element) => {
             var blueHeight;
             if (element.type == 'FILE') {

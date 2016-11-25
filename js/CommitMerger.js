@@ -9,9 +9,9 @@ export class CommitMerger {
         this._createMetricValueObjects(secondRoot.children, this.secondCommitId);
 
         this.firstRoot = firstRoot;
-        this.walk(secondRoot.children, firstRoot);
+        this.walk(secondRoot, firstRoot);
 
-        return firstRoot.children;
+        return firstRoot;
     }
 
     /**
@@ -62,11 +62,15 @@ export class CommitMerger {
     }
 
     static walk(elements, parent) {
+        if (!Array.isArray(elements)) {
+            elements = [elements];
+        }
+
         for (let element of elements) {
             // console.log('investigating ', element);
 
             // foundElement is the element from #1
-            var searchResult = this.search(element, this.firstRoot.children, this.firstRoot);
+            var searchResult = this.search(element, this.firstRoot, this.firstRoot);
             var foundElement = searchResult ? searchResult.foundElement : undefined;
 
             if (foundElement) {
