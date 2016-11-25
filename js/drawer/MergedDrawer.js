@@ -41,7 +41,7 @@ export class MergedDrawer extends AbstractDrawer {
                 var blueColor = this._getColorByPosition(this.position);
                 var orangeColor = this._getContraryColorByColor(blueColor);
 
-                var blueTransparency = blueHeight > orangeHeight && blueGA > orangeGA;
+                var blueTransparency = blueHeight > orangeHeight && blueGA >= orangeGA;
                 var orangeTransparency = orangeHeight > blueHeight && orangeGA > blueGA;
 
                 if (!isNaN(blueGA) && !isNaN(orangeGA)) {
