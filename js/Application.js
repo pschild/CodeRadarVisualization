@@ -85,16 +85,19 @@ export class Application {
             this.getLeftScreen().setData(this.result, this.minMaxPairOfHeight);
             this.getLeftScreen().setDrawer(MergedDrawer);
             this.getLeftScreen().render();
+            this.getLeftScreen().centerCamera();
         } else {
             this.getLeftScreen().reset();
             this.getLeftScreen().setData(this.result, this.minMaxPairOfHeight);
             this.getLeftScreen().setDrawer(SingleDrawer);
             this.getLeftScreen().render();
+            this.getLeftScreen().centerCamera();
 
             this.getRightScreen().reset();
             this.getRightScreen().setData(this.result, this.minMaxPairOfHeight);
             this.getRightScreen().setDrawer(SingleDrawer);
             this.getRightScreen().render();
+            this.getRightScreen().centerCamera();
         }
     }
 

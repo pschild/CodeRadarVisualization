@@ -12,6 +12,9 @@ export class Screen {
         this._cameraStartPosition = {
             x: 30000, y: 30000, z: 30000
         };
+        this._centralPosition = {
+            x: 0, y: 0, z: 0
+        };
 
         this._highlightedElement = undefined;
         this._animationDuration = 1500;
@@ -117,6 +120,18 @@ export class Screen {
         this.camera.updateProjectionMatrix();
     }
 
+    centerCamera() {
+        var root = this.scene.getObjectByName('root');
+        this._centralPosition = {
+            x: root.scale.x / 2,
+            y: 30000,
+            z: root.scale.z / 2
+        };
+
+        this.resetCamera();
+        this.resetControls();
+    }
+
     resetCamera() {
         new TWEEN.Tween(this.camera.position)
             .to({
@@ -139,9 +154,9 @@ export class Screen {
     resetControls() {
         new TWEEN.Tween(this.controls.target)
             .to({
-                x: 0,
+                x: this._centralPosition.x,
                 y: 0,
-                z: 0
+                z: this._centralPosition.z
             }, this._animationDuration)
             .easing(this._animationEasing)
             .start();
@@ -208,8 +223,7 @@ export class Screen {
             this._highlightedElement = undefined;
             doHighlight = false;
 
-            this.resetCamera();
-            this.resetControls();
+            this.centerCamera();
             PubSub.publish('closeComparisonContainer');
         } else {
             this._highlightedElement = elementName;
