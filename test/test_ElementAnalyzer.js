@@ -15,7 +15,9 @@ describe('ElementAnalyzer', function () {
         });
 
         it('should return undefined when empty object is given', function () {
-            assert.equal(ElementAnalyzer.getMaxMetricValueByMetricName({}, 'metricName1'), undefined);
+            assert.throws(() => {
+                ElementAnalyzer.getMaxMetricValueByMetricName({}, 'metricName1');
+            });
         });
 
         it('should return the biggest value', function () {
@@ -64,7 +66,9 @@ describe('ElementAnalyzer', function () {
         });
 
         it('should return undefined when empty object is given', function () {
-            assert.equal(ElementAnalyzer.getMinMetricValueByMetricName({}, 'metricName1'), undefined);
+            assert.throws(() => {
+                ElementAnalyzer.getMinMetricValueByMetricName({}, 'metricName1');
+            });
         });
 
         it('should return the smallest value', function () {
