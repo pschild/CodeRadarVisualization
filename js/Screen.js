@@ -222,10 +222,6 @@ export class Screen {
             });
         }
 
-        if (!element) {
-            return;
-        }
-
         for (var i = this.scene.children.length - 1; i >= 0; i--) {
             var child = this.scene.children[i];
 
