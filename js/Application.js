@@ -169,8 +169,8 @@ export class Application {
 
         PubSub.subscribe('synchronizeEnabledChange', (eventName, args) => {
             if (args.enabled) {
-                this.getLeftScreen().getControls().reset();
-                this.getRightScreen().getControls().reset();
+                this.getLeftScreen().centerCamera();
+                this.getRightScreen().centerCamera();
             }
 
             this.SYNCHRONIZE_ENABLED = args.enabled;
