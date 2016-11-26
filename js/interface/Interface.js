@@ -29,7 +29,7 @@ export class Interface {
         for (let commit of data.commits) {
             var option = document.createElement('option');
             option.value = commit.getName();
-            option.innerHTML = commit.getName();
+            option.innerHTML = commit.getShortName() + ' - ' + commit.getAuthor() + ' ' + commit.getFormattedDatetime();
             selectElement.appendChild(option);
         }
     }

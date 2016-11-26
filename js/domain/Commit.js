@@ -32,4 +32,23 @@ export class Commit {
         return this.analyzed;
     }
 
+    getShortName() {
+        return this.name.substr(0, 7) + '...';
+    }
+
+    getFormattedDatetime() {
+        let date = new Date(this.timestamp);
+        return [
+            date.getDate(),
+            '.',
+            date.getMonth() + 1,
+            '.',
+            date.getFullYear(),
+            ' ',
+            date.getHours(),
+            ':',
+            date.getMinutes()
+        ].join('');
+    }
+
 }
