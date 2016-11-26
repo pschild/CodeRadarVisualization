@@ -1,4 +1,5 @@
 import {SearchComponent} from './SearchComponent';
+import {LegendComponent} from './LegendComponent';
 import * as PubSub from 'pubsub-js';
 
 export class Interface {
@@ -19,6 +20,7 @@ export class Interface {
         this._bindEvents();
 
         this.searchComponent = new SearchComponent(application);
+        this.legendComponent = new LegendComponent();
     }
 
     showLoadingIndicator() {

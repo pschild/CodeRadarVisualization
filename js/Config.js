@@ -7,6 +7,8 @@ export var config = {
     HEIGHT_METRIC_NAME: 'coderadar:javaLoc',
     HEIGHT_FACTOR: 10,
 
+    COLOR_METRIC_NAME: 'coderadar:javaXyz',
+
     BLOCK_SPACING: 600,
     DEFAULT_BLOCK_HEIGHT: 500,
     DEFAULT_BLOCK_DIMENSIONS: 100,
@@ -16,5 +18,6 @@ export var config = {
 
     COLOR_MODULE: '#cccccc',
     COLOR_FIRST_COMMIT: '#0e8cf3',
-    COLOR_SECOND_COMMIT: '#ffb100'
+    COLOR_SECOND_COMMIT: '#ffb100',
+    COLOR_UNCHANGED_FILES: '#cccccc'
 };

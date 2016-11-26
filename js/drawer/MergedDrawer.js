@@ -65,7 +65,7 @@ export class MergedDrawer extends AbstractDrawer {
                         this.drawBlock(element, parent, orangeColor, orangeGA, bottom, orangeHeight, orangeTransparency, orangeMetrics, true);
                     } else {
                         // ground area and height are the same
-                        this.drawBlock(element, parent, '#eee', orangeGA, bottom, orangeHeight, false, orangeMetrics);
+                        this.drawBlock(element, parent, config.COLOR_UNCHANGED_FILES, orangeGA, bottom, orangeHeight, false, orangeMetrics);
                     }
 
                 } else if (isNaN(orangeGA)) {
