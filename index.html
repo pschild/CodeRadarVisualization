@@ -15,42 +15,70 @@
 <body>
 
 <div id="control-panel">
+    <div class="control-container">
+        <label class="control-label" for="first-commit-select">Commit 1</label>
+        <select id="first-commit-select" class="commit-select">
+            <option value="abc123" selected>#abc123</option>
+            <option value="def456">#def456</option>
+            <option value="ghi789">#ghi789</option>
+        </select>
+    </div>
 
-    <div id="synchronize-checkbox-container" class="checkbox-container">
-        <span>synchronize?</span>
-        <div class="onoffswitch">
-            <input type="checkbox" class="onoffswitch-checkbox" id="synchronize-enabled-checkbox" checked>
-            <label class="onoffswitch-label" for="synchronize-enabled-checkbox"></label>
+    <div class="control-container">
+        <label class="control-label" for="second-commit-select">Commit 2</label>
+        <select id="second-commit-select" class="commit-select">
+            <option value="abc123">#abc123</option>
+            <option value="def456" selected>#def456</option>
+            <option value="ghi789">#ghi789</option>
+        </select>
+    </div>
+
+    <div class="control-container">
+        <label class="control-label">Bildschirmmodus</label>
+        <div id="fullscreen-checkbox-container" class="checkbox-container">
+            <div class="onoffswitch">
+                <input type="checkbox" class="onoffswitch-checkbox" id="fullscreen-enabled-checkbox">
+                <label class="onoffswitch-label" for="fullscreen-enabled-checkbox"></label>
+            </div>
         </div>
     </div>
 
-    <div id="fullscreen-checkbox-container" class="checkbox-container">
-        <span>fullscreen?</span>
-        <div class="onoffswitch">
-            <input type="checkbox" class="onoffswitch-checkbox" id="fullscreen-enabled-checkbox">
-            <label class="onoffswitch-label" for="fullscreen-enabled-checkbox"></label>
+    <div class="control-container">
+        <label class="control-label">Kamerabewegung</label>
+        <div id="synchronize-checkbox-container" class="checkbox-container">
+            <div class="onoffswitch">
+                <input type="checkbox" class="onoffswitch-checkbox" id="synchronize-enabled-checkbox" checked>
+                <label class="onoffswitch-label" for="synchronize-enabled-checkbox"></label>
+            </div>
         </div>
     </div>
 
-    <div id="colorcode-checkbox-container" class="checkbox-container">
-        <span>colorcode?</span>
-        <div class="onoffswitch">
-            <input type="checkbox" class="onoffswitch-checkbox" id="colorcode-checkbox" checked>
-            <label class="onoffswitch-label" for="colorcode-checkbox"></label>
+    <div class="control-container">
+        <label class="control-label">Farbkodierung</label>
+        <div id="colorcode-checkbox-container" class="checkbox-container">
+            <div class="onoffswitch">
+                <input type="checkbox" class="onoffswitch-checkbox" id="colorcode-checkbox" checked>
+                <label class="onoffswitch-label" for="colorcode-checkbox"></label>
+            </div>
         </div>
     </div>
 
-    <select id="first-commit-select" class="commit-select">
-        <option value="abc123" selected>#abc123</option>
-        <option value="def456">#def456</option>
-        <option value="ghi789">#ghi789</option>
-    </select>
+    <div class="control-container">
+        <label class="control-label">Unveränderte Dateien</label>
+        <div id="unchanged-files-checkbox-container" class="checkbox-container">
+            <span class="checkbox-icon left"></span>
+            <div class="onoffswitch">
+                <input type="checkbox" class="onoffswitch-checkbox" id="unchanged-files-checkbox" checked disabled>
+                <label class="onoffswitch-label" for="unchanged-files-checkbox"></label>
+            </div>
+            <span class="checkbox-icon right"></span>
+        </div>
+    </div>
 
-    <select id="second-commit-select" class="commit-select">
-        <option value="abc123">#abc123</option>
-        <option value="def456" selected>#def456</option>
-        <option value="ghi789">#ghi789</option>
-    </select>
+    <div class="control-container">
+        <label class="control-label">Suche</label>
+        <input type="text" placeholder="Dateien suchen" />
+    </div>
 </div>
 
 <div id="stage" class="split">
