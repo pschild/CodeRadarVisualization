@@ -29,6 +29,14 @@
     transition: left 1s ease;
 }
 
+input[type=text], select {
+    box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.2);
+    outline: none;
+    border: 0;
+    height: 30px;
+    text-indent: 10px;
+}
+
 #stage {
     position: absolute;
     width: 100%;
@@ -142,7 +150,7 @@
 #autocomplete-container {
     position: absolute;
     left: 0;
-    top: 25px;
+    top: 32px;
     width: 100%;
     background: #fff;
     padding: 10px;
