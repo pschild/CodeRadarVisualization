@@ -6,9 +6,10 @@ export class Interface {
         this.leftSelect = document.querySelector('#first-commit-select');
         this.rightSelect = document.querySelector('#second-commit-select');
 
-        this.synchronizeCheckbox = document.querySelector('#synchronize-enabled-checkbox');
         this.fullscreenCheckbox = document.querySelector('#fullscreen-enabled-checkbox');
+        this.synchronizeCheckbox = document.querySelector('#synchronize-enabled-checkbox');
         this.colorcodeCheckbox = document.querySelector('#colorcode-checkbox');
+        this.unchangedFilesCheckbox = document.querySelector('#unchanged-files-checkbox');
 
         this.comparisonContainer = document.querySelector('#comparison-container');
 
@@ -41,20 +42,25 @@ export class Interface {
             window.renderCalls = 0;
         }, 1000);
 
-        this.synchronizeCheckbox.addEventListener('change', (event) => {
-            PubSub.publish('synchronizeEnabledChange', { enabled: event.target.checked });
-        });
-
         this.fullscreenCheckbox.addEventListener('change', (event) => {
             this.synchronizeCheckbox.disabled = event.target.checked;
             this.colorcodeCheckbox.disabled = event.target.checked;
+            this.unchangedFilesCheckbox.disabled = !event.target.checked;
 
             PubSub.publish('closeComparisonContainer');
             PubSub.publish('fullSplitToggle', { enabled: event.target.checked });
         });
 
+        this.synchronizeCheckbox.addEventListener('change', (event) => {
+            PubSub.publish('synchronizeEnabledChange', { enabled: event.target.checked });
+        });
+
         this.colorcodeCheckbox.addEventListener('change', (event) => {
             PubSub.publish('colorcodeChange', { colorcode: event.target.checked ? 'commit' : 'metric' });
+        });
+
+        this.unchangedFilesCheckbox.addEventListener('change', (event) => {
+            PubSub.publish('unchangedFilesChange', { enabled: event.target.checked });
         });
 
         this.leftSelect.addEventListener('change', function() {

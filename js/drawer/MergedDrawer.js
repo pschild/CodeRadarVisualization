@@ -2,6 +2,7 @@ import {Block} from '../Block';
 import {config} from '../Config';
 import {AbstractDrawer} from './AbstractDrawer';
 import {ElementAnalyzer} from '../ElementAnalyzer';
+import * as PubSub from 'pubsub-js';
 
 export class MergedDrawer extends AbstractDrawer {
 
@@ -45,23 +46,26 @@ export class MergedDrawer extends AbstractDrawer {
                 var blueColor = this._getColorByPosition(this.position);
                 var orangeColor = this._getContraryColorByColor(blueColor);
 
-                var blueTransparency = blueHeight > orangeHeight && blueGA >= orangeGA;
-                var orangeTransparency = orangeHeight > blueHeight && orangeGA > blueGA;
+                var blueTransparency = blueHeight >= orangeHeight && blueGA >= orangeGA;
+                var orangeTransparency = orangeHeight >= blueHeight && orangeGA >= blueGA;
 
                 if (!isNaN(blueGA) && !isNaN(orangeGA)) {
                     // both blocks
-                    if (blueGA < orangeGA) {
-                        this.drawBlock(element, parent, orangeColor, orangeGA, bottom, orangeHeight, orangeTransparency, orangeMetrics);
+                    if (blueGA < orangeGA || blueHeight < orangeHeight) {
+                        this.drawBlock(element, parent, orangeColor, orangeGA, bottom, orangeHeight, orangeTransparency, orangeMetrics, true);
 
                         element.fit.x += (orangeGA - blueGA) / 2;
                         element.fit.y += (orangeGA - blueGA) / 2;
-                        this.drawBlock(element, parent, blueColor, blueGA, bottom, blueHeight, blueTransparency, blueMetrics);
-                    } else {
-                        this.drawBlock(element, parent, blueColor, blueGA, bottom, blueHeight, blueTransparency, blueMetrics);
+                        this.drawBlock(element, parent, blueColor, blueGA, bottom, blueHeight, blueTransparency, blueMetrics, true);
+                    } else if (blueGA > orangeGA || blueHeight > orangeHeight) {
+                        this.drawBlock(element, parent, blueColor, blueGA, bottom, blueHeight, blueTransparency, blueMetrics, true);
 
                         element.fit.x += (blueGA - orangeGA) / 2;
                         element.fit.y += (blueGA - orangeGA) / 2;
-                        this.drawBlock(element, parent, orangeColor, orangeGA, bottom, orangeHeight, orangeTransparency, orangeMetrics);
+                        this.drawBlock(element, parent, orangeColor, orangeGA, bottom, orangeHeight, orangeTransparency, orangeMetrics, true);
+                    } else {
+                        // ground area and height are the same
+                        this.drawBlock(element, parent, '#eee', orangeGA, bottom, orangeHeight, false, orangeMetrics);
                     }
 
                 } else if (isNaN(orangeGA)) {
@@ -86,7 +90,7 @@ export class MergedDrawer extends AbstractDrawer {
     }
 
     // override
-    drawBlock(element, parent, color, currentCommitSize, bottom, height, isTransparent, metrics) {
+    drawBlock(element, parent, color, currentCommitSize, bottom, height, isTransparent, metrics, hasChanged = false) {
         var finalX, finalY, finalZ;
         var finalWidth, finalHeight, finalDepth;
 
@@ -120,7 +124,8 @@ export class MergedDrawer extends AbstractDrawer {
             metrics: metrics,
             type: element.type,
             tooltipLabel: this._generateTooltipHtml(element.name, metrics),
-            isHelper: isTransparent
+            isHelper: isTransparent,
+            hasChanged: hasChanged
         };
 
         this.scene.add(cube);
@@ -133,6 +138,23 @@ export class MergedDrawer extends AbstractDrawer {
             return metricValueForGroundArea[0];
         } else if (metricValueForGroundArea.length == 2) {
             return metricValueForGroundArea[0] > metricValueForGroundArea[1] ? metricValueForGroundArea[0] : metricValueForGroundArea[1];
+        }
+    }
+
+    // override
+    initializeEventListeners() {
+        PubSub.subscribe('unchangedFilesChange', (eventName, args) => {
+            this._handleUnchangedFilesVisibility(args.enabled);
+        });
+    }
+
+    _handleUnchangedFilesVisibility(enabled) {
+        for (var i = this.scene.children.length - 1; i >= 0; i--) {
+            var child = this.scene.children[i];
+
+            if (child.type == 'Mesh' && child.userData.type == 'FILE' && !child.userData.hasChanged) {
+                child.visible = enabled;
+            }
         }
     }
 
