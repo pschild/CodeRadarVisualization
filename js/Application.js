@@ -165,6 +165,7 @@ export class Application {
             }
 
             this.loadMetricData();
+            PubSub.publish('closeComparisonContainer');
         });
 
         PubSub.subscribe('synchronizeEnabledChange', (eventName, args) => {
