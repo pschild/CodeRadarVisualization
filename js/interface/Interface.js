@@ -1,8 +1,9 @@
+import {SearchComponent} from './SearchComponent';
 import * as PubSub from 'pubsub-js';
 
 export class Interface {
 
-    constructor() {
+    constructor(application) {
         this.leftSelect = document.querySelector('#first-commit-select');
         this.rightSelect = document.querySelector('#second-commit-select');
 
@@ -16,6 +17,8 @@ export class Interface {
         this.renderCallsDisplay = document.querySelector('#render-calls');
 
         this._bindEvents();
+
+        this.searchComponent = new SearchComponent(application);
     }
 
     showLoadingIndicator() {

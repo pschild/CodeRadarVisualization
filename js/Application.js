@@ -18,6 +18,8 @@ export class Application {
         this.SYNCHRONIZE_ENABLED = true;
         this.IS_FULLSCREEN = false;
 
+        this._uniqueElementList = [];
+
         this.createInterface();
         this.initializeEventListeners();
 
@@ -69,6 +71,7 @@ export class Application {
             console.timeEnd('merging time');
             // console.log('merging ' + this.leftCommitId + ' and ' + this.rightCommitId + ':', result);
 
+            this._uniqueElementList = ElementAnalyzer.generateUniqueElementList(result);
             var minMaxPairOfHeight = ElementAnalyzer.findSmallestAndBiggestMetricValueByMetricName(result, config.HEIGHT_METRIC_NAME);
 
             this.result = result;
@@ -144,7 +147,11 @@ export class Application {
     }
 
     createInterface() {
-        this.interface = new Interface();
+        this.interface = new Interface(this);
+    }
+
+    getUniqueElementList() {
+        return this._uniqueElementList;
     }
 
     initializeEventListeners() {

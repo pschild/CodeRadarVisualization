@@ -213,6 +213,14 @@ export class Screen {
                 // TOOD: handle click in fullscreen mode
             }
         });
+
+        PubSub.subscribe('searchEntryClicked', (eventName, args) => {
+            if (!this._isFullscreen) {
+                this._toggleHighlighting(args.elementName);
+            } else {
+                // TOOD: handle click in fullscreen mode
+            }
+        });
     }
 
     _toggleHighlighting(elementName) {

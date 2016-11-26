@@ -1,5 +1,23 @@
 export class ElementAnalyzer {
 
+    static generateUniqueElementList(elements, uniqueElements = []) {
+        if (!Array.isArray(elements)) {
+            elements = [elements];
+        }
+
+        for (let element of elements) {
+            if (uniqueElements.indexOf(element.name) < 0) {
+                uniqueElements.push(element.name);
+            }
+
+            if (element.children && element.children.length > 0) {
+                this.generateUniqueElementList(element.children, uniqueElements);
+            }
+        }
+
+        return uniqueElements;
+    }
+
     static findSmallestAndBiggestMetricValueByMetricName(elements, metricName) {
         if (typeof elements != 'object' || elements == null) {
             throw new Error('elements is not an object or null!');

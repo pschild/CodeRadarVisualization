@@ -77,7 +77,13 @@
 
     <div class="control-container">
         <label class="control-label">Suche</label>
-        <input type="text" placeholder="Dateien suchen" />
+        <div class="search-wrapper">
+            <input type="text" id="search-input" placeholder="Suchbegriff" />
+
+            <div id="autocomplete-container" style="display: none">
+                <ul class="suggestions-list"></ul>
+            </div>
+        </div>
     </div>
 </div>
 
