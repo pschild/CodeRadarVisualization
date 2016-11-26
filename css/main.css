@@ -2,9 +2,9 @@
     position: absolute;
     top: 0;
     left: 0;
-    border: 1px solid #000;
     background: #fff;
     padding: 5px;
+    box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.2);
     z-index: 99;
 
     display: none;
@@ -23,7 +23,7 @@
     top: 0;
     height: 100%;
     width: 2px;
-    background: #a3a3a3;
+    background: #535353;
     z-index: 98;
 
     transition: left 1s ease;
