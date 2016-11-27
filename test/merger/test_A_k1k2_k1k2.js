@@ -1,9 +1,9 @@
 var assert = require('assert');
 
-var commit1 = require('./data/commit1_A_k1k2_k1k2.json');
-var commit2 = require('./data/commit2_A_k1k2_k1k2.json');
+var commit1 = require('./../data/commit1_A_k1k2_k1k2.json');
+var commit2 = require('./../data/commit2_A_k1k2_k1k2.json');
 
-import {CommitMerger} from '../js/CommitMerger';
+import {CommitMerger} from '../../js/CommitMerger';
 
 describe('CommitMerger', function () {
     describe('#merge(commit1, commit2)', function () {
@@ -11,17 +11,18 @@ describe('CommitMerger', function () {
         commit2.commitId = 'def456';
         var result = CommitMerger.merge(commit1, commit2);
 
-        it('should return an array', function () {
-            assert.ok(Array.isArray(result));
+        it('should return an object with children', function () {
+            assert.ok(typeof result == 'object' && result != null);
+            assert.ok(Array.isArray(result.children));
         });
 
         it('should contain the correct amount of elements', function () {
-            assert.equal(result.length, 1);
-            assert.equal(result[0].children.length, 2);
+            assert.equal(result.children.length, 1);
+            assert.equal(result.children[0].children.length, 2);
         });
 
         it('should contain correct metricValues for first class', function() {
-            var metricValues = result[0].children[0].metricValues;
+            var metricValues = result.children[0].children[0].metricValues;
             assert.equal(typeof metricValues, 'object');
 
             var metricNames = Object.keys(metricValues);
@@ -38,7 +39,7 @@ describe('CommitMerger', function () {
         });
 
         it('should contain correct metricValues for second class', function() {
-            var metricValues = result[0].children[1].metricValues;
+            var metricValues = result.children[0].children[1].metricValues;
             assert.equal(typeof metricValues, 'object');
 
             var metricNames = Object.keys(metricValues);

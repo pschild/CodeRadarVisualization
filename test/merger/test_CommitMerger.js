@@ -1,6 +1,6 @@
 var assert = require('assert');
 
-import {CommitMerger} from '../js/CommitMerger';
+import {CommitMerger} from '../../js/CommitMerger';
 
 describe('CommitMerger', function () {
     describe('#_createMetricValueObjects(elements, commitId)', function () {

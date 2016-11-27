@@ -1,4 +1,6 @@
-export class Block extends THREE.Mesh {
+import {Mesh} from 'three/build/three.min';
+
+export class Block extends Mesh {
     constructor(color, name) {
         var color = color || Math.random() * 0xffffff;
 

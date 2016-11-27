@@ -1,6 +1,6 @@
 var assert = require('assert');
 
-import {Drawer} from '../js/Drawer';
+import {Drawer} from '../../js/drawer/Drawer';
 import sinon from 'sinon';
 import packers from 'binpacking';
 
@@ -112,7 +112,7 @@ var validJsonNotContainingCommitId = {
         }
     ]
 };
-var mergedData = require('./data/mergedData.json');
+var mergedData = require('./../data/mergedData.json');
 
 describe('Drawer', function () {
     describe('#_hasChildrenForCurrentCommit(element)', function () {

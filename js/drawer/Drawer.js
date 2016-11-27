@@ -1,6 +1,6 @@
-import {Block} from './Block';
-import {config} from './Config';
-import {ElementAnalyzer} from './ElementAnalyzer';
+import {Block} from '../Block';
+import {config} from '../Config';
+import {ElementAnalyzer} from '../ElementAnalyzer';
 
 const COMMIT_TYPE_CURRENT = 'current';
 const COMMIT_TYPE_OTHER = 'other';
