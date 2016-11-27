@@ -5,6 +5,8 @@ import * as PubSub from 'pubsub-js';
 export class Interface {
 
     constructor(application) {
+        this._application = application;
+
         this.leftSelect = document.querySelector('#first-commit-select');
         this.rightSelect = document.querySelector('#second-commit-select');
 
@@ -85,6 +87,20 @@ export class Interface {
         PubSub.subscribe('commitsLoaded', (eventName, args) => {
             this._createOptionElements(this.leftSelect, args);
             this._createOptionElements(this.rightSelect, args);
+
+            for (let option of this.leftSelect.options) {
+                if (option.value == this._application.leftCommitId) {
+                    option.selected = true;
+                    break;
+                }
+            }
+
+            for (let option of this.rightSelect.options) {
+                if (option.value == this._application.rightCommitId) {
+                    option.selected = true;
+                    break;
+                }
+            }
         });
 
         PubSub.subscribe('openComparisonContainer', (eventName, args) => {

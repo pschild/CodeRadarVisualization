@@ -41,10 +41,11 @@ export class Application {
             var commitMapper = new CommitMapper(data);
             commitMapper.mapAll();
 
-            PubSub.publish('commitsLoaded', { commits: commitMapper.getAll() });
+            var commits = commitMapper.getAll();
+            this.leftCommitId = commits[0].getName();
+            this.rightCommitId = commits[1].getName();
 
-            this.leftCommitId = 'abc123';
-            this.rightCommitId = 'def456';
+            PubSub.publish('commitsLoaded', { commits: commits });
 
             this.getLeftScreen().setCommitId(this.leftCommitId);
             this.getRightScreen().setCommitId(this.rightCommitId);
