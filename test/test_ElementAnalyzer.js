@@ -108,16 +108,16 @@ describe('ElementAnalyzer', function () {
     describe('#findSmallestAndBiggestMetricValueByMetricName', function () {
         it('should throw an error when data is not valid', function () {
             assert.throws(() => {
-                ElementAnalyzer.findSmallestAndBiggestMetricValueByMetricName(null, 'coderadar:javaLoc');
+                ElementAnalyzer.findSmallestAndBiggestMetricValueByMetricName(null, 'metric1');
             });
 
             assert.throws(() => {
-                ElementAnalyzer.findSmallestAndBiggestMetricValueByMetricName(42, 'coderadar:javaLoc');
+                ElementAnalyzer.findSmallestAndBiggestMetricValueByMetricName(42, 'metric1');
             });
         });
 
         it('should return default values when element list is empty', function () {
-            assert.deepEqual(ElementAnalyzer.findSmallestAndBiggestMetricValueByMetricName({}, 'coderadar:javaLoc'), {
+            assert.deepEqual(ElementAnalyzer.findSmallestAndBiggestMetricValueByMetricName({}, 'metric1'), {
                 min: Number.MAX_VALUE,
                 max: Number.MIN_VALUE
             });
@@ -125,7 +125,7 @@ describe('ElementAnalyzer', function () {
 
         it('should return the correct pair of biggest and smallest value', function () {
             var mergedData = require('./data/mergedData.json');
-            assert.deepEqual(ElementAnalyzer.findSmallestAndBiggestMetricValueByMetricName(mergedData, 'coderadar:javaLoc'), {
+            assert.deepEqual(ElementAnalyzer.findSmallestAndBiggestMetricValueByMetricName(mergedData, 'metric1'), {
                 min: 100,
                 max: 1500
             });

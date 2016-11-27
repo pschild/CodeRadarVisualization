@@ -10,8 +10,8 @@
                     "type": "FILE",
                     "name": "A1.java",
                     "metricValues": {
-                        "coderadar:javaLoc": 200,
-                        "coderadar:javaMoc": 200
+                        "metric1": 200,
+                        "metric2": 200
                     },
                     "children": []
                 }
@@ -25,8 +25,8 @@
                     "type": "FILE",
                     "name": "B1.java",
                     "metricValues": {
-                        "coderadar:javaLoc": 200,
-                        "coderadar:javaMoc": 200
+                        "metric1": 200,
+                        "metric2": 200
                     },
                     "children": []
                 }

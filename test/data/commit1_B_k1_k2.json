@@ -10,8 +10,8 @@
                     "type": "FILE",
                     "name": "A1.java",
                     "metricValues": {
-                        "coderadar:javaLoc": 100,
-                        "coderadar:javaMoc": 100
+                        "metric1": 100,
+                        "metric2": 100
                     },
                     "children": []
                 }

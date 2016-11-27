@@ -1,11 +1,16 @@
 var assert = require('assert');
 
 import {Drawer} from '../../js/drawer/Drawer';
+import {config} from '../../js/Config';
 import sinon from 'sinon';
 import packers from 'binpacking';
 
 // mock GrowingPacker because it's imported with script-tag
 Drawer.prototype._getPacker = sinon.stub().returns(packers.GrowingPacker.prototype);
+
+// change the metric names for the test data
+config.HEIGHT_METRIC_NAME = 'metric1';
+config.GROUND_AREA_METRIC_NAME = 'metric2';
 
 const CURRENT_COMMIT = 'abc123';
 var drawer = new Drawer(null, CURRENT_COMMIT);

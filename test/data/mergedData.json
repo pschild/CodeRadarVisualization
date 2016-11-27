@@ -19,10 +19,10 @@
                                         "type": "FILE",
                                         "name": "X1.java",
                                         "metricValues": {
-                                            "coderadar:javaLoc": {
+                                            "metric1": {
                                                 "abc123": 1500
                                             },
-                                            "coderadar:javaMoc": {
+                                            "metric2": {
                                                 "abc123": 950
                                             }
                                         },
@@ -36,10 +36,10 @@
                                                 "type": "FILE",
                                                 "name": "Y1.java",
                                                 "metricValues": {
-                                                    "coderadar:javaLoc": {
+                                                    "metric1": {
                                                         "abc123": 200
                                                     },
-                                                    "coderadar:javaMoc": {
+                                                    "metric2": {
                                                         "abc123": 200
                                                     }
                                                 },
@@ -53,10 +53,10 @@
                                 "type": "FILE",
                                 "name": "B1.java",
                                 "metricValues": {
-                                    "coderadar:javaLoc": {
+                                    "metric1": {
                                         "abc123": 500
                                     },
-                                    "coderadar:javaMoc": {
+                                    "metric2": {
                                         "abc123": 500
                                     }
                                 },
@@ -68,10 +68,10 @@
                         "type": "FILE",
                         "name": "C1.java",
                         "metricValues": {
-                            "coderadar:javaLoc": {
+                            "metric1": {
                                 "abc123": 200
                             },
-                            "coderadar:javaMoc": {
+                            "metric2": {
                                 "abc123": 200
                             }
                         },
@@ -87,10 +87,10 @@
                         "type": "FILE",
                         "name": "D1.java",
                         "metricValues": {
-                            "coderadar:javaLoc": {
+                            "metric1": {
                                 "abc123": 500
                             },
-                            "coderadar:javaMoc": {
+                            "metric2": {
                                 "abc123": 900
                             }
                         },
@@ -104,10 +104,10 @@
                                 "type": "FILE",
                                 "name": "E1.java",
                                 "metricValues": {
-                                    "coderadar:javaLoc": {
+                                    "metric1": {
                                         "abc123": 150
                                     },
-                                    "coderadar:javaMoc": {
+                                    "metric2": {
                                         "abc123": 150
                                     }
                                 },
@@ -125,10 +125,10 @@
                         "type": "FILE",
                         "name": "G1.java",
                         "metricValues": {
-                            "coderadar:javaLoc": {
+                            "metric1": {
                                 "def456": 800
                             },
-                            "coderadar:javaMoc": {
+                            "metric2": {
                                 "def456": 800
                             }
                         },
@@ -140,11 +140,11 @@
                 "type": "FILE",
                 "name": "A1.java",
                 "metricValues": {
-                    "coderadar:javaLoc": {
+                    "metric1": {
                         "abc123": 100,
                         "def456": 200
                     },
-                    "coderadar:javaMoc": {
+                    "metric2": {
                         "abc123": 100,
                         "def456": 200
                     }
@@ -161,10 +161,10 @@
                 "type": "FILE",
                 "name": "G1.java",
                 "metricValues": {
-                    "coderadar:javaLoc": {
+                    "metric1": {
                         "abc123": 400
                     },
-                    "coderadar:javaMoc": {
+                    "metric2": {
                         "abc123": 400
                     }
                 },
@@ -180,10 +180,10 @@
                 "type": "FILE",
                 "name": "B1.java",
                 "metricValues": {
-                    "coderadar:javaLoc": {
+                    "metric1": {
                         "def456": 200
                     },
-                    "coderadar:javaMoc": {
+                    "metric2": {
                         "def456": 200
                     }
                 },
