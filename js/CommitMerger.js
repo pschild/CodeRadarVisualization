@@ -5,8 +5,8 @@ export class CommitMerger {
         this.secondCommitId = secondRoot.commitId;
 
         // do some preparations
-        this._createMetricValueObjects(firstRoot.children, this.firstCommitId);
-        this._createMetricValueObjects(secondRoot.children, this.secondCommitId);
+        this._createMetricValueObjects(firstRoot, this.firstCommitId);
+        this._createMetricValueObjects(secondRoot, this.secondCommitId);
 
         this.firstRoot = firstRoot;
         this.walk(secondRoot, firstRoot);
