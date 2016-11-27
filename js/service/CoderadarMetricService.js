@@ -1,26 +1,27 @@
-import {AbstractDataService} from './AbstractDataService';
+import {config} from '../Config';
 
-export class CoderadarMetricService extends AbstractDataService {
+export class CoderadarMetricService {
 
     constructor() {
-        super();
-
-        this.URL = 'http://localhost:8080/projects/1/metricvalues/tree';
+        this.URL = config.BASE_URL + '/projects/1/metricvalues/tree';
     }
 
     // override
-    load(callbackFn) {
+    load(callbackFn) {}
+
+    loadByCommitId(commitId) {
         var params = {
-            'commit': 'edf099c97575ec9e1001054886010fd8fe15b8b0',
+            'commit': commitId,
             'metrics': ['coderadar:size:loc:java', 'coderadar:size:sloc:java']
         };
 
-        axios.post(this.URL, params)
-            .then(function (response) {
-                callbackFn(response.data);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+        return axios.post(this.URL, params);
+    }
+
+    loadTwoCommits(firstCommitId, secondCommitId, callbackFn) {
+        axios.all([this.loadByCommitId(firstCommitId), this.loadByCommitId(secondCommitId)])
+            .then(axios.spread(function (firstCommitResult, secondCommitResult) {
+                callbackFn(firstCommitResult.data, secondCommitResult.data);
+            }));
     }
 }

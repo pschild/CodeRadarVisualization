@@ -1,20 +1,10 @@
-import {AbstractDataService} from './AbstractDataService';
-
-export class DummyMetricService extends AbstractDataService {
+export class DummyMetricService {
 
     // override
-    load(callbackFn) {
-        axios.get('data/metrics.json')
-            .then(function (response) {
-                callbackFn(response.data);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    }
+    load(callbackFn) {}
 
     loadByCommitId(commitId) {
-        return axios.get('data/metrics_' + commitId + '.json');
+        return axios.get('data/' + commitId + '.json');
     }
 
     loadTwoCommits(firstCommitId, secondCommitId, callbackFn) {

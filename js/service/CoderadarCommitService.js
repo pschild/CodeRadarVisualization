@@ -1,11 +1,9 @@
-import {AbstractDataService} from './AbstractDataService';
+import {config} from '../Config';
 
-export class CoderadarCommitService extends AbstractDataService {
+export class CoderadarCommitService {
 
     constructor() {
-        super();
-
-        this.URL = 'http://localhost:8080/projects/1/commits?page=0&size=999';
+        this.URL = config.BASE_URL + '/projects/1/commits?page=0&size=999';
     }
 
     // override

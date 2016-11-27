@@ -10,40 +10,34 @@
                     "type": "FILE",
                     "name": "A1.java",
                     "metricValues": {
-                        "coderadar:javaLoc": 200,
-                        "coderadar:javaMoc": 200
+                        "coderadar:size:loc:java": 500,
+                        "coderadar:size:sloc:java": 500
                     },
                     "children": []
                 },
                 {
                     "type": "MODULE",
-                    "name": "Module G",
+                    "name": "Module A-A",
                     "children": [
                         {
                             "type": "FILE",
-                            "name": "G1.java",
+                            "name": "A-A1.java",
                             "metricValues": {
-                                "coderadar:javaLoc": 800,
-                                "coderadar:javaMoc": 800
+                                "coderadar:size:loc:java": 500,
+                                "coderadar:size:sloc:java": 500
+                            },
+                            "children": []
+                        },
+                        {
+                            "type": "FILE",
+                            "name": "A-A2.java",
+                            "metricValues": {
+                                "coderadar:size:loc:java": 500,
+                                "coderadar:size:sloc:java": 500
                             },
                             "children": []
                         }
                     ]
-                }
-            ]
-        },
-        {
-            "type": "MODULE",
-            "name": "Module B",
-            "children": [
-                {
-                    "type": "FILE",
-                    "name": "B1.java",
-                    "metricValues": {
-                        "coderadar:javaLoc": 2000,
-                        "coderadar:javaMoc": 200
-                    },
-                    "children": []
                 }
             ]
         }

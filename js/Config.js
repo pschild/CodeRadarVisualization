@@ -1,10 +1,12 @@
 export var config = {
+    BASE_URL: 'http://localhost:8080',
+
     SCREEN_PADDING: 0,
 
-    GROUND_AREA_METRIC_NAME: 'coderadar:javaMoc',
+    GROUND_AREA_METRIC_NAME: 'coderadar:size:sloc:java',
     GROUND_AREA_FACTOR: 10,
 
-    HEIGHT_METRIC_NAME: 'coderadar:javaLoc',
+    HEIGHT_METRIC_NAME: 'coderadar:size:loc:java',
     HEIGHT_FACTOR: 10,
 
     COLOR_METRIC_NAME: 'coderadar:javaXyz',

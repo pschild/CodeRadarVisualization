@@ -1,45 +1,39 @@
 {
     "type": "MODULE",
     "name": "root",
-    "commitId": "ghi789",
     "children": [
         {
             "type": "MODULE",
             "name": "Module A",
-            "commitId": "ghi789",
             "children": [
                 {
                     "type": "FILE",
                     "name": "A1.java",
-                    "commitId": "ghi789",
                     "metricValues": {
-                        "coderadar:javaLoc": 500,
-                        "coderadar:javaMoc": 500
+                        "coderadar:size:loc:java": 500,
+                        "coderadar:size:sloc:java": 500
                     },
                     "children": []
                 },
                 {
                     "type": "MODULE",
                     "name": "Module A-A",
-                    "commitId": "ghi789",
                     "children": [
                         {
                             "type": "FILE",
                             "name": "A-A1.java",
-                            "commitId": "ghi789",
                             "metricValues": {
-                                "coderadar:javaLoc": 500,
-                                "coderadar:javaMoc": 500
+                                "coderadar:size:loc:java": 500,
+                                "coderadar:size:sloc:java": 500
                             },
                             "children": []
                         },
                         {
                             "type": "FILE",
                             "name": "A-A2.java",
-                            "commitId": "ghi789",
                             "metricValues": {
-                                "coderadar:javaLoc": 500,
-                                "coderadar:javaMoc": 500
+                                "coderadar:size:loc:java": 500,
+                                "coderadar:size:sloc:java": 500
                             },
                             "children": []
                         }

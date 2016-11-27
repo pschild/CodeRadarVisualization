@@ -1,6 +1,4 @@
-import {AbstractDataService} from './AbstractDataService';
-
-export class DummyCommitService extends AbstractDataService {
+export class DummyCommitService {
 
     // override
     load(callbackFn) {

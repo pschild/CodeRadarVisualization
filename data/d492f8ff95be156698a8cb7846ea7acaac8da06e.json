@@ -10,8 +10,8 @@
                     "type": "FILE",
                     "name": "A1.java",
                     "metricValues": {
-                        "coderadar:javaLoc": 100,
-                        "coderadar:javaMoc": 100
+                        "coderadar:size:loc:java": 500,
+                        "coderadar:size:sloc:java": 200
                     },
                     "children": []
                 },
@@ -23,8 +23,8 @@
                             "type": "FILE",
                             "name": "D1.java",
                             "metricValues": {
-                                "coderadar:javaLoc": 500,
-                                "coderadar:javaMoc": 900
+                                "coderadar:size:loc:java": 500,
+                                "coderadar:size:sloc:java": 900
                             },
                             "children": []
                         },
@@ -36,8 +36,8 @@
                                     "type": "FILE",
                                     "name": "E1.java",
                                     "metricValues": {
-                                        "coderadar:javaLoc": 150,
-                                        "coderadar:javaMoc": 150
+                                        "coderadar:size:loc:java": 150,
+                                        "coderadar:size:sloc:java": 150
                                     },
                                     "children": []
                                 }
@@ -53,8 +53,8 @@
                             "type": "FILE",
                             "name": "C1.java",
                             "metricValues": {
-                                "coderadar:javaLoc": 200,
-                                "coderadar:javaMoc": 200
+                                "coderadar:size:loc:java": 200,
+                                "coderadar:size:sloc:java": 200
                             },
                             "children": []
                         },
@@ -66,8 +66,8 @@
                                     "type": "FILE",
                                     "name": "B1.java",
                                     "metricValues": {
-                                        "coderadar:javaLoc": 500,
-                                        "coderadar:javaMoc": 500
+                                        "coderadar:size:loc:java": 500,
+                                        "coderadar:size:sloc:java": 500
                                     },
                                     "children": []
                                 },
@@ -79,8 +79,8 @@
                                             "type": "FILE",
                                             "name": "X1.java",
                                             "metricValues": {
-                                                "coderadar:javaLoc": 1500,
-                                                "coderadar:javaMoc": 950
+                                                "coderadar:size:loc:java": 1500,
+                                                "coderadar:size:sloc:java": 950
                                             },
                                             "children": []
                                         },
@@ -92,8 +92,8 @@
                                                     "type": "FILE",
                                                     "name": "Y1.java",
                                                     "metricValues": {
-                                                        "coderadar:javaLoc": 200,
-                                                        "coderadar:javaMoc": 200
+                                                        "coderadar:size:loc:java": 200,
+                                                        "coderadar:size:sloc:java": 200
                                                     },
                                                     "children": []
                                                 }
@@ -115,8 +115,8 @@
                     "type": "FILE",
                     "name": "G1.java",
                     "metricValues": {
-                        "coderadar:javaLoc": 400,
-                        "coderadar:javaMoc": 400
+                        "coderadar:size:loc:java": 400,
+                        "coderadar:size:sloc:java": 400
                     },
                     "children": []
                 }
