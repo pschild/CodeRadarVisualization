@@ -175,14 +175,14 @@ input[type=text], select {
 
 #autocomplete-container {
     position: absolute;
-    left: 0;
+    right: 0;
     top: 32px;
-    width: 100%;
+    min-width: 100%;
     background: #fff;
-    padding: 10px;
     box-sizing: border-box;
     max-height: 250px;
     overflow-y: auto;
+    white-space: nowrap;
 
     box-shadow: rgba(0,0,0,0.2) 0 2px 6px 0;
 }
@@ -195,7 +195,11 @@ input[type=text], select {
 
 #autocomplete-container .suggestions-list > li {
     cursor: pointer;
-    padding: 2px 0;
+    padding: 10px;
+}
+
+#autocomplete-container .suggestions-list > li:hover {
+    background: #f3f3f3;
 }
 
 #comparison-container {
@@ -203,7 +207,8 @@ input[type=text], select {
     bottom: 0;
     left: 50%;
     transform: translate3d(-50%, 100%, 0);
-    width: 25%;
+    padding: 5px 20px;
+    max-width: 50%;
     height: 160px;
     background: #fff;
     box-shadow: rgba(0,0,0,0.2) 0 2px 6px 0;

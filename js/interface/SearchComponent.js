@@ -21,7 +21,7 @@ export class SearchComponent {
 
         for (let entry of entries) {
             var suggestionItem = document.createElement('li');
-            suggestionItem.innerHTML = entry;
+            suggestionItem.innerHTML = this._highlightSubstring(entry, this.searchInput.value);
             suggestionItem.addEventListener('click', () => {
                 this.searchInput.value = entry;
                 PubSub.publish('searchEntryClicked', { elementName: entry });
@@ -60,5 +60,9 @@ export class SearchComponent {
 
     _showAutoCompleteContainer() {
         this.autoCompleteContainer.style.display = 'block';
+    }
+
+    _highlightSubstring(entry, searchValue) {
+        return entry.replace(new RegExp('(' + searchValue + ')', 'ig'), '<b>$1</b>');
     }
 }
