@@ -24,7 +24,7 @@ export class AbstractDrawer {
             elements = [elements];
         }
 
-        elements.forEach((element) => {
+        for (let element of elements) {
             element.w = 0;
             element.h = 0;
 
@@ -39,10 +39,10 @@ export class AbstractDrawer {
                 element.w = result.w + config.BLOCK_SPACING * 3;
                 element.h = result.h + config.BLOCK_SPACING * 3;
             }
-        });
+        }
 
         elements.sort(function (a, b) {
-            return (b.w > a.w);
+            return b.w - a.w;
         });
 
         this.packer.fit(elements);

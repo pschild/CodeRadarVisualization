@@ -24,6 +24,11 @@ export class SingleDrawer extends AbstractDrawer {
                 return;
             }
 
+            if (!element.fit) {
+                console.warn(`element ${element.name} at position ${this.position} has no fit!`);
+                return;
+            }
+
             var myHeight;
             if (element.type == 'FILE') {
                 var heightMetric = this._getMetricValueOfElementAndCommitType(element, config.HEIGHT_METRIC_NAME, this.COMMIT_TYPE_CURRENT);
