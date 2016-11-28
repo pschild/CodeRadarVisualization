@@ -207,52 +207,52 @@ export class Screen {
         });
 
         PubSub.subscribe('elementClicked', (eventName, args) => {
-            if (!this._isFullscreen) {
-                this._toggleHighlighting(args.name);
+            var element = this.scene.getObjectByName(args.elementName);
+            if (args.doReset) {
+                this.centerCamera();
             } else {
-                // TOOD: handle click in fullscreen mode
+                this._focusElement(element);
+            }
+
+            if (!this._isFullscreen) {
+                this._highlightElementByTransparency(element, args.doReset);
             }
         });
 
         PubSub.subscribe('searchEntryClicked', (eventName, args) => {
+            var element = this.scene.getObjectByName(args.elementName);
+            if (element) {
+                this._focusElement(element);
+                this.getInteractionHandler()._clickedElementUuid = element.uuid;
+            }
+
             if (!this._isFullscreen) {
-                this._toggleHighlighting(args.elementName);
-            } else {
-                // TOOD: handle click in fullscreen mode
+                this._highlightElementByTransparency(element, false);
             }
         });
     }
 
-    _toggleHighlighting(elementName) {
-        var element = this.scene.getObjectByName(elementName);
-
-        var doHighlight;
-        if (this._highlightedElement == elementName) {
-            this._highlightedElement = undefined;
-            doHighlight = false;
-
-            this.centerCamera();
-            PubSub.publish('closeComparisonContainer');
-        } else {
-            this._highlightedElement = elementName;
-            doHighlight = true;
-
-            this._focusElement(element);
-            PubSub.publish('openComparisonContainer', {
-                position: this.position,
-                element: element
-            });
-        }
-
+    _highlightElementByTransparency(element, doReset) {
         for (var i = this.scene.children.length - 1; i >= 0; i--) {
             var child = this.scene.children[i];
 
             if (child.type == 'Mesh' && child.userData.type == 'FILE') {
-                if (child.name != this._highlightedElement) {
-                    child.material.transparent = doHighlight;
+                if (doReset) {
+                    child.material.transparent = false;
+                    continue;
+                }
+
+                if (!element) {
+                    child.material.transparent = true;
                     child.material.opacity = 0.4;
+                    continue;
+                }
+
+                if (child.name == element.name) {
+                    child.material.transparent = false;
                 } else {
-                    child.material.transparent = !doHighlight;
+                    child.material.transparent = true;
+                    child.material.opacity = 0.4;
                 }
             }
         }

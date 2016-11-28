@@ -4,7 +4,7 @@
 <head>
     <title>CodeRadar Visualization</title>
 
-    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" type="text/css" media="screen" href="node_modules/normalize.css/normalize.css"/>
     <link rel="stylesheet" type="text/css" media="screen" href="css/main.css"/>
     <link rel="stylesheet" type="text/css" media="screen" href="css/loading-indicator.css"/>
@@ -56,7 +56,7 @@
     </div>
 
     <div class="control-container">
-        <label class="control-label">Unveränderte Dateien</label>
+        <label class="control-label">UnverÃ¤nderte Dateien</label>
         <div id="unchanged-files-checkbox-container" class="checkbox-container">
             <span class="checkbox-icon left"></span>
             <div class="onoffswitch">
@@ -86,9 +86,20 @@
         <div class="uil-cube-css right"><div></div><div></div><div></div><div></div></div>
     </div>
     <div id="comparison-container">
-        <h2></h2>
-        <div class="column left"></div>
-        <div class="column right"></div>
+        <h3></h3>
+        <div class="table-container">
+            <table id="comparison-table">
+                <thead>
+                    <tr>
+                        <td>Metrik</td>
+                        <td id="first-commit-id"></td>
+                        <td id="second-commit-id"></td>
+                        <td>Ã„nderung</td>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
     </div>
     <div id="legend-container">
         <div id="legend-item-commit-1" class="legend-item">
@@ -101,7 +112,7 @@
         </div>
         <div id="legend-item-unchanged-files" class="legend-item" style="display: none;">
             <span class="legend-color"></span>
-            <span class="legend-label">Unveränderte Dateien</span>
+            <span class="legend-label">UnverÃ¤nderte Dateien</span>
         </div>
         <div id="legend-item-color-code" class="legend-item" style="display: none;">
             <span class="legend-color"></span>

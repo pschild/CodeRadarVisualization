@@ -201,5 +201,55 @@ export class Application {
                 this.getRightScreen().getInteractionHandler().setEnabled(true);
             }
         });
+
+        PubSub.subscribe('elementClicked', (eventName, args) => {
+            if (args.doReset) {
+                PubSub.publish('closeComparisonContainer');
+            } else {
+                PubSub.publish('openComparisonContainer', {
+                    leftElement: this._findLeftElementForComparisonByName(args.elementName),
+                    rightElement: this._findRightElementForComparisonByName(args.elementName)
+                });
+            }
+        });
+
+        PubSub.subscribe('searchEntryClicked', (eventName, args) => {
+            PubSub.publish('openComparisonContainer', {
+                leftElement: this._findLeftElementForComparisonByName(args.elementName),
+                rightElement: this._findRightElementForComparisonByName(args.elementName)
+            });
+        });
+    }
+
+    _findLeftElementForComparisonByName(elementName) {
+        // when we are in fullscreen mode, we need to look for the comparing elements only in the left screen.
+        if (this.IS_FULLSCREEN) {
+            for (var i = this.getLeftScreen().getScene().children.length - 1; i >= 0; i--) {
+                var child = this.getLeftScreen().getScene().children[i];
+                if (child.name == elementName) {
+                    if (child.userData.commitType != 'other') {
+                        return child;
+                    }
+                }
+            }
+        } else {
+            return this.getLeftScreen().getScene().getObjectByName(elementName);
+        }
+    }
+
+    _findRightElementForComparisonByName(elementName) {
+        // when we are in fullscreen mode, we need to look for the comparing elements only in the left screen.
+        if (this.IS_FULLSCREEN) {
+            for (var i = this.getLeftScreen().getScene().children.length - 1; i >= 0; i--) {
+                var child = this.getLeftScreen().getScene().children[i];
+                if (child.name == elementName) {
+                    if (child.userData.commitType != 'current') {
+                        return child;
+                    }
+                }
+            }
+        } else {
+            return this.getRightScreen().getScene().getObjectByName(elementName);
+        }
     }
 }

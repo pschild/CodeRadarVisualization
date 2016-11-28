@@ -221,13 +221,35 @@ input[type=text], select {
     transform: translate3d(-50%, 0%, 0);
 }
 
-#comparison-container > h2 {
+#comparison-container > h3 {
     text-align: center;
+    margin: 10px 0;
 }
 
-#comparison-container > .column {
-    width: 50%;
-    float: left;
-    padding: 15px;
-    box-sizing: border-box;
+#comparison-container #comparison-table {
+    border-spacing: 0;
+}
+
+#comparison-container #comparison-table td {
+    padding: 5px;
+}
+
+#comparison-container #comparison-table thead tr {
+    font-weight: bold;
+}
+
+#comparison-container #comparison-table tbody tr:nth-child(odd) {
+    background: #f3f3f3;
+}
+
+#comparison-container #comparison-table tbody td.increase {
+    color: #d90206;
+}
+
+#comparison-container #comparison-table tbody td.decrease {
+    color: #49c35c;
+}
+
+#comparison-container #comparison-table tbody td.same {
+    color: #ffd008;
 }

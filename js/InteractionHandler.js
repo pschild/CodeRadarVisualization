@@ -17,6 +17,7 @@ export class InteractionHandler {
 
         this.tooltipElement = document.querySelector('#tooltip');
         this._hoveredElementUuid = undefined;
+        this._clickedElementUuid = undefined;
 
         this._startingPosition = {};
 
@@ -126,7 +127,16 @@ export class InteractionHandler {
         var intersects = this._raycaster.intersectObjects(this._scene.children);
         var target = this._findFirstNonHelperBlock(intersects);
         if (target) {
-            PubSub.publish('elementClicked', { name: target.name });
+            var doReset;
+            if (target.uuid != this._clickedElementUuid) {
+                doReset = false;
+                this._clickedElementUuid = target.uuid;
+            } else {
+                doReset = true;
+                this._clickedElementUuid = undefined;
+            }
+
+            PubSub.publish('elementClicked', { elementName: target.name, doReset: doReset });
         }
     }
 

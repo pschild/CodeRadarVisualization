@@ -55,17 +55,17 @@ export class MergedDrawer extends AbstractDrawer {
                 if (!isNaN(blueGA) && !isNaN(orangeGA)) {
                     // both blocks
                     if (blueGA < orangeGA || blueHeight < orangeHeight) {
-                        this.drawBlock(element, parent, orangeColor, orangeGA, bottom, orangeHeight, orangeTransparency, orangeMetrics, true);
+                        this.drawBlock(element, parent, orangeColor, orangeGA, bottom, orangeHeight, orangeTransparency, orangeMetrics, this.COMMIT_TYPE_OTHER, true);
 
                         element.fit.x += (orangeGA - blueGA) / 2;
                         element.fit.y += (orangeGA - blueGA) / 2;
-                        this.drawBlock(element, parent, blueColor, blueGA, bottom, blueHeight, blueTransparency, blueMetrics, true);
+                        this.drawBlock(element, parent, blueColor, blueGA, bottom, blueHeight, blueTransparency, blueMetrics, this.COMMIT_TYPE_CURRENT, true);
                     } else if (blueGA > orangeGA || blueHeight > orangeHeight) {
-                        this.drawBlock(element, parent, blueColor, blueGA, bottom, blueHeight, blueTransparency, blueMetrics, true);
+                        this.drawBlock(element, parent, blueColor, blueGA, bottom, blueHeight, blueTransparency, blueMetrics, this.COMMIT_TYPE_CURRENT, true);
 
                         element.fit.x += (blueGA - orangeGA) / 2;
                         element.fit.y += (blueGA - orangeGA) / 2;
-                        this.drawBlock(element, parent, orangeColor, orangeGA, bottom, orangeHeight, orangeTransparency, orangeMetrics, true);
+                        this.drawBlock(element, parent, orangeColor, orangeGA, bottom, orangeHeight, orangeTransparency, orangeMetrics, this.COMMIT_TYPE_OTHER, true);
                     } else {
                         // ground area and height are the same
                         this.drawBlock(element, parent, config.COLOR_UNCHANGED_FILES, orangeGA, bottom, orangeHeight, false, orangeMetrics);
@@ -73,11 +73,11 @@ export class MergedDrawer extends AbstractDrawer {
 
                 } else if (isNaN(orangeGA)) {
                     // only blue block
-                    this.drawBlock(element, parent, blueColor, blueGA, bottom, blueHeight, false, blueMetrics);
+                    this.drawBlock(element, parent, blueColor, blueGA, bottom, blueHeight, false, blueMetrics, this.COMMIT_TYPE_CURRENT);
 
                 } else if (isNaN(blueGA)) {
                     // only orange block
-                    this.drawBlock(element, parent, orangeColor, orangeGA, bottom, orangeHeight, false, orangeMetrics);
+                    this.drawBlock(element, parent, orangeColor, orangeGA, bottom, orangeHeight, false, orangeMetrics, this.COMMIT_TYPE_OTHER);
                 }
             } else {
                 blueHeight = config.DEFAULT_BLOCK_HEIGHT;
@@ -93,7 +93,7 @@ export class MergedDrawer extends AbstractDrawer {
     }
 
     // override
-    drawBlock(element, parent, color, currentCommitSize, bottom, height, isTransparent, metrics, hasChanged = false) {
+    drawBlock(element, parent, color, currentCommitSize, bottom, height, isTransparent, metrics, commitType, hasChanged = false) {
         var finalX, finalY, finalZ;
         var finalWidth, finalHeight, finalDepth;
 
@@ -128,7 +128,8 @@ export class MergedDrawer extends AbstractDrawer {
             type: element.type,
             tooltipLabel: this._generateTooltipHtml(element.name, metrics),
             isHelper: isTransparent,
-            hasChanged: hasChanged
+            hasChanged: hasChanged,
+            commitType: commitType
         };
 
         this.scene.add(cube);
