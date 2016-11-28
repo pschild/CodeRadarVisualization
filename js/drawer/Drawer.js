@@ -10,8 +10,8 @@ export class Drawer {
     constructor(scene, currentCommitId, minMaxPairOfHeight) {
         this.scene = scene;
         this.currentCommitId = currentCommitId;
-        this.minHeight = minMaxPairOfHeight ? minMaxPairOfHeight.min : 0;
-        this.maxHeight = minMaxPairOfHeight ? minMaxPairOfHeight.max : 0;
+        this.minColorMetricValue = minMaxPairOfHeight ? minMaxPairOfHeight.min : 0;
+        this.maxColorMetricValue = minMaxPairOfHeight ? minMaxPairOfHeight.max : 0;
         this.packer = this._getPacker();
     }
 
@@ -134,7 +134,7 @@ export class Drawer {
     }
 
     _getColor(value) {
-        var mid = (this.maxHeight * config.HEIGHT_FACTOR + this.minHeight * config.HEIGHT_FACTOR) / 2;
+        var mid = (this.maxColorMetricValue * config.HEIGHT_FACTOR + this.minColorMetricValue * config.HEIGHT_FACTOR) / 2;
         var blue = 0;
         var red, green;
 

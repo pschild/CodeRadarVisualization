@@ -12,7 +12,7 @@ export class CoderadarMetricService {
     loadByCommitId(commitId) {
         var params = {
             'commit': commitId,
-            'metrics': ['coderadar:size:loc:java', 'coderadar:size:sloc:java']
+            'metrics': ['coderadar:size:loc:java', 'coderadar:size:sloc:java', 'coderadar:size:eloc:java']
         };
 
         return axios.post(this.URL, params);

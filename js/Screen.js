@@ -44,9 +44,9 @@ export class Screen {
         return window.innerWidth / 2;
     }
 
-    setData(data, minMaxPairOfHeight) {
+    setData(data, minMaxPairOfColorMetric) {
         this.data = data;
-        this.minMaxPairOfHeight = minMaxPairOfHeight;
+        this.minMaxPairOfColorMetric = minMaxPairOfColorMetric;
     }
 
     setDrawer(drawerClazz) {
@@ -55,7 +55,7 @@ export class Screen {
         }
 
         console.time('drawing time ' + this.position);
-        var drawer = new drawerClazz(this.scene, this.commitId, this.position, this.minMaxPairOfHeight);
+        var drawer = new drawerClazz(this.scene, this.commitId, this.position, this.minMaxPairOfColorMetric);
         drawer.calculateGroundAreas(this.data);
         drawer.drawElements(this.data);
         console.timeEnd('drawing time ' + this.position);

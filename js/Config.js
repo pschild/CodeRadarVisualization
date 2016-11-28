@@ -9,7 +9,7 @@ export var config = {
     HEIGHT_METRIC_NAME: 'coderadar:size:loc:java',
     HEIGHT_FACTOR: 1,
 
-    COLOR_METRIC_NAME: 'coderadar:javaXyz',
+    COLOR_METRIC_NAME: 'coderadar:size:eloc:java',
 
     BLOCK_SPACING: 10,
     DEFAULT_BLOCK_HEIGHT: 10,

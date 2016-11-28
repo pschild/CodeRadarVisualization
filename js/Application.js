@@ -27,7 +27,7 @@ export class Application {
         this.rightCommitId = undefined;
 
         this.result = undefined;
-        this.minMaxPairOfHeight = undefined;
+        this.minMaxPairOfColorMetric = undefined;
 
         this.screens = {};
         this.createLeftScreen();
@@ -35,7 +35,7 @@ export class Application {
     }
 
     initialize() {
-        var commitService = new DummyCommitService();
+        var commitService = new CoderadarCommitService();
         // FIRST: load commits
         commitService.load((data) => {
             var commitMapper = new CommitMapper(data);
@@ -58,7 +58,7 @@ export class Application {
     loadMetricData() {
         this.interface.showLoadingIndicator();
 
-        let metricService = new DummyMetricService();
+        let metricService = new CoderadarMetricService();
         metricService.loadTwoCommits(this.leftCommitId, this.rightCommitId, (firstCommitResult, secondCommitResult) => {
             this.getLeftScreen().reset();
             this.getRightScreen().reset();
@@ -73,10 +73,11 @@ export class Application {
             // console.log('merging ' + this.leftCommitId + ' and ' + this.rightCommitId + ':', result);
 
             this._uniqueElementList = ElementAnalyzer.generateUniqueElementList(result);
-            this.minMaxPairOfHeight = ElementAnalyzer.findSmallestAndBiggestMetricValueByMetricName(result, config.HEIGHT_METRIC_NAME);
+            var minMaxPairOfHeight = ElementAnalyzer.findSmallestAndBiggestMetricValueByMetricName(result, config.HEIGHT_METRIC_NAME);
             var minMaxPairOfGroundArea = ElementAnalyzer.findSmallestAndBiggestMetricValueByMetricName(result, config.GROUND_AREA_METRIC_NAME);
+            this.minMaxPairOfColorMetric = ElementAnalyzer.findSmallestAndBiggestMetricValueByMetricName(result, config.COLOR_METRIC_NAME);
 
-            config.HEIGHT_FACTOR = 100 / this.minMaxPairOfHeight.max;
+            config.HEIGHT_FACTOR = 100 / minMaxPairOfHeight.max;
             config.GROUND_AREA_FACTOR = 100 / minMaxPairOfGroundArea.max;
 
             this.result = result;
@@ -89,19 +90,19 @@ export class Application {
     _initializeScreens() {
         if (this.IS_FULLSCREEN) {
             this.getLeftScreen().reset();
-            this.getLeftScreen().setData(this.result, this.minMaxPairOfHeight);
+            this.getLeftScreen().setData(this.result, this.minMaxPairOfColorMetric);
             this.getLeftScreen().setDrawer(MergedDrawer);
             this.getLeftScreen().render();
             this.getLeftScreen().centerCamera();
         } else {
             this.getLeftScreen().reset();
-            this.getLeftScreen().setData(this.result, this.minMaxPairOfHeight);
+            this.getLeftScreen().setData(this.result, this.minMaxPairOfColorMetric);
             this.getLeftScreen().setDrawer(SingleDrawer);
             this.getLeftScreen().render();
             this.getLeftScreen().centerCamera();
 
             this.getRightScreen().reset();
-            this.getRightScreen().setData(this.result, this.minMaxPairOfHeight);
+            this.getRightScreen().setData(this.result, this.minMaxPairOfColorMetric);
             this.getRightScreen().setDrawer(SingleDrawer);
             this.getRightScreen().render();
             this.getRightScreen().centerCamera();
@@ -128,7 +129,7 @@ export class Application {
 
             this.getRightScreen().reset();
             this.getRightScreen().setSplitscreen();
-            this.getRightScreen().setData(this.result, this.minMaxPairOfHeight);
+            this.getRightScreen().setData(this.result, this.minMaxPairOfColorMetric);
             this.getRightScreen().setDrawer(SingleDrawer);
             this.getRightScreen().render();
         }

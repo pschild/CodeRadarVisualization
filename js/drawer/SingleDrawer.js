@@ -5,11 +5,11 @@ import * as PubSub from 'pubsub-js';
 
 export class SingleDrawer extends AbstractDrawer {
 
-    constructor(scene, currentCommitId, position, minMaxPairOfHeight) {
+    constructor(scene, currentCommitId, position, minMaxPairOfColorMetric) {
         super(scene, currentCommitId, position);
 
-        this.minHeight = minMaxPairOfHeight ? minMaxPairOfHeight.min : 0;
-        this.maxHeight = minMaxPairOfHeight ? minMaxPairOfHeight.max : 0;
+        this.minColorMetricValue = minMaxPairOfColorMetric ? minMaxPairOfColorMetric.min : 0;
+        this.maxColorMetricValue = minMaxPairOfColorMetric ? minMaxPairOfColorMetric.max : 0;
     }
 
     // override
@@ -28,10 +28,11 @@ export class SingleDrawer extends AbstractDrawer {
             if (element.type == 'FILE') {
                 var heightMetric = this._getMetricValueOfElementAndCommitType(element, config.HEIGHT_METRIC_NAME, this.COMMIT_TYPE_CURRENT);
                 var groundAreaMetric = this._getMetricValueOfElementAndCommitType(element, config.GROUND_AREA_METRIC_NAME, this.COMMIT_TYPE_CURRENT);
+                var colorMetric = this._getMetricValueOfElementAndCommitType(element, config.COLOR_METRIC_NAME, this.COMMIT_TYPE_CURRENT);
                 var metrics = {
                     [config.HEIGHT_METRIC_NAME]: heightMetric,
                     [config.GROUND_AREA_METRIC_NAME]: groundAreaMetric,
-                    quality: heightMetric
+                    [config.COLOR_METRIC_NAME]: colorMetric
                 };
 
                 myHeight = heightMetric * config.HEIGHT_FACTOR;
@@ -108,7 +109,7 @@ export class SingleDrawer extends AbstractDrawer {
     }
 
     _getColorByMetricValue(value) {
-        var mid = (this.maxHeight + this.minHeight) / 2;
+        var mid = (this.maxColorMetricValue + this.minColorMetricValue) / 2;
         var blue = 0;
         var red, green;
 
@@ -134,7 +135,7 @@ export class SingleDrawer extends AbstractDrawer {
                 if (newColorcode == 'commit') {
                     child.material.color.set(this._getColorByPosition(this.position));
                 } else if (newColorcode == 'metric') {
-                    child.material.color.set(this._getColorByMetricValue(child.userData.metrics.quality));
+                    child.material.color.set(this._getColorByMetricValue(child.userData.metrics[config.COLOR_METRIC_NAME]));
                 }
             }
         }

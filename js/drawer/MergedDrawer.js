@@ -25,16 +25,19 @@ export class MergedDrawer extends AbstractDrawer {
                 var blueGroundAreaMetric = this._getMetricValueOfElementAndCommitType(element, config.GROUND_AREA_METRIC_NAME, this.COMMIT_TYPE_CURRENT);
                 var orangeGroundAreaMetric = this._getMetricValueOfElementAndCommitType(element, config.GROUND_AREA_METRIC_NAME, this.COMMIT_TYPE_OTHER);
 
+                var blueColorMetric = this._getMetricValueOfElementAndCommitType(element, config.COLOR_METRIC_NAME, this.COMMIT_TYPE_CURRENT);
+                var orangeColorMetric = this._getMetricValueOfElementAndCommitType(element, config.COLOR_METRIC_NAME, this.COMMIT_TYPE_OTHER);
+
                 var blueMetrics = {
                     [config.HEIGHT_METRIC_NAME]: blueHeightMetric,
                     [config.GROUND_AREA_METRIC_NAME]: blueGroundAreaMetric,
-                    quality: blueHeightMetric
+                    [config.COLOR_METRIC_NAME]: blueColorMetric
                 };
 
                 var orangeMetrics = {
                     [config.HEIGHT_METRIC_NAME]: orangeHeightMetric,
                     [config.GROUND_AREA_METRIC_NAME]: orangeGroundAreaMetric,
-                    quality: orangeHeightMetric
+                    [config.COLOR_METRIC_NAME]: orangeColorMetric
                 };
 
                 blueHeight = blueHeightMetric * config.HEIGHT_FACTOR;
