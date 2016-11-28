@@ -11,7 +11,8 @@
                     "name": "A1.java",
                     "metricValues": {
                         "coderadar:size:loc:java": 500,
-                        "coderadar:size:sloc:java": 500
+                        "coderadar:size:sloc:java": 500,
+                        "coderadar:size:eloc:java": 200
                     },
                     "children": []
                 },
@@ -24,7 +25,8 @@
                             "name": "A-A1.java",
                             "metricValues": {
                                 "coderadar:size:loc:java": 500,
-                                "coderadar:size:sloc:java": 500
+                                "coderadar:size:sloc:java": 500,
+                                "coderadar:size:eloc:java": 200
                             },
                             "children": []
                         },
@@ -33,7 +35,8 @@
                             "name": "A-A2.java",
                             "metricValues": {
                                 "coderadar:size:loc:java": 500,
-                                "coderadar:size:sloc:java": 500
+                                "coderadar:size:sloc:java": 500,
+                                "coderadar:size:eloc:java": 200
                             },
                             "children": []
                         }

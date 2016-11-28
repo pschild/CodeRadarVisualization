@@ -11,7 +11,8 @@
                     "name": "A1.java",
                     "metricValues": {
                         "coderadar:size:loc:java": 500,
-                        "coderadar:size:sloc:java": 200
+                        "coderadar:size:sloc:java": 200,
+                        "coderadar:size:eloc:java": 200
                     },
                     "children": []
                 },
@@ -24,7 +25,8 @@
                             "name": "D1.java",
                             "metricValues": {
                                 "coderadar:size:loc:java": 500,
-                                "coderadar:size:sloc:java": 900
+                                "coderadar:size:sloc:java": 900,
+                                "coderadar:size:eloc:java": 200
                             },
                             "children": []
                         },
@@ -37,7 +39,8 @@
                                     "name": "E1.java",
                                     "metricValues": {
                                         "coderadar:size:loc:java": 150,
-                                        "coderadar:size:sloc:java": 150
+                                        "coderadar:size:sloc:java": 150,
+                                        "coderadar:size:eloc:java": 200
                                     },
                                     "children": []
                                 }
@@ -54,7 +57,8 @@
                             "name": "C1.java",
                             "metricValues": {
                                 "coderadar:size:loc:java": 200,
-                                "coderadar:size:sloc:java": 200
+                                "coderadar:size:sloc:java": 200,
+                                "coderadar:size:eloc:java": 200
                             },
                             "children": []
                         },
@@ -67,7 +71,8 @@
                                     "name": "B1.java",
                                     "metricValues": {
                                         "coderadar:size:loc:java": 500,
-                                        "coderadar:size:sloc:java": 500
+                                        "coderadar:size:sloc:java": 500,
+                                        "coderadar:size:eloc:java": 200
                                     },
                                     "children": []
                                 },
@@ -80,7 +85,8 @@
                                             "name": "X1.java",
                                             "metricValues": {
                                                 "coderadar:size:loc:java": 1500,
-                                                "coderadar:size:sloc:java": 950
+                                                "coderadar:size:sloc:java": 950,
+                                                "coderadar:size:eloc:java": 200
                                             },
                                             "children": []
                                         },
@@ -93,7 +99,8 @@
                                                     "name": "Y1.java",
                                                     "metricValues": {
                                                         "coderadar:size:loc:java": 200,
-                                                        "coderadar:size:sloc:java": 200
+                                                        "coderadar:size:sloc:java": 200,
+                                                        "coderadar:size:eloc:java": 200
                                                     },
                                                     "children": []
                                                 }
@@ -116,7 +123,8 @@
                     "name": "G1.java",
                     "metricValues": {
                         "coderadar:size:loc:java": 400,
-                        "coderadar:size:sloc:java": 400
+                        "coderadar:size:sloc:java": 400,
+                        "coderadar:size:eloc:java": 200
                     },
                     "children": []
                 }
