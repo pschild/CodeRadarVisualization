@@ -36,6 +36,7 @@ export class Application {
 
     initialize() {
         var commitService = new CoderadarCommitService();
+        // var commitService = new DummyCommitService();
         // FIRST: load commits
         commitService.load((data) => {
             var commitMapper = new CommitMapper(data);
@@ -59,6 +60,7 @@ export class Application {
         this.interface.showLoadingIndicator();
 
         let metricService = new CoderadarMetricService();
+        // let metricService = new DummyMetricService();
         metricService.loadTwoCommits(this.leftCommitId, this.rightCommitId, (firstCommitResult, secondCommitResult) => {
             this.getLeftScreen().reset();
             this.getRightScreen().reset();
