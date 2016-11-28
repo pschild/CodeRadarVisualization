@@ -73,10 +73,13 @@ export class Application {
             // console.log('merging ' + this.leftCommitId + ' and ' + this.rightCommitId + ':', result);
 
             this._uniqueElementList = ElementAnalyzer.generateUniqueElementList(result);
-            var minMaxPairOfHeight = ElementAnalyzer.findSmallestAndBiggestMetricValueByMetricName(result, config.HEIGHT_METRIC_NAME);
+            this.minMaxPairOfHeight = ElementAnalyzer.findSmallestAndBiggestMetricValueByMetricName(result, config.HEIGHT_METRIC_NAME);
+            var minMaxPairOfGroundArea = ElementAnalyzer.findSmallestAndBiggestMetricValueByMetricName(result, config.GROUND_AREA_METRIC_NAME);
+
+            config.HEIGHT_FACTOR = 100 / this.minMaxPairOfHeight.max;
+            config.GROUND_AREA_FACTOR = 100 / minMaxPairOfGroundArea.max;
 
             this.result = result;
-            this.minMaxPairOfHeight = minMaxPairOfHeight;
 
             this._initializeScreens();
             this.interface.hideLoadingIndicator();

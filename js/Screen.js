@@ -10,7 +10,7 @@ export class Screen {
 
         this._isFullscreen = false;
         this._cameraStartPosition = {
-            x: 30000, y: 30000, z: 30000
+            x: 1000, y: 1000, z: 1000
         };
         this._centralPosition = {
             x: 0, y: 0, z: 0
@@ -124,7 +124,7 @@ export class Screen {
         var root = this.scene.getObjectByName('root');
         this._centralPosition = {
             x: root.scale.x / 2,
-            y: 30000,
+            y: this._cameraStartPosition.y,
             z: root.scale.z / 2
         };
 
@@ -265,18 +265,18 @@ export class Screen {
 
         new TWEEN.Tween(this.camera.position)
             .to({
-                x: this._cameraStartPosition.x,
-                y: this._cameraStartPosition.y,
-                z: this._cameraStartPosition.z
+                x: element.position.x + 200,
+                y: element.position.y + 200,
+                z: element.position.z + 200
             }, this._animationDuration)
             .easing(this._animationEasing)
             .start();
 
         new TWEEN.Tween(this.controls.target)
             .to({
-                x: element.position.x,
+                x: element.position.x + element.scale.x / 2,
                 y: element.position.y,
-                z: element.position.z
+                z: element.position.z + element.scale.z / 2
             }, this._animationDuration)
             .easing(this._animationEasing)
             .start();

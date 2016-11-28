@@ -4,18 +4,18 @@ export var config = {
     SCREEN_PADDING: 0,
 
     GROUND_AREA_METRIC_NAME: 'coderadar:size:sloc:java',
-    GROUND_AREA_FACTOR: 10,
+    GROUND_AREA_FACTOR: 1,
 
     HEIGHT_METRIC_NAME: 'coderadar:size:loc:java',
-    HEIGHT_FACTOR: 10,
+    HEIGHT_FACTOR: 1,
 
     COLOR_METRIC_NAME: 'coderadar:javaXyz',
 
-    BLOCK_SPACING: 600,
-    DEFAULT_BLOCK_HEIGHT: 500,
-    DEFAULT_BLOCK_DIMENSIONS: 100,
+    BLOCK_SPACING: 10,
+    DEFAULT_BLOCK_HEIGHT: 10,
+    DEFAULT_BLOCK_DIMENSIONS: 10,
 
-    HELPER_BLOCK_HEIGHT: 100,
+    HELPER_BLOCK_HEIGHT: 10,
     HELPER_BLOCK_VISIBLE: true,
 
     COLOR_MODULE: '#cccccc',
