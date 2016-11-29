@@ -1,4 +1,4 @@
-import {Interface} from './interface/Interface';
+import {Interface} from './ui/Interface';
 import {Screen} from './Screen';
 import {config} from './Config';
 import {ElementAnalyzer} from './ElementAnalyzer';
