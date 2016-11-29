@@ -42,7 +42,6 @@
     display: inline-block;
     width: 10px;
     height: 10px;
-    background: #f00;
 }
 
 #render-calls {
