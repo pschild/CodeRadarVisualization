@@ -43,8 +43,8 @@ export class Application {
             commitMapper.mapAll();
 
             var commits = commitMapper.getAll();
-            this.leftCommitId = commits[0].getName();
-            this.rightCommitId = commits[1].getName();
+            this.leftCommitId = commits[1].getName();
+            this.rightCommitId = commits[0].getName();
 
             PubSub.publish('commitsLoaded', { commits: commits });
 
