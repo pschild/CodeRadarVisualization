@@ -5,9 +5,18 @@
     background: #fff;
     padding: 5px;
     box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.2);
+    max-width: 300px;
     z-index: 99;
 
     display: none;
+}
+
+#tooltip > .element-name {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    direction: rtl;
+    padding: 0 10px;
 }
 
 #legend-container {
@@ -61,6 +70,7 @@ input[type=text], select {
     border: 0;
     height: 30px;
     text-indent: 10px;
+    max-width: 250px;
 }
 
 #stage {
@@ -132,7 +142,7 @@ input[type=text], select {
     height: 100px;
     background: #fff;
     box-shadow: rgba(0,0,0,0.2) 0 2px 6px 0;
-    z-index: 100;
+    z-index: 101;
 }
 
 #control-panel > .control-container {
@@ -195,7 +205,11 @@ input[type=text], select {
 
 #autocomplete-container .suggestions-list > li {
     cursor: pointer;
-    padding: 10px;
+    padding: 10px 15px;
+    max-width: 400px;
+    overflow: hidden;
+    direction: rtl;
+    text-overflow: ellipsis;
 }
 
 #autocomplete-container .suggestions-list > li:hover {
@@ -208,7 +222,7 @@ input[type=text], select {
     left: 50%;
     transform: translate3d(-50%, 100%, 0);
     padding: 5px 20px;
-    max-width: 50%;
+    max-width: 40%;
     height: 160px;
     background: #fff;
     box-shadow: rgba(0,0,0,0.2) 0 2px 6px 0;
@@ -222,12 +236,17 @@ input[type=text], select {
 }
 
 #comparison-container > h3 {
-    text-align: center;
-    margin: 10px 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    direction: rtl;
+    margin: 10px auto;
+    padding: 0 10px;
 }
 
 #comparison-container #comparison-table {
     border-spacing: 0;
+    width: 100%;
 }
 
 #comparison-container #comparison-table td {

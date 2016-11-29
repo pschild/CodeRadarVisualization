@@ -65,8 +65,7 @@ export class AbstractDrawer {
 
     _generateTooltipHtml(elementName, metrics) {
         var tooltipHtml = [
-            elementName,
-            '<br/>'
+            '<div class="element-name">' + elementName + '</div>'
         ];
 
         if (metrics) {
