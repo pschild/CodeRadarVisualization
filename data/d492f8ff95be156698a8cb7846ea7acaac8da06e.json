@@ -12,7 +12,7 @@
                     "metricValues": {
                         "coderadar:size:loc:java": 500,
                         "coderadar:size:sloc:java": 200,
-                        "coderadar:size:eloc:java": 200
+                        "coderadar:size:eloc:java": 50
                     },
                     "children": []
                 },
@@ -26,7 +26,7 @@
                             "metricValues": {
                                 "coderadar:size:loc:java": 500,
                                 "coderadar:size:sloc:java": 900,
-                                "coderadar:size:eloc:java": 200
+                                "coderadar:size:eloc:java": 45
                             },
                             "children": []
                         },
@@ -40,7 +40,7 @@
                                     "metricValues": {
                                         "coderadar:size:loc:java": 150,
                                         "coderadar:size:sloc:java": 150,
-                                        "coderadar:size:eloc:java": 200
+                                        "coderadar:size:eloc:java": 180
                                     },
                                     "children": []
                                 }
@@ -58,7 +58,7 @@
                             "metricValues": {
                                 "coderadar:size:loc:java": 200,
                                 "coderadar:size:sloc:java": 200,
-                                "coderadar:size:eloc:java": 200
+                                "coderadar:size:eloc:java": 46
                             },
                             "children": []
                         },
@@ -72,7 +72,7 @@
                                     "metricValues": {
                                         "coderadar:size:loc:java": 500,
                                         "coderadar:size:sloc:java": 500,
-                                        "coderadar:size:eloc:java": 200
+                                        "coderadar:size:eloc:java": 58
                                     },
                                     "children": []
                                 },
@@ -86,7 +86,7 @@
                                             "metricValues": {
                                                 "coderadar:size:loc:java": 1500,
                                                 "coderadar:size:sloc:java": 950,
-                                                "coderadar:size:eloc:java": 200
+                                                "coderadar:size:eloc:java": 120
                                             },
                                             "children": []
                                         },
@@ -100,7 +100,7 @@
                                                     "metricValues": {
                                                         "coderadar:size:loc:java": 200,
                                                         "coderadar:size:sloc:java": 200,
-                                                        "coderadar:size:eloc:java": 200
+                                                        "coderadar:size:eloc:java": 101
                                                     },
                                                     "children": []
                                                 }
@@ -124,7 +124,7 @@
                     "metricValues": {
                         "coderadar:size:loc:java": 400,
                         "coderadar:size:sloc:java": 400,
-                        "coderadar:size:eloc:java": 200
+                        "coderadar:size:eloc:java": 20
                     },
                     "children": []
                 }

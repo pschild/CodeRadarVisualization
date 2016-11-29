@@ -1,6 +1,7 @@
 import {Block} from '../Block';
 import {config} from '../Config';
 import {AbstractDrawer} from './AbstractDrawer';
+import * as chroma from 'chroma-js/chroma';
 import * as PubSub from 'pubsub-js';
 
 export class SingleDrawer extends AbstractDrawer {
@@ -119,22 +120,9 @@ export class SingleDrawer extends AbstractDrawer {
     }
 
     _getColorByMetricValue(value) {
-        var mid = (this.maxColorMetricValue + this.minColorMetricValue) / 2;
-        var blue = 0;
-        var red, green;
-
-        if (value <= mid) {
-            // green to yellow
-            red = Math.floor(255 * (value / mid));
-            green = 255;
-
-        } else {
-            // yellow to red
-            red = 255;
-            green = Math.floor(255 * ((mid - (value - 1) % mid) / mid));
-        }
-
-        return new THREE.Color('rgb(' + red + ',' + green + ',' + blue + ')');
+        var colorScale = chroma.scale(['#ffffff','#ffc905','#f78400','#e92100','#9b1909','#4f1609','#5d0000']);
+        var hexValue = colorScale(value / (this.maxColorMetricValue + this.minColorMetricValue)).hex();
+        return new THREE.Color(hexValue);
     }
 
     _handleColorcodeChanged(newColorcode) {
