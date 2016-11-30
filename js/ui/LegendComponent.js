@@ -6,10 +6,13 @@ export class LegendComponent {
     constructor() {
         this.legendItemCommit1 = document.querySelector('#legend-item-commit-1');
         this.legendItemCommit2 = document.querySelector('#legend-item-commit-2');
+        this.legendItemAddedFiles = document.querySelector('#legend-item-added-files');
+        this.legendItemDeletedFiles = document.querySelector('#legend-item-deleted-files');
         this.legendItemUnchangedFiles = document.querySelector('#legend-item-unchanged-files');
         this.legendItemColorCode = document.querySelector('#legend-item-color-code');
 
         this.setCommitColors();
+        this.setAddedDeletedUnchangedColors();
         this.setColorCode();
 
         this._bindEvents();
@@ -18,7 +21,13 @@ export class LegendComponent {
     setCommitColors() {
         this.legendItemCommit1.querySelector('.legend-color').style.background = config.COLOR_FIRST_COMMIT;
         this.legendItemCommit2.querySelector('.legend-color').style.background = config.COLOR_SECOND_COMMIT;
-        this.legendItemUnchangedFiles.querySelector('.legend-color').style.background = config.COLOR_UNCHANGED_FILES;
+        this.legendItemUnchangedFiles.querySelector('.legend-color').style.background = config.COLOR_UNCHANGED_FILE;
+    }
+
+    setAddedDeletedUnchangedColors() {
+        this.legendItemAddedFiles.querySelector('.legend-color').style.background = config.COLOR_ADDED_FILE;
+        this.legendItemDeletedFiles.querySelector('.legend-color').style.background = config.COLOR_DELETED_FILE;
+        this.legendItemUnchangedFiles.querySelector('.legend-color').style.background = config.COLOR_UNCHANGED_FILE;
     }
 
     setColorCode() {
@@ -35,11 +44,15 @@ export class LegendComponent {
         this.legendItemCommit2.style.display = 'none';
     }
 
-    _showUnchangedFilesItem() {
+    _showAddedDeletedUnchangedFilesItems() {
+        this.legendItemAddedFiles.style.display = 'inline-block';
+        this.legendItemDeletedFiles.style.display = 'inline-block';
         this.legendItemUnchangedFiles.style.display = 'inline-block';
     }
 
-    _hideUnchangedFilesItem() {
+    _hideAddedDeletedUnchangedFilesItems() {
+        this.legendItemAddedFiles.style.display = 'none';
+        this.legendItemDeletedFiles.style.display = 'none';
         this.legendItemUnchangedFiles.style.display = 'none';
     }
 
@@ -56,9 +69,9 @@ export class LegendComponent {
             this._showCommitItems();
             if (args.enabled) {
                 this._hideColorCodeItem();
-                this._showUnchangedFilesItem();
+                this._showAddedDeletedUnchangedFilesItems();
             } else {
-                this._hideUnchangedFilesItem();
+                this._hideAddedDeletedUnchangedFilesItems();
             }
         });
 

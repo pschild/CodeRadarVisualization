@@ -69,6 +69,8 @@ export class CommitSelectionComponent {
         for (let option of this.rightSelect.options) {
             if (option.value == this.leftSelect.value) {
                 disabled = true;
+                // option.style.color = '#00f';
+                // option.style.fontWeight = 'bold';
             }
             option.disabled = disabled;
         }

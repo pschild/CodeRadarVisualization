@@ -21,5 +21,7 @@ export var config = {
     COLOR_MODULE: '#cccccc',
     COLOR_FIRST_COMMIT: '#0e8cf3',
     COLOR_SECOND_COMMIT: '#ffb100',
-    COLOR_UNCHANGED_FILES: '#cccccc'
+    COLOR_ADDED_FILE: '#49c35c',
+    COLOR_DELETED_FILE: '#d90206',
+    COLOR_UNCHANGED_FILE: '#cccccc'
 };

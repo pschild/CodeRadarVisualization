@@ -13,6 +13,7 @@
 
 #tooltip > .element-name {
     text-overflow: ellipsis;
+    text-align: center;
     white-space: nowrap;
     overflow: hidden;
     direction: rtl;
@@ -236,6 +237,7 @@ input[type=text], select {
 
 #comparison-container > h3 {
     text-overflow: ellipsis;
+    text-align: center;
     white-space: nowrap;
     overflow: hidden;
     direction: rtl;

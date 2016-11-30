@@ -68,16 +68,16 @@ export class MergedDrawer extends AbstractDrawer {
                         this.drawBlock(element, parent, orangeColor, orangeGA, bottom, orangeHeight, orangeTransparency, orangeMetrics, this.COMMIT_TYPE_OTHER, true);
                     } else {
                         // ground area and height are the same
-                        this.drawBlock(element, parent, config.COLOR_UNCHANGED_FILES, orangeGA, bottom, orangeHeight, false, orangeMetrics);
+                        this.drawBlock(element, parent, config.COLOR_UNCHANGED_FILE, orangeGA, bottom, orangeHeight, false, orangeMetrics);
                     }
 
                 } else if (isNaN(orangeGA)) {
                     // only blue block
-                    this.drawBlock(element, parent, blueColor, blueGA, bottom, blueHeight, false, blueMetrics, this.COMMIT_TYPE_CURRENT);
+                    this.drawBlock(element, parent, config.COLOR_DELETED_FILE, blueGA, bottom, blueHeight, false, blueMetrics, this.COMMIT_TYPE_CURRENT);
 
                 } else if (isNaN(blueGA)) {
                     // only orange block
-                    this.drawBlock(element, parent, orangeColor, orangeGA, bottom, orangeHeight, false, orangeMetrics, this.COMMIT_TYPE_OTHER);
+                    this.drawBlock(element, parent, config.COLOR_ADDED_FILE, orangeGA, bottom, orangeHeight, false, orangeMetrics, this.COMMIT_TYPE_OTHER);
                 }
             } else {
                 blueHeight = config.DEFAULT_BLOCK_HEIGHT;
