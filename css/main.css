@@ -183,6 +183,18 @@ input[type=text], select {
     position: relative;
 }
 
+#clear-search-input {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    right: 0;
+    background: #fff;
+    width: 20px;
+    height: 100%;
+    text-align: center;
+    line-height: 32px;
+}
+
 #autocomplete-container {
     position: absolute;
     right: 0;

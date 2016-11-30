@@ -6,6 +6,7 @@ export class SearchComponent {
         this._application = application;
 
         this.searchInput = document.querySelector('#search-input');
+        this.clearSearchInput = document.querySelector('#clear-search-input');
         this.autoCompleteContainer = document.querySelector('#autocomplete-container');
         this.suggestionsList = document.querySelector('.suggestions-list');
 
@@ -34,6 +35,11 @@ export class SearchComponent {
         this.searchInput.addEventListener('keyup', () => {
             this._updateAutoCompletePanel(this.getSuggestions());
             this._showAutoCompleteContainer();
+        });
+
+        this.clearSearchInput.addEventListener('click', () => {
+            this.searchInput.value = '';
+            this.searchInput.focus();
         });
 
         document.addEventListener('click', (event) => {
