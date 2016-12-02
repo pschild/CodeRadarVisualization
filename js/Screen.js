@@ -122,6 +122,11 @@ export class Screen {
 
     centerCamera() {
         var root = this.scene.getObjectByName('root');
+        if (!root) {
+            console.warn(`no root found in ${this.position} screen`);
+            return;
+        }
+
         this._centralPosition = {
             x: root.scale.x / 2,
             y: this._cameraStartPosition.y,
