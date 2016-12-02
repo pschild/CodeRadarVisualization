@@ -4,127 +4,35 @@
     "children": [
         {
             "type": "MODULE",
-            "name": "Module A",
+            "name": "Modul A",
             "children": [
                 {
                     "type": "FILE",
-                    "name": "A1.java",
+                    "name": "Klasse1.java",
                     "metricValues": {
-                        "coderadar:size:loc:java": 500,
-                        "coderadar:size:sloc:java": 200,
-                        "coderadar:size:eloc:java": 50
+                        "coderadar:size:loc:java": 682,
+                        "coderadar:size:sloc:java": 165,
+                        "coderadar:size:eloc:java": 89
                     },
                     "children": []
                 },
                 {
-                    "type": "MODULE",
-                    "name": "Module D",
-                    "children": [
-                        {
-                            "type": "FILE",
-                            "name": "D1.java",
-                            "metricValues": {
-                                "coderadar:size:loc:java": 500,
-                                "coderadar:size:sloc:java": 900,
-                                "coderadar:size:eloc:java": 45
-                            },
-                            "children": []
-                        },
-                        {
-                            "type": "MODULE",
-                            "name": "Module E",
-                            "children": [
-                                {
-                                    "type": "FILE",
-                                    "name": "E1.java",
-                                    "metricValues": {
-                                        "coderadar:size:loc:java": 150,
-                                        "coderadar:size:sloc:java": 150,
-                                        "coderadar:size:eloc:java": 180
-                                    },
-                                    "children": []
-                                }
-                            ]
-                        }
-                    ]
+                    "type": "FILE",
+                    "name": "Klasse2.java",
+                    "metricValues": {
+                        "coderadar:size:loc:java": 245,
+                        "coderadar:size:sloc:java": 125,
+                        "coderadar:size:eloc:java": 78
+                    },
+                    "children": []
                 },
                 {
-                    "type": "MODULE",
-                    "name": "Module C",
-                    "children": [
-                        {
-                            "type": "FILE",
-                            "name": "C1.java",
-                            "metricValues": {
-                                "coderadar:size:loc:java": 200,
-                                "coderadar:size:sloc:java": 200,
-                                "coderadar:size:eloc:java": 46
-                            },
-                            "children": []
-                        },
-                        {
-                            "type": "MODULE",
-                            "name": "Module B",
-                            "children": [
-                                {
-                                    "type": "FILE",
-                                    "name": "B1.java",
-                                    "metricValues": {
-                                        "coderadar:size:loc:java": 500,
-                                        "coderadar:size:sloc:java": 500,
-                                        "coderadar:size:eloc:java": 58
-                                    },
-                                    "children": []
-                                },
-                                {
-                                    "type": "MODULE",
-                                    "name": "Module X",
-                                    "children": [
-                                        {
-                                            "type": "FILE",
-                                            "name": "X1.java",
-                                            "metricValues": {
-                                                "coderadar:size:loc:java": 1500,
-                                                "coderadar:size:sloc:java": 950,
-                                                "coderadar:size:eloc:java": 120
-                                            },
-                                            "children": []
-                                        },
-                                        {
-                                            "type": "MODULE",
-                                            "name": "Module Y",
-                                            "children": [
-                                                {
-                                                    "type": "FILE",
-                                                    "name": "Y1.java",
-                                                    "metricValues": {
-                                                        "coderadar:size:loc:java": 200,
-                                                        "coderadar:size:sloc:java": 200,
-                                                        "coderadar:size:eloc:java": 101
-                                                    },
-                                                    "children": []
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "type": "MODULE",
-            "name": "Module G",
-            "children": [
-                {
                     "type": "FILE",
-                    "name": "G1.java",
+                    "name": "Klasse4.java",
                     "metricValues": {
-                        "coderadar:size:loc:java": 400,
-                        "coderadar:size:sloc:java": 400,
-                        "coderadar:size:eloc:java": 20
+                        "coderadar:size:loc:java": 210,
+                        "coderadar:size:sloc:java": 151,
+                        "coderadar:size:eloc:java": 100
                     },
                     "children": []
                 }
