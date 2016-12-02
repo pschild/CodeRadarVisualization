@@ -6,15 +6,16 @@
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" type="text/css" media="screen" href="node_modules/normalize.css/normalize.css"/>
-    <link rel="stylesheet" type="text/css" media="screen" href="css/main.css"/>
-    <link rel="stylesheet" type="text/css" media="screen" href="css/loading-indicator.css"/>
-    <link rel="stylesheet" type="text/css" media="screen" href="css/checkbox.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="css/app.css"/>
 
 </head>
 
 <body>
 
 <div id="control-panel">
+    <div id="render-calls"></div>
+
+
     <div class="control-container">
         <label class="control-label" for="first-commit-select">Commit 1</label>
         <select id="first-commit-select" class="commit-select"></select>
@@ -131,8 +132,6 @@
 </div>
 
 <div id="tooltip"></div>
-
-<div id="render-calls"></div>
 
 <script src="node_modules/binpacking/js/packer.growing.js"></script>
 <script src="node_modules/binpacking/js/packer.js"></script>

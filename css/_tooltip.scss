@@ -1,0 +1,21 @@
+#tooltip {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #fff;
+    padding: 5px;
+    box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    z-index: 99;
+
+    display: none;
+
+    & > .element-name {
+        text-overflow: ellipsis;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        direction: rtl;
+        padding: 0 10px;
+    }
+}

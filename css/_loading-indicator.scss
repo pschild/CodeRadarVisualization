@@ -3,16 +3,71 @@
     position: absolute;
     width: 200px;
     height: 200px;
-}
 
-.uil-cube-css.left {
-    -webkit-transform: scale(0.5) translateX(-50%);
-    top: 40%;
-}
+    &.left {
+        -webkit-transform: scale(0.5) translateX(-50%);
+        top: 40%;
+    }
 
-.uil-cube-css.right {
-    -webkit-transform: scale(0.5) translateX(-50%);
-    top: 40%;
+    &.right {
+        -webkit-transform: scale(0.5) translateX(-50%);
+        top: 40%;
+    }
+
+    & > div {
+        position: absolute;
+        width: 80px;
+        height: 80px;
+        -ms-animation: uil-cube-css 1s cubic-bezier(0.2, 0.8, 0.2, 0.8) infinite;
+        -moz-animation: uil-cube-css 1s cubic-bezier(0.2, 0.8, 0.2, 0.8) infinite;
+        -webkit-animation: uil-cube-css 1s cubic-bezier(0.2, 0.8, 0.2, 0.8) infinite;
+        -o-animation: uil-cube-css 1s cubic-bezier(0.2, 0.8, 0.2, 0.8) infinite;
+        animation: uil-cube-css 1s cubic-bezier(0.2, 0.8, 0.2, 0.8) infinite;
+    }
+    & > div:nth-of-type(1) {
+        top: 10px;
+        left: 10px;
+        background: #ffffff;
+        opacity: 0.9;
+        -ms-animation-delay: 0s;
+        -moz-animation-delay: 0s;
+        -webkit-animation-delay: 0s;
+        -o-animation-delay: 0s;
+        animation-delay: 0s;
+    }
+    & > div:nth-of-type(2) {
+        top: 10px;
+        left: 110px;
+        background: #ffffff;
+        opacity: 0.8;
+        -ms-animation-delay: 0.1s;
+        -moz-animation-delay: 0.1s;
+        -webkit-animation-delay: 0.1s;
+        -o-animation-delay: 0.1s;
+        animation-delay: 0.1s;
+    }
+    & > div:nth-of-type(3) {
+        top: 110px;
+        left: 10px;
+        background: #ffffff;
+        opacity: 0.7;
+        -ms-animation-delay: 0.3s;
+        -moz-animation-delay: 0.3s;
+        -webkit-animation-delay: 0.3s;
+        -o-animation-delay: 0.3s;
+        animation-delay: 0.3s;
+    }
+    & > div:nth-of-type(4) {
+        top: 110px;
+        left: 110px;
+        background: #ffffff;
+        opacity: 0.6;
+        -ms-animation-delay: 0.2s;
+        -moz-animation-delay: 0.2s;
+        -webkit-animation-delay: 0.2s;
+        -o-animation-delay: 0.2s;
+        animation-delay: 0.2s;
+    }
 }
 
 @-webkit-keyframes uil-cube-css {
@@ -142,58 +197,4 @@
         -o-transform: scale(1);
         transform: scale(1);
     }
-}
-.uil-cube-css > div {
-    position: absolute;
-    width: 80px;
-    height: 80px;
-    -ms-animation: uil-cube-css 1s cubic-bezier(0.2, 0.8, 0.2, 0.8) infinite;
-    -moz-animation: uil-cube-css 1s cubic-bezier(0.2, 0.8, 0.2, 0.8) infinite;
-    -webkit-animation: uil-cube-css 1s cubic-bezier(0.2, 0.8, 0.2, 0.8) infinite;
-    -o-animation: uil-cube-css 1s cubic-bezier(0.2, 0.8, 0.2, 0.8) infinite;
-    animation: uil-cube-css 1s cubic-bezier(0.2, 0.8, 0.2, 0.8) infinite;
-}
-.uil-cube-css > div:nth-of-type(1) {
-    top: 10px;
-    left: 10px;
-    background: #ffffff;
-    opacity: 0.9;
-    -ms-animation-delay: 0s;
-    -moz-animation-delay: 0s;
-    -webkit-animation-delay: 0s;
-    -o-animation-delay: 0s;
-    animation-delay: 0s;
-}
-.uil-cube-css > div:nth-of-type(2) {
-    top: 10px;
-    left: 110px;
-    background: #ffffff;
-    opacity: 0.8;
-    -ms-animation-delay: 0.1s;
-    -moz-animation-delay: 0.1s;
-    -webkit-animation-delay: 0.1s;
-    -o-animation-delay: 0.1s;
-    animation-delay: 0.1s;
-}
-.uil-cube-css > div:nth-of-type(3) {
-    top: 110px;
-    left: 10px;
-    background: #ffffff;
-    opacity: 0.7;
-    -ms-animation-delay: 0.3s;
-    -moz-animation-delay: 0.3s;
-    -webkit-animation-delay: 0.3s;
-    -o-animation-delay: 0.3s;
-    animation-delay: 0.3s;
-}
-.uil-cube-css > div:nth-of-type(4) {
-    top: 110px;
-    left: 110px;
-    background: #ffffff;
-    opacity: 0.6;
-    -ms-animation-delay: 0.2s;
-    -moz-animation-delay: 0.2s;
-    -webkit-animation-delay: 0.2s;
-    -o-animation-delay: 0.2s;
-    animation-delay: 0.2s;
 }
