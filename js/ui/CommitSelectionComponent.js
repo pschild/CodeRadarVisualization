@@ -27,7 +27,7 @@ export class CommitSelectionComponent {
                 commit: event.target.value
             });
 
-            this._disableOlderCommits();
+            this._disableOptions();
         });
 
         this.rightSelect.addEventListener('change', (event) => {
@@ -42,7 +42,7 @@ export class CommitSelectionComponent {
             this._createOptionElements(this.rightSelect, args);
 
             this._selectCurrentCommit();
-            this._disableOlderCommits();
+            this._disableOptions();
         });
     }
 
@@ -62,17 +62,18 @@ export class CommitSelectionComponent {
         }
     }
 
-    _disableOlderCommits() {
+    _disableOptions() {
         // In the second commit select it should not be possible to select a commit that is prior to the commit in the
-        // first select. So the second select always shows a later commit.
+        // first select. So the second select always shows a newer commit.
         var disabled = false;
         for (let option of this.rightSelect.options) {
             if (option.value == this.leftSelect.value) {
                 disabled = true;
-                // option.style.color = '#00f';
-                // option.style.fontWeight = 'bold';
             }
             option.disabled = disabled;
         }
+
+        // Accordingly, it should not be possible to select the first commit in the first select
+        this.leftSelect.options[0].disabled = true;
     }
 }
