@@ -43,6 +43,9 @@ export class Application {
             commitMapper.mapAll();
 
             var commits = commitMapper.getAll();
+            commits.sort(function(a, b) {
+                return b.timestamp - a.timestamp;
+            });
             this.leftCommitId = commits[1].getName();
             this.rightCommitId = commits[0].getName();
 

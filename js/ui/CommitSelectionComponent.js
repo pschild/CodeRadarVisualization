@@ -15,7 +15,7 @@ export class CommitSelectionComponent {
         for (let commit of data.commits) {
             var option = document.createElement('option');
             option.value = commit.getName();
-            option.innerHTML = commit.getShortName() + ' - ' + commit.getAuthor() + ' ' + commit.getFormattedDatetime();
+            option.innerHTML = commit.getFormattedDatetime() + ', ' + commit.getAuthor() + ', ' + commit.getShortName();
             selectElement.appendChild(option);
         }
     }
