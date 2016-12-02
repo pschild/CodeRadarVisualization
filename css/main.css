@@ -281,7 +281,3 @@ input[type=text], select {
 #comparison-container #comparison-table tbody td.decrease {
     color: #49c35c;
 }
-
-#comparison-container #comparison-table tbody td.same {
-    color: #ffd008;
-}
