@@ -30,8 +30,8 @@ export class AbstractDrawer {
 
             if (element.type == 'FILE') {
                 var groundArea = this._getValueForGroundArea(element.metricValues);
-                element.w = groundArea * config.GROUND_AREA_FACTOR + config.BLOCK_SPACING;
-                element.h = groundArea * config.GROUND_AREA_FACTOR + config.BLOCK_SPACING;
+                element.w = groundArea * config.GROUND_AREA_FACTOR + config.GLOBAL_MIN_GROUND_AREA + config.BLOCK_SPACING;
+                element.h = groundArea * config.GROUND_AREA_FACTOR + config.GLOBAL_MIN_GROUND_AREA + config.BLOCK_SPACING;
             }
 
             if (element.children && element.children.length > 0) {

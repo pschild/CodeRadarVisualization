@@ -40,11 +40,11 @@ export class MergedDrawer extends AbstractDrawer {
                     [config.COLOR_METRIC_NAME]: orangeColorMetric
                 };
 
-                blueHeight = blueHeightMetric * config.HEIGHT_FACTOR;
-                var orangeHeight = orangeHeightMetric * config.HEIGHT_FACTOR;
+                blueHeight = blueHeightMetric * config.HEIGHT_FACTOR + config.GLOBAL_MIN_HEIGHT;
+                var orangeHeight = orangeHeightMetric * config.HEIGHT_FACTOR + config.GLOBAL_MIN_HEIGHT;
 
-                var blueGA = blueGroundAreaMetric * config.GROUND_AREA_FACTOR + config.BLOCK_SPACING;
-                var orangeGA = orangeGroundAreaMetric * config.GROUND_AREA_FACTOR + config.BLOCK_SPACING;
+                var blueGA = blueGroundAreaMetric * config.GROUND_AREA_FACTOR + config.GLOBAL_MIN_GROUND_AREA + config.BLOCK_SPACING;
+                var orangeGA = orangeGroundAreaMetric * config.GROUND_AREA_FACTOR + config.GLOBAL_MIN_GROUND_AREA + config.BLOCK_SPACING;
 
                 var blueColor = this._getColorByPosition(this.position);
                 var orangeColor = this._getContraryColorByColor(blueColor);

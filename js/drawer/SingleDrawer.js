@@ -46,10 +46,10 @@ export class SingleDrawer extends AbstractDrawer {
                     [config.COLOR_METRIC_NAME]: colorMetric
                 };
 
-                myHeight = heightMetric * config.HEIGHT_FACTOR;
+                myHeight = heightMetric * config.HEIGHT_FACTOR + config.GLOBAL_MIN_HEIGHT;
 
-                var myGA = groundAreaMetric * config.GROUND_AREA_FACTOR + config.BLOCK_SPACING;
-                var otherGA = this._getMetricValueOfElementAndCommitType(element, config.GROUND_AREA_METRIC_NAME, this.COMMIT_TYPE_OTHER) * config.GROUND_AREA_FACTOR + config.BLOCK_SPACING;
+                var myGA = groundAreaMetric * config.GROUND_AREA_FACTOR + config.GLOBAL_MIN_GROUND_AREA + config.BLOCK_SPACING;
+                var otherGA = this._getMetricValueOfElementAndCommitType(element, config.GROUND_AREA_METRIC_NAME, this.COMMIT_TYPE_OTHER) * config.GROUND_AREA_FACTOR + config.GLOBAL_MIN_GROUND_AREA + config.BLOCK_SPACING;
 
                 var myColor = this._getColorByPosition(this.position);
 

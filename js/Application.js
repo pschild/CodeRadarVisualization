@@ -82,8 +82,8 @@ export class Application {
             var minMaxPairOfGroundArea = ElementAnalyzer.findSmallestAndBiggestMetricValueByMetricName(result, config.GROUND_AREA_METRIC_NAME);
             this.minMaxPairOfColorMetric = ElementAnalyzer.findSmallestAndBiggestMetricValueByMetricName(result, config.COLOR_METRIC_NAME);
 
-            config.HEIGHT_FACTOR = 100 / minMaxPairOfHeight.max;
-            config.GROUND_AREA_FACTOR = 100 / minMaxPairOfGroundArea.max;
+            config.HEIGHT_FACTOR = config.GLOBAL_MAX_HEIGHT / minMaxPairOfHeight.max;
+            config.GROUND_AREA_FACTOR = config.GLOBAL_MAX_GROUND_AREA / minMaxPairOfGroundArea.max;
 
             this.result = result;
 
