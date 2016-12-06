@@ -52,25 +52,25 @@ export class ComparisonContainerComponent {
 
             var diffMetricValueEl = document.createElement('td');
 
-            var diffLabel, diffCssClass;
+            var diffLabel, iconEl;
             if (args.leftElement && args.rightElement) {
                 var diff = args.rightElement.userData.metrics[metricName] - args.leftElement.userData.metrics[metricName];
                 if (diff > 0) {
                     diffLabel = '+' + diff;
-                    diffCssClass = 'increase';
+                    iconEl = '<span class="icon-arrow-up-right"></span>';
                 } else if (diff < 0) {
                     diffLabel = diff;
-                    diffCssClass = 'decrease';
+                    iconEl = '<span class="icon-arrow-down-right"></span>';
                 } else {
                     diffLabel = diff;
-                    diffCssClass = 'same';
+                    iconEl = '<span class="icon-arrow-right"></span>';
                 }
             } else {
                 diffLabel = '-';
+                iconEl = '';
             }
 
-            diffMetricValueEl.innerHTML = diffLabel;
-            diffMetricValueEl.classList.add(diffCssClass);
+            diffMetricValueEl.innerHTML = iconEl + diffLabel;
             rowEl.appendChild(diffMetricValueEl);
 
             this.comparisonContainer.querySelector('#comparison-table tbody').appendChild(rowEl);

@@ -44,12 +44,8 @@
             }
 
             td {
-                &.increase {
-                    color: #d90206;
-                }
-
-                &.decrease {
-                    color: #49c35c;
+                [class^="icon-"], [class*=" icon-"] {
+                    padding-right: 10px;
                 }
             }
         }
