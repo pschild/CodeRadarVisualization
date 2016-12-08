@@ -1,0 +1,101 @@
+input[type="checkbox"], input[type="radio"] {
+    opacity: 0;
+    z-index: 1;
+
+    & + label {
+        cursor: pointer;
+        display: inline-block;
+        vertical-align: middle;
+        position: relative;
+        padding-left: 5px;
+    }
+
+    &:disabled + label {
+        opacity: 0.65;
+
+        &::before {
+            background-color: #eee;
+            cursor: not-allowed;
+        }
+    }
+}
+
+input[type="radio"] {
+    & + label::before, & + label::after {
+        display: inline-block;
+        position: absolute;
+        margin-left: -20px;
+        border-radius: 50%;
+    }
+
+    & + label::before {
+        content: "";
+        width: 17px;
+        height: 17px;
+        left: 0;
+        border: 1px solid #ccc;
+        background-color: #fff;
+        transition: border 0.15s ease-in-out;
+    }
+
+    & + label::after {
+        content: " ";
+        width: 11px;
+        height: 11px;
+        left: 4px;
+        top: 4px;
+        background-color: #555;
+        transform: scale(0, 0);
+        transition: transform 0.1s ease-in-out;
+    }
+
+    &:checked + label::before {
+        border-color: #aaa;
+    }
+
+    &:checked + label::after {
+        transform: scale(1, 1);
+    }
+}
+
+input[type="checkbox"] {
+    & + label::before, & + label::after {
+        display: inline-block;
+        position: absolute;
+        left: 0;
+        margin-left: -20px;
+    }
+
+    & + label::before {
+        content: "";
+        width: 17px;
+        height: 17px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        background-color: #fff;
+        -webkit-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+        -o-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+        transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+    }
+
+    & + label::after {
+        width: 16px;
+        height: 16px;
+        top: 0;
+        padding-left: 4px;
+        padding-top: 4px;
+        font-size: 11px;
+        color: #555;
+    }
+
+    &:checked + label::before {
+        background-color: #337ab7;
+        border-color: #337ab7;
+    }
+
+    &:checked + label::after {
+        color: #fff;
+        font-family: "icomoon";
+        content: "\e913";
+    }
+}

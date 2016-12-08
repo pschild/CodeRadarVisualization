@@ -3,7 +3,8 @@ import * as PubSub from 'pubsub-js';
 export class CheckboxComponent {
 
     constructor() {
-        this.fullscreenCheckbox = document.querySelector('#fullscreen-enabled-checkbox');
+        this.screenModeRadios = document.querySelectorAll('#control-group-screen input');
+
         this.synchronizeCheckbox = document.querySelector('#synchronize-enabled-checkbox');
         this.colorcodeCheckbox = document.querySelector('#colorcode-checkbox');
         this.unchangedFilesCheckbox = document.querySelector('#unchanged-files-checkbox');
@@ -12,14 +13,18 @@ export class CheckboxComponent {
     }
 
     _bindEvents() {
-        this.fullscreenCheckbox.addEventListener('change', (event) => {
-            this.synchronizeCheckbox.disabled = event.target.checked;
-            this.colorcodeCheckbox.disabled = event.target.checked;
-            this.unchangedFilesCheckbox.disabled = !event.target.checked;
+        for (let radio of this.screenModeRadios) {
+            radio.addEventListener('change', (event) => {
+                let fullscreenEnabled = event.target.value == 'full';
 
-            PubSub.publish('closeComparisonContainer');
-            PubSub.publish('fullSplitToggle', { enabled: event.target.checked });
-        });
+                this.synchronizeCheckbox.disabled = fullscreenEnabled;
+                this.colorcodeCheckbox.disabled = fullscreenEnabled;
+                this.unchangedFilesCheckbox.disabled = !fullscreenEnabled;
+
+                PubSub.publish('closeComparisonContainer');
+                PubSub.publish('fullSplitToggle', { enabled: fullscreenEnabled });
+            });
+        }
 
         this.synchronizeCheckbox.addEventListener('change', (event) => {
             PubSub.publish('synchronizeEnabledChange', { enabled: event.target.checked });
