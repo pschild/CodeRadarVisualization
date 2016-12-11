@@ -2,7 +2,7 @@
     position: absolute;
     bottom: 0;
     left: 50%;
-    transform: translate3d(-50%, 100%, 0);
+    transform: translate3d(-50%, 100%, 0) scale(0.1);
     padding: 5px 20px;
     max-width: 40%;
     height: 160px;
@@ -13,7 +13,7 @@
     transition: transform 1.5s ease;
 
     &.open {
-        transform: translate3d(-50%, 0%, 0);
+        transform: translate3d(-50%, 0%, 0) scale(1.0);
     }
 
     & > h3 {

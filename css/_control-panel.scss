@@ -16,6 +16,10 @@
             float: right;
         }
 
+        .control-item {
+            padding: 5px;
+        }
+
         .control-label {
             display: block;
             margin-bottom: 10px;
@@ -38,6 +42,10 @@
 
         .checkbox-icon.right {
             right: 0;
+        }
+
+        #search-input {
+            padding-right: 30px;
         }
     }
 

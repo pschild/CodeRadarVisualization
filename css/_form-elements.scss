@@ -44,7 +44,7 @@ input[type="radio"] {
         height: 11px;
         left: 4px;
         top: 4px;
-        background-color: #555;
+        background-color: $highlight-color;
         transform: scale(0, 0);
         transition: transform 0.1s ease-in-out;
     }
@@ -89,8 +89,8 @@ input[type="checkbox"] {
     }
 
     &:checked + label::before {
-        background-color: #337ab7;
-        border-color: #337ab7;
+        background-color: $highlight-color;
+        border-color: $highlight-color;
     }
 
     &:checked + label::after {

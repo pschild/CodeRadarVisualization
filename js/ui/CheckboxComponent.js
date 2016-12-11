@@ -4,10 +4,9 @@ export class CheckboxComponent {
 
     constructor() {
         this.screenModeRadios = document.querySelectorAll('#control-group-screen input');
-
-        this.synchronizeCheckbox = document.querySelector('#synchronize-enabled-checkbox');
-        this.colorcodeCheckbox = document.querySelector('#colorcode-checkbox');
-        this.unchangedFilesCheckbox = document.querySelector('#unchanged-files-checkbox');
+        this.cameraModeRadios = document.querySelectorAll('#control-group-camera input');
+        this.colorModeRadios = document.querySelectorAll('#control-group-color input');
+        this.fileVisibilityCheckboxes = document.querySelectorAll('#control-group-visible-files input');
 
         this._bindEvents();
     }
@@ -17,25 +16,50 @@ export class CheckboxComponent {
             radio.addEventListener('change', (event) => {
                 let fullscreenEnabled = event.target.value == 'full';
 
-                this.synchronizeCheckbox.disabled = fullscreenEnabled;
-                this.colorcodeCheckbox.disabled = fullscreenEnabled;
-                this.unchangedFilesCheckbox.disabled = !fullscreenEnabled;
+                this._toggleCameraRadios(fullscreenEnabled);
+                this._toggleColorRadios(fullscreenEnabled);
+                this._toggleVisibilityCheckboxes(!fullscreenEnabled);
 
                 PubSub.publish('closeComparisonContainer');
                 PubSub.publish('fullSplitToggle', { enabled: fullscreenEnabled });
             });
         }
 
-        this.synchronizeCheckbox.addEventListener('change', (event) => {
-            PubSub.publish('synchronizeEnabledChange', { enabled: event.target.checked });
-        });
+        for (let radio of this.cameraModeRadios) {
+            radio.addEventListener('change', (event) => {
+                let syncEnabled = event.target.value == 'sync';
+                PubSub.publish('synchronizeEnabledChange', { enabled: syncEnabled });
+            });
+        }
 
-        this.colorcodeCheckbox.addEventListener('change', (event) => {
-            PubSub.publish('colorcodeChange', { colorcode: event.target.checked ? 'commit' : 'metric' });
-        });
+        for (let radio of this.colorModeRadios) {
+            radio.addEventListener('change', (event) => {
+                PubSub.publish('colorcodeChange', { colorcode: event.target.value });
+            });
+        }
 
-        this.unchangedFilesCheckbox.addEventListener('change', (event) => {
-            PubSub.publish('unchangedFilesChange', { enabled: event.target.checked });
-        });
+        for (let checkbox of this.fileVisibilityCheckboxes) {
+            checkbox.addEventListener('change', (event) => {
+                PubSub.publish('unchangedFilesChange', { enabled: event.target.checked });
+            });
+        }
+    }
+
+    _toggleCameraRadios(enabled) {
+        for (let radio of this.cameraModeRadios) {
+            radio.disabled = enabled;
+        }
+    }
+
+    _toggleColorRadios(enabled) {
+        for (let radio of this.colorModeRadios) {
+            radio.disabled = enabled;
+        }
+    }
+
+    _toggleVisibilityCheckboxes(enabled) {
+        for (let checkbox of this.fileVisibilityCheckboxes) {
+            checkbox.disabled = enabled;
+        }
     }
 }

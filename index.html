@@ -27,58 +27,62 @@
     </div>
 
     <div id="control-group-screen" class="control-container">
-        <div>Ansicht</div>
-        <div>
-            <input id="radio-1" type="radio" name="r-group-1" value="split" checked />
-            <label for="radio-1">nebeneinander</label>
+        <div>Ansicht <i class="icon-info"></i></div>
+        <div class="control-item">
+            <input id="radio-splitscreen" type="radio" name="radio-group-screen" value="split" checked />
+            <label for="radio-splitscreen">nebeneinander</label>
         </div>
-        <div>
-            <input id="radio-2" type="radio" name="r-group-1" value="full" />
-            <label for="radio-2">zusammen</label>
-        </div>
-    </div>
-
-    <div class="control-container">
-        <div>Dateien anzeigen</div>
-        <div>
-            <input id="check-1" type="checkbox" name="check-1" checked />
-            <label for="check-1">gelöscht</label>
-        </div>
-        <div>
-            <input id="check-2" type="checkbox" name="check-1" />
-            <label for="check-2">hinzugefügt</label>
+        <div class="control-item">
+            <input id="radio-fullscreen" type="radio" name="radio-group-screen" value="full" />
+            <label for="radio-fullscreen">kombiniert</label>
         </div>
     </div>
 
-    <div class="control-container">
-        <label class="control-label">Kamerabewegung</label>
-        <div id="synchronize-checkbox-container" class="checkbox-container">
-            <div class="onoffswitch">
-                <input type="checkbox" class="onoffswitch-checkbox" id="synchronize-enabled-checkbox" checked>
-                <label class="onoffswitch-label" for="synchronize-enabled-checkbox"></label>
+    <div id="control-group-camera" class="control-container">
+        <div>Kamerabewegung <i class="icon-info"></i></div>
+        <div class="control-item">
+            <input id="radio-synchronized-camera" type="radio" name="radio-group-camera" value="sync" checked />
+            <label for="radio-synchronized-camera">synchron</label>
+        </div>
+        <div class="control-item">
+            <input id="radio-single-camera" type="radio" name="radio-group-camera" value="single" />
+            <label for="radio-single-camera">einzeln</label>
+        </div>
+    </div>
+
+    <div id="control-group-color" class="control-container">
+        <div>Farbkodierung <i class="icon-info"></i></div>
+        <div class="control-item">
+            <input id="radio-commit-color" type="radio" name="radio-group-color" value="commit" checked />
+            <label for="radio-commit-color">pro Commit</label>
+        </div>
+        <div class="control-item">
+            <input id="radio-metric-color" type="radio" name="radio-group-color" value="metric" />
+            <label for="radio-metric-color">pro Metrik</label>
+        </div>
+    </div>
+
+    <div id="control-group-visible-files" class="control-container">
+        <div>Sichtbare Dateitypen: <i class="icon-info"></i></div>
+        <div style="display: inline-block;">
+            <div class="control-item">
+                <input id="checkbox-unchanged-files" type="checkbox" checked disabled />
+                <label for="checkbox-unchanged-files">unverändert</label>
+            </div>
+            <div class="control-item">
+                <input id="checkbox-changed-files" type="checkbox" checked disabled />
+                <label for="checkbox-changed-files">verändert</label>
             </div>
         </div>
-    </div>
-
-    <div class="control-container">
-        <label class="control-label">Farbkodierung</label>
-        <div id="colorcode-checkbox-container" class="checkbox-container">
-            <div class="onoffswitch">
-                <input type="checkbox" class="onoffswitch-checkbox" id="colorcode-checkbox" checked>
-                <label class="onoffswitch-label" for="colorcode-checkbox"></label>
+        <div style="display: inline-block;">
+            <div class="control-item">
+                <input id="checkbox-deleted-files" type="checkbox" checked disabled />
+                <label for="checkbox-deleted-files">gelöscht</label>
             </div>
-        </div>
-    </div>
-
-    <div class="control-container">
-        <label class="control-label">Unveränderte Dateien</label>
-        <div id="unchanged-files-checkbox-container" class="checkbox-container">
-            <span class="checkbox-icon left"></span>
-            <div class="onoffswitch">
-                <input type="checkbox" class="onoffswitch-checkbox" id="unchanged-files-checkbox" checked disabled>
-                <label class="onoffswitch-label" for="unchanged-files-checkbox"></label>
+            <div class="control-item">
+                <input id="checkbox-added-files" type="checkbox" checked disabled />
+                <label for="checkbox-added-files">hinzugefügt</label>
             </div>
-            <span class="checkbox-icon right"></span>
         </div>
     </div>
 
