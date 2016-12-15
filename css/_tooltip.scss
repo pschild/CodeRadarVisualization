@@ -2,9 +2,10 @@
     position: absolute;
     top: 0;
     left: 0;
-    background: #fff;
-    padding: 5px;
-    box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.2);
+    background-color: #2B222A;
+    color: #fff;
+    padding: 10px;
+    font-size: 14px;
     max-width: 300px;
     z-index: 99;
 
@@ -29,7 +30,6 @@
         top: 20px;
         left: -80px;
         background-color: #2B222A;
-        border-radius: 5px;
         color: #fff;
         content: attr(aria-label);
         padding: 10px;
@@ -41,8 +41,8 @@
 
     &::before,
     &::after {
-        color: #efefef;
-        font-size: 12px;
+        color: #fff;
+        font-size: 14px;
         opacity: 0;
         pointer-events: none;
         text-align: center;
