@@ -17,17 +17,19 @@
 
 
     <div class="control-container">
-        <label class="control-label" for="first-commit-select">Commit 1</label>
+        <label class="control-label" for="first-commit-select">Erste Revision</label>
         <select id="first-commit-select" class="commit-select"></select>
     </div>
 
     <div class="control-container">
-        <label class="control-label" for="second-commit-select">Commit 2</label>
+        <label class="control-label" for="second-commit-select">Zweite Revision</label>
         <select id="second-commit-select" class="commit-select"></select>
     </div>
 
     <div id="control-group-screen" class="control-container">
-        <div>Ansicht <i class="icon-info"></i></div>
+        <div>
+            Ansicht <span class="tooltip-toggle" aria-label="Wechsel zwischen einer Visualisierung pro Revision oder einer kombinierten Darstellung"><i class="icon-info"></i></span>
+        </div>
         <div class="control-item">
             <input id="radio-splitscreen" type="radio" name="radio-group-screen" value="split" checked />
             <label for="radio-splitscreen">nebeneinander</label>
@@ -39,7 +41,9 @@
     </div>
 
     <div id="control-group-camera" class="control-container">
-        <div>Kamerabewegung <i class="icon-info"></i></div>
+        <div>
+            Kamerabewegung <span class="tooltip-toggle" aria-label="Getrennte oder synchronisierte Kamerabewegung auf beiden Seiten"><i class="icon-info"></i></span>
+        </div>
         <div class="control-item">
             <input id="radio-synchronized-camera" type="radio" name="radio-group-camera" value="sync" checked />
             <label for="radio-synchronized-camera">synchron</label>
@@ -51,7 +55,9 @@
     </div>
 
     <div id="control-group-color" class="control-container">
-        <div>Farbkodierung <i class="icon-info"></i></div>
+        <div>
+            Farbkodierung <span class="tooltip-toggle" aria-label="Farbkodierung per Revision oder per Metrik"><i class="icon-info"></i></span>
+        </div>
         <div class="control-item">
             <input id="radio-commit-color" type="radio" name="radio-group-color" value="commit" checked />
             <label for="radio-commit-color">pro Commit</label>
@@ -63,7 +69,9 @@
     </div>
 
     <div id="control-group-visible-files" class="control-container">
-        <div>Sichtbare Dateitypen: <i class="icon-info"></i></div>
+        <div>
+            Sichtbare Dateitypen: <span class="tooltip-toggle" aria-label="Ein- oder Ausblenden von bestimmten Dateitypen in der Visualisierung"><i class="icon-info"></i></span>
+        </div>
         <div style="display: inline-block;">
             <div class="control-item">
                 <input id="checkbox-unchanged-files" type="checkbox" checked disabled />
@@ -124,11 +132,11 @@
     <div id="legend-container">
         <div id="legend-item-commit-1" class="legend-item">
             <span class="legend-color"></span>
-            <span class="legend-label">Commit 1</span>
+            <span class="legend-label">Erste Revision</span>
         </div>
         <div id="legend-item-commit-2" class="legend-item">
             <span class="legend-color"></span>
-            <span class="legend-label">Commit 2</span>
+            <span class="legend-label">Zweite Revision</span>
         </div>
         <div id="legend-item-added-files" class="legend-item" style="display: none;">
             <span class="legend-color"></span>
