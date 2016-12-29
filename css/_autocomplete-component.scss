@@ -5,38 +5,37 @@
 
     }
 
-    .show-suggestions-button {
+    .button-container {
         position: absolute;
-        cursor: pointer;
         top: 0;
         right: 0;
         background: #fff;
-        width: 20px;
         height: 100%;
-        text-align: center;
         line-height: 32px;
-        padding-right: 5px;
-        color: #ccc;
+        padding: 0 5px;
 
-        &:hover {
-            color: #000;
+        .show-suggestions-button {
+            display: inline-block;
+            height: 100%;
+            line-height: 32px;
+            cursor: pointer;
+            color: #ccc;
+
+            &:hover {
+                color: #000;
+            }
         }
-    }
 
-    .clear-button {
-        position: absolute;
-        cursor: pointer;
-        top: 0;
-        right: 25px;
-        background: #fff;
-        width: 20px;
-        height: 100%;
-        text-align: center;
-        line-height: 32px;
-        color: #ccc;
+        .clear-button {
+            display: inline-block;
+            height: 100%;
+            line-height: 32px;
+            cursor: pointer;
+            color: #ccc;
 
-        &:hover {
-            color: #000;
+            &:hover {
+                color: #000;
+            }
         }
     }
 

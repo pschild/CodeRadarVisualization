@@ -33,6 +33,14 @@ export class AutocompleteComponent {
         }
     }
 
+    hideShowSuggestionsButton() {
+        this.showSuggestionsButton.style.display = 'none';
+    }
+
+    hideClearButton() {
+        this.clearButton.style.display = 'none';
+    }
+
     disableFirstOption() {
         var listItems = this.suggestionsList.querySelectorAll('li');
         listItems[0].classList.add('inactive');

@@ -21,8 +21,10 @@
 
         <div class="autocomplete-wrapper" id="first-commit-select">
             <input type="text" />
-            <div class="show-suggestions-button icon-keyboard_arrow_down"></div>
-            <div class="clear-button icon-cancel-circle"></div>
+            <div class="button-container">
+                <div class="clear-button icon-cancel-circle"></div>
+                <div class="show-suggestions-button icon-keyboard_arrow_down"></div>
+            </div>
 
             <div class="suggestions-container">
                 <ul class="suggestions-list"></ul>
@@ -35,8 +37,10 @@
 
         <div class="autocomplete-wrapper" id="second-commit-select">
             <input type="text" />
-            <div class="show-suggestions-button icon-keyboard_arrow_down"></div>
-            <div class="clear-button icon-cancel-circle"></div>
+            <div class="button-container">
+                <div class="clear-button icon-cancel-circle"></div>
+                <div class="show-suggestions-button icon-keyboard_arrow_down"></div>
+            </div>
 
             <div class="suggestions-container">
                 <ul class="suggestions-list"></ul>
@@ -114,11 +118,15 @@
 
     <div class="control-container">
         <label class="control-label">Suche</label>
-        <div class="search-wrapper">
-            <input type="text" id="search-input" placeholder="Suchbegriff" />
-            <div id="clear-search-input" class="icon-cancel-circle"></div>
 
-            <div id="autocomplete-container" style="display: none">
+        <div class="autocomplete-wrapper" id="search-auto-complete-wrapper">
+            <input type="text" placeholder="Suchbegriff" />
+            <div class="button-container">
+                <div class="clear-button icon-cancel-circle"></div>
+                <div class="show-suggestions-button icon-keyboard_arrow_down"></div>
+            </div>
+
+            <div class="suggestions-container">
                 <ul class="suggestions-list"></ul>
             </div>
         </div>

@@ -35,10 +35,12 @@ export class CommitSelectionComponent {
         });
 
         PubSub.subscribe('autocompleteElementClicked', (eventName, args) => {
-            PubSub.publish('commitChange', {
-                type: args.componentId == this.firstCommitSelect.id ? 'left' : 'right',
-                commitId: args.selection
-            });
+            if (args.componentId == this.firstCommitSelect.id || args.componentId == this.secondCommitSelect.id) {
+                PubSub.publish('commitChange', {
+                    type: args.componentId == this.firstCommitSelect.id ? 'left' : 'right',
+                    commitId: args.selection
+                });
+            }
         });
     }
 

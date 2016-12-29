@@ -91,6 +91,8 @@ export class Application {
 
             this._initializeScreens();
             this.interface.hideLoadingIndicator();
+
+            PubSub.publish('metricsLoaded');
         });
     }
 
