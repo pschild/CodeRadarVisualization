@@ -57,29 +57,29 @@ export class MergedDrawer extends AbstractDrawer {
                 if (!isNaN(blueGA) && !isNaN(orangeGA)) {
                     // both blocks
                     if (blueGA < orangeGA || blueHeight < orangeHeight) {
-                        this.drawBlock(element, parent, orangeColor, orangeGA, bottom, orangeHeight, orangeTransparency, orangeMetrics, this.COMMIT_TYPE_OTHER, true);
+                        this.drawBlock(element, parent, orangeColor, orangeGA, bottom, orangeHeight, orangeTransparency, orangeMetrics, this.COMMIT_TYPE_OTHER, { modified: true });
 
                         element.fit.x += (orangeGA - blueGA) / 2;
                         element.fit.y += (orangeGA - blueGA) / 2;
-                        this.drawBlock(element, parent, blueColor, blueGA, bottom, blueHeight, blueTransparency, blueMetrics, this.COMMIT_TYPE_CURRENT, true);
+                        this.drawBlock(element, parent, blueColor, blueGA, bottom, blueHeight, blueTransparency, blueMetrics, this.COMMIT_TYPE_CURRENT, { modified: true });
                     } else if (blueGA > orangeGA || blueHeight > orangeHeight) {
-                        this.drawBlock(element, parent, blueColor, blueGA, bottom, blueHeight, blueTransparency, blueMetrics, this.COMMIT_TYPE_CURRENT, true);
+                        this.drawBlock(element, parent, blueColor, blueGA, bottom, blueHeight, blueTransparency, blueMetrics, this.COMMIT_TYPE_CURRENT, { modified: true });
 
                         element.fit.x += (blueGA - orangeGA) / 2;
                         element.fit.y += (blueGA - orangeGA) / 2;
-                        this.drawBlock(element, parent, orangeColor, orangeGA, bottom, orangeHeight, orangeTransparency, orangeMetrics, this.COMMIT_TYPE_OTHER, true);
+                        this.drawBlock(element, parent, orangeColor, orangeGA, bottom, orangeHeight, orangeTransparency, orangeMetrics, this.COMMIT_TYPE_OTHER, { modified: true });
                     } else {
                         // ground area and height are the same
-                        this.drawBlock(element, parent, config.COLOR_UNCHANGED_FILE, orangeGA, bottom, orangeHeight, false, orangeMetrics);
+                        this.drawBlock(element, parent, config.COLOR_UNCHANGED_FILE, orangeGA, bottom, orangeHeight, false, orangeMetrics, undefined, { modified: false });
                     }
 
                 } else if (isNaN(orangeGA)) {
                     // only blue block
-                    this.drawBlock(element, parent, config.COLOR_DELETED_FILE, blueGA, bottom, blueHeight, false, blueMetrics, this.COMMIT_TYPE_CURRENT);
+                    this.drawBlock(element, parent, config.COLOR_DELETED_FILE, blueGA, bottom, blueHeight, false, blueMetrics, this.COMMIT_TYPE_CURRENT, { deleted: true });
 
                 } else if (isNaN(blueGA)) {
                     // only orange block
-                    this.drawBlock(element, parent, config.COLOR_ADDED_FILE, orangeGA, bottom, orangeHeight, false, orangeMetrics, this.COMMIT_TYPE_OTHER);
+                    this.drawBlock(element, parent, config.COLOR_ADDED_FILE, orangeGA, bottom, orangeHeight, false, orangeMetrics, this.COMMIT_TYPE_OTHER, { added: true });
                 }
 
             // MODULE
@@ -99,7 +99,7 @@ export class MergedDrawer extends AbstractDrawer {
     }
 
     // override
-    drawBlock(element, parent, color, currentCommitSize, bottom, height, isTransparent, metrics, commitType, hasChanged = false) {
+    drawBlock(element, parent, color, currentCommitSize, bottom, height, isTransparent, metrics, commitType, changeTypes) {
         var finalX, finalY, finalZ;
         var finalWidth, finalHeight, finalDepth;
 
@@ -134,7 +134,7 @@ export class MergedDrawer extends AbstractDrawer {
             type: element.type,
             tooltipLabel: this._generateTooltipHtml(element.name, metrics),
             isHelper: isTransparent,
-            hasChanged: hasChanged,
+            changeTypes: changeTypes,
             commitType: commitType
         };
 
@@ -143,17 +143,25 @@ export class MergedDrawer extends AbstractDrawer {
 
     // override
     initializeEventListeners() {
-        PubSub.subscribe('unchangedFilesChange', (eventName, args) => {
-            this._handleUnchangedFilesVisibility(args.enabled);
+        PubSub.subscribe('fileVisibilityChange', (eventName, args) => {
+            this._handleFileVisibilityChange(args.type, args.enabled);
         });
     }
 
-    _handleUnchangedFilesVisibility(enabled) {
+    _handleFileVisibilityChange(type, enabled) {
         for (var i = this.scene.children.length - 1; i >= 0; i--) {
             var child = this.scene.children[i];
 
-            if (child.type == 'Mesh' && child.userData.type == 'FILE' && !child.userData.hasChanged) {
-                child.visible = enabled;
+            if (child.type == 'Mesh' && child.userData.type == 'FILE') {
+                if (type == 'UNCHANGED' && child.userData.changeTypes.modified == false) {
+                    child.visible = enabled;
+                } else if (type == 'CHANGED' && child.userData.changeTypes.modified == true) {
+                    child.visible = enabled;
+                } else if (type == 'DELETED' && child.userData.changeTypes.deleted == true) {
+                    child.visible = enabled;
+                } else if (type == 'ADDED' && child.userData.changeTypes.added == true) {
+                    child.visible = enabled;
+                }
             }
         }
     }

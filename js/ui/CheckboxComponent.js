@@ -40,7 +40,10 @@ export class CheckboxComponent {
 
         for (let checkbox of this.fileVisibilityCheckboxes) {
             checkbox.addEventListener('change', (event) => {
-                PubSub.publish('unchangedFilesChange', { enabled: event.target.checked });
+                PubSub.publish('fileVisibilityChange', {
+                    type: event.target.value,
+                    enabled: event.target.checked
+                });
             });
         }
     }
