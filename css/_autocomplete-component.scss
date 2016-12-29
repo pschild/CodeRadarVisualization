@@ -1,0 +1,85 @@
+.autocomplete-wrapper {
+    position: relative;
+
+    & > input[type=text] {
+
+    }
+
+    .show-suggestions-button {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        right: 0;
+        background: #fff;
+        width: 20px;
+        height: 100%;
+        text-align: center;
+        line-height: 32px;
+        padding-right: 5px;
+        color: #ccc;
+
+        &:hover {
+            color: #000;
+        }
+    }
+
+    .clear-button {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        right: 25px;
+        background: #fff;
+        width: 20px;
+        height: 100%;
+        text-align: center;
+        line-height: 32px;
+        color: #ccc;
+
+        &:hover {
+            color: #000;
+        }
+    }
+
+    .suggestions-container {
+        position: absolute;
+        left: 0;
+        top: 32px;
+        min-width: 100%;
+        background: #fff;
+        box-sizing: border-box;
+        max-height: 250px;
+        overflow-y: auto;
+        white-space: nowrap;
+        z-index: 1;
+
+        box-shadow: rgba(0,0,0,0.2) 0 2px 6px 0;
+
+        .suggestions-list {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+
+            & > li {
+                cursor: pointer;
+                padding: 10px 15px;
+                max-width: 400px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+
+                &.inactive {
+                    color: #ccc;
+                }
+
+                &.selected {
+                    color: #000;
+                    background: #f3f3f3;
+                }
+
+                &:hover {
+                    color: #000;
+                    background: #f3f3f3;
+                }
+            }
+        }
+    }
+}

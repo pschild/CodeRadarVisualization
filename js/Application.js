@@ -35,8 +35,8 @@ export class Application {
     }
 
     initialize() {
-        var commitService = new CoderadarCommitService();
-        // var commitService = new DummyCommitService();
+        // var commitService = new CoderadarCommitService();
+        var commitService = new DummyCommitService();
         // FIRST: load commits
         commitService.load((data) => {
             var commitMapper = new CommitMapper(data);
@@ -46,6 +46,8 @@ export class Application {
             commits.sort(function(a, b) {
                 return b.timestamp - a.timestamp;
             });
+
+            // TODO: what if we have less than 2 commits?
             this.leftCommitId = commits[1].getName();
             this.rightCommitId = commits[0].getName();
 
@@ -62,8 +64,8 @@ export class Application {
     loadMetricData() {
         this.interface.showLoadingIndicator();
 
-        let metricService = new CoderadarMetricService();
-        // let metricService = new DummyMetricService();
+        // let metricService = new CoderadarMetricService();
+        let metricService = new DummyMetricService();
         metricService.loadTwoCommits(this.leftCommitId, this.rightCommitId, (firstCommitResult, secondCommitResult) => {
             this.getLeftScreen().reset();
             this.getRightScreen().reset();
@@ -167,10 +169,10 @@ export class Application {
     initializeEventListeners() {
         PubSub.subscribe('commitChange', (eventName, args) => {
             if (args.type == 'left') {
-                this.leftCommitId = args.commit;
+                this.leftCommitId = args.commitId;
                 this.getLeftScreen().setCommitId(this.leftCommitId);
             } else if (args.type == 'right') {
-                this.rightCommitId = args.commit;
+                this.rightCommitId = args.commitId;
                 this.getRightScreen().setCommitId(this.rightCommitId);
             }
 

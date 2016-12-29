@@ -1,3 +1,4 @@
+import {AutocompleteComponent} from './AutocompleteComponent';
 import * as PubSub from 'pubsub-js';
 
 export class CommitSelectionComponent {
@@ -5,75 +6,44 @@ export class CommitSelectionComponent {
     constructor(application) {
         this._application = application;
 
-        this.leftSelect = document.querySelector('#first-commit-select');
-        this.rightSelect = document.querySelector('#second-commit-select');
+        this.firstCommitSelect = document.querySelector('#first-commit-select');
+        this.secondCommitSelect = document.querySelector('#second-commit-select');
+
+        this.firstAutocompleteComponent = new AutocompleteComponent(this.firstCommitSelect);
+        this.secondAutocompleteComponent = new AutocompleteComponent(this.secondCommitSelect);
 
         this._bindEvents();
     }
 
-    _createOptionElements(selectElement, data) {
-        for (let commit of data.commits) {
-            var option = document.createElement('option');
-            option.value = commit.getName();
-            option.innerHTML = commit.getFormattedDatetime() + ', ' + commit.getAuthor() + ', ' + commit.getShortName();
-            selectElement.appendChild(option);
-        }
-    }
-
     _bindEvents() {
-        this.leftSelect.addEventListener('change', (event) => {
-            PubSub.publish('commitChange', {
-                type: 'left',
-                commit: event.target.value
-            });
-
-            this._disableOptions();
-        });
-
-        this.rightSelect.addEventListener('change', (event) => {
-            PubSub.publish('commitChange', {
-                type: 'right',
-                commit: event.target.value
-            });
-        });
-
         PubSub.subscribe('commitsLoaded', (eventName, args) => {
-            this._createOptionElements(this.leftSelect, args);
-            this._createOptionElements(this.rightSelect, args);
+            let elements = [];
+            for (let commit of args.commits) {
+                elements.push({
+                    value: commit.getName(),
+                    label: commit.getFormattedDatetime() + ', ' + commit.getAuthor() + ', ' + commit.getShortName()
+                });
+            }
 
-            this._selectCurrentCommit();
-            this._disableOptions();
+            this.firstAutocompleteComponent.setElements(elements);
+            this.firstAutocompleteComponent.setSelection(this._application.leftCommitId);
+
+            this.secondAutocompleteComponent.setElements(elements);
+            this.secondAutocompleteComponent.setSelection(this._application.rightCommitId);
+
+            // this._disableInitialOptions();
+        });
+
+        PubSub.subscribe('autocompleteElementClicked', (eventName, args) => {
+            PubSub.publish('commitChange', {
+                type: args.componentId == this.firstCommitSelect.id ? 'left' : 'right',
+                commitId: args.selection
+            });
         });
     }
 
-    _selectCurrentCommit() {
-        for (let option of this.leftSelect.options) {
-            if (option.value == this._application.leftCommitId) {
-                option.selected = true;
-                break;
-            }
-        }
-
-        for (let option of this.rightSelect.options) {
-            if (option.value == this._application.rightCommitId) {
-                option.selected = true;
-                break;
-            }
-        }
-    }
-
-    _disableOptions() {
-        // In the second commit select it should not be possible to select a commit that is prior to the commit in the
-        // first select. So the second select always shows a newer commit.
-        var disabled = false;
-        for (let option of this.rightSelect.options) {
-            if (option.value == this.leftSelect.value) {
-                disabled = true;
-            }
-            option.disabled = disabled;
-        }
-
-        // Accordingly, it should not be possible to select the first commit in the first select
-        this.leftSelect.options[0].disabled = true;
+    _disableInitialOptions() {
+        this.firstAutocompleteComponent.disableFirstOption();
+        this.secondAutocompleteComponent.disableLastOption();
     }
 }

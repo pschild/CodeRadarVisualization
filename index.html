@@ -17,13 +17,31 @@
 
 
     <div class="control-container">
-        <label class="control-label" for="first-commit-select">Erste Revision</label>
-        <select id="first-commit-select" class="commit-select"></select>
+        <label class="control-label">Erste Revision</label>
+
+        <div class="autocomplete-wrapper" id="first-commit-select">
+            <input type="text" />
+            <div class="show-suggestions-button icon-keyboard_arrow_down"></div>
+            <div class="clear-button icon-cancel-circle"></div>
+
+            <div class="suggestions-container">
+                <ul class="suggestions-list"></ul>
+            </div>
+        </div>
     </div>
 
     <div class="control-container">
-        <label class="control-label" for="second-commit-select">Zweite Revision</label>
-        <select id="second-commit-select" class="commit-select"></select>
+        <label class="control-label">Zweite Revision</label>
+
+        <div class="autocomplete-wrapper" id="second-commit-select">
+            <input type="text" />
+            <div class="show-suggestions-button icon-keyboard_arrow_down"></div>
+            <div class="clear-button icon-cancel-circle"></div>
+
+            <div class="suggestions-container">
+                <ul class="suggestions-list"></ul>
+            </div>
+        </div>
     </div>
 
     <div id="control-group-screen" class="control-container">
