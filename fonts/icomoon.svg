@@ -27,4 +27,6 @@
 <glyph unicode="&#xe911;" glyph-name="folder, directory, category, browse" d="M448 832l128-128h448v-704h-1024v832z" />
 <glyph unicode="&#xe912;" glyph-name="info, information" d="M448 656c0 26.4 21.6 48 48 48h32c26.4 0 48-21.6 48-48v-32c0-26.4-21.6-48-48-48h-32c-26.4 0-48 21.6-48 48v32zM640 192h-256v64h64v192h-64v64h192v-256h64zM512 960c-282.77 0-512-229.23-512-512s229.23-512 512-512 512 229.23 512 512-229.23 512-512 512zM512 32c-229.75 0-416 186.25-416 416s186.25 416 416 416 416-186.25 416-416-186.25-416-416-416z" />
 <glyph unicode="&#xe913;" glyph-name="checkmark, tick, correct, accept, ok" d="M864 832l-480-480-224 224-160-160 384-384 640 640z" />
+<glyph unicode="&#xe914;" glyph-name="keyboard_arrow_down" d="M316 604.667l196-196 196 196 60-60-256-256-256 256z" />
+<glyph unicode="&#xe915;" glyph-name="arrow_drop_down" d="M298 512.667h428l-214-214z" />
 </font></defs></svg>
