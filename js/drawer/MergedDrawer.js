@@ -1,4 +1,5 @@
 import {Block} from '../Block';
+import {BlockConnection} from '../BlockConnection';
 import {config} from '../Config';
 import {AbstractDrawer} from './AbstractDrawer';
 import {ElementAnalyzer} from '../ElementAnalyzer';
@@ -15,6 +16,8 @@ export class MergedDrawer extends AbstractDrawer {
         if (!Array.isArray(elements)) {
             elements = [elements];
         }
+
+        var movedElements = [];
 
         elements.forEach((element) => {
             var blueHeight;
@@ -77,6 +80,14 @@ export class MergedDrawer extends AbstractDrawer {
                     // only blue block
                     this.drawBlock(element, parent, config.COLOR_DELETED_FILE, blueGA, bottom, blueHeight, false, blueMetrics, this.COMMIT_TYPE_CURRENT, { deleted: true });
 
+                    // cache element to draw connections
+                    if (this._isElementMoved(element)) {
+                        movedElements.push({
+                            fromElementName: element.name,
+                            toElementName: element.renamedTo
+                        });
+                    }
+
                 } else if (isNaN(blueGA)) {
                     // only orange block
                     this.drawBlock(element, parent, config.COLOR_ADDED_FILE, orangeGA, bottom, orangeHeight, false, orangeMetrics, this.COMMIT_TYPE_OTHER, { added: true });
@@ -96,6 +107,17 @@ export class MergedDrawer extends AbstractDrawer {
                 this.drawElements(element.children, element, bottom + blueHeight);
             }
         });
+
+        for (let movedElementPair of movedElements) {
+            var fromElement = this.scene.getObjectByName(movedElementPair.fromElementName);
+            var toElement = this.scene.getObjectByName(movedElementPair.toElementName);
+
+            if (fromElement && toElement) {
+                this.drawBlockConnection(fromElement, toElement);
+            } else {
+                console.warn(`A connection could not be drawn because at least one element could not be found in the scene.`);
+            }
+        }
     }
 
     // override
@@ -141,6 +163,10 @@ export class MergedDrawer extends AbstractDrawer {
         this.scene.add(cube);
     }
 
+    drawBlockConnection(fromElement, toElement) {
+        this.scene.add(new BlockConnection(fromElement, toElement).getCurve());
+    }
+
     // override
     initializeEventListeners() {
         PubSub.subscribe('fileVisibilityChange', (eventName, args) => {
@@ -166,4 +192,7 @@ export class MergedDrawer extends AbstractDrawer {
         }
     }
 
+    _isElementMoved(element) {
+        return element.renamedTo != null;
+    }
 }
