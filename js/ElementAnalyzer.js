@@ -31,19 +31,23 @@ export class ElementAnalyzer {
         var max = Number.MIN_VALUE;
 
         for (let element of elements) {
-            var metricValues = element.metricValues;
-            if (metricValues) {
-                var big = this.getMaxMetricValueByMetricName(metricValues, metricName);
+            // investigate only FILEs, because only files can have different sizes and colors
+            if (element.type == 'FILE') {
+                var commit1Metrics = element.commit1Metrics || null;
+                var commit2Metrics = element.commit2Metrics || null;
+
+                var big = this.getMaxMetricValueByMetricName(commit1Metrics, commit2Metrics, metricName);
                 if (big > max) {
                     max = big;
                 }
 
-                var small = this.getMinMetricValueByMetricName(metricValues, metricName);
+                var small = this.getMinMetricValueByMetricName(commit1Metrics, commit2Metrics, metricName);
                 if (small < min) {
                     min = small;
                 }
             }
 
+            // recursion
             if (element.children && element.children.length > 0) {
                 var result = this.findSmallestAndBiggestMetricValueByMetricName(element.children, metricName);
                 if (result.max > max) {
@@ -61,46 +65,31 @@ export class ElementAnalyzer {
         };
     }
 
-    static getMinMetricValueByMetricName(metricValues, metricName) {
-        var values = this.getMetricValuesByMetricName(metricValues, metricName);
-        if (values.length > 1) {
-            return values[0] > values[1] ? values[1] : values[0];
+    static getMinMetricValueByMetricName(commit1Metrics, commit2Metrics, metricName) {
+        if (commit1Metrics == null && commit2Metrics == null) {
+            throw new Error(`No metric objects given`);
+        }
+
+        if (commit1Metrics == null) {
+            return commit2Metrics[metricName];
+        } else if (commit2Metrics == null) {
+            return commit1Metrics[metricName];
         } else {
-            return values[0];
+            return commit1Metrics[metricName] < commit2Metrics[metricName] ? commit1Metrics[metricName] : commit2Metrics[metricName];
         }
     }
 
-    static getMaxMetricValueByMetricName(metricValues, metricName) {
-        var values = this.getMetricValuesByMetricName(metricValues, metricName);
-        if (values.length > 1) {
-            return values[0] < values[1] ? values[1] : values[0];
+    static getMaxMetricValueByMetricName(commit1Metrics, commit2Metrics, metricName) {
+        if (commit1Metrics == null && commit2Metrics == null) {
+            throw new Error(`No metric objects given`);
+        }
+
+        if (commit1Metrics == null) {
+            return commit2Metrics[metricName];
+        } else if (commit2Metrics == null) {
+            return commit1Metrics[metricName];
         } else {
-            return values[0];
-        }
-    }
-
-    static getMetricValuesByMetricName(metricValues, metricName) {
-        if (typeof metricValues != 'object' || metricValues == null) {
-            throw new Error('metricValues is not an object or null!');
-        }
-
-        for (let key in metricValues) {
-            if (typeof metricValues[key] == 'object') {
-                if (key == metricName) {
-                    let values = [];
-                    for (let commitId in metricValues[key]) {
-                        values.push(metricValues[key][commitId]);
-                    }
-
-                    if (values.length == 0 || values.length > 2) {
-                        throw new Error(`found either no or too many metricValues for ${metricName}! found metricValues: ${values.length}`);
-                    }
-
-                    return values;
-                }
-            } else {
-                throw new Error('wrong type ' + typeof metricValues[key] + '!');
-            }
+            return commit1Metrics[metricName] > commit2Metrics[metricName] ? commit1Metrics[metricName] : commit2Metrics[metricName];
         }
     }
 }

@@ -66,28 +66,28 @@ export class Application {
 
         // let metricService = new CoderadarMetricService();
         let metricService = new DummyMetricService();
-        metricService.loadTwoCommits(this.leftCommitId, this.rightCommitId, (firstCommitResult, secondCommitResult) => {
+        metricService.loadDeltaTree(this.leftCommitId, this.rightCommitId).then((result) => {
+            this.result = result.data;
+
             this.getLeftScreen().reset();
             this.getRightScreen().reset();
 
             // #3: set commitId dynamically
-            firstCommitResult.commitId = this.leftCommitId;
-            secondCommitResult.commitId = this.rightCommitId;
+            // firstCommitResult.commitId = this.leftCommitId;
+            // secondCommitResult.commitId = this.rightCommitId;
 
-            console.time('merging time');
-            var result = CommitMerger.merge(firstCommitResult, secondCommitResult);
-            console.timeEnd('merging time');
+            // console.time('merging time');
+            // var result = CommitMerger.merge(firstCommitResult, secondCommitResult);
+            // console.timeEnd('merging time');
             // console.log('merging ' + this.leftCommitId + ' and ' + this.rightCommitId + ':', result);
 
-            this._uniqueElementList = ElementAnalyzer.generateUniqueElementList(result);
-            var minMaxPairOfHeight = ElementAnalyzer.findSmallestAndBiggestMetricValueByMetricName(result, config.HEIGHT_METRIC_NAME);
-            var minMaxPairOfGroundArea = ElementAnalyzer.findSmallestAndBiggestMetricValueByMetricName(result, config.GROUND_AREA_METRIC_NAME);
-            this.minMaxPairOfColorMetric = ElementAnalyzer.findSmallestAndBiggestMetricValueByMetricName(result, config.COLOR_METRIC_NAME);
+            this._uniqueElementList = ElementAnalyzer.generateUniqueElementList(this.result);
+            var minMaxPairOfHeight = ElementAnalyzer.findSmallestAndBiggestMetricValueByMetricName(this.result, config.HEIGHT_METRIC_NAME);
+            var minMaxPairOfGroundArea = ElementAnalyzer.findSmallestAndBiggestMetricValueByMetricName(this.result, config.GROUND_AREA_METRIC_NAME);
+            this.minMaxPairOfColorMetric = ElementAnalyzer.findSmallestAndBiggestMetricValueByMetricName(this.result, config.COLOR_METRIC_NAME);
 
             config.HEIGHT_FACTOR = config.GLOBAL_MAX_HEIGHT / minMaxPairOfHeight.max;
             config.GROUND_AREA_FACTOR = config.GLOBAL_MAX_GROUND_AREA / minMaxPairOfGroundArea.max;
-
-            this.result = result;
 
             this._initializeScreens();
             this.interface.hideLoadingIndicator();

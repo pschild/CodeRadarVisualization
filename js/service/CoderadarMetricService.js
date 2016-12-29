@@ -3,7 +3,7 @@ import {config} from '../Config';
 export class CoderadarMetricService {
 
     constructor() {
-        this.URL = config.BASE_URL + '/projects/1/metricvalues/tree';
+        this.URL = config.BASE_URL + '/projects/1/metricvalues/deltaTree';
     }
 
     // override
@@ -12,6 +12,16 @@ export class CoderadarMetricService {
     loadByCommitId(commitId) {
         var params = {
             'commit': commitId,
+            'metrics': ['coderadar:size:loc:java', 'coderadar:size:sloc:java', 'coderadar:size:eloc:java']
+        };
+
+        return axios.post(this.URL, params);
+    }
+
+    loadDeltaTree(commit1Id, commit2Id) {
+        var params = {
+            'commit1': commit1Id,
+            'commit2': commit2Id,
             'metrics': ['coderadar:size:loc:java', 'coderadar:size:sloc:java', 'coderadar:size:eloc:java']
         };
 

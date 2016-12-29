@@ -6,8 +6,8 @@ import * as PubSub from 'pubsub-js';
 
 export class MergedDrawer extends AbstractDrawer {
 
-    constructor(scene, currentCommitId, position) {
-        super(scene, currentCommitId, position);
+    constructor(scene, position, isFullscreen) {
+        super(scene, position, isFullscreen);
     }
 
     // override
@@ -18,6 +18,8 @@ export class MergedDrawer extends AbstractDrawer {
 
         elements.forEach((element) => {
             var blueHeight;
+
+            // FILE
             if (element.type == 'FILE') {
                 var blueHeightMetric = this._getMetricValueOfElementAndCommitType(element, config.HEIGHT_METRIC_NAME, this.COMMIT_TYPE_CURRENT);
                 var orangeHeightMetric = this._getMetricValueOfElementAndCommitType(element, config.HEIGHT_METRIC_NAME, this.COMMIT_TYPE_OTHER);
@@ -79,10 +81,14 @@ export class MergedDrawer extends AbstractDrawer {
                     // only orange block
                     this.drawBlock(element, parent, config.COLOR_ADDED_FILE, orangeGA, bottom, orangeHeight, false, orangeMetrics, this.COMMIT_TYPE_OTHER);
                 }
-            } else {
-                blueHeight = config.DEFAULT_BLOCK_HEIGHT;
 
-                this.drawBlock(element, parent, config.COLOR_MODULE, undefined, bottom, blueHeight);
+            // MODULE
+            } else {
+                // don't draw empty modules
+                if (this._hasChildrenForCurrentCommit(element)) {
+                    blueHeight = config.DEFAULT_BLOCK_HEIGHT;
+                    this.drawBlock(element, parent, config.COLOR_MODULE, undefined, bottom, blueHeight);
+                }
             }
 
             // recursion
@@ -133,16 +139,6 @@ export class MergedDrawer extends AbstractDrawer {
         };
 
         this.scene.add(cube);
-    }
-
-    // override
-    _getValueForGroundArea(metricValues) {
-        var metricValueForGroundArea = ElementAnalyzer.getMetricValuesByMetricName(metricValues, config.GROUND_AREA_METRIC_NAME);
-        if (metricValueForGroundArea.length == 1) {
-            return metricValueForGroundArea[0];
-        } else if (metricValueForGroundArea.length == 2) {
-            return metricValueForGroundArea[0] > metricValueForGroundArea[1] ? metricValueForGroundArea[0] : metricValueForGroundArea[1];
-        }
     }
 
     // override

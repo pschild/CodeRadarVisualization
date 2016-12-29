@@ -6,8 +6,8 @@ import * as PubSub from 'pubsub-js';
 
 export class SingleDrawer extends AbstractDrawer {
 
-    constructor(scene, currentCommitId, position, minMaxPairOfColorMetric) {
-        super(scene, currentCommitId, position);
+    constructor(scene, position, isFullscreen, minMaxPairOfColorMetric) {
+        super(scene, position, isFullscreen);
 
         this.minColorMetricValue = minMaxPairOfColorMetric ? minMaxPairOfColorMetric.min : 0;
         this.maxColorMetricValue = minMaxPairOfColorMetric ? minMaxPairOfColorMetric.max : 0;

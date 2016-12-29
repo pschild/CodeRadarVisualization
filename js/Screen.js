@@ -55,7 +55,7 @@ export class Screen {
         }
 
         console.time('drawing time ' + this.position);
-        var drawer = new drawerClazz(this.scene, this.commitId, this.position, this.minMaxPairOfColorMetric);
+        var drawer = new drawerClazz(this.scene, this.position, this._isFullscreen, this.minMaxPairOfColorMetric);
         drawer.calculateGroundAreas(this.data);
         drawer.drawElements(this.data);
         console.timeEnd('drawing time ' + this.position);

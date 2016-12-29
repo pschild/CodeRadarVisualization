@@ -3,7 +3,7 @@ import {ElementAnalyzer} from '../ElementAnalyzer';
 
 export class AbstractDrawer {
 
-    constructor(scene, currentCommitId, position) {
+    constructor(scene, position, isFullscreen) {
         if (new.target === AbstractDrawer) {
             throw new TypeError('Instantiating AbstractDrawer not allowed.');
         }
@@ -12,8 +12,8 @@ export class AbstractDrawer {
         this.COMMIT_TYPE_CURRENT = 'current';
 
         this.scene = scene;
-        this.currentCommitId = currentCommitId;
         this.position = position;
+        this.isFullscreen = isFullscreen;
         this.packer = this._getPacker();
 
         this.initializeEventListeners();
@@ -29,7 +29,7 @@ export class AbstractDrawer {
             element.h = 0;
 
             if (element.type == 'FILE') {
-                var groundArea = this._getValueForGroundArea(element.metricValues);
+                var groundArea = this._getValueForGroundArea(element.commit1Metrics, element.commit2Metrics);
                 element.w = groundArea * config.GROUND_AREA_FACTOR + config.GLOBAL_MIN_GROUND_AREA + config.BLOCK_SPACING;
                 element.h = groundArea * config.GROUND_AREA_FACTOR + config.GLOBAL_MIN_GROUND_AREA + config.BLOCK_SPACING;
             }
@@ -53,8 +53,8 @@ export class AbstractDrawer {
         };
     }
 
-    _getValueForGroundArea(metricValues) {
-        return ElementAnalyzer.getMaxMetricValueByMetricName(metricValues, config.GROUND_AREA_METRIC_NAME);
+    _getValueForGroundArea(commit1Metrics, commit2Metrics) {
+        return ElementAnalyzer.getMaxMetricValueByMetricName(commit1Metrics, commit2Metrics, config.GROUND_AREA_METRIC_NAME);
     }
 
     drawElements(elements, parent, bottom = 0) {}
@@ -106,39 +106,33 @@ export class AbstractDrawer {
     }
 
     _hasMetricValuesForCurrentCommit(element) {
-        for (let key in element.metricValues) {
-            if (typeof element.metricValues[key] == 'object') {
-                if (Object.keys(element.metricValues[key]).indexOf(this.currentCommitId) >= 0) {
-                    return true;
-                }
+        // when in fullscreen mode, metrics for at least one commit should be present
+        if (this.isFullscreen) {
+            return element.commit1Metrics != null || element.commit2Metrics != null;
+        }
 
-                return false;
-            } else {
-                throw new Error('metricValues must be an object. current value: ' + (typeof element.metricValues[key]));
-            }
+        if (this.position == 'left') {
+            return element.commit1Metrics != null;
+        } else if (this.position == 'right') {
+            return element.commit2Metrics != null;
         }
     }
 
     _getMetricValueOfElementAndCommitType(element, metricName, commitType) {
-        for (let key in element.metricValues) {
-            if (typeof element.metricValues[key] == 'object') {
-                var metricValue = element.metricValues[metricName];
-                if (!metricValue) {
-                    throw new Error(metricName + ' was not found in metricValues ' + JSON.stringify(element.metricValues));
-                }
-
-                for (let commitKey in metricValue) {
-                    if (commitType == this.COMMIT_TYPE_OTHER && commitKey != this.currentCommitId) {
-                        return metricValue[commitKey];
-                    } else if (commitType == this.COMMIT_TYPE_CURRENT && commitKey == this.currentCommitId) {
-                        return metricValue[commitKey];
-                    }
-                }
-
-                // console.info('no matching metricValue found for commitType ' + commitType);
-            } else {
-                throw new Error('metricValues must be an object. current value: ' + (typeof element.metricValues[key]));
+        if (this.position == 'left') {
+            if (commitType == this.COMMIT_TYPE_CURRENT) {
+                return element.commit1Metrics ? element.commit1Metrics[metricName] : undefined;
+            } else if (commitType == this.COMMIT_TYPE_OTHER) {
+                return element.commit2Metrics ? element.commit2Metrics[metricName] : undefined;
             }
+
+        } else if (this.position == 'right') {
+            if (commitType == this.COMMIT_TYPE_CURRENT) {
+                return element.commit2Metrics ? element.commit2Metrics[metricName] : undefined;
+            } else if (commitType == this.COMMIT_TYPE_OTHER) {
+                return element.commit1Metrics ? element.commit1Metrics[metricName] : undefined;
+            }
+
         }
     }
 
