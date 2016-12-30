@@ -58,6 +58,9 @@ export class Screen {
         var drawer = new drawerClazz(this.scene, this.position, this._isFullscreen, this.minMaxPairOfColorMetric);
         drawer.calculateGroundAreas(this.data);
         drawer.drawElements(this.data);
+        if (this._isFullscreen) {
+            drawer.drawBlockConnections();
+        }
         console.timeEnd('drawing time ' + this.position);
     }
 
@@ -94,7 +97,7 @@ export class Screen {
             var child = this.scene.children[i];
 
             // only remove Blocks. Don't remove lights, cameras etc.
-            if (child.type == 'Mesh') {
+            if (child.type == 'Mesh' || child.type == 'Line') {
                 this.scene.remove(child);
             }
         }

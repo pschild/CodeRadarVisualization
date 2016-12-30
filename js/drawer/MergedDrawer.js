@@ -2,13 +2,14 @@ import {Block} from '../Block';
 import {BlockConnection} from '../BlockConnection';
 import {config} from '../Config';
 import {AbstractDrawer} from './AbstractDrawer';
-import {ElementAnalyzer} from '../ElementAnalyzer';
 import * as PubSub from 'pubsub-js';
 
 export class MergedDrawer extends AbstractDrawer {
 
     constructor(scene, position, isFullscreen) {
         super(scene, position, isFullscreen);
+
+        this.movedElements = [];
     }
 
     // override
@@ -16,8 +17,6 @@ export class MergedDrawer extends AbstractDrawer {
         if (!Array.isArray(elements)) {
             elements = [elements];
         }
-
-        var movedElements = [];
 
         elements.forEach((element) => {
             var blueHeight;
@@ -82,7 +81,7 @@ export class MergedDrawer extends AbstractDrawer {
 
                     // cache element to draw connections
                     if (this._isElementMoved(element)) {
-                        movedElements.push({
+                        this.movedElements.push({
                             fromElementName: element.name,
                             toElementName: element.renamedTo
                         });
@@ -107,8 +106,10 @@ export class MergedDrawer extends AbstractDrawer {
                 this.drawElements(element.children, element, bottom + blueHeight);
             }
         });
+    }
 
-        for (let movedElementPair of movedElements) {
+    drawBlockConnections() {
+        for (let movedElementPair of this.movedElements) {
             var fromElement = this.scene.getObjectByName(movedElementPair.fromElementName);
             var toElement = this.scene.getObjectByName(movedElementPair.toElementName);
 
