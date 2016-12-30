@@ -1,5 +1,7 @@
 import * as PubSub from 'pubsub-js';
 
+const MAX_WIDTH = 400;
+
 export class AutocompleteComponent {
 
     constructor(componentElement) {
@@ -16,6 +18,8 @@ export class AutocompleteComponent {
 
         this._hideSuggestions();
         this._bindEvents();
+
+        this._fitSuggestionsContainerToScreen();
     }
 
     setElements(elements) {
@@ -49,6 +53,17 @@ export class AutocompleteComponent {
     disableLastOption() {
         var listItems = this.suggestionsList.querySelectorAll('li');
         listItems[listItems.length - 1].classList.add('inactive');
+    }
+
+    _fitSuggestionsContainerToScreen() {
+        var left = this._componentElement.getBoundingClientRect().left;
+        var windowWidth = window.innerWidth;
+        if (left + MAX_WIDTH > windowWidth) {
+            this.suggestionsContainer.style.left = 'auto';
+            this.suggestionsContainer.style.right = '0px';
+
+            this.suggestionsList.classList.add('rtl');
+        }
     }
 
     _bindEvents() {
