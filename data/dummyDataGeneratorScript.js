@@ -7,20 +7,28 @@ var CHANCE_TO_CREATE_SUBMODULE = 50;
 var LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 
 var json = [];
+var submoduleCounter = 0;
+var subsubmoduleCounter = 0;
 for (var i = 0; i < random(MIN_MODULE_COUNT, MAX_MODULE_COUNT); i++) {
     var module = createModule(i);
     addFilesToModule(module);
 
     if (random(1, 100) >= 100 - CHANCE_TO_CREATE_SUBMODULE) {
-        var submodule = createModule(i, module.name);
+        var submodule = createModule(i, module.name, submoduleCounter++);
         addFilesToModule(submodule);
         module.children.push(submodule);
+
+        if (random(1, 10000) >= 100 - CHANCE_TO_CREATE_SUBMODULE) {
+            var subsubmodule = createModule(i, submodule.name, subsubmoduleCounter++);
+            addFilesToModule(subsubmodule);
+            submodule.children.push(subsubmodule);
+        }
     }
 
     json.push(module);
 }
-console.clear();
-console.log(json);
+// console.clear();
+// console.log(json);
 console.log(JSON.stringify(json));
 
 function addFilesToModule(module) {
@@ -29,10 +37,10 @@ function addFilesToModule(module) {
     }
 }
 
-function createModule(index, parentName) {
+function createModule(index, parentName, submoduleCounter) {
     var module = {};
     module.name = parentName ? parentName + '/' : '';
-    module.name += parentName ? 'Submodule' : 'Module' + LETTERS[index];
+    module.name += parentName ? 'Submodule' + LETTERS[submoduleCounter] : 'Module' + LETTERS[index];
 
     module.type = 'MODULE';
     module.children = [];

@@ -8,9 +8,9 @@ function createProject() {
     console.log('creating project...');
     return axios.post('http://localhost:8080/projects',
         {
-            "name": "Coderadar",
+            "name": "coderadar-demo",
             "vcsType": "GIT",
-            "vcsUrl": "https://github.com/reflectoring/coderadar.git"
+            "vcsUrl": "https://github.com/pschild/coderadar-demo.git"
         }
     );
 }
@@ -29,13 +29,26 @@ function addFilePattern() {
 }
 
 function addAnalyzerConfig() {
-    console.log('adding analyzing config...');
-    return axios.post('http://localhost:8080/projects/1/analyzers',
-        {
-            "analyzerName": "org.wickedsource.coderadar.analyzer.loc.LocAnalyzerPlugin",
-            "enabled": true
-        }
-    );
+    console.log('adding analyzing configs...');
+
+    var enabledAnalyzerPlugins = [
+        'org.wickedsource.coderadar.analyzer.loc.LocAnalyzerPlugin',
+        'org.wickedsource.coderadar.analyzer.checkstyle.CheckstyleSourceCodeFileAnalyzerPlugin'
+    ];
+
+    var promises = [];
+    for (var pluginName of enabledAnalyzerPlugins) {
+        promises.push(
+            axios.post('http://localhost:8080/projects/1/analyzers',
+                {
+                    "analyzerName": pluginName,
+                    "enabled": true
+                }
+            )
+        );
+    }
+
+    return axios.all(promises);
 }
 
 function addAnalyzingStrategy() {
