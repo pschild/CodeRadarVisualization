@@ -21,7 +21,7 @@ export class CommitSelectionComponent {
             for (let commit of args.commits) {
                 elements.push({
                     value: commit.getName(),
-                    label: commit.getFormattedDatetime() + ', ' + commit.getAuthor() + ', ' + commit.getShortName()
+                    label: commit.getFormattedDatetime() + ', ' + commit.getAuthor() + ', ' + commit.getName()
                 });
             }
 

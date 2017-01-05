@@ -100,7 +100,13 @@ export class AutocompleteComponent {
 
     _createListItem(element) {
         let li = document.createElement('li');
-        li.innerHTML = this._highlightSubstring(element.label, this.input.value);
+
+        if (this.input.value.length > 0) {
+            li.innerHTML = this._highlightSubstring(element.label, this.input.value);
+        } else {
+            li.innerHTML = element.label;
+        }
+
         li.dataset.value = element.value;
 
         li.addEventListener('click', (event) => {
@@ -110,6 +116,7 @@ export class AutocompleteComponent {
 
             this.input.value = element.label;
             this._markSelectedElement(element);
+            this._clearHighlights();
 
             PubSub.publish('autocompleteElementClicked', {
                 componentId: this._componentElement.id,
@@ -144,6 +151,14 @@ export class AutocompleteComponent {
         return label.replace(new RegExp('(' + searchValue + ')', 'ig'), '<b>$1</b>');
     }
 
+    _clearHighlights() {
+        var listItems = this.suggestionsList.querySelectorAll('li');
+        for (let item of listItems) {
+            item.innerHTML = item.innerHTML.replace('<b>', '');
+            item.innerHTML = item.innerHTML.replace('</b>', '');
+        }
+    }
+
     _resetFilteredElements() {
         this._filteredElements = this._elements;
         this._updateSuggestionList();
@@ -160,6 +175,7 @@ export class AutocompleteComponent {
     _toggleSuggestions() {
         if (this.suggestionsContainer.style.display == 'none') {
             this._showSuggestions();
+            this.suggestionsList.querySelector('.selected').scrollIntoView();
         } else {
             this._hideSuggestions();
         }
