@@ -175,7 +175,11 @@ export class AutocompleteComponent {
     _toggleSuggestions() {
         if (this.suggestionsContainer.style.display == 'none') {
             this._showSuggestions();
-            this.suggestionsList.querySelector('.selected').scrollIntoView();
+
+            var selectedElement = this.suggestionsList.querySelector('.selected');
+            if (selectedElement) {
+                selectedElement.scrollIntoView();
+            }
         } else {
             this._hideSuggestions();
         }
