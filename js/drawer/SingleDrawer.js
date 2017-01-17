@@ -30,21 +30,21 @@ export class SingleDrawer extends AbstractDrawer {
                 return;
             }
 
+            var heightMetric = this._getMetricValueOfElementAndCommitType(element, config.HEIGHT_METRIC_NAME, this.COMMIT_TYPE_CURRENT);
+            var groundAreaMetric = this._getMetricValueOfElementAndCommitType(element, config.GROUND_AREA_METRIC_NAME, this.COMMIT_TYPE_CURRENT);
+            var colorMetric = this._getMetricValueOfElementAndCommitType(element, config.COLOR_METRIC_NAME, this.COMMIT_TYPE_CURRENT);
+
+            var metrics = {
+                [config.HEIGHT_METRIC_NAME]: heightMetric,
+                [config.GROUND_AREA_METRIC_NAME]: groundAreaMetric,
+                [config.COLOR_METRIC_NAME]: colorMetric
+            };
+
             var myHeight;
             if (element.type == 'FILE') {
-                var heightMetric = this._getMetricValueOfElementAndCommitType(element, config.HEIGHT_METRIC_NAME, this.COMMIT_TYPE_CURRENT);
-                var groundAreaMetric = this._getMetricValueOfElementAndCommitType(element, config.GROUND_AREA_METRIC_NAME, this.COMMIT_TYPE_CURRENT);
-                var colorMetric = this._getMetricValueOfElementAndCommitType(element, config.COLOR_METRIC_NAME, this.COMMIT_TYPE_CURRENT);
-
                 if (!heightMetric || !groundAreaMetric || !colorMetric) {
                     return;
                 }
-
-                var metrics = {
-                    [config.HEIGHT_METRIC_NAME]: heightMetric,
-                    [config.GROUND_AREA_METRIC_NAME]: groundAreaMetric,
-                    [config.COLOR_METRIC_NAME]: colorMetric
-                };
 
                 myHeight = heightMetric * config.HEIGHT_FACTOR + config.GLOBAL_MIN_HEIGHT;
 
@@ -61,7 +61,7 @@ export class SingleDrawer extends AbstractDrawer {
 
             } else {
                 myHeight = config.DEFAULT_BLOCK_HEIGHT;
-                this.drawBlock(element, parent, config.COLOR_MODULE, undefined, bottom, myHeight);
+                this.drawBlock(element, parent, config.COLOR_MODULE, undefined, bottom, myHeight, false, metrics);
             }
 
             // recursion

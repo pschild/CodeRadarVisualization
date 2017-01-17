@@ -16,6 +16,16 @@ export class ComparisonContainerComponent {
 
     _bindEvents() {
         PubSub.subscribe('openComparisonContainer', (eventName, args) => {
+            // If we don't have metric values in at least one of the elements, close the container and return.
+            // No information can be shown then.
+            if (
+                (args.leftElement && !args.leftElement.userData.metrics)
+                || (args.rightElement && !args.rightElement.userData.metrics))
+            {
+                this.comparisonContainer.classList.remove('open');
+                return;
+            }
+
             if (args.leftElement) {
                 this.comparisonContainer.querySelector('h3').innerHTML = args.leftElement.name;
             } else {
