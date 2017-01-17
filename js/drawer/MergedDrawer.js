@@ -186,9 +186,21 @@ export class MergedDrawer extends AbstractDrawer {
                     child.visible = enabled;
                 } else if (type == 'DELETED' && child.userData.changeTypes.deleted == true) {
                     child.visible = enabled;
+                    this._handleConnectionVisibility(enabled);
                 } else if (type == 'ADDED' && child.userData.changeTypes.added == true) {
                     child.visible = enabled;
+                    this._handleConnectionVisibility(enabled);
                 }
+            }
+        }
+    }
+
+    _handleConnectionVisibility(visible) {
+        for (var i = this.scene.children.length - 1; i >= 0; i--) {
+            var child = this.scene.children[i];
+
+            if (child.type == 'Line' && child.userData.type == 'CONNECTION') {
+                child.visible = visible;
             }
         }
     }
