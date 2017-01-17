@@ -1,16 +1,21 @@
 var axios = require('axios');
 
+var repoName = 'coderadar';
+// var repoName = 'coderadar-demo';
+var repoUrl = 'https://github.com/reflectoring/coderadar.git';
+// var repoUrl = 'https://github.com/pschild/coderadar-demo.git';
+
 var fromYear = 2016;
-var fromMonth = 11; // 1 = january
-var fromDay = 30;
+var fromMonth = 1; // 1 = january
+var fromDay = 1;
 
 function createProject() {
     console.log('creating project...');
     return axios.post('http://localhost:8080/projects',
         {
-            "name": "coderadar-demo",
+            "name": repoName,
             "vcsType": "GIT",
-            "vcsUrl": "https://github.com/pschild/coderadar-demo.git"
+            "vcsUrl": repoUrl
         }
     );
 }
@@ -32,8 +37,7 @@ function addAnalyzerConfig() {
     console.log('adding analyzing configs...');
 
     var enabledAnalyzerPlugins = [
-        'org.wickedsource.coderadar.analyzer.loc.LocAnalyzerPlugin',
-        'org.wickedsource.coderadar.analyzer.checkstyle.CheckstyleSourceCodeFileAnalyzerPlugin'
+        'org.wickedsource.coderadar.analyzer.loc.LocAnalyzerPlugin'
     ];
 
     var promises = [];
