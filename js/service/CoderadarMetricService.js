@@ -12,7 +12,7 @@ export class CoderadarMetricService {
     loadByCommitId(commitId) {
         var params = {
             'commit': commitId,
-            'metrics': ['coderadar:size:loc:java', 'coderadar:size:sloc:java', 'coderadar:size:eloc:java']
+            'metrics': [config.HEIGHT_METRIC_NAME, config.GROUND_AREA_METRIC_NAME, config.COLOR_METRIC_NAME]
         };
 
         return axios.post(this.URL, params);
@@ -22,7 +22,7 @@ export class CoderadarMetricService {
         var params = {
             'commit1': commit1Id,
             'commit2': commit2Id,
-            'metrics': ['coderadar:size:loc:java', 'coderadar:size:sloc:java', 'coderadar:size:eloc:java']
+            'metrics': [config.HEIGHT_METRIC_NAME, config.GROUND_AREA_METRIC_NAME, config.COLOR_METRIC_NAME]
         };
 
         return axios.post(this.URL, params);

@@ -35,8 +35,8 @@ export class Application {
     }
 
     initialize() {
-        // var commitService = new CoderadarCommitService();
-        var commitService = new DummyCommitService();
+        var commitService = new CoderadarCommitService();
+        // var commitService = new DummyCommitService();
         // FIRST: load commits
         commitService.load((data) => {
             var commitMapper = new CommitMapper(data);
@@ -64,8 +64,8 @@ export class Application {
     loadMetricData() {
         this.interface.showLoadingIndicator();
 
-        // let metricService = new CoderadarMetricService();
-        let metricService = new DummyMetricService();
+        let metricService = new CoderadarMetricService();
+        // let metricService = new DummyMetricService();
         metricService.loadDeltaTree(this.leftCommitId, this.rightCommitId).then((result) => {
             this.result = result.data;
 
@@ -169,6 +169,11 @@ export class Application {
     }
 
     initializeEventListeners() {
+        PubSub.subscribe('heightDimensionChange', (eventName, args) => {
+            config.COLOR_METRIC_NAME = this.getMetricNameByShortName(args.metricName);
+            this.loadMetricData();
+        });
+
         PubSub.subscribe('commitChange', (eventName, args) => {
             if (args.type == 'left') {
                 this.leftCommitId = args.commitId;
@@ -260,5 +265,15 @@ export class Application {
         } else {
             return this.getRightScreen().getScene().getObjectByName(elementName);
         }
+    }
+
+    getMetricNameByShortName(metricName) {
+        var metricNames = {
+            'loc': 'coderadar:size:loc:java',
+            'sloc': 'coderadar:size:sloc:java',
+            'curly': 'checkstyle:com.puppycrawl.tools.checkstyle.checks.blocks.LeftCurlyCheck'
+        };
+
+        return metricNames[metricName];
     }
 }

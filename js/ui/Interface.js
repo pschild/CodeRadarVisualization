@@ -3,6 +3,7 @@ import {LegendComponent} from './LegendComponent';
 import {CommitSelectionComponent} from './CommitSelectionComponent';
 import {CheckboxComponent} from './CheckboxComponent';
 import {ComparisonContainerComponent} from './ComparisonContainerComponent';
+import {DimensionSelectionComponent} from './DimensionSelectionComponent';
 
 export class Interface {
 
@@ -18,6 +19,7 @@ export class Interface {
         this.commitSelectionComponent = new CommitSelectionComponent(application);
         this.checkboxComponent = new CheckboxComponent();
         this.comparisonContainerComponent = new ComparisonContainerComponent(application);
+        this.dimensionSelectionComponent = new DimensionSelectionComponent(application);
     }
 
     showLoadingIndicator() {
