@@ -1,5 +1,6 @@
 import {config} from '../Config';
 import {ElementAnalyzer} from '../ElementAnalyzer';
+import {MetricNameService} from '../service/MetricNameService';
 
 export class AbstractDrawer {
 
@@ -15,6 +16,8 @@ export class AbstractDrawer {
         this.position = position;
         this.isFullscreen = isFullscreen;
         this.packer = this._getPacker();
+
+        this.metricNameService = new MetricNameService();
 
         this.initializeEventListeners();
     }
@@ -70,7 +73,7 @@ export class AbstractDrawer {
 
         if (metrics) {
             for (let key of Object.keys(metrics)) {
-                tooltipHtml.push('<div>' + key + ': ' + metrics[key] + '</div>');
+                tooltipHtml.push('<div>' + this.metricNameService.getShortNameByFullName(key) + ': ' + metrics[key] + '</div>');
             }
         }
 

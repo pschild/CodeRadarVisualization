@@ -1,4 +1,5 @@
 import {config} from '../Config';
+import {MetricNameService} from '../service/MetricNameService';
 import * as PubSub from 'pubsub-js';
 
 export class LegendComponent {
@@ -11,9 +12,10 @@ export class LegendComponent {
         this.legendItemUnchangedFiles = document.querySelector('#legend-item-unchanged-files');
         this.legendItemColorCode = document.querySelector('#legend-item-color-code');
 
+        this.metricNameService = new MetricNameService();
+
         this.setCommitColors();
         this.setAddedDeletedUnchangedColors();
-        this.setColorCode();
 
         this._bindEvents();
     }
@@ -31,7 +33,7 @@ export class LegendComponent {
     }
 
     setColorCode() {
-        this.legendItemColorCode.querySelector('.legend-label').innerHTML = config.COLOR_METRIC_NAME;
+        this.legendItemColorCode.querySelector('.legend-label').innerHTML = this.metricNameService.getShortNameByFullName(config.COLOR_METRIC_NAME);
     }
 
     _showCommitItems() {
@@ -57,6 +59,7 @@ export class LegendComponent {
     }
 
     _showColorCodeItem() {
+        this.setColorCode();
         this.legendItemColorCode.style.display = 'inline-block';
     }
 

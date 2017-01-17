@@ -1,3 +1,4 @@
+import {MetricNameService} from '../service/MetricNameService';
 import {config} from '../Config';
 import * as PubSub from 'pubsub-js';
 
@@ -5,6 +6,8 @@ export class ComparisonContainerComponent {
 
     constructor(application) {
         this._application = application;
+
+        this.metricNameService = new MetricNameService();
 
         this.comparisonContainer = document.querySelector('#comparison-container');
 
@@ -39,7 +42,7 @@ export class ComparisonContainerComponent {
             var rowEl = document.createElement('tr');
 
             var metricNameEl = document.createElement('td');
-            metricNameEl.innerHTML = metricName;
+            metricNameEl.innerHTML = this.metricNameService.getShortNameByFullName(metricName);
             rowEl.appendChild(metricNameEl);
 
             var firstCommitMetricValueEl = document.createElement('td');
