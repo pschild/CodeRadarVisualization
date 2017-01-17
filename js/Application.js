@@ -6,6 +6,7 @@ import {CoderadarMetricService} from './service/CoderadarMetricService';
 import {DummyMetricService} from './service/DummyMetricService';
 import {DummyCommitService} from './service/DummyCommitService';
 import {CoderadarCommitService} from './service/CoderadarCommitService';
+import {MetricNameService} from './service/MetricNameService';
 import {CommitMapper} from './domain/CommitMapper';
 import {CommitMerger} from './CommitMerger';
 import {MergedDrawer} from './drawer/MergedDrawer';
@@ -19,6 +20,10 @@ export class Application {
         this.IS_FULLSCREEN = false;
 
         this._uniqueElementList = [];
+
+        this.commitService = new CoderadarCommitService(); // DummyCommitService CoderadarCommitService
+        this.metricService = new CoderadarMetricService(); // DummyMetricService CoderadarMetricService
+        this.metricNameService = new MetricNameService();
 
         this.createInterface();
         this.initializeEventListeners();
@@ -35,10 +40,8 @@ export class Application {
     }
 
     initialize() {
-        var commitService = new CoderadarCommitService();
-        // var commitService = new DummyCommitService();
         // FIRST: load commits
-        commitService.load((data) => {
+        this.commitService.load((data) => {
             var commitMapper = new CommitMapper(data);
             commitMapper.mapAll();
 
@@ -63,10 +66,7 @@ export class Application {
 
     loadMetricData() {
         this.interface.showLoadingIndicator();
-
-        let metricService = new CoderadarMetricService();
-        // let metricService = new DummyMetricService();
-        metricService.loadDeltaTree(this.leftCommitId, this.rightCommitId).then((result) => {
+        this.metricService.loadDeltaTree(this.leftCommitId, this.rightCommitId).then((result) => {
             this.result = result.data;
 
             this.getLeftScreen().reset();
@@ -170,7 +170,17 @@ export class Application {
 
     initializeEventListeners() {
         PubSub.subscribe('heightDimensionChange', (eventName, args) => {
-            config.COLOR_METRIC_NAME = this.getMetricNameByShortName(args.metricName);
+            config.HEIGHT_METRIC_NAME = this.metricNameService.getMetricNameByShortName(args.metricName);
+            this.loadMetricData();
+        });
+
+        PubSub.subscribe('groundAreaDimensionChange', (eventName, args) => {
+            config.GROUND_AREA_METRIC_NAME = this.metricNameService.getMetricNameByShortName(args.metricName);
+            this.loadMetricData();
+        });
+
+        PubSub.subscribe('colorDimensionChange', (eventName, args) => {
+            config.COLOR_METRIC_NAME = this.metricNameService.getMetricNameByShortName(args.metricName);
             this.loadMetricData();
         });
 
@@ -265,15 +275,5 @@ export class Application {
         } else {
             return this.getRightScreen().getScene().getObjectByName(elementName);
         }
-    }
-
-    getMetricNameByShortName(metricName) {
-        var metricNames = {
-            'loc': 'coderadar:size:loc:java',
-            'sloc': 'coderadar:size:sloc:java',
-            'curly': 'checkstyle:com.puppycrawl.tools.checkstyle.checks.blocks.LeftCurlyCheck'
-        };
-
-        return metricNames[metricName];
     }
 }
