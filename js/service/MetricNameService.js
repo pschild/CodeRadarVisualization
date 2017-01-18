@@ -6,11 +6,11 @@ export class MetricNameService {
             'SLOC': 'coderadar:size:sloc:java',
             'ELOC': 'coderadar:size:eloc:java',
             'MagicNumber': 'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck',
-            'ReturnCountCheck': 'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.ReturnCountCheck',
-            'CyclomaticComplexityCheck': 'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck',
-            'JavaNCSSCheck': 'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.JavaNCSSCheck',
-            'NPathComplexityCheck': 'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.NPathComplexityCheck',
-            'ExecutableStatementCountCheck': 'checkstyle:com.puppycrawl.tools.checkstyle.checks.sizes.ExecutableStatementCountCheck'
+            'ReturnCount': 'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.ReturnCountCheck',
+            'CyclomaticComplexity': 'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck',
+            'JavaNCSS': 'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.JavaNCSSCheck',
+            'NPathComplexity': 'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.NPathComplexityCheck',
+            'ExecutableStatementCount': 'checkstyle:com.puppycrawl.tools.checkstyle.checks.sizes.ExecutableStatementCountCheck'
         };
     }
 
