@@ -1,9 +1,9 @@
 var axios = require('axios');
 
-var repoName = 'coderadar';
-// var repoName = 'coderadar-demo';
-var repoUrl = 'https://github.com/reflectoring/coderadar.git';
-// var repoUrl = 'https://github.com/pschild/coderadar-demo.git';
+// var repoName = 'coderadar';
+var repoName = 'coderadar-demo';
+// var repoUrl = 'https://github.com/reflectoring/coderadar.git';
+var repoUrl = 'https://github.com/pschild/coderadar-demo.git';
 
 var fromYear = 2016;
 var fromMonth = 1; // 1 = january
@@ -37,7 +37,8 @@ function addAnalyzerConfig() {
     console.log('adding analyzing configs...');
 
     var enabledAnalyzerPlugins = [
-        'org.wickedsource.coderadar.analyzer.loc.LocAnalyzerPlugin'
+        'org.wickedsource.coderadar.analyzer.loc.LocAnalyzerPlugin',
+        'org.wickedsource.coderadar.analyzer.checkstyle.CheckstyleSourceCodeFileAnalyzerPlugin'
     ];
 
     var promises = [];
