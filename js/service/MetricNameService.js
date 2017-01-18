@@ -5,7 +5,12 @@ export class MetricNameService {
             'LOC': 'coderadar:size:loc:java',
             'SLOC': 'coderadar:size:sloc:java',
             'ELOC': 'coderadar:size:eloc:java',
-            'MagicNumber': 'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck'
+            'MagicNumber': 'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck',
+            'ReturnCountCheck': 'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.ReturnCountCheck',
+            'CyclomaticComplexityCheck': 'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck',
+            'JavaNCSSCheck': 'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.JavaNCSSCheck',
+            'NPathComplexityCheck': 'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.NPathComplexityCheck',
+            'ExecutableStatementCountCheck': 'checkstyle:com.puppycrawl.tools.checkstyle.checks.sizes.ExecutableStatementCountCheck'
         };
     }
 
