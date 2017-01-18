@@ -14,6 +14,10 @@ export class MetricNameService {
         };
     }
 
+    getAll() {
+        return this._metricNamesMap;
+    }
+
     getMetricNameByShortName(shortName) {
         return this._metricNamesMap[shortName];
     }
