@@ -42,7 +42,7 @@ export class SingleDrawer extends AbstractDrawer {
 
             var myHeight;
             if (element.type == 'FILE') {
-                if (!heightMetric || !groundAreaMetric || !colorMetric) {
+                if (!heightMetric || !groundAreaMetric) {
                     return;
                 }
 

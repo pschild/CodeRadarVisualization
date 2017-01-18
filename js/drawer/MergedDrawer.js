@@ -19,6 +19,11 @@ export class MergedDrawer extends AbstractDrawer {
         }
 
         elements.forEach((element) => {
+            if (!element.fit) {
+                console.warn(`element ${element.name} at position ${this.position} has no fit!`);
+                return;
+            }
+
             var blueHeight;
 
             // FILE
