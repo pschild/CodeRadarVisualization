@@ -69,9 +69,6 @@ export class Application {
         this.metricService.loadDeltaTree(this.leftCommitId, this.rightCommitId).then((result) => {
             this.result = result.data;
 
-            this.getLeftScreen().reset();
-            this.getRightScreen().reset();
-
             // #3: set commitId dynamically
             // firstCommitResult.commitId = this.leftCommitId;
             // secondCommitResult.commitId = this.rightCommitId;

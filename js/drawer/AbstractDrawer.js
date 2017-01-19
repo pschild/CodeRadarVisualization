@@ -64,6 +64,10 @@ export class AbstractDrawer {
 
     drawBlock(element, parent, color, currentCommitSize, bottom, height, isTransparent) {}
 
+    setColorization(colorMode) {}
+
+    setVisibilities(visibilityStates) {}
+
     initializeEventListeners() {}
 
     _generateTooltipHtml(elementName, metrics) {

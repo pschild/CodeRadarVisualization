@@ -174,6 +174,13 @@ export class MergedDrawer extends AbstractDrawer {
     }
 
     // override
+    setVisibilities(visibilityStates) {
+        for (let type of Object.keys(visibilityStates)) {
+            this._handleFileVisibilityChange(type, visibilityStates[type]);
+        }
+    }
+
+    // override
     initializeEventListeners() {
         PubSub.subscribe('fileVisibilityChange', (eventName, args) => {
             this._handleFileVisibilityChange(args.type, args.enabled);

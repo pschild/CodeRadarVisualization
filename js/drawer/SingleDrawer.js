@@ -113,6 +113,11 @@ export class SingleDrawer extends AbstractDrawer {
     }
 
     // override
+    setColorization(colorMode) {
+        this._handleColorcodeChanged(colorMode);
+    }
+
+    // override
     initializeEventListeners() {
         PubSub.subscribe('colorcodeChange', (eventName, args) => {
             this._handleColorcodeChanged(args.colorcode);

@@ -8,6 +8,10 @@ export class Screen {
         this.position = position;
         this.commitId = undefined;
 
+        // color and visibility states, configurable in the GUI, are saved here and given to the drawers after re-drawing the screens.
+        this._colorMode = 'commit';
+        this._visibilityStates = {};
+
         this._isFullscreen = false;
         this._cameraStartPosition = {
             x: 1000, y: 1000, z: 1000
@@ -61,6 +65,9 @@ export class Screen {
         if (this._isFullscreen) {
             drawer.drawBlockConnections();
         }
+        // apply color and visibility states so that state does not get lost by re-drawing
+        drawer.setColorization(this._colorMode);
+        drawer.setVisibilities(this._visibilityStates);
         console.timeEnd('drawing time ' + this.position);
     }
 
@@ -237,6 +244,14 @@ export class Screen {
             if (!this._isFullscreen) {
                 this._highlightElementByTransparency(element, false);
             }
+        });
+
+        PubSub.subscribe('colorcodeChange', (eventName, args) => {
+            this._colorMode = args.colorcode;
+        });
+
+        PubSub.subscribe('fileVisibilityChange', (eventName, args) => {
+            this._visibilityStates[args.type] = args.enabled;
         });
     }
 
