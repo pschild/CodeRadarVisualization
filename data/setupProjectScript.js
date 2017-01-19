@@ -69,7 +69,51 @@ function addAnalyzingStrategy() {
     );
 }
 
+function addModules() {
+    console.log('adding modules...');
+
+    var modules = [
+        'plugins',
+        'plugins/analyzer-plugin-api',
+        'plugins/checkstyle-analyzer-plugin',
+        'plugins/findbugs-adapter-plugin',
+        'plugins/loc-analyzer-plugin',
+        'plugins/todo-analyzer-plugin',
+        'server',
+        'server/coderadar-webapp',
+        'server/coderadar-webapp/src/main/java/org/wickedsource/coderadar/analyzer',
+        'server/coderadar-webapp/src/main/java/org/wickedsource/coderadar/analyzingstrategy',
+        'server/coderadar-webapp/src/main/java/org/wickedsource/coderadar/commit',
+        'server/coderadar-webapp/src/main/java/org/wickedsource/coderadar/core',
+        'server/coderadar-webapp/src/main/java/org/wickedsource/coderadar/file',
+        'server/coderadar-webapp/src/main/java/org/wickedsource/coderadar/filepattern',
+        'server/coderadar-webapp/src/main/java/org/wickedsource/coderadar/job',
+        'server/coderadar-webapp/src/main/java/org/wickedsource/coderadar/metric',
+        'server/coderadar-webapp/src/main/java/org/wickedsource/coderadar/metricquery',
+        'server/coderadar-webapp/src/main/java/org/wickedsource/coderadar/module',
+        'server/coderadar-webapp/src/main/java/org/wickedsource/coderadar/project',
+        'server/coderadar-webapp/src/main/java/org/wickedsource/coderadar/qualityprofile',
+        'server/coderadar-webapp/src/main/java/org/wickedsource/coderadar/security',
+        'server/coderadar-webapp/src/main/java/org/wickedsource/coderadar/user',
+        'server/coderadar-webapp/src/main/java/org/wickedsource/coderadar/vcs'
+    ];
+
+    var promises = [];
+    for (var moduleName of modules) {
+        promises.push(
+            axios.post('http://localhost:8080/projects/1/modules',
+                {
+                    "modulePath": moduleName
+                }
+            )
+        );
+    }
+
+    return axios.all(promises);
+}
+
 createProject()
     .then(addFilePattern)
     .then(addAnalyzerConfig)
-    .then(addAnalyzingStrategy);
+    .then(addAnalyzingStrategy)
+    .then(addModules);
