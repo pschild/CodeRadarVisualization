@@ -6,12 +6,12 @@ export var config = {
     GROUND_AREA_METRIC_NAME: 'coderadar:size:sloc:java',
     GROUND_AREA_FACTOR: 1,
     GLOBAL_MAX_GROUND_AREA: 100,
-    GLOBAL_MIN_GROUND_AREA: 1.5,
+    GLOBAL_MIN_GROUND_AREA: 10,
 
     HEIGHT_METRIC_NAME: 'coderadar:size:loc:java',
     HEIGHT_FACTOR: 1,
     GLOBAL_MAX_HEIGHT: 100,
-    GLOBAL_MIN_HEIGHT: 0,
+    GLOBAL_MIN_HEIGHT: 10,
 
     COLOR_METRIC_NAME: 'coderadar:size:eloc:java',
 
