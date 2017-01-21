@@ -32,6 +32,8 @@ export class Screen {
         this.createControls();
         this.createLight();
 
+        this.addFog();
+
         this.interactionHandler = new InteractionHandler(this.scene, this.renderer, this.position);
 
         this.initializeEventListeners();
@@ -116,6 +118,10 @@ export class Screen {
 
     createScene() {
         this.scene = new THREE.Scene();
+    }
+
+    addFog() {
+        this.scene.fog = new THREE.FogExp2(0xf0f0f0, 0.0004);
     }
 
     createCamera() {
