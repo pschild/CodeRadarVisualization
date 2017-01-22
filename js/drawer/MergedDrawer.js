@@ -82,19 +82,29 @@ export class MergedDrawer extends AbstractDrawer {
 
                 } else if (isNaN(orangeGA)) {
                     // only blue block
-                    this.drawBlock(element, parent, config.COLOR_DELETED_FILE, blueGA, bottom, blueHeight, false, blueMetrics, this.COMMIT_TYPE_CURRENT, { deleted: true });
 
+                    var changeTypes = { deleted: true };
                     // cache element to draw connections
                     if (this._isElementMoved(element)) {
                         this.movedElements.push({
                             fromElementName: element.name,
                             toElementName: element.renamedTo
                         });
+
+                        changeTypes.moved = true;
                     }
+
+                    this.drawBlock(element, parent, config.COLOR_DELETED_FILE, blueGA, bottom, blueHeight, false, blueMetrics, this.COMMIT_TYPE_CURRENT, changeTypes);
 
                 } else if (isNaN(blueGA)) {
                     // only orange block
-                    this.drawBlock(element, parent, config.COLOR_ADDED_FILE, orangeGA, bottom, orangeHeight, false, orangeMetrics, this.COMMIT_TYPE_OTHER, { added: true });
+
+                    var changeTypes = { added: true };
+                    if (this._isElementMoved(element)) {
+                        changeTypes.moved = true;
+                    }
+
+                    this.drawBlock(element, parent, config.COLOR_ADDED_FILE, orangeGA, bottom, orangeHeight, false, orangeMetrics, this.COMMIT_TYPE_OTHER, changeTypes);
                 }
 
             // MODULE
@@ -191,7 +201,7 @@ export class MergedDrawer extends AbstractDrawer {
         for (var i = this.scene.children.length - 1; i >= 0; i--) {
             var child = this.scene.children[i];
 
-            if (child.type == 'Mesh' && child.userData.type == 'FILE') {
+            if (child.userData.type == 'FILE' || child.userData.type == 'CONNECTION') {
                 if (type == 'UNCHANGED' && child.userData.changeTypes.modified == false) {
                     child.visible = enabled;
                 } else if (type == 'CHANGED' && child.userData.changeTypes.modified == true) {
@@ -202,6 +212,8 @@ export class MergedDrawer extends AbstractDrawer {
                 } else if (type == 'ADDED' && child.userData.changeTypes.added == true) {
                     child.visible = enabled;
                     this._handleConnectionVisibility(enabled);
+                } else if (type == 'MOVED' && child.userData.changeTypes.moved == true) {
+                    child.visible = enabled;
                 }
             }
         }
@@ -218,6 +230,6 @@ export class MergedDrawer extends AbstractDrawer {
     }
 
     _isElementMoved(element) {
-        return element.renamedTo != null;
+        return element.renamedTo != null || element.renamedFrom != null;
     }
 }

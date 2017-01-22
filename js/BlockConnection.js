@@ -28,7 +28,10 @@ export class BlockConnection {
 
         this.curveObject = new THREE.Line(geometry, material);
         this.curveObject.userData = {
-            type: 'CONNECTION'
+            type: 'CONNECTION',
+            changeTypes: {
+                moved: true
+            }
         };
     }
 
