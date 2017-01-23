@@ -51,7 +51,7 @@ export class SingleDrawer extends AbstractDrawer {
                 var myGA = groundAreaMetric * config.GROUND_AREA_FACTOR + config.GLOBAL_MIN_GROUND_AREA + config.BLOCK_SPACING;
                 var otherGA = this._getMetricValueOfElementAndCommitType(element, config.GROUND_AREA_METRIC_NAME, this.COMMIT_TYPE_OTHER) * config.GROUND_AREA_FACTOR + config.GLOBAL_MIN_GROUND_AREA + config.BLOCK_SPACING;
 
-                var myColor = this._getColorByPosition(this.position);
+                var myColor = this._getColorByMetricValue(colorMetric);
 
                 if (myGA < otherGA) {
                     element.fit.x += (otherGA - myGA) / 2;

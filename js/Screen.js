@@ -9,7 +9,7 @@ export class Screen {
         this.commitId = undefined;
 
         // color and visibility states, configurable in the GUI, are saved here and given to the drawers after re-drawing the screens.
-        this._colorMode = 'commit';
+        this._colorMode = 'metric';
         this._visibilityStates = {};
 
         this._isFullscreen = false;
