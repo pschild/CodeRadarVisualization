@@ -4,6 +4,7 @@ import {CommitSelectionComponent} from './CommitSelectionComponent';
 import {CheckboxComponent} from './CheckboxComponent';
 import {ComparisonContainerComponent} from './ComparisonContainerComponent';
 import {DimensionSelectionComponent} from './DimensionSelectionComponent';
+import {ContextMenuComponent} from './ContextMenuComponent';
 
 export class Interface {
 
@@ -20,6 +21,8 @@ export class Interface {
         this.checkboxComponent = new CheckboxComponent();
         this.comparisonContainerComponent = new ComparisonContainerComponent(application);
         this.dimensionSelectionComponent = new DimensionSelectionComponent(application);
+        this.dimensionSelectionComponent = new DimensionSelectionComponent(application);
+        this.contextMenuComponent = new ContextMenuComponent();
     }
 
     showLoadingIndicator() {

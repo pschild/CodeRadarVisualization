@@ -43,10 +43,10 @@ export class InteractionHandler {
 
         this._raycaster.setFromCamera(this._mouseForRaycaster, camera);
 
-        var intersects = this._raycaster.intersectObjects(this._scene.children);
-        var target = this._findFirstNonHelperBlock(intersects);
+        // var intersects = this._raycaster.intersectObjects(this._scene.children);
+        // var target = this._findFirstNonHelperBlock(intersects);
 
-        this._updateTooltip(target);
+        // this._updateTooltip(target);
     }
 
     _updateTooltip(target) {
@@ -113,7 +113,7 @@ export class InteractionHandler {
         };
     }
 
-    _onDocumentMouseUp() {
+    _onDocumentMouseUp(event) {
         this._renderer.domElement.style.cursor = '-webkit-grab';
 
         if (!this._enabled) {
@@ -127,16 +127,24 @@ export class InteractionHandler {
         var intersects = this._raycaster.intersectObjects(this._scene.children);
         var target = this._findFirstNonHelperBlock(intersects);
         if (target) {
-            var doReset;
-            if (target.uuid != this._clickedElementUuid) {
-                doReset = false;
-                this._clickedElementUuid = target.uuid;
-            } else {
-                doReset = true;
-                this._clickedElementUuid = undefined;
-            }
+            if (event.which == 1) { // left mouse button
+                var doReset;
+                if (target.uuid != this._clickedElementUuid) {
+                    doReset = false;
+                    this._clickedElementUuid = target.uuid;
+                } else {
+                    doReset = true;
+                    this._clickedElementUuid = undefined;
+                }
 
-            PubSub.publish('elementClicked', { elementName: target.name, doReset: doReset });
+                PubSub.publish('elementClicked', { elementName: target.name, doReset: doReset });
+
+            } else if (event.which == 3) { // right mouse button
+                if (target.userData && target.userData.type == 'MODULE' && !this._isFullscreen) {
+                    event.preventDefault();
+                    PubSub.publish('elementRightClicked', { elementName: target.name, position: { x: event.clientX, y: event.clientY } });
+                }
+            }
         }
     }
 

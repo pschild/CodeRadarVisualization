@@ -103,6 +103,7 @@ export class SingleDrawer extends AbstractDrawer {
         cube.scale.z = finalDepth;
 
         cube.userData = {
+            parentName: parent ? parent.name : undefined,
             metrics: metrics,
             type: element.type,
             tooltipLabel: this._generateTooltipHtml(element.name, metrics),

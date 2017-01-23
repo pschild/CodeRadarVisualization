@@ -240,6 +240,17 @@ export class Screen {
             }
         });
 
+        PubSub.subscribe('toggleChildElements', (eventName, args) => {
+            var moduleName = args.elementName;
+            for (var i = this.scene.children.length - 1; i >= 0; i--) {
+                var child = this.scene.children[i];
+
+                if (child.userData && child.userData.type == 'FILE' && child.userData.parentName == moduleName) {
+                    child.visible = !child.visible;
+                }
+            }
+        });
+
         PubSub.subscribe('searchEntryClicked', (eventName, args) => {
             var element = this.scene.getObjectByName(args.elementName);
             if (element) {
