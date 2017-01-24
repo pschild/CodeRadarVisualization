@@ -64,6 +64,7 @@ export class Screen {
         var drawer = new drawerClazz(this.scene, this.position, this._isFullscreen, this.minMaxPairOfColorMetric);
         drawer.calculateGroundAreas(this.data);
         drawer.drawElements(this.data);
+        drawer.colorizeModules();
         if (this._isFullscreen) {
             drawer.drawBlockConnections();
         }

@@ -1,6 +1,7 @@
 import {config} from '../Config';
 import {ElementAnalyzer} from '../ElementAnalyzer';
 import {MetricNameService} from '../service/MetricNameService';
+import * as chroma from 'chroma-js/chroma';
 
 export class AbstractDrawer {
 
@@ -11,6 +12,9 @@ export class AbstractDrawer {
 
         this.COMMIT_TYPE_OTHER = 'other';
         this.COMMIT_TYPE_CURRENT = 'current';
+
+        this.minBottomValue = 0;
+        this.maxBottomValue = -1;
 
         this.scene = scene;
         this.position = position;
@@ -63,6 +67,22 @@ export class AbstractDrawer {
     drawElements(elements, parent, bottom = 0) {}
 
     drawBlock(element, parent, color, currentCommitSize, bottom, height, isTransparent) {}
+
+    colorizeModules() {
+        for (var i = this.scene.children.length - 1; i >= 0; i--) {
+            var child = this.scene.children[i];
+
+            if (child.userData && child.userData.type == 'MODULE') {
+                child.material.color.set(this._getColorByBottomValue(child.userData.bottom));
+            }
+        }
+    }
+
+    _getColorByBottomValue(value) {
+        var colorScale = chroma.scale([config.COLOR_MODULE_FROM, config.COLOR_MODULE_TO]);
+        var hexValue = colorScale(value / (this.maxBottomValue + this.minBottomValue)).hex();
+        return new THREE.Color(hexValue);
+    }
 
     setColorization(colorMode) {}
 

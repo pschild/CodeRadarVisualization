@@ -60,8 +60,12 @@ export class SingleDrawer extends AbstractDrawer {
                 this.drawBlock(element, parent, myColor, myGA, bottom, myHeight, false, metrics);
 
             } else {
+                if (bottom > this.maxBottomValue) {
+                    this.maxBottomValue = bottom;
+                }
+
                 myHeight = config.DEFAULT_BLOCK_HEIGHT;
-                this.drawBlock(element, parent, config.COLOR_MODULE, undefined, bottom, myHeight, false, metrics);
+                this.drawBlock(element, parent, config.COLOR_MODULE_FROM, undefined, bottom, myHeight, false, metrics);
             }
 
             // recursion
@@ -104,6 +108,7 @@ export class SingleDrawer extends AbstractDrawer {
 
         cube.userData = {
             parentName: parent ? parent.name : undefined,
+            bottom: bottom,
             metrics: metrics,
             type: element.type,
             tooltipLabel: this._generateTooltipHtml(element.name, metrics),

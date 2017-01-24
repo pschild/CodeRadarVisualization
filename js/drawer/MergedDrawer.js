@@ -111,8 +111,12 @@ export class MergedDrawer extends AbstractDrawer {
             } else {
                 // don't draw empty modules
                 if (this._hasChildrenForCurrentCommit(element)) {
+                    if (bottom > this.maxBottomValue) {
+                        this.maxBottomValue = bottom;
+                    }
+
                     blueHeight = config.DEFAULT_BLOCK_HEIGHT;
-                    this.drawBlock(element, parent, config.COLOR_MODULE, undefined, bottom, blueHeight);
+                    this.drawBlock(element, parent, config.COLOR_MODULE_FROM, undefined, bottom, blueHeight);
                 }
             }
 
@@ -169,6 +173,7 @@ export class MergedDrawer extends AbstractDrawer {
 
         cube.userData = {
             parentName: parent ? parent.name : undefined,
+            bottom: bottom,
             metrics: metrics,
             type: element.type,
             tooltipLabel: this._generateTooltipHtml(element.name, metrics),

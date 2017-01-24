@@ -22,7 +22,8 @@ export var config = {
     HELPER_BLOCK_HEIGHT: 10,
     HELPER_BLOCK_VISIBLE: true,
 
-    COLOR_MODULE: '#cccccc',
+    COLOR_MODULE_FROM: '#cccccc',
+    COLOR_MODULE_TO: '#525252',
     COLOR_FIRST_COMMIT: '#0e8cf3',
     COLOR_SECOND_COMMIT: '#ffb100',
     COLOR_ADDED_FILE: '#49c35c',
