@@ -77,6 +77,10 @@ export class Screen {
         this.commitId = commitId;
     }
 
+    getCommitId() {
+        return this.commitId;
+    }
+
     setFullscreen() {
         this._isFullscreen = true;
         this.getInteractionHandler().setFullscreen();
@@ -188,7 +192,7 @@ export class Screen {
     }
 
     createRenderer() {
-        this.renderer = new THREE.WebGLRenderer({antialias: true});
+        this.renderer = new THREE.WebGLRenderer({antialias: true, preserveDrawingBuffer: true});
         this.renderer.setClearColor(0xf0f0f0);
         this.renderer.setSize(this._getScreenWidth() - config.SCREEN_PADDING, window.innerHeight);
 
@@ -197,6 +201,10 @@ export class Screen {
 
     updateRenderer() {
         this.renderer.setSize(this._getScreenWidth() - config.SCREEN_PADDING, window.innerHeight);
+    }
+
+    getRenderer() {
+        return this.renderer;
     }
 
     createLight() {

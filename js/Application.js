@@ -157,6 +157,10 @@ export class Application {
         return this.screens['right'];
     }
 
+    getIsFullscreen() {
+        return this.IS_FULLSCREEN;
+    }
+
     createInterface() {
         this.interface = new Interface(this);
     }
