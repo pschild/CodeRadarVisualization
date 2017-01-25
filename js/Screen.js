@@ -68,9 +68,20 @@ export class Screen {
         if (this._isFullscreen) {
             drawer.drawBlockConnections();
         }
-        // apply color and visibility states so that state does not get lost by re-drawing
+        // apply color state so that state does not get lost by re-drawing
         drawer.setColorization(this._colorMode);
-        drawer.setVisibilities(this._visibilityStates);
+
+        for (var i = this.scene.children.length - 1; i >= 0; i--) {
+            var child = this.scene.children[i];
+
+            if (child.userData && (child.userData.type == 'FILE' || child.userData.type == 'CONNECTION')) {
+                child.visible = true;
+                if (this._isFullscreen) {
+                    this.applyElementVisibilityStates(child);
+                }
+            }
+        }
+
         console.timeEnd('drawing time ' + this.position);
     }
 
@@ -254,8 +265,11 @@ export class Screen {
             for (var i = this.scene.children.length - 1; i >= 0; i--) {
                 var child = this.scene.children[i];
 
-                if (child.userData && child.userData.type == 'FILE' && child.userData.parentName == moduleName) {
+                if (child.userData && (child.userData.type == 'FILE' || child.userData.type == 'CONNECTION') && child.userData.parentName == moduleName) {
                     child.visible = !child.visible;
+                    if (this._isFullscreen) {
+                        this.applyElementVisibilityStates(child);
+                    }
                 }
             }
         });
@@ -278,7 +292,42 @@ export class Screen {
 
         PubSub.subscribe('fileVisibilityChange', (eventName, args) => {
             this._visibilityStates[args.type] = args.enabled;
+
+            for (var i = this.scene.children.length - 1; i >= 0; i--) {
+                var child = this.scene.children[i];
+
+                if (child.userData && (child.userData.type == 'FILE' || child.userData.type == 'CONNECTION')) {
+                    child.visible = true;
+                    if (this._isFullscreen) {
+                        this.applyElementVisibilityStates(child);
+                    }
+                }
+            }
         });
+    }
+
+    applyElementVisibilityStates(element) {
+        var states = this._visibilityStates;
+
+        if (states.UNCHANGED == false && element.userData.changeTypes && element.userData.changeTypes.modified == false) {
+            element.visible = false;
+        }
+
+        if (states.CHANGED == false && element.userData.changeTypes && element.userData.changeTypes.modified == true) {
+            element.visible = false;
+        }
+
+        if (states.DELETED == false && element.userData.changeTypes && element.userData.changeTypes.deleted == true) {
+            element.visible = false;
+        }
+
+        if (states.ADDED == false && element.userData.changeTypes && element.userData.changeTypes.added == true) {
+            element.visible = false;
+        }
+
+        if (states.MOVED == false && element.userData.changeTypes && element.userData.changeTypes.moved == true) {
+            element.visible = false;
+        }
     }
 
     _highlightElementByTransparency(element, doReset) {

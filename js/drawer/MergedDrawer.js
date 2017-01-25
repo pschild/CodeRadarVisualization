@@ -189,52 +189,6 @@ export class MergedDrawer extends AbstractDrawer {
         this.scene.add(new BlockConnection(fromElement, toElement).getCurve());
     }
 
-    // override
-    setVisibilities(visibilityStates) {
-        for (let type of Object.keys(visibilityStates)) {
-            this._handleFileVisibilityChange(type, visibilityStates[type]);
-        }
-    }
-
-    // override
-    initializeEventListeners() {
-        PubSub.subscribe('fileVisibilityChange', (eventName, args) => {
-            this._handleFileVisibilityChange(args.type, args.enabled);
-        });
-    }
-
-    _handleFileVisibilityChange(type, enabled) {
-        for (var i = this.scene.children.length - 1; i >= 0; i--) {
-            var child = this.scene.children[i];
-
-            if (child.userData.type == 'FILE' || child.userData.type == 'CONNECTION') {
-                if (type == 'UNCHANGED' && child.userData.changeTypes.modified == false) {
-                    child.visible = enabled;
-                } else if (type == 'CHANGED' && child.userData.changeTypes.modified == true) {
-                    child.visible = enabled;
-                } else if (type == 'DELETED' && child.userData.changeTypes.deleted == true) {
-                    child.visible = enabled;
-                    this._handleConnectionVisibility(enabled);
-                } else if (type == 'ADDED' && child.userData.changeTypes.added == true) {
-                    child.visible = enabled;
-                    this._handleConnectionVisibility(enabled);
-                } else if (type == 'MOVED' && child.userData.changeTypes.moved == true) {
-                    child.visible = enabled;
-                }
-            }
-        }
-    }
-
-    _handleConnectionVisibility(visible) {
-        for (var i = this.scene.children.length - 1; i >= 0; i--) {
-            var child = this.scene.children[i];
-
-            if (child.type == 'Line' && child.userData.type == 'CONNECTION') {
-                child.visible = visible;
-            }
-        }
-    }
-
     _isElementMoved(element) {
         return element.renamedTo != null || element.renamedFrom != null;
     }

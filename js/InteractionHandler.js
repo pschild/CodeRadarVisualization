@@ -140,7 +140,7 @@ export class InteractionHandler {
                 PubSub.publish('elementClicked', { elementName: target.name, doReset: doReset });
 
             } else if (event.which == 3) { // right mouse button
-                if (target.userData && target.userData.type == 'MODULE' && !this._isFullscreen) {
+                if (target.userData && target.userData.type == 'MODULE') {
                     event.preventDefault();
                     PubSub.publish('elementRightClicked', { elementName: target.name, position: { x: event.clientX, y: event.clientY } });
                 }

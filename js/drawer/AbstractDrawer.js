@@ -86,8 +86,6 @@ export class AbstractDrawer {
 
     setColorization(colorMode) {}
 
-    setVisibilities(visibilityStates) {}
-
     initializeEventListeners() {}
 
     _generateTooltipHtml(elementName, metrics) {
