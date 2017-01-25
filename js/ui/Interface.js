@@ -22,7 +22,6 @@ export class Interface {
         this.checkboxComponent = new CheckboxComponent();
         this.comparisonContainerComponent = new ComparisonContainerComponent(application);
         this.dimensionSelectionComponent = new DimensionSelectionComponent(application);
-        this.dimensionSelectionComponent = new DimensionSelectionComponent(application);
         this.contextMenuComponent = new ContextMenuComponent();
         this.screenshotComponent = new ScreenshotComponent(application);
     }
