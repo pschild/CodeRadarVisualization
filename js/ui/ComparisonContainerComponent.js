@@ -56,17 +56,17 @@ export class ComparisonContainerComponent {
             rowEl.appendChild(metricNameEl);
 
             var firstCommitMetricValueEl = document.createElement('td');
-            firstCommitMetricValueEl.innerHTML = args.leftElement ? args.leftElement.userData.metrics[metricName] : '-';
+            firstCommitMetricValueEl.innerHTML = args.leftElement ? args.leftElement.userData.metrics[metricName] || 'N/A' : '-';
             rowEl.appendChild(firstCommitMetricValueEl);
 
             var secondCommitMetricValueEl = document.createElement('td');
-            secondCommitMetricValueEl.innerHTML = args.rightElement ? args.rightElement.userData.metrics[metricName] : '-';
+            secondCommitMetricValueEl.innerHTML = args.rightElement ? args.rightElement.userData.metrics[metricName] || 'N/A' : '-';
             rowEl.appendChild(secondCommitMetricValueEl);
 
             var diffMetricValueEl = document.createElement('td');
 
             var diffLabel, iconEl;
-            if (args.leftElement && args.rightElement) {
+            if (args.leftElement && args.rightElement && !isNaN(diff)) {
                 var diff = args.rightElement.userData.metrics[metricName] - args.leftElement.userData.metrics[metricName];
                 if (diff > 0) {
                     diffLabel = '+' + diff;
@@ -74,7 +74,7 @@ export class ComparisonContainerComponent {
                 } else if (diff < 0) {
                     diffLabel = diff;
                     iconEl = '<span class="icon-arrow-down-right"></span>';
-                } else {
+                } else if (diff == 0) {
                     diffLabel = diff;
                     iconEl = '<span class="icon-arrow-right"></span>';
                 }
