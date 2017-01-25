@@ -131,7 +131,7 @@ export class SingleDrawer extends AbstractDrawer {
     }
 
     _getColorByMetricValue(value) {
-        var colorScale = chroma.scale(['#ffffff','#ffc905','#f78400','#e92100','#9b1909','#4f1609','#5d0000']);
+        var colorScale = chroma.scale(config.COLOR_METRIC_RANGE);
         var hexValue = colorScale(value / (this.maxColorMetricValue + this.minColorMetricValue)).hex();
         return new THREE.Color(hexValue);
     }

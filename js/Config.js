@@ -24,6 +24,7 @@ export var config = {
 
     COLOR_MODULE_FROM: '#cccccc',
     COLOR_MODULE_TO: '#525252',
+    COLOR_METRIC_RANGE: ['#ffffff','#ffc905','#f78400','#e92100','#9b1909','#4f1609','#5d0000'],
     COLOR_FIRST_COMMIT: '#0e8cf3',
     COLOR_SECOND_COMMIT: '#ffb100',
     COLOR_ADDED_FILE: '#49c35c',
