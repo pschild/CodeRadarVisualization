@@ -1,0 +1,15 @@
+.dimension-selection-container {
+    position: relative;
+    display: none;
+
+    & .dropdown-wrapper {
+        position: absolute;
+        background-color: #fff;
+        padding: 10px;
+        box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.2);
+
+        & > div {
+            padding: 5px 0;
+        }
+    }
+}

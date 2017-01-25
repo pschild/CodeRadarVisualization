@@ -90,7 +90,7 @@
         </div>
     </div>
 
-    <div id="control-group-visible-files" class="control-container">
+    <div id="control-group-visible-files" class="control-container" style="display: none;">
         <div>
             Sichtbare Dateitypen: <span class="tooltip-toggle" aria-label="Ein- oder Ausblenden von bestimmten Dateitypen in der Visualisierung"><i class="icon-info"></i></span>
         </div>
@@ -123,19 +123,26 @@
     </div>
 
     <div class="control-container">
-        <div>
-            <label for="height-metric-name">Höhe:</label>
-            <select id="height-metric-name"></select>
-        </div>
+        <button id="toggle-dynamic-mapping-panel-btn">Auswahl öffnen <i class="icon-keyboard_arrow_down"></i></button>
+        <span class="tooltip-toggle" aria-label="Dynamische Abbildung verschiedener Metriken auf Grundfläche, Höhe und Farbe"><i class="icon-info"></i></span>
 
-        <div>
-            <label for="ground-area-metric-name">Grundfläche:</label>
-            <select id="ground-area-metric-name"></select>
-        </div>
+        <div class="dimension-selection-container">
+            <div class="dropdown-wrapper">
+                <div>
+                    <label for="height-metric-name">Höhe:</label>
+                    <select id="height-metric-name"></select>
+                </div>
 
-        <div>
-            <label for="color-metric-name">Farbe:</label>
-            <select id="color-metric-name"></select>
+                <div>
+                    <label for="ground-area-metric-name">Grundfläche:</label>
+                    <select id="ground-area-metric-name"></select>
+                </div>
+
+                <div>
+                    <label for="color-metric-name">Farbe:</label>
+                    <select id="color-metric-name"></select>
+                </div>
+            </div>
         </div>
     </div>
 

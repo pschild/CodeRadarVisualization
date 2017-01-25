@@ -7,6 +7,9 @@ export class DimensionSelectionComponent {
     constructor() {
         this.metricNameService = new MetricNameService();
 
+        this.toggleDynamicMappingPanelButton = document.querySelector('#toggle-dynamic-mapping-panel-btn');
+        this.dimensionSelectionContainer = document.querySelector('.dimension-selection-container');
+
         this.heightDimensionSelect = document.querySelector('#height-metric-name');
         this.groundAreaDimensionSelect = document.querySelector('#ground-area-metric-name');
         this.colorDimensionSelect = document.querySelector('#color-metric-name');
@@ -21,6 +24,11 @@ export class DimensionSelectionComponent {
     }
 
     _bindEvents() {
+        this.toggleDynamicMappingPanelButton.addEventListener('click', () => {
+            this._toggleDimensionSelectionContainerVisibility();
+            this._toggleButtonActiveState();
+        });
+
         this.heightDimensionSelect.addEventListener('change', function() {
             PubSub.publish('heightDimensionChange', {
                 metricName: this.value
@@ -54,5 +62,21 @@ export class DimensionSelectionComponent {
         this.heightDimensionSelect.value = this.metricNameService.getShortNameByFullName(config.HEIGHT_METRIC_NAME);
         this.groundAreaDimensionSelect.value = this.metricNameService.getShortNameByFullName(config.GROUND_AREA_METRIC_NAME);
         this.colorDimensionSelect.value = this.metricNameService.getShortNameByFullName(config.COLOR_METRIC_NAME);
+    }
+
+    _toggleDimensionSelectionContainerVisibility() {
+        if (this.dimensionSelectionContainer.style.display == 'block') {
+            this.dimensionSelectionContainer.style.display = 'none';
+        } else {
+            this.dimensionSelectionContainer.style.display = 'block';
+        }
+    }
+
+    _toggleButtonActiveState() {
+        if (this.toggleDynamicMappingPanelButton.classList.contains('active')) {
+            this.toggleDynamicMappingPanelButton.classList.remove('active');
+        } else {
+            this.toggleDynamicMappingPanelButton.classList.add('active');
+        }
     }
 }
