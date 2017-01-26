@@ -1,5 +1,7 @@
 export var config = {
     BASE_URL: 'http://localhost:8080',
+    USERNAME: 'radar',
+    PASSWORD: 'Password12!',
 
     SCREEN_PADDING: 0,
 

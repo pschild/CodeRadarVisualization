@@ -6,6 +6,7 @@ import {CoderadarMetricService} from './service/CoderadarMetricService';
 import {DummyMetricService} from './service/DummyMetricService';
 import {DummyCommitService} from './service/DummyCommitService';
 import {CoderadarCommitService} from './service/CoderadarCommitService';
+import {CoderadarAuthorizationService} from './service/CoderadarAuthorizationService';
 import {MetricNameService} from './service/MetricNameService';
 import {CommitMapper} from './domain/CommitMapper';
 import {CommitMerger} from './CommitMerger';
@@ -21,6 +22,7 @@ export class Application {
 
         this._uniqueElementList = [];
 
+        this.authorizationService = new CoderadarAuthorizationService();
         this.commitService = new CoderadarCommitService(); // DummyCommitService CoderadarCommitService
         this.metricService = new CoderadarMetricService(); // DummyMetricService CoderadarMetricService
         this.metricNameService = new MetricNameService();
@@ -40,8 +42,17 @@ export class Application {
     }
 
     initialize() {
-        // FIRST: load commits
-        this.commitService.load((data) => {
+        this.login()
+            .then(this.loadCommits.bind(this))
+            .then(this.loadMetricData.bind(this));
+    }
+
+    login() {
+        return this.authorizationService.authorize();
+    }
+
+    loadCommits() {
+        return this.commitService.load((data) => {
             var commitMapper = new CommitMapper(data);
             commitMapper.mapAll();
 
@@ -58,15 +69,12 @@ export class Application {
 
             this.getLeftScreen().setCommitId(this.leftCommitId);
             this.getRightScreen().setCommitId(this.rightCommitId);
-
-            // SECOND: load commit data
-            this.loadMetricData();
         });
     }
 
     loadMetricData() {
         this.interface.showLoadingIndicator();
-        this.metricService.loadDeltaTree(this.leftCommitId, this.rightCommitId).then((result) => {
+        return this.metricService.loadDeltaTree(this.leftCommitId, this.rightCommitId).then((result) => {
             this.result = result.data;
 
             // #3: set commitId dynamically

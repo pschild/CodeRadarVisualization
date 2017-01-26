@@ -10,7 +10,7 @@ export class CoderadarCommitService {
     load(callbackFn) {
         var params = {};
 
-        axios.get(this.URL, params)
+        return axios.get(this.URL, params)
             .then(function (response) {
                 callbackFn(response.data);
             })
