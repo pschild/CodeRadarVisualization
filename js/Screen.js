@@ -14,7 +14,7 @@ export class Screen {
 
         this._isFullscreen = false;
         this._cameraStartPosition = {
-            x: 1000, y: 1000, z: 1000
+            x: 100, y: 100, z: 100
         };
         this._centralPosition = {
             x: 0, y: 0, z: 0
@@ -141,7 +141,7 @@ export class Screen {
     }
 
     createCamera() {
-        this.camera = new THREE.PerspectiveCamera(45, (this._getScreenWidth() - config.SCREEN_PADDING) / window.innerHeight, 1, 100000);
+        this.camera = new THREE.PerspectiveCamera(45, (this._getScreenWidth() - config.SCREEN_PADDING) / window.innerHeight, 0.1, 10000);
         this.camera.position.x = this._cameraStartPosition.x;
         this.camera.position.y = this._cameraStartPosition.y;
         this.camera.position.z = this._cameraStartPosition.z;
@@ -363,9 +363,9 @@ export class Screen {
 
         new TWEEN.Tween(this.camera.position)
             .to({
-                x: element.position.x + 200,
-                y: element.position.y + 200,
-                z: element.position.z + 200
+                x: element.position.x + 20,
+                y: element.position.y + 20,
+                z: element.position.z + 20
             }, this._animationDuration)
             .easing(this._animationEasing)
             .start();
