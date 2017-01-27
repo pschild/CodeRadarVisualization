@@ -37,6 +37,9 @@ export class Screen {
         this.interactionHandler = new InteractionHandler(this.scene, this.renderer, this.position);
 
         this.initializeEventListeners();
+
+        // this.stats = new Stats();
+        // document.body.appendChild(this.stats.dom);
     }
 
     getScene() {
@@ -232,6 +235,7 @@ export class Screen {
         this._requestAnimationFrameId = requestAnimationFrame(() => {
             window.renderCalls++;
             this.render();
+            // this.stats.update();
         });
 
         this.interactionHandler.update(this.camera);
