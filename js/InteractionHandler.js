@@ -43,10 +43,10 @@ export class InteractionHandler {
 
         this._raycaster.setFromCamera(this._mouseForRaycaster, camera);
 
-        // var intersects = this._raycaster.intersectObjects(this._scene.children);
-        // var target = this._findFirstNonHelperBlock(intersects);
+        var intersects = this._raycaster.intersectObjects(this._scene.children);
+        var target = this._findFirstNonHelperBlock(intersects);
 
-        // this._updateTooltip(target);
+        this._updateTooltip(target);
     }
 
     _updateTooltip(target) {
@@ -56,15 +56,15 @@ export class InteractionHandler {
                 this._hoveredElementUuid = target.uuid;
             }
 
-            if (this.tooltipElement.style.display != 'block') {
-                this.tooltipElement.style.display = 'block';
+            if (!this.tooltipElement.classList.contains('visible')) {
+                this.tooltipElement.classList.add('visible');
             }
 
-            this.tooltipElement.style.left = this._mouse.x + 5 + 'px';
-            this.tooltipElement.style.top = this._mouse.y + 5 + 'px';
+            // this.tooltipElement.style.left = this._mouse.x + 5 + 'px';
+            // this.tooltipElement.style.top = this._mouse.y + 5 + 'px';
         } else {
-            if (this.tooltipElement.style.display == 'block') {
-                this.tooltipElement.style.display = 'none';
+            if (this.tooltipElement.classList.contains('visible')) {
+                this.tooltipElement.classList.remove('visible')
             }
         }
     }

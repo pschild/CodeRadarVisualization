@@ -1,23 +1,28 @@
 #tooltip {
     position: absolute;
-    top: 0;
-    left: 0;
-    background-color: #2B222A;
-    color: #fff;
+    top: 100px;
+    left: 50%;
+    background: #fff;
+    box-shadow: rgba(0,0,0,0.2) 0 2px 6px 0;
     padding: 10px;
     font-size: 14px;
-    max-width: 300px;
+    width: 300px;
     z-index: 99;
 
-    display: none;
+    transform: translate3d(-50%, -110%, 0);
+    transition: transform 1.5s ease;
 
     & > .element-name {
         text-overflow: ellipsis;
-        text-align: center;
+        text-align: left;
         white-space: nowrap;
         overflow: hidden;
         direction: rtl;
         padding: 0 10px;
+    }
+
+    &.visible {
+        transform: translate3d(-50%, 0%, 0);
     }
 }
 

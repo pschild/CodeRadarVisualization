@@ -95,7 +95,7 @@ export class AbstractDrawer {
 
         if (metrics) {
             for (let key of Object.keys(metrics)) {
-                tooltipHtml.push('<div>' + this.metricNameService.getShortNameByFullName(key) + ': ' + metrics[key] + '</div>');
+                tooltipHtml.push('<div>' + this.metricNameService.getShortNameByFullName(key) + ': ' + (metrics[key] || 'N/A') + '</div>');
             }
         }
 
