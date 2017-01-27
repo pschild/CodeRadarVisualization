@@ -190,6 +190,7 @@ export class Application {
 
         PubSub.subscribe('colorDimensionChange', (eventName, args) => {
             config.COLOR_METRIC_NAME = this.metricNameService.getMetricNameByShortName(args.metricName);
+            this.interface.legendComponent.setColorCode();
             this.loadMetricData();
         });
 

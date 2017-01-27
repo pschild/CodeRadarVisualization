@@ -191,11 +191,15 @@
         </div>
     </div>
     <div id="legend-container">
-        <div id="legend-item-commit-1" class="legend-item">
+        <div id="legend-item-color-code" class="legend-item">
+            <span class="legend-color"></span>
+            <span class="legend-label"></span>
+        </div>
+        <div id="legend-item-commit-1" class="legend-item" style="display: none;">
             <span class="legend-color"></span>
             <span class="legend-label">Erste Revision</span>
         </div>
-        <div id="legend-item-commit-2" class="legend-item">
+        <div id="legend-item-commit-2" class="legend-item" style="display: none;">
             <span class="legend-color"></span>
             <span class="legend-label">Zweite Revision</span>
         </div>
@@ -211,10 +215,6 @@
             <span class="legend-color"></span>
             <span class="legend-label">unverändert</span>
         </div>
-        <div id="legend-item-color-code" class="legend-item" style="display: none;">
-            <span class="legend-color"></span>
-            <span class="legend-label"></span>
-        </div>
     </div>
 </div>
 
@@ -222,8 +222,6 @@
 
 <script src="node_modules/binpacking/js/packer.growing.js"></script>
 <script src="node_modules/binpacking/js/packer.js"></script>
-
-<script src="node_modules/d3/build/d3.min.js"></script>
 
 <script src="node_modules/axios/dist/axios.min.js"></script>
 

@@ -7,13 +7,14 @@ export class LegendComponent {
     constructor() {
         this.legendItemCommit1 = document.querySelector('#legend-item-commit-1');
         this.legendItemCommit2 = document.querySelector('#legend-item-commit-2');
+        this.legendItemColorCode = document.querySelector('#legend-item-color-code');
         this.legendItemAddedFiles = document.querySelector('#legend-item-added-files');
         this.legendItemDeletedFiles = document.querySelector('#legend-item-deleted-files');
         this.legendItemUnchangedFiles = document.querySelector('#legend-item-unchanged-files');
-        this.legendItemColorCode = document.querySelector('#legend-item-color-code');
 
         this.metricNameService = new MetricNameService();
 
+        this.setColorCode();
         this.setCommitColors();
         this.setAddedDeletedUnchangedColors();
 
@@ -23,7 +24,6 @@ export class LegendComponent {
     setCommitColors() {
         this.legendItemCommit1.querySelector('.legend-color').style.background = config.COLOR_FIRST_COMMIT;
         this.legendItemCommit2.querySelector('.legend-color').style.background = config.COLOR_SECOND_COMMIT;
-        this.legendItemUnchangedFiles.querySelector('.legend-color').style.background = config.COLOR_UNCHANGED_FILE;
     }
 
     setAddedDeletedUnchangedColors() {
@@ -69,23 +69,27 @@ export class LegendComponent {
 
     _bindEvents() {
         PubSub.subscribe('fullSplitToggle', (eventName, args) => {
-            this._showCommitItems();
             if (args.enabled) {
-                this._hideColorCodeItem();
+                this._showCommitItems();
                 this._showAddedDeletedUnchangedFilesItems();
+
+                this._hideColorCodeItem();
             } else {
+                this._showColorCodeItem();
+
+                this._hideCommitItems();
                 this._hideAddedDeletedUnchangedFilesItems();
             }
         });
 
-        PubSub.subscribe('colorcodeChange', (eventName, args) => {
-            if (args.colorcode == 'metric') {
-                this._showColorCodeItem();
-                this._hideCommitItems();
-            } else {
-                this._hideColorCodeItem();
-                this._showCommitItems();
-            }
-        });
+        // PubSub.subscribe('colorcodeChange', (eventName, args) => {
+        //     if (args.colorcode == 'metric') {
+        //         this._showColorCodeItem();
+        //         this._hideCommitItems();
+        //     } else {
+        //         this._hideColorCodeItem();
+        //         this._showCommitItems();
+        //     }
+        // });
     }
 }
