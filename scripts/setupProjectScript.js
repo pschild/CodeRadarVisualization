@@ -155,10 +155,11 @@ function addModules() {
     return axios.all(promises);
 }
 
-registerUser()
-    .then(authorizeUser)
-    .then(createProject)
+// registerUser()
+//     .then(authorizeUser)
+//     .then(createProject);
+authorizeUser()
     .then(addFilePattern)
     .then(addAnalyzerConfig)
-    .then(addAnalyzingStrategy);
-    // .then(addModules);
+    .then(addAnalyzingStrategy)
+    .then(addModules);

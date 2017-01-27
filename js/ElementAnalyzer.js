@@ -10,6 +10,7 @@ export class ElementAnalyzer {
                 uniqueElements.push(element.name);
             }
 
+            // recursion
             if (element.children && element.children.length > 0) {
                 this.generateUniqueElementList(element.children, uniqueElements);
             }

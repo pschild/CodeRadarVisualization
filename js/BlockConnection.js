@@ -1,6 +1,3 @@
-/**
- * usecase: scene.add(new BlockConnection(element1, element2).getCurve());
- */
 export class BlockConnection {
     constructor(fromElement, toElement) {
         var from = fromElement.position.clone();

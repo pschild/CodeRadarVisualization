@@ -7,69 +7,36 @@ import packers from 'binpacking';
 // mock GrowingPacker because it's imported with script-tag
 MergedDrawer.prototype._getPacker = sinon.stub().returns(packers.GrowingPacker.prototype);
 
-const CURRENT_COMMIT = 'abc123';
 // initialize a MergedDrawer because AbstractDrawer cannot be initialized
-var drawer = new MergedDrawer(null, CURRENT_COMMIT);
+var drawer = new MergedDrawer(null, 'left');
 
-var invalidJson = {
-    type: 'ROOT',
-    children: [
-        {
-            type: 'FILE',
-            metricValues: {
-                'metricName1': 111,
-                'metricName2': 222
-            },
-            children: []
-        },
-        {
-            type: 'MODULE',
-            children: [
-                {
-                    type: 'FILE',
-                    metricValues: {
-                        'metricName1': 333,
-                        'metricName2': 444
-                    },
-                    children: []
-                }
-            ]
-        }
-    ]
-};
 var validJsonContainingCommitId = {
-    type: 'ROOT',
-    name: 'ROOT',
+    type: 'MODULE',
     children: [
         {
             type: 'FILE',
-            name: 'A1.java',
-            metricValues: {
-                'metricName1': {
-                    'def456': 111
-                },
-                'metricName2': {
-                    'def456': 111
-                }
+            'commit1Metrics': null,
+            'commit2Metrics': {
+                'coderadar:size:loc:java': 9,
+                'coderadar:size:eloc:java': 3,
+                'coderadar:size:sloc:java': 5
             },
             children: []
         },
         {
             type: 'MODULE',
-            name: 'Module B',
             children: [
                 {
                     type: 'FILE',
-                    name: 'B1.java',
-                    metricValues: {
-                        'metricName1': {
-                            'abc123': 111,
-                            'def456': 222
-                        },
-                        'metricName2': {
-                            'abc123': 111,
-                            'def456': 222
-                        }
+                    'commit1Metrics': {
+                        'coderadar:size:loc:java': 9,
+                        'coderadar:size:eloc:java': 3,
+                        'coderadar:size:sloc:java': 5
+                    },
+                    'commit2Metrics': {
+                        'coderadar:size:loc:java': 9,
+                        'coderadar:size:eloc:java': 3,
+                        'coderadar:size:sloc:java': 5
                     },
                     children: []
                 }
@@ -78,17 +45,15 @@ var validJsonContainingCommitId = {
     ]
 };
 var validJsonNotContainingCommitId = {
-    type: 'ROOT',
+    type: 'MODULE',
     children: [
         {
             type: 'FILE',
-            metricValues: {
-                'metricName1': {
-                    'def456': 111
-                },
-                'metricName2': {
-                    'def456': 111
-                }
+            'commit1Metrics': null,
+            'commit2Metrics': {
+                'coderadar:size:loc:java': 9,
+                'coderadar:size:eloc:java': 3,
+                'coderadar:size:sloc:java': 5
             },
             children: []
         },
@@ -97,13 +62,11 @@ var validJsonNotContainingCommitId = {
             children: [
                 {
                     type: 'FILE',
-                    metricValues: {
-                        'metricName1': {
-                            'def456': 222
-                        },
-                        'metricName2': {
-                            'def456': 222
-                        }
+                    'commit1Metrics': null,
+                    'commit2Metrics': {
+                        'coderadar:size:loc:java': 9,
+                        'coderadar:size:eloc:java': 3,
+                        'coderadar:size:sloc:java': 5
                     },
                     children: []
                 }
@@ -111,15 +74,31 @@ var validJsonNotContainingCommitId = {
         }
     ]
 };
+var exampleElement = {
+    'type': 'FILE',
+    'commit1Metrics': {
+        'coderadar:size:loc:java': 1,
+        'coderadar:size:eloc:java': 2,
+        'coderadar:size:sloc:java': 3
+    },
+    'commit2Metrics': {
+        'coderadar:size:loc:java': 4,
+        'coderadar:size:eloc:java': 5,
+        'coderadar:size:sloc:java': 6
+    }
+};
+var exampleElementWithoutFirstCommitData = {
+    'type': 'FILE',
+    'commit1Metrics': null,
+    'commit2Metrics': {
+        'coderadar:size:loc:java': 4,
+        'coderadar:size:eloc:java': 5,
+        'coderadar:size:sloc:java': 6
+    }
+};
 
 describe('AbstractDrawer', function () {
-    describe('#_hasChildrenForCurrentCommit(element)', function () {
-        it('should throw an error when data is not valid', function () {
-            assert.throws(() => {
-                drawer._hasChildrenForCurrentCommit(invalidJson);
-            });
-        });
-
+    describe('_hasChildrenForCurrentCommit', function () {
         it('should return true when children are found', function () {
             assert.equal(drawer._hasChildrenForCurrentCommit(validJsonContainingCommitId), true);
         });
@@ -129,86 +108,23 @@ describe('AbstractDrawer', function () {
         });
     });
 
-    describe('#_hasMetricValuesForCurrentCommit(element)', function () {
-        it('should throw an error when data is not valid', function () {
-            assert.throws(() => {
-                drawer._hasMetricValuesForCurrentCommit({
-                    type: 'FILE',
-                    metricValues: {
-                        'metricName1': 42
-                    }
-                });
-            });
-        });
-
+    describe('_hasMetricValuesForCurrentCommit', function () {
         it('should return true when current commit is found', function () {
-            assert.equal(drawer._hasMetricValuesForCurrentCommit({
-                type: 'FILE',
-                metricValues: {
-                    'metricName1': {
-                        'abc123': 42
-                    }
-                }
-            }), true);
+            assert.equal(drawer._hasMetricValuesForCurrentCommit(exampleElement), true);
         });
 
         it('should return false when current commit is not found', function () {
-            assert.equal(drawer._hasMetricValuesForCurrentCommit({
-                type: 'FILE',
-                metricValues: {
-                    'metricName1': {
-                        'def456': 42
-                    }
-                }
-            }), false);
+            assert.equal(drawer._hasMetricValuesForCurrentCommit(exampleElementWithoutFirstCommitData), false);
         });
     });
 
-    describe('#_getMetricValueOfElementAndCurrentCommit(element, metricName)', function () {
-        it('should throw an error when data is not valid', function () {
-            assert.throws(() => {
-                drawer._getMetricValueOfElementAndCommitType({
-                    type: 'FILE',
-                    metricValues: {
-                        'metricName1': 42
-                    }
-                }, 'metricName1');
-            });
-        });
-
+    describe('_getMetricValueOfElementAndCurrentCommit', function () {
         it('should return metricValue when metric is found for current commit', function () {
-            assert.equal(drawer._getMetricValueOfElementAndCommitType({
-                type: 'FILE',
-                metricValues: {
-                    'metricName1': {
-                        'abc123': 42
-                    }
-                }
-            }, 'metricName1', 'current'), 42);
+            assert.equal(drawer._getMetricValueOfElementAndCommitType(exampleElement, 'coderadar:size:loc:java', 'current'), 1);
         });
 
-        it('should throw an error when commitId for given commitType is not found', function () {
-            assert.equal(drawer._getMetricValueOfElementAndCommitType({
-                type: 'FILE',
-                metricValues: {
-                    'metricName1': {
-                        'def456': 42
-                    }
-                }
-            }, 'metricName1', 'current'), undefined);
-        });
-
-        it('should throw an error when metricName is not found', function () {
-            assert.throws(() => {
-                drawer._getMetricValueOfElementAndCommitType({
-                    type: 'FILE',
-                    metricValues: {
-                        'metricName1': {
-                            'abc123': 42
-                        }
-                    }
-                }, 'metricName2', 'current');
-            });
+        it('should return metricValue when metric is found for other commit', function () {
+            assert.equal(drawer._getMetricValueOfElementAndCommitType(exampleElement, 'coderadar:size:loc:java', 'other'), 4);
         });
     });
 });

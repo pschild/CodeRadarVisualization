@@ -41,6 +41,7 @@ export class AbstractDrawer {
                 element.h = groundArea * config.GROUND_AREA_FACTOR + config.GLOBAL_MIN_GROUND_AREA + config.BLOCK_SPACING;
             }
 
+            // recursion
             if (element.children && element.children.length > 0) {
                 var result = this.calculateGroundAreas(element.children);
                 element.w = result.w + config.BLOCK_SPACING * 3;
@@ -122,6 +123,7 @@ export class AbstractDrawer {
                 found = true;
             }
 
+            // recursion
             if (child.children && child.children.length > 0 && !found) {
                 found = this._hasChildrenForCurrentCommit(child);
             }

@@ -55,6 +55,7 @@ export class CommitMerger {
                 delete element.metricValues;
             }
 
+            // recursion
             if (element.children && element.children.length > 0) {
                 this._createMetricValueObjects(element.children, commitId);
             }
@@ -108,6 +109,7 @@ export class CommitMerger {
                 continue;
             }
 
+            // recursion
             if (element.children && element.children.length > 0) {
                 this.walk(element.children, element);
             }
@@ -136,6 +138,7 @@ export class CommitMerger {
                 };
             }
 
+            // recursion
             if (element.children && element.children.length > 0) {
                 var resultFromChildrenSearch = this.search(elementToFind, element.children, element);
                 if (resultFromChildrenSearch) {
