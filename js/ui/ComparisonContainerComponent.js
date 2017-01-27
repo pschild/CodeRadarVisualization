@@ -41,7 +41,7 @@ export class ComparisonContainerComponent {
             this.comparisonContainer.classList.add('open');
         });
 
-        PubSub.subscribe('closeComparisonContainer', (eventName, args) => {
+        PubSub.subscribe('closeComparisonContainer', () => {
             this.comparisonContainer.classList.remove('open');
         });
     }
@@ -66,7 +66,7 @@ export class ComparisonContainerComponent {
             var diffMetricValueEl = document.createElement('td');
 
             var diffLabel, iconEl;
-            if (args.leftElement && args.rightElement && !isNaN(diff)) {
+            if (args.leftElement && args.rightElement) {
                 var diff = args.rightElement.userData.metrics[metricName] - args.leftElement.userData.metrics[metricName];
                 if (diff > 0) {
                     diffLabel = '+' + diff;
@@ -77,6 +77,9 @@ export class ComparisonContainerComponent {
                 } else if (diff == 0) {
                     diffLabel = diff;
                     iconEl = '<span class="icon-arrow-right"></span>';
+                } else {
+                    diffLabel = '-';
+                    iconEl = '';
                 }
             } else {
                 diffLabel = '-';
