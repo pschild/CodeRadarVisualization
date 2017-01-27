@@ -1,4 +1,6 @@
 export var config = {
+    DEBUG_MODE_ENABLED: true,
+
     // CODERADAR CONFIG
     BASE_URL: 'http://localhost:8080',
     USERNAME: 'radar',

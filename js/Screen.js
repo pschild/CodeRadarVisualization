@@ -38,8 +38,14 @@ export class Screen {
 
         this.initializeEventListeners();
 
-        // this.stats = new Stats();
-        // document.body.appendChild(this.stats.dom);
+        if (config.DEBUG_MODE_ENABLED) {
+            this.stats = new Stats();
+            document.body.appendChild(this.stats.dom);
+            this.stats.dom.style.left = 'initial';
+            this.stats.dom.style.top = 'initial';
+            this.stats.dom.style.right = '0px';
+            this.stats.dom.style.bottom = '0px';
+        }
     }
 
     getScene() {
@@ -233,9 +239,10 @@ export class Screen {
 
     render() {
         this._requestAnimationFrameId = requestAnimationFrame(() => {
-            window.renderCalls++;
             this.render();
-            // this.stats.update();
+            if (config.DEBUG_MODE_ENABLED) {
+                this.stats.update();
+            }
         });
 
         this.interactionHandler.update(this.camera);
