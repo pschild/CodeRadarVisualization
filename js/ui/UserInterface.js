@@ -1,13 +1,13 @@
-import {SearchComponent} from './SearchComponent';
-import {LegendComponent} from './LegendComponent';
-import {CommitSelectionComponent} from './CommitSelectionComponent';
-import {CheckboxComponent} from './CheckboxComponent';
-import {ComparisonContainerComponent} from './ComparisonContainerComponent';
-import {DimensionSelectionComponent} from './DimensionSelectionComponent';
-import {ContextMenuComponent} from './ContextMenuComponent';
-import {ScreenshotComponent} from './ScreenshotComponent';
+import {SearchComponent} from './components/SearchComponent';
+import {LegendComponent} from './components/LegendComponent';
+import {CommitSelectionComponent} from './components/CommitSelectionComponent';
+import {CheckboxComponent} from './components/CheckboxComponent';
+import {ComparisonContainerComponent} from './components/ComparisonContainerComponent';
+import {DimensionSelectionComponent} from './components/DimensionSelectionComponent';
+import {ContextMenuComponent} from './components/ContextMenuComponent';
+import {ScreenshotComponent} from './components/ScreenshotComponent';
 
-export class Interface {
+export class UserInterface {
 
     constructor(application) {
         this._application = application;

@@ -1,6 +1,6 @@
 var assert = require('assert');
 
-import {ElementAnalyzer} from '../js/ElementAnalyzer';
+import {ElementAnalyzer} from '../js/util/ElementAnalyzer';
 
 var commit1Metrics = {
     "metric1Name": 111,

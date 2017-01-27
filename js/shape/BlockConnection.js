@@ -1,4 +1,4 @@
-import {config} from './Config';
+import {config} from '../Config';
 
 export class BlockConnection {
     constructor(fromElement, toElement) {

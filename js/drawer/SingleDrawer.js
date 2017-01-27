@@ -1,4 +1,4 @@
-import {Block} from '../Block';
+import {Block} from '../shape/Block';
 import {config} from '../Config';
 import {AbstractDrawer} from './AbstractDrawer';
 import * as chroma from 'chroma-js/chroma';

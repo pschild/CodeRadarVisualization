@@ -1,8 +1,7 @@
-import {Block} from '../Block';
-import {BlockConnection} from '../BlockConnection';
+import {Block} from '../shape/Block';
+import {BlockConnection} from '../shape/BlockConnection';
 import {config} from '../Config';
 import {AbstractDrawer} from './AbstractDrawer';
-import * as PubSub from 'pubsub-js';
 
 export class MergedDrawer extends AbstractDrawer {
 

@@ -1,5 +1,5 @@
-import {MetricNameService} from '../service/MetricNameService';
-import {config} from '../Config';
+import {MetricNameService} from '../../service/MetricNameService';
+import {config} from '../../Config';
 import * as PubSub from 'pubsub-js';
 
 export class DimensionSelectionComponent {

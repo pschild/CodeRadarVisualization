@@ -1,4 +1,4 @@
-import {InteractionHandler} from './InteractionHandler';
+import {InteractionHandler} from './ui/InteractionHandler';
 import {config} from './Config';
 import * as PubSub from 'pubsub-js';
 

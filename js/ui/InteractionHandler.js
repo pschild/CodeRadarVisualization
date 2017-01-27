@@ -1,4 +1,4 @@
-import {config} from './Config';
+import {config} from '../Config';
 import * as PubSub from 'pubsub-js';
 
 export class InteractionHandler {

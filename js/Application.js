@@ -1,7 +1,7 @@
-import {Interface} from './ui/Interface';
+import {UserInterface} from './ui/UserInterface';
 import {Screen} from './Screen';
 import {config} from './Config';
-import {ElementAnalyzer} from './ElementAnalyzer';
+import {ElementAnalyzer} from './util/ElementAnalyzer';
 import {CoderadarMetricService} from './service/CoderadarMetricService';
 import {DummyMetricService} from './service/DummyMetricService';
 import {DummyCommitService} from './service/DummyCommitService';
@@ -9,7 +9,6 @@ import {CoderadarCommitService} from './service/CoderadarCommitService';
 import {CoderadarAuthorizationService} from './service/CoderadarAuthorizationService';
 import {MetricNameService} from './service/MetricNameService';
 import {CommitMapper} from './domain/CommitMapper';
-import {CommitMerger} from './CommitMerger';
 import {MergedDrawer} from './drawer/MergedDrawer';
 import {SingleDrawer} from './drawer/SingleDrawer';
 import * as PubSub from 'pubsub-js';
@@ -73,7 +72,7 @@ export class Application {
     }
 
     loadMetricData() {
-        this.interface.showLoadingIndicator();
+        this.userInterface.showLoadingIndicator();
         return this.metricService.loadDeltaTree(this.leftCommitId, this.rightCommitId).then((result) => {
             this.result = result.data;
 
@@ -95,7 +94,7 @@ export class Application {
             config.GROUND_AREA_FACTOR = config.GLOBAL_MAX_GROUND_AREA / minMaxPairOfGroundArea.max;
 
             this._initializeScreens();
-            this.interface.hideLoadingIndicator();
+            this.userInterface.hideLoadingIndicator();
 
             PubSub.publish('metricsLoaded');
         });
@@ -170,7 +169,7 @@ export class Application {
     }
 
     createInterface() {
-        this.interface = new Interface(this);
+        this.userInterface = new UserInterface(this);
     }
 
     getUniqueElementList() {
@@ -190,7 +189,7 @@ export class Application {
 
         PubSub.subscribe('colorDimensionChange', (eventName, args) => {
             config.COLOR_METRIC_NAME = this.metricNameService.getMetricNameByShortName(args.metricName);
-            this.interface.legendComponent.setColorCode();
+            this.userInterface.legendComponent.setColorCode();
             this.loadMetricData();
         });
 

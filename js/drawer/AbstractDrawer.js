@@ -1,5 +1,5 @@
 import {config} from '../Config';
-import {ElementAnalyzer} from '../ElementAnalyzer';
+import {ElementAnalyzer} from '../util/ElementAnalyzer';
 import {MetricNameService} from '../service/MetricNameService';
 import * as chroma from 'chroma-js/chroma';
 
