@@ -80,7 +80,7 @@ export class AbstractDrawer {
     }
 
     _getColorByBottomValue(value) {
-        var colorScale = chroma.scale([config.COLOR_MODULE_FROM, config.COLOR_MODULE_TO]);
+        var colorScale = chroma.scale(config.COLOR_HIERARCHY_RANGE);
         var hexValue = colorScale(value / (this.maxBottomValue + this.minBottomValue)).hex();
         return new THREE.Color(hexValue);
     }

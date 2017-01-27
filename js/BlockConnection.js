@@ -1,3 +1,5 @@
+import {config} from './Config';
+
 export class BlockConnection {
     constructor(fromElement, toElement) {
         var from = fromElement.position.clone();
@@ -18,12 +20,9 @@ export class BlockConnection {
 
         var geometry = new THREE.Geometry();
         geometry.vertices = curve.getPoints(50);
-
-        var material = new THREE.LineBasicMaterial({
-            color: 0xff0000
-        });
-
+        var material = new THREE.LineBasicMaterial({ color: config.COLOR_CONNECTION });
         this.curveObject = new THREE.Line(geometry, material);
+
         this.curveObject.userData = {
             type: 'CONNECTION',
             changeTypes: {

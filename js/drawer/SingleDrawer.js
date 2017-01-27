@@ -65,7 +65,7 @@ export class SingleDrawer extends AbstractDrawer {
                 }
 
                 myHeight = config.DEFAULT_BLOCK_HEIGHT;
-                this.drawBlock(element, parent, config.COLOR_MODULE_FROM, undefined, bottom, myHeight, false, metrics);
+                this.drawBlock(element, parent, config.COLOR_HIERARCHY_RANGE[0], undefined, bottom, myHeight, false, metrics);
             }
 
             // recursion
@@ -131,7 +131,7 @@ export class SingleDrawer extends AbstractDrawer {
     }
 
     _getColorByMetricValue(value) {
-        var colorScale = chroma.scale(config.COLOR_METRIC_RANGE);
+        var colorScale = chroma.scale(config.COLOR_HEATMAP_RANGE);
         var hexValue = colorScale(value / (this.maxColorMetricValue + this.minColorMetricValue)).hex();
         return new THREE.Color(hexValue);
     }

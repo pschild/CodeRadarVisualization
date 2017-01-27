@@ -2,8 +2,6 @@ import {Mesh} from 'three/build/three.min';
 
 export class Block extends Mesh {
     constructor(color, name) {
-        var color = color || Math.random() * 0xffffff;
-
         var geometry = new THREE.BoxGeometry(1, 1, 1);
 
         // move local coordinate system to scale the block properly
