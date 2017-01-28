@@ -23,8 +23,20 @@ npm test
 ```
 
 # Screenshots
-You can compare two versions of your software project either side by side ...
+Just choose two versions of your software project (based on GIT) and the type of view:
+![Choose Versions](https://cloud.githubusercontent.com/assets/1246566/22399865/b43c4a3c-e5a6-11e6-829e-3ee483129843.PNG)
+
+You can compare the two versions either side by side ...
 ![Split View](https://cloud.githubusercontent.com/assets/1246566/22399780/f8e23356-e5a4-11e6-9871-d08730dedda5.png)
 
 ... or in a merged view:
 ![Merged View](https://cloud.githubusercontent.com/assets/1246566/22399788/21de226a-e5a5-11e6-9ea7-1756f073dd4d.png)
+
+You can filter for specific properties of your classes ...
+![filter](https://cloud.githubusercontent.com/assets/1246566/22399866/b43d7d80-e5a6-11e6-8c64-b368556ac82a.PNG)
+
+... and map different types of metrics to your personal visualization.
+![mapping](https://cloud.githubusercontent.com/assets/1246566/22399867/b43f1316-e5a6-11e6-95ce-2cc9fb560a67.PNG)
+
+Of course, you can also search for certain files in your project and highlight them in the visualization
+![search](https://cloud.githubusercontent.com/assets/1246566/22399864/b43befba-e5a6-11e6-8b12-bdd23b369efa.PNG)
