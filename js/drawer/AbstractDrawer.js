@@ -23,7 +23,7 @@ export class AbstractDrawer {
 
         this.metricNameService = new MetricNameService();
 
-        this.initializeEventListeners();
+        this._initializeEventListeners();
     }
 
     calculateGroundAreas(elements) {
@@ -87,7 +87,7 @@ export class AbstractDrawer {
 
     setColorization(colorMode) {}
 
-    initializeEventListeners() {}
+    _initializeEventListeners() {}
 
     _generateTooltipHtml(elementName, metrics) {
         var tooltipHtml = [

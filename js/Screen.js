@@ -36,7 +36,7 @@ export class Screen {
 
         this.interactionHandler = new InteractionHandler(this.scene, this.renderer, this.position);
 
-        this.initializeEventListeners();
+        this._initializeEventListeners();
 
         if (config.DEBUG_MODE_ENABLED) {
             this.stats = new Stats();
@@ -251,7 +251,7 @@ export class Screen {
         TWEEN.update();
     }
 
-    initializeEventListeners() {
+    _initializeEventListeners() {
         window.addEventListener('resize', this.onWindowResize.bind(this), false);
 
         this.renderer.domElement.addEventListener('mousemove', () => {

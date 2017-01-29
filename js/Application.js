@@ -26,8 +26,8 @@ export class Application {
         this.metricService = new CoderadarMetricService(); // DummyMetricService CoderadarMetricService
         this.metricNameService = new MetricNameService();
 
-        this.createInterface();
-        this.initializeEventListeners();
+        this._createUserInterface();
+        this._initializeEventListeners();
 
         this.leftCommitId = undefined;
         this.rightCommitId = undefined;
@@ -168,7 +168,7 @@ export class Application {
         return this.IS_FULLSCREEN;
     }
 
-    createInterface() {
+    _createUserInterface() {
         this.userInterface = new UserInterface(this);
     }
 
@@ -176,7 +176,7 @@ export class Application {
         return this._uniqueElementList;
     }
 
-    initializeEventListeners() {
+    _initializeEventListeners() {
         PubSub.subscribe('heightDimensionChange', (eventName, args) => {
             config.HEIGHT_METRIC_NAME = this.metricNameService.getMetricNameByShortName(args.metricName);
             this.loadMetricData();
