@@ -6,9 +6,6 @@ export class CoderadarMetricService {
         this.URL = config.BASE_URL + '/projects/1/metricvalues/deltaTree';
     }
 
-    // override
-    load(callbackFn) {}
-
     loadByCommitId(commitId) {
         var params = {
             'commit': commitId,
@@ -28,6 +25,7 @@ export class CoderadarMetricService {
         return axios.post(this.URL, params);
     }
 
+    // deprecated
     loadTwoCommits(firstCommitId, secondCommitId, callbackFn) {
         axios.all([this.loadByCommitId(firstCommitId), this.loadByCommitId(secondCommitId)])
             .then(axios.spread(function (firstCommitResult, secondCommitResult) {

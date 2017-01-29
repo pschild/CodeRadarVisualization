@@ -51,53 +51,55 @@ export class Application {
     }
 
     loadCommits() {
-        return this.commitService.load((data) => {
-            var commitMapper = new CommitMapper(data);
-            commitMapper.mapAll();
+        return this.commitService.load()
+            .then((response) => {
+                var commitMapper = new CommitMapper(response.data);
+                commitMapper.mapAll();
 
-            var commits = commitMapper.getAll();
-            commits.sort(function(a, b) {
-                return b.timestamp - a.timestamp;
+                var commits = commitMapper.getAll();
+                commits.sort(function(a, b) {
+                    return b.timestamp - a.timestamp;
+                });
+
+                // TODO: what if we have less than 2 commits?
+                this.leftCommitId = commits[1].getName();
+                this.rightCommitId = commits[0].getName();
+
+                PubSub.publish('commitsLoaded', { commits: commits });
+
+                this.getLeftScreen().setCommitId(this.leftCommitId);
+                this.getRightScreen().setCommitId(this.rightCommitId);
             });
-
-            // TODO: what if we have less than 2 commits?
-            this.leftCommitId = commits[1].getName();
-            this.rightCommitId = commits[0].getName();
-
-            PubSub.publish('commitsLoaded', { commits: commits });
-
-            this.getLeftScreen().setCommitId(this.leftCommitId);
-            this.getRightScreen().setCommitId(this.rightCommitId);
-        });
     }
 
     loadMetricData() {
         this.userInterface.showLoadingIndicator();
-        return this.metricService.loadDeltaTree(this.leftCommitId, this.rightCommitId).then((result) => {
-            this.result = result.data;
+        return this.metricService.loadDeltaTree(this.leftCommitId, this.rightCommitId)
+            .then((result) => {
+                this.result = result.data;
 
-            // #3: set commitId dynamically
-            // firstCommitResult.commitId = this.leftCommitId;
-            // secondCommitResult.commitId = this.rightCommitId;
+                // #3: set commitId dynamically
+                // firstCommitResult.commitId = this.leftCommitId;
+                // secondCommitResult.commitId = this.rightCommitId;
 
-            // console.time('merging time');
-            // var result = CommitMerger.merge(firstCommitResult, secondCommitResult);
-            // console.timeEnd('merging time');
-            // console.log('merging ' + this.leftCommitId + ' and ' + this.rightCommitId + ':', result);
+                // console.time('merging time');
+                // var result = CommitMerger.merge(firstCommitResult, secondCommitResult);
+                // console.timeEnd('merging time');
+                // console.log('merging ' + this.leftCommitId + ' and ' + this.rightCommitId + ':', result);
 
-            this._uniqueElementList = ElementAnalyzer.generateUniqueElementList(this.result);
-            var minMaxPairOfHeight = ElementAnalyzer.findSmallestAndBiggestMetricValueByMetricName(this.result, config.HEIGHT_METRIC_NAME);
-            var minMaxPairOfGroundArea = ElementAnalyzer.findSmallestAndBiggestMetricValueByMetricName(this.result, config.GROUND_AREA_METRIC_NAME);
-            this.minMaxPairOfColorMetric = ElementAnalyzer.findSmallestAndBiggestMetricValueByMetricName(this.result, config.COLOR_METRIC_NAME);
+                this._uniqueElementList = ElementAnalyzer.generateUniqueElementList(this.result);
+                var minMaxPairOfHeight = ElementAnalyzer.findSmallestAndBiggestMetricValueByMetricName(this.result, config.HEIGHT_METRIC_NAME);
+                var minMaxPairOfGroundArea = ElementAnalyzer.findSmallestAndBiggestMetricValueByMetricName(this.result, config.GROUND_AREA_METRIC_NAME);
+                this.minMaxPairOfColorMetric = ElementAnalyzer.findSmallestAndBiggestMetricValueByMetricName(this.result, config.COLOR_METRIC_NAME);
 
-            config.HEIGHT_FACTOR = config.GLOBAL_MAX_HEIGHT / minMaxPairOfHeight.max;
-            config.GROUND_AREA_FACTOR = config.GLOBAL_MAX_GROUND_AREA / minMaxPairOfGroundArea.max;
+                config.HEIGHT_FACTOR = config.GLOBAL_MAX_HEIGHT / minMaxPairOfHeight.max;
+                config.GROUND_AREA_FACTOR = config.GLOBAL_MAX_GROUND_AREA / minMaxPairOfGroundArea.max;
 
-            this._initializeScreens();
-            this.userInterface.hideLoadingIndicator();
+                this._initializeScreens();
+                this.userInterface.hideLoadingIndicator();
 
-            PubSub.publish('metricsLoaded');
-        });
+                PubSub.publish('metricsLoaded');
+            });
     }
 
     _initializeScreens() {
