@@ -37,7 +37,7 @@ export class CommitSelectionComponent {
         PubSub.subscribe('autocompleteElementClicked', (eventName, args) => {
             if (args.componentId == this.firstCommitSelect.id || args.componentId == this.secondCommitSelect.id) {
                 PubSub.publish('commitChange', {
-                    screen: args.componentId == this.firstCommitSelect.id ? 'left' : 'right',
+                    commitType: args.componentId == this.firstCommitSelect.id ? 'firstCommit' : 'secondCommit',
                     commitId: args.selection
                 });
             }

@@ -199,14 +199,14 @@ export class Application {
         });
 
         PubSub.subscribe('commitChange', (eventName, args) => {
-            if (args.screen == 'left') {
+            if (args.commitType == 'firstCommit') {
                 this.leftCommitId = args.commitId;
                 this.getLeftScreen().setCommitId(this.leftCommitId);
-            } else if (args.screen == 'right') {
+            } else if (args.commitType == 'secondCommit') {
                 this.rightCommitId = args.commitId;
                 this.getRightScreen().setCommitId(this.rightCommitId);
             } else {
-                throw new Error(`Unknown screen type ${args.screen}!`);
+                throw new Error(`Unknown screen type ${args.commitType}!`);
             }
 
             this.loadMetricData();
