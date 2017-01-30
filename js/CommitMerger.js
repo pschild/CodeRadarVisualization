@@ -1,3 +1,5 @@
+import * as Constants from './Constants';
+
 export class CommitMerger {
 
     static merge(firstRoot, secondRoot) {
@@ -42,7 +44,7 @@ export class CommitMerger {
         }
 
         for (let element of elements) {
-            if (element.type === 'FILE') {
+            if (element.type === Constants.ELEMENT_TYPE_FILE) {
                 var metricValues = element.metricValues;
                 for (let metricName in metricValues) {
                     if (typeof metricValues[metricName] == 'number') {
@@ -87,7 +89,7 @@ export class CommitMerger {
                         continue;
                     }
                 } else {
-                    if (element.type === 'FILE') {
+                    if (element.type === Constants.ELEMENT_TYPE_FILE) {
                         foundElement.metricValues = this._mergeMetricValues(foundElement, element);
                     }
                 }

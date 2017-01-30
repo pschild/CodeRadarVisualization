@@ -1,6 +1,7 @@
 import {UserInterface} from './ui/UserInterface';
 import {Screen} from './Screen';
 import {config} from './Config';
+import * as Constants from './Constants';
 import {ElementAnalyzer} from './util/ElementAnalyzer';
 import {CoderadarMetricService} from './service/CoderadarMetricService';
 import {DummyMetricService} from './service/DummyMetricService';
@@ -151,19 +152,19 @@ export class Application {
     }
 
     createLeftScreen() {
-        this.screens['left'] = new Screen('left');
+        this.screens[Constants.LEFT_SCREEN] = new Screen(Constants.LEFT_SCREEN);
     }
 
     createRightScreen() {
-        this.screens['right'] = new Screen('right');
+        this.screens[Constants.RIGHT_SCREEN] = new Screen(Constants.RIGHT_SCREEN);
     }
 
     getLeftScreen() {
-        return this.screens['left'];
+        return this.screens[Constants.LEFT_SCREEN];
     }
 
     getRightScreen() {
-        return this.screens['right'];
+        return this.screens[Constants.RIGHT_SCREEN];
     }
 
     getIsFullscreen() {
@@ -181,13 +182,13 @@ export class Application {
     _initializeEventListeners() {
         PubSub.subscribe('dimensionChange', (eventName, args) => {
             switch (args.dimension) {
-                case 'height':
+                case Constants.HEIGHT_DIMENSION:
                     config.HEIGHT_METRIC_NAME = this.metricNameService.getMetricNameByShortName(args.metricName);
                     break;
-                case 'groundarea':
+                case Constants.GROUNDAREA_DIMENSION:
                     config.GROUND_AREA_METRIC_NAME = this.metricNameService.getMetricNameByShortName(args.metricName);
                     break;
-                case 'color':
+                case Constants.COLOR_DIMENSION:
                     config.COLOR_METRIC_NAME = this.metricNameService.getMetricNameByShortName(args.metricName);
                     this.userInterface.legendComponent.setColorCode();
                     break;
@@ -199,10 +200,10 @@ export class Application {
         });
 
         PubSub.subscribe('commitChange', (eventName, args) => {
-            if (args.commitType == 'firstCommit') {
+            if (args.commitType == Constants.FIRST_COMMIT) {
                 this.leftCommitId = args.commitId;
                 this.getLeftScreen().setCommitId(this.leftCommitId);
-            } else if (args.commitType == 'secondCommit') {
+            } else if (args.commitType == Constants.SECOND_COMMIT) {
                 this.rightCommitId = args.commitId;
                 this.getRightScreen().setCommitId(this.rightCommitId);
             } else {
@@ -227,13 +228,13 @@ export class Application {
         });
 
         PubSub.subscribe('mouseMove', (eventName, args) => {
-            if (args.screen == 'left') {
+            if (args.screen == Constants.LEFT_SCREEN) {
                 this.getLeftScreen().getControls().enabled = true;
                 this.getRightScreen().getControls().enabled = this.SYNCHRONIZE_ENABLED;
 
                 this.getLeftScreen().getInteractionHandler().setEnabled(true);
                 this.getRightScreen().getInteractionHandler().setEnabled(false);
-            } else if (args.screen == 'right') {
+            } else if (args.screen == Constants.RIGHT_SCREEN) {
                 this.getLeftScreen().getControls().enabled = this.SYNCHRONIZE_ENABLED;
                 this.getRightScreen().getControls().enabled = true;
 
@@ -267,7 +268,7 @@ export class Application {
             for (var i = this.getLeftScreen().getScene().children.length - 1; i >= 0; i--) {
                 var child = this.getLeftScreen().getScene().children[i];
                 if (child.name == elementName) {
-                    if (child.userData.commitType != 'other') {
+                    if (child.userData.commitType != Constants.COMMIT_TYPE_OTHER) {
                         return child;
                     }
                 }
@@ -283,7 +284,7 @@ export class Application {
             for (var i = this.getLeftScreen().getScene().children.length - 1; i >= 0; i--) {
                 var child = this.getLeftScreen().getScene().children[i];
                 if (child.name == elementName) {
-                    if (child.userData.commitType != 'current') {
+                    if (child.userData.commitType != Constants.COMMIT_TYPE_CURRENT) {
                         return child;
                     }
                 }

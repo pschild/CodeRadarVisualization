@@ -1,4 +1,5 @@
 import {config} from '../Config';
+import * as Constants from '../Constants';
 import {ElementAnalyzer} from '../util/ElementAnalyzer';
 import {MetricNameService} from '../service/MetricNameService';
 import * as chroma from 'chroma-js/chroma';
@@ -9,9 +10,6 @@ export class AbstractDrawer {
         if (new.target === AbstractDrawer) {
             throw new TypeError('Instantiating AbstractDrawer not allowed.');
         }
-
-        this.COMMIT_TYPE_OTHER = 'other';
-        this.COMMIT_TYPE_CURRENT = 'current';
 
         this.minBottomValue = 0;
         this.maxBottomValue = -1;
@@ -35,7 +33,7 @@ export class AbstractDrawer {
             element.w = 0;
             element.h = 0;
 
-            if (element.type == 'FILE') {
+            if (element.type == Constants.ELEMENT_TYPE_FILE) {
                 var groundArea = this._getValueForGroundArea(element.commit1Metrics, element.commit2Metrics);
                 element.w = groundArea * config.GROUND_AREA_FACTOR + config.GLOBAL_MIN_GROUND_AREA + config.BLOCK_SPACING;
                 element.h = groundArea * config.GROUND_AREA_FACTOR + config.GLOBAL_MIN_GROUND_AREA + config.BLOCK_SPACING;
@@ -73,7 +71,7 @@ export class AbstractDrawer {
         for (var i = this.scene.children.length - 1; i >= 0; i--) {
             var child = this.scene.children[i];
 
-            if (child.userData && child.userData.type == 'MODULE') {
+            if (child.userData && child.userData.type == Constants.ELEMENT_TYPE_MODULE) {
                 child.material.color.set(this._getColorByBottomValue(child.userData.bottom));
             }
         }
@@ -108,7 +106,7 @@ export class AbstractDrawer {
     }
 
     _getColorByPosition(position) {
-        return position == 'left' ? config.COLOR_FIRST_COMMIT : config.COLOR_SECOND_COMMIT;
+        return position == Constants.LEFT_SCREEN ? config.COLOR_FIRST_COMMIT : config.COLOR_SECOND_COMMIT;
     }
 
     _getContraryColorByColor(color) {
@@ -138,25 +136,25 @@ export class AbstractDrawer {
             return element.commit1Metrics != null || element.commit2Metrics != null;
         }
 
-        if (this.position == 'left') {
+        if (this.position == Constants.LEFT_SCREEN) {
             return element.commit1Metrics != null;
-        } else if (this.position == 'right') {
+        } else if (this.position == Constants.RIGHT_SCREEN) {
             return element.commit2Metrics != null;
         }
     }
 
     _getMetricValueOfElementAndCommitType(element, metricName, commitType) {
-        if (this.position == 'left') {
-            if (commitType == this.COMMIT_TYPE_CURRENT) {
+        if (this.position == Constants.LEFT_SCREEN) {
+            if (commitType == Constants.COMMIT_TYPE_CURRENT) {
                 return element.commit1Metrics ? element.commit1Metrics[metricName] : undefined;
-            } else if (commitType == this.COMMIT_TYPE_OTHER) {
+            } else if (commitType == Constants.COMMIT_TYPE_OTHER) {
                 return element.commit2Metrics ? element.commit2Metrics[metricName] : undefined;
             }
 
-        } else if (this.position == 'right') {
-            if (commitType == this.COMMIT_TYPE_CURRENT) {
+        } else if (this.position == Constants.RIGHT_SCREEN) {
+            if (commitType == Constants.COMMIT_TYPE_CURRENT) {
                 return element.commit2Metrics ? element.commit2Metrics[metricName] : undefined;
-            } else if (commitType == this.COMMIT_TYPE_OTHER) {
+            } else if (commitType == Constants.COMMIT_TYPE_OTHER) {
                 return element.commit1Metrics ? element.commit1Metrics[metricName] : undefined;
             }
 

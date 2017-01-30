@@ -1,4 +1,5 @@
 import {config} from '../Config';
+import * as Constants from '../Constants';
 
 export class BlockConnection {
     constructor(fromElement, toElement) {
@@ -24,7 +25,7 @@ export class BlockConnection {
         this.curveObject = new THREE.Line(geometry, material);
 
         this.curveObject.userData = {
-            type: 'CONNECTION',
+            type: Constants.ELEMENT_TYPE_CONNECTION,
             changeTypes: {
                 moved: true
             }

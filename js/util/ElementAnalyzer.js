@@ -1,3 +1,5 @@
+import * as Constants from '../Constants';
+
 export class ElementAnalyzer {
 
     static generateUniqueElementList(elements, uniqueElements = []) {
@@ -33,7 +35,7 @@ export class ElementAnalyzer {
 
         for (let element of elements) {
             // investigate only FILEs, because only files can have different sizes and colors
-            if (element.type == 'FILE') {
+            if (element.type == Constants.ELEMENT_TYPE_FILE) {
                 var commit1Metrics = element.commit1Metrics || null;
                 var commit2Metrics = element.commit2Metrics || null;
 

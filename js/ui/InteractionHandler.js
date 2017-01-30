@@ -1,4 +1,5 @@
 import {config} from '../Config';
+import * as Constants from '../Constants';
 import * as PubSub from 'pubsub-js';
 
 export class InteractionHandler {
@@ -98,7 +99,7 @@ export class InteractionHandler {
         this._mouse.x = event.clientX;
         this._mouse.y = event.clientY;
 
-        var screenOffset = this._position == 'left' ? 0 : this._getScreenWidth();
+        var screenOffset = this._position == Constants.LEFT_SCREEN ? 0 : this._getScreenWidth();
 
         this._mouseForRaycaster.x = ((event.clientX - screenOffset) / this._getScreenWidth()) * 2 - 1;
         this._mouseForRaycaster.y = -(event.clientY / window.innerHeight) * 2 + 1;
@@ -140,7 +141,7 @@ export class InteractionHandler {
                 PubSub.publish('elementClicked', { elementName: target.name, doReset: doReset });
 
             } else if (event.which == 3) { // right mouse button
-                if (target.userData && target.userData.type == 'MODULE') {
+                if (target.userData && target.userData.type == Constants.ELEMENT_TYPE_MODULE) {
                     event.preventDefault();
                     PubSub.publish('elementRightClicked', { elementName: target.name, position: { x: event.clientX, y: event.clientY } });
                 }

@@ -1,5 +1,6 @@
 import {AutocompleteComponent} from './AutocompleteComponent';
 import * as PubSub from 'pubsub-js';
+import * as Constants from '../../Constants';
 
 export class CommitSelectionComponent {
 
@@ -30,22 +31,15 @@ export class CommitSelectionComponent {
 
             this.secondAutocompleteComponent.setElements(elements);
             this.secondAutocompleteComponent.setSelection(this._application.rightCommitId);
-
-            // this._disableInitialOptions();
         });
 
         PubSub.subscribe('autocompleteElementClicked', (eventName, args) => {
             if (args.componentId == this.firstCommitSelect.id || args.componentId == this.secondCommitSelect.id) {
                 PubSub.publish('commitChange', {
-                    commitType: args.componentId == this.firstCommitSelect.id ? 'firstCommit' : 'secondCommit',
+                    commitType: args.componentId == this.firstCommitSelect.id ? Constants.FIRST_COMMIT : Constants.SECOND_COMMIT,
                     commitId: args.selection
                 });
             }
         });
-    }
-
-    _disableInitialOptions() {
-        this.firstAutocompleteComponent.disableFirstOption();
-        this.secondAutocompleteComponent.disableLastOption();
     }
 }

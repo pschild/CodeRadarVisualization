@@ -1,5 +1,6 @@
 import {MetricNameService} from '../../service/MetricNameService';
 import {config} from '../../Config';
+import * as Constants from '../../Constants';
 import * as PubSub from 'pubsub-js';
 
 export class DimensionSelectionComponent {
@@ -31,21 +32,21 @@ export class DimensionSelectionComponent {
 
         this.heightDimensionSelect.addEventListener('change', function() {
             PubSub.publish('dimensionChange', {
-                dimension: 'height',
+                dimension: Constants.HEIGHT_DIMENSION,
                 metricName: this.value
             });
         });
 
         this.groundAreaDimensionSelect.addEventListener('change', function() {
             PubSub.publish('dimensionChange', {
-                dimension: 'groundarea',
+                dimension: Constants.GROUNDAREA_DIMENSION,
                 metricName: this.value
             });
         });
 
         this.colorDimensionSelect.addEventListener('change', function() {
             PubSub.publish('dimensionChange', {
-                dimension: 'color',
+                dimension: Constants.COLOR_DIMENSION,
                 metricName: this.value
             });
         });

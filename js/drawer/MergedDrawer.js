@@ -1,6 +1,7 @@
 import {Block} from '../shape/Block';
 import {BlockConnection} from '../shape/BlockConnection';
 import {config} from '../Config';
+import * as Constants from '../Constants';
 import {AbstractDrawer} from './AbstractDrawer';
 
 export class MergedDrawer extends AbstractDrawer {
@@ -26,15 +27,15 @@ export class MergedDrawer extends AbstractDrawer {
             var blueHeight;
 
             // FILE
-            if (element.type == 'FILE') {
-                var blueHeightMetric = this._getMetricValueOfElementAndCommitType(element, config.HEIGHT_METRIC_NAME, this.COMMIT_TYPE_CURRENT);
-                var orangeHeightMetric = this._getMetricValueOfElementAndCommitType(element, config.HEIGHT_METRIC_NAME, this.COMMIT_TYPE_OTHER);
+            if (element.type == Constants.ELEMENT_TYPE_FILE) {
+                var blueHeightMetric = this._getMetricValueOfElementAndCommitType(element, config.HEIGHT_METRIC_NAME, Constants.COMMIT_TYPE_CURRENT);
+                var orangeHeightMetric = this._getMetricValueOfElementAndCommitType(element, config.HEIGHT_METRIC_NAME, Constants.COMMIT_TYPE_OTHER);
 
-                var blueGroundAreaMetric = this._getMetricValueOfElementAndCommitType(element, config.GROUND_AREA_METRIC_NAME, this.COMMIT_TYPE_CURRENT);
-                var orangeGroundAreaMetric = this._getMetricValueOfElementAndCommitType(element, config.GROUND_AREA_METRIC_NAME, this.COMMIT_TYPE_OTHER);
+                var blueGroundAreaMetric = this._getMetricValueOfElementAndCommitType(element, config.GROUND_AREA_METRIC_NAME, Constants.COMMIT_TYPE_CURRENT);
+                var orangeGroundAreaMetric = this._getMetricValueOfElementAndCommitType(element, config.GROUND_AREA_METRIC_NAME, Constants.COMMIT_TYPE_OTHER);
 
-                var blueColorMetric = this._getMetricValueOfElementAndCommitType(element, config.COLOR_METRIC_NAME, this.COMMIT_TYPE_CURRENT);
-                var orangeColorMetric = this._getMetricValueOfElementAndCommitType(element, config.COLOR_METRIC_NAME, this.COMMIT_TYPE_OTHER);
+                var blueColorMetric = this._getMetricValueOfElementAndCommitType(element, config.COLOR_METRIC_NAME, Constants.COMMIT_TYPE_CURRENT);
+                var orangeColorMetric = this._getMetricValueOfElementAndCommitType(element, config.COLOR_METRIC_NAME, Constants.COMMIT_TYPE_OTHER);
 
                 var blueMetrics = {
                     [config.HEIGHT_METRIC_NAME]: blueHeightMetric,
@@ -63,17 +64,17 @@ export class MergedDrawer extends AbstractDrawer {
                 if (!isNaN(blueGA) && !isNaN(orangeGA)) {
                     // both blocks
                     if (blueGA < orangeGA || blueHeight < orangeHeight) {
-                        this.drawBlock(element, parent, orangeColor, orangeGA, bottom, orangeHeight, orangeTransparency, orangeMetrics, this.COMMIT_TYPE_OTHER, { modified: true });
+                        this.drawBlock(element, parent, orangeColor, orangeGA, bottom, orangeHeight, orangeTransparency, orangeMetrics, Constants.COMMIT_TYPE_OTHER, { modified: true });
 
                         element.fit.x += (orangeGA - blueGA) / 2;
                         element.fit.y += (orangeGA - blueGA) / 2;
-                        this.drawBlock(element, parent, blueColor, blueGA, bottom, blueHeight, blueTransparency, blueMetrics, this.COMMIT_TYPE_CURRENT, { modified: true });
+                        this.drawBlock(element, parent, blueColor, blueGA, bottom, blueHeight, blueTransparency, blueMetrics, Constants.COMMIT_TYPE_CURRENT, { modified: true });
                     } else if (blueGA > orangeGA || blueHeight > orangeHeight) {
-                        this.drawBlock(element, parent, blueColor, blueGA, bottom, blueHeight, blueTransparency, blueMetrics, this.COMMIT_TYPE_CURRENT, { modified: true });
+                        this.drawBlock(element, parent, blueColor, blueGA, bottom, blueHeight, blueTransparency, blueMetrics, Constants.COMMIT_TYPE_CURRENT, { modified: true });
 
                         element.fit.x += (blueGA - orangeGA) / 2;
                         element.fit.y += (blueGA - orangeGA) / 2;
-                        this.drawBlock(element, parent, orangeColor, orangeGA, bottom, orangeHeight, orangeTransparency, orangeMetrics, this.COMMIT_TYPE_OTHER, { modified: true });
+                        this.drawBlock(element, parent, orangeColor, orangeGA, bottom, orangeHeight, orangeTransparency, orangeMetrics, Constants.COMMIT_TYPE_OTHER, { modified: true });
                     } else {
                         // ground area and height are the same
                         this.drawBlock(element, parent, config.COLOR_UNCHANGED_FILE, orangeGA, bottom, orangeHeight, false, orangeMetrics, undefined, { modified: false });
@@ -93,7 +94,7 @@ export class MergedDrawer extends AbstractDrawer {
                         changeTypes.moved = true;
                     }
 
-                    this.drawBlock(element, parent, config.COLOR_DELETED_FILE, blueGA, bottom, blueHeight, false, blueMetrics, this.COMMIT_TYPE_CURRENT, changeTypes);
+                    this.drawBlock(element, parent, config.COLOR_DELETED_FILE, blueGA, bottom, blueHeight, false, blueMetrics, Constants.COMMIT_TYPE_CURRENT, changeTypes);
 
                 } else if (isNaN(blueGA)) {
                     // only orange block
@@ -103,7 +104,7 @@ export class MergedDrawer extends AbstractDrawer {
                         changeTypes.moved = true;
                     }
 
-                    this.drawBlock(element, parent, config.COLOR_ADDED_FILE, orangeGA, bottom, orangeHeight, false, orangeMetrics, this.COMMIT_TYPE_OTHER, changeTypes);
+                    this.drawBlock(element, parent, config.COLOR_ADDED_FILE, orangeGA, bottom, orangeHeight, false, orangeMetrics, Constants.COMMIT_TYPE_OTHER, changeTypes);
                 }
 
             // MODULE
@@ -153,9 +154,9 @@ export class MergedDrawer extends AbstractDrawer {
         element.renderedX = finalX;
         element.renderedY = finalZ;
 
-        finalWidth = element.type == 'FILE' ? currentCommitSize - config.BLOCK_SPACING : element.w - config.BLOCK_SPACING * 2;
+        finalWidth = element.type == Constants.ELEMENT_TYPE_FILE ? currentCommitSize - config.BLOCK_SPACING : element.w - config.BLOCK_SPACING * 2;
         finalHeight = height;
-        finalDepth = element.type == 'FILE' ? currentCommitSize - config.BLOCK_SPACING : element.h - config.BLOCK_SPACING * 2;
+        finalDepth = element.type == Constants.ELEMENT_TYPE_FILE ? currentCommitSize - config.BLOCK_SPACING : element.h - config.BLOCK_SPACING * 2;
 
         if (isTransparent) {
             cube.material.transparent = true;

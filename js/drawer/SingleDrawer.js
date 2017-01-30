@@ -1,5 +1,6 @@
 import {Block} from '../shape/Block';
 import {config} from '../Config';
+import * as Constants from '../Constants';
 import {AbstractDrawer} from './AbstractDrawer';
 import * as chroma from 'chroma-js/chroma';
 import * as PubSub from 'pubsub-js';
@@ -21,18 +22,18 @@ export class SingleDrawer extends AbstractDrawer {
 
         elements.forEach((element) => {
             // don't draw empty modules
-            if (element.type == 'MODULE' && !this._hasChildrenForCurrentCommit(element)) {
+            if (element.type == Constants.ELEMENT_TYPE_MODULE && !this._hasChildrenForCurrentCommit(element)) {
                 return;
             }
 
             if (!element.fit) {
-                console.warn(`element ${element.name} at position ${this.position} has no fit!`);
+                console.info(`element ${element.name} at position ${this.position} has no fit!`);
                 return;
             }
 
-            var heightMetric = this._getMetricValueOfElementAndCommitType(element, config.HEIGHT_METRIC_NAME, this.COMMIT_TYPE_CURRENT);
-            var groundAreaMetric = this._getMetricValueOfElementAndCommitType(element, config.GROUND_AREA_METRIC_NAME, this.COMMIT_TYPE_CURRENT);
-            var colorMetric = this._getMetricValueOfElementAndCommitType(element, config.COLOR_METRIC_NAME, this.COMMIT_TYPE_CURRENT);
+            var heightMetric = this._getMetricValueOfElementAndCommitType(element, config.HEIGHT_METRIC_NAME, Constants.COMMIT_TYPE_CURRENT);
+            var groundAreaMetric = this._getMetricValueOfElementAndCommitType(element, config.GROUND_AREA_METRIC_NAME, Constants.COMMIT_TYPE_CURRENT);
+            var colorMetric = this._getMetricValueOfElementAndCommitType(element, config.COLOR_METRIC_NAME, Constants.COMMIT_TYPE_CURRENT);
 
             var metrics = {
                 [config.HEIGHT_METRIC_NAME]: heightMetric,
@@ -41,7 +42,7 @@ export class SingleDrawer extends AbstractDrawer {
             };
 
             var myHeight;
-            if (element.type == 'FILE') {
+            if (element.type == Constants.ELEMENT_TYPE_FILE) {
                 if (!heightMetric || !groundAreaMetric) {
                     return;
                 }
@@ -49,7 +50,7 @@ export class SingleDrawer extends AbstractDrawer {
                 myHeight = heightMetric * config.HEIGHT_FACTOR + config.GLOBAL_MIN_HEIGHT;
 
                 var myGA = groundAreaMetric * config.GROUND_AREA_FACTOR + config.GLOBAL_MIN_GROUND_AREA + config.BLOCK_SPACING;
-                var otherGA = this._getMetricValueOfElementAndCommitType(element, config.GROUND_AREA_METRIC_NAME, this.COMMIT_TYPE_OTHER) * config.GROUND_AREA_FACTOR + config.GLOBAL_MIN_GROUND_AREA + config.BLOCK_SPACING;
+                var otherGA = this._getMetricValueOfElementAndCommitType(element, config.GROUND_AREA_METRIC_NAME, Constants.COMMIT_TYPE_OTHER) * config.GROUND_AREA_FACTOR + config.GLOBAL_MIN_GROUND_AREA + config.BLOCK_SPACING;
 
                 var myColor = this._getColorByMetricValue(colorMetric);
 
@@ -89,9 +90,9 @@ export class SingleDrawer extends AbstractDrawer {
         element.renderedX = finalX;
         element.renderedY = finalZ;
 
-        finalWidth = element.type == 'FILE' ? currentCommitSize - config.BLOCK_SPACING : element.w - config.BLOCK_SPACING * 2;
+        finalWidth = element.type == Constants.ELEMENT_TYPE_FILE ? currentCommitSize - config.BLOCK_SPACING : element.w - config.BLOCK_SPACING * 2;
         finalHeight = height;
-        finalDepth = element.type == 'FILE' ? currentCommitSize - config.BLOCK_SPACING : element.h - config.BLOCK_SPACING * 2;
+        finalDepth = element.type == Constants.ELEMENT_TYPE_FILE ? currentCommitSize - config.BLOCK_SPACING : element.h - config.BLOCK_SPACING * 2;
 
         if (isTransparent) {
             cube.material.transparent = true;
@@ -140,7 +141,7 @@ export class SingleDrawer extends AbstractDrawer {
         for (var i = this.scene.children.length - 1; i >= 0; i--) {
             var child = this.scene.children[i];
 
-            if (child.type == 'Mesh' && child.userData.type == 'FILE') {
+            if (child.type == 'Mesh' && child.userData.type == Constants.ELEMENT_TYPE_FILE) {
                 if (newColorcode == 'commit') {
                     child.material.color.set(this._getColorByPosition(this.position));
                 } else if (newColorcode == 'metric') {

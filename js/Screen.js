@@ -1,5 +1,6 @@
 import {InteractionHandler} from './ui/InteractionHandler';
 import {config} from './Config';
+import * as Constants from './Constants';
 import * as PubSub from 'pubsub-js';
 
 export class Screen {
@@ -83,7 +84,7 @@ export class Screen {
         for (var i = this.scene.children.length - 1; i >= 0; i--) {
             var child = this.scene.children[i];
 
-            if (child.userData && (child.userData.type == 'FILE' || child.userData.type == 'CONNECTION')) {
+            if (child.userData && (child.userData.type == Constants.ELEMENT_TYPE_FILE || child.userData.type == Constants.ELEMENT_TYPE_CONNECTION)) {
                 child.visible = true;
                 if (this._isFullscreen) {
                     this.applyElementVisibilityStates(child);
@@ -276,7 +277,12 @@ export class Screen {
             for (var i = this.scene.children.length - 1; i >= 0; i--) {
                 var child = this.scene.children[i];
 
-                if (child.userData && (child.userData.type == 'FILE' || child.userData.type == 'CONNECTION') && child.userData.parentName == moduleName) {
+                if (
+                    child.userData &&
+                    (
+                        child.userData.type == Constants.ELEMENT_TYPE_FILE
+                        || child.userData.type == Constants.ELEMENT_TYPE_CONNECTION
+                    ) && child.userData.parentName == moduleName) {
                     child.visible = !child.visible;
                     if (this._isFullscreen) {
                         this.applyElementVisibilityStates(child);
@@ -307,7 +313,7 @@ export class Screen {
             for (var i = this.scene.children.length - 1; i >= 0; i--) {
                 var child = this.scene.children[i];
 
-                if (child.userData && (child.userData.type == 'FILE' || child.userData.type == 'CONNECTION')) {
+                if (child.userData && (child.userData.type == Constants.ELEMENT_TYPE_FILE || child.userData.type == Constants.ELEMENT_TYPE_CONNECTION)) {
                     child.visible = true;
                     if (this._isFullscreen) {
                         this.applyElementVisibilityStates(child);
@@ -345,7 +351,7 @@ export class Screen {
         for (var i = this.scene.children.length - 1; i >= 0; i--) {
             var child = this.scene.children[i];
 
-            if (child.type == 'Mesh' && child.userData.type == 'FILE') {
+            if (child.type == 'Mesh' && child.userData.type == Constants.ELEMENT_TYPE_FILE) {
                 if (doReset) {
                     child.material.transparent = false;
                     continue;
