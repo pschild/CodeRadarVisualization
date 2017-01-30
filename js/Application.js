@@ -179,29 +179,34 @@ export class Application {
     }
 
     _initializeEventListeners() {
-        PubSub.subscribe('heightDimensionChange', (eventName, args) => {
-            config.HEIGHT_METRIC_NAME = this.metricNameService.getMetricNameByShortName(args.metricName);
-            this.loadMetricData();
-        });
+        PubSub.subscribe('dimensionChange', (eventName, args) => {
+            switch (args.dimension) {
+                case 'height':
+                    config.HEIGHT_METRIC_NAME = this.metricNameService.getMetricNameByShortName(args.metricName);
+                    break;
+                case 'groundarea':
+                    config.GROUND_AREA_METRIC_NAME = this.metricNameService.getMetricNameByShortName(args.metricName);
+                    break;
+                case 'color':
+                    config.COLOR_METRIC_NAME = this.metricNameService.getMetricNameByShortName(args.metricName);
+                    this.userInterface.legendComponent.setColorCode();
+                    break;
+                default:
+                    throw new Error(`Unknown dimension ${args.dimension}!`);
+            }
 
-        PubSub.subscribe('groundAreaDimensionChange', (eventName, args) => {
-            config.GROUND_AREA_METRIC_NAME = this.metricNameService.getMetricNameByShortName(args.metricName);
-            this.loadMetricData();
-        });
-
-        PubSub.subscribe('colorDimensionChange', (eventName, args) => {
-            config.COLOR_METRIC_NAME = this.metricNameService.getMetricNameByShortName(args.metricName);
-            this.userInterface.legendComponent.setColorCode();
             this.loadMetricData();
         });
 
         PubSub.subscribe('commitChange', (eventName, args) => {
-            if (args.type == 'left') {
+            if (args.screen == 'left') {
                 this.leftCommitId = args.commitId;
                 this.getLeftScreen().setCommitId(this.leftCommitId);
-            } else if (args.type == 'right') {
+            } else if (args.screen == 'right') {
                 this.rightCommitId = args.commitId;
                 this.getRightScreen().setCommitId(this.rightCommitId);
+            } else {
+                throw new Error(`Unknown screen type ${args.screen}!`);
             }
 
             this.loadMetricData();

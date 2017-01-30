@@ -30,19 +30,22 @@ export class DimensionSelectionComponent {
         });
 
         this.heightDimensionSelect.addEventListener('change', function() {
-            PubSub.publish('heightDimensionChange', {
+            PubSub.publish('dimensionChange', {
+                dimension: 'height',
                 metricName: this.value
             });
         });
 
         this.groundAreaDimensionSelect.addEventListener('change', function() {
-            PubSub.publish('groundAreaDimensionChange', {
+            PubSub.publish('dimensionChange', {
+                dimension: 'groundarea',
                 metricName: this.value
             });
         });
 
         this.colorDimensionSelect.addEventListener('change', function() {
-            PubSub.publish('colorDimensionChange', {
+            PubSub.publish('dimensionChange', {
+                dimension: 'color',
                 metricName: this.value
             });
         });
