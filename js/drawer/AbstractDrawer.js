@@ -12,7 +12,7 @@ export class AbstractDrawer {
         }
 
         this.minBottomValue = 0;
-        this.maxBottomValue = -1;
+        this.maxBottomValue = Number.MIN_VALUE;
 
         this.scene = scene;
         this.position = position;
@@ -58,10 +58,6 @@ export class AbstractDrawer {
         };
     }
 
-    _getValueForGroundArea(commit1Metrics, commit2Metrics) {
-        return ElementAnalyzer.getMaxMetricValueByMetricName(commit1Metrics, commit2Metrics, config.GROUND_AREA_METRIC_NAME);
-    }
-
     drawElements(elements, parent, bottom = 0) {}
 
     drawBlock(element, parent, color, currentCommitSize, bottom, height, isTransparent) {}
@@ -100,23 +96,7 @@ export class AbstractDrawer {
         return new GrowingPacker();
     }
 
-    _getMetricValueOfElementAndCommitType(element, metricName, commitType) {
-        if (this.position == Constants.LEFT_SCREEN) {
-            if (commitType == Constants.COMMIT_TYPE_CURRENT) {
-                return element.commit1Metrics ? element.commit1Metrics[metricName] : undefined;
-            } else if (commitType == Constants.COMMIT_TYPE_OTHER) {
-                return element.commit2Metrics ? element.commit2Metrics[metricName] : undefined;
-            }
-
-        } else if (this.position == Constants.RIGHT_SCREEN) {
-            if (commitType == Constants.COMMIT_TYPE_CURRENT) {
-                return element.commit2Metrics ? element.commit2Metrics[metricName] : undefined;
-            } else if (commitType == Constants.COMMIT_TYPE_OTHER) {
-                return element.commit1Metrics ? element.commit1Metrics[metricName] : undefined;
-            }
-
-        }
+    _getValueForGroundArea(commit1Metrics, commit2Metrics) {
+        return ElementAnalyzer.getMaxMetricValueByMetricName(commit1Metrics, commit2Metrics, config.GROUND_AREA_METRIC_NAME);
     }
-
-
 }

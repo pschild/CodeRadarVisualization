@@ -32,9 +32,9 @@ export class SingleDrawer extends AbstractDrawer {
                 return;
             }
 
-            var heightMetric = this._getMetricValueOfElementAndCommitType(element, config.HEIGHT_METRIC_NAME, Constants.COMMIT_TYPE_CURRENT);
-            var groundAreaMetric = this._getMetricValueOfElementAndCommitType(element, config.GROUND_AREA_METRIC_NAME, Constants.COMMIT_TYPE_CURRENT);
-            var colorMetric = this._getMetricValueOfElementAndCommitType(element, config.COLOR_METRIC_NAME, Constants.COMMIT_TYPE_CURRENT);
+            var heightMetric = ElementAnalyzer.getMetricValueOfElementAndCommitType(element, config.HEIGHT_METRIC_NAME, Constants.COMMIT_TYPE_CURRENT, this.position);
+            var groundAreaMetric = ElementAnalyzer.getMetricValueOfElementAndCommitType(element, config.GROUND_AREA_METRIC_NAME, Constants.COMMIT_TYPE_CURRENT, this.position);
+            var colorMetric = ElementAnalyzer.getMetricValueOfElementAndCommitType(element, config.COLOR_METRIC_NAME, Constants.COMMIT_TYPE_CURRENT, this.position);
 
             var metrics = {
                 [config.HEIGHT_METRIC_NAME]: heightMetric,
@@ -51,7 +51,7 @@ export class SingleDrawer extends AbstractDrawer {
                 myHeight = heightMetric * config.HEIGHT_FACTOR + config.GLOBAL_MIN_HEIGHT;
 
                 var myGA = groundAreaMetric * config.GROUND_AREA_FACTOR + config.GLOBAL_MIN_GROUND_AREA + config.BLOCK_SPACING;
-                var otherGA = this._getMetricValueOfElementAndCommitType(element, config.GROUND_AREA_METRIC_NAME, Constants.COMMIT_TYPE_OTHER) * config.GROUND_AREA_FACTOR + config.GLOBAL_MIN_GROUND_AREA + config.BLOCK_SPACING;
+                var otherGA = ElementAnalyzer.getMetricValueOfElementAndCommitType(element, config.GROUND_AREA_METRIC_NAME, Constants.COMMIT_TYPE_OTHER, this.position) * config.GROUND_AREA_FACTOR + config.GLOBAL_MIN_GROUND_AREA + config.BLOCK_SPACING;
 
                 var myColor = ColorHelper.getColorByMetricValue(colorMetric, this.maxColorMetricValue, this.minColorMetricValue);
 
@@ -127,6 +127,7 @@ export class SingleDrawer extends AbstractDrawer {
 
     // override
     _initializeEventListeners() {
+        super._initializeEventListeners();
         PubSub.subscribe('colorcodeChange', (eventName, args) => {
             this._handleColorcodeChanged(args.colorcode);
         });

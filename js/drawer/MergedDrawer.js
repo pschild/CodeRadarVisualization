@@ -30,14 +30,14 @@ export class MergedDrawer extends AbstractDrawer {
 
             // FILE
             if (element.type == Constants.ELEMENT_TYPE_FILE) {
-                var blueHeightMetric = this._getMetricValueOfElementAndCommitType(element, config.HEIGHT_METRIC_NAME, Constants.COMMIT_TYPE_CURRENT);
-                var orangeHeightMetric = this._getMetricValueOfElementAndCommitType(element, config.HEIGHT_METRIC_NAME, Constants.COMMIT_TYPE_OTHER);
+                var blueHeightMetric = ElementAnalyzer.getMetricValueOfElementAndCommitType(element, config.HEIGHT_METRIC_NAME, Constants.COMMIT_TYPE_CURRENT, this.position);
+                var orangeHeightMetric = ElementAnalyzer.getMetricValueOfElementAndCommitType(element, config.HEIGHT_METRIC_NAME, Constants.COMMIT_TYPE_OTHER, this.position);
 
-                var blueGroundAreaMetric = this._getMetricValueOfElementAndCommitType(element, config.GROUND_AREA_METRIC_NAME, Constants.COMMIT_TYPE_CURRENT);
-                var orangeGroundAreaMetric = this._getMetricValueOfElementAndCommitType(element, config.GROUND_AREA_METRIC_NAME, Constants.COMMIT_TYPE_OTHER);
+                var blueGroundAreaMetric = ElementAnalyzer.getMetricValueOfElementAndCommitType(element, config.GROUND_AREA_METRIC_NAME, Constants.COMMIT_TYPE_CURRENT, this.position);
+                var orangeGroundAreaMetric = ElementAnalyzer.getMetricValueOfElementAndCommitType(element, config.GROUND_AREA_METRIC_NAME, Constants.COMMIT_TYPE_OTHER, this.position);
 
-                var blueColorMetric = this._getMetricValueOfElementAndCommitType(element, config.COLOR_METRIC_NAME, Constants.COMMIT_TYPE_CURRENT);
-                var orangeColorMetric = this._getMetricValueOfElementAndCommitType(element, config.COLOR_METRIC_NAME, Constants.COMMIT_TYPE_OTHER);
+                var blueColorMetric = ElementAnalyzer.getMetricValueOfElementAndCommitType(element, config.COLOR_METRIC_NAME, Constants.COMMIT_TYPE_CURRENT, this.position);
+                var orangeColorMetric = ElementAnalyzer.getMetricValueOfElementAndCommitType(element, config.COLOR_METRIC_NAME, Constants.COMMIT_TYPE_OTHER, this.position);
 
                 var blueMetrics = {
                     [config.HEIGHT_METRIC_NAME]: blueHeightMetric,
@@ -129,19 +129,6 @@ export class MergedDrawer extends AbstractDrawer {
         });
     }
 
-    drawBlockConnections() {
-        for (let movedElementPair of this.movedElements) {
-            var fromElement = this.scene.getObjectByName(movedElementPair.fromElementName);
-            var toElement = this.scene.getObjectByName(movedElementPair.toElementName);
-
-            if (fromElement && toElement) {
-                this.drawBlockConnection(fromElement, toElement);
-            } else {
-                console.warn(`A connection could not be drawn because at least one element could not be found in the scene.`);
-            }
-        }
-    }
-
     // override
     drawBlock(element, parent, color, currentCommitSize, bottom, height, isTransparent, metrics, commitType, changeTypes) {
         var finalX, finalY, finalZ;
@@ -185,6 +172,19 @@ export class MergedDrawer extends AbstractDrawer {
         };
 
         this.scene.add(cube);
+    }
+
+    drawBlockConnections() {
+        for (let movedElementPair of this.movedElements) {
+            var fromElement = this.scene.getObjectByName(movedElementPair.fromElementName);
+            var toElement = this.scene.getObjectByName(movedElementPair.toElementName);
+
+            if (fromElement && toElement) {
+                this.drawBlockConnection(fromElement, toElement);
+            } else {
+                console.warn(`A connection could not be drawn because at least one element could not be found in the scene.`);
+            }
+        }
     }
 
     drawBlockConnection(fromElement, toElement) {

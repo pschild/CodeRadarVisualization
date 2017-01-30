@@ -125,4 +125,28 @@ export class ElementAnalyzer {
             throw new Error(`Unknown screen position ${screenPosition}!`);
         }
     }
+
+    static getMetricValueOfElementAndCommitType(element, metricName, commitType, screenPosition) {
+        if (screenPosition == Constants.LEFT_SCREEN) {
+            if (commitType == Constants.COMMIT_TYPE_CURRENT) {
+                return element.commit1Metrics ? element.commit1Metrics[metricName] : undefined;
+            } else if (commitType == Constants.COMMIT_TYPE_OTHER) {
+                return element.commit2Metrics ? element.commit2Metrics[metricName] : undefined;
+            } else {
+                throw new Error(`Unknown commitType ${commitType}!`);
+            }
+
+        } else if (screenPosition == Constants.RIGHT_SCREEN) {
+            if (commitType == Constants.COMMIT_TYPE_CURRENT) {
+                return element.commit2Metrics ? element.commit2Metrics[metricName] : undefined;
+            } else if (commitType == Constants.COMMIT_TYPE_OTHER) {
+                return element.commit1Metrics ? element.commit1Metrics[metricName] : undefined;
+            } else {
+                throw new Error(`Unknown commitType ${commitType}!`);
+            }
+
+        } else {
+            throw new Error(`Unknown screen position ${screenPosition}!`);
+        }
+    }
 }

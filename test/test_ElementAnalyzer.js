@@ -235,4 +235,34 @@ describe('ElementAnalyzer', function () {
             assert.equal(ElementAnalyzer.hasMetricValuesForCurrentCommit(exampleElementWithoutFirstCommitData, false, Constants.LEFT_SCREEN), false);
         });
     });
+
+    describe('getMetricValueOfElementAndCurrentCommit', function () {
+        it('should return metricValue when metric is found for current commit', function () {
+            assert.equal(ElementAnalyzer.getMetricValueOfElementAndCommitType(exampleElement, 'coderadar:size:loc:java', Constants.COMMIT_TYPE_CURRENT, Constants.LEFT_SCREEN), 1);
+        });
+
+        it('should return metricValue when metric is found for other commit', function () {
+            assert.equal(ElementAnalyzer.getMetricValueOfElementAndCommitType(exampleElement, 'coderadar:size:loc:java', Constants.COMMIT_TYPE_OTHER, Constants.LEFT_SCREEN), 4);
+        });
+
+        it('should return undefined when an empty element is given', function () {
+            assert.equal(ElementAnalyzer.getMetricValueOfElementAndCommitType({}, 'coderadar:size:loc:java', Constants.COMMIT_TYPE_CURRENT, Constants.LEFT_SCREEN), undefined);
+        });
+
+        it('should return undefined when metric is not found', function () {
+            assert.equal(ElementAnalyzer.getMetricValueOfElementAndCommitType(exampleElement, 'unknown', Constants.COMMIT_TYPE_CURRENT, Constants.LEFT_SCREEN), undefined);
+        });
+
+        it('should throw an error when unknown commit type is given', function () {
+            assert.throws(() => {
+                ElementAnalyzer.getMetricValueOfElementAndCommitType(exampleElement, 'coderadar:size:loc:java', 'unknown', Constants.LEFT_SCREEN);
+            });
+        });
+
+        it('should throw an error when unknown screen position is given', function () {
+            assert.throws(() => {
+                ElementAnalyzer.getMetricValueOfElementAndCommitType(exampleElement, 'coderadar:size:loc:java', Constants.COMMIT_TYPE_OTHER, 'unknown');
+            });
+        });
+    });
 });
