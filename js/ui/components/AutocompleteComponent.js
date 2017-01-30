@@ -1,5 +1,3 @@
-import * as PubSub from 'pubsub-js';
-
 const MAX_WIDTH = 400;
 
 export class AutocompleteComponent {
@@ -118,14 +116,15 @@ export class AutocompleteComponent {
             this._markSelectedElement(element);
             this._clearHighlights();
 
-            PubSub.publish('autocompleteElementClicked', {
-                componentId: this._componentElement.id,
+            this._onSelection({
                 selection: element.value
             });
         });
 
         return li;
     }
+
+    _onSelection(args) { console.warn('not implemented'); }
 
     _markSelectedElement(element) {
         var listItems = this.suggestionsList.querySelectorAll('li');
