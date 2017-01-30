@@ -100,7 +100,9 @@ export class ElementAnalyzer {
         var found = false;
 
         for (let child of element.children) {
-            found = this.hasMetricValuesForCurrentCommit(child, isFullscreen, screenPosition);
+            if (this.hasMetricValuesForCurrentCommit(child, isFullscreen, screenPosition)) {
+                found = true;
+            }
 
             // recursion
             if (child.children && child.children.length > 0 && !found) {
