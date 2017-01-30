@@ -3,6 +3,7 @@ import {BlockConnection} from '../shape/BlockConnection';
 import {config} from '../Config';
 import * as Constants from '../Constants';
 import {AbstractDrawer} from './AbstractDrawer';
+import {ElementAnalyzer} from '../util/ElementAnalyzer';
 
 export class MergedDrawer extends AbstractDrawer {
 
@@ -110,7 +111,7 @@ export class MergedDrawer extends AbstractDrawer {
             // MODULE
             } else {
                 // don't draw empty modules
-                if (this._hasChildrenForCurrentCommit(element)) {
+                if (ElementAnalyzer.hasChildrenForCurrentCommit(element, true, this.position)) {
                     if (bottom > this.maxBottomValue) {
                         this.maxBottomValue = bottom;
                     }

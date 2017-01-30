@@ -2,6 +2,7 @@ import {Block} from '../shape/Block';
 import {config} from '../Config';
 import * as Constants from '../Constants';
 import {AbstractDrawer} from './AbstractDrawer';
+import {ElementAnalyzer} from '../util/ElementAnalyzer';
 import * as chroma from 'chroma-js/chroma';
 import * as PubSub from 'pubsub-js';
 
@@ -22,7 +23,7 @@ export class SingleDrawer extends AbstractDrawer {
 
         elements.forEach((element) => {
             // don't draw empty modules
-            if (element.type == Constants.ELEMENT_TYPE_MODULE && !this._hasChildrenForCurrentCommit(element)) {
+            if (element.type == Constants.ELEMENT_TYPE_MODULE && !ElementAnalyzer.hasChildrenForCurrentCommit(element, false, this.position)) {
                 return;
             }
 

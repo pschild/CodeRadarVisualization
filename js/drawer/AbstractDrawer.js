@@ -113,36 +113,6 @@ export class AbstractDrawer {
         return color == config.COLOR_FIRST_COMMIT ? config.COLOR_SECOND_COMMIT : config.COLOR_FIRST_COMMIT;
     }
 
-    _hasChildrenForCurrentCommit(element) {
-        var found = false;
-
-        for (let child of element.children) {
-            if (this._hasMetricValuesForCurrentCommit(child)) {
-                found = true;
-            }
-
-            // recursion
-            if (child.children && child.children.length > 0 && !found) {
-                found = this._hasChildrenForCurrentCommit(child);
-            }
-        }
-
-        return found;
-    }
-
-    _hasMetricValuesForCurrentCommit(element) {
-        // when in fullscreen mode, metrics for at least one commit should be present
-        if (this.isFullscreen) {
-            return element.commit1Metrics != null || element.commit2Metrics != null;
-        }
-
-        if (this.position == Constants.LEFT_SCREEN) {
-            return element.commit1Metrics != null;
-        } else if (this.position == Constants.RIGHT_SCREEN) {
-            return element.commit2Metrics != null;
-        }
-    }
-
     _getMetricValueOfElementAndCommitType(element, metricName, commitType) {
         if (this.position == Constants.LEFT_SCREEN) {
             if (commitType == Constants.COMMIT_TYPE_CURRENT) {

@@ -1,3 +1,7 @@
+import * as THREE from 'three';
+window.THREE = THREE; // to make THREE available for OrbitControls
+require('three/examples/js/controls/OrbitControls.js'); // require instead if import, because OrbitControls is not a ES6 module
+
 import {InteractionHandler} from './ui/InteractionHandler';
 import {config} from './Config';
 import * as Constants from './Constants';

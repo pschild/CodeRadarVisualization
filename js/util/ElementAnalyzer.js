@@ -95,4 +95,34 @@ export class ElementAnalyzer {
             return commit1Metrics[metricName] > commit2Metrics[metricName] ? commit1Metrics[metricName] : commit2Metrics[metricName];
         }
     }
+
+    static hasChildrenForCurrentCommit(element, isFullscreen, screenPosition) {
+        var found = false;
+
+        for (let child of element.children) {
+            found = this.hasMetricValuesForCurrentCommit(child, isFullscreen, screenPosition);
+
+            // recursion
+            if (child.children && child.children.length > 0 && !found) {
+                found = this.hasChildrenForCurrentCommit(child, isFullscreen, screenPosition);
+            }
+        }
+
+        return found;
+    }
+
+    static hasMetricValuesForCurrentCommit(element, isFullscreen, screenPosition) {
+        // when in fullscreen mode, metrics for at least one commit should be present
+        if (isFullscreen) {
+            return element.commit1Metrics != null || element.commit2Metrics != null;
+        }
+
+        if (screenPosition == Constants.LEFT_SCREEN) {
+            return element.commit1Metrics != null;
+        } else if (screenPosition == Constants.RIGHT_SCREEN) {
+            return element.commit2Metrics != null;
+        } else {
+            throw new Error(`Unknown screen position ${screenPosition}!`);
+        }
+    }
 }

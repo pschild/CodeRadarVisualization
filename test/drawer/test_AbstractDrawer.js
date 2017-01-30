@@ -10,70 +10,6 @@ MergedDrawer.prototype._getPacker = sinon.stub().returns(packers.GrowingPacker.p
 // initialize a MergedDrawer because AbstractDrawer cannot be initialized
 var drawer = new MergedDrawer(null, 'left');
 
-var validJsonContainingCommitId = {
-    type: 'MODULE',
-    children: [
-        {
-            type: 'FILE',
-            'commit1Metrics': null,
-            'commit2Metrics': {
-                'coderadar:size:loc:java': 9,
-                'coderadar:size:eloc:java': 3,
-                'coderadar:size:sloc:java': 5
-            },
-            children: []
-        },
-        {
-            type: 'MODULE',
-            children: [
-                {
-                    type: 'FILE',
-                    'commit1Metrics': {
-                        'coderadar:size:loc:java': 9,
-                        'coderadar:size:eloc:java': 3,
-                        'coderadar:size:sloc:java': 5
-                    },
-                    'commit2Metrics': {
-                        'coderadar:size:loc:java': 9,
-                        'coderadar:size:eloc:java': 3,
-                        'coderadar:size:sloc:java': 5
-                    },
-                    children: []
-                }
-            ]
-        }
-    ]
-};
-var validJsonNotContainingCommitId = {
-    type: 'MODULE',
-    children: [
-        {
-            type: 'FILE',
-            'commit1Metrics': null,
-            'commit2Metrics': {
-                'coderadar:size:loc:java': 9,
-                'coderadar:size:eloc:java': 3,
-                'coderadar:size:sloc:java': 5
-            },
-            children: []
-        },
-        {
-            type: 'MODULE',
-            children: [
-                {
-                    type: 'FILE',
-                    'commit1Metrics': null,
-                    'commit2Metrics': {
-                        'coderadar:size:loc:java': 9,
-                        'coderadar:size:eloc:java': 3,
-                        'coderadar:size:sloc:java': 5
-                    },
-                    children: []
-                }
-            ]
-        }
-    ]
-};
 var exampleElement = {
     'type': 'FILE',
     'commit1Metrics': {
@@ -87,37 +23,8 @@ var exampleElement = {
         'coderadar:size:sloc:java': 6
     }
 };
-var exampleElementWithoutFirstCommitData = {
-    'type': 'FILE',
-    'commit1Metrics': null,
-    'commit2Metrics': {
-        'coderadar:size:loc:java': 4,
-        'coderadar:size:eloc:java': 5,
-        'coderadar:size:sloc:java': 6
-    }
-};
 
 describe('AbstractDrawer', function () {
-    describe('_hasChildrenForCurrentCommit', function () {
-        it('should return true when children are found', function () {
-            assert.equal(drawer._hasChildrenForCurrentCommit(validJsonContainingCommitId), true);
-        });
-
-        it('should return false when no children are found', function () {
-            assert.equal(drawer._hasChildrenForCurrentCommit(validJsonNotContainingCommitId), false);
-        });
-    });
-
-    describe('_hasMetricValuesForCurrentCommit', function () {
-        it('should return true when current commit is found', function () {
-            assert.equal(drawer._hasMetricValuesForCurrentCommit(exampleElement), true);
-        });
-
-        it('should return false when current commit is not found', function () {
-            assert.equal(drawer._hasMetricValuesForCurrentCommit(exampleElementWithoutFirstCommitData), false);
-        });
-    });
-
     describe('_getMetricValueOfElementAndCurrentCommit', function () {
         it('should return metricValue when metric is found for current commit', function () {
             assert.equal(drawer._getMetricValueOfElementAndCommitType(exampleElement, 'coderadar:size:loc:java', 'current'), 1);
