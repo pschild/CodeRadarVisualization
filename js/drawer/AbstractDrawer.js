@@ -58,9 +58,9 @@ export class AbstractDrawer {
         };
     }
 
-    drawElements(elements, parent, bottom = 0) { console.warn('not implemented'); }
+    drawElements(elements, parent, bottom = 0) { }
 
-    drawBlock(element, parent, color, currentCommitSize, bottom, height, isTransparent) { console.warn('not implemented'); }
+    drawBlock(element, parent, color, currentCommitSize, bottom, height, isTransparent) { }
 
     colorizeModules() {
         for (var i = this.scene.children.length - 1; i >= 0; i--) {
@@ -74,9 +74,9 @@ export class AbstractDrawer {
         }
     }
 
-    setColorization(colorMode) { console.warn('not implemented'); }
+    setColorization(colorMode) { }
 
-    _initializeEventListeners() { console.warn('not implemented'); }
+    _initializeEventListeners() { }
 
     _generateTooltipHtml(elementName, metrics) {
         var tooltipHtml = [
