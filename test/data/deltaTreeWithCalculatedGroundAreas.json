@@ -1,0 +1,441 @@
+{
+    "name": "root",
+    "type": "MODULE",
+    "commit1Metrics": {
+        "coderadar:size:loc:java": 800,
+        "coderadar:size:eloc:java": 4,
+        "coderadar:size:sloc:java": 8
+    },
+    "commit2Metrics": {
+        "coderadar:size:loc:java": 800,
+        "coderadar:size:eloc:java": 4,
+        "coderadar:size:sloc:java": 8
+    },
+    "renamedFrom": null,
+    "renamedTo": null,
+    "changes": null,
+    "children": [
+        {
+            "name": "moduleB",
+            "type": "MODULE",
+            "commit1Metrics": {
+                "coderadar:size:loc:java": 4,
+                "coderadar:size:eloc:java": 2,
+                "coderadar:size:sloc:java": 4
+            },
+            "commit2Metrics": {
+                "coderadar:size:loc:java": 6,
+                "coderadar:size:eloc:java": 3,
+                "coderadar:size:sloc:java": 6
+            },
+            "renamedFrom": null,
+            "renamedTo": null,
+            "changes": null,
+            "children": [
+                {
+                    "name": "moduleB/src/main/java/IncreasedClass.java",
+                    "type": "FILE",
+                    "commit1Metrics": {
+                        "coderadar:size:loc:java": 100,
+                        "coderadar:size:eloc:java": 100,
+                        "coderadar:size:sloc:java": 100
+                    },
+                    "commit2Metrics": {
+                        "coderadar:size:loc:java": 200,
+                        "coderadar:size:eloc:java": 200,
+                        "coderadar:size:sloc:java": 200
+                    },
+                    "renamedFrom": null,
+                    "renamedTo": null,
+                    "changes": {
+                        "renamed": false,
+                        "modified": false,
+                        "deleted": false,
+                        "added": false
+                    },
+                    "children": [],
+                    "w": 12,
+                    "h": 12,
+                    "fit": {
+                        "x": 0,
+                        "y": 0,
+                        "w": 12,
+                        "h": 12,
+                        "used": true,
+                        "down": {
+                            "x": 0,
+                            "y": 12,
+                            "w": 12,
+                            "h": 0
+                        },
+                        "right": {
+                            "x": 12,
+                            "y": 0,
+                            "w": 0,
+                            "h": 12
+                        }
+                    },
+                    "renderedX": 5.5,
+                    "renderedY": 5.5
+                },
+                {
+                    "name": "moduleB/src/main/java/DecreasedClass.java",
+                    "type": "FILE",
+                    "commit1Metrics": {
+                        "coderadar:size:loc:java": 200,
+                        "coderadar:size:eloc:java": 200,
+                        "coderadar:size:sloc:java": 200
+                    },
+                    "commit2Metrics": {
+                        "coderadar:size:loc:java": 100,
+                        "coderadar:size:eloc:java": 100,
+                        "coderadar:size:sloc:java": 100
+                    },
+                    "renamedFrom": null,
+                    "renamedTo": null,
+                    "changes": {
+                        "renamed": false,
+                        "modified": false,
+                        "deleted": false,
+                        "added": false
+                    },
+                    "children": [],
+                    "w": 12,
+                    "h": 12,
+                    "fit": {
+                        "x": 12,
+                        "y": 0,
+                        "w": 12,
+                        "h": 12,
+                        "used": true,
+                        "down": {
+                            "x": 12,
+                            "y": 12,
+                            "w": 12,
+                            "h": 0
+                        },
+                        "right": {
+                            "x": 24,
+                            "y": 0,
+                            "w": 0,
+                            "h": 12
+                        }
+                    },
+                    "renderedX": 15,
+                    "renderedY": 3
+                },
+                {
+                    "name": "moduleB/src/main/java/AddedClass.java",
+                    "type": "FILE",
+                    "commit1Metrics": null,
+                    "commit2Metrics": {
+                        "coderadar:size:loc:java": 2,
+                        "coderadar:size:eloc:java": 1,
+                        "coderadar:size:sloc:java": 2
+                    },
+                    "renamedFrom": null,
+                    "renamedTo": null,
+                    "changes": {
+                        "renamed": false,
+                        "modified": false,
+                        "deleted": false,
+                        "added": true
+                    },
+                    "children": [],
+                    "w": 2.1,
+                    "h": 2.1,
+                    "fit": {
+                        "x": 0,
+                        "y": 12,
+                        "w": 24,
+                        "h": 2.1,
+                        "used": true,
+                        "down": {
+                            "x": 0,
+                            "y": 14.1,
+                            "w": 24,
+                            "h": 0
+                        },
+                        "right": {
+                            "x": 2.1,
+                            "y": 12,
+                            "w": 21.9,
+                            "h": 2.1,
+                            "used": true,
+                            "down": {
+                                "x": 2.1,
+                                "y": 14.1,
+                                "w": 21.9,
+                                "h": 0
+                            },
+                            "right": {
+                                "x": 4.2,
+                                "y": 12,
+                                "w": 19.799999999999997,
+                                "h": 2.1
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "moduleB/src/main/java/MovedClassFromAToB.java",
+                    "type": "FILE",
+                    "commit1Metrics": null,
+                    "commit2Metrics": {
+                        "coderadar:size:loc:java": 2,
+                        "coderadar:size:eloc:java": 1,
+                        "coderadar:size:sloc:java": 2
+                    },
+                    "renamedFrom": "moduleA/src/main/java/MovedClassFromAToB.java",
+                    "renamedTo": null,
+                    "changes": {
+                        "renamed": true,
+                        "modified": false,
+                        "deleted": false,
+                        "added": false
+                    },
+                    "children": [],
+                    "w": 2.1,
+                    "h": 2.1,
+                    "fit": {
+                        "x": 2.1,
+                        "y": 12,
+                        "w": 21.9,
+                        "h": 2.1,
+                        "used": true,
+                        "down": {
+                            "x": 2.1,
+                            "y": 14.1,
+                            "w": 21.9,
+                            "h": 0
+                        },
+                        "right": {
+                            "x": 4.2,
+                            "y": 12,
+                            "w": 19.799999999999997,
+                            "h": 2.1
+                        }
+                    }
+                }
+            ],
+            "w": 27,
+            "h": 17.1,
+            "fit": {
+                "x": 0,
+                "y": 0,
+                "w": 27,
+                "h": 17.1,
+                "used": true,
+                "down": {
+                    "x": 0,
+                    "y": 17.1,
+                    "w": 27,
+                    "h": 0
+                },
+                "right": {
+                    "x": 27,
+                    "y": 0,
+                    "w": 0,
+                    "h": 17.1
+                }
+            },
+            "renderedX": 2,
+            "renderedY": 2
+        },
+        {
+            "name": "moduleA",
+            "type": "MODULE",
+            "commit1Metrics": {
+                "coderadar:size:loc:java": 4,
+                "coderadar:size:eloc:java": 2,
+                "coderadar:size:sloc:java": 4
+            },
+            "commit2Metrics": {
+                "coderadar:size:loc:java": 2,
+                "coderadar:size:eloc:java": 1,
+                "coderadar:size:sloc:java": 2
+            },
+            "renamedFrom": null,
+            "renamedTo": null,
+            "changes": null,
+            "children": [
+                {
+                    "name": "moduleA/src/main/java/UnchangedClass.java",
+                    "type": "FILE",
+                    "commit1Metrics": {
+                        "coderadar:size:loc:java": 2,
+                        "coderadar:size:eloc:java": 1,
+                        "coderadar:size:sloc:java": 2
+                    },
+                    "commit2Metrics": {
+                        "coderadar:size:loc:java": 2,
+                        "coderadar:size:eloc:java": 1,
+                        "coderadar:size:sloc:java": 2
+                    },
+                    "renamedFrom": null,
+                    "renamedTo": null,
+                    "changes": {
+                        "renamed": false,
+                        "modified": false,
+                        "deleted": false,
+                        "added": false
+                    },
+                    "children": [],
+                    "w": 2.1,
+                    "h": 2.1,
+                    "fit": {
+                        "x": 0,
+                        "y": 0,
+                        "w": 2.1,
+                        "h": 2.1,
+                        "used": true,
+                        "down": {
+                            "x": 0,
+                            "y": 2.1,
+                            "w": 2.1,
+                            "h": 0
+                        },
+                        "right": {
+                            "x": 2.1,
+                            "y": 0,
+                            "w": 0,
+                            "h": 2.1
+                        }
+                    },
+                    "renderedX": 3,
+                    "renderedY": 20.1
+                },
+                {
+                    "name": "moduleA/src/main/java/MovedClassFromAToB.java",
+                    "type": "FILE",
+                    "commit1Metrics": {
+                        "coderadar:size:loc:java": 2,
+                        "coderadar:size:eloc:java": 1,
+                        "coderadar:size:sloc:java": 2
+                    },
+                    "commit2Metrics": null,
+                    "renamedFrom": null,
+                    "renamedTo": "moduleB/src/main/java/MovedClassFromAToB.java",
+                    "changes": {
+                        "renamed": true,
+                        "modified": false,
+                        "deleted": false,
+                        "added": false
+                    },
+                    "children": [],
+                    "w": 2.1,
+                    "h": 2.1,
+                    "fit": {
+                        "x": 2.1,
+                        "y": 0,
+                        "w": 2.1,
+                        "h": 2.1,
+                        "used": true,
+                        "down": {
+                            "x": 2.1,
+                            "y": 2.1,
+                            "w": 2.1,
+                            "h": 0
+                        },
+                        "right": {
+                            "x": 4.2,
+                            "y": 0,
+                            "w": 0,
+                            "h": 2.1
+                        }
+                    },
+                    "renderedX": 5.1,
+                    "renderedY": 20.1
+                },
+                {
+                    "name": "moduleB/src/main/java/RemovedClass.java",
+                    "type": "FILE",
+                    "commit1Metrics": {
+                        "coderadar:size:loc:java": 2,
+                        "coderadar:size:eloc:java": 1,
+                        "coderadar:size:sloc:java": 2
+                    },
+                    "commit2Metrics": null,
+                    "renamedFrom": null,
+                    "renamedTo": null,
+                    "changes": {
+                        "renamed": false,
+                        "modified": false,
+                        "deleted": false,
+                        "added": true
+                    },
+                    "children": [],
+                    "w": 2.1,
+                    "h": 2.1,
+                    "fit": {
+                        "x": 0,
+                        "y": 2.1,
+                        "w": 4.2,
+                        "h": 2.1,
+                        "used": true,
+                        "down": {
+                            "x": 0,
+                            "y": 4.2,
+                            "w": 4.2,
+                            "h": 0
+                        },
+                        "right": {
+                            "x": 2.1,
+                            "y": 2.1,
+                            "w": 2.1,
+                            "h": 2.1
+                        }
+                    },
+                    "renderedX": 3,
+                    "renderedY": 22.200000000000003
+                }
+            ],
+            "w": 7.2,
+            "h": 7.2,
+            "fit": {
+                "x": 0,
+                "y": 17.1,
+                "w": 27,
+                "h": 7.2,
+                "used": true,
+                "down": {
+                    "x": 0,
+                    "y": 24.3,
+                    "w": 27,
+                    "h": 0
+                },
+                "right": {
+                    "x": 7.2,
+                    "y": 17.1,
+                    "w": 19.8,
+                    "h": 7.2
+                }
+            },
+            "renderedX": 2,
+            "renderedY": 19.1
+        }
+    ],
+    "w": 30,
+    "h": 27.3,
+    "fit": {
+        "x": 0,
+        "y": 0,
+        "w": 30,
+        "h": 27.3,
+        "used": true,
+        "down": {
+            "x": 0,
+            "y": 27.3,
+            "w": 30,
+            "h": 0
+        },
+        "right": {
+            "x": 30,
+            "y": 0,
+            "w": 0,
+            "h": 27.3
+        }
+    },
+    "renderedX": 1,
+    "renderedY": 1
+}

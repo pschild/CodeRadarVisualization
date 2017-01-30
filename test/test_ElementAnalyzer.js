@@ -208,7 +208,7 @@ describe('ElementAnalyzer', function () {
                 ElementAnalyzer.findSmallestAndBiggestMetricValueByMetricName(deltaTree, 'coderadar:size:loc:java'),
                 {
                     min: 2,
-                    max: 201
+                    max: 200
                 }
             );
         });
