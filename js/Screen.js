@@ -75,7 +75,7 @@ export class Screen {
         }
 
         console.time('drawing time ' + this.position);
-        var drawer = new drawerClazz(this.scene, this.position, this._isFullscreen, this.minMaxPairOfColorMetric);
+        var drawer = new drawerClazz(this.scene, this.position, this.minMaxPairOfColorMetric);
         drawer.calculateGroundAreas(this.data);
         drawer.drawElements(this.data);
         drawer.colorizeModules();

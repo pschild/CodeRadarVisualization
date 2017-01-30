@@ -4,11 +4,12 @@ import {config} from '../Config';
 import * as Constants from '../Constants';
 import {AbstractDrawer} from './AbstractDrawer';
 import {ElementAnalyzer} from '../util/ElementAnalyzer';
+import {ColorHelper} from '../util/ColorHelper';
 
 export class MergedDrawer extends AbstractDrawer {
 
-    constructor(scene, position, isFullscreen) {
-        super(scene, position, isFullscreen);
+    constructor(scene, position) {
+        super(scene, position);
 
         this.movedElements = [];
     }
@@ -56,8 +57,8 @@ export class MergedDrawer extends AbstractDrawer {
                 var blueGA = blueGroundAreaMetric * config.GROUND_AREA_FACTOR + config.GLOBAL_MIN_GROUND_AREA + config.BLOCK_SPACING;
                 var orangeGA = orangeGroundAreaMetric * config.GROUND_AREA_FACTOR + config.GLOBAL_MIN_GROUND_AREA + config.BLOCK_SPACING;
 
-                var blueColor = this._getColorByPosition(this.position);
-                var orangeColor = this._getContraryColorByColor(blueColor);
+                var blueColor = ColorHelper.getColorByPosition(this.position);
+                var orangeColor = ColorHelper.getContraryColorByColor(blueColor);
 
                 var blueTransparency = blueHeight >= orangeHeight && blueGA >= orangeGA;
                 var orangeTransparency = orangeHeight >= blueHeight && orangeGA >= blueGA;

@@ -1,12 +1,12 @@
 import {config} from '../Config';
 import * as Constants from '../Constants';
 import {ElementAnalyzer} from '../util/ElementAnalyzer';
+import {ColorHelper} from '../util/ColorHelper';
 import {MetricNameService} from '../service/MetricNameService';
-import * as chroma from 'chroma-js/chroma';
 
 export class AbstractDrawer {
 
-    constructor(scene, position, isFullscreen) {
+    constructor(scene, position) {
         if (new.target === AbstractDrawer) {
             throw new TypeError('Instantiating AbstractDrawer not allowed.');
         }
@@ -16,7 +16,6 @@ export class AbstractDrawer {
 
         this.scene = scene;
         this.position = position;
-        this.isFullscreen = isFullscreen;
         this.packer = this._getPacker();
 
         this.metricNameService = new MetricNameService();
@@ -72,15 +71,11 @@ export class AbstractDrawer {
             var child = this.scene.children[i];
 
             if (child.userData && child.userData.type == Constants.ELEMENT_TYPE_MODULE) {
-                child.material.color.set(this._getColorByBottomValue(child.userData.bottom));
+                child.material.color.set(
+                    ColorHelper.getColorByBottomValue(child.userData.bottom, this.maxBottomValue, this.minBottomValue)
+                );
             }
         }
-    }
-
-    _getColorByBottomValue(value) {
-        var colorScale = chroma.scale(config.COLOR_HIERARCHY_RANGE);
-        var hexValue = colorScale(value / (this.maxBottomValue + this.minBottomValue)).hex();
-        return new THREE.Color(hexValue);
     }
 
     setColorization(colorMode) {}
@@ -103,14 +98,6 @@ export class AbstractDrawer {
 
     _getPacker() {
         return new GrowingPacker();
-    }
-
-    _getColorByPosition(position) {
-        return position == Constants.LEFT_SCREEN ? config.COLOR_FIRST_COMMIT : config.COLOR_SECOND_COMMIT;
-    }
-
-    _getContraryColorByColor(color) {
-        return color == config.COLOR_FIRST_COMMIT ? config.COLOR_SECOND_COMMIT : config.COLOR_FIRST_COMMIT;
     }
 
     _getMetricValueOfElementAndCommitType(element, metricName, commitType) {

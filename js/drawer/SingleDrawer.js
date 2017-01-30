@@ -3,13 +3,13 @@ import {config} from '../Config';
 import * as Constants from '../Constants';
 import {AbstractDrawer} from './AbstractDrawer';
 import {ElementAnalyzer} from '../util/ElementAnalyzer';
-import * as chroma from 'chroma-js/chroma';
+import {ColorHelper} from '../util/ColorHelper';
 import * as PubSub from 'pubsub-js';
 
 export class SingleDrawer extends AbstractDrawer {
 
-    constructor(scene, position, isFullscreen, minMaxPairOfColorMetric) {
-        super(scene, position, isFullscreen);
+    constructor(scene, position, minMaxPairOfColorMetric) {
+        super(scene, position);
 
         this.minColorMetricValue = minMaxPairOfColorMetric ? minMaxPairOfColorMetric.min : 0;
         this.maxColorMetricValue = minMaxPairOfColorMetric ? minMaxPairOfColorMetric.max : 0;
@@ -53,7 +53,7 @@ export class SingleDrawer extends AbstractDrawer {
                 var myGA = groundAreaMetric * config.GROUND_AREA_FACTOR + config.GLOBAL_MIN_GROUND_AREA + config.BLOCK_SPACING;
                 var otherGA = this._getMetricValueOfElementAndCommitType(element, config.GROUND_AREA_METRIC_NAME, Constants.COMMIT_TYPE_OTHER) * config.GROUND_AREA_FACTOR + config.GLOBAL_MIN_GROUND_AREA + config.BLOCK_SPACING;
 
-                var myColor = this._getColorByMetricValue(colorMetric);
+                var myColor = ColorHelper.getColorByMetricValue(colorMetric, this.maxColorMetricValue, this.minColorMetricValue);
 
                 if (myGA < otherGA) {
                     element.fit.x += (otherGA - myGA) / 2;
@@ -132,21 +132,19 @@ export class SingleDrawer extends AbstractDrawer {
         });
     }
 
-    _getColorByMetricValue(value) {
-        var colorScale = chroma.scale(config.COLOR_HEATMAP_RANGE);
-        var hexValue = colorScale(value / (this.maxColorMetricValue + this.minColorMetricValue)).hex();
-        return new THREE.Color(hexValue);
-    }
-
     _handleColorcodeChanged(newColorcode) {
         for (var i = this.scene.children.length - 1; i >= 0; i--) {
             var child = this.scene.children[i];
 
             if (child.type == 'Mesh' && child.userData.type == Constants.ELEMENT_TYPE_FILE) {
                 if (newColorcode == 'commit') {
-                    child.material.color.set(this._getColorByPosition(this.position));
+                    child.material.color.set(
+                        ColorHelper.getColorByPosition(this.position)
+                    );
                 } else if (newColorcode == 'metric') {
-                    child.material.color.set(this._getColorByMetricValue(child.userData.metrics[config.COLOR_METRIC_NAME]));
+                    child.material.color.set(
+                        ColorHelper.getColorByMetricValue(child.userData.metrics[config.COLOR_METRIC_NAME], this.maxColorMetricValue, this.minColorMetricValue)
+                    );
                 }
             }
         }
