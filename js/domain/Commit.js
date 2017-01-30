@@ -1,3 +1,5 @@
+import {DatetimeFormatter} from '../util/DatetimeFormatter';
+
 export class Commit {
 
     setName(name) {
@@ -37,18 +39,9 @@ export class Commit {
     }
 
     getFormattedDatetime() {
-        let date = new Date(this.timestamp);
-        return [
-            date.getDate() < 10 ? '0' + date.getDate() : date.getDate(),
-            '.',
-            date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1,
-            '.',
-            date.getFullYear(),
-            ' ',
-            date.getHours() < 10 ? '0' + date.getHours() : date.getHours(),
-            ':',
-            date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()
-        ].join('');
+        return new DatetimeFormatter()
+            .withShowSeconds(false)
+            .formatDate(new Date(this.timestamp));
     }
 
 }

@@ -1,3 +1,5 @@
+import {DatetimeFormatter} from '../../util/DatetimeFormatter';
+
 export class ScreenshotComponent {
 
     constructor(application) {
@@ -36,19 +38,11 @@ export class ScreenshotComponent {
     }
 
     _getDateTimeAsString() {
-        var date = new Date();
-        return [
-            date.getDate() < 10 ? '0' + date.getDate() : date.getDate(),
-            '-',
-            date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1,
-            '-',
-            date.getFullYear(),
-            '_',
-            date.getHours() < 10 ? '0' + date.getHours() : date.getHours(),
-            '-',
-            date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes(),
-            '-',
-            date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds()
-        ].join('');
+        return new DatetimeFormatter()
+            .withDateSeparator('-')
+            .withTimeSeparator('-')
+            .withDatetimeSeparator('_')
+            .withShowSeconds(false)
+            .formatDate();
     }
 }
