@@ -70,17 +70,33 @@ export class DimensionSelectionComponent {
 
     _toggleDimensionSelectionContainerVisibility() {
         if (this.dimensionSelectionContainer.style.display == 'block') {
-            this.dimensionSelectionContainer.style.display = 'none';
+            this._hideSelectionContainer();
         } else {
-            this.dimensionSelectionContainer.style.display = 'block';
+            this._showSelectionContainer();
         }
     }
 
     _toggleButtonActiveState() {
         if (this.toggleDynamicMappingPanelButton.classList.contains('active')) {
-            this.toggleDynamicMappingPanelButton.classList.remove('active');
+            this._setButtonStateInactive()
         } else {
-            this.toggleDynamicMappingPanelButton.classList.add('active');
+            this._setButtonStateActive();
         }
+    }
+
+    _showSelectionContainer() {
+        this.dimensionSelectionContainer.style.display = 'block';
+    }
+
+    _hideSelectionContainer() {
+        this.dimensionSelectionContainer.style.display = 'none';
+    }
+
+    _setButtonStateActive() {
+        this.toggleDynamicMappingPanelButton.classList.add('active');
+    }
+
+    _setButtonStateInactive() {
+        this.toggleDynamicMappingPanelButton.classList.remove('active');
     }
 }
