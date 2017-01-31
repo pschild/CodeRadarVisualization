@@ -1,7 +1,7 @@
-var MIN_MODULE_COUNT = 5;
-var MAX_MODULE_COUNT = 15;
-var MIN_FILE_COUNT = 5;
-var MAX_FILE_COUNT = 15;
+var MIN_MODULE_COUNT = 25;
+var MAX_MODULE_COUNT = 25;
+var MIN_FILE_COUNT = 25;
+var MAX_FILE_COUNT = 25;
 var CHANCE_TO_CREATE_SUBMODULE = 50;
 
 var LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
@@ -27,9 +27,16 @@ for (var i = 0; i < random(MIN_MODULE_COUNT, MAX_MODULE_COUNT); i++) {
 
     json.push(module);
 }
+
+var root = {
+    "name": "root",
+    "type": "MODULE",
+    "children": json
+};
+
 // console.clear();
 // console.log(json);
-console.log(JSON.stringify(json));
+console.log(JSON.stringify(root));
 
 function addFilesToModule(module) {
     for (var i = 0; i < random(MIN_FILE_COUNT, MAX_FILE_COUNT); i++) {
@@ -54,13 +61,13 @@ function createFile(index, moduleName) {
     file.children = [];
     file.commit1Metrics = {
         "coderadar:size:loc:java": random(10, 800),
-        "coderadar:cyclomaticComplexity": random(0, 80),
-        "coderadar:magicNumbers": random(0, 20)
+        "coderadar:size:sloc:java": random(1, 80),
+        "coderadar:size:eloc:java": random(0, 20)
     };
     file.commit2Metrics = {
         "coderadar:size:loc:java": random(10, 800),
-        "coderadar:cyclomaticComplexity": random(0, 80),
-        "coderadar:magicNumbers": random(0, 20)
+        "coderadar:size:sloc:java": random(1, 80),
+        "coderadar:size:eloc:java": random(0, 20)
     };
     file.changes = {
         renamed: randomBool(),

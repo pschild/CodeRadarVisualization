@@ -3,10 +3,21 @@ var axios = require('axios');
 var username = "radar";
 var password = "Password12!";
 
-var repoName = 'coderadar';
-// var repoName = 'coderadar-demo';
-var repoUrl = 'https://github.com/reflectoring/coderadar.git';
-// var repoUrl = 'https://github.com/pschild/coderadar-demo.git';
+var repoList = {
+    'coderadar': {
+        'repoName': 'coderadar',
+        'repoUrl': 'https://github.com/reflectoring/coderadar.git'
+    },
+    'coderadar-demo': {
+        'repoName': 'coderadar-demo',
+        'repoUrl': 'https://github.com/pschild/coderadar-demo.git'
+    },
+    'hystrix': {
+        'repoName': 'hystrix',
+        'repoUrl': 'https://github.com/Netflix/Hystrix.git'
+    }
+};
+var activeRepo = repoList.hystrix;
 
 var fromYear = 2015;
 var fromMonth = 10; // 1 = january
@@ -43,9 +54,9 @@ function createProject() {
     console.log('creating project...');
     return axios.post('http://localhost:8080/projects',
         {
-            "name": repoName,
+            "name": activeRepo.repoName,
             "vcsType": "GIT",
-            "vcsUrl": repoUrl
+            "vcsUrl": activeRepo.repoUrl
         },
         {
             headers: {'Authorization': accessToken}
@@ -114,6 +125,10 @@ function addAnalyzingStrategy() {
 function addModules() {
     console.log('adding modules...');
 
+    if (activeRepo.repoName != 'coderadar') {
+        return;
+    }
+
     var modules = [
         'coderadar-plugin-api',
         'coderadar-plugins/checkstyle-analyzer-plugin',
@@ -157,10 +172,8 @@ function addModules() {
 
 registerUser()
     .then(authorizeUser)
-    .then(createProject);
-
-// authorizeUser()
-//     .then(addFilePattern)
-//     .then(addAnalyzerConfig)
-//     .then(addAnalyzingStrategy)
-//     .then(addModules);
+    .then(createProject)
+    .then(addFilePattern)
+    .then(addAnalyzerConfig)
+    .then(addAnalyzingStrategy)
+    .then(addModules);
