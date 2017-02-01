@@ -65,21 +65,36 @@ export class MergedDrawer extends AbstractDrawer {
 
                 if (!isNaN(blueGA) && !isNaN(orangeGA)) {
                     // both blocks
-                    if (blueGA < orangeGA || blueHeight < orangeHeight) {
+                    if (blueGA < orangeGA) {
+                        // draw the bigger block ...
                         this.drawBlock(element, parent, orangeColor, orangeGA, bottom, orangeHeight, orangeTransparency, orangeMetrics, Constants.COMMIT_TYPE_OTHER, { modified: true });
 
+                        // ... calculate the center position for the smaller block ...
                         element.fit.x += (orangeGA - blueGA) / 2;
                         element.fit.y += (orangeGA - blueGA) / 2;
+
+                        // ... draw the smaller block
                         this.drawBlock(element, parent, blueColor, blueGA, bottom, blueHeight, blueTransparency, blueMetrics, Constants.COMMIT_TYPE_CURRENT, { modified: true });
-                    } else if (blueGA > orangeGA || blueHeight > orangeHeight) {
+                    } else if (blueGA > orangeGA) {
+                        // draw the bigger block ...
                         this.drawBlock(element, parent, blueColor, blueGA, bottom, blueHeight, blueTransparency, blueMetrics, Constants.COMMIT_TYPE_CURRENT, { modified: true });
 
+                        // ... calculate the center position for the smaller block ...
                         element.fit.x += (blueGA - orangeGA) / 2;
                         element.fit.y += (blueGA - orangeGA) / 2;
+
+                        // ... draw the smaller block
                         this.drawBlock(element, parent, orangeColor, orangeGA, bottom, orangeHeight, orangeTransparency, orangeMetrics, Constants.COMMIT_TYPE_OTHER, { modified: true });
                     } else {
-                        // ground area and height are the same
-                        this.drawBlock(element, parent, config.COLOR_UNCHANGED_FILE, orangeGA, bottom, orangeHeight, false, orangeMetrics, undefined, { modified: false });
+                        // ground areas are the same
+                        if (blueHeight != orangeHeight) {
+                            // heights are different, so draw both blocks
+                            this.drawBlock(element, parent, blueColor, blueGA, bottom, blueHeight, blueTransparency, blueMetrics, Constants.COMMIT_TYPE_CURRENT, { modified: true });
+                            this.drawBlock(element, parent, orangeColor, orangeGA, bottom, orangeHeight, orangeTransparency, orangeMetrics, Constants.COMMIT_TYPE_OTHER, { modified: true });
+                        } else {
+                            // heights are the same, so the file has not changed
+                            this.drawBlock(element, parent, config.COLOR_UNCHANGED_FILE, orangeGA, bottom, orangeHeight, false, orangeMetrics, undefined, { modified: false });
+                        }
                     }
 
                 } else if (isNaN(orangeGA)) {
