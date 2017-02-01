@@ -91,14 +91,14 @@ export class Application {
                                     "type": "FILE",
                                     "children": [],
                                     "commit1Metrics": {
-                                        "coderadar:size:loc:java": 600,
-                                        "coderadar:size:sloc:java": 40, // ok wenn kleiner, fehler wenn größer
-                                        "coderadar:size:eloc:java": 17
+                                        "coderadar:size:loc:java": 100,
+                                        "coderadar:size:sloc:java": 200, // ok wenn kleiner, fehler wenn größer
+                                        "coderadar:size:eloc:java": 200
                                     },
                                     "commit2Metrics": {
-                                        "coderadar:size:loc:java": 611,
-                                        "coderadar:size:sloc:java": 76, // ok wenn größer, fehler wenn kleiner
-                                        "coderadar:size:eloc:java": 11
+                                        "coderadar:size:loc:java": 200,
+                                        "coderadar:size:sloc:java": 100, // ok wenn größer, fehler wenn kleiner
+                                        "coderadar:size:eloc:java": 100
                                     },
                                     "changes": {
                                         "renamed": true,
@@ -114,14 +114,14 @@ export class Application {
                                     "type": "FILE",
                                     "children": [],
                                     "commit1Metrics": {
-                                        "coderadar:size:loc:java": 30,
-                                        "coderadar:size:sloc:java": 76,
-                                        "coderadar:size:eloc:java": 15
+                                        "coderadar:size:loc:java": 200,
+                                        "coderadar:size:sloc:java": 100,
+                                        "coderadar:size:eloc:java": 100
                                     },
                                     "commit2Metrics": {
-                                        "coderadar:size:loc:java": 40,
-                                        "coderadar:size:sloc:java": 6,
-                                        "coderadar:size:eloc:java": 8
+                                        "coderadar:size:loc:java": 100,
+                                        "coderadar:size:sloc:java": 200,
+                                        "coderadar:size:eloc:java": 200
                                     },
                                     "changes": {
                                         "renamed": false,
