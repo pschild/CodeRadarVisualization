@@ -78,64 +78,6 @@ export class Application {
         return this.metricService.loadDeltaTree(this.leftCommitId, this.rightCommitId)
             .then((result) => {
                 this.result = result.data;
-                this.result = {
-                    "name": "root",
-                    "type": "MODULE",
-                    "children": [
-                        {
-                            "name": "ModuleA",
-                            "type": "MODULE",
-                            "children": [
-                                {
-                                    "name": "ModuleA/ClassK",
-                                    "type": "FILE",
-                                    "children": [],
-                                    "commit1Metrics": {
-                                        "coderadar:size:loc:java": 100,
-                                        "coderadar:size:sloc:java": 200, // ok wenn kleiner, fehler wenn größer
-                                        "coderadar:size:eloc:java": 200
-                                    },
-                                    "commit2Metrics": {
-                                        "coderadar:size:loc:java": 200,
-                                        "coderadar:size:sloc:java": 100, // ok wenn größer, fehler wenn kleiner
-                                        "coderadar:size:eloc:java": 100
-                                    },
-                                    "changes": {
-                                        "renamed": true,
-                                        "modified": true,
-                                        "added": false,
-                                        "deleted": false
-                                    },
-                                    "renamedFrom": null,
-                                    "renamedTo": null
-                                },
-                                {
-                                    "name": "ModuleA/ClassR",
-                                    "type": "FILE",
-                                    "children": [],
-                                    "commit1Metrics": {
-                                        "coderadar:size:loc:java": 200,
-                                        "coderadar:size:sloc:java": 100,
-                                        "coderadar:size:eloc:java": 100
-                                    },
-                                    "commit2Metrics": {
-                                        "coderadar:size:loc:java": 100,
-                                        "coderadar:size:sloc:java": 200,
-                                        "coderadar:size:eloc:java": 200
-                                    },
-                                    "changes": {
-                                        "renamed": false,
-                                        "modified": true,
-                                        "added": true,
-                                        "deleted": true
-                                    },
-                                    "renamedFrom": null,
-                                    "renamedTo": null
-                                }
-                            ]
-                        }
-                    ]
-                };
 
                 // #3: set commitId dynamically
                 // firstCommitResult.commitId = this.leftCommitId;

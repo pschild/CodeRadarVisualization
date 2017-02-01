@@ -1,5 +1,5 @@
 export var config = {
-    DEBUG_MODE_ENABLED: true,
+    DEBUG_MODE_ENABLED: false,
 
     // CODERADAR CONFIG
     BASE_URL: 'http://localhost:8080',
