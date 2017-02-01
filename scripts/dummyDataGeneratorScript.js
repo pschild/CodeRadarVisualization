@@ -5,6 +5,11 @@ var MAX_FILE_COUNT = 25;
 var CHANCE_TO_CREATE_SUBMODULE = 50;
 
 var LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+for (var k = 0; k < 2; k++) {
+    for (var j = 0; j < 10; j++) {
+        LETTERS.push(LETTERS[k] + LETTERS[j]);
+    }
+}
 
 var json = [];
 var submoduleCounter = 0;
@@ -35,7 +40,7 @@ var root = {
 };
 
 // console.clear();
-// console.log(json);
+// console.log(root);
 console.log(JSON.stringify(root));
 
 function addFilesToModule(module) {
@@ -55,25 +60,41 @@ function createModule(index, parentName, submoduleCounter) {
 }
 
 function createFile(index, moduleName) {
+    var added = false;
+    var deleted = false;
+
+    var chanceToBeAddedOrDeleted = random(0, 100);
+    if (chanceToBeAddedOrDeleted <= 20) {
+        added = true;
+    } else if (chanceToBeAddedOrDeleted <= 40) {
+        deleted = true;
+    }
+
     var file = {};
     file.name = moduleName + '/Class' + LETTERS[index];
     file.type = 'FILE';
     file.children = [];
-    file.commit1Metrics = {
+    file.commit1Metrics = added ? null : {
         "coderadar:size:loc:java": random(10, 800),
         "coderadar:size:sloc:java": random(1, 80),
         "coderadar:size:eloc:java": random(0, 20)
     };
-    file.commit2Metrics = {
+    file.commit2Metrics = deleted ? null : {
         "coderadar:size:loc:java": random(10, 800),
         "coderadar:size:sloc:java": random(1, 80),
         "coderadar:size:eloc:java": random(0, 20)
     };
+
+    // chance that file hasn't changed
+    if (random(0, 100) <= 70 && file.commit1Metrics != null && file.commit2Metrics != null) {
+        file.commit2Metrics = file.commit1Metrics;
+    }
+
     file.changes = {
-        renamed: randomBool(),
-        modified: randomBool(),
-        added: randomBool(),
-        deleted: randomBool()
+        renamed: false,
+        modified: file.commit1Metrics != file.commit2Metrics,
+        added: added,
+        deleted: deleted
     };
     file.renamedFrom = null;
     file.renamedTo = null;
