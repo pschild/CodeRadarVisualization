@@ -15,9 +15,13 @@ var repoList = {
     'hystrix': {
         'repoName': 'hystrix',
         'repoUrl': 'https://github.com/Netflix/Hystrix.git'
+    },
+    'junit': {
+        'repoName': 'junit4',
+        'repoUrl': 'https://github.com/junit-team/junit4.git'
     }
 };
-var activeRepo = repoList.hystrix;
+var activeRepo = repoList.junit;
 
 var fromYear = 2015;
 var fromMonth = 10; // 1 = january
