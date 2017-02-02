@@ -22,7 +22,13 @@
         white-space: nowrap;
         overflow: hidden;
         direction: rtl;
-        padding: 0 10px;
+        padding-bottom: 10px;
+    }
+
+    & table {
+        & td.metric-name-column {
+            font-weight: bold;
+        }
     }
 }
 

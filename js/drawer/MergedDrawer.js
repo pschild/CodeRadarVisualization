@@ -133,7 +133,7 @@ export class MergedDrawer extends AbstractDrawer {
                     }
 
                     blueHeight = config.DEFAULT_BLOCK_HEIGHT;
-                    this.drawBlock(element, parent, config.COLOR_HIERARCHY_RANGE[0], undefined, bottom, blueHeight);
+                    this.drawBlock(element, parent, config.COLOR_HIERARCHY_RANGE[0], undefined, bottom, blueHeight, false);
                 }
             }
 

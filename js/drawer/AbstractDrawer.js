@@ -79,17 +79,24 @@ export class AbstractDrawer {
     _initializeEventListeners() { }
 
     _generateTooltipHtml(elementName, metrics) {
-        var tooltipHtml = [
-            '<div class="element-name">' + elementName + '</div>'
-        ];
+        var tooltipHtml = ['<div class="element-name">' + elementName + '</div>'];
 
         if (metrics) {
-            for (let key of Object.keys(metrics)) {
-                tooltipHtml.push('<div>' + this.metricNameService.getShortNameByFullName(key) + ': ' + (metrics[key] || 'N/A') + '</div>');
+            tooltipHtml.push('<table>');
+            for (let metricName of Object.keys(metrics)) {
+                tooltipHtml.push(this._generateTableRow(metricName, metrics[metricName]));
             }
+            tooltipHtml.push('</table>');
         }
-
         return tooltipHtml.join('');
+    }
+
+    _generateTableRow(metricName, metricValue) {
+        var html = ['<tr>'];
+        html.push('<td class="metric-name-column">' + this.metricNameService.getShortNameByFullName(metricName) + ':</td>');
+        html.push('<td class="metric-value-column">' + (metricValue || 'N/A') + '</td>');
+        html.push('</tr>');
+        return html.join('');
     }
 
     _getPacker() {

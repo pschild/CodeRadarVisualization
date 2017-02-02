@@ -7,6 +7,7 @@ export class InteractionHandler {
     constructor(scene, renderer, position) {
         this._enabled = false;
         this._isFullscreen = false;
+        this._mouseOverScreen = false;
 
         this._scene = scene;
         this._renderer = renderer;
@@ -38,7 +39,7 @@ export class InteractionHandler {
     }
 
     update(camera) {
-        if (!this._enabled) {
+        if (!this._enabled || !this._mouseOverScreen) {
             return;
         }
 
@@ -65,11 +66,15 @@ export class InteractionHandler {
             this.tooltipElement.style.top = this._mouse.y + 15 + 'px';
         } else {
             if (this.tooltipElement.classList.contains('visible')) {
-                this.tooltipElement.classList.remove('visible');
-                this.tooltipElement.style.left = '0px';
-                this.tooltipElement.style.top = '0px';
+                this._hideTooltip();
             }
         }
+    }
+
+    _hideTooltip() {
+        this.tooltipElement.classList.remove('visible');
+        this.tooltipElement.style.left = '-1000px';
+        this.tooltipElement.style.top = '-1000px';
     }
 
     _findFirstNonHelperBlock(intersects) {
@@ -105,6 +110,15 @@ export class InteractionHandler {
 
         this._mouseForRaycaster.x = ((event.clientX - screenOffset) / this._getScreenWidth()) * 2 - 1;
         this._mouseForRaycaster.y = -(event.clientY / window.innerHeight) * 2 + 1;
+    }
+
+    _onDocumentMouseOver() {
+        this._mouseOverScreen = true;
+    }
+
+    _onDocumentMouseOut() {
+        this._mouseOverScreen = false;
+        this._hideTooltip();
     }
 
     _onDocumentMouseDown() {
@@ -152,6 +166,8 @@ export class InteractionHandler {
     }
 
     bindEvents() {
+        this._renderer.domElement.addEventListener('mouseover', this._onDocumentMouseOver.bind(this), false);
+        this._renderer.domElement.addEventListener('mouseout', this._onDocumentMouseOut.bind(this), false);
         this._renderer.domElement.addEventListener('mousemove', this._onDocumentMouseMove.bind(this), false);
         this._renderer.domElement.addEventListener('mousedown', this._onDocumentMouseDown.bind(this), false);
         this._renderer.domElement.addEventListener('mouseup', this._onDocumentMouseUp.bind(this), false);
