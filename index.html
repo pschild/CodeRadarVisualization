@@ -45,6 +45,8 @@
         </div>
     </div>
 
+    <div class="divider"></div>
+
     <div id="control-group-screen" class="control-container">
         <div>
             Ansicht <span class="tooltip-toggle" aria-label="Wechsel zwischen einer Visualisierung pro Revision oder einer kombinierten Darstellung"><i class="icon-info"></i></span>
@@ -87,44 +89,15 @@
         </div>
     </div>
 
-    <!--<div id="control-group-visible-files" class="control-container">-->
-        <!--<div>-->
-            <!--Sichtbare Dateitypen: <span class="tooltip-toggle" aria-label="Ein- oder Ausblenden von bestimmten Dateitypen in der Visualisierung"><i class="icon-info"></i></span>-->
-        <!--</div>-->
-        <!--<div style="display: inline-block;">-->
-            <!--<div class="control-item">-->
-                <!--<input id="checkbox-unchanged-files" type="checkbox" value="UNCHANGED" checked disabled />-->
-                <!--<label for="checkbox-unchanged-files">unverändert</label>-->
-            <!--</div>-->
-            <!--<div class="control-item">-->
-                <!--<input id="checkbox-changed-files" type="checkbox" value="CHANGED" checked disabled />-->
-                <!--<label for="checkbox-changed-files">verändert</label>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<div style="display: inline-block;">-->
-            <!--<div class="control-item">-->
-                <!--<input id="checkbox-deleted-files" type="checkbox" value="DELETED" checked disabled />-->
-                <!--<label for="checkbox-deleted-files">gelöscht</label>-->
-            <!--</div>-->
-            <!--<div class="control-item">-->
-                <!--<input id="checkbox-added-files" type="checkbox" value="ADDED" checked disabled />-->
-                <!--<label for="checkbox-added-files">hinzugefügt</label>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<div style="display: inline-block;">-->
-            <!--<div class="control-item">-->
-                <!--<input id="checkbox-moved-files" type="checkbox" value="MOVED" checked disabled />-->
-                <!--<label for="checkbox-moved-files">umbenannt/verschoben</label>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
+    <div class="divider"></div>
 
     <div class="control-container">
         <div class="popover" id="mapping-component">
             <button class="popover-toggle-btn">Metrik-Mapping <i class="icon-keyboard_arrow_down"></i></button>
-            <span class="tooltip-toggle" aria-label="Auswahl der Abbildung verschiedener Metriken auf Grundfläche, Höhe und Farbe"><i class="icon-info"></i></span>
             <div class="popover-floating-wrapper">
                 <div class="popover-content">
+                    <span class="tooltip-toggle" aria-label="Auswahl der Abbildung verschiedener Metriken auf Grundfläche, Höhe und Farbe"><i class="icon-info"></i></span>
+
                     <div>
                         <label for="height-metric-name">Höhe:</label>
                         <select id="height-metric-name"></select>
@@ -149,6 +122,8 @@
             <button class="popover-toggle-btn">Filter <i class="icon-keyboard_arrow_down"></i></button>
             <div class="popover-floating-wrapper">
                 <div class="popover-content">
+                    <span class="tooltip-toggle" aria-label="Ein- oder Ausblenden von bestimmten Dateitypen in der Visualisierung"><i class="icon-info"></i></span>
+
                     <div>
                         <input id="checkbox-unchanged-files" type="checkbox" value="UNCHANGED" checked disabled />
                         <label for="checkbox-unchanged-files">unverändert</label>
@@ -173,6 +148,8 @@
             </div>
         </div>
     </div>
+
+    <div class="divider"></div>
 
     <div class="control-container">
         <button id="screenshot-btn">Screenshot</button>

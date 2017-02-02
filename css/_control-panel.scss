@@ -54,6 +54,13 @@
         }
     }
 
+    .divider {
+        height: 90px;
+        border-left: 1px solid $grey;
+        float: left;
+        margin: 5px 10px;
+    }
+
     #render-calls {
         position: absolute;
         top: 0;

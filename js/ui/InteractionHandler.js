@@ -61,11 +61,13 @@ export class InteractionHandler {
                 this.tooltipElement.classList.add('visible');
             }
 
-            // this.tooltipElement.style.left = this._mouse.x + 5 + 'px';
-            // this.tooltipElement.style.top = this._mouse.y + 5 + 'px';
+            this.tooltipElement.style.left = this._mouse.x + 15 + 'px';
+            this.tooltipElement.style.top = this._mouse.y + 15 + 'px';
         } else {
             if (this.tooltipElement.classList.contains('visible')) {
-                this.tooltipElement.classList.remove('visible')
+                this.tooltipElement.classList.remove('visible');
+                this.tooltipElement.style.left = '0px';
+                this.tooltipElement.style.top = '0px';
             }
         }
     }
