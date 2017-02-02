@@ -2,9 +2,9 @@ export class MetricNameService {
 
     constructor() {
         this._metricNamesMap = {
-            'LOC': 'coderadar:size:loc:java',
-            'SLOC': 'coderadar:size:sloc:java',
-            'ELOC': 'coderadar:size:eloc:java',
+            'Lines of Code': 'coderadar:size:loc:java',
+            'Source Lines of Code': 'coderadar:size:sloc:java',
+            'Effective Lines of Code': 'coderadar:size:eloc:java',
             'MagicNumber': 'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck',
             'ReturnCount': 'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.ReturnCountCheck',
             'CyclomaticComplexity': 'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck',
