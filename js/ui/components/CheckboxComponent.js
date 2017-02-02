@@ -17,7 +17,6 @@ export class CheckboxComponent {
 
                 this._toggleCameraRadios(fullscreenEnabled);
                 this._toggleColorRadios(fullscreenEnabled);
-                // this._toggleVisibilityCheckboxes(!fullscreenEnabled);
 
                 PubSub.publish('closeComparisonContainer');
                 PubSub.publish('fullSplitToggle', { enabled: fullscreenEnabled });
