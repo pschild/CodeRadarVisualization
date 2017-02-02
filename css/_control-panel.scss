@@ -11,6 +11,7 @@
         position: relative;
         float: left;
         margin: 10px;
+        height: 80px;
 
         &:last-child {
             float: right;
@@ -46,6 +47,10 @@
 
         #search-input {
             padding-right: 30px;
+        }
+
+        & button {
+            height: 100%;
         }
     }
 

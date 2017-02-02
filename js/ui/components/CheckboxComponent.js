@@ -6,7 +6,7 @@ export class CheckboxComponent {
         this.screenModeRadios = document.querySelectorAll('#control-group-screen input');
         this.cameraModeRadios = document.querySelectorAll('#control-group-camera input');
         this.colorModeRadios = document.querySelectorAll('#control-group-color input');
-        this.fileVisibilityCheckboxes = document.querySelectorAll('#control-group-visible-files input');
+        // this.fileVisibilityCheckboxes = document.querySelectorAll('#control-group-visible-files input');
 
         this._bindEvents();
     }
@@ -18,7 +18,7 @@ export class CheckboxComponent {
 
                 this._toggleCameraRadios(fullscreenEnabled);
                 this._toggleColorRadios(fullscreenEnabled);
-                this._toggleVisibilityCheckboxes(!fullscreenEnabled);
+                // this._toggleVisibilityCheckboxes(!fullscreenEnabled);
 
                 PubSub.publish('closeComparisonContainer');
                 PubSub.publish('fullSplitToggle', { enabled: fullscreenEnabled });
@@ -38,14 +38,14 @@ export class CheckboxComponent {
             });
         }
 
-        for (let checkbox of this.fileVisibilityCheckboxes) {
-            checkbox.addEventListener('change', (event) => {
-                PubSub.publish('fileVisibilityChange', {
-                    type: event.target.value,
-                    enabled: event.target.checked
-                });
-            });
-        }
+        // for (let checkbox of this.fileVisibilityCheckboxes) {
+        //     checkbox.addEventListener('change', (event) => {
+        //         PubSub.publish('fileVisibilityChange', {
+        //             type: event.target.value,
+        //             enabled: event.target.checked
+        //         });
+        //     });
+        // }
     }
 
     _toggleCameraRadios(enabled) {
@@ -60,9 +60,9 @@ export class CheckboxComponent {
         }
     }
 
-    _toggleVisibilityCheckboxes(enabled) {
-        for (let checkbox of this.fileVisibilityCheckboxes) {
-            checkbox.disabled = enabled;
-        }
-    }
+    // _toggleVisibilityCheckboxes(enabled) {
+    //     for (let checkbox of this.fileVisibilityCheckboxes) {
+    //         checkbox.disabled = enabled;
+    //     }
+    // }
 }

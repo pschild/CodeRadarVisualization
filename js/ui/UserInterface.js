@@ -4,6 +4,7 @@ import {CommitSelectionComponent} from './components/CommitSelectionComponent';
 import {CheckboxComponent} from './components/CheckboxComponent';
 import {ComparisonContainerComponent} from './components/ComparisonContainerComponent';
 import {DimensionSelectionComponent} from './components/DimensionSelectionComponent';
+import {FilterComponent} from './components/FilterComponent';
 import {ContextMenuComponent} from './components/ContextMenuComponent';
 import {ScreenshotComponent} from './components/ScreenshotComponent';
 import * as Constants from '../Constants';
@@ -23,7 +24,10 @@ export class UserInterface {
         this.legendComponent = new LegendComponent();
         this.checkboxComponent = new CheckboxComponent();
         this.comparisonContainerComponent = new ComparisonContainerComponent(application);
-        this.dimensionSelectionComponent = new DimensionSelectionComponent(application);
+
+        this.dimensionSelectionComponent = new DimensionSelectionComponent(document.querySelector('#mapping-component'));
+        this.filterComponent = new FilterComponent(document.querySelector('#filter-component'));
+
         this.contextMenuComponent = new ContextMenuComponent();
         this.screenshotComponent = new ScreenshotComponent(application);
     }

@@ -1,19 +1,19 @@
 import {MetricNameService} from '../../service/MetricNameService';
+import {PopoverComponent} from '../components/PopoverComponent';
 import {config} from '../../Config';
 import * as Constants from '../../Constants';
 import * as PubSub from 'pubsub-js';
 
-export class DimensionSelectionComponent {
+export class DimensionSelectionComponent extends PopoverComponent {
 
-    constructor() {
+    constructor(componentElement) {
+        super(componentElement);
+
         this.metricNameService = new MetricNameService();
 
-        this.toggleDynamicMappingPanelButton = document.querySelector('#toggle-dynamic-mapping-panel-btn');
-        this.dimensionSelectionContainer = document.querySelector('.dimension-selection-container');
-
-        this.heightDimensionSelect = document.querySelector('#height-metric-name');
-        this.groundAreaDimensionSelect = document.querySelector('#ground-area-metric-name');
-        this.colorDimensionSelect = document.querySelector('#color-metric-name');
+        this.heightDimensionSelect = componentElement.querySelector('#height-metric-name');
+        this.groundAreaDimensionSelect = componentElement.querySelector('#ground-area-metric-name');
+        this.colorDimensionSelect = componentElement.querySelector('#color-metric-name');
 
         this._fillDropdowns(this.heightDimensionSelect);
         this._fillDropdowns(this.groundAreaDimensionSelect);
@@ -25,10 +25,7 @@ export class DimensionSelectionComponent {
     }
 
     _bindEvents() {
-        this.toggleDynamicMappingPanelButton.addEventListener('click', () => {
-            this._toggleDimensionSelectionContainerVisibility();
-            this._toggleButtonActiveState();
-        });
+        super._bindEvents();
 
         this.heightDimensionSelect.addEventListener('change', function() {
             PubSub.publish('dimensionChange', {
@@ -66,37 +63,5 @@ export class DimensionSelectionComponent {
         this.heightDimensionSelect.value = this.metricNameService.getShortNameByFullName(config.HEIGHT_METRIC_NAME);
         this.groundAreaDimensionSelect.value = this.metricNameService.getShortNameByFullName(config.GROUND_AREA_METRIC_NAME);
         this.colorDimensionSelect.value = this.metricNameService.getShortNameByFullName(config.COLOR_METRIC_NAME);
-    }
-
-    _toggleDimensionSelectionContainerVisibility() {
-        if (this.dimensionSelectionContainer.style.display == 'block') {
-            this._hideSelectionContainer();
-        } else {
-            this._showSelectionContainer();
-        }
-    }
-
-    _toggleButtonActiveState() {
-        if (this.toggleDynamicMappingPanelButton.classList.contains('active')) {
-            this._setButtonStateInactive()
-        } else {
-            this._setButtonStateActive();
-        }
-    }
-
-    _showSelectionContainer() {
-        this.dimensionSelectionContainer.style.display = 'block';
-    }
-
-    _hideSelectionContainer() {
-        this.dimensionSelectionContainer.style.display = 'none';
-    }
-
-    _setButtonStateActive() {
-        this.toggleDynamicMappingPanelButton.classList.add('active');
-    }
-
-    _setButtonStateInactive() {
-        this.toggleDynamicMappingPanelButton.classList.remove('active');
     }
 }

@@ -1,9 +1,16 @@
-input[type=text], select {
-    box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.2);
+input[type=text] {
     outline: none;
     border: 0;
+    border-bottom: 1px solid $grey;
     height: 30px;
     text-indent: 10px;
+    max-width: 250px;
+}
+
+select {
+    outline: none;
+    border: 1px solid $grey;
+    height: 30px;
     max-width: 250px;
 }
 

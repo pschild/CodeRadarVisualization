@@ -1,0 +1,27 @@
+.popover {
+    height: 100%;
+
+    .popover-toggle-btn {
+        & > i {
+            display: block;
+        }
+    }
+
+    .popover-floating-wrapper {
+        position: relative;
+        display: none;
+
+        .popover-content {
+            position: absolute;
+            z-index: 1;
+            background-color: #fff;
+            padding: 10px;
+            box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.2);
+            min-width: 200px;
+
+            & > div {
+                padding: 5px 0;
+            }
+        }
+    }
+}
