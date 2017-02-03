@@ -1,0 +1,17 @@
+.custom-icon-metric-mapping {
+    position: relative;
+    width: 30px;
+
+    .icon-stats-bars {
+        position: absolute;
+        left: 9px;
+        top: -14px;
+    }
+
+    .icon-cog {
+        position: absolute;
+        font-size: 17px;
+        left: -4px;
+        top: -16px;
+    }
+}

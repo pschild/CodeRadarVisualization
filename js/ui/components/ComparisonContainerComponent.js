@@ -70,13 +70,13 @@ export class ComparisonContainerComponent {
                 var diff = args.rightElement.userData.metrics[metricName] - args.leftElement.userData.metrics[metricName];
                 if (diff > 0) {
                     diffLabel = '+' + diff;
-                    iconEl = '<span class="icon-arrow-up-right"></span>';
+                    iconEl = '<span class="icon-caret-up"></span>';
                 } else if (diff < 0) {
                     diffLabel = diff;
-                    iconEl = '<span class="icon-arrow-down-right"></span>';
+                    iconEl = '<span class="icon-caret-down"></span>';
                 } else if (diff == 0) {
                     diffLabel = diff;
-                    iconEl = '<span class="icon-arrow-right"></span>';
+                    iconEl = '<span class="icon-caret-right"></span>';
                 } else {
                     diffLabel = '-';
                     iconEl = '';

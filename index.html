@@ -18,7 +18,7 @@
         <div class="autocomplete-wrapper" id="first-commit-auto-complete-wrapper">
             <input type="text" />
             <div class="button-container">
-                <div class="clear-button icon-cancel-circle"></div>
+                <div class="clear-button icon-close2"></div>
                 <div class="show-suggestions-button icon-keyboard_arrow_down"></div>
             </div>
 
@@ -33,7 +33,7 @@
         <div class="autocomplete-wrapper" id="second-commit-auto-complete-wrapper">
             <input type="text" />
             <div class="button-container">
-                <div class="clear-button icon-cancel-circle"></div>
+                <div class="clear-button icon-close2"></div>
                 <div class="show-suggestions-button icon-keyboard_arrow_down"></div>
             </div>
 
@@ -91,23 +91,29 @@
 
     <div class="control-container">
         <div class="popover" id="mapping-component">
-            <button class="popover-toggle-btn">Metrik-Mapping <i class="icon-keyboard_arrow_down"></i></button>
+            <button class="popover-toggle-btn">
+                <div class="custom-icon-metric-mapping">
+                    <i class="large-icon icon-stats-bars"></i>
+                    <i class="large-icon icon-cog"></i>
+                </div>
+                <i class="expand-icon icon-keyboard_arrow_down"></i>
+            </button>
             <div class="popover-floating-wrapper">
                 <div class="popover-content">
                     <span class="tooltip-toggle" aria-label="Auswahl der Abbildung verschiedener Metriken auf Grundfläche, Höhe und Farbe"><i class="icon-info"></i></span>
 
                     <div>
-                        <label for="height-metric-name">Höhe:</label>
+                        <label for="height-metric-name"><i class="icon-arrows-v"></i> <b>Höhe</b></label>
                         <select id="height-metric-name"></select>
                     </div>
 
                     <div>
-                        <label for="ground-area-metric-name">Grundfläche:</label>
+                        <label for="ground-area-metric-name"><i class="icon-arrows-h"></i> <b>Grundfläche</b></label>
                         <select id="ground-area-metric-name"></select>
                     </div>
 
                     <div>
-                        <label for="color-metric-name">Farbe:</label>
+                        <label for="color-metric-name"><i class="icon-paintcan"></i> <b>Farbe</b></label>
                         <select id="color-metric-name"></select>
                     </div>
                 </div>
@@ -117,7 +123,7 @@
 
     <div class="control-container">
         <div class="popover" id="filter-component">
-            <button class="popover-toggle-btn">Filter <i class="icon-keyboard_arrow_down"></i></button>
+            <button class="popover-toggle-btn"><i class="large-icon icon-filter"></i><i class="expand-icon icon-keyboard_arrow_down"></i></button>
             <div class="popover-floating-wrapper">
                 <div class="popover-content">
                     <span class="tooltip-toggle" aria-label="Ein- oder Ausblenden von bestimmten Dateitypen in der Visualisierung"><i class="icon-info"></i></span>
@@ -150,16 +156,17 @@
     <div class="divider"></div>
 
     <div class="control-container">
-        <button id="screenshot-btn">Screenshot</button>
+        <button id="screenshot-btn"><i class="large-icon icon-image"></i></button>
         <a href="#" id="screenshot-link" style="display: none;"></a>
     </div>
 
     <div class="control-container">
         <label class="control-label">Suche</label>
         <div class="autocomplete-wrapper" id="search-auto-complete-wrapper">
+            <i class="large-icon icon-search"></i>
             <input type="text" placeholder="Modul oder Klasse" />
             <div class="button-container">
-                <div class="clear-button icon-cancel-circle"></div>
+                <div class="clear-button icon-close2"></div>
                 <div class="show-suggestions-button icon-keyboard_arrow_down"></div>
             </div>
 

@@ -34,6 +34,10 @@ button {
     border: 1px solid #ccc;
     outline: none;
 
+    & .large-icon {
+        font-size: 24px;
+    }
+
     &:active, &.active {
         background-color: #e6e6e6;
         border-color: #adadad;

@@ -63,6 +63,20 @@
         margin: 5px 10px;
     }
 
+    #search-auto-complete-wrapper {
+        i {
+            position: absolute;
+            padding: 0 5px;
+            background: #fff;
+            line-height: 30px;
+            color: #ccc;
+        }
+
+        input[type=text] {
+            text-indent: 28px;
+        }
+    }
+
     #render-calls {
         position: absolute;
         top: 0;
