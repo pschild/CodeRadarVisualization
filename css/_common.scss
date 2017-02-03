@@ -3,15 +3,23 @@ input[type=text] {
     border: 0;
     border-bottom: 1px solid $grey;
     height: 30px;
-    text-indent: 10px;
     max-width: 250px;
+
+    &:active, &:focus {
+        border-bottom-color: $highlight-color;
+    }
 }
 
 select {
     outline: none;
-    border: 1px solid $grey;
+    border: 0;
+    border-bottom: 1px solid $grey;
     height: 30px;
     max-width: 250px;
+
+    &:active, &:focus {
+        border-bottom-color: $highlight-color;
+    }
 }
 
 button {

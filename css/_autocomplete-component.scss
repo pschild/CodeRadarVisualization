@@ -7,11 +7,9 @@
 
     .button-container {
         position: absolute;
-        top: -1px;
+        top: 0;
         right: 0;
         background: #fff;
-        height: 100%;
-        line-height: 32px;
         padding: 0 5px;
 
         .show-suggestions-button {

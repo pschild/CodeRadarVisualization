@@ -3,7 +3,10 @@
 
     .popover-toggle-btn {
         & > i {
-            display: block;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
         }
     }
 

@@ -2,7 +2,7 @@
     position: absolute;
     top: 0;
     width: 100%;
-    height: 100px;
+    height: 70px;
     background: #fff;
     box-shadow: rgba(0,0,0,0.2) 0 2px 6px 0;
     z-index: 101;
@@ -11,19 +11,21 @@
         position: relative;
         float: left;
         margin: 10px;
-        height: 80px;
+        height: 50px;
 
         &:last-child {
             float: right;
         }
 
         .control-item {
+            display: inline-block;
             padding: 5px;
         }
 
         .control-label {
+            font-size: 12px;
             display: block;
-            margin-bottom: 10px;
+            margin-top: 5px;
         }
 
         .checkbox-container {
@@ -55,7 +57,7 @@
     }
 
     .divider {
-        height: 90px;
+        height: 60px;
         border-left: 1px solid $grey;
         float: left;
         margin: 5px 10px;
