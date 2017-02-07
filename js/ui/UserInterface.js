@@ -12,24 +12,24 @@ import * as Constants from '../Constants';
 export class UserInterface {
 
     constructor(application) {
-        this._application = application;
+        let searchComponentElement = document.querySelector('#search-auto-complete-wrapper');
+        let firstCommitComponentElement = document.querySelector('#first-commit-auto-complete-wrapper');
+        let secondCommitComponentElement = document.querySelector('#second-commit-auto-complete-wrapper');
+        let dimensionSelectionComponentElement = document.querySelector('#mapping-component');
+        let filterComponentElement = document.querySelector('#filter-component');
 
-        this.searchComponentElement = document.querySelector('#search-auto-complete-wrapper');
-        this.firstCommitComponentElement = document.querySelector('#first-commit-auto-complete-wrapper');
-        this.secondCommitComponentElement = document.querySelector('#second-commit-auto-complete-wrapper');
+        let searchComponent = new SearchComponent(searchComponentElement, application);
+        let firstCommitSelectionComponent = new CommitSelectionComponent(firstCommitComponentElement, application, Constants.FIRST_COMMIT);
+        let secondCommitSelectionComponent = new CommitSelectionComponent(secondCommitComponentElement, application, Constants.SECOND_COMMIT);
+        let legendComponent = new LegendComponent();
+        let checkboxComponent = new CheckboxComponent();
+        let comparisonContainerComponent = new ComparisonContainerComponent(application);
 
-        this.searchComponent = new SearchComponent(this.searchComponentElement, application);
-        this.firstCommitSelectionComponent = new CommitSelectionComponent(this.firstCommitComponentElement, application, Constants.FIRST_COMMIT);
-        this.secondCommitSelectionComponent = new CommitSelectionComponent(this.secondCommitComponentElement, application, Constants.SECOND_COMMIT);
-        this.legendComponent = new LegendComponent();
-        this.checkboxComponent = new CheckboxComponent();
-        this.comparisonContainerComponent = new ComparisonContainerComponent(application);
+        let dimensionSelectionComponent = new DimensionSelectionComponent(dimensionSelectionComponentElement);
+        let filterComponent = new FilterComponent(filterComponentElement);
 
-        this.dimensionSelectionComponent = new DimensionSelectionComponent(document.querySelector('#mapping-component'));
-        this.filterComponent = new FilterComponent(document.querySelector('#filter-component'));
-
-        this.contextMenuComponent = new ContextMenuComponent();
-        this.screenshotComponent = new ScreenshotComponent(application);
+        let contextMenuComponent = new ContextMenuComponent();
+        let screenshotComponent = new ScreenshotComponent(application);
     }
 
     showLoadingIndicator() {
