@@ -3,15 +3,9 @@ import {Screen} from './Screen';
 import {config} from './Config';
 import * as Constants from './Constants';
 import {ElementAnalyzer} from './util/ElementAnalyzer';
-import {CoderadarMetricService} from './service/CoderadarMetricService';
-import {DummyMetricService} from './service/DummyMetricService';
-import {DummyCommitService} from './service/DummyCommitService';
-import {CoderadarCommitService} from './service/CoderadarCommitService';
-import {CoderadarAuthorizationService} from './service/CoderadarAuthorizationService';
-import {MetricNameService} from './service/MetricNameService';
-import {CommitMapper} from './domain/CommitMapper';
 import {MergedDrawer} from './drawer/MergedDrawer';
 import {SingleDrawer} from './drawer/SingleDrawer';
+import {ServiceLocator} from './ServiceLocator';
 import * as PubSub from 'pubsub-js';
 
 export class Application {
@@ -22,10 +16,10 @@ export class Application {
 
         this._uniqueElementList = [];
 
-        this.authorizationService = new CoderadarAuthorizationService();
-        this.commitService = new CoderadarCommitService(); // DummyCommitService CoderadarCommitService
-        this.metricService = new CoderadarMetricService(); // DummyMetricService CoderadarMetricService
-        this.metricNameService = new MetricNameService();
+        this.authorizationService = ServiceLocator.getInstance().get('authorizationService');
+        this.commitService = ServiceLocator.getInstance().get('commitService');
+        this.metricService = ServiceLocator.getInstance().get('metricService');
+        this.metricNameService = ServiceLocator.getInstance().get('metricNameService');
 
         this._createUserInterface();
         this._initializeEventListeners();
@@ -53,14 +47,8 @@ export class Application {
 
     loadCommits() {
         return this.commitService.load()
-            .then((response) => {
-                var commitMapper = new CommitMapper(response.data);
-                commitMapper.mapAll();
-
-                var commits = commitMapper.getAll();
-                commits.sort(function(a, b) {
-                    return b.timestamp - a.timestamp;
-                });
+            .then(() => {
+                var commits = this.commitService.getCommits();
 
                 // TODO: what if we have less than 2 commits?
                 this.leftCommitId = commits[1].getName();
@@ -190,7 +178,7 @@ export class Application {
                     break;
                 case Constants.COLOR_DIMENSION:
                     config.COLOR_METRIC_NAME = this.metricNameService.getMetricNameByShortName(args.metricName);
-                    this.userInterface.legendComponent.setColorCode();
+                    this.userInterface.getLegendComponent().setColorCode();
                     break;
                 default:
                     throw new Error(`Unknown dimension ${args.dimension}!`);

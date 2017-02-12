@@ -1,6 +1,7 @@
 import {MetricNameService} from '../../service/MetricNameService';
 import {config} from '../../Config';
 import * as PubSub from 'pubsub-js';
+import {ServiceLocator} from '../../ServiceLocator';
 
 export class ComparisonContainerComponent {
 
@@ -32,8 +33,12 @@ export class ComparisonContainerComponent {
                 this.comparisonContainer.querySelector('h3').innerHTML = args.rightElement.name;
             }
 
-            this.comparisonContainer.querySelector('#first-commit-id').innerHTML = this._application.leftCommitId.substring(0, 7) + '...';
-            this.comparisonContainer.querySelector('#second-commit-id').innerHTML = this._application.rightCommitId.substring(0, 7) + '...';
+            var commitService = ServiceLocator.getInstance().get('commitService');
+            var leftCommit = commitService.getCommitByName(this._application.leftCommitId);
+            var rightCommit = commitService.getCommitByName(this._application.rightCommitId);
+
+            this.comparisonContainer.querySelector('#first-commit-id').innerHTML = leftCommit.getFormattedDatetime();
+            this.comparisonContainer.querySelector('#second-commit-id').innerHTML = rightCommit.getFormattedDatetime();
 
             this.comparisonContainer.querySelector('#comparison-table tbody').innerHTML = '';
             this._addMetricRows(args);

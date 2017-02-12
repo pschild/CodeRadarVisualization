@@ -21,7 +21,6 @@ export class UserInterface {
         let searchComponent = new SearchComponent(searchComponentElement, application);
         let firstCommitSelectionComponent = new CommitSelectionComponent(firstCommitComponentElement, application, Constants.FIRST_COMMIT);
         let secondCommitSelectionComponent = new CommitSelectionComponent(secondCommitComponentElement, application, Constants.SECOND_COMMIT);
-        let legendComponent = new LegendComponent();
         let checkboxComponent = new CheckboxComponent();
         let comparisonContainerComponent = new ComparisonContainerComponent(application);
 
@@ -30,6 +29,12 @@ export class UserInterface {
 
         let contextMenuComponent = new ContextMenuComponent();
         let screenshotComponent = new ScreenshotComponent(application);
+
+        this.legendComponent = new LegendComponent();
+    }
+
+    getLegendComponent() {
+        return this.legendComponent;
     }
 
     showLoadingIndicator() {
