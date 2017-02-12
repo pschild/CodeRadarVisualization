@@ -1,7 +1,7 @@
 import {MetricNameService} from '../../service/MetricNameService';
 import {config} from '../../Config';
 import * as PubSub from 'pubsub-js';
-import {ServiceLocator} from '../../ServiceLocator';
+import {ServiceLocator} from '../../service/ServiceLocator';
 
 export class ComparisonContainerComponent {
 

@@ -1,5 +1,5 @@
 import {Application} from './Application';
-import {ServiceLocator} from './ServiceLocator';
+import {ServiceLocator} from './service/ServiceLocator';
 import {CoderadarAuthorizationService} from './service/CoderadarAuthorizationService';
 import {CoderadarCommitService} from './service/CoderadarCommitService';
 import {CoderadarMetricService} from './service/CoderadarMetricService';

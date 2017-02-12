@@ -5,7 +5,7 @@ import * as Constants from './Constants';
 import {ElementAnalyzer} from './util/ElementAnalyzer';
 import {MergedDrawer} from './drawer/MergedDrawer';
 import {SingleDrawer} from './drawer/SingleDrawer';
-import {ServiceLocator} from './ServiceLocator';
+import {ServiceLocator} from './service/ServiceLocator';
 import * as PubSub from 'pubsub-js';
 
 export class Application {
