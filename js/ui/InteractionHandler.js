@@ -121,7 +121,7 @@ export class InteractionHandler {
         this._hideTooltip();
     }
 
-    _onDocumentMouseDown() {
+    _onDocumentMouseDown(event) {
         this._renderer.domElement.style.cursor = '-webkit-grabbing';
 
         this._startingPosition = {
