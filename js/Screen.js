@@ -17,15 +17,12 @@ export class Screen {
         this._visibilityStates = {};
 
         this._isFullscreen = false;
-        this._cameraStartPosition = {
-            x: 100, y: 100, z: 100
-        };
+        this._cameraStartPosition = config.CAMERA_START_POSITION;
         this._centralPosition = {
             x: 0, y: 0, z: 0
         };
 
         this._highlightedElement = undefined;
-        this._animationDuration = 1500;
         this._animationEasing = TWEEN.Easing.Sinusoidal.InOut;
 
         this._requestAnimationFrameId = undefined;
@@ -132,7 +129,7 @@ export class Screen {
         for (var i = this.scene.children.length - 1; i >= 0; i--) {
             var child = this.scene.children[i];
 
-            // only remove Blocks. Don't remove lights, cameras etc.
+            // only remove Blocks and Lines. Don't remove lights, cameras etc.
             if (child.type == 'Mesh' || child.type == 'Line') {
                 this.scene.remove(child);
             }
@@ -152,7 +149,7 @@ export class Screen {
     }
 
     createCamera() {
-        this.camera = new THREE.PerspectiveCamera(45, (this._getScreenWidth() - config.SCREEN_PADDING) / window.innerHeight, 0.1, 10000);
+        this.camera = new THREE.PerspectiveCamera(45, (this._getScreenWidth() - config.SCREEN_PADDING) / window.innerHeight, config.CAMERA_NEAR, config.CAMERA_FAR);
         this.camera.position.x = this._cameraStartPosition.x;
         this.camera.position.y = this._cameraStartPosition.y;
         this.camera.position.z = this._cameraStartPosition.z;
@@ -186,7 +183,7 @@ export class Screen {
                 x: this._cameraStartPosition.x,
                 y: this._cameraStartPosition.y,
                 z: this._cameraStartPosition.z
-            }, this._animationDuration)
+            }, config.CAMERA_ANIMATION_DURATION)
             .easing(this._animationEasing)
             .start();
     }
@@ -205,7 +202,7 @@ export class Screen {
                 x: this._centralPosition.x,
                 y: 0,
                 z: this._centralPosition.z
-            }, this._animationDuration)
+            }, config.CAMERA_ANIMATION_DURATION)
             .easing(this._animationEasing)
             .start();
     }
@@ -377,10 +374,10 @@ export class Screen {
 
         new TWEEN.Tween(this.camera.position)
             .to({
-                x: element.position.x + 20,
-                y: element.position.y + 20,
-                z: element.position.z + 20
-            }, this._animationDuration)
+                x: element.position.x + config.CAMERA_DISTANCE_TO_FOCUSSED_ELEMENT,
+                y: element.position.y + config.CAMERA_DISTANCE_TO_FOCUSSED_ELEMENT,
+                z: element.position.z + config.CAMERA_DISTANCE_TO_FOCUSSED_ELEMENT
+            }, config.CAMERA_ANIMATION_DURATION)
             .easing(this._animationEasing)
             .start();
 
@@ -389,7 +386,7 @@ export class Screen {
                 x: element.position.x + element.scale.x / 2,
                 y: element.position.y,
                 z: element.position.z + element.scale.z / 2
-            }, this._animationDuration)
+            }, config.CAMERA_ANIMATION_DURATION)
             .easing(this._animationEasing)
             .start();
     }
