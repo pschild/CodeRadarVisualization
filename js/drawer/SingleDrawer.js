@@ -4,7 +4,6 @@ import * as Constants from '../Constants';
 import {AbstractDrawer} from './AbstractDrawer';
 import {ElementAnalyzer} from '../util/ElementAnalyzer';
 import {ColorHelper} from '../util/ColorHelper';
-import * as PubSub from 'pubsub-js';
 
 export class SingleDrawer extends AbstractDrawer {
 
@@ -118,37 +117,6 @@ export class SingleDrawer extends AbstractDrawer {
         };
 
         this.scene.add(cube);
-    }
-
-    // override
-    setColorization(colorMode) {
-        this._handleColorcodeChanged(colorMode);
-    }
-
-    // override
-    _initializeEventListeners() {
-        super._initializeEventListeners();
-        PubSub.subscribe('colorcodeChange', (eventName, args) => {
-            this._handleColorcodeChanged(args.colorcode);
-        });
-    }
-
-    _handleColorcodeChanged(newColorcode) {
-        for (var i = this.scene.children.length - 1; i >= 0; i--) {
-            var child = this.scene.children[i];
-
-            if (child.type == 'Mesh' && child.userData.type == Constants.ELEMENT_TYPE_FILE) {
-                if (newColorcode == 'commit') {
-                    child.material.color.set(
-                        ColorHelper.getColorByPosition(this.position)
-                    );
-                } else if (newColorcode == 'metric') {
-                    child.material.color.set(
-                        ColorHelper.getColorByMetricValue(child.userData.metrics[config.COLOR_METRIC_NAME], this.maxColorMetricValue, this.minColorMetricValue)
-                    );
-                }
-            }
-        }
     }
 
 }

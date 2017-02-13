@@ -74,8 +74,6 @@ export class AbstractDrawer {
         }
     }
 
-    setColorization(colorMode) { }
-
     _initializeEventListeners() { }
 
     _generateTooltipHtml(elementName, metrics) {

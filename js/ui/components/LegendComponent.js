@@ -81,15 +81,5 @@ export class LegendComponent {
                 this._hideAddedDeletedUnchangedFilesItems();
             }
         });
-
-        // PubSub.subscribe('colorcodeChange', (eventName, args) => {
-        //     if (args.colorcode == 'metric') {
-        //         this._showColorCodeItem();
-        //         this._hideCommitItems();
-        //     } else {
-        //         this._hideColorCodeItem();
-        //         this._showCommitItems();
-        //     }
-        // });
     }
 }
