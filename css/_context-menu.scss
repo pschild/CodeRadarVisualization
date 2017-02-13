@@ -23,8 +23,8 @@
             text-overflow: ellipsis;
 
             &:hover {
-                color: $state-active;
-                background: $state-hover;
+                color: $state-active-color;
+                background: $state-hover-color;
             }
         }
     }

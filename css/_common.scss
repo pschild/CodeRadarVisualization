@@ -1,7 +1,7 @@
 input[type=text] {
     outline: none;
     border: 0;
-    border-bottom: 1px solid $state-inactive;
+    border-bottom: 1px solid $state-inactive-color;
     height: 30px;
     max-width: 250px;
 
@@ -13,7 +13,7 @@ input[type=text] {
 select {
     outline: none;
     border: 0;
-    border-bottom: 1px solid $state-inactive;
+    border-bottom: 1px solid $state-inactive-color;
     height: 30px;
     max-width: 250px;
 

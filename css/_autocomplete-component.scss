@@ -13,10 +13,10 @@
             height: 100%;
             line-height: 32px;
             cursor: pointer;
-            color: $state-inactive;
+            color: $state-inactive-color;
 
             &:hover {
-                color: $state-active;
+                color: $state-active-color;
             }
         }
 
@@ -25,10 +25,10 @@
             height: 100%;
             line-height: 32px;
             cursor: pointer;
-            color: $state-inactive;
+            color: $state-inactive-color;
 
             &:hover {
-                color: $state-active;
+                color: $state-active-color;
             }
         }
     }
@@ -64,17 +64,17 @@
                 text-overflow: ellipsis;
 
                 &.inactive {
-                    color: $state-inactive;
+                    color: $state-inactive-color;
                 }
 
                 &.selected {
-                    color: $state-active;
-                    background: $state-hover;
+                    color: $state-active-color;
+                    background: $state-hover-color;
                 }
 
                 &:hover {
-                    color: $state-active;
-                    background: $state-hover;
+                    color: $state-active-color;
+                    background: $state-hover-color;
                 }
             }
         }
