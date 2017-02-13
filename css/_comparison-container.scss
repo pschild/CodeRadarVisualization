@@ -6,7 +6,7 @@
     padding: 5px 20px;
     max-width: 40%;
     height: 160px;
-    background: #fff;
+    background: $background-color;
     box-shadow: rgba(0,0,0,0.2) 0 2px 6px 0;
     z-index: 100;
 
@@ -40,7 +40,7 @@
 
         tbody {
             tr:nth-child(odd) {
-                background: #f3f3f3;
+                background: $table-row-background-color;
             }
 
             td {

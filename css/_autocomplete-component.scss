@@ -1,15 +1,11 @@
 .autocomplete-wrapper {
     position: relative;
 
-    & > input[type=text] {
-
-    }
-
     .button-container {
         position: absolute;
         top: 0;
         right: 0;
-        background: #fff;
+        background: $background-color;
         padding: 0 5px;
 
         .show-suggestions-button {
@@ -17,10 +13,10 @@
             height: 100%;
             line-height: 32px;
             cursor: pointer;
-            color: #ccc;
+            color: $state-inactive;
 
             &:hover {
-                color: #000;
+                color: $state-active;
             }
         }
 
@@ -29,10 +25,10 @@
             height: 100%;
             line-height: 32px;
             cursor: pointer;
-            color: #ccc;
+            color: $state-inactive;
 
             &:hover {
-                color: #000;
+                color: $state-active;
             }
         }
     }
@@ -42,7 +38,7 @@
         left: 0;
         top: 32px;
         min-width: 100%;
-        background: #fff;
+        background: $background-color;
         box-sizing: border-box;
         max-height: 250px;
         overflow-y: auto;
@@ -68,17 +64,17 @@
                 text-overflow: ellipsis;
 
                 &.inactive {
-                    color: #ccc;
+                    color: $state-inactive;
                 }
 
                 &.selected {
-                    color: #000;
-                    background: #f3f3f3;
+                    color: $state-active;
+                    background: $state-hover;
                 }
 
                 &:hover {
-                    color: #000;
-                    background: #f3f3f3;
+                    color: $state-active;
+                    background: $state-hover;
                 }
             }
         }

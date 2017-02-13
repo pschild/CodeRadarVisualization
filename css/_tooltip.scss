@@ -2,8 +2,8 @@
     position: absolute;
     top: 0;
     left: 0;
-    background-color: #2B222A;
-    color: #fff;
+    background-color: $tooltip-background-color;
+    color: $background-color;
     padding: 10px;
     font-size: 14px;
     max-width: 300px;
@@ -40,8 +40,8 @@
         position: absolute;
         top: 20px;
         left: -80px;
-        background-color: #2B222A;
-        color: #fff;
+        background-color: $tooltip-background-color;
+        color: $background-color;
         content: attr(aria-label);
         padding: 10px;
         text-transform: none;
@@ -52,7 +52,7 @@
 
     &::before,
     &::after {
-        color: #fff;
+        color: $background-color;
         font-size: 14px;
         opacity: 0;
         pointer-events: none;

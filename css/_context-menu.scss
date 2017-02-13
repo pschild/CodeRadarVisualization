@@ -4,7 +4,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    background: #ffffff;
+    background: $background-color;
     box-sizing: border-box;
     z-index: 1;
 
@@ -23,8 +23,8 @@
             text-overflow: ellipsis;
 
             &:hover {
-                color: #000;
-                background: #f3f3f3;
+                color: $state-active;
+                background: $state-hover;
             }
         }
     }
