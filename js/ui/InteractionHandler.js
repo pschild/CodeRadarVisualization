@@ -98,7 +98,7 @@ export class InteractionHandler {
         return window.innerWidth / 2 - config.SCREEN_PADDING;
     }
 
-    _onDocumentMouseMove() {
+    _onDocumentMouseMove(event) {
         if (!this._enabled) {
             return;
         }
