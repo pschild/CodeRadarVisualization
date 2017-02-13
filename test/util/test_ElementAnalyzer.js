@@ -1,7 +1,7 @@
 var assert = require('assert');
 
-import {ElementAnalyzer} from '../js/util/ElementAnalyzer';
-import * as Constants from '../js/Constants';
+import {ElementAnalyzer} from '../../js/util/ElementAnalyzer';
+import * as Constants from '../../js/Constants';
 
 var commit1Metrics = {
     "metric1Name": 111,
@@ -202,7 +202,7 @@ describe('ElementAnalyzer', function () {
     });
 
     describe('findSmallestAndBiggestMetricValueByMetricName', function () {
-        var deltaTree = require('./data/deltaTree.json');
+        var deltaTree = require('./../data/deltaTree.json');
         it('should return smallest and biggest metric value of given delta tree', function () {
             assert.deepEqual(
                 ElementAnalyzer.findSmallestAndBiggestMetricValueByMetricName(deltaTree, 'coderadar:size:loc:java'),
