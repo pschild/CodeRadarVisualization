@@ -50,7 +50,6 @@ export class Application {
             .then(() => {
                 var commits = this.commitService.getCommits();
 
-                // TODO: what if we have less than 2 commits?
                 this.leftCommitId = commits[1].getName();
                 this.rightCommitId = commits[0].getName();
 
@@ -66,15 +65,6 @@ export class Application {
         return this.metricService.loadDeltaTree(this.leftCommitId, this.rightCommitId)
             .then((result) => {
                 this.result = result.data;
-
-                // #3: set commitId dynamically
-                // firstCommitResult.commitId = this.leftCommitId;
-                // secondCommitResult.commitId = this.rightCommitId;
-
-                // console.time('merging time');
-                // var result = CommitMerger.merge(firstCommitResult, secondCommitResult);
-                // console.timeEnd('merging time');
-                // console.log('merging ' + this.leftCommitId + ' and ' + this.rightCommitId + ':', result);
 
                 this._uniqueElementList = ElementAnalyzer.generateUniqueElementList(this.result);
                 var minMaxPairOfHeight = ElementAnalyzer.findSmallestAndBiggestMetricValueByMetricName(this.result, config.HEIGHT_METRIC_NAME);
