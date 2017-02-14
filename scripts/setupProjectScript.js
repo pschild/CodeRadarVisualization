@@ -8,23 +8,31 @@ var repoList = {
         'repoName': 'coderadar',
         'repoUrl': 'https://github.com/reflectoring/coderadar.git'
     },
-    'coderadar-demo': {
+    'coderadarDemo': {
         'repoName': 'coderadar-demo',
         'repoUrl': 'https://github.com/pschild/coderadar-demo.git'
-    },
-    'hystrix': {
-        'repoName': 'hystrix',
-        'repoUrl': 'https://github.com/Netflix/Hystrix.git'
     },
     'junit': {
         'repoName': 'junit4',
         'repoUrl': 'https://github.com/junit-team/junit4.git'
+    },
+    'javaDesignPatterns': {
+        'repoName': 'java-design-patterns',
+        'repoUrl': 'https://github.com/iluwatar/java-design-patterns.git'
+    },
+    'retrofit': {
+        'repoName': 'retrofit',
+        'repoUrl': 'https://github.com/square/retrofit.git'
+    },
+    'javaAlgorithms': {
+        'repoName': 'java-algorithms',
+        'repoUrl': 'https://github.com/posborne/java-algorithms.git'
     }
 };
-var activeRepo = repoList.junit;
+var activeRepo = repoList.javaAlgorithms;
 
 var fromYear = 2015;
-var fromMonth = 10; // 1 = january
+var fromMonth = 1; // 1 = january
 var fromDay = 1;
 
 var accessToken = undefined;
@@ -179,5 +187,5 @@ registerUser()
     .then(createProject)
     .then(addFilePattern)
     .then(addAnalyzerConfig)
-    .then(addAnalyzingStrategy)
-    .then(addModules);
+    .then(addAnalyzingStrategy);
+    // .then(addModules);
