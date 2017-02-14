@@ -7,7 +7,7 @@
     "url": "https://github.com/pschild/CodeRadarVisualization.git"
   },
   "scripts": {
-    "test": "mocha --compilers js:babel-core/register test/test*.js"
+    "test": "mocha --compilers js:babel-core/register test/**/test*.js"
   },
   "dependencies": {
     "axios": "^0.15.2",
