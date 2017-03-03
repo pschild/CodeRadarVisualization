@@ -9,7 +9,7 @@ Therefore, **results of static code analyses are visualized** in the form of a c
 
 ## How to install
 ### Checkout and install dependencies
-After checking out the project to your local harddrive, just can install all needed dependencies with npm:
+After checking out the project to your local harddrive, you can install all needed dependencies with npm:
 ```
 npm install
 ```
