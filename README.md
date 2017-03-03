@@ -1,22 +1,34 @@
 # CodeRadarVisualization
 
-## Installing dependencies
-After checking out the project to your local harddrive, just install all needed dependencies with npm:
+## Background
+In the context of my bachelor thesis, a prototypic application is developed that can **visualize the structure and quality of software**.
+With the **comparison of different versions** of this software, also tendencies of the **software's evolution** shall be revealed and become visible.
+According to that, the aim of this application is that developers and also project managers are able to **intuitively explore and localize flaws and possibilities to improve their projects**.
+Therefore, **results of static code analyses are visualized** in the form of a city with buildings representing the files and districts representing the modules of the project.
+
+## How to install
+### Checkout and install dependencies
+After checking out the project to your local harddrive, just can install all needed dependencies with npm:
 ```
 npm install
 ```
 
-## Transform to ES5
-Because ES6 is used for writing the JavaScript code, you need to transpile the code into ES5. You can easily do that with the help of gulp:
+### Coderadar
+The application is yet designed to visualize results of static code analyses of the tool **Coderadar** exclusively. So at the moment, you would need to have a locally running Coderadar server and a fully analyzed sample project in order to use the application.
+To see how this works, just have a look at the [GitHub project](https://github.com/reflectoring/coderadar) and at the [administration guide](http://www.reflectoring.io/coderadar/current/docs/admin.html).
+
+## How to develop
+### Transpiling to ES5
+Because ES6 is used for writing the JavaScript code, you need to transpile the code into ES5 to make the app run in all browsers. You can easily do that with the help of gulp:
 ```
 gulp
 ```
-To make the development a lot more comfortable, you can also start a code watcher with gulp. It will automatically transpile the JavaScript code to ES5 whenever it detects a change:
+To make the development a lot more comfortable, you can also start a code watcher with gulp. It will automatically transpile the JavaScript code to ES5 whenever it detects a change in the source files:
 ```
 gulp watch
 ```
 
-## Execute tests
+### Execute tests
 To make sure the code works properly, you can run unit tests with
 ```
 npm test
