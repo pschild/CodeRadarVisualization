@@ -36,19 +36,19 @@ npm test
 
 # Screenshots
 Just choose two versions of your software project (based on GIT) and the type of view:
-![Choose Versions](https://cloud.githubusercontent.com/assets/1246566/22399865/b43c4a3c-e5a6-11e6-829e-3ee483129843.PNG)
+![Choose Versions](https://cloud.githubusercontent.com/assets/1246566/23557895/fbbbf66e-0031-11e7-8192-5d9c41db98a6.PNG)
 
 You can compare the two versions either side by side ...
 ![Split View](https://cloud.githubusercontent.com/assets/1246566/22399780/f8e23356-e5a4-11e6-9871-d08730dedda5.png)
 
 ... or in a merged view:
-![Merged View](https://cloud.githubusercontent.com/assets/1246566/22399788/21de226a-e5a5-11e6-9ea7-1756f073dd4d.png)
+![Merged View](https://cloud.githubusercontent.com/assets/1246566/23557874/e3137ff6-0031-11e7-9174-f8ceb05f1550.PNG)
 
 You can filter for specific properties of your classes ...
-![filter](https://cloud.githubusercontent.com/assets/1246566/22399866/b43d7d80-e5a6-11e6-8c64-b368556ac82a.PNG)
+![filter](https://cloud.githubusercontent.com/assets/1246566/23557936/1872fe88-0032-11e7-8437-ae6f0a79ae3e.PNG)
 
 ... and map different types of metrics to your personal visualization.
-![mapping](https://cloud.githubusercontent.com/assets/1246566/22399867/b43f1316-e5a6-11e6-95ce-2cc9fb560a67.PNG)
+![mapping](https://cloud.githubusercontent.com/assets/1246566/23557926/11553c7e-0032-11e7-9661-5968ab5226db.PNG)
 
 Of course, you can also search for certain files in your project and highlight them in the visualization
-![search](https://cloud.githubusercontent.com/assets/1246566/22399864/b43befba-e5a6-11e6-8b12-bdd23b369efa.PNG)
+![search](https://cloud.githubusercontent.com/assets/1246566/23557911/08b60db4-0032-11e7-8ca4-01bd8d27d6fc.PNG)
