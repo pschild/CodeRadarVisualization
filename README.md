@@ -1,4 +1,4 @@
-# CodeRadarVisualization
+# Visualization of software evolution with HTML, CSS and JavaScript
 
 ## Background
 In the context of my bachelor thesis, a prototypic application is developed that can **visualize the structure and quality of software**.
