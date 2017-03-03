@@ -1,8 +1,9 @@
-# Visualization of software evolution with HTML, CSS and JavaScript
+# Visualization of software quality and evolution
 
 ## Background
-In the context of my bachelor thesis, a prototypic application is developed that can **visualize the structure and quality of software**.
-With the **comparison of different versions** of this software, also tendencies of the **software's evolution** shall be revealed and become visible.
+In the context of my bachelor thesis, I developed a prototypic application that can **visualize the structure and quality of software**. It has been developed with the help of web technologies HTML, CSS and JavaScript. For the three-dimensional visualization, the library [Three.js](https://github.com/mrdoob/three.js/) was used.
+
+With the **comparison of different versions** of this software, tendencies of the **software's evolution** shall be revealed and become visible.
 According to that, the aim of this application is that developers and also project managers are able to **intuitively explore and localize flaws and possibilities to improve their projects**.
 Therefore, **results of static code analyses are visualized** in the form of a city with buildings representing the files and districts representing the modules of the project.
 
