@@ -34,8 +34,12 @@ export class AbstractDrawer {
 
             if (element.type == Constants.ELEMENT_TYPE_FILE) {
                 var groundArea = this._getValueForGroundArea(element.commit1Metrics, element.commit2Metrics);
-                element.w = groundArea * config.GROUND_AREA_FACTOR + config.GLOBAL_MIN_GROUND_AREA + config.BLOCK_SPACING;
-                element.h = groundArea * config.GROUND_AREA_FACTOR + config.GLOBAL_MIN_GROUND_AREA + config.BLOCK_SPACING;
+                if (!groundArea) {
+                    element.w = element.h = 0;
+                } else {
+                    element.w = groundArea * config.GROUND_AREA_FACTOR + config.GLOBAL_MIN_GROUND_AREA + config.BLOCK_SPACING;
+                    element.h = groundArea * config.GROUND_AREA_FACTOR + config.GLOBAL_MIN_GROUND_AREA + config.BLOCK_SPACING;
+                }
             }
 
             // recursion
