@@ -26,8 +26,15 @@
     "@angular/platform-browser": "^4.0.0",
     "@angular/platform-browser-dynamic": "^4.0.0",
     "@angular/router": "^4.0.0",
+    "@types/three": "^0.84.3",
+    "@types/tweenjs": "^0.6.27",
+    "binpacking": "0.0.1",
+    "chroma-js": "^1.2.1",
     "core-js": "^2.4.1",
+    "normalize.css": "^5.0.0",
     "rxjs": "^5.1.0",
+    "three": "^0.81.2",
+    "tween.js": "^16.3.5",
     "zone.js": "^0.8.4"
   },
   "devDependencies": {
