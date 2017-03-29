@@ -31,7 +31,7 @@ var repoList = {
 };
 var activeRepo = repoList.javaAlgorithms;
 
-var fromYear = 2015;
+var fromYear = 2016;
 var fromMonth = 1; // 1 = january
 var fromDay = 1;
 
@@ -67,8 +67,9 @@ function createProject() {
     return axios.post('http://localhost:8080/projects',
         {
             "name": activeRepo.repoName,
-            "vcsType": "GIT",
-            "vcsUrl": activeRepo.repoUrl
+            "vcsUrl": activeRepo.repoUrl,
+            "startDate" : [ 2016, 1, 1 ],
+            "endDate" : [ 2016, 12, 31 ]
         },
         {
             headers: {'Authorization': accessToken}
