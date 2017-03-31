@@ -8,13 +8,14 @@ import {Component} from '@angular/core';
 })
 export class AppComponent {
     title = 'app works!';
+
     constructor() {
         var packer = new GrowingPacker();
         var blocks = [
-            { w: 100, h: 100 },
-            { w: 100, h: 100 },
-            { w:  80, h:  80 },
-            { w:  80, h:  80 }
+            {w: 100, h: 100},
+            {w: 100, h: 100},
+            {w: 80, h: 80},
+            {w: 80, h: 80}
         ];
 
         packer.fit(blocks);
