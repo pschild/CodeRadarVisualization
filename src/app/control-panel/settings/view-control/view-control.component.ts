@@ -12,6 +12,11 @@ import {changeViewType} from "../settings.actions";
 })
 export class ViewControlComponent implements OnInit {
 
+    viewTypes: any = {
+        split: ViewType.SPLIT,
+        merged: ViewType.MERGED
+    };
+
     activeViewType: ViewType;
 
     subscription: Subscription;

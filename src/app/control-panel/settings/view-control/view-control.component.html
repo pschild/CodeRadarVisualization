@@ -1,8 +1,8 @@
 <div class="control-item">
-    <input id="radio-splitscreen" type="radio" name="radio-group-screen" value="0" (click)="changeViewType(0)" [checked]="activeViewType === 0" />
+    <input id="radio-splitscreen" type="radio" name="radio-group-screen" [value]="viewTypes.split" (click)="changeViewType(viewTypes.split)" [checked]="activeViewType === viewTypes.split" />
     <label for="radio-splitscreen">nebeneinander</label>
 </div>
 <div class="control-item">
-    <input id="radio-fullscreen" type="radio" name="radio-group-screen" value="1" (click)="changeViewType(1)" [checked]="activeViewType === 1" />
+    <input id="radio-fullscreen" type="radio" name="radio-group-screen" [value]="viewTypes.merged" (click)="changeViewType(viewTypes.merged)" [checked]="activeViewType === viewTypes.merged" />
     <label for="radio-fullscreen">kombiniert</label>
 </div>

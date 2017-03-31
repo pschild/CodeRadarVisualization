@@ -1,9 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
 import {AppState} from "../../shared/reducers";
 import {Subscription} from "rxjs";
 import {Commit} from "../../domain/Commit";
-import {loadCommits} from "../control-panel.actions";
+import {changeCommit, loadCommits} from "../control-panel.actions";
+import {CommitType} from "../../enum/CommitType";
 
 @Component({
     selector: 'app-commit-chooser',
@@ -15,6 +16,8 @@ export class CommitChooserComponent implements OnInit {
     subscription: Subscription;
     private loading: boolean = false;
     commits: Commit[];
+
+    @Input() commitType: CommitType;
 
     constructor(private store: Store<AppState>) {
     }
@@ -31,6 +34,10 @@ export class CommitChooserComponent implements OnInit {
 
     ngOnDestroy() {
         this.subscription.unsubscribe();
+    }
+
+    handleValueChanged(chosenModel: Commit) {
+        this.store.dispatch(changeCommit(this.commitType, chosenModel));
     }
 
     autocompleListFormatter = (data: any) => {

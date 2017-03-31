@@ -1,4 +1,5 @@
 import {Component, OnInit} from "@angular/core";
+import {CommitType} from "../enum/CommitType";
 
 @Component({
     selector: 'app-control-panel',
@@ -6,6 +7,11 @@ import {Component, OnInit} from "@angular/core";
     styleUrls: ['./control-panel.component.scss']
 })
 export class ControlPanelComponent implements OnInit {
+
+    commitTypes: any = {
+        left: CommitType.LEFT,
+        right: CommitType.RIGHT
+    };
 
     constructor() {
     }

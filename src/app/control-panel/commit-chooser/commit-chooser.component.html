@@ -3,6 +3,7 @@
        [list-formatter]="autocompleListFormatter"
        value-property-name="id"
        display-property-name="name"
-       no-match-found-text="Nichts gefunden." />
+       no-match-found-text="Nichts gefunden."
+       (valueChanged)="handleValueChanged($event)" />
 
 {{selected | json}}
