@@ -8,6 +8,8 @@ import {ControlPanelModule} from "./control-panel/control-panel.module";
 import {VisualizationModule} from "./visualization/visualization.module";
 import {reducer} from "./shared/reducers";
 import {StoreModule} from "@ngrx/store";
+import {EffectsModule} from "@ngrx/effects";
+import {AppEffects} from "./shared/effects";
 
 @NgModule({
     declarations: [
@@ -19,7 +21,8 @@ import {StoreModule} from "@ngrx/store";
         HttpModule,
         ControlPanelModule,
         VisualizationModule,
-        StoreModule.provideStore(reducer)
+        StoreModule.provideStore(reducer),
+        EffectsModule.run(AppEffects)
     ],
     providers: [],
     bootstrap: [AppComponent]

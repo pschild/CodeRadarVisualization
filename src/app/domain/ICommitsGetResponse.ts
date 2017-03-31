@@ -1,5 +1,7 @@
 import {Commit} from "./Commit";
 
 export interface ICommitsGetResponse {
-    commits: Commit[];
+    _embedded: {
+        commitResourceList: Commit[]
+    };
 }
