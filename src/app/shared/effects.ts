@@ -5,11 +5,14 @@ import * as actions from '../shared/actions';
 import {CommitService} from "../control-panel/commit-chooser/commit.service";
 import {ICommitsGetResponse} from "../domain/ICommitsGetResponse";
 import {ICommitsGetErrorResponse} from "../domain/ICommitsGetErrorResponse";
+import {IDeltaTreeGetErrorResponse} from "../domain/IDeltaTreeGetErrorResponse";
+import {IDeltaTreeGetResponse} from "../domain/IDeltaTreeGetResponse";
+import {MetricService} from "../visualization/metric.service";
 
 @Injectable()
 export class AppEffects {
 
-    constructor(private actions$: Actions, private commitService: CommitService) { }
+    constructor(private actions$: Actions, private commitService: CommitService, private metricService: MetricService) { }
 
     @Effect() loadCommitsEffects$ = this.actions$
         .ofType(actions.LOAD_COMMITS)
@@ -20,6 +23,19 @@ export class AppEffects {
                 })
                 .catch((response: ICommitsGetErrorResponse) => {
                     return Observable.of(actions.loadCommitsError(response.error));
+                })
+        );
+
+    @Effect() loadMetricTreeEffects$ = this.actions$
+        .ofType(actions.LOAD_METRIC_TREE)
+        .map((action) => action.payload)
+        .switchMap(
+            (payload) => this.metricService.loadDeltaTree(payload.leftCommit, payload.rightCommit)
+                .map((result: IDeltaTreeGetResponse) => {
+                    return actions.loadMetricTreeSuccess(result);
+                })
+                .catch((response: IDeltaTreeGetErrorResponse) => {
+                    return Observable.of(actions.loadMetricTreeError(response.error));
                 })
         );
 }
