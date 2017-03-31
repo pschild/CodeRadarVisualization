@@ -1,5 +1,5 @@
 import {Action} from '@ngrx/store';
-import {ViewType} from "../enum/ViewType";
+import {ViewType} from "../../enum/ViewType";
 
 export const CHANGE_VIEW_TYPE = 'CHANGE_VIEW_TYPE';
 
