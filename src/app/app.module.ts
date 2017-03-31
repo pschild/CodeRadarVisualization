@@ -6,6 +6,8 @@ import {HttpModule} from '@angular/http';
 import {AppComponent} from './app.component';
 import {ControlPanelModule} from "./control-panel/control-panel.module";
 import {VisualizationModule} from "./visualization/visualization.module";
+import {reducer} from "./shared/reducers";
+import {StoreModule} from "@ngrx/store";
 
 @NgModule({
     declarations: [
@@ -16,7 +18,8 @@ import {VisualizationModule} from "./visualization/visualization.module";
         FormsModule,
         HttpModule,
         ControlPanelModule,
-        VisualizationModule
+        VisualizationModule,
+        StoreModule.provideStore(reducer)
     ],
     providers: [],
     bootstrap: [AppComponent]
