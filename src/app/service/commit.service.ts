@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Http} from "@angular/http";
-import {ICommitsGetResponse} from "../../domain/ICommitsGetResponse";
+import {ICommitsGetResponse} from "../domain/ICommitsGetResponse";
 import {Observable} from "rxjs";
 
 @Injectable()

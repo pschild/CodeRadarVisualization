@@ -2,12 +2,12 @@ import {Injectable} from '@angular/core';
 import {Actions, Effect} from '@ngrx/effects';
 import {Observable} from "rxjs";
 import * as actions from '../shared/actions';
-import {CommitService} from "../control-panel/commit-chooser/commit.service";
+import {CommitService} from "../service/commit.service";
 import {ICommitsGetResponse} from "../domain/ICommitsGetResponse";
 import {ICommitsGetErrorResponse} from "../domain/ICommitsGetErrorResponse";
 import {IDeltaTreeGetErrorResponse} from "../domain/IDeltaTreeGetErrorResponse";
 import {IDeltaTreeGetResponse} from "../domain/IDeltaTreeGetResponse";
-import {MetricService} from "../visualization/metric.service";
+import {MetricService} from "../service/metric.service";
 
 @Injectable()
 export class AppEffects {

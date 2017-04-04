@@ -1,5 +1,5 @@
 import {BrowserXhr, ResponseOptions, XHRBackend, XSRFStrategy} from "@angular/http";
-import {MockData} from "./mocks/mock-data";
+import {MockData} from "./service/mocks/mock-data";
 import {InMemoryBackendService} from "angular-in-memory-web-api";
 import {environment} from "../environments/environment";
 import {Injector} from "@angular/core";

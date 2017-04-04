@@ -6,9 +6,9 @@ import {ViewControlComponent} from "./settings/view-control/view-control.compone
 import {FormsModule} from "@angular/forms";
 import {NguiAutoCompleteModule} from "@ngui/auto-complete";
 import {CommitChooserComponent} from "./commit-chooser/commit-chooser.component";
-import {CommitService} from "./commit-chooser/commit.service";
+import {CommitService} from "../service/commit.service";
 import {environment} from "../../environments/environment";
-import {CommitMockService} from "../mocks/commit-mock.service";
+import {CommitMockService} from "../service/mocks/commit-mock.service";
 
 @NgModule({
     imports: [

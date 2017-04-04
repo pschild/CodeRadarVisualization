@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Http} from "@angular/http";
 import {Observable} from "rxjs";
-import {IDeltaTreeGetResponse} from "../domain/IDeltaTreeGetResponse";
-import {Commit} from "../domain/Commit";
+import {IDeltaTreeGetResponse} from "../../domain/IDeltaTreeGetResponse";
+import {Commit} from "../../domain/Commit";
 
 @Injectable()
 export class MetricMockService {
