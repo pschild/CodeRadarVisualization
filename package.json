@@ -32,6 +32,7 @@
     "@ngui/auto-complete": "^0.13.1",
     "@types/three": "^0.84.3",
     "@types/tweenjs": "^0.6.27",
+    "angular-in-memory-web-api": "^0.3.1",
     "axios": "^0.15.2",
     "binpacking": "0.0.1",
     "chroma-js": "^1.2.1",

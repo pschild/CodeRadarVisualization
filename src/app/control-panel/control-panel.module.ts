@@ -1,4 +1,4 @@
-import {NgModule} from "@angular/core";
+import {Injector, NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {ControlPanelComponent} from "./control-panel.component";
 import {SettingsComponent} from "./settings/settings.component";
@@ -7,6 +7,11 @@ import {FormsModule} from "@angular/forms";
 import {NguiAutoCompleteModule} from "@ngui/auto-complete";
 import {CommitChooserComponent} from "./commit-chooser/commit-chooser.component";
 import {CommitService} from "./commit-chooser/commit.service";
+import {MockData} from "../mocks/mock-data";
+import {environment} from "../../environments/environment";
+import {InMemoryBackendService} from "angular-in-memory-web-api";
+import {CommitMockService} from "../mocks/commit-mock.service";
+import {BrowserXhr, ResponseOptions, XHRBackend, XSRFStrategy} from "@angular/http";
 
 @NgModule({
     imports: [
@@ -23,7 +28,25 @@ import {CommitService} from "./commit-chooser/commit.service";
     exports: [
         ControlPanelComponent
     ],
-    providers: [CommitService]
+    providers: [
+        {
+            provide: CommitService,
+            useClass: environment.production ? CommitService : CommitMockService
+        },
+        {
+            provide: XHRBackend,
+            useFactory: (injector: Injector, browser: BrowserXhr, xsrf: XSRFStrategy, options: ResponseOptions): any => {
+                if (environment.production) {
+                    return new XHRBackend(browser, options, xsrf);
+                } else {
+                    return new InMemoryBackendService(injector, new MockData(), {
+                        // This is the configuration options
+                    });
+                }
+            },
+            deps: [Injector, BrowserXhr, XSRFStrategy, ResponseOptions]
+        }
+    ]
 })
 export class ControlPanelModule {
 }
