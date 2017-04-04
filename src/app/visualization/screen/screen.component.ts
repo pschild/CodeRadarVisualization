@@ -18,6 +18,7 @@ export class ScreenComponent implements OnInit {
     renderer: WebGLRenderer;
     scene: Scene = new Scene();
     camera: PerspectiveCamera = new PerspectiveCamera(45, (this.getScreenWidth() - 0) / window.innerHeight, 0.1, 10000);
+    controls: THREE.OrbitControls;
 
     constructor() {
     }
@@ -34,11 +35,14 @@ export class ScreenComponent implements OnInit {
 
         this.scene.add(block);
 
-        this.camera.position.set(0, 0, 0);
+        this.camera.position.z = 100;
         this.scene.add(this.camera);
 
         this.createLight();
         this.createRenderer();
+
+        this.controls = new THREE.OrbitControls(this.camera, <HTMLElement>document.querySelector('#stage'));
+
         this.render();
     }
 
@@ -64,6 +68,7 @@ export class ScreenComponent implements OnInit {
             this.render();
         });
 
+        this.controls.update();
         this.renderer.render(this.scene, this.camera);
     }
 
