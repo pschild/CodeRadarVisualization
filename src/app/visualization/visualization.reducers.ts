@@ -27,6 +27,7 @@ export const VisualizationReducer: ActionReducer<VisualizationState> = (state = 
             return newState;
 
         case VisualizationActions.LOAD_METRIC_TREE_ERROR:
+            newState = Object.assign({}, state);
             newState.metricsLoading = false;
             console.error(`Error while loading metrics: ${action.payload}`);
             return state;

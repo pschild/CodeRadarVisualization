@@ -34,6 +34,7 @@ export const ControlPanelReducer: ActionReducer<ControlPanelState> = (state = in
             return newState;
 
         case ControlPanelActions.LOAD_COMMITS_ERROR:
+            newState = Object.assign({}, state);
             newState.commitsLoading = false;
             console.error(`Error while loading commits: ${action.payload}`);
             return state;
