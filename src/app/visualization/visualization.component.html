@@ -1,4 +1,5 @@
-<app-screen [screenType]="screenTypes.left"></app-screen>
-<app-screen [screenType]="screenTypes.right"></app-screen>
-
-<div id="stage"></div>
+<div id="stage" class="split">
+    <div class="vertical-line"></div>
+    <app-screen [screenType]="screenTypes.left"></app-screen>
+    <app-screen [screenType]="screenTypes.right"></app-screen>
+</div>

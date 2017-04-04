@@ -19,7 +19,8 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.scss"
+        "styles.scss",
+        "../node_modules/normalize.css/normalize.css"
       ],
       "scripts": [
         "../node_modules/binpacking/js/packer.growing.js",

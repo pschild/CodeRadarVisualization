@@ -1,3 +1,2 @@
-/* You can add global styles to this file, and also import other style files */
-
+#stage canvas{position:absolute;cursor:-webkit-grab;transition:all 1s ease}#stage canvas:first-child{left:0}#stage canvas:last-child{opacity:0;left:100%}#stage.split canvas:last-child{opacity:1;left:50%}
 /*# sourceMappingURL=styles.css.map */
