@@ -3,6 +3,8 @@ import {CommonModule} from '@angular/common';
 import {VisualizationComponent} from './visualization.component';
 import {ScreenComponent} from './screen/screen.component';
 import {MetricService} from "./metric.service";
+import {environment} from "../../environments/environment";
+import {MetricMockService} from "../mocks/metric-mock.service";
 
 @NgModule({
     imports: [
@@ -16,7 +18,10 @@ import {MetricService} from "./metric.service";
         VisualizationComponent
     ],
     providers: [
-        MetricService
+        {
+            provide: MetricService,
+            useClass: environment.demo ? MetricMockService : MetricService
+        }
     ]
 })
 export class VisualizationModule {
