@@ -16,6 +16,7 @@ export class CommitChooserComponent implements OnInit {
     subscription: Subscription;
     private loading: boolean = false;
     commits: Commit[];
+    selected: Commit;
 
     @Input() commitType: CommitType;
 
