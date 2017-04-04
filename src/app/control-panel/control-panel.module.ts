@@ -31,17 +31,17 @@ import {BrowserXhr, ResponseOptions, XHRBackend, XSRFStrategy} from "@angular/ht
     providers: [
         {
             provide: CommitService,
-            useClass: environment.production ? CommitService : CommitMockService
+            useClass: environment.demo ? CommitMockService : CommitService
         },
         {
             provide: XHRBackend,
             useFactory: (injector: Injector, browser: BrowserXhr, xsrf: XSRFStrategy, options: ResponseOptions): any => {
-                if (environment.production) {
-                    return new XHRBackend(browser, options, xsrf);
-                } else {
+                if (environment.demo) {
                     return new InMemoryBackendService(injector, new MockData(), {
                         // This is the configuration options
                     });
+                } else {
+                    return new XHRBackend(browser, options, xsrf);
                 }
             },
             deps: [Injector, BrowserXhr, XSRFStrategy, ResponseOptions]
