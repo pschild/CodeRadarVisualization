@@ -14,7 +14,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "demo": "ng serve --environment demo"
   },
   "private": true,
   "dependencies": {
