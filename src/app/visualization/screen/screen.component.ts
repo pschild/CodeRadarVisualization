@@ -2,6 +2,10 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ScreenType} from "../../enum/ScreenType";
 import {WebGLRenderer, Scene, AmbientLight, DirectionalLight} from "three";
 import {Block} from "../../geometry/block";
+import {Subscription} from "rxjs";
+import {Store} from "@ngrx/store";
+import {AppState} from "../../shared/reducers";
+import {ViewType} from "../../enum/ViewType";
 
 @Component({
     selector: 'app-screen',
@@ -11,6 +15,8 @@ import {Block} from "../../geometry/block";
 export class ScreenComponent implements OnInit {
 
     @Input() screenType: ScreenType;
+
+    subscription: Subscription;
 
     private isMergedView: boolean = false;
     private requestAnimationFrameId: number;
@@ -22,7 +28,7 @@ export class ScreenComponent implements OnInit {
     camera: THREE.PerspectiveCamera = new THREE.PerspectiveCamera(45, (this.getScreenWidth() - 0) / window.innerHeight, 0.1, 10000);
     controls: THREE.OrbitControls;
 
-    constructor() {
+    constructor(private store: Store<AppState>) {
     }
 
     ngOnInit() {
@@ -37,9 +43,7 @@ export class ScreenComponent implements OnInit {
 
         this.scene.add(block);
 
-        this.camera.position.z = 100;
-        this.scene.add(this.camera);
-
+        this.createCamera();
         this.createLight();
         this.createRenderer();
 
@@ -48,6 +52,22 @@ export class ScreenComponent implements OnInit {
         this.initializeEventListeners();
 
         this.render();
+
+        this.subscription = this.store.select(state => state.settingsState)
+            .subscribe((settingsState) => {
+                this.isMergedView = settingsState.activeViewType === ViewType.MERGED;
+                this.handleViewChanged();
+
+                if (this.isMergedView) {
+                    document.querySelector('#stage').classList.remove('split');
+                } else {
+                    document.querySelector('#stage').classList.add('split');
+                }
+            });
+    }
+
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
     }
 
     createRenderer() {
@@ -71,6 +91,11 @@ export class ScreenComponent implements OnInit {
         this.scene.add(directionalLight);
     }
 
+    createCamera() {
+        this.camera.position.z = 100;
+        this.scene.add(this.camera);
+    }
+
     updateCamera() {
         this.camera.aspect = (this.getScreenWidth() - 0) / window.innerHeight;
         this.camera.updateProjectionMatrix();
@@ -85,7 +110,7 @@ export class ScreenComponent implements OnInit {
         this.renderer.render(this.scene, this.camera);
     }
 
-    getScreenWidth() {
+    private getScreenWidth() {
         if (this.isMergedView) {
             return window.innerWidth;
         }
@@ -93,10 +118,10 @@ export class ScreenComponent implements OnInit {
     }
 
     private initializeEventListeners() {
-        window.addEventListener('resize', this.onWindowResize.bind(this), false);
+        window.addEventListener('resize', this.handleViewChanged.bind(this), false);
     }
 
-    private onWindowResize() {
+    private handleViewChanged() {
         this.updateCamera();
         this.updateRenderer();
     }
