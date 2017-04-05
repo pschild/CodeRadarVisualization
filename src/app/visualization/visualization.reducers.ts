@@ -1,10 +1,10 @@
 import * as VisualizationActions from "./visualization.actions";
 import {Action, ActionReducer} from "@ngrx/store";
-import {IDeltaTreeGetResponse} from "../domain/IDeltaTreeGetResponse";
+import {Node} from "../domain/Node";
 
 export interface VisualizationState {
     metricsLoading: boolean;
-    metricTree: IDeltaTreeGetResponse;
+    metricTree: Node;
 }
 
 const initialState: VisualizationState = {
@@ -23,7 +23,7 @@ export const VisualizationReducer: ActionReducer<VisualizationState> = (state = 
         case VisualizationActions.LOAD_METRIC_TREE_SUCCESS:
             newState = Object.assign({}, state);
             newState.metricsLoading = false;
-            newState.metricTree = action.payload.metricTree;
+            newState.metricTree = action.payload;
             return newState;
 
         case VisualizationActions.LOAD_METRIC_TREE_ERROR:

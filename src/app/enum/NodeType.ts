@@ -1,4 +1,4 @@
 export enum NodeType {
-    MODULE,
-    FILE
+    MODULE = <any>'MODULE',
+    FILE = <any>'FILE'
 }

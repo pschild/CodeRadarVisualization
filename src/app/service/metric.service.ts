@@ -18,7 +18,7 @@ export class MetricService {
         };
 
         // TODO: this.http.post('http://localhost:4200/assets/json/deltaTree.json', body)
-        return this.http.get('http://localhost:4200/assets/json/deltaTree.json')
+        return this.http.get('http://localhost:4200/assets/json/deltaTree1.json')
             .map(res => <IDeltaTreeGetResponse>res.json());
     }
 

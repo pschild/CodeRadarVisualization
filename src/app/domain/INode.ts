@@ -1,4 +1,5 @@
 import {NodeType} from "../enum/NodeType";
+import {IPackerElement} from "./IPackerElement";
 
 export interface INode {
     name: string;
@@ -8,5 +9,6 @@ export interface INode {
     renamedFrom: any;
     renamedTo: any;
     changes: any;
-    children: INode[];
+    children?: INode[];
+    packerInfo?: IPackerElement
 }
