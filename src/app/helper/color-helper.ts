@@ -1,0 +1,29 @@
+import {AppConfig} from "../AppConfig";
+import {ScreenType} from "../enum/ScreenType";
+declare var chroma: any;
+
+export class ColorHelper {
+
+    static getColorByPosition(screenType: ScreenType): string {
+        return screenType === ScreenType.LEFT ? AppConfig.COLOR_FIRST_COMMIT : AppConfig.COLOR_SECOND_COMMIT;
+    }
+
+    static getContraryColorByColor(color: string): string {
+        return color === AppConfig.COLOR_FIRST_COMMIT ? AppConfig.COLOR_SECOND_COMMIT : AppConfig.COLOR_FIRST_COMMIT;
+    }
+
+    static getColorByMetricValue(value: number, max: number, min: number): THREE.Color {
+        return this.getColorScale(AppConfig.COLOR_HEATMAP_RANGE, value, max, min);
+    }
+
+    static getColorByBottomValue(value, max, min) {
+        return this.getColorScale(AppConfig.COLOR_HIERARCHY_RANGE, value, max, min);
+    }
+
+    static getColorScale(range, value: number, max: number, min: number): THREE.Color {
+        let colorScale = chroma.scale(range);
+        let hexValue = colorScale(value / (max + min)).hex();
+        return new THREE.Color(hexValue);
+    }
+
+}
