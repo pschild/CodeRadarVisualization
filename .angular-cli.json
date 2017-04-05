@@ -24,6 +24,7 @@
       ],
       "scripts": [
         "../node_modules/binpacking/js/packer.growing.js",
+        "../node_modules/chroma-js/chroma.min.js",
         "../node_modules/three/build/three.js",
         "../node_modules/three/examples/js/controls/OrbitControls.js"
       ],
