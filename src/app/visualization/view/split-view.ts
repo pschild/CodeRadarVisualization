@@ -8,14 +8,34 @@ import {CommitReferenceType} from "../../enum/CommitReferenceType";
 import {ColorHelper} from "../../helper/color-helper";
 import {ElementAnalyzer} from "../../helper/element-analyzer";
 import {ScreenType} from "../../enum/ScreenType";
+import {AppState} from "../../shared/reducers";
+import {Store} from "@ngrx/store";
+import {Subscription} from "rxjs";
 
 export class SplitView extends AbstractView {
 
     screenType: ScreenType;
+    store: Store<AppState>;
 
-    constructor(screenType: ScreenType) {
+    minColorMetricValue: number;
+    maxColorMetricValue: number;
+
+    subscription: Subscription;
+
+    constructor(screenType: ScreenType, store: Store<AppState>) {
         super();
         this.screenType = screenType;
+
+        // no dependency injection as the view class are constructed with "new" instead with Angular
+        this.store = store;
+
+        this.subscription = this.store.select(state => state.visualizationState)
+            .subscribe((visualizationState) => {
+                if (!visualizationState.metricsLoading && visualizationState.metricTree) {
+                    this.minColorMetricValue = visualizationState.minColorMetricValue;
+                    this.maxColorMetricValue = visualizationState.maxColorMetricValue;
+                }
+            });
     }
 
     calculateElements(nodes: INode[], parent: INode, bottom: number) {
@@ -55,8 +75,7 @@ export class SplitView extends AbstractView {
                 let myGA = groundAreaMetric * AppConfig.GROUND_AREA_FACTOR + AppConfig.GLOBAL_MIN_GROUND_AREA + AppConfig.BLOCK_SPACING;
                 let otherGA = ElementAnalyzer.getMetricValueOfElementAndCommitReferenceType(node, AppConfig.GROUND_AREA_METRIC_NAME, CommitReferenceType.OTHER, this.screenType) * AppConfig.GROUND_AREA_FACTOR + AppConfig.GLOBAL_MIN_GROUND_AREA + AppConfig.BLOCK_SPACING;
 
-                // let myColor = ColorHelper.getColorByMetricValue(colorMetric, this.maxColorMetricValue, this.minColorMetricValue);
-                let myColor = '#f00';
+                let myColor = ColorHelper.getColorByMetricValue(colorMetric, this.maxColorMetricValue, this.minColorMetricValue);
 
                 if (myGA < otherGA) {
                     node.packerInfo.fit.x += (otherGA - myGA) / 2;

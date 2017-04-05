@@ -20,7 +20,7 @@
       "type": "FILE",
       "commit1Metrics": {
         "coderadar:size:loc:java": 20,
-        "coderadar:size:eloc:java": 1,
+        "coderadar:size:eloc:java": 20,
         "coderadar:size:sloc:java": 2
       },
       "commit2Metrics": {
@@ -48,7 +48,7 @@
       },
       "commit2Metrics": {
         "coderadar:size:loc:java": 2,
-        "coderadar:size:eloc:java": 1,
+        "coderadar:size:eloc:java": 10,
         "coderadar:size:sloc:java": 2
       },
       "renamedFrom": null,
