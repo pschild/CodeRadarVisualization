@@ -35,7 +35,7 @@ export class ScreenComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.view = new SplitView();
+        this.view = new SplitView(this.screenType);
 
         this.createCamera();
         this.createLight();

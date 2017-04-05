@@ -3,6 +3,8 @@ import {Block} from "../../geometry/block";
 import {INode} from "../../domain/INode";
 import {NodeType} from "app/enum/NodeType";
 import {IPackerElement} from "../../domain/IPackerElement";
+import {AppConfig} from "../../AppConfig";
+import {ElementAnalyzer} from "../../helper/element-analyzer";
 declare var GrowingPacker: any;
 
 export abstract class AbstractView {
@@ -10,6 +12,9 @@ export abstract class AbstractView {
     rootNode: INode;
     blockElements: Block[] = [];
     packer = new GrowingPacker();
+
+    minBottomValue: number = 0;
+    maxBottomValue: number = Number.MIN_VALUE;
 
     constructor() {
 
@@ -37,21 +42,20 @@ export abstract class AbstractView {
             let element: IPackerElement = { w: 0, h: 0 };
 
             if (node.type === NodeType.FILE) {
-                // let groundArea = this._getValueForGroundArea(node.commit1Metrics, node.commit2Metrics);
-                let groundArea = 10;
+                let groundArea = this.getValueForGroundArea(node.commit1Metrics, node.commit2Metrics);
                 if (!groundArea) {
                     element.w = element.h = 0;
                 } else {
-                    element.w = groundArea * 0.1 + 1 + 5;
-                    element.h = groundArea * 0.1 + 1 + 5;
+                    element.w = groundArea * AppConfig.GROUND_AREA_FACTOR + AppConfig.GLOBAL_MIN_GROUND_AREA + AppConfig.BLOCK_SPACING;
+                    element.h = groundArea * AppConfig.GROUND_AREA_FACTOR + AppConfig.GLOBAL_MIN_GROUND_AREA + AppConfig.BLOCK_SPACING;
                 }
             }
 
             // recursion
             if (node.children && node.children.length > 0) {
                 let result = this.calculateGroundAreas(node.children);
-                element.w = result.w + 5 * 3;
-                element.h = result.h + 5 * 3;
+                element.w = result.w + AppConfig.BLOCK_SPACING * 3;
+                element.h = result.h + AppConfig.BLOCK_SPACING * 3;
             }
 
             node.packerInfo = element;
@@ -75,14 +79,7 @@ export abstract class AbstractView {
         return this.blockElements;
     }
 
-    traverseNodes(nodes: INode[], workerFn: Function, params: Object = null): void {
-        nodes.forEach((node) => {
-            workerFn(node);
-
-            // recursion
-            if (node.children && node.children.length > 0) {
-                this.traverseNodes(node.children, workerFn, params);
-            }
-        });
+    private getValueForGroundArea(commit1Metrics: any, commit2Metrics: any): number {
+        return ElementAnalyzer.getMaxMetricValueByMetricName(commit1Metrics, commit2Metrics, AppConfig.GROUND_AREA_METRIC_NAME);
     }
 }

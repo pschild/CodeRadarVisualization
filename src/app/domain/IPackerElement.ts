@@ -20,4 +20,6 @@ export interface IPackerElement {
     }
     w: number;
     h: number;
+    renderedX?: number;
+    renderedY?: number;
 }
