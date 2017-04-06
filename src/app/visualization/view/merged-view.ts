@@ -55,8 +55,8 @@ export class MergedView extends AbstractView {
                 blueHeight = blueHeightMetric * AppConfig.HEIGHT_FACTOR + AppConfig.GLOBAL_MIN_HEIGHT;
                 let orangeHeight = orangeHeightMetric * AppConfig.HEIGHT_FACTOR + AppConfig.GLOBAL_MIN_HEIGHT;
 
-                let blueGA = blueGroundAreaMetric * AppConfig.GROUND_AREA_FACTOR + AppConfig.GLOBAL_MIN_GROUND_AREA + AppConfig.BLOCK_SPACING;
-                let orangeGA = orangeGroundAreaMetric * AppConfig.GROUND_AREA_FACTOR + AppConfig.GLOBAL_MIN_GROUND_AREA + AppConfig.BLOCK_SPACING;
+                let blueGA = blueGroundAreaMetric * AppConfig.GROUND_AREA_FACTOR + AppConfig.GLOBAL_MIN_GROUND_AREA;
+                let orangeGA = orangeGroundAreaMetric * AppConfig.GROUND_AREA_FACTOR + AppConfig.GLOBAL_MIN_GROUND_AREA;
 
                 let blueColor = ColorHelper.getColorByPosition(this.screenType);
                 let orangeColor = ColorHelper.getContraryColorByColor(blueColor);
