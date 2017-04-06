@@ -8,6 +8,7 @@ import {ViewType} from "../../enum/ViewType";
 import {AbstractView} from "../view/abstract-view";
 import {SplitView} from "../view/split-view";
 import {MergedView} from "../view/merged-view";
+import {BlockConnection} from "../../geometry/block-connection";
 
 @Component({
     selector: 'app-screen',
@@ -22,6 +23,7 @@ export class ScreenComponent implements OnInit {
 
     private isMergedView: boolean = false;
     private requestAnimationFrameId: number;
+    private renderingIsPaused: boolean = false;
 
     renderer: WebGLRenderer;
     scene: Scene = new Scene();
@@ -62,20 +64,22 @@ export class ScreenComponent implements OnInit {
 
                 if (this.isMergedView) {
                     this.view = new MergedView(this.screenType);
+                    if (this.screenType === ScreenType.RIGHT) {
+                        this.pauseRendering();
+                    }
                     document.querySelector('#stage').classList.remove('split');
+
                 } else {
                     this.view = new SplitView(this.screenType, this.store);
+                    if (this.screenType === ScreenType.RIGHT) {
+                        this.resumeRendering();
+                    }
                     document.querySelector('#stage').classList.add('split');
                 }
 
                 if (!result.visualizationState.metricsLoading && result.visualizationState.metricTree) {
-                    this.view.setMetricTree(result.visualizationState.metricTree);
-                    this.view.recalculate();
                     this.resetScene();
-                    this.view.getBlockElements().forEach((element) => {
-                        this.scene.add(element);
-                    });
-
+                    this.prepareView(result.visualizationState.metricTree);
                     this.handleViewChanged();
                 }
             })
@@ -126,6 +130,36 @@ export class ScreenComponent implements OnInit {
 
         this.controls.update();
         this.renderer.render(this.scene, this.camera);
+    }
+
+    pauseRendering() {
+        if (this.requestAnimationFrameId) {
+            cancelAnimationFrame(this.requestAnimationFrameId);
+            this.resetScene();
+            this.renderingIsPaused = true;
+        }
+    }
+
+    resumeRendering() {
+        if (this.renderingIsPaused) {
+            this.render();
+            this.renderingIsPaused = false;
+        }
+    }
+
+    prepareView(metricTree) {
+        this.view.setMetricTree(metricTree);
+        this.view.recalculate();
+        this.view.getBlockElements().forEach((element) => {
+            this.scene.add(element);
+        });
+
+        if (this.view instanceof MergedView) {
+            this.view.calculateConnections(this.scene);
+            this.view.getConnections().forEach((blockConnection: BlockConnection) => {
+                this.scene.add(blockConnection.getCurve());
+            });
+        }
     }
 
     resetScene() {
