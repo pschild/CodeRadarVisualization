@@ -31,7 +31,7 @@ export class AppEffects {
         .ofType(actions.LOAD_METRIC_TREE)
         .map((action) => action.payload)
         .switchMap(
-            (payload) => this.metricService.loadDeltaTree(payload.leftCommit, payload.rightCommit)
+            (payload) => this.metricService.loadDeltaTree(payload.leftCommit, payload.rightCommit, payload.metricMapping)
                 .mergeMap((result: IDeltaTreeGetResponse) => {
                     return [
                         actions.loadMetricTreeSuccess(result),

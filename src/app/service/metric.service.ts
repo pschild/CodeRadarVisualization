@@ -3,6 +3,7 @@ import {Http} from "@angular/http";
 import {Observable} from "rxjs";
 import {IDeltaTreeGetResponse} from "../domain/IDeltaTreeGetResponse";
 import {Commit} from "../domain/Commit";
+import {IMetricMapping} from "../domain/IMetricMapping";
 
 @Injectable()
 export class MetricService {
@@ -10,11 +11,11 @@ export class MetricService {
     constructor(private http: Http) {
     }
 
-    loadDeltaTree(leftCommit: Commit, rightCommit: Commit): Observable<IDeltaTreeGetResponse> {
+    loadDeltaTree(leftCommit: Commit, rightCommit: Commit, metricMapping: IMetricMapping): Observable<IDeltaTreeGetResponse> {
         let body = {
             'commit1': leftCommit.name,
             'commit2': rightCommit.name,
-            'metrics': ['metric1', 'metric2', 'metric3'] // TODO
+            'metrics': [metricMapping.heightMetricName, metricMapping.groundAreaMetricName, metricMapping.colorMetricName]
         };
 
         // TODO: this.http.post('http://localhost:4200/assets/json/deltaTree.json', body)
