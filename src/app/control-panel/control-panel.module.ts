@@ -11,6 +11,7 @@ import {environment} from "../../environments/environment";
 import {CommitMockService} from "../service/mocks/commit-mock.service";
 import {SearchComponent} from './search/search.component';
 import {FilterComponent} from './settings/filter/filter.component';
+import {MetricMappingComponent} from './settings/metric-mapping/metric-mapping.component';
 
 @NgModule({
     imports: [
@@ -24,7 +25,8 @@ import {FilterComponent} from './settings/filter/filter.component';
         ViewControlComponent,
         CommitChooserComponent,
         SearchComponent,
-        FilterComponent
+        FilterComponent,
+        MetricMappingComponent
     ],
     exports: [
         ControlPanelComponent

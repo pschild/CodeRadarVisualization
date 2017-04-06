@@ -6,6 +6,19 @@ export class AppConfig {
     static USERNAME: string = 'radar';
     static PASSWORD: string = 'Password12!';
 
+    // ALL AVAILABLE METRICS
+    static AVAILABLE_METRICS = [
+        { shortName: 'Lines of Code (LOC)', name: 'coderadar:size:loc:java' },
+        { shortName: 'Source Lines of Code (SLOC)', name: 'coderadar:size:sloc:java' },
+        { shortName: 'Effective Lines of Code (ELOC)', name: 'coderadar:size:eloc:java' },
+        { shortName: 'MagicNumber', name: 'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck' },
+        { shortName: 'ReturnCount', name: 'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.ReturnCountCheck' },
+        { shortName: 'CyclomaticComplexity', name: 'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck' },
+        { shortName: 'JavaNCSS', name: 'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.JavaNCSSCheck' },
+        { shortName: 'NPathComplexity', name: 'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.NPathComplexityCheck' },
+        { shortName: 'ExecutableStatementCount', name: 'checkstyle:com.puppycrawl.tools.checkstyle.checks.sizes.ExecutableStatementCountCheck' },
+    ];
+
     // DEFAULT METRIC MAPPING
     static GROUND_AREA_METRIC_NAME: string = 'coderadar:size:sloc:java';
     static HEIGHT_METRIC_NAME: string = 'coderadar:size:loc:java';
