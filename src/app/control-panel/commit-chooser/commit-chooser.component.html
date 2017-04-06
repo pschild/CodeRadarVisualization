@@ -1,9 +1,10 @@
-<input ngui-auto-complete [(ngModel)]="selected"
-       [source]="commits"
-       [list-formatter]="autocompleteListFormatter"
-       value-property-name="id"
-       display-property-name="name"
-       no-match-found-text="Nichts gefunden."
-       (valueChanged)="handleValueChanged($event)" />
-
-{{selected | json}}
+<div class="form-group">
+    <input class="form-control"
+           ngui-auto-complete [(ngModel)]="selected"
+           [source]="commits"
+           [list-formatter]="autocompleteListFormatter"
+           value-property-name="id"
+           display-property-name="name"
+           no-match-found-text="Nichts gefunden."
+           (valueChanged)="handleValueChanged($event)" />
+</div>
