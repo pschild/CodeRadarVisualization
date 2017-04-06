@@ -7,10 +7,14 @@ import {NodeType} from "../../enum/NodeType";
 import {ColorHelper} from "../../helper/color-helper";
 import {CommitReferenceType} from "../../enum/CommitReferenceType";
 import {ScreenType} from "../../enum/ScreenType";
+import {BlockConnection} from "app/geometry/block-connection";
+import Line = THREE.Line;
+import Scene = THREE.Scene;
 
 export class MergedView extends AbstractView {
 
     movedElements: any[] = [];
+    connections: BlockConnection[] = [];
 
     constructor(screenType: ScreenType) {
         super(screenType);
@@ -143,6 +147,23 @@ export class MergedView extends AbstractView {
                 this.calculateElements(node.children, node, bottom + blueHeight);
             }
         });
+    }
+
+    calculateConnections(scene: Scene) {
+        for (let movedElementPair of this.movedElements) {
+            let fromElement = scene.getObjectByName(movedElementPair.fromElementName);
+            let toElement = scene.getObjectByName(movedElementPair.toElementName);
+
+            if (fromElement && toElement) {
+                this.connections.push(new BlockConnection(fromElement, toElement));
+            } else {
+                console.warn(`A connection could not be drawn because at least one element could not be found in the scene.`);
+            }
+        }
+    }
+
+    getConnections(): BlockConnection[] {
+        return this.connections;
     }
 
     private isNodeMoved(node: INode) {
