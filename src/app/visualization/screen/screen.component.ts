@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ScreenType} from "../../enum/ScreenType";
 import {WebGLRenderer, Scene, AmbientLight, DirectionalLight} from "three";
-import {Subscription} from "rxjs";
+import {Observable, Subscription} from "rxjs";
 import {Store} from "@ngrx/store";
 import {AppState} from "../../shared/reducers";
 import {ViewType} from "../../enum/ViewType";
@@ -48,39 +48,35 @@ export class ScreenComponent implements OnInit {
 
         this.render();
 
-        this.subscriptions.push(this.store.select(state => state.settingsState)
-            .subscribe((settingsState) => {
-                this.isMergedView = settingsState.activeViewType === ViewType.MERGED;
+        // combine visualization state and settings state as we need information from both at the same time
+        let states = Observable.combineLatest(this.store.select(state => state.visualizationState), this.store.select(state => state.settingsState), (visualizationState, settingsState) => {
+            return {
+                visualizationState: visualizationState,
+                settingsState: settingsState
+            };
+        });
 
-                /*if (this.isMergedView) {
-                    this.view = new MergedView(this.screenType);
-                } else {
-                    this.view = new SplitView(this.screenType, this.store);
-                }
-                // TODO: setMetricTree
-                this.view.recalculate();
-                this.view.getBlockElements().forEach((element) => {
-                    this.scene.add(element);
-                });*/
-
-                this.handleViewChanged();
+        this.subscriptions.push(
+            states.subscribe((result) => {
+                this.isMergedView = result.settingsState.activeViewType === ViewType.MERGED;
 
                 if (this.isMergedView) {
+                    this.view = new MergedView(this.screenType);
                     document.querySelector('#stage').classList.remove('split');
                 } else {
+                    this.view = new SplitView(this.screenType, this.store);
                     document.querySelector('#stage').classList.add('split');
                 }
-            })
-        );
 
-        this.subscriptions.push(this.store.select(state => state.visualizationState)
-            .subscribe((visualizationState) => {
-                if (!visualizationState.metricsLoading && visualizationState.metricTree) {
-                    this.view.setMetricTree(visualizationState.metricTree);
+                if (!result.visualizationState.metricsLoading && result.visualizationState.metricTree) {
+                    this.view.setMetricTree(result.visualizationState.metricTree);
                     this.view.recalculate();
+                    this.resetScene();
                     this.view.getBlockElements().forEach((element) => {
                         this.scene.add(element);
                     });
+
+                    this.handleViewChanged();
                 }
             })
         );
@@ -130,6 +126,17 @@ export class ScreenComponent implements OnInit {
 
         this.controls.update();
         this.renderer.render(this.scene, this.camera);
+    }
+
+    resetScene() {
+        for (let i = this.scene.children.length - 1; i >= 0; i--) {
+            let child = this.scene.children[i];
+
+            // only remove Blocks and Lines. Don't remove lights, cameras etc.
+            if (child.type === 'Mesh' || child.type === 'Line') {
+                this.scene.remove(child);
+            }
+        }
     }
 
     private getScreenWidth() {
