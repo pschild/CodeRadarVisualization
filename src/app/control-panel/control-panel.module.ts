@@ -10,6 +10,7 @@ import {CommitService} from "../service/commit.service";
 import {environment} from "../../environments/environment";
 import {CommitMockService} from "../service/mocks/commit-mock.service";
 import {SearchComponent} from './search/search.component';
+import {FilterComponent} from './settings/filter/filter.component';
 
 @NgModule({
     imports: [
@@ -22,7 +23,8 @@ import {SearchComponent} from './search/search.component';
         SettingsComponent,
         ViewControlComponent,
         CommitChooserComponent,
-        SearchComponent
+        SearchComponent,
+        FilterComponent
     ],
     exports: [
         ControlPanelComponent

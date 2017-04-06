@@ -1,0 +1,34 @@
+<div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Filter
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <div class="custom-controls-stacked">
+            <label class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" [(ngModel)]="activeFilter.unchanged" (change)="handleFilterChanged()">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">unverändert</span>
+            </label>
+            <label class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" [(ngModel)]="activeFilter.changed" (change)="handleFilterChanged()">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">verändert</span>
+            </label>
+            <label class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" [(ngModel)]="activeFilter.deleted" (change)="handleFilterChanged()">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">gelöscht</span>
+            </label>
+            <label class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" [(ngModel)]="activeFilter.added" (change)="handleFilterChanged()">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">hinzugefügt</span>
+            </label>
+            <label class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" [(ngModel)]="activeFilter.moved" (change)="handleFilterChanged()">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">umbenannt/verschoben</span>
+            </label>
+        </div>
+    </div>
+</div>
