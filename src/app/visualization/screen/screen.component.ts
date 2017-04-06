@@ -7,6 +7,7 @@ import {AppState} from "../../shared/reducers";
 import {ViewType} from "../../enum/ViewType";
 import {AbstractView} from "../view/abstract-view";
 import {SplitView} from "../view/split-view";
+import {MergedView} from "../view/merged-view";
 
 @Component({
     selector: 'app-screen',
@@ -50,6 +51,18 @@ export class ScreenComponent implements OnInit {
         this.subscriptions.push(this.store.select(state => state.settingsState)
             .subscribe((settingsState) => {
                 this.isMergedView = settingsState.activeViewType === ViewType.MERGED;
+
+                /*if (this.isMergedView) {
+                    this.view = new MergedView(this.screenType);
+                } else {
+                    this.view = new SplitView(this.screenType, this.store);
+                }
+                // TODO: setMetricTree
+                this.view.recalculate();
+                this.view.getBlockElements().forEach((element) => {
+                    this.scene.add(element);
+                });*/
+
                 this.handleViewChanged();
 
                 if (this.isMergedView) {
@@ -63,7 +76,6 @@ export class ScreenComponent implements OnInit {
         this.subscriptions.push(this.store.select(state => state.visualizationState)
             .subscribe((visualizationState) => {
                 if (!visualizationState.metricsLoading && visualizationState.metricTree) {
-                    // console.log(`metrics changed for screen ${this.screenType}`, visualizationState.metricTree);
                     this.view.setMetricTree(visualizationState.metricTree);
                     this.view.recalculate();
                     this.view.getBlockElements().forEach((element) => {

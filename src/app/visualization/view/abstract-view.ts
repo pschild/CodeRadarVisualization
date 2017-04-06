@@ -5,6 +5,8 @@ import {NodeType} from "app/enum/NodeType";
 import {IPackerElement} from "../../domain/IPackerElement";
 import {AppConfig} from "../../AppConfig";
 import {ElementAnalyzer} from "../../helper/element-analyzer";
+import {ScreenType} from "../../enum/ScreenType";
+import {CommitReferenceType} from "../../enum/CommitReferenceType";
 declare var GrowingPacker: any;
 
 export abstract class AbstractView {
@@ -16,8 +18,10 @@ export abstract class AbstractView {
     minBottomValue: number = 0;
     maxBottomValue: number = Number.MIN_VALUE;
 
-    constructor() {
+    screenType: ScreenType;
 
+    constructor(screenType: ScreenType) {
+        this.screenType = screenType;
     }
 
     setMetricTree(root: INode) {
@@ -74,6 +78,54 @@ export abstract class AbstractView {
     }
 
     abstract calculateElements(nodes: INode[], parent: INode, bottom: number);
+
+    createBlock(node: INode, parent: INode, color: any, currentCommitSize: any, bottom: number, height: number, isTransparent: boolean, metrics?: any, commitType?: CommitReferenceType, changeTypes?: any) {
+        let finalX, finalY, finalZ;
+        let finalWidth, finalHeight, finalDepth;
+
+        let cube = new Block(color, node.name);
+        finalX = node.packerInfo.fit.x + (parent ? parent.packerInfo.renderedX : 0) + AppConfig.BLOCK_SPACING;
+        finalY = bottom;
+        finalZ = node.packerInfo.fit.y + (parent ? parent.packerInfo.renderedY : 0) + AppConfig.BLOCK_SPACING;
+
+        // save the rendered positions to draw children relative to their parent
+        node.packerInfo.renderedX = finalX;
+        node.packerInfo.renderedY = finalZ;
+
+        finalWidth = node.type === NodeType.FILE ? currentCommitSize - AppConfig.BLOCK_SPACING : node.packerInfo.w - AppConfig.BLOCK_SPACING * 2;
+        finalHeight = height;
+        finalDepth = node.type === NodeType.FILE ? currentCommitSize - AppConfig.BLOCK_SPACING : node.packerInfo.h - AppConfig.BLOCK_SPACING * 2;
+
+        if (isTransparent) {
+            cube.material.transparent = true;
+            cube.material.opacity = 0.4;
+        }
+
+        cube.position.x = finalX;
+        cube.position.y = finalY;
+        cube.position.z = finalZ;
+
+        cube.scale.x = finalWidth;
+        cube.scale.y = finalHeight;
+        cube.scale.z = finalDepth;
+
+        cube.userData = this.createUserData(node, parent, bottom, isTransparent, metrics, commitType, changeTypes);
+
+        this.blockElements.push(cube);
+    }
+
+    createUserData(node: INode, parent: INode, bottom: number, isTransparent: boolean, metrics: any, commitType?: CommitReferenceType, changeTypes?: any) {
+        return {
+            parentName: parent ? parent.name : undefined,
+            bottom: bottom,
+            metrics: metrics,
+            type: node.type,
+            // tooltipLabel: this._generateTooltipHtml(node.name, metrics),
+            isHelper: isTransparent,
+            commitType: commitType,
+            changeTypes: changeTypes
+        };
+    }
 
     getBlockElements(): Block[] {
         return this.blockElements;

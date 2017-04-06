@@ -23,8 +23,7 @@ export class SplitView extends AbstractView {
     subscription: Subscription;
 
     constructor(screenType: ScreenType, store: Store<AppState>) {
-        super();
-        this.screenType = screenType;
+        super(screenType);
 
         // no dependency injection as the view class are constructed with "new" instead with Angular
         this.store = store;
@@ -97,48 +96,6 @@ export class SplitView extends AbstractView {
                 this.calculateElements(node.children, node, bottom + myHeight);
             }
         });
-    }
-
-    createBlock(node: INode, parent: INode, color: any, currentCommitSize: any, bottom: number, height: number, isTransparent: boolean, metrics: any) {
-        let finalX, finalY, finalZ;
-        let finalWidth, finalHeight, finalDepth;
-
-        let cube = new Block(color, node.name);
-        finalX = node.packerInfo.fit.x + (parent ? parent.packerInfo.renderedX : 0) + AppConfig.BLOCK_SPACING;
-        finalY = bottom;
-        finalZ = node.packerInfo.fit.y + (parent ? parent.packerInfo.renderedY : 0) + AppConfig.BLOCK_SPACING;
-
-        // save the rendered positions to draw children relative to their parent
-        node.packerInfo.renderedX = finalX;
-        node.packerInfo.renderedY = finalZ;
-
-        finalWidth = node.type === NodeType.FILE ? currentCommitSize - AppConfig.BLOCK_SPACING : node.packerInfo.w - AppConfig.BLOCK_SPACING * 2;
-        finalHeight = height;
-        finalDepth = node.type === NodeType.FILE ? currentCommitSize - AppConfig.BLOCK_SPACING : node.packerInfo.h - AppConfig.BLOCK_SPACING * 2;
-
-        if (isTransparent) {
-            cube.material.transparent = true;
-            cube.material.opacity = 0.4;
-        }
-
-        cube.position.x = finalX;
-        cube.position.y = finalY;
-        cube.position.z = finalZ;
-
-        cube.scale.x = finalWidth;
-        cube.scale.y = finalHeight;
-        cube.scale.z = finalDepth;
-
-        cube.userData = {
-            parentName: parent ? parent.name : undefined,
-            bottom: bottom,
-            metrics: metrics,
-            type: node.type,
-            // tooltipLabel: this._generateTooltipHtml(node.name, metrics),
-            isHelper: isTransparent
-        };
-
-        this.blockElements.push(cube);
     }
 
 }
