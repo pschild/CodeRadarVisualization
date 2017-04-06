@@ -9,6 +9,7 @@ import {CommitChooserComponent} from "./commit-chooser/commit-chooser.component"
 import {CommitService} from "../service/commit.service";
 import {environment} from "../../environments/environment";
 import {CommitMockService} from "../service/mocks/commit-mock.service";
+import {SearchComponent} from './search/search.component';
 
 @NgModule({
     imports: [
@@ -20,7 +21,8 @@ import {CommitMockService} from "../service/mocks/commit-mock.service";
         ControlPanelComponent,
         SettingsComponent,
         ViewControlComponent,
-        CommitChooserComponent
+        CommitChooserComponent,
+        SearchComponent
     ],
     exports: [
         ControlPanelComponent

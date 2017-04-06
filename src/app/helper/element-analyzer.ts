@@ -5,6 +5,25 @@ import {NodeType} from "../enum/NodeType";
 
 export class ElementAnalyzer {
 
+    static generateUniqueElementList(nodes: INode[], uniqueElements: string[] = []) {
+        if (!Array.isArray(nodes)) {
+            nodes = [nodes];
+        }
+
+        for (let node of nodes) {
+            if (uniqueElements.indexOf(node.name) < 0) {
+                uniqueElements.push(node.name);
+            }
+
+            // recursion
+            if (node.children && node.children.length > 0) {
+                this.generateUniqueElementList(node.children, uniqueElements);
+            }
+        }
+
+        return uniqueElements;
+    }
+
     static findSmallestAndBiggestMetricValueByMetricName(nodes: INode[], metricName: string): any {
         if (typeof nodes !== 'object' || nodes === null) {
             throw new Error('elements is not an object or null!');
