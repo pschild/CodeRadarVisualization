@@ -50,16 +50,16 @@ export abstract class AbstractView {
                 if (!groundArea) {
                     element.w = element.h = 0;
                 } else {
-                    element.w = groundArea * AppConfig.GROUND_AREA_FACTOR + AppConfig.GLOBAL_MIN_GROUND_AREA + AppConfig.BLOCK_SPACING;
-                    element.h = groundArea * AppConfig.GROUND_AREA_FACTOR + AppConfig.GLOBAL_MIN_GROUND_AREA + AppConfig.BLOCK_SPACING;
+                    element.w = groundArea * AppConfig.GROUND_AREA_FACTOR + AppConfig.GLOBAL_MIN_GROUND_AREA + 2 * AppConfig.BLOCK_SPACING;
+                    element.h = groundArea * AppConfig.GROUND_AREA_FACTOR + AppConfig.GLOBAL_MIN_GROUND_AREA + 2 * AppConfig.BLOCK_SPACING;
                 }
             }
 
             // recursion
             if (node.children && node.children.length > 0) {
                 let result = this.calculateGroundAreas(node.children);
-                element.w = result.w + AppConfig.BLOCK_SPACING * 3;
-                element.h = result.h + AppConfig.BLOCK_SPACING * 3;
+                element.w = result.w + 2 * AppConfig.BLOCK_SPACING;
+                element.h = result.h + 2 * AppConfig.BLOCK_SPACING;
             }
 
             node.packerInfo = element;
@@ -92,9 +92,9 @@ export abstract class AbstractView {
         node.packerInfo.renderedX = finalX;
         node.packerInfo.renderedY = finalZ;
 
-        finalWidth = node.type === NodeType.FILE ? currentCommitSize - AppConfig.BLOCK_SPACING : node.packerInfo.w - AppConfig.BLOCK_SPACING * 2;
+        finalWidth = node.type === NodeType.FILE ? currentCommitSize : node.packerInfo.w - 2 * AppConfig.BLOCK_SPACING;
         finalHeight = height;
-        finalDepth = node.type === NodeType.FILE ? currentCommitSize - AppConfig.BLOCK_SPACING : node.packerInfo.h - AppConfig.BLOCK_SPACING * 2;
+        finalDepth = node.type === NodeType.FILE ? currentCommitSize : node.packerInfo.h - 2 * AppConfig.BLOCK_SPACING;
 
         if (isTransparent) {
             cube.material.transparent = true;
