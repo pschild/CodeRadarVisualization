@@ -41,7 +41,7 @@ export class CommitChooserComponent implements OnInit {
         this.store.dispatch(changeCommit(this.commitType, chosenModel));
     }
 
-    autocompleListFormatter = (data: any) => {
+    autocompleteListFormatter = (data: any) => {
         return `${data.name.substr(0, 7)}, ${data.author}`;
     }
 

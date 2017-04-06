@@ -1,5 +1,5 @@
 <input ngui-auto-complete [(ngModel)]="searchTerm"
        [source]="uniqueFileList"
-       [list-formatter]="autocompleListFormatter"
+       [list-formatter]="autocompleteListFormatter"
        no-match-found-text="Nichts gefunden."
        (valueChanged)="handleValueChanged($event)" />

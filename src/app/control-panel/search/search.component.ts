@@ -32,7 +32,7 @@ export class SearchComponent implements OnInit {
         console.log(chosenItem);
     }
 
-    autocompleListFormatter = (data: string) => {
+    autocompleteListFormatter = (data: string) => {
         return data;
     }
 
