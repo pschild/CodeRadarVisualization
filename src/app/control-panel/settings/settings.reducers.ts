@@ -36,12 +36,12 @@ export const SettingsReducer: ActionReducer<SettingsState> = (state = initialSta
 
         case SettingsActions.CHANGE_ACTIVE_FILTER:
             newState = Object.assign({}, state);
-            newState.activeFilter = action.payload;
+            newState.activeFilter = Object.assign({}, state.activeFilter, action.payload);
             return newState;
 
         case SettingsActions.SET_METRIC_MAPPING:
             newState = Object.assign({}, state);
-            newState.metricMapping = action.payload;
+            newState.metricMapping = Object.assign({}, state.metricMapping, action.payload);
             return newState;
 
         default:
