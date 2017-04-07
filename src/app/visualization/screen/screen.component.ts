@@ -1,9 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ScreenType} from "../../enum/ScreenType";
 import {WebGLRenderer, Scene, AmbientLight, DirectionalLight} from "three";
-import {Observable, Subscription} from "rxjs";
+import {Subscription} from "rxjs";
 import {Store} from "@ngrx/store";
-import {AppState} from "../../shared/reducers";
+import * as fromRoot from "../../shared/reducers";
 import {ViewType} from "../../enum/ViewType";
 import {AbstractView} from "../view/abstract-view";
 import {SplitView} from "../view/split-view";
@@ -34,7 +34,7 @@ export class ScreenComponent implements OnInit {
 
     view: AbstractView;
 
-    constructor(private store: Store<AppState>) {
+    constructor(private store: Store<fromRoot.AppState>) {
     }
 
     ngOnInit() {
@@ -50,36 +50,28 @@ export class ScreenComponent implements OnInit {
 
         this.render();
 
-        // combine visualization state and settings state as we need information from both at the same time
-        let states = Observable.combineLatest(this.store.select(state => state.visualizationState), this.store.select(state => state.settingsState), (visualizationState, settingsState) => {
-            return {
-                visualizationState: visualizationState,
-                settingsState: settingsState
-            };
-        });
-
         this.subscriptions.push(
-            states.subscribe((result) => {
-                this.isMergedView = result.settingsState.activeViewType === ViewType.MERGED;
+            this.store.select(fromRoot.getViewChanged).subscribe((result) => {
+                if (result) {
+                    this.isMergedView = result.activeViewType === ViewType.MERGED;
 
-                if (this.isMergedView) {
-                    this.view = new MergedView(this.screenType);
-                    if (this.screenType === ScreenType.RIGHT) {
-                        this.pauseRendering();
+                    if (this.isMergedView) {
+                        this.view = new MergedView(this.screenType);
+                        if (this.screenType === ScreenType.RIGHT) {
+                            this.pauseRendering();
+                        }
+                        document.querySelector('#stage').classList.remove('split');
+
+                    } else {
+                        this.view = new SplitView(this.screenType, this.store);
+                        if (this.screenType === ScreenType.RIGHT) {
+                            this.resumeRendering();
+                        }
+                        document.querySelector('#stage').classList.add('split');
                     }
-                    document.querySelector('#stage').classList.remove('split');
 
-                } else {
-                    this.view = new SplitView(this.screenType, this.store);
-                    if (this.screenType === ScreenType.RIGHT) {
-                        this.resumeRendering();
-                    }
-                    document.querySelector('#stage').classList.add('split');
-                }
-
-                if (!result.visualizationState.metricsLoading && result.visualizationState.metricTree) {
                     this.resetScene();
-                    this.prepareView(result.visualizationState.metricTree);
+                    this.prepareView(result.isReadyForDrawing.metricTree);
                     this.handleViewChanged();
                 }
             })

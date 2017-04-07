@@ -16,8 +16,8 @@ const initialState: VisualizationState = {
     metricsLoading: false,
     metricTree: null,
     uniqueFileList: [],
-    minColorMetricValue: Number.MAX_VALUE,
-    maxColorMetricValue: Number.MIN_VALUE
+    minColorMetricValue: undefined,
+    maxColorMetricValue: undefined
 };
 
 export const VisualizationReducer: ActionReducer<VisualizationState> = (state = initialState, action: Action) => {
@@ -67,9 +67,5 @@ export const getMetricTree = (state: VisualizationState) => state.metricTree;
 
 export const getUniqueFileList = (state: VisualizationState) => state.uniqueFileList;
 
-export const getMinAndMax = (state: VisualizationState) => {
-    return {
-        min: state.minColorMetricValue,
-        max: state.maxColorMetricValue
-    };
-};
+export const getMinColorMetricValue = (state: VisualizationState) => state.minColorMetricValue;
+export const getMaxColorMetricValue = (state: VisualizationState) => state.maxColorMetricValue;

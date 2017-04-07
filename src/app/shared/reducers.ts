@@ -38,7 +38,12 @@ export const getRightCommit = createSelector(getControlPanelState, fromControlPa
 
 export const getMetricsLoading = createSelector(getVisualizationState, fromVisualization.getMetricsLoading);
 
+export const getMetricTree = createSelector(getVisualizationState, fromVisualization.getMetricTree);
+
 export const getUniqueFileList = createSelector(getVisualizationState, fromVisualization.getUniqueFileList);
+
+export const getMinColorMetricValue = createSelector(getVisualizationState, fromVisualization.getMinColorMetricValue);
+export const getMaxColorMetricValue = createSelector(getVisualizationState, fromVisualization.getMaxColorMetricValue);
 
 export const getMetricMapping = createSelector(getSettingsState, fromSettings.getMetricMapping);
 
@@ -52,6 +57,34 @@ export const isReadyForLoadingMetrics = createSelector(getCommits, getLeftCommit
             leftCommit: leftCommit,
             rightCommit: rightCommit,
             metricMapping: metricMapping
+        };
+    }
+});
+
+export const isReadyForDrawing = createSelector(getMetricsLoading, getMetricTree, getMinColorMetricValue, getMaxColorMetricValue, (metricsLoading, metricTree, minColorMetricValue, maxColorMetricValue) => {
+    if (!metricsLoading && metricTree !== null && minColorMetricValue && maxColorMetricValue) {
+        return {
+            metricTree: metricTree,
+            minColorMetricValue: minColorMetricValue,
+            maxColorMetricValue: maxColorMetricValue
+        };
+    }
+});
+
+export const getViewChanged = createSelector(getActiveViewType, isReadyForDrawing, (activeViewType, isReadyForDrawing) => {
+    if (isReadyForDrawing) {
+        return {
+            activeViewType: activeViewType,
+            isReadyForDrawing: isReadyForDrawing
+        };
+    }
+});
+
+export const getMinAndMaxColorMetricValues = createSelector(getMetricsLoading, getMetricTree, getMinColorMetricValue, getMaxColorMetricValue, (metricsLoading, metricTree, minColorMetricValue, maxColorMetricValue) => {
+    if (!metricsLoading && metricTree !== null && minColorMetricValue && maxColorMetricValue) {
+        return {
+            minColorMetricValue: minColorMetricValue,
+            maxColorMetricValue: maxColorMetricValue
         };
     }
 });

@@ -8,33 +8,32 @@ import {CommitReferenceType} from "../../enum/CommitReferenceType";
 import {ColorHelper} from "../../helper/color-helper";
 import {ElementAnalyzer} from "../../helper/element-analyzer";
 import {ScreenType} from "../../enum/ScreenType";
-import {AppState} from "../../shared/reducers";
+import * as fromRoot from "../../shared/reducers";
 import {Store} from "@ngrx/store";
 import {Subscription} from "rxjs";
 
 export class SplitView extends AbstractView {
 
     screenType: ScreenType;
-    store: Store<AppState>;
+    store: Store<fromRoot.AppState>;
 
     minColorMetricValue: number;
     maxColorMetricValue: number;
 
     subscription: Subscription;
 
-    constructor(screenType: ScreenType, store: Store<AppState>) {
+    constructor(screenType: ScreenType, store: Store<fromRoot.AppState>) {
         super(screenType);
 
         // no dependency injection as the view class are constructed with "new" instead with Angular
         this.store = store;
 
-        this.subscription = this.store.select(state => state.visualizationState)
-            .subscribe((visualizationState) => {
-                if (!visualizationState.metricsLoading && visualizationState.metricTree) {
-                    this.minColorMetricValue = visualizationState.minColorMetricValue;
-                    this.maxColorMetricValue = visualizationState.maxColorMetricValue;
-                }
-            });
+        this.subscription = this.store.select(fromRoot.getMinAndMaxColorMetricValues).subscribe((result) => {
+            if (result) {
+                this.minColorMetricValue = result.minColorMetricValue;
+                this.maxColorMetricValue = result.maxColorMetricValue;
+            }
+        });
     }
 
     calculateElements(nodes: INode[], parent: INode, bottom: number) {
