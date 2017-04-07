@@ -1,6 +1,6 @@
-import {ElementType} from "../enum/ElementType";
 import {Geometry, LineBasicMaterial, Line, Vector3, QuadraticBezierCurve3} from "three";
 import {AppConfig} from "../AppConfig";
+import {NodeType} from "../enum/NodeType";
 
 export class BlockConnection {
 
@@ -29,7 +29,7 @@ export class BlockConnection {
         this.curveObject = new Line(geometry, material);
 
         this.curveObject.userData = {
-            type: ElementType.CONNECTION,
+            type: NodeType.CONNECTION,
             changeTypes: {
                 moved: true
             }
