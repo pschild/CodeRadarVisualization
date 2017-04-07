@@ -56,3 +56,11 @@ export const ControlPanelReducer: ActionReducer<ControlPanelState> = (state = in
             return state;
     }
 };
+
+export const getCommits = (state: ControlPanelState) => state.commits;
+
+export const getCommitsLoading = (state: ControlPanelState) => state.commitsLoading;
+
+export const getLeftCommit = (state: ControlPanelState) => state.leftCommit;
+
+export const getRightCommit = (state: ControlPanelState) => state.rightCommit;

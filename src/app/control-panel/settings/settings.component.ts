@@ -1,4 +1,5 @@
 import {Component, OnInit} from "@angular/core";
+declare var $: any;
 
 @Component({
     selector: 'app-settings',
@@ -11,6 +12,10 @@ export class SettingsComponent implements OnInit {
     }
 
     ngOnInit() {
+        // prevent bootstrap dropdown from being closed by clicking on its content
+        $(document).on('click', '.dropdown-menu', function (e) {
+            e.stopPropagation();
+        });
     }
 
 }

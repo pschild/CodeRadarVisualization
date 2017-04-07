@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ViewType} from "../../../enum/ViewType";
 import {Store} from "@ngrx/store";
-import {AppState} from "../../../shared/reducers";
+import * as fromRoot from "../../../shared/reducers";
 import {Subscription} from "rxjs";
 import {changeViewType} from "../settings.actions";
 
@@ -21,14 +21,13 @@ export class ViewControlComponent implements OnInit {
 
     subscription: Subscription;
 
-    constructor(private store: Store<AppState>) {
+    constructor(private store: Store<fromRoot.AppState>) {
     }
 
     ngOnInit() {
-        this.subscription = this.store.select(state => state.settingsState)
-            .subscribe((settingsState) => {
-                this.activeViewType = settingsState.activeViewType;
-            });
+        this.subscription = this.store.select(fromRoot.getActiveViewType).subscribe((activeViewType) => {
+            this.activeViewType = activeViewType;
+        });
     }
 
     ngOnDestroy() {

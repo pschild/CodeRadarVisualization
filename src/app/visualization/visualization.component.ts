@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ScreenType} from "../enum/ScreenType";
 import {Observable, Subscription} from "rxjs";
 import {Store} from "@ngrx/store";
-import {AppState} from "../shared/reducers";
+import * as fromRoot from "../shared/reducers";
 import {loadMetricTree} from "./visualization.actions";
 
 @Component({
@@ -12,7 +12,7 @@ import {loadMetricTree} from "./visualization.actions";
 })
 export class VisualizationComponent implements OnInit {
 
-    metricsLoading: boolean = false;
+    metricsLoading$: Observable<boolean>;
 
     subscriptions: Subscription[] = [];
 
@@ -21,35 +21,16 @@ export class VisualizationComponent implements OnInit {
         right: ScreenType.RIGHT
     };
 
-    constructor(private store: Store<AppState>) {
+    constructor(private store: Store<fromRoot.AppState>) {
     }
 
     ngOnInit() {
-        this.subscriptions.push(this.store.select(state => state.visualizationState)
-            .subscribe((visualizationState) => {
-                this.metricsLoading = visualizationState.metricsLoading;
-            })
-        );
-
-        // combine states as we need information from all of them at the same time
-        let states = Observable.combineLatest(
-            this.store.select(state => state.controlPanelState),
-            this.store.select(state => state.settingsState
-        ), (controlPanelState, settingsState) => {
-            return {
-                controlPanelState: controlPanelState,
-                settingsState: settingsState
-            };
-        });
+        this.metricsLoading$ = this.store.select(fromRoot.getMetricsLoading);
 
         this.subscriptions.push(
-            states.subscribe((result) => {
-                if (
-                    result.controlPanelState.commits.length >= 2
-                    && result.controlPanelState.leftCommit
-                    && result.controlPanelState.rightCommit
-                ) {
-                    this.store.dispatch(loadMetricTree(result.controlPanelState.leftCommit, result.controlPanelState.rightCommit, result.settingsState.metricMapping));
+            this.store.select(fromRoot.isReadyForLoadingMetrics).subscribe((result) => {
+                if (result) {
+                    this.store.dispatch(loadMetricTree(result.leftCommit, result.rightCommit, result.metricMapping));
                 }
             })
         );

@@ -48,3 +48,9 @@ export const SettingsReducer: ActionReducer<SettingsState> = (state = initialSta
             return state;
     }
 };
+
+export const getActiveViewType = (state: SettingsState) => state.activeViewType;
+
+export const getActiveFilter = (state: SettingsState) => state.activeFilter;
+
+export const getMetricMapping = (state: SettingsState) => state.metricMapping;

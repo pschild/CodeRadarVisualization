@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AppState} from "../../shared/reducers";
+import * as fromRoot from "../../shared/reducers";
 import {Store} from "@ngrx/store";
 import {Subscription} from "rxjs";
 
@@ -14,14 +14,13 @@ export class SearchComponent implements OnInit {
     searchTerm: string;
     uniqueFileList: string[] = [];
 
-    constructor(private store: Store<AppState>) {
+    constructor(private store: Store<fromRoot.AppState>) {
     }
 
     ngOnInit() {
-        this.subscription = this.store.select(state => state.visualizationState)
-            .subscribe((visualizationState) => {
-                this.uniqueFileList = visualizationState.uniqueFileList;
-            });
+        this.subscription = this.store.select(fromRoot.getUniqueFileList).subscribe((fileList) => {
+            this.uniqueFileList = fileList;
+        });
     }
 
     ngOnDestroy() {

@@ -8,3 +8,4 @@
            no-match-found-text="Nichts gefunden."
            (valueChanged)="handleValueChanged($event)" />
 </div>
+<p *ngIf="loading$ | async">LADE</p>

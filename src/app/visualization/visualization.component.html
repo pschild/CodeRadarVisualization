@@ -3,3 +3,4 @@
     <app-screen [screenType]="screenTypes.left"></app-screen>
     <app-screen [screenType]="screenTypes.right"></app-screen>
 </div>
+<p *ngIf="metricsLoading$ | async">LADE</p>

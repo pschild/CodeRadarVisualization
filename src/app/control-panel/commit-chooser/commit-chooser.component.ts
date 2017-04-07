@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
-import {AppState} from "../../shared/reducers";
-import {Subscription} from "rxjs";
+import * as fromRoot from "../../shared/reducers";
+import {Observable, Subscription} from "rxjs";
 import {Commit} from "../../domain/Commit";
 import {changeCommit, loadCommits} from "../control-panel.actions";
 import {CommitType} from "../../enum/CommitType";
@@ -14,21 +14,21 @@ import {CommitType} from "../../enum/CommitType";
 export class CommitChooserComponent implements OnInit {
 
     subscription: Subscription;
-    private loading: boolean = false;
+    loading$: Observable<boolean>;
     commits: Commit[];
     selected: Commit;
 
     @Input() commitType: CommitType;
 
-    constructor(private store: Store<AppState>) {
+    constructor(private store: Store<fromRoot.AppState>) {
     }
 
     ngOnInit() {
-        this.subscription = this.store.select(state => state.controlPanelState)
-            .subscribe((controlPanelState) => {
-                this.loading = controlPanelState.commitsLoading;
-                this.commits = controlPanelState.commits;
-            });
+        this.loading$ = this.store.select(fromRoot.getCommitsLoading);
+
+        this.subscription = this.store.select(fromRoot.getCommits).subscribe((commits) => {
+            this.commits = commits;
+        });
 
         this.store.dispatch(loadCommits());
     }

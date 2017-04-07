@@ -39,6 +39,7 @@
     "bootstrap": "^4.0.0-alpha.6",
     "chroma-js": "^1.2.1",
     "core-js": "^2.4.1",
+    "reselect": "^2.5.4",
     "rxjs": "^5.1.0",
     "three": "^0.81.2",
     "three-orbit-controls": "^82.1.0",

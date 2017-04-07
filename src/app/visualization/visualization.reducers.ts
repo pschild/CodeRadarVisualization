@@ -60,3 +60,16 @@ export const VisualizationReducer: ActionReducer<VisualizationState> = (state = 
             return state;
     }
 };
+
+export const getMetricsLoading = (state: VisualizationState) => state.metricsLoading;
+
+export const getMetricTree = (state: VisualizationState) => state.metricTree;
+
+export const getUniqueFileList = (state: VisualizationState) => state.uniqueFileList;
+
+export const getMinAndMax = (state: VisualizationState) => {
+    return {
+        min: state.minColorMetricValue,
+        max: state.maxColorMetricValue
+    };
+};

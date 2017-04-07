@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
-import {AppState} from "../../../shared/reducers";
+import * as fromRoot from "../../../shared/reducers";
 import {Subscription} from "rxjs";
 import {setMetricMapping} from "../settings.actions";
 import {IMetricMapping} from "../../../domain/IMetricMapping";
@@ -18,16 +18,15 @@ export class MetricMappingComponent implements OnInit {
 
     subscription: Subscription;
 
-    constructor(private store: Store<AppState>) {
+    constructor(private store: Store<fromRoot.AppState>) {
     }
 
     ngOnInit() {
         this.metricNames = MetricNameHelper.getAll();
 
-        this.subscription = this.store.select(state => state.settingsState)
-            .subscribe((settingsState) => {
-                this.metricMapping = settingsState.metricMapping;
-            });
+        this.subscription = this.store.select(fromRoot.getMetricMapping).subscribe((metricMapping) => {
+            this.metricMapping = metricMapping;
+        });
     }
 
     applyMetricMappings() {
