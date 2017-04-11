@@ -16,7 +16,6 @@ dependencies:
 test:
   override:
     - yarn run notest
-    - echo ${MY_TEST}
     #- ng lint
     #- ng test --watch false # single test run
 
@@ -25,4 +24,5 @@ deployment:
   demo:
     branch: angular-ui
     commands:
-      - yarn run ghp
+      - ng build --environment demo --base-href 'https://pschild.github.io/CodeRadarVisualization/'
+      - ngh --no-silent
