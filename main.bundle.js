@@ -1355,164 +1355,164 @@ var MockData = (function () {
             { name: '9bedf67800b2923982bdf60c89c57ce6fd2d9a1c', author: 'John Doe', timestamp: 1491926159000, analyzed: true }
         ];
         var metrics = {
-            "name": "root",
-            "type": "MODULE",
-            "commit1Metrics": {
-                "coderadar:size:loc:java": 453,
-                "checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck": 15,
-                "checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck": 5
+            'name': 'root',
+            'type': 'MODULE',
+            'commit1Metrics': {
+                'coderadar:size:loc:java': 453,
+                'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck': 15,
+                'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck': 5
             },
-            "commit2Metrics": {
-                "coderadar:size:loc:java": 155,
-                "checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck": 2,
-                "checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck": 4
+            'commit2Metrics': {
+                'coderadar:size:loc:java': 155,
+                'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck': 2,
+                'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck': 4
             },
-            "renamedFrom": null,
-            "renamedTo": null,
-            "changes": null,
-            "children": [
+            'renamedFrom': null,
+            'renamedTo': null,
+            'changes': null,
+            'children': [
                 {
-                    "name": "AddedAndRemovedFiles.java",
-                    "type": "MODULE",
-                    "commit1Metrics": {
-                        "coderadar:size:loc:java": 453,
-                        "checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck": 15,
-                        "checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck": 5
+                    'name': 'AddedAndRemovedFiles.java',
+                    'type': 'MODULE',
+                    'commit1Metrics': {
+                        'coderadar:size:loc:java': 453,
+                        'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck': 15,
+                        'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck': 5
                     },
-                    "commit2Metrics": {
-                        "coderadar:size:loc:java": 155,
-                        "checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck": 2,
-                        "checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck": 4
+                    'commit2Metrics': {
+                        'coderadar:size:loc:java': 155,
+                        'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck': 2,
+                        'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck': 4
                     },
-                    "renamedFrom": null,
-                    "renamedTo": null,
-                    "changes": null,
-                    "children": [
+                    'renamedFrom': null,
+                    'renamedTo': null,
+                    'changes': null,
+                    'children': [
                         {
-                            "name": "OnlyLeft.java",
-                            "type": "FILE",
-                            "commit1Metrics": {
-                                "coderadar:size:loc:java": 453,
-                                "checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck": 15,
-                                "checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck": 5
+                            'name': 'OnlyLeft.java',
+                            'type': 'FILE',
+                            'commit1Metrics': {
+                                'coderadar:size:loc:java': 453,
+                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck': 15,
+                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck': 5
                             },
-                            "commit2Metrics": null,
-                            "renamedFrom": null,
-                            "renamedTo": null,
-                            "changes": {
-                                "renamed": false,
-                                "modified": false,
-                                "deleted": true,
-                                "added": false
+                            'commit2Metrics': null,
+                            'renamedFrom': null,
+                            'renamedTo': null,
+                            'changes': {
+                                'renamed': false,
+                                'modified': false,
+                                'deleted': true,
+                                'added': false
                             },
-                            "children": []
+                            'children': []
                         },
                         {
-                            "name": "OnlyRight.java",
-                            "type": "FILE",
-                            "commit1Metrics": null,
-                            "commit2Metrics": {
-                                "coderadar:size:loc:java": 155,
-                                "checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck": 2,
-                                "checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck": 4
+                            'name': 'OnlyRight.java',
+                            'type': 'FILE',
+                            'commit1Metrics': null,
+                            'commit2Metrics': {
+                                'coderadar:size:loc:java': 155,
+                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck': 2,
+                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck': 4
                             },
-                            "renamedFrom": null,
-                            "renamedTo": null,
-                            "changes": {
-                                "renamed": false,
-                                "modified": false,
-                                "deleted": false,
-                                "added": true
+                            'renamedFrom': null,
+                            'renamedTo': null,
+                            'changes': {
+                                'renamed': false,
+                                'modified': false,
+                                'deleted': false,
+                                'added': true
                             },
-                            "children": []
+                            'children': []
                         }
                     ]
                 },
                 {
-                    "name": "ChangedAndUnchangedFiles.java",
-                    "type": "MODULE",
-                    "commit1Metrics": {
-                        "coderadar:size:loc:java": 100,
-                        "checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck": 100,
-                        "checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck": 100
+                    'name': 'ChangedAndUnchangedFiles.java',
+                    'type': 'MODULE',
+                    'commit1Metrics': {
+                        'coderadar:size:loc:java': 100,
+                        'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck': 100,
+                        'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck': 100
                     },
-                    "commit2Metrics": {
-                        "coderadar:size:loc:java": 100,
-                        "checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck": 100,
-                        "checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck": 100
+                    'commit2Metrics': {
+                        'coderadar:size:loc:java': 100,
+                        'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck': 100,
+                        'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck': 100
                     },
-                    "renamedFrom": null,
-                    "renamedTo": null,
-                    "changes": null,
-                    "children": [
+                    'renamedFrom': null,
+                    'renamedTo': null,
+                    'changes': null,
+                    'children': [
                         {
-                            "name": "Smaller.java",
-                            "type": "FILE",
-                            "commit1Metrics": {
-                                "coderadar:size:loc:java": 475,
-                                "checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck": 1,
-                                "checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck": 1
+                            'name': 'Smaller.java',
+                            'type': 'FILE',
+                            'commit1Metrics': {
+                                'coderadar:size:loc:java': 475,
+                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck': 1,
+                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck': 1
                             },
-                            "commit2Metrics": {
-                                "coderadar:size:loc:java": 345,
-                                "checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck": 1,
-                                "checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck": 1
+                            'commit2Metrics': {
+                                'coderadar:size:loc:java': 345,
+                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck': 1,
+                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck': 1
                             },
-                            "renamedFrom": null,
-                            "renamedTo": null,
-                            "changes": {
-                                "renamed": false,
-                                "modified": true,
-                                "deleted": false,
-                                "added": false
+                            'renamedFrom': null,
+                            'renamedTo': null,
+                            'changes': {
+                                'renamed': false,
+                                'modified': true,
+                                'deleted': false,
+                                'added': false
                             },
-                            "children": []
+                            'children': []
                         },
                         {
-                            "name": "Bigger.java",
-                            "type": "FILE",
-                            "commit1Metrics": {
-                                "coderadar:size:loc:java": 75,
-                                "checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck": 1,
-                                "checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck": 1
+                            'name': 'Bigger.java',
+                            'type': 'FILE',
+                            'commit1Metrics': {
+                                'coderadar:size:loc:java': 75,
+                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck': 1,
+                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck': 1
                             },
-                            "commit2Metrics": {
-                                "coderadar:size:loc:java": 121,
-                                "checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck": 1,
-                                "checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck": 2
+                            'commit2Metrics': {
+                                'coderadar:size:loc:java': 121,
+                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck': 1,
+                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck': 2
                             },
-                            "renamedFrom": null,
-                            "renamedTo": null,
-                            "changes": {
-                                "renamed": false,
-                                "modified": true,
-                                "deleted": false,
-                                "added": false
+                            'renamedFrom': null,
+                            'renamedTo': null,
+                            'changes': {
+                                'renamed': false,
+                                'modified': true,
+                                'deleted': false,
+                                'added': false
                             },
-                            "children": []
+                            'children': []
                         },
                         {
-                            "name": "Untouched.java",
-                            "type": "FILE",
-                            "commit1Metrics": {
-                                "coderadar:size:loc:java": 51,
-                                "checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck": 12,
-                                "checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck": 1
+                            'name': 'Untouched.java',
+                            'type': 'FILE',
+                            'commit1Metrics': {
+                                'coderadar:size:loc:java': 51,
+                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck': 12,
+                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck': 1
                             },
-                            "commit2Metrics": {
-                                "coderadar:size:loc:java": 51,
-                                "checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck": 12,
-                                "checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck": 1
+                            'commit2Metrics': {
+                                'coderadar:size:loc:java': 51,
+                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck': 12,
+                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck': 1
                             },
-                            "renamedFrom": null,
-                            "renamedTo": null,
-                            "changes": {
-                                "renamed": false,
-                                "modified": false,
-                                "deleted": false,
-                                "added": false
+                            'renamedFrom': null,
+                            'renamedTo': null,
+                            'changes': {
+                                'renamed': false,
+                                'modified': false,
+                                'deleted': false,
+                                'added': false
                             },
-                            "children": []
+                            'children': []
                         }
                     ]
                 }
@@ -2796,56 +2796,56 @@ webpackContext.id = 411;
 /***/ 420:
 /***/ (function(module, exports) {
 
-module.exports = "<app-control-panel></app-control-panel>\r\n<app-visualization></app-visualization>"
+module.exports = "<app-control-panel></app-control-panel>\n<app-visualization></app-visualization>"
 
 /***/ }),
 
 /***/ 421:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"form-group\">\r\n    <input class=\"form-control\"\r\n           ngui-auto-complete [(ngModel)]=\"selected\"\r\n           [source]=\"commits\"\r\n           [value-formatter]=\"formatCommit\"\r\n           [list-formatter]=\"formatCommit\"\r\n           value-property-name=\"id\"\r\n           display-property-name=\"name\"\r\n           no-match-found-text=\"Nichts gefunden.\"\r\n           match-formatted=\"true\"\r\n           (valueChanged)=\"handleValueChanged($event)\" />\r\n</div>\r\n<p *ngIf=\"loading$ | async\">LADE</p>"
+module.exports = "<div class=\"form-group\">\n    <input class=\"form-control\"\n           ngui-auto-complete [(ngModel)]=\"selected\"\n           [source]=\"commits\"\n           [value-formatter]=\"formatCommit\"\n           [list-formatter]=\"formatCommit\"\n           value-property-name=\"id\"\n           display-property-name=\"name\"\n           no-match-found-text=\"Nichts gefunden.\"\n           match-formatted=\"true\"\n           (valueChanged)=\"handleValueChanged($event)\" />\n</div>\n<p *ngIf=\"loading$ | async\">LADE</p>"
 
 /***/ }),
 
 /***/ 422:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\">\r\n    <form id=\"control-panel\" class=\"row align-items-end\">\r\n        <div class=\"col-4\">\r\n            <div class=\"row\">\r\n                <app-commit-chooser class=\"col-6\" [commitType]=\"commitTypes.left\"></app-commit-chooser>\r\n                <app-commit-chooser class=\"col-6\" [commitType]=\"commitTypes.right\"></app-commit-chooser>\r\n            </div>\r\n        </div>\r\n        <div class=\"col-6\">\r\n            <div>\r\n                <app-settings class=\"row\"></app-settings>\r\n            </div>\r\n        </div>\r\n        <div class=\"col-2\">\r\n            <app-search></app-search>\r\n        </div>\r\n    </form>\r\n</div>"
+module.exports = "<div class=\"container-fluid\">\n    <form id=\"control-panel\" class=\"row align-items-end\">\n        <div class=\"col-4\">\n            <div class=\"row\">\n                <app-commit-chooser class=\"col-6\" [commitType]=\"commitTypes.left\"></app-commit-chooser>\n                <app-commit-chooser class=\"col-6\" [commitType]=\"commitTypes.right\"></app-commit-chooser>\n            </div>\n        </div>\n        <div class=\"col-6\">\n            <div>\n                <app-settings class=\"row\"></app-settings>\n            </div>\n        </div>\n        <div class=\"col-2\">\n            <app-search></app-search>\n        </div>\n    </form>\n</div>"
 
 /***/ }),
 
 /***/ 423:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"form-group\">\r\n    <input class=\"form-control\"\r\n           ngui-auto-complete [(ngModel)]=\"searchTerm\"\r\n           [source]=\"uniqueFileList\"\r\n           [list-formatter]=\"autocompleteListFormatter\"\r\n           no-match-found-text=\"Nichts gefunden.\"\r\n           (valueChanged)=\"handleValueChanged($event)\" />\r\n</div>"
+module.exports = "<div class=\"form-group\">\n    <input class=\"form-control\"\n           ngui-auto-complete [(ngModel)]=\"searchTerm\"\n           [source]=\"uniqueFileList\"\n           [list-formatter]=\"autocompleteListFormatter\"\n           no-match-found-text=\"Nichts gefunden.\"\n           (valueChanged)=\"handleValueChanged($event)\" />\n</div>"
 
 /***/ }),
 
 /***/ 424:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"dropdown\">\r\n    <button class=\"btn btn-block btn-secondary dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\r\n        Filter\r\n    </button>\r\n    <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\r\n        <div class=\"custom-controls-stacked\">\r\n            <label class=\"custom-control custom-checkbox\">\r\n                <input type=\"checkbox\" class=\"custom-control-input\" [(ngModel)]=\"activeFilter.unchanged\" (change)=\"handleFilterChanged()\">\r\n                <span class=\"custom-control-indicator\"></span>\r\n                <span class=\"custom-control-description\">unverändert</span>\r\n            </label>\r\n            <label class=\"custom-control custom-checkbox\">\r\n                <input type=\"checkbox\" class=\"custom-control-input\" [(ngModel)]=\"activeFilter.changed\" (change)=\"handleFilterChanged()\">\r\n                <span class=\"custom-control-indicator\"></span>\r\n                <span class=\"custom-control-description\">verändert</span>\r\n            </label>\r\n            <label class=\"custom-control custom-checkbox\">\r\n                <input type=\"checkbox\" class=\"custom-control-input\" [(ngModel)]=\"activeFilter.deleted\" (change)=\"handleFilterChanged()\">\r\n                <span class=\"custom-control-indicator\"></span>\r\n                <span class=\"custom-control-description\">gelöscht</span>\r\n            </label>\r\n            <label class=\"custom-control custom-checkbox\">\r\n                <input type=\"checkbox\" class=\"custom-control-input\" [(ngModel)]=\"activeFilter.added\" (change)=\"handleFilterChanged()\">\r\n                <span class=\"custom-control-indicator\"></span>\r\n                <span class=\"custom-control-description\">hinzugefügt</span>\r\n            </label>\r\n            <label class=\"custom-control custom-checkbox\">\r\n                <input type=\"checkbox\" class=\"custom-control-input\" [(ngModel)]=\"activeFilter.moved\" (change)=\"handleFilterChanged()\">\r\n                <span class=\"custom-control-indicator\"></span>\r\n                <span class=\"custom-control-description\">umbenannt/verschoben</span>\r\n            </label>\r\n        </div>\r\n    </div>\r\n</div>"
+module.exports = "<div class=\"dropdown\">\n    <button class=\"btn btn-block btn-secondary dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n        Filter\n    </button>\n    <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n        <div class=\"custom-controls-stacked\">\n            <label class=\"custom-control custom-checkbox\">\n                <input type=\"checkbox\" class=\"custom-control-input\" [(ngModel)]=\"activeFilter.unchanged\" (change)=\"handleFilterChanged()\">\n                <span class=\"custom-control-indicator\"></span>\n                <span class=\"custom-control-description\">unverändert</span>\n            </label>\n            <label class=\"custom-control custom-checkbox\">\n                <input type=\"checkbox\" class=\"custom-control-input\" [(ngModel)]=\"activeFilter.changed\" (change)=\"handleFilterChanged()\">\n                <span class=\"custom-control-indicator\"></span>\n                <span class=\"custom-control-description\">verändert</span>\n            </label>\n            <label class=\"custom-control custom-checkbox\">\n                <input type=\"checkbox\" class=\"custom-control-input\" [(ngModel)]=\"activeFilter.deleted\" (change)=\"handleFilterChanged()\">\n                <span class=\"custom-control-indicator\"></span>\n                <span class=\"custom-control-description\">gelöscht</span>\n            </label>\n            <label class=\"custom-control custom-checkbox\">\n                <input type=\"checkbox\" class=\"custom-control-input\" [(ngModel)]=\"activeFilter.added\" (change)=\"handleFilterChanged()\">\n                <span class=\"custom-control-indicator\"></span>\n                <span class=\"custom-control-description\">hinzugefügt</span>\n            </label>\n            <label class=\"custom-control custom-checkbox\">\n                <input type=\"checkbox\" class=\"custom-control-input\" [(ngModel)]=\"activeFilter.moved\" (change)=\"handleFilterChanged()\">\n                <span class=\"custom-control-indicator\"></span>\n                <span class=\"custom-control-description\">umbenannt/verschoben</span>\n            </label>\n        </div>\n    </div>\n</div>"
 
 /***/ }),
 
 /***/ 425:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"dropdown\">\r\n    <button class=\"btn btn-block btn-secondary dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\r\n        Mapping\r\n    </button>\r\n    <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\r\n        <label for=\"height-metric-name\">Höhe</label>\r\n        <select id=\"height-metric-name\" class=\"custom-select\" [(ngModel)]=\"metricMapping.heightMetricName\">\r\n            <option *ngFor=\"let metricName of metricNames\" [ngValue]=\"metricName.name\">{{metricName.shortName}}</option>\r\n        </select>\r\n\r\n        <label for=\"groundarea-metric-name\">Grundfläche</label>\r\n        <select id=\"groundarea-metric-name\" class=\"custom-select\" [(ngModel)]=\"metricMapping.groundAreaMetricName\">\r\n            <option *ngFor=\"let metricName of metricNames\" [ngValue]=\"metricName.name\">{{metricName.shortName}}</option>\r\n        </select>\r\n\r\n        <label for=\"color-metric-name\">Farbe</label>\r\n        <select id=\"color-metric-name\" class=\"custom-select\" [(ngModel)]=\"metricMapping.colorMetricName\">\r\n            <option *ngFor=\"let metricName of metricNames\" [ngValue]=\"metricName.name\">{{metricName.shortName}}</option>\r\n        </select>\r\n\r\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"applyMetricMappings()\">übernehmen</button>\r\n    </div>\r\n</div>"
+module.exports = "<div class=\"dropdown\">\n    <button class=\"btn btn-block btn-secondary dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n        Mapping\n    </button>\n    <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n        <label for=\"height-metric-name\">Höhe</label>\n        <select id=\"height-metric-name\" class=\"custom-select\" [(ngModel)]=\"metricMapping.heightMetricName\">\n            <option *ngFor=\"let metricName of metricNames\" [ngValue]=\"metricName.name\">{{metricName.shortName}}</option>\n        </select>\n\n        <label for=\"groundarea-metric-name\">Grundfläche</label>\n        <select id=\"groundarea-metric-name\" class=\"custom-select\" [(ngModel)]=\"metricMapping.groundAreaMetricName\">\n            <option *ngFor=\"let metricName of metricNames\" [ngValue]=\"metricName.name\">{{metricName.shortName}}</option>\n        </select>\n\n        <label for=\"color-metric-name\">Farbe</label>\n        <select id=\"color-metric-name\" class=\"custom-select\" [(ngModel)]=\"metricMapping.colorMetricName\">\n            <option *ngFor=\"let metricName of metricNames\" [ngValue]=\"metricName.name\">{{metricName.shortName}}</option>\n        </select>\n\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"applyMetricMappings()\">übernehmen</button>\n    </div>\n</div>"
 
 /***/ }),
 
 /***/ 426:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-4\">\r\n    <app-view-control></app-view-control>\r\n</div>\r\n<div class=\"col-2\">\r\n    <app-filter></app-filter>\r\n</div>\r\n<div class=\"col-2\">\r\n    <app-metric-mapping></app-metric-mapping>\r\n</div>"
+module.exports = "<div class=\"col-4\">\n    <app-view-control></app-view-control>\n</div>\n<div class=\"col-2\">\n    <app-filter></app-filter>\n</div>\n<div class=\"col-2\">\n    <app-metric-mapping></app-metric-mapping>\n</div>"
 
 /***/ }),
 
 /***/ 427:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"form-group\">\r\n    <label class=\"custom-control custom-radio\">\r\n        <input id=\"radio-splitscreen\" type=\"radio\" name=\"radio-group-screen\" class=\"custom-control-input\" [value]=\"viewTypes.split\" (click)=\"changeViewType(viewTypes.split)\" [checked]=\"activeViewType === viewTypes.split\" />\r\n        <span class=\"custom-control-indicator\"></span>\r\n        <span class=\"custom-control-description\">nebeneinander</span>\r\n    </label>\r\n    <label class=\"custom-control custom-radio\">\r\n        <input id=\"radio-fullscreen\" type=\"radio\" name=\"radio-group-screen\" class=\"custom-control-input\" [value]=\"viewTypes.merged\" (click)=\"changeViewType(viewTypes.merged)\" [checked]=\"activeViewType === viewTypes.merged\" />\r\n        <span class=\"custom-control-indicator\"></span>\r\n        <span class=\"custom-control-description\">kombiniert</span>\r\n    </label>\r\n</div>"
+module.exports = "<div class=\"form-group\">\n    <label class=\"custom-control custom-radio\">\n        <input id=\"radio-splitscreen\" type=\"radio\" name=\"radio-group-screen\" class=\"custom-control-input\" [value]=\"viewTypes.split\" (click)=\"changeViewType(viewTypes.split)\" [checked]=\"activeViewType === viewTypes.split\" />\n        <span class=\"custom-control-indicator\"></span>\n        <span class=\"custom-control-description\">nebeneinander</span>\n    </label>\n    <label class=\"custom-control custom-radio\">\n        <input id=\"radio-fullscreen\" type=\"radio\" name=\"radio-group-screen\" class=\"custom-control-input\" [value]=\"viewTypes.merged\" (click)=\"changeViewType(viewTypes.merged)\" [checked]=\"activeViewType === viewTypes.merged\" />\n        <span class=\"custom-control-indicator\"></span>\n        <span class=\"custom-control-description\">kombiniert</span>\n    </label>\n</div>"
 
 /***/ }),
 
@@ -2859,7 +2859,7 @@ module.exports = ""
 /***/ 429:
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"stage\" class=\"split\">\r\n    <div class=\"vertical-line\"></div>\r\n    <app-screen [screenType]=\"screenTypes.left\"></app-screen>\r\n    <app-screen [screenType]=\"screenTypes.right\"></app-screen>\r\n</div>\r\n<p *ngIf=\"metricsLoading$ | async\">LADE</p>"
+module.exports = "<div id=\"stage\" class=\"split\">\n    <div class=\"vertical-line\"></div>\n    <app-screen [screenType]=\"screenTypes.left\"></app-screen>\n    <app-screen [screenType]=\"screenTypes.right\"></app-screen>\n</div>\n<p *ngIf=\"metricsLoading$ | async\">LADE</p>"
 
 /***/ }),
 
