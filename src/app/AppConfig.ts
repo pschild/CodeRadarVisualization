@@ -1,3 +1,4 @@
+import {environment} from "../environments/environment";
 export class AppConfig {
     static DEBUG_MODE_ENABLED: boolean = false;
 
@@ -20,9 +21,9 @@ export class AppConfig {
     ];
 
     // DEFAULT METRIC MAPPING
-    static GROUND_AREA_METRIC_NAME: string = 'coderadar:size:sloc:java';
     static HEIGHT_METRIC_NAME: string = 'coderadar:size:loc:java';
-    static COLOR_METRIC_NAME: string = 'coderadar:size:eloc:java';
+    static GROUND_AREA_METRIC_NAME: string = environment.demo ? 'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck' : 'coderadar:size:sloc:java';
+    static COLOR_METRIC_NAME: string = environment.demo ? 'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck' : 'coderadar:size:eloc:java';
 
     // VISUALIZATION SETTINGS
     static GROUND_AREA_FACTOR: number = 0.1;
