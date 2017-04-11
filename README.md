@@ -1,4 +1,4 @@
-CircleCI: [![CircleCI](https://circleci.com/gh/pschild/CodeRadarVisualization/tree/angular-ui.svg?style=svg)](https://circleci.com/gh/pschild/CodeRadarVisualization/tree/angular-ui)
+[![CircleCI](https://circleci.com/gh/pschild/CodeRadarVisualization/tree/angular-ui.svg?style=svg)](https://circleci.com/gh/pschild/CodeRadarVisualization/tree/angular-ui)
 
 # Visualization of software quality and evolution
 
@@ -11,6 +11,11 @@ Therefore, **results of static code analyses are visualized** in the form of a c
 
 ## How to install
 ### Checkout and install dependencies
+As the project was generated with [Angular CLI](https://github.com/angular/angular-cli), it's recommended to install that tool globally:
+```
+npm install -g @angular/cli
+```
+
 After checking out the project to your local harddrive, you can install all needed dependencies with npm:
 ```
 npm install
@@ -21,43 +26,16 @@ The application is yet designed to visualize results of static code analyses of 
 To see how this works, just have a look at the [GitHub project](https://github.com/reflectoring/coderadar) and at the [administration guide](http://www.reflectoring.io/coderadar/current/docs/admin.html).
 
 ## How to develop
-### Transpiling to ES5
-Because ES6 is used for writing the JavaScript code, you need to transpile the code into ES5 to make the app run in all browsers. You can easily do that with the help of gulp:
-```
-gulp
-```
-To make the development a lot more comfortable, you can also start a code watcher with gulp. It will automatically transpile the JavaScript code to ES5 whenever it detects a change in the source files:
-```
-gulp watch
-```
+### Development server
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files. Add `--environment demo` to run the demo mode.
 
-### Execute tests
-To make sure the code works properly, you can run unit tests with
-```
-npm test
-```
 
-# Screenshots
-Just choose two versions of your software project (based on GIT) and the type of view:
+### Build
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Use the `-prod` flag for a production build or `--environment demo` for the demo mode.
 
-![Choose Versions](https://cloud.githubusercontent.com/assets/1246566/23557895/fbbbf66e-0031-11e7-8192-5d9c41db98a6.PNG)
+### Running unit tests
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-You can compare the two versions either side by side ...
-
-![Split View](https://cloud.githubusercontent.com/assets/1246566/22399780/f8e23356-e5a4-11e6-9871-d08730dedda5.png)
-
-... or in a merged view:
-
-![Merged View](https://cloud.githubusercontent.com/assets/1246566/23557874/e3137ff6-0031-11e7-9174-f8ceb05f1550.PNG)
-
-You can filter for specific properties of your classes ...
-
-![filter](https://cloud.githubusercontent.com/assets/1246566/23557936/1872fe88-0032-11e7-8437-ae6f0a79ae3e.PNG)
-
-... and map different types of metrics to your personal visualization.
-
-![mapping](https://cloud.githubusercontent.com/assets/1246566/23557926/11553c7e-0032-11e7-9661-5968ab5226db.PNG)
-
-Of course, you can also search for certain files in your project and highlight them in the visualization
-
-![search](https://cloud.githubusercontent.com/assets/1246566/23557911/08b60db4-0032-11e7-8ca4-01bd8d27d6fc.PNG)
+## Demo
+The latest state of the angular-ui branch will always be automatically deployed to the [demo](https://pschild.github.io/CodeRadarVisualization/).
