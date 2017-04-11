@@ -1,8 +1,8 @@
-import {BrowserXhr, ResponseOptions, XHRBackend, XSRFStrategy} from "@angular/http";
-import {MockData} from "./service/mocks/mock-data";
-import {InMemoryBackendService} from "angular-in-memory-web-api";
-import {environment} from "../environments/environment";
-import {Injector} from "@angular/core";
+import {BrowserXhr, ResponseOptions, XHRBackend, XSRFStrategy} from '@angular/http';
+import {MockData} from './service/mocks/mock-data';
+import {InMemoryBackendService} from 'angular-in-memory-web-api';
+import {environment} from '../environments/environment';
+import {Injector} from '@angular/core';
 
 export function XHRBackendFactory(injector: Injector, browser: BrowserXhr, xsrf: XSRFStrategy, options: ResponseOptions) {
     if (environment.demo) {
