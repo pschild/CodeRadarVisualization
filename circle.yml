@@ -10,7 +10,7 @@ dependencies:
   cache_directories:
     - ~/.cache/yarn
   pre:
-    - yarn install -g @angular/cli@1.0.0 angular-cli-ghpages
+    - yarn global add @angular/cli@1.0.0 angular-cli-ghpages
 
 ## Customize test commands
 test:
