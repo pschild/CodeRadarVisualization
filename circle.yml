@@ -1,15 +1,21 @@
 machine:
   node:
     version: 6.10.0
+  environment:
+      PATH: "${PATH}:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin"
 
 dependencies:
+  override:
+    - yarn
+  cache_directories:
+    - ~/.cache/yarn
   pre:
-    - npm install -g npm@latest @angular/cli@1.0.0 angular-cli-ghpages
+    - yarn install -g @angular/cli@1.0.0 angular-cli-ghpages
 
 ## Customize test commands
 test:
   override:
-    - npm run notest
+    - yarn run notest
     #- ng lint
     #- ng test --watch false # single test run
 
