@@ -3,6 +3,7 @@ import {Action, ActionReducer} from "@ngrx/store";
 import {ViewType} from "../../enum/ViewType";
 import {IFilter} from "../../domain/IFilter";
 import {IMetricMapping} from "../../domain/IMetricMapping";
+import {AppConfig} from "../../AppConfig";
 
 export interface SettingsState {
     activeViewType: ViewType;
@@ -20,9 +21,9 @@ const initialState: SettingsState = {
         moved: true
     },
     metricMapping: {
-        heightMetricName: 'coderadar:size:loc:java',
-        groundAreaMetricName: 'coderadar:size:sloc:java',
-        colorMetricName: 'coderadar:size:eloc:java'
+        heightMetricName: AppConfig.HEIGHT_METRIC_NAME,
+        groundAreaMetricName: AppConfig.GROUND_AREA_METRIC_NAME,
+        colorMetricName: AppConfig.COLOR_METRIC_NAME
     }
 };
 
