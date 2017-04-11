@@ -16,7 +16,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "demo": "ng serve --environment demo",
-    "ghp": "ng build --environment demo --base-href 'https://pschild.github.io/CodeRadarVisualization/' && ngh"
+    "ghp": "ng build --environment demo --base-href 'https://pschild.github.io/CodeRadarVisualization/' && ngh",
+    "notest": "echo No tests at the moment ..."
   },
   "private": true,
   "dependencies": {
