@@ -9,6 +9,8 @@ import {AbstractView} from "../view/abstract-view";
 import {SplitView} from "../view/split-view";
 import {MergedView} from "../view/merged-view";
 import {BlockConnection} from "../../geometry/block-connection";
+import {IFilter} from "../../domain/IFilter";
+import {NodeType} from "../../enum/NodeType";
 
 @Component({
     selector: 'app-screen',
@@ -72,8 +74,15 @@ export class ScreenComponent implements OnInit {
 
                     this.resetScene();
                     this.prepareView(result.isReadyForDrawing.metricTree);
+                    this.applyFilter(result.activeFilter);
                     this.handleViewChanged();
                 }
+            })
+        );
+
+        this.subscriptions.push(
+            this.store.select(fromRoot.getActiveFilter).subscribe((activeFilter) => {
+                this.applyFilter(activeFilter);
             })
         );
     }
@@ -181,4 +190,38 @@ export class ScreenComponent implements OnInit {
         this.updateRenderer();
     }
 
+    private applyFilter(activeFilter: IFilter) {
+        if (!this.isMergedView) {
+            return;
+        }
+
+        for (let i = this.scene.children.length - 1; i >= 0; i--) {
+            let node = this.scene.children[i];
+
+            if (node.userData && (node.userData.type === NodeType.FILE || node.userData.type === NodeType.CONNECTION)) {
+                node.visible = true;
+                if (this.isMergedView) {
+                    if (activeFilter.unchanged === false && node.userData.changeTypes && node.userData.changeTypes.modified == false) {
+                        node.visible = false;
+                    }
+
+                    if (activeFilter.changed === false && node.userData.changeTypes && node.userData.changeTypes.modified == true) {
+                        node.visible = false;
+                    }
+
+                    if (activeFilter.deleted === false && node.userData.changeTypes && node.userData.changeTypes.deleted == true) {
+                        node.visible = false;
+                    }
+
+                    if (activeFilter.added === false && node.userData.changeTypes && node.userData.changeTypes.added == true) {
+                        node.visible = false;
+                    }
+
+                    if (activeFilter.moved === false && node.userData.changeTypes && node.userData.changeTypes.moved == true) {
+                        node.visible = false;
+                    }
+                }
+            }
+        }
+    }
 }

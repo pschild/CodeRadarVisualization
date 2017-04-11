@@ -71,11 +71,12 @@ export const isReadyForDrawing = createSelector(getMetricsLoading, getMetricTree
     }
 });
 
-export const getViewChanged = createSelector(getActiveViewType, isReadyForDrawing, (activeViewType, isReadyForDrawing) => {
+export const getViewChanged = createSelector(getActiveViewType, isReadyForDrawing, getActiveFilter, (activeViewType, isReadyForDrawing, activeFilter) => {
     if (isReadyForDrawing) {
         return {
             activeViewType: activeViewType,
-            isReadyForDrawing: isReadyForDrawing
+            isReadyForDrawing: isReadyForDrawing,
+            activeFilter: activeFilter
         };
     }
 });
