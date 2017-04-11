@@ -1,12 +1,12 @@
 import * as VisualizationActions from "./visualization.actions";
 import {Action, ActionReducer} from "@ngrx/store";
-import {Node} from "../domain/Node";
 import {ElementAnalyzer} from "../helper/element-analyzer";
 import {AppConfig} from "../AppConfig";
+import {INode} from "../domain/INode";
 
 export interface VisualizationState {
     metricsLoading: boolean;
-    metricTree: Node;
+    metricTree: INode;
     uniqueFileList: any[];
     minColorMetricValue: number;
     maxColorMetricValue: number;
