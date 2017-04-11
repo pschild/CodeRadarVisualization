@@ -25,4 +25,4 @@ deployment:
     branch: angular-ui
     commands:
       - ng build --environment demo --base-href 'https://pschild.github.io/CodeRadarVisualization/'
-      - ngh --no-silent
+      - ngh --name="pschild" --email=philippe.schild@googlemail.com --no-silent
