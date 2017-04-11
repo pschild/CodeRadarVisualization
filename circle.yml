@@ -3,10 +3,19 @@ machine:
     version: 6.10.0
 dependencies:
   pre:
-    - npm install angular-cli@latest -g
+    - npm install -g @angular/cli
+    - npm install -g angular-cli-ghpages
+
 ## Customize test commands
 test:
   override:
     - npm run notest
     #- ng lint
     #- ng test --watch false # single test run
+
+## Deploy to gh-pages when tests are OK
+deployment:
+  demo:
+    branch: angular-ui
+    commands:
+      - npm run ghp
