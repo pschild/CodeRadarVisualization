@@ -9,6 +9,7 @@ import {VisualizationModule} from "./visualization/visualization.module";
 import {reducer} from "./shared/reducers";
 import {StoreModule} from "@ngrx/store";
 import {EffectsModule} from "@ngrx/effects";
+import {StoreDevtoolsModule} from "@ngrx/store-devtools";
 import {AppEffects} from "./shared/effects";
 import {XHRBackendFactory} from "./XHRBackendFactory";
 
@@ -23,7 +24,8 @@ import {XHRBackendFactory} from "./XHRBackendFactory";
         ControlPanelModule,
         VisualizationModule,
         StoreModule.provideStore(reducer),
-        EffectsModule.run(AppEffects)
+        EffectsModule.run(AppEffects),
+        StoreDevtoolsModule.instrumentOnlyWithExtension()
     ],
     providers: [
         {
