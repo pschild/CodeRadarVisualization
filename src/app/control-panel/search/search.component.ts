@@ -31,7 +31,7 @@ export class SearchComponent implements OnInit {
         console.log(chosenItem);
     }
 
-    autocompleteListFormatter = (data: string) => {
+    autocompleteListFormatter(data: string): string {
         return data;
     }
 

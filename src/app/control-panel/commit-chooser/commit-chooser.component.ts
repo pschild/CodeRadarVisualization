@@ -5,6 +5,7 @@ import {Observable, Subscription} from "rxjs";
 import {Commit} from "../../domain/Commit";
 import {changeCommit, loadCommits} from "../control-panel.actions";
 import {CommitType} from "../../enum/CommitType";
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-commit-chooser',
@@ -41,8 +42,9 @@ export class CommitChooserComponent implements OnInit {
         this.store.dispatch(changeCommit(this.commitType, chosenModel));
     }
 
-    autocompleteListFormatter = (data: any) => {
-        return `${data.name.substr(0, 7)}, ${data.author}`;
+    formatCommit(data: any): string {
+        let formattedDateAndTime = moment(data.timestamp).format('DD.MM.YYYY HH:mm');
+        return `${formattedDateAndTime}, ${data.author}, ${data.name.substr(0, 7)}`;
     }
 
 }
