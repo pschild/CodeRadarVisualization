@@ -4,7 +4,7 @@ machine:
 
 dependencies:
   pre:
-    - npm install -g @angular/cli@1.0.0 angular-cli-ghpages
+    - npm install -g npm@latest @angular/cli@1.0.0 angular-cli-ghpages
 
 ## Customize test commands
 test:
