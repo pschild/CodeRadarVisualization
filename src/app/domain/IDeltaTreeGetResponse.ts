@@ -1,3 +1,5 @@
+import {INode} from "./INode";
+
 export interface IDeltaTreeGetResponse {
-    nodes: Node[]
+    rootNode: INode
 }

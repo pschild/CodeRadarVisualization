@@ -1,7 +1,7 @@
 import {Action} from "@ngrx/store";
 import {Commit} from "../domain/Commit";
-import {IDeltaTreeGetResponse} from "../domain/IDeltaTreeGetResponse";
 import {IMetricMapping} from "../domain/IMetricMapping";
+import {INode} from "../domain/INode";
 
 export const LOAD_METRIC_TREE = 'LOAD_METRIC_TREE';
 export const LOAD_METRIC_TREE_SUCCESS = 'LOAD_METRIC_TREE_SUCCESS';
@@ -20,7 +20,7 @@ export function loadMetricTree(leftCommit: Commit, rightCommit: Commit, metricMa
     };
 }
 
-export function loadMetricTreeSuccess(metricTree: IDeltaTreeGetResponse): Action {
+export function loadMetricTreeSuccess(metricTree: INode): Action {
     return {
         type: LOAD_METRIC_TREE_SUCCESS,
         payload: metricTree
@@ -34,14 +34,14 @@ export function loadMetricTreeError(error: string): Action {
     };
 }
 
-export function calculateMinimumAndMaximumValues(metricTree: IDeltaTreeGetResponse): Action {
+export function calculateMinimumAndMaximumValues(metricTree: INode): Action {
     return {
         type: CALCULATE_MINIMUM_AND_MAXIMUM_VALUES,
         payload: metricTree
     };
 }
 
-export function generateUniqueFileList(metricTree: IDeltaTreeGetResponse): Action {
+export function generateUniqueFileList(metricTree: INode): Action {
     return {
         type: GENERATE_UNIQUE_FILE_LIST,
         payload: metricTree

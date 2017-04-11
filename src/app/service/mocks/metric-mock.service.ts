@@ -3,6 +3,7 @@ import {Http} from "@angular/http";
 import {Observable} from "rxjs";
 import {IDeltaTreeGetResponse} from "../../domain/IDeltaTreeGetResponse";
 import {Commit} from "../../domain/Commit";
+import {IMetricMapping} from "../../domain/IMetricMapping";
 
 @Injectable()
 export class MetricMockService {
@@ -10,11 +11,11 @@ export class MetricMockService {
     constructor(private http: Http) {
     }
 
-    loadDeltaTree(leftCommit: Commit, rightCommit: Commit): Observable<IDeltaTreeGetResponse> {
+    loadDeltaTree(leftCommit: Commit, rightCommit: Commit, metricMapping: IMetricMapping): Observable<IDeltaTreeGetResponse> {
         return this.http.get('api/metrics')
             .map((res) => {
                 let mockedResponse: IDeltaTreeGetResponse = {
-                    nodes: res.json().data
+                    rootNode: res.json().data
                 };
                 return mockedResponse;
             });

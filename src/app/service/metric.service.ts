@@ -20,7 +20,11 @@ export class MetricService {
 
         // TODO: this.http.post('http://localhost:4200/assets/json/deltaTree.json', body)
         return this.http.get('http://localhost:4200/assets/json/deltaTree.json')
-            .map(res => <IDeltaTreeGetResponse>res.json());
+            .map((res) => {
+                return {
+                    rootNode: res.json()
+                };
+            });
     }
 
 }

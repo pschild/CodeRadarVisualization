@@ -8,7 +8,6 @@ import {ICommitsGetErrorResponse} from "../domain/ICommitsGetErrorResponse";
 import {IDeltaTreeGetErrorResponse} from "../domain/IDeltaTreeGetErrorResponse";
 import {IDeltaTreeGetResponse} from "../domain/IDeltaTreeGetResponse";
 import {MetricService} from "../service/metric.service";
-import {generateUniqueFileList} from "../visualization/visualization.actions";
 
 @Injectable()
 export class AppEffects {
@@ -34,9 +33,9 @@ export class AppEffects {
             (payload) => this.metricService.loadDeltaTree(payload.leftCommit, payload.rightCommit, payload.metricMapping)
                 .mergeMap((result: IDeltaTreeGetResponse) => {
                     return [
-                        actions.loadMetricTreeSuccess(result),
-                        actions.calculateMinimumAndMaximumValues(result),
-                        actions.generateUniqueFileList(result)
+                        actions.loadMetricTreeSuccess(result.rootNode),
+                        actions.calculateMinimumAndMaximumValues(result.rootNode),
+                        actions.generateUniqueFileList(result.rootNode)
                     ];
                 })
                 .catch((response: IDeltaTreeGetErrorResponse) => {
