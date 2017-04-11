@@ -20,13 +20,8 @@ test:
     #- ng test --watch false # single test run
 
 ## Deploy to gh-pages when tests are OK
-#deployment:
-#  demo:
-#    branch: angular-ui
-#    commands:
-#      - npm run ghp
 deployment:
   demo:
     branch: angular-ui
     commands:
-      - ng build --environment demo
+      - yarn run ghp
