@@ -1,3 +1,5 @@
+CircleCI: [![CircleCI](https://circleci.com/gh/pschild/CodeRadarVisualization/tree/angular-ui.svg?style=svg)](https://circleci.com/gh/pschild/CodeRadarVisualization/tree/angular-ui)
+
 # Visualization of software quality and evolution
 
 ## Background
