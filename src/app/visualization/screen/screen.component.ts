@@ -11,6 +11,7 @@ import {MergedView} from "../view/merged-view";
 import {BlockConnection} from "../../geometry/block-connection";
 import {IFilter} from "../../domain/IFilter";
 import {NodeType} from "../../enum/NodeType";
+import {ScreenshotService} from "../../service/screenshot.service";
 
 @Component({
     selector: 'app-screen',
@@ -36,7 +37,15 @@ export class ScreenComponent implements OnInit {
 
     view: AbstractView;
 
-    constructor(private store: Store<fromRoot.AppState>) {
+    constructor(private store: Store<fromRoot.AppState>, private screenshotService: ScreenshotService) {
+        this.screenshotService.screenshotRequested$.subscribe(() => {
+            let imgFromCanvas = this.renderer.domElement.toDataURL('image/png');
+            let pngFile = imgFromCanvas.replace(/^data:image\/png/, 'data:application/octet-stream');
+            this.screenshotService.add({
+                screenType: this.screenType,
+                file: pngFile
+            });
+        });
     }
 
     ngOnInit() {

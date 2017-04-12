@@ -12,6 +12,7 @@ import {CommitMockService} from "../service/mocks/commit-mock.service";
 import {SearchComponent} from './search/search.component';
 import {FilterComponent} from './settings/filter/filter.component';
 import {MetricMappingComponent} from './settings/metric-mapping/metric-mapping.component';
+import {ScreenshotComponent} from './screenshot/screenshot.component';
 
 @NgModule({
     imports: [
@@ -26,7 +27,8 @@ import {MetricMappingComponent} from './settings/metric-mapping/metric-mapping.c
         CommitChooserComponent,
         SearchComponent,
         FilterComponent,
-        MetricMappingComponent
+        MetricMappingComponent,
+        ScreenshotComponent
     ],
     exports: [
         ControlPanelComponent

@@ -41,6 +41,7 @@
     "bootstrap": "^4.0.0-alpha.6",
     "chroma-js": "^1.2.1",
     "core-js": "^2.4.1",
+    "gifshot": "^0.3.2",
     "moment": "^2.18.1",
     "reselect": "^2.5.4",
     "rxjs": "^5.1.0",
