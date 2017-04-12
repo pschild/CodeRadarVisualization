@@ -1,15 +1,14 @@
 <div class="container-fluid">
-    <form id="control-panel" class="row align-items-end">
+    <form id="control-panel" class="row align-items-center justify-content-between">
         <div class="col-4">
             <div class="row">
                 <app-commit-chooser class="col-6" [commitType]="commitTypes.left"></app-commit-chooser>
                 <app-commit-chooser class="col-6" [commitType]="commitTypes.right"></app-commit-chooser>
             </div>
         </div>
-        <div class="col-6">
-            <div>
-                <app-settings class="row"></app-settings>
-            </div>
+        <div class="col-5">
+            <app-settings></app-settings>
+            <button class="btn btn-secondary" type="button">Screenshot</button>
         </div>
         <div class="col-2">
             <app-search></app-search>

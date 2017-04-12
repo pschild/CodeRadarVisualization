@@ -1,13 +1,11 @@
-<div class="form-group">
-    <input class="form-control"
-           ngui-auto-complete [(ngModel)]="selected"
-           [source]="commits"
-           [value-formatter]="formatCommit"
-           [list-formatter]="formatCommit"
-           value-property-name="id"
-           display-property-name="name"
-           no-match-found-text="Nichts gefunden."
-           match-formatted="true"
-           (valueChanged)="handleValueChanged($event)" />
-</div>
+<input class="form-control"
+       ngui-auto-complete [(ngModel)]="selected"
+       [source]="commits"
+       [value-formatter]="formatCommit"
+       [list-formatter]="formatCommit"
+       value-property-name="id"
+       display-property-name="name"
+       no-match-found-text="Nichts gefunden."
+       match-formatted="true"
+       (valueChanged)="handleValueChanged($event)" />
 <p *ngIf="loading$ | async">LADE</p>

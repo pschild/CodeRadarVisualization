@@ -26,6 +26,10 @@
   }
 }
 
+.dropdown-menu {
+  padding: 1.25rem;
+}
+
 /* Overwrite styles of ng2-auto-complete */
 .ngui-auto-complete {
   & > ul {
