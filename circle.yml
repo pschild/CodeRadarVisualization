@@ -30,4 +30,4 @@ deployment:
     branch: angular-ui
     commands:
       - ng build --environment demo --base-href 'https://pschild.github.io/CodeRadarVisualization/'
-      - angular-cli-ghpages --name=${GH_NAME} --email=${GH_EMAIL} --no-silent
+      - angular-cli-ghpages --name=${GH_NAME} --email=${GH_EMAIL}
