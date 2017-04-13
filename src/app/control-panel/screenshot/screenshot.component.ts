@@ -3,6 +3,7 @@ import * as fromRoot from "../../shared/reducers";
 import {Store} from "@ngrx/store";
 import {clearScreenshots, requestScreenshot} from "../control-panel.actions";
 import {Subscription} from "rxjs";
+import {ScreenType} from "../../enum/ScreenType";
 declare var gifshot: any;
 
 @Component({
@@ -21,7 +22,7 @@ export class ScreenshotComponent implements OnInit {
         this.subscriptions.push(
             this.store.select(fromRoot.getScreenshots).subscribe((screenshots) => {
                 if (screenshots.length > 0) {
-                    this.generateGif(screenshots);
+                    this.generateGifs(screenshots);
                 }
             })
         );
@@ -37,30 +38,34 @@ export class ScreenshotComponent implements OnInit {
         this.store.dispatch(requestScreenshot());
     }
 
-    generateGif(images: any[]) {
+    generateGifs(screenshotObjects: any[]) {
+        let screenshotsForLeftScreen = screenshotObjects.filter(screenshotObject => screenshotObject.screenType === ScreenType.LEFT).map(screenshotObject => screenshotObject.file);
+        let screenshotsForRightScreen = screenshotObjects.filter(screenshotObject => screenshotObject.screenType === ScreenType.RIGHT).map(screenshotObject => screenshotObject.file);
+        this.generateGif(screenshotsForLeftScreen, ScreenType.LEFT);
+        this.generateGif(screenshotsForRightScreen, ScreenType.RIGHT);
+    }
+
+    generateGif(images: any[], screenType: ScreenType) {
+        if (!images.length) {
+            return;
+        }
+
         gifshot.createGIF({
-            images: images.map(image => image.file),
+            images: images,
             interval: 1
         }, (obj) => {
             if (!obj.error) {
                 let image = obj.image;
-
-                if (!document.querySelector('#left-gif-placeholder img')) {
-                    let animatedImage = document.createElement('img');
-                    animatedImage.src = image;
-                    document.querySelector('#left-gif-placeholder').appendChild(animatedImage);
-                } else {
-                    (<HTMLImageElement>document.querySelector('#left-gif-placeholder img')).src = image;
-                }
+                let animatedImage = <HTMLImageElement>document.querySelector(screenType === ScreenType.LEFT ? '#left-gif' : '#right-gif');
+                animatedImage.src = image;
             }
         });
     }
 
     removeScreenshots() {
         this.store.dispatch(clearScreenshots());
-        if (document.querySelector('#left-gif-placeholder img')) {
-            document.querySelector('#left-gif-placeholder img').remove();
-        }
+        (<HTMLImageElement>document.querySelector('#left-gif')).src = '';
+        (<HTMLImageElement>document.querySelector('#right-gif')).src = '';
     }
 
 }
