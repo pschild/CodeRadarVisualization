@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {ScreenshotService} from "../../service/screenshot.service";
-import {ScreenType} from "../../enum/ScreenType";
+import * as fromRoot from "../../shared/reducers";
+import {Store} from "@ngrx/store";
+import {clearScreenshots, requestScreenshot} from "../control-panel.actions";
+import {Subscription} from "rxjs";
 declare var gifshot: any;
 
 @Component({
@@ -10,20 +12,34 @@ declare var gifshot: any;
 })
 export class ScreenshotComponent implements OnInit {
 
-    constructor(private screenshotService: ScreenshotService) {
+    subscriptions: Subscription[] = [];
+
+    constructor(private store: Store<fromRoot.AppState>) {
     }
 
     ngOnInit() {
+        this.subscriptions.push(
+            this.store.select(fromRoot.getScreenshots).subscribe((screenshots) => {
+                if (screenshots.length > 0) {
+                    this.generateGif(screenshots);
+                }
+            })
+        );
+    }
+
+    ngOnDestroy() {
+        this.subscriptions.forEach((subscription: Subscription) => {
+            subscription.unsubscribe();
+        });
     }
 
     takeScreenshot() {
-        this.screenshotService.requestScreenshot();
-        this.generateGif();
+        this.store.dispatch(requestScreenshot());
     }
 
-    generateGif() {
+    generateGif(images: any[]) {
         gifshot.createGIF({
-            images: this.screenshotService.getAll().filter(data => data.screenType === ScreenType.LEFT).map(data => data.file),
+            images: images.map(image => image.file),
             interval: 1
         }, (obj) => {
             if (!obj.error) {
@@ -41,7 +57,7 @@ export class ScreenshotComponent implements OnInit {
     }
 
     removeScreenshots() {
-        this.screenshotService.clearAll();
+        this.store.dispatch(clearScreenshots());
         if (document.querySelector('#left-gif-placeholder img')) {
             document.querySelector('#left-gif-placeholder img').remove();
         }

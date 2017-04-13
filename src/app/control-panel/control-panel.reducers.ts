@@ -8,13 +8,17 @@ export interface ControlPanelState {
     commitsLoading: boolean;
     leftCommit: Commit;
     rightCommit: Commit;
+    screenshotRequested: boolean;
+    screenshots: any[];
 }
 
 const initialState: ControlPanelState = {
     commits: [],
     commitsLoading: false,
     leftCommit: null,
-    rightCommit: null
+    rightCommit: null,
+    screenshotRequested: false,
+    screenshots: []
 };
 
 export const ControlPanelReducer: ActionReducer<ControlPanelState> = (state = initialState, action: Action) => {
@@ -52,6 +56,22 @@ export const ControlPanelReducer: ActionReducer<ControlPanelState> = (state = in
 
             return newState;
 
+        case ControlPanelActions.REQUEST_SCREENSHOT:
+            newState = Object.assign({}, state);
+            newState.screenshotRequested = true;
+            return newState;
+
+        case ControlPanelActions.ADD_SCREENSHOT:
+            newState = Object.assign({}, state);
+            newState.screenshots = [...state.screenshots, action.payload];
+            newState.screenshotRequested = false;
+            return newState;
+
+        case ControlPanelActions.CLEAR_SCREENSHOTS:
+            newState = Object.assign({}, state);
+            newState.screenshots = [];
+            return newState;
+
         default:
             return state;
     }
@@ -64,3 +84,7 @@ export const getCommitsLoading = (state: ControlPanelState) => state.commitsLoad
 export const getLeftCommit = (state: ControlPanelState) => state.leftCommit;
 
 export const getRightCommit = (state: ControlPanelState) => state.rightCommit;
+
+export const isScreenshotRequested = (state: ControlPanelState) => state.screenshotRequested;
+
+export const getScreenshots = (state: ControlPanelState) => state.screenshots;

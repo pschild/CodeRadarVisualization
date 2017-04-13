@@ -11,7 +11,7 @@ import {MergedView} from "../view/merged-view";
 import {BlockConnection} from "../../geometry/block-connection";
 import {IFilter} from "../../domain/IFilter";
 import {NodeType} from "../../enum/NodeType";
-import {ScreenshotService} from "../../service/screenshot.service";
+import {addScreenshot} from "../../control-panel/control-panel.actions";
 
 @Component({
     selector: 'app-screen',
@@ -37,15 +37,7 @@ export class ScreenComponent implements OnInit {
 
     view: AbstractView;
 
-    constructor(private store: Store<fromRoot.AppState>, private screenshotService: ScreenshotService) {
-        this.screenshotService.screenshotRequested$.subscribe(() => {
-            let imgFromCanvas = this.renderer.domElement.toDataURL('image/png');
-            let pngFile = imgFromCanvas.replace(/^data:image\/png/, 'data:application/octet-stream');
-            this.screenshotService.add({
-                screenType: this.screenType,
-                file: pngFile
-            });
-        });
+    constructor(private store: Store<fromRoot.AppState>) {
     }
 
     ngOnInit() {
@@ -92,6 +84,19 @@ export class ScreenComponent implements OnInit {
         this.subscriptions.push(
             this.store.select(fromRoot.getActiveFilter).subscribe((activeFilter) => {
                 this.applyFilter(activeFilter);
+            })
+        );
+
+        this.subscriptions.push(
+            this.store.select(fromRoot.isScreenshotRequested).subscribe((isRequested) => {
+                if (isRequested) {
+                    let imgFromCanvas = this.renderer.domElement.toDataURL('image/png');
+                    let pngFile = imgFromCanvas.replace(/^data:image\/png/, 'data:application/octet-stream');
+                    this.store.dispatch(addScreenshot({
+                        screenType: this.screenType,
+                        file: pngFile
+                    }));
+                }
             })
         );
     }

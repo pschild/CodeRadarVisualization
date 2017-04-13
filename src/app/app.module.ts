@@ -12,7 +12,6 @@ import {EffectsModule} from '@ngrx/effects';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {AppEffects} from './shared/effects';
 import {XHRBackendFactory} from './XHRBackendFactory';
-import {ScreenshotService} from "./service/screenshot.service";
 
 @NgModule({
     declarations: [
@@ -33,8 +32,7 @@ import {ScreenshotService} from "./service/screenshot.service";
             provide: XHRBackend,
             useFactory: XHRBackendFactory,
             deps: [Injector, BrowserXhr, XSRFStrategy, ResponseOptions]
-        },
-        ScreenshotService
+        }
     ],
     bootstrap: [AppComponent]
 })

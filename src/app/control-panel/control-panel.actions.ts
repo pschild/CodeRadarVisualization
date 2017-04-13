@@ -6,6 +6,9 @@ export const LOAD_COMMITS = 'LOAD_COMMITS';
 export const LOAD_COMMITS_SUCCESS = 'LOAD_COMMITS_SUCCESS';
 export const LOAD_COMMITS_ERROR = 'LOAD_COMMITS_ERROR';
 export const CHANGE_COMMIT = 'CHANGE_COMMIT';
+export const REQUEST_SCREENSHOT = 'REQUEST_SCREENSHOT';
+export const ADD_SCREENSHOT = 'ADD_SCREENSHOT';
+export const CLEAR_SCREENSHOTS = 'CLEAR_SCREENSHOTS';
 
 export function loadCommits(): Action {
     return {
@@ -34,5 +37,24 @@ export function changeCommit(commitType: CommitType, commit: Commit): Action {
             commitType: commitType,
             commit: commit
         }
+    };
+}
+
+export function requestScreenshot(): Action {
+    return {
+        type: REQUEST_SCREENSHOT
+    };
+}
+
+export function addScreenshot(screenshotObject: any): Action {
+    return {
+        type: ADD_SCREENSHOT,
+        payload: screenshotObject
+    };
+}
+
+export function clearScreenshots(): Action {
+    return {
+        type: CLEAR_SCREENSHOTS
     };
 }
