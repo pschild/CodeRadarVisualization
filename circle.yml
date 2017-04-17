@@ -1,7 +1,9 @@
 general:
   branches:
-    only:
-      - angular-ui
+    ignore:
+      - master
+      - gh-pages
+      - commit-merger
 
 machine:
   node:

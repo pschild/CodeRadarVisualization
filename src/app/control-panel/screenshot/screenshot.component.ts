@@ -4,6 +4,7 @@ import {Store} from "@ngrx/store";
 import {clearScreenshots, requestScreenshot} from "../control-panel.actions";
 import {Subscription} from "rxjs";
 import {ScreenType} from "../../enum/ScreenType";
+import {ViewType} from "../../enum/ViewType";
 declare var gifshot: any;
 
 @Component({
@@ -15,6 +16,16 @@ export class ScreenshotComponent implements OnInit {
 
     subscriptions: Subscription[] = [];
 
+    activeViewType: ViewType;
+
+    viewTypes: any = {
+        merged: ViewType.MERGED,
+        split: ViewType.SPLIT
+    };
+
+    leftGifSource: string;
+    rightGifSource: string;
+
     constructor(private store: Store<fromRoot.AppState>) {
     }
 
@@ -24,6 +35,13 @@ export class ScreenshotComponent implements OnInit {
                 if (screenshots.length > 0) {
                     this.generateGifs(screenshots);
                 }
+            })
+        );
+
+        this.subscriptions.push(
+            this.store.select(fromRoot.getActiveViewType).subscribe((activeViewType) => {
+                this.activeViewType = activeViewType;
+                this.removeScreenshots();
             })
         );
     }
@@ -40,9 +58,12 @@ export class ScreenshotComponent implements OnInit {
 
     generateGifs(screenshotObjects: any[]) {
         let screenshotsForLeftScreen = screenshotObjects.filter(screenshotObject => screenshotObject.screenType === ScreenType.LEFT).map(screenshotObject => screenshotObject.file);
-        let screenshotsForRightScreen = screenshotObjects.filter(screenshotObject => screenshotObject.screenType === ScreenType.RIGHT).map(screenshotObject => screenshotObject.file);
         this.generateGif(screenshotsForLeftScreen, ScreenType.LEFT);
-        this.generateGif(screenshotsForRightScreen, ScreenType.RIGHT);
+
+        if (this.activeViewType === ViewType.SPLIT) {
+            let screenshotsForRightScreen = screenshotObjects.filter(screenshotObject => screenshotObject.screenType === ScreenType.RIGHT).map(screenshotObject => screenshotObject.file);
+            this.generateGif(screenshotsForRightScreen, ScreenType.RIGHT);
+        }
     }
 
     generateGif(images: any[], screenType: ScreenType) {
@@ -55,17 +76,21 @@ export class ScreenshotComponent implements OnInit {
             interval: 1
         }, (obj) => {
             if (!obj.error) {
-                let image = obj.image;
-                let animatedImage = <HTMLImageElement>document.querySelector(screenType === ScreenType.LEFT ? '#left-gif' : '#right-gif');
-                animatedImage.src = image;
+                if (screenType === ScreenType.LEFT) {
+                    this.leftGifSource = obj.image;
+                } else if (screenType === ScreenType.RIGHT) {
+                    this.rightGifSource = obj.image;
+                } else {
+                    throw new Error(`Unknown screentype ${screenType}`);
+                }
             }
         });
     }
 
     removeScreenshots() {
         this.store.dispatch(clearScreenshots());
-        (<HTMLImageElement>document.querySelector('#left-gif')).src = '';
-        (<HTMLImageElement>document.querySelector('#right-gif')).src = '';
+        this.leftGifSource = undefined;
+        this.rightGifSource = undefined;
     }
 
 }

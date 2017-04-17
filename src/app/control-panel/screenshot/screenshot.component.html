@@ -4,8 +4,22 @@
         <span class="sr-only">Toggle Dropdown</span>
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <img id="left-gif">
-        <img id="right-gif">
-        <button type="button" class="btn btn-danger" (click)="removeScreenshots()">zurücksetzen</button>
+        <div class="row">
+            <div *ngIf="leftGifSource" class="col-6">
+                <label>{{activeViewType === viewTypes.merged ? 'Kombinierte Ansicht' : 'Erster Commit'}}</label>
+                <img id="left-gif" src="{{leftGifSource}}">
+            </div>
+
+            <div *ngIf="activeViewType === viewTypes.split && rightGifSource" class="col-6">
+                <label>Zweiter Commit</label>
+                <img id="right-gif" src="{{rightGifSource}}">
+            </div>
+
+            <div class="col-12">
+                <button type="button" class="btn btn-danger" (click)="removeScreenshots()" *ngIf="leftGifSource || rightGifSource">zurücksetzen</button>
+            </div>
+
+            <div *ngIf="!leftGifSource && !rightGifSource" class="col-12">Wähle "Screenshot" um ein GIF zu erstellen.</div>
+        </div>
     </div>
 </div>
