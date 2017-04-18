@@ -1,25 +1,23 @@
 <div class="btn-group">
-    <button type="button" class="btn btn-secondary" (click)="takeScreenshot()">Screenshot</button>
+    <button type="button" class="btn btn-secondary" (click)="takeScreenshot()">Screenshot speichern</button>
     <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <span class="sr-only">Toggle Dropdown</span>
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <div class="row">
-            <div *ngIf="leftGifSource" class="col-6">
-                <label>{{activeViewType === viewTypes.merged ? 'Kombinierte Ansicht' : 'Erster Commit'}}</label>
-                <img id="left-gif" src="{{leftGifSource}}">
+        <div class="form-group">
+            <label>GIF erstellen für:</label>
+            <div class="btn-group">
+                <button type="button" class="btn btn-secondary" (click)="generateGif(screenTypes.left)">Erster Commit</button>
+                <button type="button" class="btn btn-secondary" (click)="generateGif(screenTypes.right)">Zweiter Commit</button>
             </div>
+        </div>
 
-            <div *ngIf="activeViewType === viewTypes.split && rightGifSource" class="col-6">
-                <label>Zweiter Commit</label>
-                <img id="right-gif" src="{{rightGifSource}}">
-            </div>
+        <img *ngIf="gifSource && !isGenerating" id="gif" src="{{gifSource}}">
+        <p *ngIf="isGenerating">GIF wird erstellt ...</p>
+        <small *ngIf="!gifSource && !isGenerating">Ein GIF wird aus gespeicherten Screenshots erzeugt (Button "Screenshot speichern")</small>
 
-            <div class="col-12">
-                <button type="button" class="btn btn-danger" (click)="removeScreenshots()" *ngIf="leftGifSource || rightGifSource">zurücksetzen</button>
-            </div>
-
-            <div *ngIf="!leftGifSource && !rightGifSource" class="col-12">Wähle "Screenshot" um ein GIF zu erstellen.</div>
+        <div class="form-group" *ngIf="gifSource">
+            <button type="button" class="btn btn-danger" (click)="removeScreenshots()">zurücksetzen</button>
         </div>
     </div>
 </div>

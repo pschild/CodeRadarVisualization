@@ -18,26 +18,24 @@ export class ScreenshotComponent implements OnInit {
 
     activeViewType: ViewType;
 
+    screenTypes: any = {
+        left: ScreenType.LEFT,
+        right: ScreenType.RIGHT
+    };
+
     viewTypes: any = {
         merged: ViewType.MERGED,
         split: ViewType.SPLIT
     };
 
-    leftGifSource: string;
-    rightGifSource: string;
+    gifSource: string;
+
+    isGenerating: boolean = false;
 
     constructor(private store: Store<fromRoot.AppState>) {
     }
 
     ngOnInit() {
-        this.subscriptions.push(
-            this.store.select(fromRoot.getScreenshots).subscribe((screenshots) => {
-                if (screenshots.length > 0) {
-                    this.generateGifs(screenshots);
-                }
-            })
-        );
-
         this.subscriptions.push(
             this.store.select(fromRoot.getActiveViewType).subscribe((activeViewType) => {
                 this.activeViewType = activeViewType;
@@ -56,43 +54,36 @@ export class ScreenshotComponent implements OnInit {
         this.store.dispatch(requestScreenshot());
     }
 
-    generateGifs(screenshotObjects: any[]) {
-        let screenshotsForLeftScreen = screenshotObjects.filter(screenshotObject => screenshotObject.screenType === ScreenType.LEFT).map(screenshotObject => screenshotObject.file);
-        this.generateGif(screenshotsForLeftScreen, ScreenType.LEFT);
-
-        if (this.activeViewType === ViewType.SPLIT) {
-            let screenshotsForRightScreen = screenshotObjects.filter(screenshotObject => screenshotObject.screenType === ScreenType.RIGHT).map(screenshotObject => screenshotObject.file);
-            this.generateGif(screenshotsForRightScreen, ScreenType.RIGHT);
-        }
-    }
-
-    generateGif(images: any[], screenType: ScreenType) {
-        if (!images.length) {
-            return;
-        }
-
-        gifshot.createGIF({
-            images: images,
-            interval: 1,
-            gifWidth: this.activeViewType === ViewType.SPLIT ? window.innerWidth / 2 : window.innerWidth,
-            gifHeight: window.innerHeight
-        }, (obj) => {
-            if (!obj.error) {
-                if (screenType === ScreenType.LEFT) {
-                    this.leftGifSource = obj.image;
-                } else if (screenType === ScreenType.RIGHT) {
-                    this.rightGifSource = obj.image;
-                } else {
-                    throw new Error(`Unknown screentype ${screenType}`);
+    generateGif(screenType: ScreenType) {
+        this.store.select(fromRoot.getScreenshots).subscribe((screenshots) => {
+            if (screenshots.length > 0) {
+                let images = screenshots.filter(screenshotObject => screenshotObject.screenType === screenType).map(screenshotObject => screenshotObject.file);
+                if (!images.length) {
+                    return;
                 }
+
+                this.isGenerating = true;
+                gifshot.createGIF({
+                    images: images,
+                    interval: 1,
+                    gifWidth: this.activeViewType === ViewType.SPLIT ? window.innerWidth / 2 : window.innerWidth,
+                    gifHeight: window.innerHeight
+                }, (obj) => {
+                    if (!obj.error) {
+                        this.gifSource = obj.image;
+                    }
+
+                    this.isGenerating = false;
+                });
+            } else {
+                alert(`Es wurden keine gespeicherten Screenshots gefunden.`);
             }
-        });
+        }).unsubscribe();
     }
 
     removeScreenshots() {
         this.store.dispatch(clearScreenshots());
-        this.leftGifSource = undefined;
-        this.rightGifSource = undefined;
+        this.gifSource = undefined;
     }
 
 }
