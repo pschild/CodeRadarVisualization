@@ -37,11 +37,11 @@ export class AppConfig {
     static SCREEN_PADDING: number = 0;
 
     // CAMERA SETTINGS
-    static CAMERA_NEAR: number = 1;
-    static CAMERA_FAR: number = 100000;
-    static CAMERA_DISTANCE_TO_FOCUSSED_ELEMENT: number = 200;
+    static CAMERA_NEAR: number = 0.1;
+    static CAMERA_FAR: number = 10000;
+    static CAMERA_DISTANCE_TO_FOCUSSED_ELEMENT: number = 100;
     static CAMERA_START_POSITION: any = {
-        x: 1000, y: 1000, z: 1000
+        x: 100, y: 50, z: 200
     };
     static CAMERA_ANIMATION_DURATION: number = 1500;
 

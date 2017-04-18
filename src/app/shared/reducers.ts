@@ -49,6 +49,8 @@ export const getUniqueFileList = createSelector(getVisualizationState, fromVisua
 export const getMinColorMetricValue = createSelector(getVisualizationState, fromVisualization.getMinColorMetricValue);
 export const getMaxColorMetricValue = createSelector(getVisualizationState, fromVisualization.getMaxColorMetricValue);
 
+export const getFocussedElementName = createSelector(getVisualizationState, fromVisualization.getFocussedElementName);
+
 export const getMetricMapping = createSelector(getSettingsState, fromSettings.getMetricMapping);
 
 export const getActiveFilter = createSelector(getSettingsState, fromSettings.getActiveFilter);

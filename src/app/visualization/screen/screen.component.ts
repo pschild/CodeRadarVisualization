@@ -13,6 +13,8 @@ import {IFilter} from "../../domain/IFilter";
 import {NodeType} from "../../enum/NodeType";
 import {addScreenshot} from "../../control-panel/control-panel.actions";
 import {InteractionHandler} from "../interaction-handler/interaction-handler";
+import {AppConfig} from "../../AppConfig";
+declare var TWEEN: any;
 
 @Component({
     selector: 'app-screen',
@@ -33,7 +35,7 @@ export class ScreenComponent implements OnInit {
     scene: Scene = new Scene();
 
     // use THREE.PerspectiveCamera instead of importing PerspectiveCamera to avoid warning for panning and zooming are disabled (see https://github.com/nicolaspanel/three-orbitcontrols-ts/issues/1)
-    camera: THREE.PerspectiveCamera = new THREE.PerspectiveCamera(45, (this.getScreenWidth() - 0) / window.innerHeight, 0.1, 10000);
+    camera: THREE.PerspectiveCamera;
     controls: THREE.OrbitControls;
 
     interactionHandler: InteractionHandler;
@@ -47,11 +49,10 @@ export class ScreenComponent implements OnInit {
         this.view = new SplitView(this.screenType, this.store);
 
         this.createCamera();
+        this.createControls();
         this.createLight();
         this.createRenderer();
         this.createInteractionHandler();
-
-        this.controls = new THREE.OrbitControls(this.camera, <HTMLElement>document.querySelector('#stage'));
 
         this.initializeEventListeners();
 
@@ -82,6 +83,7 @@ export class ScreenComponent implements OnInit {
                     this.prepareView(result.isReadyForDrawing.metricTree);
                     this.applyFilter(result.activeFilter);
                     this.handleViewChanged();
+                    this.resetCameraAndControls();
                 }
             })
         );
@@ -89,6 +91,14 @@ export class ScreenComponent implements OnInit {
         this.subscriptions.push(
             this.store.select(fromRoot.getActiveFilter).subscribe((activeFilter) => {
                 this.applyFilter(activeFilter);
+            })
+        );
+
+        this.subscriptions.push(
+            this.store.select(fromRoot.getFocussedElementName).subscribe((focussedElementName) => {
+                if (focussedElementName) {
+                    this.focusElementByName(focussedElementName);
+                }
             })
         );
 
@@ -134,13 +144,28 @@ export class ScreenComponent implements OnInit {
     }
 
     createCamera() {
-        this.camera.position.z = 100;
+        this.camera = new THREE.PerspectiveCamera(45, (this.getScreenWidth() - 0) / window.innerHeight, AppConfig.CAMERA_NEAR, AppConfig.CAMERA_FAR);
         this.scene.add(this.camera);
     }
 
     updateCamera() {
         this.camera.aspect = (this.getScreenWidth() - 0) / window.innerHeight;
         this.camera.updateProjectionMatrix();
+    }
+
+    createControls() {
+        this.controls = new THREE.OrbitControls(this.camera, <HTMLElement>document.querySelector('#stage'));
+    }
+
+    resetCameraAndControls() {
+        this.camera.position.x = AppConfig.CAMERA_START_POSITION.x;
+        this.camera.position.y = AppConfig.CAMERA_START_POSITION.y;
+        this.camera.position.z = AppConfig.CAMERA_START_POSITION.z;
+
+        let centralCoordinates = this.getCentralCoordinates();
+        this.controls.target.x = centralCoordinates.x;
+        this.controls.target.y = centralCoordinates.y;
+        this.controls.target.z = centralCoordinates.z;
     }
 
     render() {
@@ -151,6 +176,7 @@ export class ScreenComponent implements OnInit {
         this.controls.update();
         this.renderer.render(this.scene, this.camera);
         this.interactionHandler.update(this.camera);
+        TWEEN.update();
     }
 
     pauseRendering() {
@@ -184,7 +210,7 @@ export class ScreenComponent implements OnInit {
     }
 
     createInteractionHandler() {
-        this.interactionHandler = new InteractionHandler(this.scene, this.renderer, this.screenType, this.isMergedView);
+        this.interactionHandler = new InteractionHandler(this.scene, this.renderer, this.screenType, this.isMergedView, this.store);
     }
 
     resetScene() {
@@ -196,6 +222,45 @@ export class ScreenComponent implements OnInit {
                 this.scene.remove(child);
             }
         }
+    }
+
+    focusElementByName(elementName) {
+        let element = this.scene.getObjectByName(elementName);
+        if (!element) {
+            return;
+        }
+
+        new TWEEN.Tween(this.camera.position)
+            .to({
+                x: element.position.x + AppConfig.CAMERA_DISTANCE_TO_FOCUSSED_ELEMENT,
+                y: element.position.y + AppConfig.CAMERA_DISTANCE_TO_FOCUSSED_ELEMENT,
+                z: element.position.z + AppConfig.CAMERA_DISTANCE_TO_FOCUSSED_ELEMENT
+            }, AppConfig.CAMERA_ANIMATION_DURATION)
+            .easing(TWEEN.Easing.Sinusoidal.InOut)
+            .start();
+
+        new TWEEN.Tween(this.controls.target)
+            .to({
+                x: element.position.x + element.scale.x / 2,
+                y: element.position.y,
+                z: element.position.z + element.scale.z / 2
+            }, AppConfig.CAMERA_ANIMATION_DURATION)
+            .easing(TWEEN.Easing.Sinusoidal.InOut)
+            .start();
+    }
+
+    private getCentralCoordinates() {
+        let root = this.scene.getObjectByName('root');
+        if (!root) {
+            console.warn(`no root found in screen #${this.screenType}`);
+            return;
+        }
+
+        return {
+            x: root.scale.x / 2,
+            y: AppConfig.CAMERA_START_POSITION.y,
+            z: root.scale.z / 2
+        };
     }
 
     private getScreenWidth() {

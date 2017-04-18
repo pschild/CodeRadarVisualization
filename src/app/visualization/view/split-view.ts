@@ -1,5 +1,4 @@
 import {AbstractView} from "./abstract-view";
-import {Block} from "../../geometry/block";
 import Object3D = THREE.Object3D;
 import {INode} from "../../domain/INode";
 import {NodeType} from "../../enum/NodeType";

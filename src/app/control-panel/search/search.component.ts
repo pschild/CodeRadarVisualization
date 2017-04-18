@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import * as fromRoot from "../../shared/reducers";
 import {Store} from "@ngrx/store";
 import {Subscription} from "rxjs";
+import {focusElement} from "../../visualization/visualization.actions";
 
 @Component({
     selector: 'app-search',
@@ -28,7 +29,7 @@ export class SearchComponent implements OnInit {
     }
 
     handleValueChanged(chosenItem: string) {
-        console.log(chosenItem);
+        this.store.dispatch(focusElement(chosenItem));
     }
 
     autocompleteListFormatter(data: string): string {

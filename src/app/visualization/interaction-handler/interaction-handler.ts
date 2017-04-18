@@ -7,8 +7,13 @@ import {NodeType} from "app/enum/NodeType";
 import PerspectiveCamera = THREE.PerspectiveCamera;
 import Intersection = THREE.Intersection;
 import Object3D = THREE.Object3D;
+import {focusElement} from "../visualization.actions";
+import {Store} from "@ngrx/store";
+import * as fromRoot from "../../shared/reducers";
 
 export class InteractionHandler {
+
+    store: Store<fromRoot.AppState>;
 
     enabled: boolean = false;
 
@@ -27,11 +32,14 @@ export class InteractionHandler {
 
     startingPosition: {x?: number, y?: number} = {};
 
-    constructor(scene: Scene, renderer: WebGLRenderer, screenType: ScreenType, isMergedView: boolean) {
+    constructor(scene: Scene, renderer: WebGLRenderer, screenType: ScreenType, isMergedView: boolean, store: Store<fromRoot.AppState>) {
         this.scene = scene;
         this.renderer = renderer;
         this.screenType = screenType;
         this.isMergedView = isMergedView;
+
+        // no dependency injection as the view class are constructed with "new" instead with Angular
+        this.store = store;
 
         this.bindEvents();
     }
@@ -139,24 +147,13 @@ export class InteractionHandler {
         let target = this.findFirstNonHelperBlock(intersects);
         if (target) {
             if (event.which == 1) { // left mouse button
-                let doReset;
                 if (target.uuid != this.clickedElementUuid) {
-                    doReset = false;
                     this.clickedElementUuid = target.uuid;
                 } else {
-                    doReset = true;
                     this.clickedElementUuid = undefined;
                 }
 
-                console.log('element clicked');
-
-                // PubSub.publish('elementClicked', { elementName: target.name, doReset: doReset });
-
-            } else if (event.which == 3) { // right mouse button
-                if (target.userData && target.userData.type === NodeType.MODULE) {
-                    event.preventDefault();
-                    // PubSub.publish('elementRightClicked', { elementName: target.name, position: { x: event.clientX, y: event.clientY } });
-                }
+                this.store.dispatch(focusElement(target.name));
             }
         }
     }
