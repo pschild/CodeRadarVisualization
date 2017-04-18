@@ -1,9 +1,7 @@
 general:
   branches:
-    ignore:
-      - master
-      - gh-pages
-      - commit-merger
+    only:
+      - angular-ui
 
 machine:
   node:
@@ -32,4 +30,5 @@ deployment:
     branch: angular-ui
     commands:
       - ng build --environment demo --base-href 'https://pschild.github.io/CodeRadarVisualization/'
+      - cp circle.yml dist/circle.yml
       - angular-cli-ghpages --name=${GH_NAME} --email=${GH_EMAIL}
