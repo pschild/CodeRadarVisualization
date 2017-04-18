@@ -12,6 +12,7 @@ import {BlockConnection} from "../../geometry/block-connection";
 import {IFilter} from "../../domain/IFilter";
 import {NodeType} from "../../enum/NodeType";
 import {addScreenshot} from "../../control-panel/control-panel.actions";
+import {InteractionHandler} from "../interaction-handler/interaction-handler";
 
 @Component({
     selector: 'app-screen',
@@ -35,6 +36,8 @@ export class ScreenComponent implements OnInit {
     camera: THREE.PerspectiveCamera = new THREE.PerspectiveCamera(45, (this.getScreenWidth() - 0) / window.innerHeight, 0.1, 10000);
     controls: THREE.OrbitControls;
 
+    interactionHandler: InteractionHandler;
+
     view: AbstractView;
 
     constructor(private store: Store<fromRoot.AppState>) {
@@ -46,6 +49,7 @@ export class ScreenComponent implements OnInit {
         this.createCamera();
         this.createLight();
         this.createRenderer();
+        this.createInteractionHandler();
 
         this.controls = new THREE.OrbitControls(this.camera, <HTMLElement>document.querySelector('#stage'));
 
@@ -57,6 +61,7 @@ export class ScreenComponent implements OnInit {
             this.store.select(fromRoot.getViewChanged).subscribe((result) => {
                 if (result) {
                     this.isMergedView = result.activeViewType === ViewType.MERGED;
+                    this.interactionHandler.setIsMergedView(this.isMergedView);
 
                     if (this.isMergedView) {
                         this.view = new MergedView(this.screenType);
@@ -145,6 +150,7 @@ export class ScreenComponent implements OnInit {
 
         this.controls.update();
         this.renderer.render(this.scene, this.camera);
+        this.interactionHandler.update(this.camera);
     }
 
     pauseRendering() {
@@ -175,6 +181,10 @@ export class ScreenComponent implements OnInit {
                 this.scene.add(blockConnection.getCurve());
             });
         }
+    }
+
+    createInteractionHandler() {
+        this.interactionHandler = new InteractionHandler(this.scene, this.renderer, this.screenType, this.isMergedView);
     }
 
     resetScene() {

@@ -5,6 +5,7 @@ import {ScreenComponent} from './screen/screen.component';
 import {MetricService} from "../service/metric.service";
 import {environment} from "../../environments/environment";
 import {MetricMockService} from "../service/mocks/metric-mock.service";
+import { TooltipComponent } from './tooltip/tooltip.component';
 
 @NgModule({
     imports: [
@@ -12,7 +13,8 @@ import {MetricMockService} from "../service/mocks/metric-mock.service";
     ],
     declarations: [
         VisualizationComponent,
-        ScreenComponent
+        ScreenComponent,
+        TooltipComponent
     ],
     exports: [
         VisualizationComponent
