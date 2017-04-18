@@ -258,7 +258,7 @@ var AbstractView = (function () {
 /* unused harmony export getLeftCommit */
 /* unused harmony export getRightCommit */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return isScreenshotRequested; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return getScreenshots; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return getScreenshots; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return getMetricsLoading; });
 /* unused harmony export getMetricTree */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return getUniqueFileList; });
@@ -266,7 +266,7 @@ var AbstractView = (function () {
 /* unused harmony export getMaxColorMetricValue */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return getMetricMapping; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return getActiveFilter; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return getActiveViewType; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return getActiveViewType; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return isReadyForLoadingMetrics; });
 /* unused harmony export isReadyForDrawing */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return getViewChanged; });
@@ -875,19 +875,19 @@ var ScreenshotComponent = (function () {
     function ScreenshotComponent(store) {
         this.store = store;
         this.subscriptions = [];
+        this.screenTypes = {
+            left: __WEBPACK_IMPORTED_MODULE_4__enum_ScreenType__["a" /* ScreenType */].LEFT,
+            right: __WEBPACK_IMPORTED_MODULE_4__enum_ScreenType__["a" /* ScreenType */].RIGHT
+        };
         this.viewTypes = {
             merged: __WEBPACK_IMPORTED_MODULE_5__enum_ViewType__["a" /* ViewType */].MERGED,
             split: __WEBPACK_IMPORTED_MODULE_5__enum_ViewType__["a" /* ViewType */].SPLIT
         };
+        this.isGenerating = false;
     }
     ScreenshotComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.subscriptions.push(this.store.select(__WEBPACK_IMPORTED_MODULE_1__shared_reducers__["h" /* getScreenshots */]).subscribe(function (screenshots) {
-            if (screenshots.length > 0) {
-                _this.generateGifs(screenshots);
-            }
-        }));
-        this.subscriptions.push(this.store.select(__WEBPACK_IMPORTED_MODULE_1__shared_reducers__["i" /* getActiveViewType */]).subscribe(function (activeViewType) {
+        this.subscriptions.push(this.store.select(__WEBPACK_IMPORTED_MODULE_1__shared_reducers__["h" /* getActiveViewType */]).subscribe(function (activeViewType) {
             _this.activeViewType = activeViewType;
             _this.removeScreenshots();
         }));
@@ -900,42 +900,35 @@ var ScreenshotComponent = (function () {
     ScreenshotComponent.prototype.takeScreenshot = function () {
         this.store.dispatch(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__control_panel_actions__["k" /* requestScreenshot */])());
     };
-    ScreenshotComponent.prototype.generateGifs = function (screenshotObjects) {
-        var screenshotsForLeftScreen = screenshotObjects.filter(function (screenshotObject) { return screenshotObject.screenType === __WEBPACK_IMPORTED_MODULE_4__enum_ScreenType__["a" /* ScreenType */].LEFT; }).map(function (screenshotObject) { return screenshotObject.file; });
-        this.generateGif(screenshotsForLeftScreen, __WEBPACK_IMPORTED_MODULE_4__enum_ScreenType__["a" /* ScreenType */].LEFT);
-        if (this.activeViewType === __WEBPACK_IMPORTED_MODULE_5__enum_ViewType__["a" /* ViewType */].SPLIT) {
-            var screenshotsForRightScreen = screenshotObjects.filter(function (screenshotObject) { return screenshotObject.screenType === __WEBPACK_IMPORTED_MODULE_4__enum_ScreenType__["a" /* ScreenType */].RIGHT; }).map(function (screenshotObject) { return screenshotObject.file; });
-            this.generateGif(screenshotsForRightScreen, __WEBPACK_IMPORTED_MODULE_4__enum_ScreenType__["a" /* ScreenType */].RIGHT);
-        }
-    };
-    ScreenshotComponent.prototype.generateGif = function (images, screenType) {
+    ScreenshotComponent.prototype.generateGif = function (screenType) {
         var _this = this;
-        if (!images.length) {
-            return;
-        }
-        gifshot.createGIF({
-            images: images,
-            interval: 1,
-            gifWidth: this.activeViewType === __WEBPACK_IMPORTED_MODULE_5__enum_ViewType__["a" /* ViewType */].SPLIT ? window.innerWidth / 2 : window.innerWidth,
-            gifHeight: window.innerHeight
-        }, function (obj) {
-            if (!obj.error) {
-                if (screenType === __WEBPACK_IMPORTED_MODULE_4__enum_ScreenType__["a" /* ScreenType */].LEFT) {
-                    _this.leftGifSource = obj.image;
+        this.store.select(__WEBPACK_IMPORTED_MODULE_1__shared_reducers__["i" /* getScreenshots */]).subscribe(function (screenshots) {
+            if (screenshots.length > 0) {
+                var images = screenshots.filter(function (screenshotObject) { return screenshotObject.screenType === screenType; }).map(function (screenshotObject) { return screenshotObject.file; });
+                if (!images.length) {
+                    return;
                 }
-                else if (screenType === __WEBPACK_IMPORTED_MODULE_4__enum_ScreenType__["a" /* ScreenType */].RIGHT) {
-                    _this.rightGifSource = obj.image;
-                }
-                else {
-                    throw new Error("Unknown screentype " + screenType);
-                }
+                _this.isGenerating = true;
+                gifshot.createGIF({
+                    images: images,
+                    interval: 1,
+                    gifWidth: _this.activeViewType === __WEBPACK_IMPORTED_MODULE_5__enum_ViewType__["a" /* ViewType */].SPLIT ? window.innerWidth / 2 : window.innerWidth,
+                    gifHeight: window.innerHeight
+                }, function (obj) {
+                    if (!obj.error) {
+                        _this.gifSource = obj.image;
+                    }
+                    _this.isGenerating = false;
+                });
             }
-        });
+            else {
+                alert("Es wurden keine gespeicherten Screenshots gefunden.");
+            }
+        }).unsubscribe();
     };
     ScreenshotComponent.prototype.removeScreenshots = function () {
         this.store.dispatch(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__control_panel_actions__["l" /* clearScreenshots */])());
-        this.leftGifSource = undefined;
-        this.rightGifSource = undefined;
+        this.gifSource = undefined;
     };
     return ScreenshotComponent;
 }());
@@ -1250,7 +1243,7 @@ var ViewControlComponent = (function () {
     }
     ViewControlComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.subscription = this.store.select(__WEBPACK_IMPORTED_MODULE_3__shared_reducers__["i" /* getActiveViewType */]).subscribe(function (activeViewType) {
+        this.subscription = this.store.select(__WEBPACK_IMPORTED_MODULE_3__shared_reducers__["h" /* getActiveViewType */]).subscribe(function (activeViewType) {
             _this.activeViewType = activeViewType;
         });
     };
@@ -2665,7 +2658,7 @@ exports = module.exports = __webpack_require__(15)();
 
 
 // module
-exports.push([module.i, ".dropdown-menu {\n  min-width: 460px; }\n  .dropdown-menu img {\n    width: 200px; }\n", ""]);
+exports.push([module.i, "img#gif {\n  width: 100%;\n  margin-bottom: 1rem; }\n", ""]);
 
 // exports
 
@@ -3079,7 +3072,7 @@ module.exports = "<div class=\"container-fluid\">\n    <form id=\"control-panel\
 /***/ 427:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"btn-group\">\n    <button type=\"button\" class=\"btn btn-secondary\" (click)=\"takeScreenshot()\">Screenshot</button>\n    <button type=\"button\" class=\"btn btn-secondary dropdown-toggle dropdown-toggle-split\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n        <span class=\"sr-only\">Toggle Dropdown</span>\n    </button>\n    <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n        <div class=\"row\">\n            <div *ngIf=\"leftGifSource\" class=\"col-6\">\n                <label>{{activeViewType === viewTypes.merged ? 'Kombinierte Ansicht' : 'Erster Commit'}}</label>\n                <img id=\"left-gif\" src=\"{{leftGifSource}}\">\n            </div>\n\n            <div *ngIf=\"activeViewType === viewTypes.split && rightGifSource\" class=\"col-6\">\n                <label>Zweiter Commit</label>\n                <img id=\"right-gif\" src=\"{{rightGifSource}}\">\n            </div>\n\n            <div class=\"col-12\">\n                <button type=\"button\" class=\"btn btn-danger\" (click)=\"removeScreenshots()\" *ngIf=\"leftGifSource || rightGifSource\">zurücksetzen</button>\n            </div>\n\n            <div *ngIf=\"!leftGifSource && !rightGifSource\" class=\"col-12\">Wähle \"Screenshot\" um ein GIF zu erstellen.</div>\n        </div>\n    </div>\n</div>"
+module.exports = "<div class=\"btn-group\">\n    <button type=\"button\" class=\"btn btn-secondary\" (click)=\"takeScreenshot()\">Screenshot speichern</button>\n    <button type=\"button\" class=\"btn btn-secondary dropdown-toggle dropdown-toggle-split\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n        <span class=\"sr-only\">Toggle Dropdown</span>\n    </button>\n    <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n        <div class=\"form-group\">\n            <label>GIF erstellen für:</label>\n            <div class=\"btn-group\">\n                <button type=\"button\" class=\"btn btn-secondary\" (click)=\"generateGif(screenTypes.left)\">Erster Commit</button>\n                <button type=\"button\" class=\"btn btn-secondary\" (click)=\"generateGif(screenTypes.right)\">Zweiter Commit</button>\n            </div>\n        </div>\n\n        <img *ngIf=\"gifSource && !isGenerating\" id=\"gif\" src=\"{{gifSource}}\">\n        <p *ngIf=\"isGenerating\">GIF wird erstellt ...</p>\n        <small *ngIf=\"!gifSource && !isGenerating\">Ein GIF wird aus gespeicherten Screenshots erzeugt (Button \"Screenshot speichern\")</small>\n\n        <div class=\"form-group\" *ngIf=\"gifSource\">\n            <button type=\"button\" class=\"btn btn-danger\" (click)=\"removeScreenshots()\">zurücksetzen</button>\n        </div>\n    </div>\n</div>"
 
 /***/ }),
 
