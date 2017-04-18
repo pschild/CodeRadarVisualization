@@ -915,7 +915,9 @@ var ScreenshotComponent = (function () {
         }
         gifshot.createGIF({
             images: images,
-            interval: 1
+            interval: 1,
+            gifWidth: this.activeViewType === __WEBPACK_IMPORTED_MODULE_5__enum_ViewType__["a" /* ViewType */].SPLIT ? window.innerWidth / 2 : window.innerWidth,
+            gifHeight: window.innerHeight
         }, function (obj) {
             if (!obj.error) {
                 if (screenType === __WEBPACK_IMPORTED_MODULE_4__enum_ScreenType__["a" /* ScreenType */].LEFT) {
@@ -2663,7 +2665,7 @@ exports = module.exports = __webpack_require__(15)();
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, ".dropdown-menu {\n  min-width: 460px; }\n  .dropdown-menu img {\n    width: 200px; }\n", ""]);
 
 // exports
 
