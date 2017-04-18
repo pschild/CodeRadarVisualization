@@ -73,7 +73,9 @@ export class ScreenshotComponent implements OnInit {
 
         gifshot.createGIF({
             images: images,
-            interval: 1
+            interval: 1,
+            gifWidth: this.activeViewType === ViewType.SPLIT ? window.innerWidth / 2 : window.innerWidth,
+            gifHeight: window.innerHeight
         }, (obj) => {
             if (!obj.error) {
                 if (screenType === ScreenType.LEFT) {
