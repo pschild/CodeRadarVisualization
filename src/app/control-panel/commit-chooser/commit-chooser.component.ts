@@ -14,7 +14,7 @@ import * as moment from 'moment';
 })
 export class CommitChooserComponent implements OnInit {
 
-    subscription: Subscription;
+    subscriptions: Subscription[] = [];
     loading$: Observable<boolean>;
     commits: Commit[];
     selected: Commit;
@@ -27,15 +27,27 @@ export class CommitChooserComponent implements OnInit {
     ngOnInit() {
         this.loading$ = this.store.select(fromRoot.getCommitsLoading);
 
-        this.subscription = this.store.select(fromRoot.getCommits).subscribe((commits) => {
-            this.commits = commits;
-        });
+        this.subscriptions.push(
+            this.store.select(fromRoot.getCommits).subscribe((commits) => {
+                this.commits = commits;
+            })
+        );
+
+        this.subscriptions.push(
+            this.store.select(fromRoot.getLeftAndRightCommit).subscribe((result) => {
+                if (result) {
+                    this.selected = this.commitType === CommitType.LEFT ? result.leftCommit : result.rightCommit;
+                }
+            })
+        );
 
         this.store.dispatch(loadCommits());
     }
 
     ngOnDestroy() {
-        this.subscription.unsubscribe();
+        this.subscriptions.forEach((subscription: Subscription) => {
+            subscription.unsubscribe();
+        });
     }
 
     handleValueChanged(chosenModel: Commit) {

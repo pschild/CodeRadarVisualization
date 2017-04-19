@@ -57,6 +57,15 @@ export const getActiveFilter = createSelector(getSettingsState, fromSettings.get
 
 export const getActiveViewType = createSelector(getSettingsState, fromSettings.getActiveViewType);
 
+export const getLeftAndRightCommit = createSelector(getLeftCommit, getRightCommit, (leftCommit, rightCommit) => {
+    if (leftCommit && rightCommit) {
+        return {
+            leftCommit: leftCommit,
+            rightCommit: rightCommit
+        };
+    }
+});
+
 export const isReadyForLoadingMetrics = createSelector(getCommits, getLeftCommit, getRightCommit, getMetricMapping, (commits, leftCommit, rightCommit, metricMapping) => {
     if (commits && commits.length > 2 && leftCommit !== null && rightCommit !== null) {
         return {
