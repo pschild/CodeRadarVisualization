@@ -2,6 +2,7 @@
     <div class="vertical-line"></div>
     <app-screen [screenType]="screenTypes.left"></app-screen>
     <app-screen [screenType]="screenTypes.right"></app-screen>
+    <app-comparison-panel></app-comparison-panel>
 </div>
 <app-tooltip></app-tooltip>
 <p *ngIf="metricsLoading$ | async">LADE</p>

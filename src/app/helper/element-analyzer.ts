@@ -5,6 +5,27 @@ import {NodeType} from "../enum/NodeType";
 
 export class ElementAnalyzer {
 
+    static findElementByName(nodes: INode[], elementName: string): INode {
+        if (!Array.isArray(nodes)) {
+            nodes = [nodes];
+        }
+
+        let foundElement: INode;
+
+        for (let node of nodes) {
+            if (node.name === elementName) {
+                foundElement = node;
+            }
+
+            // recursion
+            if (node.children && node.children.length > 0 && !foundElement) {
+                foundElement = this.findElementByName(node.children, elementName);
+            }
+        }
+
+        return foundElement;
+    }
+
     static generateUniqueElementList(nodes: INode[], uniqueElements: string[] = []) {
         if (!Array.isArray(nodes)) {
             nodes = [nodes];

@@ -1,0 +1,28 @@
+<div id="comparison-panel">
+    <strong class="element-name">{{elementName}}</strong>
+    <div class="table-container">
+        <table id="comparison-table" class="table table-striped table-sm">
+            <thead>
+            <tr>
+                <th>Metrik</th>
+                <th id="first-commit-id">{{leftCommit?.name}}</th>
+                <th id="second-commit-id">{{rightCommit?.name}}</th>
+                <th>Änderung</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let row of tableData">
+                    <td>{{row.metricName}}</td>
+                    <td>{{row.leftCommitValue}}</td>
+                    <td>{{row.rightCommitValue}}</td>
+                    <td>
+                        <i *ngIf="row.difference > 0" class="fa fa-caret-up" aria-hidden="true"></i>
+                        <i *ngIf="row.difference < 0" class="fa fa-caret-down" aria-hidden="true"></i>
+                        <i *ngIf="row.difference === 0" class="fa fa-caret-right" aria-hidden="true"></i>
+                        {{row.difference}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
