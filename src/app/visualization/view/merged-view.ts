@@ -1,5 +1,4 @@
 import {AbstractView} from "./abstract-view";
-import Object3D = THREE.Object3D;
 import {INode} from "../../domain/INode";
 import {ElementAnalyzer} from "../../helper/element-analyzer";
 import {AppConfig} from "../../AppConfig";
@@ -8,8 +7,7 @@ import {ColorHelper} from "../../helper/color-helper";
 import {CommitReferenceType} from "../../enum/CommitReferenceType";
 import {ScreenType} from "../../enum/ScreenType";
 import {BlockConnection} from "app/geometry/block-connection";
-import Line = THREE.Line;
-import Scene = THREE.Scene;
+import {Scene} from "three";
 
 export class MergedView extends AbstractView {
 

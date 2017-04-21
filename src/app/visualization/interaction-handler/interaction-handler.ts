@@ -1,12 +1,5 @@
-import Scene = THREE.Scene;
-import WebGLRenderer = THREE.WebGLRenderer;
-import Raycaster = THREE.Raycaster;
-import Vector2 = THREE.Vector2;
+import {Scene, WebGLRenderer, Raycaster, Vector2, PerspectiveCamera, Intersection, Object3D} from "three";
 import {ScreenType} from "../../enum/ScreenType";
-import {NodeType} from "app/enum/NodeType";
-import PerspectiveCamera = THREE.PerspectiveCamera;
-import Intersection = THREE.Intersection;
-import Object3D = THREE.Object3D;
 import {focusElement} from "../visualization.actions";
 import {Store} from "@ngrx/store";
 import * as fromRoot from "../../shared/reducers";

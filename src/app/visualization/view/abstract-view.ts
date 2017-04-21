@@ -1,4 +1,3 @@
-import Object3D = THREE.Object3D;
 import {Block} from "../../geometry/block";
 import {INode} from "../../domain/INode";
 import {NodeType} from "app/enum/NodeType";

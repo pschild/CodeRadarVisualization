@@ -1,5 +1,6 @@
 import {AppConfig} from "../AppConfig";
 import {ScreenType} from "../enum/ScreenType";
+import {Color} from "three";
 declare var chroma: any;
 
 export class ColorHelper {
@@ -23,7 +24,7 @@ export class ColorHelper {
     static getColorScale(range, value: number, max: number, min: number): THREE.Color {
         let colorScale = chroma.scale(range);
         let hexValue = colorScale(value / (max + min)).hex();
-        return new THREE.Color(hexValue);
+        return new Color(hexValue);
     }
 
 }
