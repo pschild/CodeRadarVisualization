@@ -1,6 +1,7 @@
 import {Action} from "@ngrx/store";
 import {Commit} from "../domain/Commit";
 import {CommitType} from "../enum/CommitType";
+import {ICommit} from "../domain/ICommit";
 
 export const LOAD_COMMITS = 'LOAD_COMMITS';
 export const LOAD_COMMITS_SUCCESS = 'LOAD_COMMITS_SUCCESS';
@@ -30,7 +31,7 @@ export function loadCommitsError(error: string): Action {
     };
 }
 
-export function changeCommit(commitType: CommitType, commit: Commit): Action {
+export function changeCommit(commitType: CommitType, commit: ICommit): Action {
     return {
         type: CHANGE_COMMIT,
         payload: {

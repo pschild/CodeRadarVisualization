@@ -1,11 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Store} from "@ngrx/store";
-import * as fromRoot from "../../shared/reducers";
-import {Observable, Subscription} from "rxjs";
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Commit} from "../../domain/Commit";
-import {changeCommit, loadCommits} from "../control-panel.actions";
 import {CommitType} from "../../enum/CommitType";
 import * as moment from 'moment';
+import {ICommit} from "../../domain/ICommit";
 
 @Component({
     selector: 'app-commit-chooser',
@@ -14,44 +11,21 @@ import * as moment from 'moment';
 })
 export class CommitChooserComponent implements OnInit {
 
-    subscriptions: Subscription[] = [];
-    loading$: Observable<boolean>;
-    commits: Commit[];
-    selected: Commit;
-
     @Input() commitType: CommitType;
+    @Input() commits: ICommit[];
+    @Input() selected: ICommit;
+    @Input() loading: boolean;
 
-    constructor(private store: Store<fromRoot.AppState>) {
+    @Output() changeCommit = new EventEmitter();
+
+    constructor() {
     }
 
     ngOnInit() {
-        this.loading$ = this.store.select(fromRoot.getCommitsLoading);
-
-        this.subscriptions.push(
-            this.store.select(fromRoot.getCommits).subscribe((commits) => {
-                this.commits = commits;
-            })
-        );
-
-        this.subscriptions.push(
-            this.store.select(fromRoot.getLeftAndRightCommit).subscribe((result) => {
-                if (result) {
-                    this.selected = this.commitType === CommitType.LEFT ? result.leftCommit : result.rightCommit;
-                }
-            })
-        );
-
-        this.store.dispatch(loadCommits());
-    }
-
-    ngOnDestroy() {
-        this.subscriptions.forEach((subscription: Subscription) => {
-            subscription.unsubscribe();
-        });
     }
 
     handleValueChanged(chosenModel: Commit) {
-        this.store.dispatch(changeCommit(this.commitType, chosenModel));
+        this.changeCommit.emit({commitType: this.commitType, commit: chosenModel});
     }
 
     formatCommit(data: any): string {

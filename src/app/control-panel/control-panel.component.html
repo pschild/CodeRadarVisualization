@@ -4,12 +4,22 @@
             <div class="row">
                 <div class="col-6">
                     <small>Erste Revision</small>
-                    <app-commit-chooser [commitType]="commitTypes.left"></app-commit-chooser>
+                    <app-commit-chooser
+                            [commitType]="commitTypes.left"
+                            [commits]="commits$ | async"
+                            [loading]="commitsLoading$ | async"
+                            [selected]="leftCommit$ | async"
+                            (changeCommit)="handleCommitChanged($event)"></app-commit-chooser>
                 </div>
 
                 <div class="col-6">
                     <small>Zweite Revision</small>
-                    <app-commit-chooser [commitType]="commitTypes.right"></app-commit-chooser>
+                    <app-commit-chooser
+                            [commitType]="commitTypes.right"
+                            [commits]="commits$ | async"
+                            [loading]="commitsLoading$ | async"
+                            [selected]="rightCommit$ | async"
+                            (changeCommit)="handleCommitChanged($event)"></app-commit-chooser>
                 </div>
             </div>
         </div>
