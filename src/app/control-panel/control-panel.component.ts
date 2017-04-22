@@ -2,10 +2,11 @@ import {Component, OnInit} from "@angular/core";
 import {CommitType} from "../enum/CommitType";
 import {Store} from "@ngrx/store";
 import * as fromRoot from "../shared/reducers";
-import {changeCommit, loadCommits} from "./control-panel.actions";
+import {changeCommit, clearScreenshots, loadCommits, requestScreenshot} from "./control-panel.actions";
 import {ICommit} from "../domain/ICommit";
 import {Observable} from "rxjs/Observable";
 import {focusElement} from "../visualization/visualization.actions";
+import {ViewType} from "../enum/ViewType";
 
 @Component({
     selector: 'app-control-panel',
@@ -26,6 +27,9 @@ export class ControlPanelComponent implements OnInit {
 
     uniqueFileList$: Observable<string[]>;
 
+    activeViewType$: Observable<ViewType>;
+    screenshots$: Observable<any[]>;
+
     constructor(private store: Store<fromRoot.AppState>) {
     }
 
@@ -38,6 +42,9 @@ export class ControlPanelComponent implements OnInit {
         this.rightCommit$ = this.store.select(fromRoot.getRightCommit);
 
         this.uniqueFileList$ = this.store.select(fromRoot.getUniqueFileList);
+
+        this.activeViewType$ = this.store.select(fromRoot.getActiveViewType);
+        this.screenshots$ = this.store.select(fromRoot.getScreenshots);
     }
 
     handleCommitChanged(payload: {commitType: CommitType, commit: ICommit}) {
@@ -46,6 +53,14 @@ export class ControlPanelComponent implements OnInit {
 
     handleSearchStarted(chosenItem: string) {
         this.store.dispatch(focusElement(chosenItem));
+    }
+
+    handleTakeScreenshot() {
+        this.store.dispatch(requestScreenshot());
+    }
+
+    handleRemoveScreenshots() {
+        this.store.dispatch(clearScreenshots());
     }
 
 }

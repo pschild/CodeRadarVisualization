@@ -25,7 +25,12 @@
         </div>
         <div class="col-6">
             <app-settings></app-settings>
-            <app-screenshot></app-screenshot>
+            <app-screenshot
+                    [activeViewType]="activeViewType$ | async"
+                    [screenshots]="screenshots$ | async"
+                    (handleTakeScreenshot)="handleTakeScreenshot($event)"
+                    (handleRemoveScreenshots)="handleRemoveScreenshots($event)">
+            </app-screenshot>
         </div>
         <div class="col-2">
             <small>Suche</small>
