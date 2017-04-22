@@ -15,6 +15,7 @@ import {addScreenshot} from "../../control-panel/control-panel.actions";
 import {InteractionHandler} from "../interaction-handler/interaction-handler";
 import {AppConfig} from "../../AppConfig";
 declare var TWEEN: any;
+declare var THREE: any;
 
 @Component({
     selector: 'app-screen',
