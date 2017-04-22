@@ -6,7 +6,10 @@ webpackJsonp([1,5],{
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__AppConfig__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__enum_ScreenType__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_three__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_three___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_three__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ColorHelper; });
+
 
 
 var ColorHelper = (function () {
@@ -27,7 +30,7 @@ var ColorHelper = (function () {
     ColorHelper.getColorScale = function (range, value, max, min) {
         var colorScale = chroma.scale(range);
         var hexValue = colorScale(value / (max + min)).hex();
-        return new THREE.Color(hexValue);
+        return new __WEBPACK_IMPORTED_MODULE_2_three__["Color"](hexValue);
     };
     return ColorHelper;
 }());
@@ -129,7 +132,7 @@ var _a;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__geometry_block__ = __webpack_require__(334);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_app_enum_NodeType__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__AppConfig__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helper_element_analyzer__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helper_element_analyzer__ = __webpack_require__(41);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AbstractView; });
 
 
@@ -258,39 +261,40 @@ var AbstractView = (function () {
 
 /***/ }),
 
-/***/ 18:
+/***/ 17:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_reselect__ = __webpack_require__(446);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_reselect__ = __webpack_require__(449);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_reselect___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_reselect__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ngrx_store__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ngrx_store__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__control_panel_control_panel_reducers__ = __webpack_require__(325);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__control_panel_settings_settings_reducers__ = __webpack_require__(331);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__visualization_visualization_reducers__ = __webpack_require__(348);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__visualization_visualization_reducers__ = __webpack_require__(349);
 /* harmony export (immutable) */ __webpack_exports__["a"] = reducer;
 /* unused harmony export getControlPanelState */
 /* unused harmony export getVisualizationState */
 /* unused harmony export getSettingsState */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return getCommitsLoading; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "n", function() { return getCommits; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "o", function() { return getCommitsLoading; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "p", function() { return getCommits; });
 /* unused harmony export getLeftCommit */
 /* unused harmony export getRightCommit */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return isScreenshotRequested; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return getScreenshots; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return getMetricsLoading; });
-/* unused harmony export getMetricTree */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return getUniqueFileList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return isScreenshotRequested; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return getScreenshots; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return getMetricsLoading; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return getMetricTree; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "n", function() { return getUniqueFileList; });
 /* unused harmony export getMinColorMetricValue */
 /* unused harmony export getMaxColorMetricValue */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return getFocussedElementName; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return getMetricMapping; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return getActiveFilter; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return getActiveViewType; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return isReadyForLoadingMetrics; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return getFocussedElementName; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return getMetricMapping; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return getActiveFilter; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return getActiveViewType; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return getLeftAndRightCommit; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return isReadyForLoadingMetrics; });
 /* unused harmony export isReadyForDrawing */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return getViewChanged; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return getMinAndMaxColorMetricValues; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return getViewChanged; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return getMinAndMaxColorMetricValues; });
 
 
 
@@ -323,6 +327,14 @@ var getFocussedElementName = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_r
 var getMetricMapping = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_reselect__["createSelector"])(getSettingsState, __WEBPACK_IMPORTED_MODULE_3__control_panel_settings_settings_reducers__["b" /* getMetricMapping */]);
 var getActiveFilter = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_reselect__["createSelector"])(getSettingsState, __WEBPACK_IMPORTED_MODULE_3__control_panel_settings_settings_reducers__["c" /* getActiveFilter */]);
 var getActiveViewType = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_reselect__["createSelector"])(getSettingsState, __WEBPACK_IMPORTED_MODULE_3__control_panel_settings_settings_reducers__["d" /* getActiveViewType */]);
+var getLeftAndRightCommit = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_reselect__["createSelector"])(getLeftCommit, getRightCommit, function (leftCommit, rightCommit) {
+    if (leftCommit && rightCommit) {
+        return {
+            leftCommit: leftCommit,
+            rightCommit: rightCommit
+        };
+    }
+});
 var isReadyForLoadingMetrics = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_reselect__["createSelector"])(getCommits, getLeftCommit, getRightCommit, getMetricMapping, function (commits, leftCommit, rightCommit, metricMapping) {
     if (commits && commits.length > 2 && leftCommit !== null && rightCommit !== null) {
         return {
@@ -468,7 +480,7 @@ __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dyna
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_http__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__service_mocks_mock_data__ = __webpack_require__(338);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angular_in_memory_web_api__ = __webpack_require__(352);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angular_in_memory_web_api__ = __webpack_require__(353);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__(36);
 /* harmony export (immutable) */ __webpack_exports__["a"] = XHRBackendFactory;
 
@@ -511,8 +523,8 @@ var AppComponent = (function () {
 AppComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-root',
-        template: __webpack_require__(434),
-        styles: [__webpack_require__(408)]
+        template: __webpack_require__(436),
+        styles: [__webpack_require__(409)]
     }),
     __metadata("design:paramtypes", [])
 ], AppComponent);
@@ -525,15 +537,15 @@ AppComponent = __decorate([
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(56);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__(320);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__control_panel_control_panel_module__ = __webpack_require__(324);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__visualization_visualization_module__ = __webpack_require__(347);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__shared_reducers__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ngrx_store__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__visualization_visualization_module__ = __webpack_require__(348);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__shared_reducers__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ngrx_store__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ngrx_effects__ = __webpack_require__(111);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ngrx_store_devtools__ = __webpack_require__(315);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__shared_effects__ = __webpack_require__(340);
@@ -598,10 +610,10 @@ AppModule = __decorate([
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ngrx_store__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_reducers__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ngrx_store__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_reducers__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__control_panel_actions__ = __webpack_require__(39);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__enum_CommitType__ = __webpack_require__(80);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__enum_CommitType__ = __webpack_require__(81);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_moment__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_moment__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CommitChooserComponent; });
@@ -623,17 +635,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var CommitChooserComponent = (function () {
     function CommitChooserComponent(store) {
         this.store = store;
+        this.subscriptions = [];
     }
     CommitChooserComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.loading$ = this.store.select(__WEBPACK_IMPORTED_MODULE_2__shared_reducers__["m" /* getCommitsLoading */]);
-        this.subscription = this.store.select(__WEBPACK_IMPORTED_MODULE_2__shared_reducers__["n" /* getCommits */]).subscribe(function (commits) {
+        this.loading$ = this.store.select(__WEBPACK_IMPORTED_MODULE_2__shared_reducers__["o" /* getCommitsLoading */]);
+        this.subscriptions.push(this.store.select(__WEBPACK_IMPORTED_MODULE_2__shared_reducers__["p" /* getCommits */]).subscribe(function (commits) {
             _this.commits = commits;
-        });
+        }));
+        this.subscriptions.push(this.store.select(__WEBPACK_IMPORTED_MODULE_2__shared_reducers__["c" /* getLeftAndRightCommit */]).subscribe(function (result) {
+            if (result) {
+                _this.selected = _this.commitType === __WEBPACK_IMPORTED_MODULE_4__enum_CommitType__["a" /* CommitType */].LEFT ? result.leftCommit : result.rightCommit;
+            }
+        }));
         this.store.dispatch(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__control_panel_actions__["m" /* loadCommits */])());
     };
     CommitChooserComponent.prototype.ngOnDestroy = function () {
-        this.subscription.unsubscribe();
+        this.subscriptions.forEach(function (subscription) {
+            subscription.unsubscribe();
+        });
     };
     CommitChooserComponent.prototype.handleValueChanged = function (chosenModel) {
         this.store.dispatch(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__control_panel_actions__["n" /* changeCommit */])(this.commitType, chosenModel));
@@ -651,8 +671,8 @@ __decorate([
 CommitChooserComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-commit-chooser',
-        template: __webpack_require__(435),
-        styles: [__webpack_require__(409)]
+        template: __webpack_require__(437),
+        styles: [__webpack_require__(410)]
     }),
     __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__ngrx_store__["g" /* Store */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__ngrx_store__["g" /* Store */]) === "function" && _b || Object])
 ], CommitChooserComponent);
@@ -667,7 +687,7 @@ var _a, _b;
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__enum_CommitType__ = __webpack_require__(80);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__enum_CommitType__ = __webpack_require__(81);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ControlPanelComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -694,8 +714,8 @@ var ControlPanelComponent = (function () {
 ControlPanelComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-control-panel',
-        template: __webpack_require__(436),
-        styles: [__webpack_require__(410)]
+        template: __webpack_require__(438),
+        styles: [__webpack_require__(411)]
     }),
     __metadata("design:paramtypes", [])
 ], ControlPanelComponent);
@@ -713,8 +733,8 @@ ControlPanelComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__control_panel_component__ = __webpack_require__(323);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__settings_settings_component__ = __webpack_require__(330);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__settings_view_control_view_control_component__ = __webpack_require__(332);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_forms__ = __webpack_require__(53);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ngui_auto_complete__ = __webpack_require__(350);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_forms__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ngui_auto_complete__ = __webpack_require__(351);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ngui_auto_complete___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__ngui_auto_complete__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__commit_chooser_commit_chooser_component__ = __webpack_require__(322);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__service_commit_service__ = __webpack_require__(125);
@@ -789,7 +809,7 @@ ControlPanelModule = __decorate([
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__control_panel_actions__ = __webpack_require__(39);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__enum_CommitType__ = __webpack_require__(80);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__enum_CommitType__ = __webpack_require__(81);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ControlPanelReducer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return getCommits; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return getCommitsLoading; });
@@ -871,11 +891,11 @@ var getScreenshots = function (state) { return state.screenshots; };
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_reducers__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ngrx_store__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_reducers__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ngrx_store__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__control_panel_actions__ = __webpack_require__(39);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__enum_ScreenType__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__enum_ViewType__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__enum_ViewType__ = __webpack_require__(57);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ScreenshotComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -908,7 +928,7 @@ var ScreenshotComponent = (function () {
     }
     ScreenshotComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.subscriptions.push(this.store.select(__WEBPACK_IMPORTED_MODULE_1__shared_reducers__["i" /* getActiveViewType */]).subscribe(function (activeViewType) {
+        this.subscriptions.push(this.store.select(__WEBPACK_IMPORTED_MODULE_1__shared_reducers__["l" /* getActiveViewType */]).subscribe(function (activeViewType) {
             _this.activeViewType = activeViewType;
             _this.removeScreenshots();
         }));
@@ -923,7 +943,7 @@ var ScreenshotComponent = (function () {
     };
     ScreenshotComponent.prototype.generateGif = function (screenType) {
         var _this = this;
-        this.store.select(__WEBPACK_IMPORTED_MODULE_1__shared_reducers__["j" /* getScreenshots */]).subscribe(function (screenshots) {
+        this.store.select(__WEBPACK_IMPORTED_MODULE_1__shared_reducers__["m" /* getScreenshots */]).subscribe(function (screenshots) {
             if (screenshots.length > 0) {
                 var images = screenshots.filter(function (screenshotObject) { return screenshotObject.screenType === screenType; }).map(function (screenshotObject) { return screenshotObject.file; });
                 if (!images.length) {
@@ -956,8 +976,8 @@ var ScreenshotComponent = (function () {
 ScreenshotComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-screenshot',
-        template: __webpack_require__(437),
-        styles: [__webpack_require__(411)]
+        template: __webpack_require__(439),
+        styles: [__webpack_require__(412)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__ngrx_store__["g" /* Store */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ngrx_store__["g" /* Store */]) === "function" && _a || Object])
 ], ScreenshotComponent);
@@ -972,9 +992,9 @@ var _a;
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_reducers__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ngrx_store__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__visualization_visualization_actions__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_reducers__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ngrx_store__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__visualization_visualization_actions__ = __webpack_require__(42);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SearchComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -996,7 +1016,7 @@ var SearchComponent = (function () {
     }
     SearchComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.subscription = this.store.select(__WEBPACK_IMPORTED_MODULE_1__shared_reducers__["l" /* getUniqueFileList */]).subscribe(function (fileList) {
+        this.subscription = this.store.select(__WEBPACK_IMPORTED_MODULE_1__shared_reducers__["n" /* getUniqueFileList */]).subscribe(function (fileList) {
             _this.uniqueFileList = fileList;
         });
     };
@@ -1014,8 +1034,8 @@ var SearchComponent = (function () {
 SearchComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-search',
-        template: __webpack_require__(438),
-        styles: [__webpack_require__(412)]
+        template: __webpack_require__(440),
+        styles: [__webpack_require__(413)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__ngrx_store__["g" /* Store */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ngrx_store__["g" /* Store */]) === "function" && _a || Object])
 ], SearchComponent);
@@ -1030,8 +1050,8 @@ var _a;
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ngrx_store__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_reducers__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ngrx_store__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_reducers__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__settings_actions__ = __webpack_require__(40);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FilterComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -1053,7 +1073,7 @@ var FilterComponent = (function () {
     }
     FilterComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.subscription = this.store.select(__WEBPACK_IMPORTED_MODULE_2__shared_reducers__["c" /* getActiveFilter */]).subscribe(function (activeFilter) {
+        this.subscription = this.store.select(__WEBPACK_IMPORTED_MODULE_2__shared_reducers__["g" /* getActiveFilter */]).subscribe(function (activeFilter) {
             _this.activeFilter = activeFilter;
         });
     };
@@ -1068,8 +1088,8 @@ var FilterComponent = (function () {
 FilterComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-filter',
-        template: __webpack_require__(439),
-        styles: [__webpack_require__(413)]
+        template: __webpack_require__(441),
+        styles: [__webpack_require__(414)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__ngrx_store__["g" /* Store */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__ngrx_store__["g" /* Store */]) === "function" && _a || Object])
 ], FilterComponent);
@@ -1084,8 +1104,8 @@ var _a;
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ngrx_store__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_reducers__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ngrx_store__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_reducers__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__settings_actions__ = __webpack_require__(40);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__helper_metric_name_helper__ = __webpack_require__(335);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MetricMappingComponent; });
@@ -1110,7 +1130,7 @@ var MetricMappingComponent = (function () {
     MetricMappingComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.metricNames = __WEBPACK_IMPORTED_MODULE_4__helper_metric_name_helper__["a" /* MetricNameHelper */].getAll();
-        this.subscription = this.store.select(__WEBPACK_IMPORTED_MODULE_2__shared_reducers__["k" /* getMetricMapping */]).subscribe(function (metricMapping) {
+        this.subscription = this.store.select(__WEBPACK_IMPORTED_MODULE_2__shared_reducers__["d" /* getMetricMapping */]).subscribe(function (metricMapping) {
             _this.metricMapping = metricMapping;
         });
     };
@@ -1125,8 +1145,8 @@ var MetricMappingComponent = (function () {
 MetricMappingComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-metric-mapping',
-        template: __webpack_require__(440),
-        styles: [__webpack_require__(414)]
+        template: __webpack_require__(442),
+        styles: [__webpack_require__(415)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__ngrx_store__["g" /* Store */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__ngrx_store__["g" /* Store */]) === "function" && _a || Object])
 ], MetricMappingComponent);
@@ -1166,8 +1186,8 @@ var SettingsComponent = (function () {
 SettingsComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-settings',
-        template: __webpack_require__(441),
-        styles: [__webpack_require__(415)]
+        template: __webpack_require__(443),
+        styles: [__webpack_require__(416)]
     }),
     __metadata("design:paramtypes", [])
 ], SettingsComponent);
@@ -1181,7 +1201,7 @@ SettingsComponent = __decorate([
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__settings_actions__ = __webpack_require__(40);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__enum_ViewType__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__enum_ViewType__ = __webpack_require__(57);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__AppConfig__ = __webpack_require__(21);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SettingsReducer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return getActiveViewType; });
@@ -1237,9 +1257,9 @@ var getMetricMapping = function (state) { return state.metricMapping; };
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__enum_ViewType__ = __webpack_require__(55);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ngrx_store__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_reducers__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__enum_ViewType__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ngrx_store__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_reducers__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__settings_actions__ = __webpack_require__(40);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ViewControlComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -1266,7 +1286,7 @@ var ViewControlComponent = (function () {
     }
     ViewControlComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.subscription = this.store.select(__WEBPACK_IMPORTED_MODULE_3__shared_reducers__["i" /* getActiveViewType */]).subscribe(function (activeViewType) {
+        this.subscription = this.store.select(__WEBPACK_IMPORTED_MODULE_3__shared_reducers__["l" /* getActiveViewType */]).subscribe(function (activeViewType) {
             _this.activeViewType = activeViewType;
         });
     };
@@ -1281,8 +1301,8 @@ var ViewControlComponent = (function () {
 ViewControlComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-view-control',
-        template: __webpack_require__(442),
-        styles: [__webpack_require__(416)]
+        template: __webpack_require__(444),
+        styles: [__webpack_require__(417)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__ngrx_store__["g" /* Store */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ngrx_store__["g" /* Store */]) === "function" && _a || Object])
 ], ViewControlComponent);
@@ -1296,7 +1316,7 @@ var _a;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three__ = __webpack_require__(110);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three__ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_three__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__AppConfig__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__enum_NodeType__ = __webpack_require__(34);
@@ -1345,7 +1365,7 @@ var BlockConnection = (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three__ = __webpack_require__(110);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three__ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_three__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Block; });
 var __extends = (this && this.__extends) || (function () {
@@ -1700,7 +1720,7 @@ var MockData = (function () {
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_0__control_panel_control_panel_actions__["c"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__control_panel_settings_settings_actions__ = __webpack_require__(40);
 /* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__visualization_visualization_actions__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__visualization_visualization_actions__ = __webpack_require__(42);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_2__visualization_visualization_actions__["a"]; });
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "e", function() { return __WEBPACK_IMPORTED_MODULE_2__visualization_visualization_actions__["b"]; });
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "f", function() { return __WEBPACK_IMPORTED_MODULE_2__visualization_visualization_actions__["c"]; });
@@ -1734,7 +1754,7 @@ var NodeType;
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ngrx_effects__ = __webpack_require__(111);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs__ = __webpack_require__(448);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs__ = __webpack_require__(451);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_actions__ = __webpack_require__(339);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__service_commit_service__ = __webpack_require__(125);
@@ -1809,19 +1829,125 @@ var _a, _b, _c;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__enum_ScreenType__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__visualization_actions__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ngrx_store__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_reducers__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helper_element_analyzer__ = __webpack_require__(41);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComparisonPanelComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var ComparisonPanelComponent = (function () {
+    function ComparisonPanelComponent(store) {
+        this.store = store;
+        this.subscriptions = [];
+        this.tableData = [];
+    }
+    ComparisonPanelComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.comparisonPanel = document.querySelector('#comparison-panel');
+        this.subscriptions.push(this.store.select(__WEBPACK_IMPORTED_MODULE_2__shared_reducers__["b" /* getFocussedElementName */]).subscribe(function (focussedElementName) {
+            if (focussedElementName) {
+                _this.elementName = focussedElementName;
+                _this.foundElement = __WEBPACK_IMPORTED_MODULE_3__helper_element_analyzer__["a" /* ElementAnalyzer */].findElementByName(_this.metricTree, focussedElementName);
+                _this.prepareTableData();
+                _this.show();
+            }
+        }));
+        this.subscriptions.push(this.store.select(__WEBPACK_IMPORTED_MODULE_2__shared_reducers__["c" /* getLeftAndRightCommit */]).subscribe(function (result) {
+            if (result) {
+                _this.leftCommit = result.leftCommit;
+                _this.rightCommit = result.rightCommit;
+            }
+        }));
+        this.subscriptions.push(this.store.select(__WEBPACK_IMPORTED_MODULE_2__shared_reducers__["d" /* getMetricMapping */]).subscribe(function (metricMapping) {
+            _this.metricMapping = metricMapping;
+        }));
+        this.subscriptions.push(this.store.select(__WEBPACK_IMPORTED_MODULE_2__shared_reducers__["e" /* getMetricTree */]).subscribe(function (metricTree) {
+            _this.metricTree = metricTree;
+        }));
+    };
+    ComparisonPanelComponent.prototype.ngOnDestroy = function () {
+        this.subscriptions.forEach(function (subscription) {
+            subscription.unsubscribe();
+        });
+    };
+    ComparisonPanelComponent.prototype.prepareTableData = function () {
+        var data = [];
+        for (var _i = 0, _a = Object.keys(this.metricMapping); _i < _a.length; _i++) {
+            var key = _a[_i];
+            var metricName = this.metricMapping[key];
+            var leftCommitValue = void 0;
+            if (this.foundElement.commit1Metrics && this.foundElement.commit1Metrics[metricName]) {
+                leftCommitValue = this.foundElement.commit1Metrics[metricName];
+            }
+            var rightCommitValue = void 0;
+            if (this.foundElement.commit2Metrics && this.foundElement.commit2Metrics[metricName]) {
+                rightCommitValue = this.foundElement.commit2Metrics[metricName];
+            }
+            var difference = 0;
+            if (leftCommitValue && rightCommitValue) {
+                difference = rightCommitValue - leftCommitValue;
+            }
+            data.push({
+                metricName: metricName,
+                leftCommitValue: leftCommitValue || 'N/A',
+                rightCommitValue: rightCommitValue || 'N/A',
+                difference: difference
+            });
+        }
+        this.tableData = data;
+    };
+    ComparisonPanelComponent.prototype.show = function () {
+        this.comparisonPanel.classList.add('open');
+    };
+    ComparisonPanelComponent.prototype.hide = function () {
+        this.comparisonPanel.classList.remove('open');
+    };
+    return ComparisonPanelComponent;
+}());
+ComparisonPanelComponent = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'app-comparison-panel',
+        template: __webpack_require__(445),
+        styles: [__webpack_require__(418)]
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__ngrx_store__["g" /* Store */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__ngrx_store__["g" /* Store */]) === "function" && _a || Object])
+], ComparisonPanelComponent);
+
+var _a;
+//# sourceMappingURL=comparison-panel.component.js.map
+
+/***/ }),
+
+/***/ 342:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_three__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__enum_ScreenType__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__visualization_actions__ = __webpack_require__(42);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return InteractionHandler; });
-var Raycaster = THREE.Raycaster;
-var Vector2 = THREE.Vector2;
+
 
 
 var InteractionHandler = (function () {
     function InteractionHandler(scene, renderer, screenType, isMergedView, store) {
         this.enabled = false;
-        this.raycaster = new Raycaster();
-        this.mouse = new Vector2();
-        this.mouseForRaycaster = new Vector2();
+        this.raycaster = new __WEBPACK_IMPORTED_MODULE_0_three__["Raycaster"]();
+        this.mouse = new __WEBPACK_IMPORTED_MODULE_0_three__["Vector2"]();
+        this.mouseForRaycaster = new __WEBPACK_IMPORTED_MODULE_0_three__["Vector2"]();
         this.tooltipElement = document.querySelector('#tooltip');
         this.hoveredElementUuid = undefined;
         this.clickedElementUuid = undefined;
@@ -1894,7 +2020,7 @@ var InteractionHandler = (function () {
         }
         this.mouse.x = event.clientX;
         this.mouse.y = event.clientY;
-        var screenOffset = this.screenType === __WEBPACK_IMPORTED_MODULE_0__enum_ScreenType__["a" /* ScreenType */].LEFT ? 0 : this.getScreenWidth();
+        var screenOffset = this.screenType === __WEBPACK_IMPORTED_MODULE_1__enum_ScreenType__["a" /* ScreenType */].LEFT ? 0 : this.getScreenWidth();
         this.mouseForRaycaster.x = ((event.clientX - screenOffset) / this.getScreenWidth()) * 2 - 1;
         this.mouseForRaycaster.y = -(event.clientY / window.innerHeight) * 2 + 1;
     };
@@ -1923,7 +2049,7 @@ var InteractionHandler = (function () {
                 else {
                     this.clickedElementUuid = undefined;
                 }
-                this.store.dispatch(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__visualization_actions__["k" /* focusElement */])(target.name));
+                this.store.dispatch(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__visualization_actions__["k" /* focusElement */])(target.name));
             }
         }
     };
@@ -1947,22 +2073,22 @@ var InteractionHandler = (function () {
 
 /***/ }),
 
-/***/ 342:
+/***/ 343:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__enum_ScreenType__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_three__ = __webpack_require__(110);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_three__ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_three___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_three__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ngrx_store__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_reducers__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__enum_ViewType__ = __webpack_require__(55);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__view_split_view__ = __webpack_require__(345);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__view_merged_view__ = __webpack_require__(344);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ngrx_store__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_reducers__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__enum_ViewType__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__view_split_view__ = __webpack_require__(346);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__view_merged_view__ = __webpack_require__(345);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__enum_NodeType__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__control_panel_control_panel_actions__ = __webpack_require__(39);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__interaction_handler_interaction_handler__ = __webpack_require__(341);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__interaction_handler_interaction_handler__ = __webpack_require__(342);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__AppConfig__ = __webpack_require__(21);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ScreenComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -2004,7 +2130,7 @@ var ScreenComponent = (function () {
         this.createInteractionHandler();
         this.initializeEventListeners();
         this.render();
-        this.subscriptions.push(this.store.select(__WEBPACK_IMPORTED_MODULE_4__shared_reducers__["b" /* getViewChanged */]).subscribe(function (result) {
+        this.subscriptions.push(this.store.select(__WEBPACK_IMPORTED_MODULE_4__shared_reducers__["f" /* getViewChanged */]).subscribe(function (result) {
             if (result) {
                 _this.isMergedView = result.activeViewType === __WEBPACK_IMPORTED_MODULE_5__enum_ViewType__["a" /* ViewType */].MERGED;
                 _this.interactionHandler.setIsMergedView(_this.isMergedView);
@@ -2029,15 +2155,15 @@ var ScreenComponent = (function () {
                 _this.resetCameraAndControls();
             }
         }));
-        this.subscriptions.push(this.store.select(__WEBPACK_IMPORTED_MODULE_4__shared_reducers__["c" /* getActiveFilter */]).subscribe(function (activeFilter) {
+        this.subscriptions.push(this.store.select(__WEBPACK_IMPORTED_MODULE_4__shared_reducers__["g" /* getActiveFilter */]).subscribe(function (activeFilter) {
             _this.applyFilter(activeFilter);
         }));
-        this.subscriptions.push(this.store.select(__WEBPACK_IMPORTED_MODULE_4__shared_reducers__["d" /* getFocussedElementName */]).subscribe(function (focussedElementName) {
+        this.subscriptions.push(this.store.select(__WEBPACK_IMPORTED_MODULE_4__shared_reducers__["b" /* getFocussedElementName */]).subscribe(function (focussedElementName) {
             if (focussedElementName) {
                 _this.focusElementByName(focussedElementName);
             }
         }));
-        this.subscriptions.push(this.store.select(__WEBPACK_IMPORTED_MODULE_4__shared_reducers__["e" /* isScreenshotRequested */]).subscribe(function (isRequested) {
+        this.subscriptions.push(this.store.select(__WEBPACK_IMPORTED_MODULE_4__shared_reducers__["h" /* isScreenshotRequested */]).subscribe(function (isRequested) {
             if (isRequested) {
                 var imgFromCanvas = _this.renderer.domElement.toDataURL('image/png');
                 var pngFile = imgFromCanvas.replace(/^data:image\/png/, 'data:application/octet-stream');
@@ -2222,8 +2348,8 @@ __decorate([
 ScreenComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-screen',
-        template: __webpack_require__(443),
-        styles: [__webpack_require__(417)]
+        template: __webpack_require__(446),
+        styles: [__webpack_require__(419)]
     }),
     __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__ngrx_store__["g" /* Store */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ngrx_store__["g" /* Store */]) === "function" && _b || Object])
 ], ScreenComponent);
@@ -2233,7 +2359,7 @@ var _a, _b;
 
 /***/ }),
 
-/***/ 343:
+/***/ 344:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2259,8 +2385,8 @@ var TooltipComponent = (function () {
 TooltipComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-tooltip',
-        template: __webpack_require__(444),
-        styles: [__webpack_require__(418)]
+        template: __webpack_require__(447),
+        styles: [__webpack_require__(420)]
     }),
     __metadata("design:paramtypes", [])
 ], TooltipComponent);
@@ -2269,16 +2395,16 @@ TooltipComponent = __decorate([
 
 /***/ }),
 
-/***/ 344:
+/***/ 345:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__abstract_view__ = __webpack_require__(127);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helper_element_analyzer__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helper_element_analyzer__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__AppConfig__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__enum_NodeType__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__helper_color_helper__ = __webpack_require__(124);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__enum_CommitReferenceType__ = __webpack_require__(79);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__enum_CommitReferenceType__ = __webpack_require__(80);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_app_geometry_block_connection__ = __webpack_require__(333);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MergedView; });
 var __extends = (this && this.__extends) || (function () {
@@ -2442,17 +2568,17 @@ var MergedView = (function (_super) {
 
 /***/ }),
 
-/***/ 345:
+/***/ 346:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__abstract_view__ = __webpack_require__(127);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__enum_NodeType__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__AppConfig__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__enum_CommitReferenceType__ = __webpack_require__(79);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__enum_CommitReferenceType__ = __webpack_require__(80);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__helper_color_helper__ = __webpack_require__(124);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__helper_element_analyzer__ = __webpack_require__(56);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__shared_reducers__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__helper_element_analyzer__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__shared_reducers__ = __webpack_require__(17);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SplitView; });
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -2477,7 +2603,7 @@ var SplitView = (function (_super) {
         var _this = _super.call(this, screenType) || this;
         // no dependency injection as the view class are constructed with "new" instead with Angular
         _this.store = store;
-        _this.subscription = _this.store.select(__WEBPACK_IMPORTED_MODULE_6__shared_reducers__["f" /* getMinAndMaxColorMetricValues */]).subscribe(function (result) {
+        _this.subscription = _this.store.select(__WEBPACK_IMPORTED_MODULE_6__shared_reducers__["i" /* getMinAndMaxColorMetricValues */]).subscribe(function (result) {
             if (result) {
                 _this.minColorMetricValue = result.minColorMetricValue;
                 _this.maxColorMetricValue = result.maxColorMetricValue;
@@ -2543,15 +2669,15 @@ var SplitView = (function (_super) {
 
 /***/ }),
 
-/***/ 346:
+/***/ 347:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__enum_ScreenType__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ngrx_store__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_reducers__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__visualization_actions__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ngrx_store__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_reducers__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__visualization_actions__ = __webpack_require__(42);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return VisualizationComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2578,8 +2704,8 @@ var VisualizationComponent = (function () {
     }
     VisualizationComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.metricsLoading$ = this.store.select(__WEBPACK_IMPORTED_MODULE_3__shared_reducers__["g" /* getMetricsLoading */]);
-        this.subscriptions.push(this.store.select(__WEBPACK_IMPORTED_MODULE_3__shared_reducers__["h" /* isReadyForLoadingMetrics */]).subscribe(function (result) {
+        this.metricsLoading$ = this.store.select(__WEBPACK_IMPORTED_MODULE_3__shared_reducers__["j" /* getMetricsLoading */]);
+        this.subscriptions.push(this.store.select(__WEBPACK_IMPORTED_MODULE_3__shared_reducers__["k" /* isReadyForLoadingMetrics */]).subscribe(function (result) {
             if (result) {
                 _this.store.dispatch(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__visualization_actions__["l" /* loadMetricTree */])(result.leftCommit, result.rightCommit, result.metricMapping));
             }
@@ -2595,8 +2721,8 @@ var VisualizationComponent = (function () {
 VisualizationComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-visualization',
-        template: __webpack_require__(445),
-        styles: [__webpack_require__(419)]
+        template: __webpack_require__(448),
+        styles: [__webpack_require__(421)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__ngrx_store__["g" /* Store */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ngrx_store__["g" /* Store */]) === "function" && _a || Object])
 ], VisualizationComponent);
@@ -2606,18 +2732,19 @@ var _a;
 
 /***/ }),
 
-/***/ 347:
+/***/ 348:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__visualization_component__ = __webpack_require__(346);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__screen_screen_component__ = __webpack_require__(342);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__visualization_component__ = __webpack_require__(347);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__screen_screen_component__ = __webpack_require__(343);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__service_metric_service__ = __webpack_require__(126);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__environments_environment__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__service_mocks_metric_mock_service__ = __webpack_require__(337);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__tooltip_tooltip_component__ = __webpack_require__(343);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__tooltip_tooltip_component__ = __webpack_require__(344);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__comparison_panel_comparison_panel_component__ = __webpack_require__(341);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return VisualizationModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2625,6 +2752,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -2646,7 +2774,8 @@ VisualizationModule = __decorate([
         declarations: [
             __WEBPACK_IMPORTED_MODULE_2__visualization_component__["a" /* VisualizationComponent */],
             __WEBPACK_IMPORTED_MODULE_3__screen_screen_component__["a" /* ScreenComponent */],
-            __WEBPACK_IMPORTED_MODULE_7__tooltip_tooltip_component__["a" /* TooltipComponent */]
+            __WEBPACK_IMPORTED_MODULE_7__tooltip_tooltip_component__["a" /* TooltipComponent */],
+            __WEBPACK_IMPORTED_MODULE_8__comparison_panel_comparison_panel_component__["a" /* ComparisonPanelComponent */]
         ],
         exports: [
             __WEBPACK_IMPORTED_MODULE_2__visualization_component__["a" /* VisualizationComponent */]
@@ -2664,12 +2793,12 @@ VisualizationModule = __decorate([
 
 /***/ }),
 
-/***/ 348:
+/***/ 349:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__visualization_actions__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helper_element_analyzer__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__visualization_actions__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helper_element_analyzer__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__AppConfig__ = __webpack_require__(21);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return VisualizationReducer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return getMetricsLoading; });
@@ -2868,28 +2997,10 @@ function setMetricMapping(mapping) {
 
 /***/ }),
 
-/***/ 408:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(11)();
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
 /***/ 409:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(11)();
+exports = module.exports = __webpack_require__(10)();
 // imports
 
 
@@ -2905,6 +3016,365 @@ module.exports = module.exports.toString();
 /***/ }),
 
 /***/ 41:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__enum_CommitReferenceType__ = __webpack_require__(80);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__enum_ScreenType__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__enum_NodeType__ = __webpack_require__(34);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ElementAnalyzer; });
+
+
+
+var ElementAnalyzer = (function () {
+    function ElementAnalyzer() {
+    }
+    ElementAnalyzer.findElementByName = function (nodes, elementName) {
+        if (!Array.isArray(nodes)) {
+            nodes = [nodes];
+        }
+        var foundElement;
+        for (var _i = 0, nodes_1 = nodes; _i < nodes_1.length; _i++) {
+            var node = nodes_1[_i];
+            if (node.name === elementName) {
+                foundElement = node;
+            }
+            // recursion
+            if (node.children && node.children.length > 0 && !foundElement) {
+                foundElement = this.findElementByName(node.children, elementName);
+            }
+        }
+        return foundElement;
+    };
+    ElementAnalyzer.generateUniqueElementList = function (nodes, uniqueElements) {
+        if (uniqueElements === void 0) { uniqueElements = []; }
+        if (!Array.isArray(nodes)) {
+            nodes = [nodes];
+        }
+        for (var _i = 0, nodes_2 = nodes; _i < nodes_2.length; _i++) {
+            var node = nodes_2[_i];
+            if (uniqueElements.indexOf(node.name) < 0) {
+                uniqueElements.push(node.name);
+            }
+            // recursion
+            if (node.children && node.children.length > 0) {
+                this.generateUniqueElementList(node.children, uniqueElements);
+            }
+        }
+        return uniqueElements;
+    };
+    ElementAnalyzer.findSmallestAndBiggestMetricValueByMetricName = function (nodes, metricName) {
+        if (typeof nodes !== 'object' || nodes === null) {
+            throw new Error('elements is not an object or null!');
+        }
+        if (!Array.isArray(nodes)) {
+            nodes = [nodes];
+        }
+        var min = Number.MAX_VALUE;
+        var max = Number.MIN_VALUE;
+        for (var _i = 0, nodes_3 = nodes; _i < nodes_3.length; _i++) {
+            var node = nodes_3[_i];
+            // investigate only FILEs, because only files can have different sizes and colors
+            if (node.type == __WEBPACK_IMPORTED_MODULE_2__enum_NodeType__["a" /* NodeType */].FILE) {
+                var commit1Metrics = node.commit1Metrics || null;
+                var commit2Metrics = node.commit2Metrics || null;
+                var big = this.getMaxMetricValueByMetricName(commit1Metrics, commit2Metrics, metricName);
+                if (big > max) {
+                    max = big;
+                }
+                var small = this.getMinMetricValueByMetricName(commit1Metrics, commit2Metrics, metricName);
+                if (small < min) {
+                    min = small;
+                }
+            }
+            // recursion
+            if (node.children && node.children.length > 0) {
+                var result = this.findSmallestAndBiggestMetricValueByMetricName(node.children, metricName);
+                if (result.max > max) {
+                    max = result.max;
+                }
+                if (result.min < min) {
+                    min = result.min;
+                }
+            }
+        }
+        return {
+            min: min,
+            max: max
+        };
+    };
+    ElementAnalyzer.getMinMetricValueByMetricName = function (commit1Metrics, commit2Metrics, metricName) {
+        if (commit1Metrics === null && commit2Metrics === null) {
+            throw new Error("No metric objects given");
+        }
+        if (commit1Metrics === null) {
+            return commit2Metrics[metricName];
+        }
+        else if (commit2Metrics === null) {
+            return commit1Metrics[metricName];
+        }
+        else {
+            return commit1Metrics[metricName] < commit2Metrics[metricName] ? commit1Metrics[metricName] : commit2Metrics[metricName];
+        }
+    };
+    ElementAnalyzer.getMaxMetricValueByMetricName = function (commit1Metrics, commit2Metrics, metricName) {
+        if (commit1Metrics === null && commit2Metrics === null) {
+            throw new Error("No metric objects given");
+        }
+        if (commit1Metrics === null) {
+            return commit2Metrics[metricName];
+        }
+        else if (commit2Metrics === null) {
+            return commit1Metrics[metricName];
+        }
+        else {
+            return commit1Metrics[metricName] > commit2Metrics[metricName] ? commit1Metrics[metricName] : commit2Metrics[metricName];
+        }
+    };
+    ElementAnalyzer.hasChildrenForCurrentCommit = function (node, isFullScreen, screenType) {
+        var found = false;
+        for (var _i = 0, _a = node.children; _i < _a.length; _i++) {
+            var child = _a[_i];
+            if (this.hasMetricValuesForCurrentCommit(child, isFullScreen, screenType)) {
+                found = true;
+            }
+            // recursion
+            if (child.children && child.children.length > 0 && !found) {
+                found = this.hasChildrenForCurrentCommit(child, isFullScreen, screenType);
+            }
+        }
+        return found;
+    };
+    ElementAnalyzer.hasMetricValuesForCurrentCommit = function (node, isFullScreen, screenType) {
+        // when in fullScreen mode, metrics for at least one commit should be present
+        if (isFullScreen) {
+            return node.commit1Metrics != null || node.commit2Metrics != null;
+        }
+        if (screenType == __WEBPACK_IMPORTED_MODULE_1__enum_ScreenType__["a" /* ScreenType */].LEFT) {
+            return node.commit1Metrics != null;
+        }
+        else if (screenType == __WEBPACK_IMPORTED_MODULE_1__enum_ScreenType__["a" /* ScreenType */].RIGHT) {
+            return node.commit2Metrics != null;
+        }
+        else {
+            throw new Error("Unknown screenType " + screenType + "!");
+        }
+    };
+    ElementAnalyzer.getMetricValueOfElementAndCommitReferenceType = function (node, metricName, commitReferenceType, screenType) {
+        if (screenType == __WEBPACK_IMPORTED_MODULE_1__enum_ScreenType__["a" /* ScreenType */].LEFT) {
+            if (commitReferenceType == __WEBPACK_IMPORTED_MODULE_0__enum_CommitReferenceType__["a" /* CommitReferenceType */].THIS) {
+                return node.commit1Metrics ? node.commit1Metrics[metricName] : undefined;
+            }
+            else if (commitReferenceType == __WEBPACK_IMPORTED_MODULE_0__enum_CommitReferenceType__["a" /* CommitReferenceType */].OTHER) {
+                return node.commit2Metrics ? node.commit2Metrics[metricName] : undefined;
+            }
+            else {
+                throw new Error("Unknown commitReferenceType " + commitReferenceType + "!");
+            }
+        }
+        else if (screenType == __WEBPACK_IMPORTED_MODULE_1__enum_ScreenType__["a" /* ScreenType */].RIGHT) {
+            if (commitReferenceType == __WEBPACK_IMPORTED_MODULE_0__enum_CommitReferenceType__["a" /* CommitReferenceType */].THIS) {
+                return node.commit2Metrics ? node.commit2Metrics[metricName] : undefined;
+            }
+            else if (commitReferenceType == __WEBPACK_IMPORTED_MODULE_0__enum_CommitReferenceType__["a" /* CommitReferenceType */].OTHER) {
+                return node.commit1Metrics ? node.commit1Metrics[metricName] : undefined;
+            }
+            else {
+                throw new Error("Unknown commitReferenceType " + commitReferenceType + "!");
+            }
+        }
+        else {
+            throw new Error("Unknown screenType " + screenType + "!");
+        }
+    };
+    return ElementAnalyzer;
+}());
+
+//# sourceMappingURL=element-analyzer.js.map
+
+/***/ }),
+
+/***/ 410:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(10)();
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 411:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(10)();
+// imports
+
+
+// module
+exports.push([module.i, "#control-panel {\n  position: absolute;\n  top: 0;\n  width: 100%;\n  height: 80px;\n  background: #fff;\n  box-shadow: rgba(0, 0, 0, 0.2) 0 2px 6px 0;\n  z-index: 101; }\n  #control-panel > .control-container {\n    position: relative;\n    float: left;\n    margin: 10px;\n    height: 50px; }\n    #control-panel > .control-container:last-child {\n      float: right; }\n    #control-panel > .control-container .control-item {\n      display: inline-block;\n      padding: 5px; }\n    #control-panel > .control-container .control-label {\n      font-size: 12px;\n      display: block;\n      margin-top: 5px; }\n    #control-panel > .control-container .checkbox-container {\n      position: relative; }\n    #control-panel > .control-container .checkbox-icon {\n      position: absolute;\n      top: 0;\n      width: 30px;\n      height: 30px; }\n    #control-panel > .control-container .checkbox-icon.left {\n      left: 0; }\n    #control-panel > .control-container .checkbox-icon.right {\n      right: 0; }\n    #control-panel > .control-container #search-input {\n      padding-right: 30px; }\n    #control-panel > .control-container button {\n      height: 100%; }\n  #control-panel .divider {\n    height: 60px;\n    border-left: 1px solid #ccc;\n    float: left;\n    margin: 5px 10px; }\n  #control-panel #search-auto-complete-wrapper i {\n    position: absolute;\n    padding: 0 5px;\n    background: #fff;\n    line-height: 30px;\n    color: #ccc; }\n  #control-panel #search-auto-complete-wrapper input[type=text] {\n    text-indent: 28px; }\n  #control-panel #render-calls {\n    position: absolute;\n    top: 0;\n    right: 0;\n    font-size: 10px;\n    z-index: 10000; }\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 412:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(10)();
+// imports
+
+
+// module
+exports.push([module.i, "img#gif {\n  width: 100%;\n  margin-bottom: 1rem; }\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 413:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(10)();
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 414:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(10)();
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 415:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(10)();
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 416:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(10)();
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 417:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(10)();
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 418:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(10)();
+// imports
+
+
+// module
+exports.push([module.i, "#comparison-panel {\n  position: absolute;\n  bottom: 0;\n  left: 50%;\n  -webkit-transform: translate3d(-50%, 100%, 0) scale(0.1);\n          transform: translate3d(-50%, 100%, 0) scale(0.1);\n  padding: 5px 20px;\n  max-width: 40%;\n  height: 190px;\n  background: #fff;\n  box-shadow: rgba(0, 0, 0, 0.2) 0 2px 6px 0;\n  z-index: 100;\n  transition: -webkit-transform 1.5s ease;\n  transition: transform 1.5s ease;\n  transition: transform 1.5s ease, -webkit-transform 1.5s ease; }\n  #comparison-panel.open {\n    -webkit-transform: translate3d(-50%, 0%, 0) scale(1);\n            transform: translate3d(-50%, 0%, 0) scale(1); }\n  #comparison-panel > .element-name {\n    display: block;\n    text-overflow: ellipsis;\n    text-align: center;\n    white-space: nowrap;\n    overflow: hidden;\n    direction: rtl;\n    margin: 10px auto;\n    padding: 0 10px; }\n  #comparison-panel table #first-commit-id, #comparison-panel table #second-commit-id {\n    max-width: 100px;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap; }\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 419:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(10)();
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 42:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2970,154 +3440,10 @@ function focusElement(elementName) {
 
 /***/ }),
 
-/***/ 410:
+/***/ 420:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(11)();
-// imports
-
-
-// module
-exports.push([module.i, "#control-panel {\n  position: absolute;\n  top: 0;\n  width: 100%;\n  height: 80px;\n  background: #fff;\n  box-shadow: rgba(0, 0, 0, 0.2) 0 2px 6px 0;\n  z-index: 101; }\n  #control-panel > .control-container {\n    position: relative;\n    float: left;\n    margin: 10px;\n    height: 50px; }\n    #control-panel > .control-container:last-child {\n      float: right; }\n    #control-panel > .control-container .control-item {\n      display: inline-block;\n      padding: 5px; }\n    #control-panel > .control-container .control-label {\n      font-size: 12px;\n      display: block;\n      margin-top: 5px; }\n    #control-panel > .control-container .checkbox-container {\n      position: relative; }\n    #control-panel > .control-container .checkbox-icon {\n      position: absolute;\n      top: 0;\n      width: 30px;\n      height: 30px; }\n    #control-panel > .control-container .checkbox-icon.left {\n      left: 0; }\n    #control-panel > .control-container .checkbox-icon.right {\n      right: 0; }\n    #control-panel > .control-container #search-input {\n      padding-right: 30px; }\n    #control-panel > .control-container button {\n      height: 100%; }\n  #control-panel .divider {\n    height: 60px;\n    border-left: 1px solid #ccc;\n    float: left;\n    margin: 5px 10px; }\n  #control-panel #search-auto-complete-wrapper i {\n    position: absolute;\n    padding: 0 5px;\n    background: #fff;\n    line-height: 30px;\n    color: #ccc; }\n  #control-panel #search-auto-complete-wrapper input[type=text] {\n    text-indent: 28px; }\n  #control-panel #render-calls {\n    position: absolute;\n    top: 0;\n    right: 0;\n    font-size: 10px;\n    z-index: 10000; }\n", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ 411:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(11)();
-// imports
-
-
-// module
-exports.push([module.i, "img#gif {\n  width: 100%;\n  margin-bottom: 1rem; }\n", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ 412:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(11)();
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ 413:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(11)();
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ 414:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(11)();
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ 415:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(11)();
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ 416:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(11)();
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ 417:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(11)();
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ 418:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(11)();
+exports = module.exports = __webpack_require__(10)();
 // imports
 
 
@@ -3132,10 +3458,10 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 419:
+/***/ 421:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(11)();
+exports = module.exports = __webpack_require__(10)();
 // imports
 
 
@@ -3150,7 +3476,7 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 423:
+/***/ 425:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
@@ -3399,96 +3725,103 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 423;
+webpackContext.id = 425;
 
-
-/***/ }),
-
-/***/ 434:
-/***/ (function(module, exports) {
-
-module.exports = "<app-control-panel></app-control-panel>\n<app-visualization></app-visualization>"
-
-/***/ }),
-
-/***/ 435:
-/***/ (function(module, exports) {
-
-module.exports = "<input class=\"form-control\"\n       placeholder=\"Datum, Commit-ID, Autor\"\n       ngui-auto-complete [(ngModel)]=\"selected\"\n       [source]=\"commits\"\n       [value-formatter]=\"formatCommit\"\n       [list-formatter]=\"formatCommit\"\n       value-property-name=\"id\"\n       display-property-name=\"name\"\n       no-match-found-text=\"Nichts gefunden.\"\n       match-formatted=\"true\"\n       (valueChanged)=\"handleValueChanged($event)\" />\n<p *ngIf=\"loading$ | async\">LADE</p>"
 
 /***/ }),
 
 /***/ 436:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\">\n    <form id=\"control-panel\" class=\"row align-items-center justify-content-between\">\n        <div class=\"col-4\">\n            <div class=\"row\">\n                <div class=\"col-6\">\n                    <small>Erste Revision</small>\n                    <app-commit-chooser [commitType]=\"commitTypes.left\"></app-commit-chooser>\n                </div>\n\n                <div class=\"col-6\">\n                    <small>Zweite Revision</small>\n                    <app-commit-chooser [commitType]=\"commitTypes.right\"></app-commit-chooser>\n                </div>\n            </div>\n        </div>\n        <div class=\"col-6\">\n            <app-settings></app-settings>\n            <app-screenshot></app-screenshot>\n        </div>\n        <div class=\"col-2\">\n            <small>Suche</small>\n            <app-search></app-search>\n        </div>\n    </form>\n</div>"
+module.exports = "<app-control-panel></app-control-panel>\n<app-visualization></app-visualization>"
 
 /***/ }),
 
 /***/ 437:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"btn-group\">\n    <button type=\"button\" class=\"btn btn-secondary\" (click)=\"takeScreenshot()\"><i class=\"fa fa-camera\" aria-hidden=\"true\"></i> Screenshot speichern</button>\n    <button type=\"button\" class=\"btn btn-secondary dropdown-toggle dropdown-toggle-split\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n        <span class=\"sr-only\">Toggle Dropdown</span>\n    </button>\n    <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n        <div class=\"form-group\">\n            <label>GIF erstellen für:</label>\n            <div class=\"btn-group\">\n                <button type=\"button\" class=\"btn btn-secondary\" (click)=\"generateGif(screenTypes.left)\">Erster Commit</button>\n                <button type=\"button\" class=\"btn btn-secondary\" (click)=\"generateGif(screenTypes.right)\">Zweiter Commit</button>\n            </div>\n        </div>\n\n        <img *ngIf=\"gifSource && !isGenerating\" id=\"gif\" src=\"{{gifSource}}\">\n        <p *ngIf=\"isGenerating\">GIF wird erstellt ...</p>\n        <small *ngIf=\"!gifSource && !isGenerating\">Ein GIF wird aus gespeicherten Screenshots erzeugt (Button \"Screenshot speichern\")</small>\n\n        <div class=\"form-group\" *ngIf=\"gifSource\">\n            <button type=\"button\" class=\"btn btn-danger\" (click)=\"removeScreenshots()\">zurücksetzen</button>\n        </div>\n    </div>\n</div>"
+module.exports = "<input class=\"form-control\"\n       placeholder=\"Datum, Commit-ID, Autor\"\n       ngui-auto-complete\n       [(ngModel)]=\"selected\"\n       [source]=\"commits\"\n       [value-formatter]=\"formatCommit\"\n       [list-formatter]=\"formatCommit\"\n       value-property-name=\"id\"\n       display-property-name=\"name\"\n       no-match-found-text=\"Nichts gefunden.\"\n       match-formatted=\"true\"\n       (valueChanged)=\"handleValueChanged($event)\" />\n<p *ngIf=\"loading$ | async\">LADE</p>"
 
 /***/ }),
 
 /***/ 438:
 /***/ (function(module, exports) {
 
-module.exports = "<input class=\"form-control\"\n       placeholder=\"Datei, Modul, ...\"\n       ngui-auto-complete [(ngModel)]=\"searchTerm\"\n       [source]=\"uniqueFileList\"\n       [list-formatter]=\"autocompleteListFormatter\"\n       no-match-found-text=\"Nichts gefunden.\"\n       (valueChanged)=\"handleValueChanged($event)\" />"
+module.exports = "<div class=\"container-fluid\">\n    <form id=\"control-panel\" class=\"row align-items-center justify-content-between\">\n        <div class=\"col-4\">\n            <div class=\"row\">\n                <div class=\"col-6\">\n                    <small>Erste Revision</small>\n                    <app-commit-chooser [commitType]=\"commitTypes.left\"></app-commit-chooser>\n                </div>\n\n                <div class=\"col-6\">\n                    <small>Zweite Revision</small>\n                    <app-commit-chooser [commitType]=\"commitTypes.right\"></app-commit-chooser>\n                </div>\n            </div>\n        </div>\n        <div class=\"col-6\">\n            <app-settings></app-settings>\n            <app-screenshot></app-screenshot>\n        </div>\n        <div class=\"col-2\">\n            <small>Suche</small>\n            <app-search></app-search>\n        </div>\n    </form>\n</div>"
 
 /***/ }),
 
 /***/ 439:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"btn-group\">\n    <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n        <i class=\"fa fa-filter\" aria-hidden=\"true\"></i> Filter\n    </button>\n    <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n        <div class=\"custom-controls-stacked\">\n            <label class=\"custom-control custom-checkbox\">\n                <input type=\"checkbox\" class=\"custom-control-input\" [(ngModel)]=\"activeFilter.unchanged\" (change)=\"handleFilterChanged()\">\n                <span class=\"custom-control-indicator\"></span>\n                <span class=\"custom-control-description\">unverändert</span>\n            </label>\n            <label class=\"custom-control custom-checkbox\">\n                <input type=\"checkbox\" class=\"custom-control-input\" [(ngModel)]=\"activeFilter.changed\" (change)=\"handleFilterChanged()\">\n                <span class=\"custom-control-indicator\"></span>\n                <span class=\"custom-control-description\">verändert</span>\n            </label>\n            <label class=\"custom-control custom-checkbox\">\n                <input type=\"checkbox\" class=\"custom-control-input\" [(ngModel)]=\"activeFilter.deleted\" (change)=\"handleFilterChanged()\">\n                <span class=\"custom-control-indicator\"></span>\n                <span class=\"custom-control-description\">gelöscht</span>\n            </label>\n            <label class=\"custom-control custom-checkbox\">\n                <input type=\"checkbox\" class=\"custom-control-input\" [(ngModel)]=\"activeFilter.added\" (change)=\"handleFilterChanged()\">\n                <span class=\"custom-control-indicator\"></span>\n                <span class=\"custom-control-description\">hinzugefügt</span>\n            </label>\n            <label class=\"custom-control custom-checkbox\">\n                <input type=\"checkbox\" class=\"custom-control-input\" [(ngModel)]=\"activeFilter.moved\" (change)=\"handleFilterChanged()\">\n                <span class=\"custom-control-indicator\"></span>\n                <span class=\"custom-control-description\">umbenannt/verschoben</span>\n            </label>\n        </div>\n    </div>\n</div>"
+module.exports = "<div class=\"btn-group\">\n    <button type=\"button\" class=\"btn btn-secondary\" (click)=\"takeScreenshot()\"><i class=\"fa fa-camera\" aria-hidden=\"true\"></i> Screenshot speichern</button>\n    <button type=\"button\" class=\"btn btn-secondary dropdown-toggle dropdown-toggle-split\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n        <span class=\"sr-only\">Toggle Dropdown</span>\n    </button>\n    <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n        <div class=\"form-group\">\n            <label>GIF erstellen für:</label>\n            <div class=\"btn-group\">\n                <button type=\"button\" class=\"btn btn-secondary\" (click)=\"generateGif(screenTypes.left)\">Erster Commit</button>\n                <button type=\"button\" class=\"btn btn-secondary\" (click)=\"generateGif(screenTypes.right)\">Zweiter Commit</button>\n            </div>\n        </div>\n\n        <img *ngIf=\"gifSource && !isGenerating\" id=\"gif\" src=\"{{gifSource}}\">\n        <p *ngIf=\"isGenerating\">GIF wird erstellt ...</p>\n        <small *ngIf=\"!gifSource && !isGenerating\">Ein GIF wird aus gespeicherten Screenshots erzeugt (Button \"Screenshot speichern\")</small>\n\n        <div class=\"form-group\" *ngIf=\"gifSource\">\n            <button type=\"button\" class=\"btn btn-danger\" (click)=\"removeScreenshots()\">zurücksetzen</button>\n        </div>\n    </div>\n</div>"
 
 /***/ }),
 
 /***/ 440:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"btn-group\">\n    <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n        <i class=\"fa fa-bar-chart\" aria-hidden=\"true\"></i> Mapping\n    </button>\n    <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n        <div class=\"form-group\">\n            <label for=\"height-metric-name\">Höhe</label>\n            <select id=\"height-metric-name\" class=\"custom-select\" [(ngModel)]=\"metricMapping.heightMetricName\">\n                <option *ngFor=\"let metricName of metricNames\" [ngValue]=\"metricName.name\">{{metricName.shortName}}</option>\n            </select>\n        </div>\n\n        <div class=\"form-group\">\n            <label for=\"groundarea-metric-name\">Grundfläche</label>\n            <select id=\"groundarea-metric-name\" class=\"custom-select\" [(ngModel)]=\"metricMapping.groundAreaMetricName\">\n                <option *ngFor=\"let metricName of metricNames\" [ngValue]=\"metricName.name\">{{metricName.shortName}}</option>\n            </select>\n        </div>\n\n        <div class=\"form-group\">\n            <label for=\"color-metric-name\">Farbe</label>\n            <select id=\"color-metric-name\" class=\"custom-select\" [(ngModel)]=\"metricMapping.colorMetricName\">\n                <option *ngFor=\"let metricName of metricNames\" [ngValue]=\"metricName.name\">{{metricName.shortName}}</option>\n            </select>\n        </div>\n\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"applyMetricMappings()\">übernehmen</button>\n    </div>\n</div>"
+module.exports = "<input class=\"form-control\"\n       placeholder=\"Datei, Modul, ...\"\n       ngui-auto-complete\n       [(ngModel)]=\"searchTerm\"\n       [source]=\"uniqueFileList\"\n       [list-formatter]=\"autocompleteListFormatter\"\n       no-match-found-text=\"Nichts gefunden.\"\n       (valueChanged)=\"handleValueChanged($event)\" />"
 
 /***/ }),
 
 /***/ 441:
 /***/ (function(module, exports) {
 
-module.exports = "<div>\n    <small>Einstellungen</small>\n</div>\n<app-view-control></app-view-control>\n<app-filter></app-filter>\n<app-metric-mapping></app-metric-mapping>"
+module.exports = "<div class=\"btn-group\">\n    <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n        <i class=\"fa fa-filter\" aria-hidden=\"true\"></i> Filter\n    </button>\n    <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n        <div class=\"custom-controls-stacked\">\n            <label class=\"custom-control custom-checkbox\">\n                <input type=\"checkbox\" class=\"custom-control-input\" [(ngModel)]=\"activeFilter.unchanged\" (change)=\"handleFilterChanged()\">\n                <span class=\"custom-control-indicator\"></span>\n                <span class=\"custom-control-description\">unverändert</span>\n            </label>\n            <label class=\"custom-control custom-checkbox\">\n                <input type=\"checkbox\" class=\"custom-control-input\" [(ngModel)]=\"activeFilter.changed\" (change)=\"handleFilterChanged()\">\n                <span class=\"custom-control-indicator\"></span>\n                <span class=\"custom-control-description\">verändert</span>\n            </label>\n            <label class=\"custom-control custom-checkbox\">\n                <input type=\"checkbox\" class=\"custom-control-input\" [(ngModel)]=\"activeFilter.deleted\" (change)=\"handleFilterChanged()\">\n                <span class=\"custom-control-indicator\"></span>\n                <span class=\"custom-control-description\">gelöscht</span>\n            </label>\n            <label class=\"custom-control custom-checkbox\">\n                <input type=\"checkbox\" class=\"custom-control-input\" [(ngModel)]=\"activeFilter.added\" (change)=\"handleFilterChanged()\">\n                <span class=\"custom-control-indicator\"></span>\n                <span class=\"custom-control-description\">hinzugefügt</span>\n            </label>\n            <label class=\"custom-control custom-checkbox\">\n                <input type=\"checkbox\" class=\"custom-control-input\" [(ngModel)]=\"activeFilter.moved\" (change)=\"handleFilterChanged()\">\n                <span class=\"custom-control-indicator\"></span>\n                <span class=\"custom-control-description\">umbenannt/verschoben</span>\n            </label>\n        </div>\n    </div>\n</div>"
 
 /***/ }),
 
 /***/ 442:
 /***/ (function(module, exports) {
 
-module.exports = "<label class=\"custom-control custom-radio\">\n    <input id=\"radio-splitscreen\" type=\"radio\" name=\"radio-group-screen\" class=\"custom-control-input\" [value]=\"viewTypes.split\" (click)=\"changeViewType(viewTypes.split)\" [checked]=\"activeViewType === viewTypes.split\" />\n    <span class=\"custom-control-indicator\"></span>\n    <span class=\"custom-control-description\">nebeneinander</span>\n</label>\n<label class=\"custom-control custom-radio\">\n    <input id=\"radio-fullscreen\" type=\"radio\" name=\"radio-group-screen\" class=\"custom-control-input\" [value]=\"viewTypes.merged\" (click)=\"changeViewType(viewTypes.merged)\" [checked]=\"activeViewType === viewTypes.merged\" />\n    <span class=\"custom-control-indicator\"></span>\n    <span class=\"custom-control-description\">kombiniert</span>\n</label>"
+module.exports = "<div class=\"btn-group\">\n    <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n        <i class=\"fa fa-bar-chart\" aria-hidden=\"true\"></i> Mapping\n    </button>\n    <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n        <div class=\"form-group\">\n            <label for=\"height-metric-name\">Höhe</label>\n            <select id=\"height-metric-name\" class=\"custom-select\" [(ngModel)]=\"metricMapping.heightMetricName\">\n                <option *ngFor=\"let metricName of metricNames\" [ngValue]=\"metricName.name\">{{metricName.shortName}}</option>\n            </select>\n        </div>\n\n        <div class=\"form-group\">\n            <label for=\"groundarea-metric-name\">Grundfläche</label>\n            <select id=\"groundarea-metric-name\" class=\"custom-select\" [(ngModel)]=\"metricMapping.groundAreaMetricName\">\n                <option *ngFor=\"let metricName of metricNames\" [ngValue]=\"metricName.name\">{{metricName.shortName}}</option>\n            </select>\n        </div>\n\n        <div class=\"form-group\">\n            <label for=\"color-metric-name\">Farbe</label>\n            <select id=\"color-metric-name\" class=\"custom-select\" [(ngModel)]=\"metricMapping.colorMetricName\">\n                <option *ngFor=\"let metricName of metricNames\" [ngValue]=\"metricName.name\">{{metricName.shortName}}</option>\n            </select>\n        </div>\n\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"applyMetricMappings()\">übernehmen</button>\n    </div>\n</div>"
 
 /***/ }),
 
 /***/ 443:
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "<div>\n    <small>Einstellungen</small>\n</div>\n<app-view-control></app-view-control>\n<app-filter></app-filter>\n<app-metric-mapping></app-metric-mapping>"
 
 /***/ }),
 
 /***/ 444:
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"tooltip\"></div>"
+module.exports = "<label class=\"custom-control custom-radio\">\n    <input id=\"radio-splitscreen\" type=\"radio\" name=\"radio-group-screen\" class=\"custom-control-input\" [value]=\"viewTypes.split\" (click)=\"changeViewType(viewTypes.split)\" [checked]=\"activeViewType === viewTypes.split\" />\n    <span class=\"custom-control-indicator\"></span>\n    <span class=\"custom-control-description\">nebeneinander</span>\n</label>\n<label class=\"custom-control custom-radio\">\n    <input id=\"radio-fullscreen\" type=\"radio\" name=\"radio-group-screen\" class=\"custom-control-input\" [value]=\"viewTypes.merged\" (click)=\"changeViewType(viewTypes.merged)\" [checked]=\"activeViewType === viewTypes.merged\" />\n    <span class=\"custom-control-indicator\"></span>\n    <span class=\"custom-control-description\">kombiniert</span>\n</label>"
 
 /***/ }),
 
 /***/ 445:
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"stage\" class=\"split\">\n    <div class=\"vertical-line\"></div>\n    <app-screen [screenType]=\"screenTypes.left\"></app-screen>\n    <app-screen [screenType]=\"screenTypes.right\"></app-screen>\n</div>\n<app-tooltip></app-tooltip>\n<p *ngIf=\"metricsLoading$ | async\">LADE</p>"
+module.exports = "<div id=\"comparison-panel\">\n    <strong class=\"element-name\">{{elementName}}</strong>\n    <div class=\"table-container\">\n        <table id=\"comparison-table\" class=\"table table-striped table-sm\">\n            <thead>\n            <tr>\n                <th>Metrik</th>\n                <th id=\"first-commit-id\">{{leftCommit?.name}}</th>\n                <th id=\"second-commit-id\">{{rightCommit?.name}}</th>\n                <th>Änderung</th>\n            </tr>\n            </thead>\n            <tbody>\n                <tr *ngFor=\"let row of tableData\">\n                    <td>{{row.metricName}}</td>\n                    <td>{{row.leftCommitValue}}</td>\n                    <td>{{row.rightCommitValue}}</td>\n                    <td>\n                        <i *ngIf=\"row.difference > 0\" class=\"fa fa-caret-up\" aria-hidden=\"true\"></i>\n                        <i *ngIf=\"row.difference < 0\" class=\"fa fa-caret-down\" aria-hidden=\"true\"></i>\n                        <i *ngIf=\"row.difference === 0\" class=\"fa fa-caret-right\" aria-hidden=\"true\"></i>\n                        {{row.difference}}\n                    </td>\n                </tr>\n            </tbody>\n        </table>\n    </div>\n</div>"
 
 /***/ }),
 
-/***/ 55:
+/***/ 446:
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ 447:
+/***/ (function(module, exports) {
+
+module.exports = "<div id=\"tooltip\"></div>"
+
+/***/ }),
+
+/***/ 448:
+/***/ (function(module, exports) {
+
+module.exports = "<div id=\"stage\" class=\"split\">\n    <div class=\"vertical-line\"></div>\n    <app-screen [screenType]=\"screenTypes.left\"></app-screen>\n    <app-screen [screenType]=\"screenTypes.right\"></app-screen>\n    <app-comparison-panel></app-comparison-panel>\n</div>\n<app-tooltip></app-tooltip>\n<p *ngIf=\"metricsLoading$ | async\">LADE</p>"
+
+/***/ }),
+
+/***/ 57:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3502,169 +3835,7 @@ var ViewType;
 
 /***/ }),
 
-/***/ 56:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__enum_CommitReferenceType__ = __webpack_require__(79);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__enum_ScreenType__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__enum_NodeType__ = __webpack_require__(34);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ElementAnalyzer; });
-
-
-
-var ElementAnalyzer = (function () {
-    function ElementAnalyzer() {
-    }
-    ElementAnalyzer.generateUniqueElementList = function (nodes, uniqueElements) {
-        if (uniqueElements === void 0) { uniqueElements = []; }
-        if (!Array.isArray(nodes)) {
-            nodes = [nodes];
-        }
-        for (var _i = 0, nodes_1 = nodes; _i < nodes_1.length; _i++) {
-            var node = nodes_1[_i];
-            if (uniqueElements.indexOf(node.name) < 0) {
-                uniqueElements.push(node.name);
-            }
-            // recursion
-            if (node.children && node.children.length > 0) {
-                this.generateUniqueElementList(node.children, uniqueElements);
-            }
-        }
-        return uniqueElements;
-    };
-    ElementAnalyzer.findSmallestAndBiggestMetricValueByMetricName = function (nodes, metricName) {
-        if (typeof nodes !== 'object' || nodes === null) {
-            throw new Error('elements is not an object or null!');
-        }
-        if (!Array.isArray(nodes)) {
-            nodes = [nodes];
-        }
-        var min = Number.MAX_VALUE;
-        var max = Number.MIN_VALUE;
-        for (var _i = 0, nodes_2 = nodes; _i < nodes_2.length; _i++) {
-            var node = nodes_2[_i];
-            // investigate only FILEs, because only files can have different sizes and colors
-            if (node.type == __WEBPACK_IMPORTED_MODULE_2__enum_NodeType__["a" /* NodeType */].FILE) {
-                var commit1Metrics = node.commit1Metrics || null;
-                var commit2Metrics = node.commit2Metrics || null;
-                var big = this.getMaxMetricValueByMetricName(commit1Metrics, commit2Metrics, metricName);
-                if (big > max) {
-                    max = big;
-                }
-                var small = this.getMinMetricValueByMetricName(commit1Metrics, commit2Metrics, metricName);
-                if (small < min) {
-                    min = small;
-                }
-            }
-            // recursion
-            if (node.children && node.children.length > 0) {
-                var result = this.findSmallestAndBiggestMetricValueByMetricName(node.children, metricName);
-                if (result.max > max) {
-                    max = result.max;
-                }
-                if (result.min < min) {
-                    min = result.min;
-                }
-            }
-        }
-        return {
-            min: min,
-            max: max
-        };
-    };
-    ElementAnalyzer.getMinMetricValueByMetricName = function (commit1Metrics, commit2Metrics, metricName) {
-        if (commit1Metrics === null && commit2Metrics === null) {
-            throw new Error("No metric objects given");
-        }
-        if (commit1Metrics === null) {
-            return commit2Metrics[metricName];
-        }
-        else if (commit2Metrics === null) {
-            return commit1Metrics[metricName];
-        }
-        else {
-            return commit1Metrics[metricName] < commit2Metrics[metricName] ? commit1Metrics[metricName] : commit2Metrics[metricName];
-        }
-    };
-    ElementAnalyzer.getMaxMetricValueByMetricName = function (commit1Metrics, commit2Metrics, metricName) {
-        if (commit1Metrics === null && commit2Metrics === null) {
-            throw new Error("No metric objects given");
-        }
-        if (commit1Metrics === null) {
-            return commit2Metrics[metricName];
-        }
-        else if (commit2Metrics === null) {
-            return commit1Metrics[metricName];
-        }
-        else {
-            return commit1Metrics[metricName] > commit2Metrics[metricName] ? commit1Metrics[metricName] : commit2Metrics[metricName];
-        }
-    };
-    ElementAnalyzer.hasChildrenForCurrentCommit = function (node, isFullScreen, screenType) {
-        var found = false;
-        for (var _i = 0, _a = node.children; _i < _a.length; _i++) {
-            var child = _a[_i];
-            if (this.hasMetricValuesForCurrentCommit(child, isFullScreen, screenType)) {
-                found = true;
-            }
-            // recursion
-            if (child.children && child.children.length > 0 && !found) {
-                found = this.hasChildrenForCurrentCommit(child, isFullScreen, screenType);
-            }
-        }
-        return found;
-    };
-    ElementAnalyzer.hasMetricValuesForCurrentCommit = function (node, isFullScreen, screenType) {
-        // when in fullScreen mode, metrics for at least one commit should be present
-        if (isFullScreen) {
-            return node.commit1Metrics != null || node.commit2Metrics != null;
-        }
-        if (screenType == __WEBPACK_IMPORTED_MODULE_1__enum_ScreenType__["a" /* ScreenType */].LEFT) {
-            return node.commit1Metrics != null;
-        }
-        else if (screenType == __WEBPACK_IMPORTED_MODULE_1__enum_ScreenType__["a" /* ScreenType */].RIGHT) {
-            return node.commit2Metrics != null;
-        }
-        else {
-            throw new Error("Unknown screenType " + screenType + "!");
-        }
-    };
-    ElementAnalyzer.getMetricValueOfElementAndCommitReferenceType = function (node, metricName, commitReferenceType, screenType) {
-        if (screenType == __WEBPACK_IMPORTED_MODULE_1__enum_ScreenType__["a" /* ScreenType */].LEFT) {
-            if (commitReferenceType == __WEBPACK_IMPORTED_MODULE_0__enum_CommitReferenceType__["a" /* CommitReferenceType */].THIS) {
-                return node.commit1Metrics ? node.commit1Metrics[metricName] : undefined;
-            }
-            else if (commitReferenceType == __WEBPACK_IMPORTED_MODULE_0__enum_CommitReferenceType__["a" /* CommitReferenceType */].OTHER) {
-                return node.commit2Metrics ? node.commit2Metrics[metricName] : undefined;
-            }
-            else {
-                throw new Error("Unknown commitReferenceType " + commitReferenceType + "!");
-            }
-        }
-        else if (screenType == __WEBPACK_IMPORTED_MODULE_1__enum_ScreenType__["a" /* ScreenType */].RIGHT) {
-            if (commitReferenceType == __WEBPACK_IMPORTED_MODULE_0__enum_CommitReferenceType__["a" /* CommitReferenceType */].THIS) {
-                return node.commit2Metrics ? node.commit2Metrics[metricName] : undefined;
-            }
-            else if (commitReferenceType == __WEBPACK_IMPORTED_MODULE_0__enum_CommitReferenceType__["a" /* CommitReferenceType */].OTHER) {
-                return node.commit1Metrics ? node.commit1Metrics[metricName] : undefined;
-            }
-            else {
-                throw new Error("Unknown commitReferenceType " + commitReferenceType + "!");
-            }
-        }
-        else {
-            throw new Error("Unknown screenType " + screenType + "!");
-        }
-    };
-    return ElementAnalyzer;
-}());
-
-//# sourceMappingURL=element-analyzer.js.map
-
-/***/ }),
-
-/***/ 714:
+/***/ 717:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(292);
@@ -3672,7 +3843,7 @@ module.exports = __webpack_require__(292);
 
 /***/ }),
 
-/***/ 79:
+/***/ 80:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3686,7 +3857,7 @@ var CommitReferenceType;
 
 /***/ }),
 
-/***/ 80:
+/***/ 81:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3700,5 +3871,5 @@ var CommitType;
 
 /***/ })
 
-},[714]);
+},[717]);
 //# sourceMappingURL=main.bundle.js.map
