@@ -1,8 +1,4 @@
-import {Component, OnInit} from '@angular/core';
-import * as fromRoot from "../../shared/reducers";
-import {Store} from "@ngrx/store";
-import {Subscription} from "rxjs";
-import {focusElement} from "../../visualization/visualization.actions";
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
     selector: 'app-search',
@@ -11,25 +7,18 @@ import {focusElement} from "../../visualization/visualization.actions";
 })
 export class SearchComponent implements OnInit {
 
-    subscription: Subscription;
-    searchTerm: string;
-    uniqueFileList: string[] = [];
+    @Input() uniqueFileList: string[] = [];
 
-    constructor(private store: Store<fromRoot.AppState>) {
+    @Output() startSearch = new EventEmitter();
+
+    constructor() {
     }
 
     ngOnInit() {
-        this.subscription = this.store.select(fromRoot.getUniqueFileList).subscribe((fileList) => {
-            this.uniqueFileList = fileList;
-        });
-    }
-
-    ngOnDestroy() {
-        this.subscription.unsubscribe();
     }
 
     handleValueChanged(chosenItem: string) {
-        this.store.dispatch(focusElement(chosenItem));
+        this.startSearch.emit(chosenItem);
     }
 
     autocompleteListFormatter(data: string): string {

@@ -5,6 +5,7 @@ import * as fromRoot from "../shared/reducers";
 import {changeCommit, loadCommits} from "./control-panel.actions";
 import {ICommit} from "../domain/ICommit";
 import {Observable} from "rxjs/Observable";
+import {focusElement} from "../visualization/visualization.actions";
 
 @Component({
     selector: 'app-control-panel',
@@ -23,6 +24,8 @@ export class ControlPanelComponent implements OnInit {
     rightCommit$: Observable<ICommit>;
     commitsLoading$: Observable<boolean>;
 
+    uniqueFileList$: Observable<string[]>;
+
     constructor(private store: Store<fromRoot.AppState>) {
     }
 
@@ -33,10 +36,16 @@ export class ControlPanelComponent implements OnInit {
         this.commitsLoading$ = this.store.select(fromRoot.getCommitsLoading);
         this.leftCommit$ = this.store.select(fromRoot.getLeftCommit);
         this.rightCommit$ = this.store.select(fromRoot.getRightCommit);
+
+        this.uniqueFileList$ = this.store.select(fromRoot.getUniqueFileList);
     }
 
     handleCommitChanged(payload: {commitType: CommitType, commit: ICommit}) {
         this.store.dispatch(changeCommit(payload.commitType, payload.commit));
+    }
+
+    handleSearchStarted(chosenItem: string) {
+        this.store.dispatch(focusElement(chosenItem));
     }
 
 }

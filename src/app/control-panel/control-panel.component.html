@@ -29,7 +29,7 @@
         </div>
         <div class="col-2">
             <small>Suche</small>
-            <app-search></app-search>
+            <app-search [uniqueFileList]="uniqueFileList$ | async" (startSearch)="handleSearchStarted($event)"></app-search>
         </div>
     </form>
 </div>
