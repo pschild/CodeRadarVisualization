@@ -1,9 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ViewType} from "../../../enum/ViewType";
-import {Store} from "@ngrx/store";
-import * as fromRoot from "../../../shared/reducers";
-import {Subscription} from "rxjs";
-import {changeViewType} from "../settings.actions";
 
 @Component({
     selector: 'app-view-control',
@@ -17,25 +13,18 @@ export class ViewControlComponent implements OnInit {
         merged: ViewType.MERGED
     };
 
-    activeViewType: ViewType;
+    @Input() activeViewType: ViewType;
 
-    subscription: Subscription;
+    @Output() viewTypeChanged = new EventEmitter();
 
-    constructor(private store: Store<fromRoot.AppState>) {
+    constructor() {
     }
 
     ngOnInit() {
-        this.subscription = this.store.select(fromRoot.getActiveViewType).subscribe((activeViewType) => {
-            this.activeViewType = activeViewType;
-        });
-    }
-
-    ngOnDestroy() {
-        this.subscription.unsubscribe();
     }
 
     changeViewType(value) {
-        this.store.dispatch(changeViewType(value === 0 ? ViewType.SPLIT : ViewType.MERGED));
+        this.viewTypeChanged.emit(value === 0 ? ViewType.SPLIT : ViewType.MERGED);
     }
 
 }

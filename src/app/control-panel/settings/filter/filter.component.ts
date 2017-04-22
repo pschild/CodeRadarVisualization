@@ -1,9 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {Subscription} from "rxjs";
-import {Store} from "@ngrx/store";
-import * as fromRoot from "../../../shared/reducers";
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {IFilter} from "app/domain/IFilter";
-import {changeActiveFilter} from "../settings.actions";
 
 @Component({
     selector: 'app-filter',
@@ -12,25 +8,18 @@ import {changeActiveFilter} from "../settings.actions";
 })
 export class FilterComponent implements OnInit {
 
-    activeFilter: IFilter;
+    @Input() activeFilter: IFilter;
 
-    subscription: Subscription;
+    @Output() filterChanged = new EventEmitter();
 
-    constructor(private store: Store<fromRoot.AppState>) {
+    constructor() {
     }
 
     ngOnInit() {
-        this.subscription = this.store.select(fromRoot.getActiveFilter).subscribe((activeFilter) => {
-            this.activeFilter = activeFilter;
-        });
     }
 
     handleFilterChanged() {
-        this.store.dispatch(changeActiveFilter(this.activeFilter));
-    }
-
-    ngOnDestroy() {
-        this.subscription.unsubscribe();
+        this.filterChanged.emit(this.activeFilter);
     }
 
 }

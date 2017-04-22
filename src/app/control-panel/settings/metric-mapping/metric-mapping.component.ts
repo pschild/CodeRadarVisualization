@@ -1,8 +1,4 @@
-import {Component, OnInit} from '@angular/core';
-import {Store} from "@ngrx/store";
-import * as fromRoot from "../../../shared/reducers";
-import {Subscription} from "rxjs";
-import {setMetricMapping} from "../settings.actions";
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {IMetricMapping} from "../../../domain/IMetricMapping";
 import {MetricNameHelper} from "../../../helper/metric-name-helper";
 
@@ -13,28 +9,21 @@ import {MetricNameHelper} from "../../../helper/metric-name-helper";
 })
 export class MetricMappingComponent implements OnInit {
 
-    metricMapping: IMetricMapping;
+    @Input() metricMapping: IMetricMapping;
+
+    @Output() metricMappingChanged = new EventEmitter();
+
     metricNames: Object;
 
-    subscription: Subscription;
-
-    constructor(private store: Store<fromRoot.AppState>) {
+    constructor() {
     }
 
     ngOnInit() {
         this.metricNames = MetricNameHelper.getAll();
-
-        this.subscription = this.store.select(fromRoot.getMetricMapping).subscribe((metricMapping) => {
-            this.metricMapping = metricMapping;
-        });
     }
 
     applyMetricMappings() {
-        this.store.dispatch(setMetricMapping(this.metricMapping));
-    }
-
-    ngOnDestroy() {
-        this.subscription.unsubscribe();
+        this.metricMappingChanged.emit();
     }
 
 }

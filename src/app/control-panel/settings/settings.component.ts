@@ -1,4 +1,11 @@
 import {Component, OnInit} from "@angular/core";
+import {Observable} from "rxjs/Observable";
+import {ViewType} from "../../enum/ViewType";
+import {Store} from "@ngrx/store";
+import * as fromRoot from "../../shared/reducers";
+import {changeActiveFilter, changeViewType, setMetricMapping} from "./settings.actions";
+import {IFilter} from "../../domain/IFilter";
+import {IMetricMapping} from "../../domain/IMetricMapping";
 declare var $: any;
 
 @Component({
@@ -8,14 +15,36 @@ declare var $: any;
 })
 export class SettingsComponent implements OnInit {
 
-    constructor() {
+    activeViewType$: Observable<ViewType>;
+
+    activeFilter$: Observable<IFilter>;
+
+    metricMapping$: Observable<IMetricMapping>;
+
+    constructor(private store: Store<fromRoot.AppState>) {
     }
 
     ngOnInit() {
+        this.activeViewType$ = this.store.select(fromRoot.getActiveViewType);
+        this.activeFilter$ = this.store.select(fromRoot.getActiveFilter);
+        this.metricMapping$ = this.store.select(fromRoot.getMetricMapping);
+
         // prevent bootstrap dropdown from being closed by clicking on its content
         $(document).on('click', '.dropdown-menu', function (e) {
             e.stopPropagation();
         });
+    }
+
+    handleViewTypeChanged(viewType: ViewType) {
+        this.store.dispatch(changeViewType(viewType));
+    }
+
+    handleFilterChanged(filter: IFilter) {
+        this.store.dispatch(changeActiveFilter(filter));
+    }
+
+    handleMetricMappingChanged(metricMapping: IMetricMapping) {
+        this.store.dispatch(setMetricMapping(metricMapping));
     }
 
 }
