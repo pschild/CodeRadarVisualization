@@ -1,19 +1,10 @@
 import {Scene, WebGLRenderer, Raycaster, Vector2, PerspectiveCamera, Intersection, Object3D} from "three";
 import {ScreenType} from "../../enum/ScreenType";
-import {focusElement} from "../visualization.actions";
-import {Store} from "@ngrx/store";
-import * as fromRoot from "../../shared/reducers";
+import {FocusService} from "../../service/focus.service";
 
 export class InteractionHandler {
 
-    store: Store<fromRoot.AppState>;
-
     enabled: boolean = false;
-
-    scene: Scene;
-    renderer: WebGLRenderer;
-    screenType: ScreenType;
-    isMergedView: boolean;
 
     raycaster: Raycaster = new Raycaster();
     mouse: Vector2 = new Vector2();
@@ -25,15 +16,13 @@ export class InteractionHandler {
 
     startingPosition: {x?: number, y?: number} = {};
 
-    constructor(scene: Scene, renderer: WebGLRenderer, screenType: ScreenType, isMergedView: boolean, store: Store<fromRoot.AppState>) {
-        this.scene = scene;
-        this.renderer = renderer;
-        this.screenType = screenType;
-        this.isMergedView = isMergedView;
-
-        // no dependency injection as the view class are constructed with "new" instead with Angular
-        this.store = store;
-
+    constructor(
+        private scene: Scene,
+        private renderer: WebGLRenderer,
+        private screenType: ScreenType,
+        private isMergedView: boolean,
+        private focusService: FocusService
+    ) {
         this.bindEvents();
     }
 
@@ -146,7 +135,7 @@ export class InteractionHandler {
                     this.clickedElementUuid = undefined;
                 }
 
-                this.store.dispatch(focusElement(target.name));
+                this.focusService.focusElement(target.name);
             }
         }
     }

@@ -36,8 +36,6 @@ export const getLeftCommit = createSelector(getControlPanelState, fromControlPan
 
 export const getRightCommit = createSelector(getControlPanelState, fromControlPanel.getRightCommit);
 
-export const isScreenshotRequested = createSelector(getControlPanelState, fromControlPanel.isScreenshotRequested);
-
 export const getScreenshots = createSelector(getControlPanelState, fromControlPanel.getScreenshots);
 
 export const getMetricsLoading = createSelector(getVisualizationState, fromVisualization.getMetricsLoading);
@@ -48,8 +46,6 @@ export const getUniqueFileList = createSelector(getVisualizationState, fromVisua
 
 export const getMinColorMetricValue = createSelector(getVisualizationState, fromVisualization.getMinColorMetricValue);
 export const getMaxColorMetricValue = createSelector(getVisualizationState, fromVisualization.getMaxColorMetricValue);
-
-export const getFocussedElementName = createSelector(getVisualizationState, fromVisualization.getFocussedElementName);
 
 export const getMetricMapping = createSelector(getSettingsState, fromSettings.getMetricMapping);
 
@@ -62,36 +58,6 @@ export const getLeftAndRightCommit = createSelector(getLeftCommit, getRightCommi
         return {
             leftCommit: leftCommit,
             rightCommit: rightCommit
-        };
-    }
-});
-
-export const isReadyForLoadingMetrics = createSelector(getCommits, getLeftCommit, getRightCommit, getMetricMapping, (commits, leftCommit, rightCommit, metricMapping) => {
-    if (commits && commits.length > 2 && leftCommit !== null && rightCommit !== null) {
-        return {
-            leftCommit: leftCommit,
-            rightCommit: rightCommit,
-            metricMapping: metricMapping
-        };
-    }
-});
-
-export const isReadyForDrawing = createSelector(getMetricsLoading, getMetricTree, getMinColorMetricValue, getMaxColorMetricValue, (metricsLoading, metricTree, minColorMetricValue, maxColorMetricValue) => {
-    if (!metricsLoading && metricTree !== null && minColorMetricValue && maxColorMetricValue) {
-        return {
-            metricTree: metricTree,
-            minColorMetricValue: minColorMetricValue,
-            maxColorMetricValue: maxColorMetricValue
-        };
-    }
-});
-
-export const getViewChanged = createSelector(getActiveViewType, isReadyForDrawing, getActiveFilter, (activeViewType, isReadyForDrawing, activeFilter) => {
-    if (isReadyForDrawing) {
-        return {
-            activeViewType: activeViewType,
-            isReadyForDrawing: isReadyForDrawing,
-            activeFilter: activeFilter
         };
     }
 });

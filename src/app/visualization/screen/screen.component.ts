@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {ScreenType} from "../../enum/ScreenType";
 import {WebGLRenderer, Scene, AmbientLight, DirectionalLight} from "three";
 import {Subscription} from "rxjs";
@@ -11,9 +11,11 @@ import {MergedView} from "../view/merged-view";
 import {BlockConnection} from "../../geometry/block-connection";
 import {IFilter} from "../../domain/IFilter";
 import {NodeType} from "../../enum/NodeType";
-import {addScreenshot} from "../../control-panel/control-panel.actions";
 import {InteractionHandler} from "../interaction-handler/interaction-handler";
 import {AppConfig} from "../../AppConfig";
+import {INode} from "../../domain/INode";
+import {ScreenShotService} from "../../service/screenshot.service";
+import {FocusService} from "../../service/focus.service";
 declare var TWEEN: any;
 declare var THREE: any;
 
@@ -22,9 +24,12 @@ declare var THREE: any;
     templateUrl: './screen.component.html',
     styleUrls: ['./screen.component.scss']
 })
-export class ScreenComponent implements OnInit {
+export class ScreenComponent implements OnInit, OnChanges {
 
     @Input() screenType: ScreenType;
+    @Input() activeViewType: ViewType;
+    @Input() activeFilter: IFilter;
+    @Input() metricTree: INode;
 
     subscriptions: Subscription[] = [];
 
@@ -43,7 +48,38 @@ export class ScreenComponent implements OnInit {
 
     view: AbstractView;
 
-    constructor(private store: Store<fromRoot.AppState>) {
+    constructor(private store: Store<fromRoot.AppState>, private screenShotService: ScreenShotService, private focusService: FocusService) {
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        if (this.activeViewType !== null && this.metricTree !== null && this.activeFilter !== null) {
+            this.isMergedView = this.activeViewType === ViewType.MERGED;
+            this.interactionHandler.setIsMergedView(this.isMergedView);
+
+            if (this.isMergedView) {
+                this.view = new MergedView(this.screenType);
+                if (this.screenType === ScreenType.RIGHT) {
+                    this.pauseRendering();
+                }
+                document.querySelector('#stage').classList.remove('split');
+
+            } else {
+                this.view = new SplitView(this.screenType, this.store);
+                if (this.screenType === ScreenType.RIGHT) {
+                    this.resumeRendering();
+                }
+                document.querySelector('#stage').classList.add('split');
+            }
+
+            this.resetScene();
+            this.prepareView(this.metricTree);
+            this.applyFilter(this.activeFilter);
+            this.handleViewChanged();
+        }
+
+        if (changes.metricTree && changes.metricTree.currentValue) {
+            this.resetCameraAndControls();
+        }
     }
 
     ngOnInit() {
@@ -60,59 +96,19 @@ export class ScreenComponent implements OnInit {
         this.render();
 
         this.subscriptions.push(
-            this.store.select(fromRoot.getViewChanged).subscribe((result) => {
-                if (result) {
-                    this.isMergedView = result.activeViewType === ViewType.MERGED;
-                    this.interactionHandler.setIsMergedView(this.isMergedView);
-
-                    if (this.isMergedView) {
-                        this.view = new MergedView(this.screenType);
-                        if (this.screenType === ScreenType.RIGHT) {
-                            this.pauseRendering();
-                        }
-                        document.querySelector('#stage').classList.remove('split');
-
-                    } else {
-                        this.view = new SplitView(this.screenType, this.store);
-                        if (this.screenType === ScreenType.RIGHT) {
-                            this.resumeRendering();
-                        }
-                        document.querySelector('#stage').classList.add('split');
-                    }
-
-                    this.resetScene();
-                    this.prepareView(result.isReadyForDrawing.metricTree);
-                    this.applyFilter(result.activeFilter);
-                    this.handleViewChanged();
-                    this.resetCameraAndControls();
-                }
+            this.focusService.elementFocussed$.subscribe((elementName) => {
+                this.focusElementByName(elementName);
             })
         );
 
         this.subscriptions.push(
-            this.store.select(fromRoot.getActiveFilter).subscribe((activeFilter) => {
-                this.applyFilter(activeFilter);
-            })
-        );
-
-        this.subscriptions.push(
-            this.store.select(fromRoot.getFocussedElementName).subscribe((focussedElementName) => {
-                if (focussedElementName) {
-                    this.focusElementByName(focussedElementName);
-                }
-            })
-        );
-
-        this.subscriptions.push(
-            this.store.select(fromRoot.isScreenshotRequested).subscribe((isRequested) => {
-                if (isRequested) {
-                    let imgFromCanvas = this.renderer.domElement.toDataURL('image/png');
-                    let pngFile = imgFromCanvas.replace(/^data:image\/png/, 'data:application/octet-stream');
-                    this.store.dispatch(addScreenshot({
-                        screenType: this.screenType,
-                        file: pngFile
-                    }));
-                }
+            this.screenShotService.screenShotRequested$.subscribe(() => {
+                let imgFromCanvas = this.renderer.domElement.toDataURL('image/png');
+                let pngFile = imgFromCanvas.replace(/^data:image\/png/, 'data:application/octet-stream');
+                this.screenShotService.addScreenShot({
+                    screenType: this.screenType,
+                    file: pngFile
+                });
             })
         );
     }
@@ -211,7 +207,7 @@ export class ScreenComponent implements OnInit {
     }
 
     createInteractionHandler() {
-        this.interactionHandler = new InteractionHandler(this.scene, this.renderer, this.screenType, this.isMergedView, this.store);
+        this.interactionHandler = new InteractionHandler(this.scene, this.renderer, this.screenType, this.isMergedView, this.focusService);
     }
 
     resetScene() {

@@ -27,7 +27,7 @@
             <app-settings></app-settings>
             <app-screenshot
                     [activeViewType]="activeViewType$ | async"
-                    [screenshots]="screenshots$ | async"
+                    [screenShots]="screenShots$ | async"
                     (handleTakeScreenshot)="handleTakeScreenshot($event)"
                     (handleRemoveScreenshots)="handleRemoveScreenshots($event)">
             </app-screenshot>

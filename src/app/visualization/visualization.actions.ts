@@ -48,10 +48,3 @@ export function generateUniqueFileList(metricTree: INode): Action {
         payload: metricTree
     };
 }
-
-export function focusElement(elementName: string): Action {
-    return {
-        type: FOCUS_ELEMENT,
-        payload: elementName
-    };
-}

@@ -12,6 +12,8 @@ import {EffectsModule} from '@ngrx/effects';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {AppEffects} from './shared/effects';
 import {XHRBackendFactory} from './XHRBackendFactory';
+import {ScreenShotService} from "./service/screenshot.service";
+import {FocusService} from "./service/focus.service";
 
 @NgModule({
     declarations: [
@@ -32,7 +34,9 @@ import {XHRBackendFactory} from './XHRBackendFactory';
             provide: XHRBackend,
             useFactory: XHRBackendFactory,
             deps: [Injector, BrowserXhr, XSRFStrategy, ResponseOptions]
-        }
+        },
+        ScreenShotService,
+        FocusService
     ],
     bootstrap: [AppComponent]
 })

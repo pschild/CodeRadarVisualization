@@ -41,12 +41,6 @@ export function changeCommit(commitType: CommitType, commit: ICommit): Action {
     };
 }
 
-export function requestScreenshot(): Action {
-    return {
-        type: REQUEST_SCREENSHOT
-    };
-}
-
 export function addScreenshot(screenshotObject: any): Action {
     return {
         type: ADD_SCREENSHOT,

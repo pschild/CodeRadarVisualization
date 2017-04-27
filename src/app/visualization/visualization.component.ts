@@ -4,6 +4,9 @@ import {Observable, Subscription} from "rxjs";
 import {Store} from "@ngrx/store";
 import * as fromRoot from "../shared/reducers";
 import {loadMetricTree} from "./visualization.actions";
+import {ViewType} from "../enum/ViewType";
+import {IFilter} from "../domain/IFilter";
+import {INode} from "../domain/INode";
 
 @Component({
     selector: 'app-visualization',
@@ -13,6 +16,9 @@ import {loadMetricTree} from "./visualization.actions";
 export class VisualizationComponent implements OnInit {
 
     metricsLoading$: Observable<boolean>;
+    activeViewType$: Observable<ViewType>;
+    activeFilter$: Observable<IFilter>;
+    metricTree$: Observable<INode>;
 
     subscriptions: Subscription[] = [];
 
@@ -26,13 +32,16 @@ export class VisualizationComponent implements OnInit {
 
     ngOnInit() {
         this.metricsLoading$ = this.store.select(fromRoot.getMetricsLoading);
+        this.activeViewType$ = this.store.select(fromRoot.getActiveViewType);
+        this.activeFilter$ = this.store.select(fromRoot.getActiveFilter);
+        this.metricTree$ = this.store.select(fromRoot.getMetricTree);
 
         this.subscriptions.push(
-            this.store.select(fromRoot.isReadyForLoadingMetrics).subscribe((result) => {
-                if (result) {
-                    this.store.dispatch(loadMetricTree(result.leftCommit, result.rightCommit, result.metricMapping));
-                }
-            })
+            Observable.combineLatest(this.store.select(fromRoot.getLeftCommit), this.store.select(fromRoot.getRightCommit), this.store.select(fromRoot.getMetricMapping))
+                .filter(([leftCommit, rightCommit, metricMapping]) => !!leftCommit && !!rightCommit)
+                .subscribe(([leftCommit, rightCommit, metricMapping]) => {
+                    this.store.dispatch(loadMetricTree(leftCommit, rightCommit, metricMapping));
+                })
         );
     }
 

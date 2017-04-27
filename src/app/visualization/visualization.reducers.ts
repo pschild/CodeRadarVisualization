@@ -10,7 +10,6 @@ export interface VisualizationState {
     uniqueFileList: any[];
     minColorMetricValue: number;
     maxColorMetricValue: number;
-    focussedElementName: string;
 }
 
 const initialState: VisualizationState = {
@@ -18,8 +17,7 @@ const initialState: VisualizationState = {
     metricTree: null,
     uniqueFileList: [],
     minColorMetricValue: undefined,
-    maxColorMetricValue: undefined,
-    focussedElementName: ''
+    maxColorMetricValue: undefined
 };
 
 export const VisualizationReducer: ActionReducer<VisualizationState> = (state = initialState, action: Action) => {
@@ -58,12 +56,6 @@ export const VisualizationReducer: ActionReducer<VisualizationState> = (state = 
             console.error(`Error while loading metrics: ${action.payload}`);
             return state;
 
-        case VisualizationActions.FOCUS_ELEMENT:
-            newState = Object.assign({}, state);
-            newState.focussedElementName = action.payload;
-
-            return newState;
-
         default:
             return state;
     }
@@ -77,5 +69,3 @@ export const getUniqueFileList = (state: VisualizationState) => state.uniqueFile
 
 export const getMinColorMetricValue = (state: VisualizationState) => state.minColorMetricValue;
 export const getMaxColorMetricValue = (state: VisualizationState) => state.maxColorMetricValue;
-
-export const getFocussedElementName = (state: VisualizationState) => state.focussedElementName;

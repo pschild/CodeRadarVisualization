@@ -11,7 +11,7 @@ declare var gifshot: any;
 export class ScreenshotComponent implements OnInit {
 
     @Input() activeViewType: ViewType;
-    @Input() screenshots: any[];
+    @Input() screenShots: any[];
 
     @Output() handleTakeScreenshot = new EventEmitter();
     @Output() handleRemoveScreenshots = new EventEmitter();
@@ -24,9 +24,6 @@ export class ScreenshotComponent implements OnInit {
     gifSource: string;
     isGenerating: boolean = false;
 
-    constructor() {
-    }
-
     ngOnInit() {
     }
 
@@ -35,8 +32,8 @@ export class ScreenshotComponent implements OnInit {
     }
 
     generateGif(screenType: ScreenType) {
-        if (this.screenshots.length > 0) {
-            let images = this.screenshots.filter(screenshotObject => screenshotObject.screenType === screenType).map(screenshotObject => screenshotObject.file);
+        if (this.screenShots.length > 0) {
+            let images = this.screenShots.filter(screenShotObject => screenShotObject.screenType === screenType).map(screenShotObject => screenShotObject.file);
             if (!images.length) {
                 return;
             }

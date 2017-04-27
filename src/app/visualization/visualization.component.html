@@ -1,7 +1,17 @@
 <div id="stage" class="split">
     <div class="vertical-line"></div>
-    <app-screen [screenType]="screenTypes.left"></app-screen>
-    <app-screen [screenType]="screenTypes.right"></app-screen>
+    <app-screen
+            [screenType]="screenTypes.left"
+            [activeViewType]="activeViewType$ | async"
+            [activeFilter]="activeFilter$ | async"
+            [metricTree]="metricTree$ | async">
+    </app-screen>
+    <app-screen
+            [screenType]="screenTypes.right"
+            [activeViewType]="activeViewType$ | async"
+            [activeFilter]="activeFilter$ | async"
+            [metricTree]="metricTree$ | async">
+    </app-screen>
     <app-comparison-panel></app-comparison-panel>
 </div>
 <app-tooltip></app-tooltip>

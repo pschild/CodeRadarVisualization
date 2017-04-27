@@ -6,6 +6,7 @@ import {ElementAnalyzer} from "../../helper/element-analyzer";
 import {ICommit} from "../../domain/ICommit";
 import {IMetricMapping} from "../../domain/IMetricMapping";
 import {INode} from "../../domain/INode";
+import {FocusService} from "../../service/focus.service";
 
 @Component({
     selector: 'app-comparison-panel',
@@ -27,20 +28,20 @@ export class ComparisonPanelComponent implements OnInit {
     leftCommit: ICommit;
     rightCommit: ICommit;
 
-    constructor(private store: Store<fromRoot.AppState>) {
+    constructor(
+        private store: Store<fromRoot.AppState>,
+        private focusService: FocusService) {
     }
 
     ngOnInit() {
         this.comparisonPanel = <HTMLElement>document.querySelector('#comparison-panel');
 
         this.subscriptions.push(
-            this.store.select(fromRoot.getFocussedElementName).subscribe((focussedElementName) => {
-                if (focussedElementName) {
-                    this.elementName = focussedElementName;
-                    this.foundElement = ElementAnalyzer.findElementByName(this.metricTree, focussedElementName);
-                    this.prepareTableData();
-                    this.show();
-                }
+            this.focusService.elementFocussed$.subscribe((elementName) => {
+                this.elementName = elementName;
+                this.foundElement = ElementAnalyzer.findElementByName(this.metricTree, elementName);
+                this.prepareTableData();
+                this.show();
             })
         );
 

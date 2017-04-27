@@ -2,11 +2,12 @@ import {Component, OnInit} from "@angular/core";
 import {CommitType} from "../enum/CommitType";
 import {Store} from "@ngrx/store";
 import * as fromRoot from "../shared/reducers";
-import {changeCommit, clearScreenshots, loadCommits, requestScreenshot} from "./control-panel.actions";
+import {changeCommit, loadCommits} from "./control-panel.actions";
 import {ICommit} from "../domain/ICommit";
 import {Observable} from "rxjs/Observable";
-import {focusElement} from "../visualization/visualization.actions";
 import {ViewType} from "../enum/ViewType";
+import {ScreenShotService} from "../service/screenshot.service";
+import {FocusService} from "../service/focus.service";
 
 @Component({
     selector: 'app-control-panel',
@@ -28,9 +29,9 @@ export class ControlPanelComponent implements OnInit {
     uniqueFileList$: Observable<string[]>;
 
     activeViewType$: Observable<ViewType>;
-    screenshots$: Observable<any[]>;
+    screenShots$: Observable<any[]>;
 
-    constructor(private store: Store<fromRoot.AppState>) {
+    constructor(private store: Store<fromRoot.AppState>, private screenShotService: ScreenShotService, private focusService: FocusService) {
     }
 
     ngOnInit() {
@@ -44,7 +45,7 @@ export class ControlPanelComponent implements OnInit {
         this.uniqueFileList$ = this.store.select(fromRoot.getUniqueFileList);
 
         this.activeViewType$ = this.store.select(fromRoot.getActiveViewType);
-        this.screenshots$ = this.store.select(fromRoot.getScreenshots);
+        this.screenShots$ = this.screenShotService.getScreenShots();
     }
 
     handleCommitChanged(payload: {commitType: CommitType, commit: ICommit}) {
@@ -52,15 +53,15 @@ export class ControlPanelComponent implements OnInit {
     }
 
     handleSearchStarted(chosenItem: string) {
-        this.store.dispatch(focusElement(chosenItem));
+        this.focusService.focusElement(chosenItem);
     }
 
     handleTakeScreenshot() {
-        this.store.dispatch(requestScreenshot());
+        this.screenShotService.requestScreenShot();
     }
 
     handleRemoveScreenshots() {
-        this.store.dispatch(clearScreenshots());
+        this.screenShotService.clearScreenShots();
     }
 
 }
