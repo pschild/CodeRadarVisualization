@@ -13,6 +13,7 @@
             [metricTree]="metricTree$ | async">
     </app-screen>
     <app-comparison-panel></app-comparison-panel>
+    <app-legend [activeViewType]="activeViewType$ | async" [metricMapping]="metricMapping$ | async"></app-legend>
 </div>
 <app-tooltip></app-tooltip>
 <p *ngIf="metricsLoading$ | async">LADE</p>

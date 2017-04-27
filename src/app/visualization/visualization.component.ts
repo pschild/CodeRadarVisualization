@@ -7,6 +7,7 @@ import {loadMetricTree} from "./visualization.actions";
 import {ViewType} from "../enum/ViewType";
 import {IFilter} from "../interfaces/IFilter";
 import {INode} from "../interfaces/INode";
+import {IMetricMapping} from "../interfaces/IMetricMapping";
 
 @Component({
     selector: 'app-visualization',
@@ -19,6 +20,7 @@ export class VisualizationComponent implements OnInit {
     activeViewType$: Observable<ViewType>;
     activeFilter$: Observable<IFilter>;
     metricTree$: Observable<INode>;
+    metricMapping$: Observable<IMetricMapping>;
 
     subscriptions: Subscription[] = [];
 
@@ -35,9 +37,10 @@ export class VisualizationComponent implements OnInit {
         this.activeViewType$ = this.store.select(fromRoot.getActiveViewType);
         this.activeFilter$ = this.store.select(fromRoot.getActiveFilter);
         this.metricTree$ = this.store.select(fromRoot.getMetricTree);
+        this.metricMapping$ = this.store.select(fromRoot.getMetricMapping);
 
         this.subscriptions.push(
-            Observable.combineLatest(this.store.select(fromRoot.getLeftCommit), this.store.select(fromRoot.getRightCommit), this.store.select(fromRoot.getMetricMapping))
+            Observable.combineLatest(this.store.select(fromRoot.getLeftCommit), this.store.select(fromRoot.getRightCommit), this.metricMapping$)
                 .filter(([leftCommit, rightCommit, metricMapping]) => !!leftCommit && !!rightCommit)
                 .subscribe(([leftCommit, rightCommit, metricMapping]) => {
                     this.store.dispatch(loadMetricTree(leftCommit, rightCommit, metricMapping));
