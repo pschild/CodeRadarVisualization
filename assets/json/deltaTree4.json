@@ -1,0 +1,164 @@
+{
+  "name": "root",
+  "type": "MODULE",
+  "commit1Metrics": {
+    "coderadar:size:loc:java": 800,
+    "coderadar:size:eloc:java": 4,
+    "coderadar:size:sloc:java": 8
+  },
+  "commit2Metrics": {
+    "coderadar:size:loc:java": 800,
+    "coderadar:size:eloc:java": 4,
+    "coderadar:size:sloc:java": 8
+  },
+  "renamedFrom": null,
+  "renamedTo": null,
+  "changes": null,
+  "children": [
+    {
+      "name": "moduleA",
+      "type": "MODULE",
+      "commit1Metrics": {
+        "coderadar:size:loc:java": 4,
+        "coderadar:size:eloc:java": 2,
+        "coderadar:size:sloc:java": 4
+      },
+      "commit2Metrics": {
+        "coderadar:size:loc:java": 2,
+        "coderadar:size:eloc:java": 1,
+        "coderadar:size:sloc:java": 2
+      },
+      "renamedFrom": null,
+      "renamedTo": null,
+      "changes": null,
+      "children": [
+        {
+          "name": "moduleA/src/main/java/UnchangedClass.java",
+          "type": "FILE",
+          "commit1Metrics": {
+            "coderadar:size:loc:java": 2,
+            "coderadar:size:eloc:java": 1,
+            "coderadar:size:sloc:java": 2
+          },
+          "commit2Metrics": {
+            "coderadar:size:loc:java": 2,
+            "coderadar:size:eloc:java": 1,
+            "coderadar:size:sloc:java": 2
+          },
+          "renamedFrom": null,
+          "renamedTo": null,
+          "changes": {
+            "renamed": false,
+            "modified": false,
+            "deleted": false,
+            "added": false
+          },
+          "children": []
+        },
+        {
+          "name": "moduleB/src/main/java/RemovedClass.java",
+          "type": "FILE",
+          "commit1Metrics": {
+            "coderadar:size:loc:java": 2,
+            "coderadar:size:eloc:java": 1,
+            "coderadar:size:sloc:java": 2
+          },
+          "commit2Metrics": null,
+          "renamedFrom": null,
+          "renamedTo": null,
+          "changes": {
+            "renamed": false,
+            "modified": false,
+            "deleted": false,
+            "added": true
+          },
+          "children": []
+        }
+      ]
+    },
+    {
+      "name": "moduleB",
+      "type": "MODULE",
+      "commit1Metrics": {
+        "coderadar:size:loc:java": 4,
+        "coderadar:size:eloc:java": 2,
+        "coderadar:size:sloc:java": 4
+      },
+      "commit2Metrics": {
+        "coderadar:size:loc:java": 6,
+        "coderadar:size:eloc:java": 3,
+        "coderadar:size:sloc:java": 6
+      },
+      "renamedFrom": null,
+      "renamedTo": null,
+      "changes": null,
+      "children": [
+        {
+          "name": "moduleB/src/main/java/AddedClass.java",
+          "type": "FILE",
+          "commit1Metrics": null,
+          "commit2Metrics": {
+            "coderadar:size:loc:java": 2,
+            "coderadar:size:eloc:java": 1,
+            "coderadar:size:sloc:java": 2
+          },
+          "renamedFrom": null,
+          "renamedTo": null,
+          "changes": {
+            "renamed": false,
+            "modified": false,
+            "deleted": false,
+            "added": true
+          },
+          "children": []
+        },
+        {
+          "name": "moduleB/src/main/java/IncreasedClass.java",
+          "type": "FILE",
+          "commit1Metrics": {
+            "coderadar:size:loc:java": 100,
+            "coderadar:size:eloc:java": 100,
+            "coderadar:size:sloc:java": 100
+          },
+          "commit2Metrics": {
+            "coderadar:size:loc:java": 200,
+            "coderadar:size:eloc:java": 200,
+            "coderadar:size:sloc:java": 200
+          },
+          "renamedFrom": null,
+          "renamedTo": null,
+          "changes": {
+            "renamed": false,
+            "modified": false,
+            "deleted": false,
+            "added": false
+          },
+          "children": []
+        },
+        {
+          "name": "moduleB/src/main/java/DecreasedClass.java",
+          "type": "FILE",
+          "commit1Metrics": {
+            "coderadar:size:loc:java": 200,
+            "coderadar:size:eloc:java": 200,
+            "coderadar:size:sloc:java": 200
+          },
+          "commit2Metrics": {
+            "coderadar:size:loc:java": 100,
+            "coderadar:size:eloc:java": 100,
+            "coderadar:size:sloc:java": 100
+          },
+          "renamedFrom": null,
+          "renamedTo": null,
+          "changes": {
+            "renamed": false,
+            "modified": false,
+            "deleted": false,
+            "added": false
+          },
+          "children": []
+        }
+      ]
+    }
+  ]
+}
