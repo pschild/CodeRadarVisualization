@@ -1,0 +1,99 @@
+{
+  "name": "root",
+  "type": "MODULE",
+  "commit1Metrics": {
+    "coderadar:size:loc:java": 800,
+    "coderadar:size:eloc:java": 4,
+    "coderadar:size:sloc:java": 8
+  },
+  "commit2Metrics": {
+    "coderadar:size:loc:java": 800,
+    "coderadar:size:eloc:java": 4,
+    "coderadar:size:sloc:java": 8
+  },
+  "renamedFrom": null,
+  "renamedTo": null,
+  "changes": null,
+  "children": [
+    {
+      "name": "moduleA",
+      "type": "MODULE",
+      "commit1Metrics": {
+        "coderadar:size:loc:java": 4,
+        "coderadar:size:eloc:java": 2,
+        "coderadar:size:sloc:java": 4
+      },
+      "commit2Metrics": {
+        "coderadar:size:loc:java": 2,
+        "coderadar:size:eloc:java": 1,
+        "coderadar:size:sloc:java": 2
+      },
+      "renamedFrom": null,
+      "renamedTo": null,
+      "changes": null,
+      "children": [
+        {
+          "name": "moduleA/src/main/java/UnchangedClass.java",
+          "type": "FILE",
+          "commit1Metrics": {
+            "coderadar:size:loc:java": 2,
+            "coderadar:size:eloc:java": 1,
+            "coderadar:size:sloc:java": 2
+          },
+          "commit2Metrics": {
+            "coderadar:size:loc:java": 2,
+            "coderadar:size:eloc:java": 1,
+            "coderadar:size:sloc:java": 2
+          },
+          "renamedFrom": null,
+          "renamedTo": null,
+          "changes": {
+            "renamed": false,
+            "modified": false,
+            "deleted": false,
+            "added": false
+          },
+          "children": []
+        },
+        {
+          "name": "moduleA/src/main/java/MovedClassFromAToB.java",
+          "type": "FILE",
+          "commit1Metrics": {
+            "coderadar:size:loc:java": 2,
+            "coderadar:size:eloc:java": 1,
+            "coderadar:size:sloc:java": 2
+          },
+          "commit2Metrics": null,
+          "renamedFrom": null,
+          "renamedTo": "moduleB/src/main/java/MovedClassFromAToB.java",
+          "changes": {
+            "renamed": true,
+            "modified": false,
+            "deleted": false,
+            "added": false
+          },
+          "children": []
+        },
+        {
+          "name": "moduleB/src/main/java/RemovedClass.java",
+          "type": "FILE",
+          "commit1Metrics": {
+            "coderadar:size:loc:java": 2,
+            "coderadar:size:eloc:java": 1,
+            "coderadar:size:sloc:java": 2
+          },
+          "commit2Metrics": null,
+          "renamedFrom": null,
+          "renamedTo": null,
+          "changes": {
+            "renamed": false,
+            "modified": false,
+            "deleted": false,
+            "added": true
+          },
+          "children": []
+        }
+      ]
+    }
+  ]
+}
