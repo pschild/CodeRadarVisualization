@@ -1,8 +1,8 @@
 import * as SettingsActions from "./settings.actions";
 import {Action, ActionReducer} from "@ngrx/store";
 import {ViewType} from "../../enum/ViewType";
-import {IFilter} from "../../domain/IFilter";
-import {IMetricMapping} from "../../domain/IMetricMapping";
+import {IFilter} from "../../interfaces/IFilter";
+import {IMetricMapping} from "../../interfaces/IMetricMapping";
 import {AppConfig} from "../../AppConfig";
 
 export interface SettingsState {

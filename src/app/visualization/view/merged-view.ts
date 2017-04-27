@@ -1,5 +1,5 @@
 import {AbstractView} from "./abstract-view";
-import {INode} from "../../domain/INode";
+import {INode} from "../../interfaces/INode";
 import {ElementAnalyzer} from "../../helper/element-analyzer";
 import {AppConfig} from "../../AppConfig";
 import {NodeType} from "../../enum/NodeType";

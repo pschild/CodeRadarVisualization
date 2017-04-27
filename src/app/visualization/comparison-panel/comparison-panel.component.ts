@@ -3,9 +3,9 @@ import {Store} from "@ngrx/store";
 import * as fromRoot from "../../shared/reducers";
 import {Subscription} from "rxjs/Subscription";
 import {ElementAnalyzer} from "../../helper/element-analyzer";
-import {ICommit} from "../../domain/ICommit";
-import {IMetricMapping} from "../../domain/IMetricMapping";
-import {INode} from "../../domain/INode";
+import {ICommit} from "../../interfaces/ICommit";
+import {IMetricMapping} from "../../interfaces/IMetricMapping";
+import {INode} from "../../interfaces/INode";
 import {FocusService} from "../../service/focus.service";
 
 @Component({

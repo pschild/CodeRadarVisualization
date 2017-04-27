@@ -1,13 +1,11 @@
 import {Action} from "@ngrx/store";
-import {Commit} from "../domain/Commit";
 import {CommitType} from "../enum/CommitType";
-import {ICommit} from "../domain/ICommit";
+import {ICommit} from "../interfaces/ICommit";
 
 export const LOAD_COMMITS = 'LOAD_COMMITS';
 export const LOAD_COMMITS_SUCCESS = 'LOAD_COMMITS_SUCCESS';
 export const LOAD_COMMITS_ERROR = 'LOAD_COMMITS_ERROR';
 export const CHANGE_COMMIT = 'CHANGE_COMMIT';
-export const REQUEST_SCREENSHOT = 'REQUEST_SCREENSHOT';
 export const ADD_SCREENSHOT = 'ADD_SCREENSHOT';
 export const CLEAR_SCREENSHOTS = 'CLEAR_SCREENSHOTS';
 
@@ -17,7 +15,7 @@ export function loadCommits(): Action {
     };
 }
 
-export function loadCommitsSuccess(commits: Commit[]): Action {
+export function loadCommitsSuccess(commits: ICommit[]): Action {
     return {
         type: LOAD_COMMITS_SUCCESS,
         payload: commits

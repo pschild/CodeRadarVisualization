@@ -1,13 +1,13 @@
 import * as ControlPanelActions from "./control-panel.actions";
 import {Action, ActionReducer} from "@ngrx/store";
-import {Commit} from "../domain/Commit";
+import {ICommit} from "../interfaces/ICommit";
 import {CommitType} from "../enum/CommitType";
 
 export interface ControlPanelState {
-    commits: Commit[];
+    commits: ICommit[];
     commitsLoading: boolean;
-    leftCommit: Commit;
-    rightCommit: Commit;
+    leftCommit: ICommit;
+    rightCommit: ICommit;
     screenshots: any[];
 }
 

@@ -1,7 +1,7 @@
 import {Action} from '@ngrx/store';
 import {ViewType} from "../../enum/ViewType";
-import {IFilter} from "../../domain/IFilter";
-import {IMetricMapping} from "../../domain/IMetricMapping";
+import {IFilter} from "../../interfaces/IFilter";
+import {IMetricMapping} from "../../interfaces/IMetricMapping";
 
 export const CHANGE_VIEW_TYPE = 'CHANGE_VIEW_TYPE';
 export const CHANGE_ACTIVE_FILTER = 'CHANGE_ACTIVE_FILTER';

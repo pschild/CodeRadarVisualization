@@ -5,8 +5,8 @@ import {Store} from "@ngrx/store";
 import * as fromRoot from "../shared/reducers";
 import {loadMetricTree} from "./visualization.actions";
 import {ViewType} from "../enum/ViewType";
-import {IFilter} from "../domain/IFilter";
-import {INode} from "../domain/INode";
+import {IFilter} from "../interfaces/IFilter";
+import {INode} from "../interfaces/INode";
 
 @Component({
     selector: 'app-visualization',

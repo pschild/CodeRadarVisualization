@@ -1,5 +1,5 @@
 import {AbstractView} from "./abstract-view";
-import {INode} from "../../domain/INode";
+import {INode} from "../../interfaces/INode";
 import {NodeType} from "../../enum/NodeType";
 import {AppConfig} from "../../AppConfig";
 import {CommitReferenceType} from "../../enum/CommitReferenceType";

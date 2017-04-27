@@ -1,7 +1,7 @@
 import * as VisualizationActions from "./visualization.actions";
 import {Action, ActionReducer} from "@ngrx/store";
 import {ElementAnalyzer} from "../helper/element-analyzer";
-import {INode} from "../domain/INode";
+import {INode} from "../interfaces/INode";
 
 export interface VisualizationState {
     metricsLoading: boolean;

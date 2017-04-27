@@ -3,10 +3,10 @@ import {Actions, Effect} from '@ngrx/effects';
 import {Observable} from "rxjs";
 import * as actions from '../shared/actions';
 import {CommitService} from "../service/commit.service";
-import {ICommitsGetResponse} from "../domain/ICommitsGetResponse";
-import {ICommitsGetErrorResponse} from "../domain/ICommitsGetErrorResponse";
-import {IDeltaTreeGetErrorResponse} from "../domain/IDeltaTreeGetErrorResponse";
-import {IDeltaTreeGetResponse} from "../domain/IDeltaTreeGetResponse";
+import {ICommitsGetResponse} from "../interfaces/ICommitsGetResponse";
+import {ICommitsGetErrorResponse} from "../interfaces/ICommitsGetErrorResponse";
+import {IDeltaTreeGetErrorResponse} from "../interfaces/IDeltaTreeGetErrorResponse";
+import {IDeltaTreeGetResponse} from "../interfaces/IDeltaTreeGetResponse";
 import {MetricService} from "../service/metric.service";
 
 @Injectable()

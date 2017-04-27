@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {IMetricMapping} from "../../../domain/IMetricMapping";
+import {IMetricMapping} from "../../../interfaces/IMetricMapping";
 import {MetricNameHelper} from "../../../helper/metric-name-helper";
 
 @Component({

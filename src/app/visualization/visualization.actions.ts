@@ -1,16 +1,14 @@
 import {Action} from "@ngrx/store";
-import {Commit} from "../domain/Commit";
-import {IMetricMapping} from "../domain/IMetricMapping";
-import {INode} from "../domain/INode";
+import {ICommit} from "../interfaces/ICommit";
+import {IMetricMapping} from "../interfaces/IMetricMapping";
+import {INode} from "../interfaces/INode";
 
 export const LOAD_METRIC_TREE = 'LOAD_METRIC_TREE';
 export const LOAD_METRIC_TREE_SUCCESS = 'LOAD_METRIC_TREE_SUCCESS';
 export const LOAD_METRIC_TREE_ERROR = 'LOAD_METRIC_TREE_ERROR';
-export const CALCULATE_MINIMUM_AND_MAXIMUM_VALUES = 'CALCULATE_MINIMUM_AND_MAXIMUM_VALUES';
 export const GENERATE_UNIQUE_FILE_LIST = 'GENERATE_UNIQUE_FILE_LIST';
-export const FOCUS_ELEMENT = 'FOCUS_ELEMENT';
 
-export function loadMetricTree(leftCommit: Commit, rightCommit: Commit, metricMapping: IMetricMapping): Action {
+export function loadMetricTree(leftCommit: ICommit, rightCommit: ICommit, metricMapping: IMetricMapping): Action {
     return {
         type: LOAD_METRIC_TREE,
         payload: {

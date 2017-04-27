@@ -3,7 +3,7 @@ import {CommitType} from "../enum/CommitType";
 import {Store} from "@ngrx/store";
 import * as fromRoot from "../shared/reducers";
 import {changeCommit, loadCommits} from "./control-panel.actions";
-import {ICommit} from "../domain/ICommit";
+import {ICommit} from "../interfaces/ICommit";
 import {Observable} from "rxjs/Observable";
 import {ViewType} from "../enum/ViewType";
 import {ScreenShotService} from "../service/screenshot.service";

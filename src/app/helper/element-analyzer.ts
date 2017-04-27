@@ -1,5 +1,5 @@
 import {CommitReferenceType} from "../enum/CommitReferenceType";
-import {INode} from "../domain/INode";
+import {INode} from "../interfaces/INode";
 import {ScreenType} from "../enum/ScreenType";
 import {NodeType} from "../enum/NodeType";
 

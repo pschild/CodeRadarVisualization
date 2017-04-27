@@ -4,8 +4,8 @@ import {ViewType} from "../../enum/ViewType";
 import {Store} from "@ngrx/store";
 import * as fromRoot from "../../shared/reducers";
 import {changeActiveFilter, changeViewType, setMetricMapping} from "./settings.actions";
-import {IFilter} from "../../domain/IFilter";
-import {IMetricMapping} from "../../domain/IMetricMapping";
+import {IFilter} from "../../interfaces/IFilter";
+import {IMetricMapping} from "../../interfaces/IMetricMapping";
 declare var $: any;
 
 @Component({
