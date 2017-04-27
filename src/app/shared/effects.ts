@@ -34,7 +34,6 @@ export class AppEffects {
                 .mergeMap((result: IDeltaTreeGetResponse) => {
                     return [
                         actions.loadMetricTreeSuccess(result.rootNode),
-                        actions.calculateMinimumAndMaximumValues(result.rootNode),
                         actions.generateUniqueFileList(result.rootNode)
                     ];
                 })

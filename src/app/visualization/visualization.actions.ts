@@ -35,13 +35,6 @@ export function loadMetricTreeError(error: string): Action {
     };
 }
 
-export function calculateMinimumAndMaximumValues(metricTree: INode): Action {
-    return {
-        type: CALCULATE_MINIMUM_AND_MAXIMUM_VALUES,
-        payload: metricTree
-    };
-}
-
 export function generateUniqueFileList(metricTree: INode): Action {
     return {
         type: GENERATE_UNIQUE_FILE_LIST,

@@ -2,8 +2,6 @@ import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core'
 import {ScreenType} from "../../enum/ScreenType";
 import {WebGLRenderer, Scene, AmbientLight, DirectionalLight} from "three";
 import {Subscription} from "rxjs";
-import {Store} from "@ngrx/store";
-import * as fromRoot from "../../shared/reducers";
 import {ViewType} from "../../enum/ViewType";
 import {AbstractView} from "../view/abstract-view";
 import {SplitView} from "../view/split-view";
@@ -48,7 +46,7 @@ export class ScreenComponent implements OnInit, OnChanges {
 
     view: AbstractView;
 
-    constructor(private store: Store<fromRoot.AppState>, private screenShotService: ScreenShotService, private focusService: FocusService) {
+    constructor(private screenShotService: ScreenShotService, private focusService: FocusService) {
     }
 
     ngOnChanges(changes: SimpleChanges) {
@@ -64,7 +62,7 @@ export class ScreenComponent implements OnInit, OnChanges {
                 document.querySelector('#stage').classList.remove('split');
 
             } else {
-                this.view = new SplitView(this.screenType, this.store);
+                this.view = new SplitView(this.screenType);
                 if (this.screenType === ScreenType.RIGHT) {
                     this.resumeRendering();
                 }
@@ -83,7 +81,7 @@ export class ScreenComponent implements OnInit, OnChanges {
     }
 
     ngOnInit() {
-        this.view = new SplitView(this.screenType, this.store);
+        this.view = new SplitView(this.screenType);
 
         this.createCamera();
         this.createControls();

@@ -1,23 +1,18 @@
 import * as VisualizationActions from "./visualization.actions";
 import {Action, ActionReducer} from "@ngrx/store";
 import {ElementAnalyzer} from "../helper/element-analyzer";
-import {AppConfig} from "../AppConfig";
 import {INode} from "../domain/INode";
 
 export interface VisualizationState {
     metricsLoading: boolean;
     metricTree: INode;
     uniqueFileList: any[];
-    minColorMetricValue: number;
-    maxColorMetricValue: number;
 }
 
 const initialState: VisualizationState = {
     metricsLoading: false,
     metricTree: null,
-    uniqueFileList: [],
-    minColorMetricValue: undefined,
-    maxColorMetricValue: undefined
+    uniqueFileList: []
 };
 
 export const VisualizationReducer: ActionReducer<VisualizationState> = (state = initialState, action: Action) => {
@@ -32,15 +27,6 @@ export const VisualizationReducer: ActionReducer<VisualizationState> = (state = 
             newState = Object.assign({}, state);
             newState.metricsLoading = false;
             newState.metricTree = action.payload;
-
-            return newState;
-
-        case VisualizationActions.CALCULATE_MINIMUM_AND_MAXIMUM_VALUES:
-            newState = Object.assign({}, state);
-
-            let minMaxPairOfColorMetric = ElementAnalyzer.findSmallestAndBiggestMetricValueByMetricName(newState.metricTree, AppConfig.COLOR_METRIC_NAME);
-            newState.minColorMetricValue = minMaxPairOfColorMetric.min;
-            newState.maxColorMetricValue = minMaxPairOfColorMetric.max;
 
             return newState;
 
@@ -66,6 +52,3 @@ export const getMetricsLoading = (state: VisualizationState) => state.metricsLoa
 export const getMetricTree = (state: VisualizationState) => state.metricTree;
 
 export const getUniqueFileList = (state: VisualizationState) => state.uniqueFileList;
-
-export const getMinColorMetricValue = (state: VisualizationState) => state.minColorMetricValue;
-export const getMaxColorMetricValue = (state: VisualizationState) => state.maxColorMetricValue;

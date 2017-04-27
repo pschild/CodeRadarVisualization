@@ -44,9 +44,6 @@ export const getMetricTree = createSelector(getVisualizationState, fromVisualiza
 
 export const getUniqueFileList = createSelector(getVisualizationState, fromVisualization.getUniqueFileList);
 
-export const getMinColorMetricValue = createSelector(getVisualizationState, fromVisualization.getMinColorMetricValue);
-export const getMaxColorMetricValue = createSelector(getVisualizationState, fromVisualization.getMaxColorMetricValue);
-
 export const getMetricMapping = createSelector(getSettingsState, fromSettings.getMetricMapping);
 
 export const getActiveFilter = createSelector(getSettingsState, fromSettings.getActiveFilter);
@@ -58,15 +55,6 @@ export const getLeftAndRightCommit = createSelector(getLeftCommit, getRightCommi
         return {
             leftCommit: leftCommit,
             rightCommit: rightCommit
-        };
-    }
-});
-
-export const getMinAndMaxColorMetricValues = createSelector(getMetricsLoading, getMetricTree, getMinColorMetricValue, getMaxColorMetricValue, (metricsLoading, metricTree, minColorMetricValue, maxColorMetricValue) => {
-    if (!metricsLoading && metricTree !== null && minColorMetricValue && maxColorMetricValue) {
-        return {
-            minColorMetricValue: minColorMetricValue,
-            maxColorMetricValue: maxColorMetricValue
         };
     }
 });
