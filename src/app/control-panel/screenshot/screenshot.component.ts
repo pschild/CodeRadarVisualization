@@ -22,6 +22,11 @@ export class ScreenshotComponent implements OnInit {
         right: ScreenType.RIGHT
     };
 
+    viewTypes: any = {
+        split: ViewType.SPLIT,
+        merged: ViewType.MERGED
+    };
+
     gifSource: string;
     isGenerating: boolean = false;
 
