@@ -74,6 +74,10 @@ export class ComparisonPanelComponent implements OnInit {
         });
     }
 
+    handleClose() {
+        this.hide();
+    }
+
     prepareTableData() {
         let rows = [];
         for (let key of Object.keys(this.metricMapping)) {
