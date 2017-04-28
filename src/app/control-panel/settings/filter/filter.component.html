@@ -2,7 +2,7 @@
     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <i class="fa fa-filter" aria-hidden="true"></i> Filter
     </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <div id="filter-dropdown" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <div class="custom-controls-stacked">
             <label class="custom-control custom-checkbox">
                 <input type="checkbox" class="custom-control-input" [(ngModel)]="activeFilter.unchanged" (change)="handleFilterChanged()">

@@ -6,7 +6,6 @@ import * as fromRoot from "../../shared/reducers";
 import {changeActiveFilter, changeViewType, setMetricMapping} from "./settings.actions";
 import {IFilter} from "../../interfaces/IFilter";
 import {IMetricMapping} from "../../interfaces/IMetricMapping";
-declare var $: any;
 
 @Component({
     selector: 'app-settings',
@@ -28,11 +27,6 @@ export class SettingsComponent implements OnInit {
         this.activeViewType$ = this.store.select(fromRoot.getActiveViewType);
         this.activeFilter$ = this.store.select(fromRoot.getActiveFilter);
         this.metricMapping$ = this.store.select(fromRoot.getMetricMapping);
-
-        // prevent bootstrap dropdown from being closed by clicking on its content
-        $(document).on('click', '.dropdown-menu', function (e) {
-            e.stopPropagation();
-        });
     }
 
     handleViewTypeChanged(viewType: ViewType) {

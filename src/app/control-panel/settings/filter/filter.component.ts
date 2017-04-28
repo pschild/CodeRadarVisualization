@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {IFilter} from "app/interfaces/IFilter";
+declare var $: any;
 
 @Component({
     selector: 'app-filter',
@@ -16,6 +17,10 @@ export class FilterComponent implements OnInit {
     }
 
     ngOnInit() {
+        // prevent bootstrap dropdown from being closed by clicking on its content
+        $(document).on('click', '#filter-dropdown', function (e) {
+            e.stopPropagation();
+        });
     }
 
     handleFilterChanged() {

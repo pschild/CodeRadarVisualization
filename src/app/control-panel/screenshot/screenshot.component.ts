@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ScreenType} from "../../enum/ScreenType";
 import {ViewType} from "../../enum/ViewType";
 declare var gifshot: any;
+declare var $: any;
 
 @Component({
     selector: 'app-screenshot',
@@ -25,6 +26,10 @@ export class ScreenshotComponent implements OnInit {
     isGenerating: boolean = false;
 
     ngOnInit() {
+        // prevent bootstrap dropdown from being closed by clicking on its content
+        $(document).on('click', '#screenshot-dropdown', function (e) {
+            e.stopPropagation();
+        });
     }
 
     takeScreenshot() {
