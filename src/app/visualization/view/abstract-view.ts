@@ -6,6 +6,7 @@ import {AppConfig} from "../../AppConfig";
 import {ElementAnalyzer} from "../../helper/element-analyzer";
 import {ScreenType} from "../../enum/ScreenType";
 import {CommitReferenceType} from "../../enum/CommitReferenceType";
+import {MetricNameHelper} from "../../helper/metric-name-helper";
 declare var GrowingPacker: any;
 
 export abstract class AbstractView {
@@ -141,7 +142,7 @@ export abstract class AbstractView {
 
     private generateTableRow(metricName, metricValue) {
         let html = ['<tr>'];
-        html.push('<td class="metric-name-column">' + metricName + ':</td>');
+        html.push('<td class="metric-name-column">' + MetricNameHelper.getShortNameByFullName(metricName) + ':</td>');
         html.push('<td class="metric-value-column">' + (metricValue || 'N/A') + '</td>');
         html.push('</tr>');
         return html.join('');

@@ -1,7 +1,7 @@
 <div id="legend-container">
     <div id="legend-item-color-code" class="legend-item" *ngIf="activeViewType === viewTypes.split">
         <span class="legend-color"></span>
-        <small class="legend-label">{{metricMapping.colorMetricName}}</small>
+        <small class="legend-label">{{colorMetricName}}</small>
     </div>
     <div id="legend-item-commit-1" class="legend-item" *ngIf="activeViewType === viewTypes.merged">
         <span class="legend-color" [ngStyle]="{'background': colorFirstCommit}"></span>

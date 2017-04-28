@@ -7,6 +7,7 @@ import {ICommit} from "../../interfaces/ICommit";
 import {IMetricMapping} from "../../interfaces/IMetricMapping";
 import {INode} from "../../interfaces/INode";
 import {FocusService} from "../../service/focus.service";
+import {MetricNameHelper} from "../../helper/metric-name-helper";
 
 @Component({
     selector: 'app-comparison-panel',
@@ -21,7 +22,7 @@ export class ComparisonPanelComponent implements OnInit {
 
     metricTree: any;
     metricMapping: IMetricMapping;
-    tableData: any[] = [];
+    tableRows: any[] = [];
 
     elementName: string;
     foundElement: INode;
@@ -74,7 +75,7 @@ export class ComparisonPanelComponent implements OnInit {
     }
 
     prepareTableData() {
-        let data = [];
+        let rows = [];
         for (let key of Object.keys(this.metricMapping)) {
             let metricName = this.metricMapping[key];
 
@@ -93,14 +94,14 @@ export class ComparisonPanelComponent implements OnInit {
                 difference = rightCommitValue - leftCommitValue;
             }
 
-            data.push({
-                metricName: metricName,
+            rows.push({
+                metricName: MetricNameHelper.getShortNameByFullName(metricName),
                 leftCommitValue: leftCommitValue || 'N/A',
                 rightCommitValue: rightCommitValue || 'N/A',
                 difference: difference
             });
         }
-        this.tableData = data;
+        this.tableRows = rows;
     }
 
     show() {
