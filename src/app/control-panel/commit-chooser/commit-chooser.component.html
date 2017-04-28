@@ -1,13 +1,14 @@
-<input class="form-control"
-       placeholder="Datum, Commit-ID, Autor"
-       ngui-auto-complete
-       [(ngModel)]="selected"
-       [source]="commits"
-       [value-formatter]="formatCommit"
-       [list-formatter]="formatCommit"
-       value-property-name="id"
-       display-property-name="name"
-       no-match-found-text="Nichts gefunden."
-       match-formatted="true"
-       (valueChanged)="handleValueChanged($event)" />
+<app-autosuggest-wrapper
+        [placeholder]="'Datum, Commit-ID, Autor'"
+        [(model)]="selected"
+        [source]="commits"
+        [valuePropertyName]="id"
+        [displayPropertyName]="name"
+        [noMatchFoundText]="'Nichts gefunden.'"
+        [matchFormatted]="true"
+        [valueFormatter]="formatCommit"
+        [listFormatter]="formatCommit"
+        (valueChanged)="handleCommitChanged($event)">
+</app-autosuggest-wrapper>
+
 <p *ngIf="loading">LADE</p>

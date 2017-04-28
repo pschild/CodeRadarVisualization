@@ -23,7 +23,7 @@ export class CommitChooserComponent implements OnInit {
     ngOnInit() {
     }
 
-    handleValueChanged(chosenModel: ICommit) {
+    handleCommitChanged(chosenModel: ICommit) {
         this.changeCommit.emit({commitType: this.commitType, commit: chosenModel});
     }
 

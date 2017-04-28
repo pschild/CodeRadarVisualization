@@ -1,7 +1,7 @@
-<input class="form-control"
-       placeholder="Datei, Modul, ..."
-       ngui-auto-complete
-       [source]="uniqueFileList"
-       [list-formatter]="autocompleteListFormatter"
-       no-match-found-text="Nichts gefunden."
-       (valueChanged)="handleValueChanged($event)" />
+<app-autosuggest-wrapper
+        [placeholder]="'Datei, Modul, ...'"
+        [source]="uniqueFileList"
+        [noMatchFoundText]="'Nichts gefunden.'"
+        [listFormatter]="autocompleteListFormatter"
+        (valueChanged)="handleSearchChanged($event)">
+</app-autosuggest-wrapper>

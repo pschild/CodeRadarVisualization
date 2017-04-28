@@ -17,7 +17,7 @@ export class SearchComponent implements OnInit {
     ngOnInit() {
     }
 
-    handleValueChanged(chosenItem: string) {
+    handleSearchChanged(chosenItem: string) {
         this.startSearch.emit(chosenItem);
     }
 

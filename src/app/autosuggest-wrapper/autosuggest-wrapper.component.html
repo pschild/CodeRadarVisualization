@@ -1,0 +1,17 @@
+<div class="autosuggest-wrapper-container">
+    <input #inputElement class="form-control"
+           [placeholder]="placeholder"
+           ngui-auto-complete
+           [(ngModel)]="model"
+           [source]="source"
+           value-property-name="id"
+           display-property-name="name"
+           [value-formatter]="valueFormatter"
+           [list-formatter]="listFormatter"
+           [no-match-found-text]="noMatchFoundText"
+           [match-formatted]="matchFormatted"
+           (valueChanged)="handleValueChanged($event)" />
+    <button type="button" class="close" aria-label="Close" (click)="handleClearInputClicked()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>

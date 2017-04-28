@@ -13,6 +13,7 @@ import {SearchComponent} from './search/search.component';
 import {FilterComponent} from './settings/filter/filter.component';
 import {MetricMappingComponent} from './settings/metric-mapping/metric-mapping.component';
 import {ScreenshotComponent} from './screenshot/screenshot.component';
+import {AutosuggestWrapperComponent} from "../autosuggest-wrapper/autosuggest-wrapper.component";
 
 @NgModule({
     imports: [
@@ -28,7 +29,8 @@ import {ScreenshotComponent} from './screenshot/screenshot.component';
         SearchComponent,
         FilterComponent,
         MetricMappingComponent,
-        ScreenshotComponent
+        ScreenshotComponent,
+        AutosuggestWrapperComponent
     ],
     exports: [
         ControlPanelComponent
