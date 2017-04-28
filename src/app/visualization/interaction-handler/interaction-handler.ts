@@ -11,7 +11,6 @@ export class InteractionHandler {
     mouse: Vector2 = new Vector2();
     mouseForRaycaster: Vector2 = new Vector2();
 
-    tooltipElement = <HTMLElement>document.querySelector('#tooltip');
     hoveredElementUuid = undefined;
     clickedElementUuid = undefined;
 
@@ -68,25 +67,11 @@ export class InteractionHandler {
                 this.hoveredElementUuid = target.uuid;
             }
 
-            if (!this.tooltipElement.classList.contains('visible')) {
-                this.tooltipElement.classList.add('visible');
-            }
-
-            this.tooltipElement.style.left = this.mouse.x + 15 + 'px';
-            this.tooltipElement.style.top = this.mouse.y + 15 + 'px';
+            this.tooltipService.show();
+            this.tooltipService.setMousePosition({x: this.mouse.x, y: this.mouse.y});
         } else {
-            if (this.tooltipElement.classList.contains('visible')) {
-                // TODO: in service
-                this.hideTooltip();
-            }
+            this.tooltipService.hide();
         }
-    }
-
-    // TODO: in service
-    hideTooltip() {
-        this.tooltipElement.classList.remove('visible');
-        this.tooltipElement.style.left = '-1000px';
-        this.tooltipElement.style.top = '-1000px';
     }
 
     onDocumentMouseOver() {
@@ -95,7 +80,7 @@ export class InteractionHandler {
 
     onDocumentMouseOut() {
         this.enabled = false;
-        this.hideTooltip();
+        this.tooltipService.hide();
     }
 
     onDocumentMouseMove(event) {
