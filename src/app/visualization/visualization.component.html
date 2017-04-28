@@ -1,5 +1,6 @@
 <div id="stage" class="split">
     <div class="vertical-line"></div>
+    <app-loading-indicator *ngIf="metricsLoading$ | async"></app-loading-indicator>
     <app-screen
             [screenType]="screenTypes.left"
             [activeViewType]="activeViewType$ | async"
@@ -16,4 +17,3 @@
     <app-legend [activeViewType]="activeViewType$ | async" [colorMetricName]="colorMetricName$ | async"></app-legend>
 </div>
 <app-tooltip></app-tooltip>
-<p *ngIf="metricsLoading$ | async">LADE</p>

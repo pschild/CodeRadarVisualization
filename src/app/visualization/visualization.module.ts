@@ -9,6 +9,7 @@ import {TooltipComponent} from './tooltip/tooltip.component';
 import {ComparisonPanelComponent} from './comparison-panel/comparison-panel.component';
 import {LegendComponent} from './legend/legend.component';
 import {KeyValuePipe} from "../pipes/key-value.pipe";
+import {LoadingIndicatorComponent} from './loading-indicator/loading-indicator.component';
 
 @NgModule({
     imports: [
@@ -20,7 +21,8 @@ import {KeyValuePipe} from "../pipes/key-value.pipe";
         TooltipComponent,
         ComparisonPanelComponent,
         LegendComponent,
-        KeyValuePipe
+        KeyValuePipe,
+        LoadingIndicatorComponent
     ],
     exports: [
         VisualizationComponent
