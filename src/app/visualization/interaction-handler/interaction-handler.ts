@@ -1,6 +1,7 @@
 import {Scene, WebGLRenderer, Raycaster, Vector2, PerspectiveCamera, Intersection, Object3D} from "three";
 import {ScreenType} from "../../enum/ScreenType";
 import {FocusService} from "../../service/focus.service";
+import {TooltipService} from "../../service/tooltip.service";
 
 export class InteractionHandler {
 
@@ -21,7 +22,8 @@ export class InteractionHandler {
         private renderer: WebGLRenderer,
         private screenType: ScreenType,
         private isMergedView: boolean,
-        private focusService: FocusService
+        private focusService: FocusService,
+        private tooltipService: TooltipService
     ) {
         this.bindEvents();
     }
@@ -59,7 +61,10 @@ export class InteractionHandler {
     updateTooltip(target: Object3D) {
         if (target) {
             if (target.uuid != this.hoveredElementUuid) {
-                this.tooltipElement.innerHTML = target.userData.tooltipLabel;
+                this.tooltipService.setContent({
+                    elementName: target.userData.elementName,
+                    metrics: target.userData.metrics
+                });
                 this.hoveredElementUuid = target.uuid;
             }
 
@@ -71,11 +76,13 @@ export class InteractionHandler {
             this.tooltipElement.style.top = this.mouse.y + 15 + 'px';
         } else {
             if (this.tooltipElement.classList.contains('visible')) {
+                // TODO: in service
                 this.hideTooltip();
             }
         }
     }
 
+    // TODO: in service
     hideTooltip() {
         this.tooltipElement.classList.remove('visible');
         this.tooltipElement.style.left = '-1000px';

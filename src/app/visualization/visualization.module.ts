@@ -7,7 +7,8 @@ import {environment} from "../../environments/environment";
 import {MetricMockService} from "../service/mocks/metric-mock.service";
 import {TooltipComponent} from './tooltip/tooltip.component';
 import {ComparisonPanelComponent} from './comparison-panel/comparison-panel.component';
-import { LegendComponent } from './legend/legend.component';
+import {LegendComponent} from './legend/legend.component';
+import {KeyValuePipe} from "../pipes/key-value.pipe";
 
 @NgModule({
     imports: [
@@ -18,7 +19,8 @@ import { LegendComponent } from './legend/legend.component';
         ScreenComponent,
         TooltipComponent,
         ComparisonPanelComponent,
-        LegendComponent
+        LegendComponent,
+        KeyValuePipe
     ],
     exports: [
         VisualizationComponent

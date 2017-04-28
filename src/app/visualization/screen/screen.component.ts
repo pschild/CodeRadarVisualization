@@ -14,6 +14,7 @@ import {AppConfig} from "../../AppConfig";
 import {INode} from "../../interfaces/INode";
 import {ScreenShotService} from "../../service/screenshot.service";
 import {FocusService} from "../../service/focus.service";
+import {TooltipService} from "../../service/tooltip.service";
 declare var TWEEN: any;
 declare var THREE: any;
 
@@ -46,7 +47,7 @@ export class ScreenComponent implements OnInit, OnChanges {
 
     view: AbstractView;
 
-    constructor(private screenShotService: ScreenShotService, private focusService: FocusService) {
+    constructor(private screenShotService: ScreenShotService, private focusService: FocusService, private tooltipService: TooltipService) {
     }
 
     ngOnChanges(changes: SimpleChanges) {
@@ -205,7 +206,7 @@ export class ScreenComponent implements OnInit, OnChanges {
     }
 
     createInteractionHandler() {
-        this.interactionHandler = new InteractionHandler(this.scene, this.renderer, this.screenType, this.isMergedView, this.focusService);
+        this.interactionHandler = new InteractionHandler(this.scene, this.renderer, this.screenType, this.isMergedView, this.focusService, this.tooltipService);
     }
 
     resetScene() {

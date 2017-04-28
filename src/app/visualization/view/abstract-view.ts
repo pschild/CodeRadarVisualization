@@ -120,32 +120,11 @@ export abstract class AbstractView {
             bottom: bottom,
             metrics: metrics,
             type: node.type,
-            tooltipLabel: this.generateTooltipHtml(node.name, metrics),
+            elementName: node.name,
             isHelper: isTransparent,
             commitType: commitType,
             changeTypes: changeTypes
         };
-    }
-
-    private generateTooltipHtml(elementName: string, metrics: any) {
-        let tooltipHtml = ['<div class="element-name">' + elementName + '</div>'];
-
-        if (metrics) {
-            tooltipHtml.push('<table>');
-            for (let metricName of Object.keys(metrics)) {
-                tooltipHtml.push(this.generateTableRow(metricName, metrics[metricName]));
-            }
-            tooltipHtml.push('</table>');
-        }
-        return tooltipHtml.join('');
-    }
-
-    private generateTableRow(metricName, metricValue) {
-        let html = ['<tr>'];
-        html.push('<td class="metric-name-column">' + MetricNameHelper.getShortNameByFullName(metricName) + ':</td>');
-        html.push('<td class="metric-value-column">' + (metricValue || 'N/A') + '</td>');
-        html.push('</tr>');
-        return html.join('');
     }
 
     getBlockElements(): Block[] {

@@ -14,6 +14,7 @@ import {AppEffects} from './shared/effects';
 import {XHRBackendFactory} from './XHRBackendFactory';
 import {ScreenShotService} from "./service/screenshot.service";
 import {FocusService} from "./service/focus.service";
+import {TooltipService} from "./service/tooltip.service";
 
 @NgModule({
     declarations: [
@@ -36,7 +37,8 @@ import {FocusService} from "./service/focus.service";
             deps: [Injector, BrowserXhr, XSRFStrategy, ResponseOptions]
         },
         ScreenShotService,
-        FocusService
+        FocusService,
+        TooltipService
     ],
     bootstrap: [AppComponent]
 })
