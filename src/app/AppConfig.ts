@@ -33,12 +33,12 @@ export class AppConfig {
     static GLOBAL_MIN_GROUND_AREA: number = 1;
     static GLOBAL_MAX_HEIGHT: number = 100;
     static GLOBAL_MIN_HEIGHT: number = 1;
-    static BLOCK_SPACING: number = 5;
-    static DEFAULT_BLOCK_HEIGHT: number = 0.2;
+    static BLOCK_SPACING: number = 20;
+    static MODULE_BLOCK_HEIGHT: number = 10;
 
     // CAMERA SETTINGS
     static CAMERA_NEAR: number = 0.1;
-    static CAMERA_FAR: number = 10000;
+    static CAMERA_FAR: number = 100000;
     static CAMERA_DISTANCE_TO_FOCUSSED_ELEMENT: number = 100;
     static CAMERA_START_POSITION: any = {
         x: 100, y: 50, z: 200

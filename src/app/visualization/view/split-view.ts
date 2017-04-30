@@ -71,7 +71,7 @@ export class SplitView extends AbstractView {
                     this.maxBottomValue = bottom;
                 }
 
-                myHeight = AppConfig.DEFAULT_BLOCK_HEIGHT;
+                myHeight = AppConfig.MODULE_BLOCK_HEIGHT;
                 this.createBlock(node, parent, AppConfig.COLOR_HIERARCHY_RANGE[0], undefined, bottom, myHeight, false, metrics);
             }
 

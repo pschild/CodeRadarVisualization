@@ -136,7 +136,7 @@ export class MergedView extends AbstractView {
                         this.maxBottomValue = bottom;
                     }
 
-                    blueHeight = AppConfig.DEFAULT_BLOCK_HEIGHT;
+                    blueHeight = AppConfig.MODULE_BLOCK_HEIGHT;
                     this.createBlock(node, parent, AppConfig.COLOR_HIERARCHY_RANGE[0], undefined, bottom, blueHeight, false);
                 }
             }
