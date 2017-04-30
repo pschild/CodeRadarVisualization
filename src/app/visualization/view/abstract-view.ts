@@ -1,4 +1,3 @@
-import {Block} from "../../geometry/block";
 import {INode} from "../../interfaces/INode";
 import {NodeType} from "app/enum/NodeType";
 import {IPackerElement} from "../../interfaces/IPackerElement";
@@ -6,21 +5,27 @@ import {AppConfig} from "../../AppConfig";
 import {ElementAnalyzer} from "../../helper/element-analyzer";
 import {ScreenType} from "../../enum/ScreenType";
 import {CommitReferenceType} from "../../enum/CommitReferenceType";
+import {BoxGeometry, Mesh, MeshLambertMaterial} from "three";
 declare var GrowingPacker: any;
 
 export abstract class AbstractView {
 
     rootNode: INode;
-    blockElements: Block[] = [];
+    blockElements: Mesh[] = [];
     packer = new GrowingPacker();
 
     minBottomValue: number = 0;
     maxBottomValue: number = Number.MIN_VALUE;
 
+    geo;
+
     screenType: ScreenType;
 
     constructor(screenType: ScreenType) {
         this.screenType = screenType;
+
+        this.geo = new BoxGeometry(1, 1, 1);
+        this.geo.translate(0.5, 0.5, 0.5);
     }
 
     setMetricTree(root: INode) {
@@ -82,7 +87,7 @@ export abstract class AbstractView {
         let finalX, finalY, finalZ;
         let finalWidth, finalHeight, finalDepth;
 
-        let cube = new Block(color, node.name);
+        let cube = this.createCubeGeometry(color, node.name);
         finalX = node.packerInfo.fit.x + (parent ? parent.packerInfo.renderedX : 0) + AppConfig.BLOCK_SPACING;
         finalY = bottom;
         finalZ = node.packerInfo.fit.y + (parent ? parent.packerInfo.renderedY : 0) + AppConfig.BLOCK_SPACING;
@@ -113,6 +118,14 @@ export abstract class AbstractView {
         this.blockElements.push(cube);
     }
 
+    createCubeGeometry(color: string, name: string) {
+        let material = new MeshLambertMaterial({color: color});
+
+        let block = new Mesh(this.geo, material);
+        block.name = name;
+        return block;
+    }
+
     createUserData(node: INode, parent: INode, bottom: number, isTransparent: boolean, metrics: any, commitType?: CommitReferenceType, changeTypes?: any) {
         return {
             parentName: parent ? parent.name : undefined,
@@ -126,7 +139,7 @@ export abstract class AbstractView {
         };
     }
 
-    getBlockElements(): Block[] {
+    getBlockElements(): Mesh[] {
         return this.blockElements;
     }
 
