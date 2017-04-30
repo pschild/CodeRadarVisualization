@@ -8,7 +8,6 @@ import {ViewType} from "../enum/ViewType";
 import {IFilter} from "../interfaces/IFilter";
 import {INode} from "../interfaces/INode";
 import {IMetricMapping} from "../interfaces/IMetricMapping";
-import {ElementAnalyzer} from "../helper/element-analyzer";
 import {MetricNameHelper} from "../helper/metric-name-helper";
 
 @Component({
@@ -22,6 +21,7 @@ export class VisualizationComponent implements OnInit {
     activeViewType$: Observable<ViewType>;
     activeFilter$: Observable<IFilter>;
     metricTree$: Observable<INode>;
+    metricMapping$: Observable<IMetricMapping>;
     colorMetricName$: Observable<string>;
 
     subscriptions: Subscription[] = [];
@@ -39,6 +39,7 @@ export class VisualizationComponent implements OnInit {
         this.activeViewType$ = this.store.select(fromRoot.getActiveViewType);
         this.activeFilter$ = this.store.select(fromRoot.getActiveFilter);
         this.metricTree$ = this.store.select(fromRoot.getMetricTree);
+        this.metricMapping$ = this.store.select(fromRoot.getMetricMapping);
         this.colorMetricName$ = this.store.select(fromRoot.getMetricMapping)
             .map(metricMapping => metricMapping.colorMetricName)
             .map(colorMetricName => MetricNameHelper.getShortNameByFullName(colorMetricName));

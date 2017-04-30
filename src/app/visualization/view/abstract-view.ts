@@ -5,7 +5,8 @@ import {AppConfig} from "../../AppConfig";
 import {ElementAnalyzer} from "../../helper/element-analyzer";
 import {ScreenType} from "../../enum/ScreenType";
 import {CommitReferenceType} from "../../enum/CommitReferenceType";
-import {BoxGeometry, Mesh, MeshLambertMaterial} from "three";
+import {BoxGeometry, Mesh, MeshLambertMaterial, Geometry} from "three";
+import {IMetricMapping} from "../../interfaces/IMetricMapping";
 declare var GrowingPacker: any;
 
 export abstract class AbstractView {
@@ -17,15 +18,11 @@ export abstract class AbstractView {
     minBottomValue: number = 0;
     maxBottomValue: number = Number.MIN_VALUE;
 
-    geo;
+    geometry: Geometry;
 
-    screenType: ScreenType;
-
-    constructor(screenType: ScreenType) {
-        this.screenType = screenType;
-
-        this.geo = new BoxGeometry(1, 1, 1);
-        this.geo.translate(0.5, 0.5, 0.5);
+    constructor(protected screenType: ScreenType, protected metricMapping: IMetricMapping) {
+        this.geometry = new BoxGeometry(1, 1, 1);
+        this.geometry.translate(0.5, 0.5, 0.5);
     }
 
     setMetricTree(root: INode) {
@@ -121,7 +118,7 @@ export abstract class AbstractView {
     createCubeGeometry(color: string, name: string) {
         let material = new MeshLambertMaterial({color: color});
 
-        let block = new Mesh(this.geo, material);
+        let block = new Mesh(this.geometry, material);
         block.name = name;
         return block;
     }

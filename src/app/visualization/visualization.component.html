@@ -5,13 +5,15 @@
             [screenType]="screenTypes.left"
             [activeViewType]="activeViewType$ | async"
             [activeFilter]="activeFilter$ | async"
-            [metricTree]="metricTree$ | async">
+            [metricTree]="metricTree$ | async"
+            [metricMapping]="metricMapping$ | async">
     </app-screen>
     <app-screen
             [screenType]="screenTypes.right"
             [activeViewType]="activeViewType$ | async"
             [activeFilter]="activeFilter$ | async"
-            [metricTree]="metricTree$ | async">
+            [metricTree]="metricTree$ | async"
+            [metricMapping]="metricMapping$ | async">
     </app-screen>
     <app-comparison-panel></app-comparison-panel>
     <app-legend [activeViewType]="activeViewType$ | async" [colorMetricName]="colorMetricName$ | async"></app-legend>

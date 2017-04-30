@@ -32,7 +32,7 @@ export class MetricMappingComponent implements OnInit {
     }
 
     applyMetricMappings() {
-        this.metricMappingChanged.emit();
+        this.metricMappingChanged.emit(this.metricMapping);
     }
 
 }

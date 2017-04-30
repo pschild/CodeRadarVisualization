@@ -6,20 +6,19 @@ import {CommitReferenceType} from "../../enum/CommitReferenceType";
 import {ColorHelper} from "../../helper/color-helper";
 import {ElementAnalyzer} from "../../helper/element-analyzer";
 import {ScreenType} from "../../enum/ScreenType";
+import {IMetricMapping} from "../../interfaces/IMetricMapping";
 
 export class SplitView extends AbstractView {
-
-    screenType: ScreenType;
 
     minColorMetricValue: number;
     maxColorMetricValue: number;
 
-    constructor(screenType: ScreenType) {
-        super(screenType);
+    constructor(screenType: ScreenType, metricMapping: IMetricMapping) {
+        super(screenType, metricMapping);
     }
 
     calculateElements(nodes: INode[], parent: INode, bottom: number) {
-        let minMaxColorValuePair = ElementAnalyzer.findSmallestAndBiggestMetricValueByMetricName(this.rootNode.children, AppConfig.COLOR_METRIC_NAME);
+        let minMaxColorValuePair = ElementAnalyzer.findSmallestAndBiggestMetricValueByMetricName(this.rootNode.children, this.metricMapping.colorMetricName);
         this.minColorMetricValue = minMaxColorValuePair.min;
         this.maxColorMetricValue = minMaxColorValuePair.max;
 
@@ -38,14 +37,14 @@ export class SplitView extends AbstractView {
                 return;
             }
 
-            let heightMetric = ElementAnalyzer.getMetricValueOfElementAndCommitReferenceType(node, AppConfig.HEIGHT_METRIC_NAME, CommitReferenceType.THIS, this.screenType);
-            let groundAreaMetric = ElementAnalyzer.getMetricValueOfElementAndCommitReferenceType(node, AppConfig.GROUND_AREA_METRIC_NAME, CommitReferenceType.THIS, this.screenType);
-            let colorMetric = ElementAnalyzer.getMetricValueOfElementAndCommitReferenceType(node, AppConfig.COLOR_METRIC_NAME, CommitReferenceType.THIS, this.screenType);
+            let heightMetric = ElementAnalyzer.getMetricValueOfElementAndCommitReferenceType(node, this.metricMapping.heightMetricName, CommitReferenceType.THIS, this.screenType);
+            let groundAreaMetric = ElementAnalyzer.getMetricValueOfElementAndCommitReferenceType(node, this.metricMapping.groundAreaMetricName, CommitReferenceType.THIS, this.screenType);
+            let colorMetric = ElementAnalyzer.getMetricValueOfElementAndCommitReferenceType(node, this.metricMapping.colorMetricName, CommitReferenceType.THIS, this.screenType);
 
             let metrics = {
-                [AppConfig.HEIGHT_METRIC_NAME]: heightMetric,
-                [AppConfig.GROUND_AREA_METRIC_NAME]: groundAreaMetric,
-                [AppConfig.COLOR_METRIC_NAME]: colorMetric
+                [this.metricMapping.heightMetricName]: heightMetric,
+                [this.metricMapping.groundAreaMetricName]: groundAreaMetric,
+                [this.metricMapping.colorMetricName]: colorMetric
             };
 
             let myHeight;
@@ -57,7 +56,7 @@ export class SplitView extends AbstractView {
                 myHeight = heightMetric * AppConfig.HEIGHT_FACTOR + AppConfig.GLOBAL_MIN_HEIGHT;
 
                 let myGA = groundAreaMetric * AppConfig.GROUND_AREA_FACTOR + AppConfig.GLOBAL_MIN_GROUND_AREA;
-                let otherGA = ElementAnalyzer.getMetricValueOfElementAndCommitReferenceType(node, AppConfig.GROUND_AREA_METRIC_NAME, CommitReferenceType.OTHER, this.screenType) * AppConfig.GROUND_AREA_FACTOR + AppConfig.GLOBAL_MIN_GROUND_AREA;
+                let otherGA = ElementAnalyzer.getMetricValueOfElementAndCommitReferenceType(node, this.metricMapping.groundAreaMetricName, CommitReferenceType.OTHER, this.screenType) * AppConfig.GROUND_AREA_FACTOR + AppConfig.GLOBAL_MIN_GROUND_AREA;
 
                 let myColor = ColorHelper.getColorByMetricValue(colorMetric, this.maxColorMetricValue, this.minColorMetricValue);
 

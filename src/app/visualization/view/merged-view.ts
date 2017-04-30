@@ -8,14 +8,15 @@ import {CommitReferenceType} from "../../enum/CommitReferenceType";
 import {ScreenType} from "../../enum/ScreenType";
 import {BlockConnection} from "app/geometry/block-connection";
 import {Scene} from "three";
+import {IMetricMapping} from "../../interfaces/IMetricMapping";
 
 export class MergedView extends AbstractView {
 
     movedElements: any[] = [];
     connections: BlockConnection[] = [];
 
-    constructor(screenType: ScreenType) {
-        super(screenType);
+    constructor(screenType: ScreenType, metricMapping: IMetricMapping) {
+        super(screenType, metricMapping);
     }
 
     calculateElements(nodes: INode[], parent: INode, bottom: number) {
@@ -33,25 +34,25 @@ export class MergedView extends AbstractView {
 
             // FILE
             if (node.type === NodeType.FILE) {
-                let blueHeightMetric = ElementAnalyzer.getMetricValueOfElementAndCommitReferenceType(node, AppConfig.HEIGHT_METRIC_NAME, CommitReferenceType.THIS, this.screenType);
-                let orangeHeightMetric = ElementAnalyzer.getMetricValueOfElementAndCommitReferenceType(node, AppConfig.HEIGHT_METRIC_NAME, CommitReferenceType.OTHER, this.screenType);
+                let blueHeightMetric = ElementAnalyzer.getMetricValueOfElementAndCommitReferenceType(node, this.metricMapping.heightMetricName, CommitReferenceType.THIS, this.screenType);
+                let orangeHeightMetric = ElementAnalyzer.getMetricValueOfElementAndCommitReferenceType(node, this.metricMapping.heightMetricName, CommitReferenceType.OTHER, this.screenType);
 
-                let blueGroundAreaMetric = ElementAnalyzer.getMetricValueOfElementAndCommitReferenceType(node, AppConfig.GROUND_AREA_METRIC_NAME, CommitReferenceType.THIS, this.screenType);
-                let orangeGroundAreaMetric = ElementAnalyzer.getMetricValueOfElementAndCommitReferenceType(node, AppConfig.GROUND_AREA_METRIC_NAME, CommitReferenceType.OTHER, this.screenType);
+                let blueGroundAreaMetric = ElementAnalyzer.getMetricValueOfElementAndCommitReferenceType(node, this.metricMapping.groundAreaMetricName, CommitReferenceType.THIS, this.screenType);
+                let orangeGroundAreaMetric = ElementAnalyzer.getMetricValueOfElementAndCommitReferenceType(node, this.metricMapping.groundAreaMetricName, CommitReferenceType.OTHER, this.screenType);
 
-                let blueColorMetric = ElementAnalyzer.getMetricValueOfElementAndCommitReferenceType(node, AppConfig.COLOR_METRIC_NAME, CommitReferenceType.THIS, this.screenType);
-                let orangeColorMetric = ElementAnalyzer.getMetricValueOfElementAndCommitReferenceType(node, AppConfig.COLOR_METRIC_NAME, CommitReferenceType.OTHER, this.screenType);
+                let blueColorMetric = ElementAnalyzer.getMetricValueOfElementAndCommitReferenceType(node, this.metricMapping.colorMetricName, CommitReferenceType.THIS, this.screenType);
+                let orangeColorMetric = ElementAnalyzer.getMetricValueOfElementAndCommitReferenceType(node, this.metricMapping.colorMetricName, CommitReferenceType.OTHER, this.screenType);
 
                 let blueMetrics = {
-                    [AppConfig.HEIGHT_METRIC_NAME]: blueHeightMetric,
-                    [AppConfig.GROUND_AREA_METRIC_NAME]: blueGroundAreaMetric,
-                    [AppConfig.COLOR_METRIC_NAME]: blueColorMetric
+                    [this.metricMapping.heightMetricName]: blueHeightMetric,
+                    [this.metricMapping.groundAreaMetricName]: blueGroundAreaMetric,
+                    [this.metricMapping.colorMetricName]: blueColorMetric
                 };
 
                 let orangeMetrics = {
-                    [AppConfig.HEIGHT_METRIC_NAME]: orangeHeightMetric,
-                    [AppConfig.GROUND_AREA_METRIC_NAME]: orangeGroundAreaMetric,
-                    [AppConfig.COLOR_METRIC_NAME]: orangeColorMetric
+                    [this.metricMapping.heightMetricName]: orangeHeightMetric,
+                    [this.metricMapping.groundAreaMetricName]: orangeGroundAreaMetric,
+                    [this.metricMapping.colorMetricName]: orangeColorMetric
                 };
 
                 blueHeight = blueHeightMetric * AppConfig.HEIGHT_FACTOR + AppConfig.GLOBAL_MIN_HEIGHT;

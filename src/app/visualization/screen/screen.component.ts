@@ -15,6 +15,7 @@ import {INode} from "../../interfaces/INode";
 import {ScreenShotService} from "../../service/screenshot.service";
 import {FocusService} from "../../service/focus.service";
 import {TooltipService} from "../../service/tooltip.service";
+import {IMetricMapping} from "../../interfaces/IMetricMapping";
 declare var TWEEN: any;
 declare var THREE: any;
 
@@ -29,6 +30,7 @@ export class ScreenComponent implements OnInit, OnChanges {
     @Input() activeViewType: ViewType;
     @Input() activeFilter: IFilter;
     @Input() metricTree: INode;
+    @Input() metricMapping: IMetricMapping;
 
     subscriptions: Subscription[] = [];
 
@@ -56,14 +58,14 @@ export class ScreenComponent implements OnInit, OnChanges {
             this.interactionHandler.setIsMergedView(this.isMergedView);
 
             if (this.isMergedView) {
-                this.view = new MergedView(this.screenType);
+                this.view = new MergedView(this.screenType, this.metricMapping);
                 if (this.screenType === ScreenType.RIGHT) {
                     this.pauseRendering();
                 }
                 document.querySelector('#stage').classList.remove('split');
 
             } else {
-                this.view = new SplitView(this.screenType);
+                this.view = new SplitView(this.screenType, this.metricMapping);
                 if (this.screenType === ScreenType.RIGHT) {
                     this.resumeRendering();
                 }
@@ -82,7 +84,7 @@ export class ScreenComponent implements OnInit, OnChanges {
     }
 
     ngOnInit() {
-        this.view = new SplitView(this.screenType);
+        this.view = new SplitView(this.screenType, this.metricMapping);
 
         this.createCamera();
         this.createControls();

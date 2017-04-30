@@ -15,9 +15,7 @@ import {IMetricMapping} from "../../interfaces/IMetricMapping";
 export class SettingsComponent implements OnInit {
 
     activeViewType$: Observable<ViewType>;
-
     activeFilter$: Observable<IFilter>;
-
     metricMapping$: Observable<IMetricMapping>;
 
     constructor(private store: Store<fromRoot.AppState>) {
