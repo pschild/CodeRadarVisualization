@@ -141,6 +141,6 @@ export abstract class AbstractView {
     }
 
     private getValueForGroundArea(commit1Metrics: any, commit2Metrics: any): number {
-        return ElementAnalyzer.getMaxMetricValueByMetricName(commit1Metrics, commit2Metrics, AppConfig.GROUND_AREA_METRIC_NAME);
+        return ElementAnalyzer.getMaxMetricValueByMetricName(commit1Metrics, commit2Metrics, this.metricMapping.groundAreaMetricName);
     }
 }
