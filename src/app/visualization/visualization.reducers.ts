@@ -21,6 +21,8 @@ export const VisualizationReducer: ActionReducer<VisualizationState> = (state = 
         case VisualizationActions.LOAD_METRIC_TREE:
             newState = Object.assign({}, state);
             newState.metricsLoading = true;
+            newState.metricTree = null;
+            newState.uniqueFileList = [];
             return newState;
 
         case VisualizationActions.LOAD_METRIC_TREE_SUCCESS:
