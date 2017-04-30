@@ -1,9 +1,10 @@
 import {environment} from "../environments/environment";
+
 export class AppConfig {
     static DEBUG_MODE_ENABLED: boolean = false;
 
-    // CODERADAR CONFIG
-    static BASE_URL: string = 'http://localhost:8080';
+    // CODERADAR SERVER CONFIG
+    static BASE_URL: string = 'http://192.168.1.37:8080';
     static USERNAME: string = 'radar';
     static PASSWORD: string = 'Password12!';
 
@@ -34,7 +35,6 @@ export class AppConfig {
     static GLOBAL_MIN_HEIGHT: number = 1;
     static BLOCK_SPACING: number = 5;
     static DEFAULT_BLOCK_HEIGHT: number = 0.2;
-    static SCREEN_PADDING: number = 0;
 
     // CAMERA SETTINGS
     static CAMERA_NEAR: number = 0.1;

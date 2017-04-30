@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {IDeltaTreeGetResponse} from "../interfaces/IDeltaTreeGetResponse";
 import {ICommit} from "../interfaces/ICommit";
 import {IMetricMapping} from "../interfaces/IMetricMapping";
+import {AppConfig} from "../AppConfig";
 
 @Injectable()
 export class MetricService {
@@ -18,6 +19,15 @@ export class MetricService {
             'metrics': [metricMapping.heightMetricName, metricMapping.groundAreaMetricName, metricMapping.colorMetricName]
         };
 
+        // Temporary: use this code block for querying a running coderadar server
+        /*return this.http.post(`${AppConfig.BASE_URL}/projects/1/metricvalues/deltaTree`, body)
+            .map((res) => {
+                return {
+                    rootNode: res.json()
+                };
+            });*/
+
+        // Temporary: use this code block for querying a dummy json file
         let id;
         switch (rightCommit.name) {
             case 'b152859ca8d73f5c974c2264107fd0092af310d0':
@@ -34,9 +44,8 @@ export class MetricService {
                 break;
         }
 
-        // TODO: this.http.post('http://localhost:4200/assets/json/deltaTree.json', body)
         return this.http.get(`http://localhost:4200/assets/json/deltaTree${id}.json`)
-            .delay(1500) // TODO: remove in final version
+            .delay(1500)
             .map((res) => {
                 return {
                     rootNode: res.json()
