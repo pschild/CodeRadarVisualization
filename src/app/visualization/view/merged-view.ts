@@ -122,6 +122,7 @@ export class MergedView extends AbstractView {
 
                     let changeTypes = { added: true, deleted: false, moved: false };
                     if (this.isNodeMoved(node)) {
+                        // don't push to this.movedElements to avoid duplicates
                         changeTypes.moved = true;
                     }
 

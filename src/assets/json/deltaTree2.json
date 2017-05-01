@@ -73,7 +73,26 @@
             "added": false
           },
           "children": []
-        },
+        }
+      ]
+    },
+    {
+      "name": "moduleB",
+      "type": "MODULE",
+      "commit1Metrics": {
+        "coderadar:size:loc:java": 40,
+        "coderadar:size:eloc:java": 20,
+        "coderadar:size:sloc:java": 40
+      },
+      "commit2Metrics": {
+        "coderadar:size:loc:java": 20,
+        "coderadar:size:eloc:java": 10,
+        "coderadar:size:sloc:java": 20
+      },
+      "renamedFrom": null,
+      "renamedTo": null,
+      "changes": null,
+      "children": [
         {
           "name": "moduleB/src/main/java/RemovedClass.java",
           "type": "FILE",
@@ -90,6 +109,25 @@
             "modified": false,
             "deleted": false,
             "added": true
+          },
+          "children": []
+        },
+        {
+          "name": "moduleB/src/main/java/MovedClassFromAToB.java",
+          "type": "FILE",
+          "commit1Metrics": {
+            "coderadar:size:loc:java": 2,
+            "coderadar:size:eloc:java": 1,
+            "coderadar:size:sloc:java": 2
+          },
+          "commit2Metrics": null,
+          "renamedFrom": null,
+          "renamedTo": null,
+          "changes": {
+            "renamed": true,
+            "modified": false,
+            "deleted": false,
+            "added": false
           },
           "children": []
         }
