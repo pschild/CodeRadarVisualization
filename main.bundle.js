@@ -24,7 +24,7 @@ var ColorHelper = (function () {
     ColorHelper.getColorByMetricValue = function (value, max, min) {
         return this.getColorScale(__WEBPACK_IMPORTED_MODULE_0__AppConfig__["a" /* AppConfig */].COLOR_HEATMAP_RANGE, value, max, min);
     };
-    ColorHelper.getColorByBottomValue = function (value, max, min) {
+    ColorHelper.getColorByLevelValue = function (value, max, min) {
         return this.getColorScale(__WEBPACK_IMPORTED_MODULE_0__AppConfig__["a" /* AppConfig */].COLOR_HIERARCHY_RANGE, value, max, min);
     };
     ColorHelper.getColorScale = function (range, value, max, min) {
@@ -186,8 +186,7 @@ var AbstractView = (function () {
         this.metricMapping = metricMapping;
         this.blockElements = [];
         this.packer = new GrowingPacker();
-        this.minBottomValue = 0;
-        this.maxBottomValue = Number.MIN_VALUE;
+        this.minModuleLevel = 1;
         this.geometry = new __WEBPACK_IMPORTED_MODULE_3_three__["BoxGeometry"](1, 1, 1);
         this.geometry.translate(0.5, 0.5, 0.5);
     }
@@ -198,6 +197,7 @@ var AbstractView = (function () {
         if (!this.rootNode) {
             throw new Error("rootNode is not defined!");
         }
+        this.maxModuleLevel = __WEBPACK_IMPORTED_MODULE_2__helper_element_analyzer__["a" /* ElementAnalyzer */].getMaxModuleLevel(this.rootNode);
         this.calculateGroundAreas([this.rootNode]);
         this.calculateElements([this.rootNode], null, 0);
     };
@@ -2702,8 +2702,9 @@ var MergedView = (function (_super) {
         _this.connections = [];
         return _this;
     }
-    MergedView.prototype.calculateElements = function (nodes, parent, bottom) {
+    MergedView.prototype.calculateElements = function (nodes, parent, bottom, level) {
         var _this = this;
+        if (level === void 0) { level = 1; }
         if (!Array.isArray(nodes)) {
             nodes = [nodes];
         }
@@ -2789,6 +2790,7 @@ var MergedView = (function (_super) {
                     // only orange block
                     var changeTypes = { added: true, deleted: false, moved: false };
                     if (_this.isNodeMoved(node)) {
+                        // don't push to this.movedElements to avoid duplicates
                         changeTypes.moved = true;
                     }
                     _this.createBlock(node, parent, __WEBPACK_IMPORTED_MODULE_2__AppConfig__["a" /* AppConfig */].COLOR_ADDED_FILE, orangeGA, bottom, orangeHeight, false, orangeMetrics, __WEBPACK_IMPORTED_MODULE_5__enum_CommitReferenceType__["a" /* CommitReferenceType */].OTHER, changeTypes);
@@ -2798,16 +2800,14 @@ var MergedView = (function (_super) {
             else {
                 // don't draw empty modules
                 if (__WEBPACK_IMPORTED_MODULE_1__helper_element_analyzer__["a" /* ElementAnalyzer */].hasChildrenForCurrentCommit(node, true, _this.screenType)) {
-                    if (bottom > _this.maxBottomValue) {
-                        _this.maxBottomValue = bottom;
-                    }
                     blueHeight = __WEBPACK_IMPORTED_MODULE_2__AppConfig__["a" /* AppConfig */].MODULE_BLOCK_HEIGHT;
-                    _this.createBlock(node, parent, __WEBPACK_IMPORTED_MODULE_2__AppConfig__["a" /* AppConfig */].COLOR_HIERARCHY_RANGE[0], undefined, bottom, blueHeight, false);
+                    var moduleColor = __WEBPACK_IMPORTED_MODULE_4__helper_color_helper__["a" /* ColorHelper */].getColorByLevelValue(level, _this.minModuleLevel, _this.maxModuleLevel);
+                    _this.createBlock(node, parent, moduleColor, undefined, bottom, blueHeight, false);
                 }
             }
             // recursion
             if (node.children && node.children.length > 0) {
-                _this.calculateElements(node.children, node, bottom + blueHeight);
+                _this.calculateElements(node.children, node, bottom + blueHeight, level + 1);
             }
             var _a, _b;
         });
@@ -2870,8 +2870,9 @@ var SplitView = (function (_super) {
     function SplitView(screenType, metricMapping) {
         return _super.call(this, screenType, metricMapping) || this;
     }
-    SplitView.prototype.calculateElements = function (nodes, parent, bottom) {
+    SplitView.prototype.calculateElements = function (nodes, parent, bottom, level) {
         var _this = this;
+        if (level === void 0) { level = 1; }
         var minMaxColorValuePair = __WEBPACK_IMPORTED_MODULE_5__helper_element_analyzer__["a" /* ElementAnalyzer */].findSmallestAndBiggestMetricValueByMetricName(this.rootNode.children, this.metricMapping.colorMetricName);
         this.minColorMetricValue = minMaxColorValuePair.min;
         this.maxColorMetricValue = minMaxColorValuePair.max;
@@ -2911,15 +2912,13 @@ var SplitView = (function (_super) {
                 _this.createBlock(node, parent, myColor, myGA, bottom, myHeight, false, metrics);
             }
             else {
-                if (bottom > _this.maxBottomValue) {
-                    _this.maxBottomValue = bottom;
-                }
                 myHeight = __WEBPACK_IMPORTED_MODULE_2__AppConfig__["a" /* AppConfig */].MODULE_BLOCK_HEIGHT;
-                _this.createBlock(node, parent, __WEBPACK_IMPORTED_MODULE_2__AppConfig__["a" /* AppConfig */].COLOR_HIERARCHY_RANGE[0], undefined, bottom, myHeight, false, metrics);
+                var moduleColor = __WEBPACK_IMPORTED_MODULE_4__helper_color_helper__["a" /* ColorHelper */].getColorByLevelValue(level, _this.minModuleLevel, _this.maxModuleLevel);
+                _this.createBlock(node, parent, moduleColor, undefined, bottom, myHeight, false, metrics);
             }
             // recursion
             if (node.children && node.children.length > 0) {
-                _this.calculateElements(node.children, node, bottom + myHeight);
+                _this.calculateElements(node.children, node, bottom + myHeight, level + 1);
             }
             var _a;
         });
@@ -3206,6 +3205,16 @@ var ElementAnalyzer = (function () {
             }
         }
         return uniqueElements;
+    };
+    ElementAnalyzer.getMaxModuleLevel = function (node) {
+        var _this = this;
+        var depth = 0;
+        if (node.children) {
+            node.children.filter(function (child) { return child.type === __WEBPACK_IMPORTED_MODULE_2__enum_NodeType__["a" /* NodeType */].MODULE; }).forEach(function (childNode) {
+                depth = Math.max(_this.getMaxModuleLevel(childNode), depth);
+            });
+        }
+        return 1 + depth;
     };
     ElementAnalyzer.findSmallestAndBiggestMetricValueByMetricName = function (nodes, metricName) {
         if (typeof nodes !== 'object' || nodes === null) {
