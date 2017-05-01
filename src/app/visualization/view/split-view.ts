@@ -17,7 +17,7 @@ export class SplitView extends AbstractView {
         super(screenType, metricMapping);
     }
 
-    calculateElements(nodes: INode[], parent: INode, bottom: number) {
+    calculateElements(nodes: INode[], parent: INode, bottom: number, level: number = 1) {
         let minMaxColorValuePair = ElementAnalyzer.findSmallestAndBiggestMetricValueByMetricName(this.rootNode.children, this.metricMapping.colorMetricName);
         this.minColorMetricValue = minMaxColorValuePair.min;
         this.maxColorMetricValue = minMaxColorValuePair.max;
@@ -67,17 +67,15 @@ export class SplitView extends AbstractView {
                 this.createBlock(node, parent, myColor, myGA, bottom, myHeight, false, metrics);
 
             } else {
-                if (bottom > this.maxBottomValue) {
-                    this.maxBottomValue = bottom;
-                }
-
                 myHeight = AppConfig.MODULE_BLOCK_HEIGHT;
-                this.createBlock(node, parent, AppConfig.COLOR_HIERARCHY_RANGE[0], undefined, bottom, myHeight, false, metrics);
+                let moduleColor = ColorHelper.getColorByLevelValue(level, this.minModuleLevel, this.maxModuleLevel);
+                console.log(node.name, this.minModuleLevel, this.maxModuleLevel, level);
+                this.createBlock(node, parent, moduleColor, undefined, bottom, myHeight, false, metrics);
             }
 
             // recursion
             if (node.children && node.children.length > 0) {
-                this.calculateElements(node.children, node, bottom + myHeight);
+                this.calculateElements(node.children, node, bottom + myHeight, level + 1);
             }
         });
     }

@@ -19,7 +19,7 @@ export class MergedView extends AbstractView {
         super(screenType, metricMapping);
     }
 
-    calculateElements(nodes: INode[], parent: INode, bottom: number) {
+    calculateElements(nodes: INode[], parent: INode, bottom: number, level: number = 1) {
         if (!Array.isArray(nodes)) {
             nodes = [nodes];
         }
@@ -132,18 +132,15 @@ export class MergedView extends AbstractView {
             } else {
                 // don't draw empty modules
                 if (ElementAnalyzer.hasChildrenForCurrentCommit(node, true, this.screenType)) {
-                    if (bottom > this.maxBottomValue) {
-                        this.maxBottomValue = bottom;
-                    }
-
                     blueHeight = AppConfig.MODULE_BLOCK_HEIGHT;
-                    this.createBlock(node, parent, AppConfig.COLOR_HIERARCHY_RANGE[0], undefined, bottom, blueHeight, false);
+                    let moduleColor = ColorHelper.getColorByLevelValue(level, this.minModuleLevel, this.maxModuleLevel);
+                    this.createBlock(node, parent, moduleColor, undefined, bottom, blueHeight, false);
                 }
             }
 
             // recursion
             if (node.children && node.children.length > 0) {
-                this.calculateElements(node.children, node, bottom + blueHeight);
+                this.calculateElements(node.children, node, bottom + blueHeight, level + 1);
             }
         });
     }

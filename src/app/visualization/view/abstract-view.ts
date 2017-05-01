@@ -15,8 +15,8 @@ export abstract class AbstractView {
     blockElements: Mesh[] = [];
     packer = new GrowingPacker();
 
-    minBottomValue: number = 0;
-    maxBottomValue: number = Number.MIN_VALUE;
+    minModuleLevel: number = 1;
+    maxModuleLevel: number;
 
     geometry: Geometry;
 
@@ -33,6 +33,8 @@ export abstract class AbstractView {
         if (!this.rootNode) {
             throw new Error(`rootNode is not defined!`);
         }
+
+        this.maxModuleLevel = ElementAnalyzer.getMaxModuleLevel(this.rootNode);
 
         this.calculateGroundAreas([this.rootNode]);
         this.calculateElements([this.rootNode], null, 0);

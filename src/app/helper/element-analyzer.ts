@@ -45,7 +45,17 @@ export class ElementAnalyzer {
         return uniqueElements;
     }
 
-    static findSmallestAndBiggestMetricValueByMetricName(nodes: INode[], metricName: string): any {
+    static getMaxModuleLevel(node: INode): number {
+        let depth = 0;
+        if (node.children) {
+            node.children.filter(child => child.type === NodeType.MODULE).forEach((childNode) => {
+                depth = Math.max(this.getMaxModuleLevel(childNode), depth);
+            });
+        }
+        return 1 + depth;
+    }
+
+    static findSmallestAndBiggestMetricValueByMetricName(nodes: INode[], metricName: string): {min: number, max: number} {
         if (typeof nodes !== 'object' || nodes === null) {
             throw new Error('elements is not an object or null!');
         }

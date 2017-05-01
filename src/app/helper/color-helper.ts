@@ -17,7 +17,7 @@ export class ColorHelper {
         return this.getColorScale(AppConfig.COLOR_HEATMAP_RANGE, value, max, min);
     }
 
-    static getColorByBottomValue(value, max, min) {
+    static getColorByLevelValue(value: number, max: number, min: number): THREE.Color {
         return this.getColorScale(AppConfig.COLOR_HIERARCHY_RANGE, value, max, min);
     }
 
