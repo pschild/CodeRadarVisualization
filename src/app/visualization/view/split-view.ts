@@ -69,7 +69,6 @@ export class SplitView extends AbstractView {
             } else {
                 myHeight = AppConfig.MODULE_BLOCK_HEIGHT;
                 let moduleColor = ColorHelper.getColorByLevelValue(level, this.minModuleLevel, this.maxModuleLevel);
-                console.log(node.name, this.minModuleLevel, this.maxModuleLevel, level);
                 this.createBlock(node, parent, moduleColor, undefined, bottom, myHeight, false, metrics);
             }
 
