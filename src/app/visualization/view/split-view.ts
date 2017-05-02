@@ -53,18 +53,18 @@ export class SplitView extends AbstractView {
                     return;
                 }
 
-                myHeight = heightMetric * AppConfig.HEIGHT_FACTOR + AppConfig.GLOBAL_MIN_HEIGHT;
+                myHeight = heightMetric * AppConfig.HEIGHT_FACTOR;
 
-                let myGA = groundAreaMetric * AppConfig.GROUND_AREA_FACTOR + AppConfig.GLOBAL_MIN_GROUND_AREA;
-                let otherGA = ElementAnalyzer.getMetricValueOfElementAndCommitReferenceType(node, this.metricMapping.groundAreaMetricName, CommitReferenceType.OTHER, this.screenType) * AppConfig.GROUND_AREA_FACTOR + AppConfig.GLOBAL_MIN_GROUND_AREA;
+                let myEdgeLength = Math.sqrt(groundAreaMetric) * AppConfig.EDGE_LENGTH_FACTOR;
+                let otherEdgeLength = Math.sqrt(ElementAnalyzer.getMetricValueOfElementAndCommitReferenceType(node, this.metricMapping.groundAreaMetricName, CommitReferenceType.OTHER, this.screenType)) * AppConfig.EDGE_LENGTH_FACTOR;
 
                 let myColor = ColorHelper.getColorByMetricValue(colorMetric, this.maxColorMetricValue, this.minColorMetricValue);
 
-                if (myGA < otherGA) {
-                    node.packerInfo.fit.x += (otherGA - myGA) / 2;
-                    node.packerInfo.fit.y += (otherGA - myGA) / 2;
+                if (myEdgeLength < otherEdgeLength) {
+                    node.packerInfo.fit.x += (otherEdgeLength - myEdgeLength) / 2;
+                    node.packerInfo.fit.y += (otherEdgeLength - myEdgeLength) / 2;
                 }
-                this.createBlock(node, parent, myColor, myGA, bottom, myHeight, false, metrics);
+                this.createBlock(node, parent, myColor, myEdgeLength, bottom, myHeight, false, metrics);
 
             } else {
                 myHeight = AppConfig.MODULE_BLOCK_HEIGHT;

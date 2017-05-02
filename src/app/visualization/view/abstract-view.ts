@@ -49,12 +49,12 @@ export abstract class AbstractView {
             let element: IPackerElement = { w: 0, h: 0 };
 
             if (node.type === NodeType.FILE) {
-                let groundArea = this.getValueForGroundArea(node.commit1Metrics, node.commit2Metrics);
-                if (!groundArea) {
+                let edgeLength = this.getEdgeLength(node.commit1Metrics, node.commit2Metrics);
+                if (!edgeLength) {
                     element.w = element.h = 0;
                 } else {
-                    element.w = groundArea * AppConfig.GROUND_AREA_FACTOR + AppConfig.GLOBAL_MIN_GROUND_AREA + 2 * AppConfig.BLOCK_SPACING;
-                    element.h = groundArea * AppConfig.GROUND_AREA_FACTOR + AppConfig.GLOBAL_MIN_GROUND_AREA + 2 * AppConfig.BLOCK_SPACING;
+                    element.w = edgeLength * AppConfig.EDGE_LENGTH_FACTOR + 2 * AppConfig.BLOCK_SPACING;
+                    element.h = edgeLength * AppConfig.EDGE_LENGTH_FACTOR + 2 * AppConfig.BLOCK_SPACING;
                 }
             }
 
@@ -82,7 +82,7 @@ export abstract class AbstractView {
 
     abstract calculateElements(nodes: INode[], parent: INode, bottom: number);
 
-    createBlock(node: INode, parent: INode, color: any, currentCommitSize: any, bottom: number, height: number, isTransparent: boolean, metrics?: any, commitType?: CommitReferenceType, changeTypes?: any) {
+    createBlock(node: INode, parent: INode, color: any, edgeLength: number, bottom: number, height: number, isTransparent: boolean, metrics?: any, commitType?: CommitReferenceType, changeTypes?: any) {
         let finalX, finalY, finalZ;
         let finalWidth, finalHeight, finalDepth;
 
@@ -95,9 +95,9 @@ export abstract class AbstractView {
         node.packerInfo.renderedX = finalX;
         node.packerInfo.renderedY = finalZ;
 
-        finalWidth = node.type === NodeType.FILE ? currentCommitSize : node.packerInfo.w - 2 * AppConfig.BLOCK_SPACING;
+        finalWidth = node.type === NodeType.FILE ? edgeLength : node.packerInfo.w - 2 * AppConfig.BLOCK_SPACING;
         finalHeight = height;
-        finalDepth = node.type === NodeType.FILE ? currentCommitSize : node.packerInfo.h - 2 * AppConfig.BLOCK_SPACING;
+        finalDepth = node.type === NodeType.FILE ? edgeLength : node.packerInfo.h - 2 * AppConfig.BLOCK_SPACING;
 
         if (isTransparent) {
             cube.material.transparent = true;
@@ -142,7 +142,8 @@ export abstract class AbstractView {
         return this.blockElements;
     }
 
-    private getValueForGroundArea(commit1Metrics: any, commit2Metrics: any): number {
-        return ElementAnalyzer.getMaxMetricValueByMetricName(commit1Metrics, commit2Metrics, this.metricMapping.groundAreaMetricName);
+    private getEdgeLength(commit1Metrics: any, commit2Metrics: any): number {
+        let groundAreaValue = ElementAnalyzer.getMaxMetricValueByMetricName(commit1Metrics, commit2Metrics, this.metricMapping.groundAreaMetricName);
+        return Math.sqrt(groundAreaValue);
     }
 }

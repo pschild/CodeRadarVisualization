@@ -55,53 +55,53 @@ export class MergedView extends AbstractView {
                     [this.metricMapping.colorMetricName]: orangeColorMetric
                 };
 
-                blueHeight = blueHeightMetric * AppConfig.HEIGHT_FACTOR + AppConfig.GLOBAL_MIN_HEIGHT;
-                let orangeHeight = orangeHeightMetric * AppConfig.HEIGHT_FACTOR + AppConfig.GLOBAL_MIN_HEIGHT;
+                blueHeight = blueHeightMetric * AppConfig.HEIGHT_FACTOR;
+                let orangeHeight = orangeHeightMetric * AppConfig.HEIGHT_FACTOR;
 
-                let blueGA = blueGroundAreaMetric * AppConfig.GROUND_AREA_FACTOR + AppConfig.GLOBAL_MIN_GROUND_AREA;
-                let orangeGA = orangeGroundAreaMetric * AppConfig.GROUND_AREA_FACTOR + AppConfig.GLOBAL_MIN_GROUND_AREA;
+                let blueEdgeLength = Math.sqrt(blueGroundAreaMetric) * AppConfig.EDGE_LENGTH_FACTOR;
+                let orangeEdgeLength = Math.sqrt(orangeGroundAreaMetric) * AppConfig.EDGE_LENGTH_FACTOR;
 
                 let blueColor = ColorHelper.getColorByPosition(this.screenType);
                 let orangeColor = ColorHelper.getContraryColorByColor(blueColor);
 
-                let blueTransparency = blueHeight >= orangeHeight && blueGA >= orangeGA;
-                let orangeTransparency = orangeHeight >= blueHeight && orangeGA >= blueGA;
+                let blueTransparency = blueHeight >= orangeHeight && blueEdgeLength >= orangeEdgeLength;
+                let orangeTransparency = orangeHeight >= blueHeight && orangeEdgeLength >= blueEdgeLength;
 
-                if (!isNaN(blueGA) && !isNaN(orangeGA)) {
+                if (!isNaN(blueEdgeLength) && !isNaN(orangeEdgeLength)) {
                     // both blocks
-                    if (blueGA < orangeGA) {
+                    if (blueEdgeLength < orangeEdgeLength) {
                         // draw the bigger block ...
-                        this.createBlock(node, parent, orangeColor, orangeGA, bottom, orangeHeight, orangeTransparency, orangeMetrics, CommitReferenceType.OTHER, { modified: true });
+                        this.createBlock(node, parent, orangeColor, orangeEdgeLength, bottom, orangeHeight, orangeTransparency, orangeMetrics, CommitReferenceType.OTHER, { modified: true });
 
                         // ... calculate the center position for the smaller block ...
-                        node.packerInfo.fit.x += (orangeGA - blueGA) / 2;
-                        node.packerInfo.fit.y += (orangeGA - blueGA) / 2;
+                        node.packerInfo.fit.x += (orangeEdgeLength - blueEdgeLength) / 2;
+                        node.packerInfo.fit.y += (orangeEdgeLength - blueEdgeLength) / 2;
 
                         // ... draw the smaller block
-                        this.createBlock(node, parent, blueColor, blueGA, bottom, blueHeight, blueTransparency, blueMetrics, CommitReferenceType.THIS, { modified: true });
-                    } else if (blueGA > orangeGA) {
+                        this.createBlock(node, parent, blueColor, blueEdgeLength, bottom, blueHeight, blueTransparency, blueMetrics, CommitReferenceType.THIS, { modified: true });
+                    } else if (blueEdgeLength > orangeEdgeLength) {
                         // draw the bigger block ...
-                        this.createBlock(node, parent, blueColor, blueGA, bottom, blueHeight, blueTransparency, blueMetrics, CommitReferenceType.THIS, { modified: true });
+                        this.createBlock(node, parent, blueColor, blueEdgeLength, bottom, blueHeight, blueTransparency, blueMetrics, CommitReferenceType.THIS, { modified: true });
 
                         // ... calculate the center position for the smaller block ...
-                        node.packerInfo.fit.x += (blueGA - orangeGA) / 2;
-                        node.packerInfo.fit.y += (blueGA - orangeGA) / 2;
+                        node.packerInfo.fit.x += (blueEdgeLength - orangeEdgeLength) / 2;
+                        node.packerInfo.fit.y += (blueEdgeLength - orangeEdgeLength) / 2;
 
                         // ... draw the smaller block
-                        this.createBlock(node, parent, orangeColor, orangeGA, bottom, orangeHeight, orangeTransparency, orangeMetrics, CommitReferenceType.OTHER, { modified: true });
+                        this.createBlock(node, parent, orangeColor, orangeEdgeLength, bottom, orangeHeight, orangeTransparency, orangeMetrics, CommitReferenceType.OTHER, { modified: true });
                     } else {
                         // ground areas are the same
                         if (blueHeight != orangeHeight) {
                             // heights are different, so draw both blocks
-                            this.createBlock(node, parent, blueColor, blueGA, bottom, blueHeight, blueTransparency, blueMetrics, CommitReferenceType.THIS, { modified: true });
-                            this.createBlock(node, parent, orangeColor, orangeGA, bottom, orangeHeight, orangeTransparency, orangeMetrics, CommitReferenceType.OTHER, { modified: true });
+                            this.createBlock(node, parent, blueColor, blueEdgeLength, bottom, blueHeight, blueTransparency, blueMetrics, CommitReferenceType.THIS, { modified: true });
+                            this.createBlock(node, parent, orangeColor, orangeEdgeLength, bottom, orangeHeight, orangeTransparency, orangeMetrics, CommitReferenceType.OTHER, { modified: true });
                         } else {
                             // heights are the same, so the file has not changed
-                            this.createBlock(node, parent, AppConfig.COLOR_UNCHANGED_FILE, orangeGA, bottom, orangeHeight, false, orangeMetrics, undefined, { modified: false });
+                            this.createBlock(node, parent, AppConfig.COLOR_UNCHANGED_FILE, orangeEdgeLength, bottom, orangeHeight, false, orangeMetrics, undefined, { modified: false });
                         }
                     }
 
-                } else if (isNaN(orangeGA)) {
+                } else if (isNaN(orangeEdgeLength)) {
                     // only blue block
 
                     let changeTypes = { added: false, deleted: true, moved: false };
@@ -115,9 +115,9 @@ export class MergedView extends AbstractView {
                         changeTypes.moved = true;
                     }
 
-                    this.createBlock(node, parent, AppConfig.COLOR_DELETED_FILE, blueGA, bottom, blueHeight, false, blueMetrics, CommitReferenceType.THIS, changeTypes);
+                    this.createBlock(node, parent, AppConfig.COLOR_DELETED_FILE, blueEdgeLength, bottom, blueHeight, false, blueMetrics, CommitReferenceType.THIS, changeTypes);
 
-                } else if (isNaN(blueGA)) {
+                } else if (isNaN(blueEdgeLength)) {
                     // only orange block
 
                     let changeTypes = { added: true, deleted: false, moved: false };
@@ -126,7 +126,7 @@ export class MergedView extends AbstractView {
                         changeTypes.moved = true;
                     }
 
-                    this.createBlock(node, parent, AppConfig.COLOR_ADDED_FILE, orangeGA, bottom, orangeHeight, false, orangeMetrics, CommitReferenceType.OTHER, changeTypes);
+                    this.createBlock(node, parent, AppConfig.COLOR_ADDED_FILE, orangeEdgeLength, bottom, orangeHeight, false, orangeMetrics, CommitReferenceType.OTHER, changeTypes);
                 }
 
                 // MODULE
