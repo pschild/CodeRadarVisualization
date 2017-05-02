@@ -15,6 +15,7 @@ import {XHRBackendFactory} from './XHRBackendFactory';
 import {ScreenShotService} from "./service/screenshot.service";
 import {FocusService} from "./service/focus.service";
 import {TooltipService} from "./service/tooltip.service";
+import {ComparisonPanelService} from "./service/comparison-panel.service";
 
 @NgModule({
     declarations: [
@@ -38,7 +39,8 @@ import {TooltipService} from "./service/tooltip.service";
         },
         ScreenShotService,
         FocusService,
-        TooltipService
+        TooltipService,
+        ComparisonPanelService
     ],
     bootstrap: [AppComponent]
 })

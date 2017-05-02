@@ -1,13 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
 import * as fromRoot from "../../shared/reducers";
 import {Subscription} from "rxjs/Subscription";
-import {ElementAnalyzer} from "../../helper/element-analyzer";
 import {ICommit} from "../../interfaces/ICommit";
 import {IMetricMapping} from "../../interfaces/IMetricMapping";
 import {INode} from "../../interfaces/INode";
-import {FocusService} from "../../service/focus.service";
 import {MetricNameHelper} from "../../helper/metric-name-helper";
+import {ComparisonPanelService} from "../../service/comparison-panel.service";
 
 @Component({
     selector: 'app-comparison-panel',
@@ -16,54 +15,37 @@ import {MetricNameHelper} from "../../helper/metric-name-helper";
 })
 export class ComparisonPanelComponent implements OnInit {
 
+    @Input() metricMapping: IMetricMapping;
+    @Input() leftCommit: ICommit;
+    @Input() rightCommit: ICommit;
+
     comparisonPanel: HTMLElement;
 
     subscriptions: Subscription[] = [];
 
-    metricTree: any;
-    metricMapping: IMetricMapping;
     tableRows: any[] = [];
 
     elementName: string;
-    foundElement: INode;
-    leftCommit: ICommit;
-    rightCommit: ICommit;
 
     constructor(
         private store: Store<fromRoot.AppState>,
-        private focusService: FocusService) {
+        private comparisonPanelService: ComparisonPanelService) {
     }
 
     ngOnInit() {
         this.comparisonPanel = <HTMLElement>document.querySelector('#comparison-panel');
 
         this.subscriptions.push(
-            this.focusService.elementFocussed$.subscribe((elementName) => {
-                this.elementName = elementName;
-                this.foundElement = ElementAnalyzer.findElementByName(this.metricTree, elementName);
-                this.prepareTableData();
+            this.comparisonPanelService.showComparisonPanel$.subscribe((params) => {
+                this.elementName = params.elementName;
+                this.prepareTableData(params.foundElement);
                 this.show();
             })
         );
 
         this.subscriptions.push(
-            this.store.select(fromRoot.getLeftAndRightCommit).subscribe((result) => {
-                if (result) {
-                    this.leftCommit = result.leftCommit;
-                    this.rightCommit = result.rightCommit;
-                }
-            })
-        );
-
-        this.subscriptions.push(
-            this.store.select(fromRoot.getMetricMapping).subscribe((metricMapping) => {
-                this.metricMapping = metricMapping;
-            })
-        );
-
-        this.subscriptions.push(
-            this.store.select(fromRoot.getMetricTree).subscribe((metricTree) => {
-                this.metricTree = metricTree;
+            this.comparisonPanelService.hideComparisonPanel$.subscribe(() => {
+                this.hide();
             })
         );
     }
@@ -78,19 +60,19 @@ export class ComparisonPanelComponent implements OnInit {
         this.hide();
     }
 
-    prepareTableData() {
+    prepareTableData(foundElement: INode) {
         let rows = [];
         for (let key of Object.keys(this.metricMapping)) {
             let metricName = this.metricMapping[key];
 
             let leftCommitValue;
-            if (this.foundElement.commit1Metrics && this.foundElement.commit1Metrics[metricName]) {
-                leftCommitValue = this.foundElement.commit1Metrics[metricName];
+            if (foundElement.commit1Metrics && foundElement.commit1Metrics[metricName]) {
+                leftCommitValue = foundElement.commit1Metrics[metricName];
             }
 
             let rightCommitValue;
-            if (this.foundElement.commit2Metrics && this.foundElement.commit2Metrics[metricName]) {
-                rightCommitValue = this.foundElement.commit2Metrics[metricName];
+            if (foundElement.commit2Metrics && foundElement.commit2Metrics[metricName]) {
+                rightCommitValue = foundElement.commit2Metrics[metricName];
             }
 
             let difference: number = 0;

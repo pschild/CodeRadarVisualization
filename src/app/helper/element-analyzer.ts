@@ -5,7 +5,7 @@ import {NodeType} from "../enum/NodeType";
 
 export class ElementAnalyzer {
 
-    static findElementByName(nodes: INode[], elementName: string): INode {
+    static findElementByName(nodes: any, elementName: string): INode {
         if (!Array.isArray(nodes)) {
             nodes = [nodes];
         }

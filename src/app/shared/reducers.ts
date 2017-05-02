@@ -49,12 +49,3 @@ export const getMetricMapping = createSelector(getSettingsState, fromSettings.ge
 export const getActiveFilter = createSelector(getSettingsState, fromSettings.getActiveFilter);
 
 export const getActiveViewType = createSelector(getSettingsState, fromSettings.getActiveViewType);
-
-export const getLeftAndRightCommit = createSelector(getLeftCommit, getRightCommit, (leftCommit, rightCommit) => {
-    if (leftCommit && rightCommit) {
-        return {
-            leftCommit: leftCommit,
-            rightCommit: rightCommit
-        };
-    }
-});

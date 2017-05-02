@@ -16,6 +16,8 @@ import {ScreenShotService} from "../../service/screenshot.service";
 import {FocusService} from "../../service/focus.service";
 import {TooltipService} from "../../service/tooltip.service";
 import {IMetricMapping} from "../../interfaces/IMetricMapping";
+import {ComparisonPanelService} from "../../service/comparison-panel.service";
+import {ElementAnalyzer} from "app/helper/element-analyzer";
 declare var TWEEN: any;
 declare var THREE: any;
 
@@ -51,7 +53,12 @@ export class ScreenComponent implements OnInit, OnChanges {
 
     doCameraReset: boolean = true;
 
-    constructor(private screenShotService: ScreenShotService, private focusService: FocusService, private tooltipService: TooltipService) {
+    constructor(
+        private screenShotService: ScreenShotService,
+        private focusService: FocusService,
+        private tooltipService: TooltipService,
+        private comparisonPanelService: ComparisonPanelService
+    ) {
     }
 
     ngOnChanges(changes: SimpleChanges) {
@@ -105,6 +112,10 @@ export class ScreenComponent implements OnInit, OnChanges {
         this.subscriptions.push(
             this.focusService.elementFocussed$.subscribe((elementName) => {
                 this.focusElementByName(elementName);
+                this.comparisonPanelService.show({
+                    elementName: elementName,
+                    foundElement: ElementAnalyzer.findElementByName(this.metricTree, elementName)
+                });
             })
         );
 
