@@ -158,9 +158,12 @@ export class ScreenComponent implements OnInit, OnChanges {
     }
 
     resetCamera() {
-        this.camera.position.x = AppConfig.CAMERA_START_POSITION.x;
-        this.camera.position.y = AppConfig.CAMERA_START_POSITION.y;
-        this.camera.position.z = AppConfig.CAMERA_START_POSITION.z;
+        let root = this.scene.getObjectByName('root');
+        // pythagoras
+        let diagonal = Math.sqrt(Math.pow(root.scale.x, 2) + Math.pow(root.scale.z, 2));
+        this.camera.position.x = root.scale.x * 2;
+        this.camera.position.y = diagonal * 1.5;
+        this.camera.position.z = root.scale.z * 2;
     }
 
     createControls() {
@@ -236,11 +239,15 @@ export class ScreenComponent implements OnInit, OnChanges {
             return;
         }
 
+        let root = this.scene.getObjectByName('root');
+        // pythagoras
+        let diagonal = Math.sqrt(Math.pow(root.scale.x, 2) + Math.pow(root.scale.z, 2));
+
         new TWEEN.Tween(this.camera.position)
             .to({
-                x: element.position.x + AppConfig.CAMERA_DISTANCE_TO_FOCUSSED_ELEMENT,
-                y: element.position.y + AppConfig.CAMERA_DISTANCE_TO_FOCUSSED_ELEMENT,
-                z: element.position.z + AppConfig.CAMERA_DISTANCE_TO_FOCUSSED_ELEMENT
+                x: element.position.x + root.scale.x / 5,
+                y: element.position.y + diagonal / 5,
+                z: element.position.z + root.scale.z / 5
             }, AppConfig.CAMERA_ANIMATION_DURATION)
             .easing(TWEEN.Easing.Sinusoidal.InOut)
             .start();
@@ -264,7 +271,7 @@ export class ScreenComponent implements OnInit, OnChanges {
 
         return {
             x: root.scale.x / 2,
-            y: AppConfig.CAMERA_START_POSITION.y,
+            y: 0,
             z: root.scale.z / 2
         };
     }

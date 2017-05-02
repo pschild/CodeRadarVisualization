@@ -27,22 +27,19 @@ export class AppConfig {
     static COLOR_METRIC_NAME: string = environment.demo ? 'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck' : 'coderadar:size:eloc:java';
 
     // VISUALIZATION SETTINGS
-    static EDGE_LENGTH_FACTOR: number = 1;
+    static EDGE_LENGTH_FACTOR: number = 2;
     static HEIGHT_FACTOR: number = 0.1;
     // static GLOBAL_MAX_GROUND_AREA: number = 100;
     // static GLOBAL_MIN_GROUND_AREA: number = 1;
     // static GLOBAL_MAX_HEIGHT: number = 100;
     // static GLOBAL_MIN_HEIGHT: number = 1;
-    static BLOCK_SPACING: number = 2;
-    static MODULE_BLOCK_HEIGHT: number = 2;
+    static BLOCK_SPACING: number = 5;
+    static MODULE_BLOCK_HEIGHT: number = 5;
 
     // CAMERA SETTINGS
     static CAMERA_NEAR: number = 0.1;
     static CAMERA_FAR: number = 100000;
     static CAMERA_DISTANCE_TO_FOCUSSED_ELEMENT: number = 100;
-    static CAMERA_START_POSITION: any = {
-        x: 100, y: 50, z: 200
-    };
     static CAMERA_ANIMATION_DURATION: number = 1500;
 
     // COLORS
