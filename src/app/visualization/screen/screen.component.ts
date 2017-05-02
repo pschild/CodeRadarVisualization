@@ -49,6 +49,8 @@ export class ScreenComponent implements OnInit, OnChanges {
 
     view: AbstractView;
 
+    doCameraReset: boolean = true;
+
     constructor(private screenShotService: ScreenShotService, private focusService: FocusService, private tooltipService: TooltipService) {
     }
 
@@ -79,7 +81,11 @@ export class ScreenComponent implements OnInit, OnChanges {
         }
 
         if (changes.metricTree && changes.metricTree.currentValue) {
-            this.resetCameraAndControls();
+            if (this.doCameraReset) {
+                this.resetCamera();
+                this.doCameraReset = false;
+            }
+            this.resetControls();
         }
     }
 
@@ -151,15 +157,17 @@ export class ScreenComponent implements OnInit, OnChanges {
         this.camera.updateProjectionMatrix();
     }
 
+    resetCamera() {
+        this.camera.position.x = AppConfig.CAMERA_START_POSITION.x;
+        this.camera.position.y = AppConfig.CAMERA_START_POSITION.y;
+        this.camera.position.z = AppConfig.CAMERA_START_POSITION.z;
+    }
+
     createControls() {
         this.controls = new THREE.OrbitControls(this.camera, <HTMLElement>document.querySelector('#stage'));
     }
 
-    resetCameraAndControls() {
-        this.camera.position.x = AppConfig.CAMERA_START_POSITION.x;
-        this.camera.position.y = AppConfig.CAMERA_START_POSITION.y;
-        this.camera.position.z = AppConfig.CAMERA_START_POSITION.z;
-
+    resetControls() {
         let centralCoordinates = this.getCentralCoordinates();
         this.controls.target.x = centralCoordinates.x;
         this.controls.target.y = centralCoordinates.y;
