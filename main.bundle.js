@@ -1,6 +1,6 @@
 webpackJsonp([1,5],{
 
-/***/ 128:
+/***/ 130:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -39,21 +39,21 @@ var ColorHelper = (function () {
 
 /***/ }),
 
-/***/ 129:
+/***/ 131:
+/***/ (function(module, exports) {
+
+//# sourceMappingURL=ICommit.js.map
+
+/***/ }),
+
+/***/ 132:
 /***/ (function(module, exports) {
 
 //# sourceMappingURL=IFilter.js.map
 
 /***/ }),
 
-/***/ 130:
-/***/ (function(module, exports) {
-
-//# sourceMappingURL=IMetricMapping.js.map
-
-/***/ }),
-
-/***/ 131:
+/***/ 133:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -95,7 +95,7 @@ var _a;
 
 /***/ }),
 
-/***/ 132:
+/***/ 134:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -166,13 +166,13 @@ var _a;
 
 /***/ }),
 
-/***/ 133:
+/***/ 135:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_app_enum_NodeType__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__AppConfig__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__helper_element_analyzer__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__helper_element_analyzer__ = __webpack_require__(39);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_three__ = __webpack_require__(52);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_three___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_three__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AbstractView; });
@@ -209,13 +209,13 @@ var AbstractView = (function () {
             var node = nodes_1[_i];
             var element = { w: 0, h: 0 };
             if (node.type === __WEBPACK_IMPORTED_MODULE_0_app_enum_NodeType__["a" /* NodeType */].FILE) {
-                var groundArea = this.getValueForGroundArea(node.commit1Metrics, node.commit2Metrics);
-                if (!groundArea) {
+                var edgeLength = this.getEdgeLength(node.commit1Metrics, node.commit2Metrics);
+                if (!edgeLength) {
                     element.w = element.h = 0;
                 }
                 else {
-                    element.w = groundArea * __WEBPACK_IMPORTED_MODULE_1__AppConfig__["a" /* AppConfig */].GROUND_AREA_FACTOR + __WEBPACK_IMPORTED_MODULE_1__AppConfig__["a" /* AppConfig */].GLOBAL_MIN_GROUND_AREA + 2 * __WEBPACK_IMPORTED_MODULE_1__AppConfig__["a" /* AppConfig */].BLOCK_SPACING;
-                    element.h = groundArea * __WEBPACK_IMPORTED_MODULE_1__AppConfig__["a" /* AppConfig */].GROUND_AREA_FACTOR + __WEBPACK_IMPORTED_MODULE_1__AppConfig__["a" /* AppConfig */].GLOBAL_MIN_GROUND_AREA + 2 * __WEBPACK_IMPORTED_MODULE_1__AppConfig__["a" /* AppConfig */].BLOCK_SPACING;
+                    element.w = edgeLength * __WEBPACK_IMPORTED_MODULE_1__AppConfig__["a" /* AppConfig */].EDGE_LENGTH_FACTOR + 2 * __WEBPACK_IMPORTED_MODULE_1__AppConfig__["a" /* AppConfig */].BLOCK_SPACING;
+                    element.h = edgeLength * __WEBPACK_IMPORTED_MODULE_1__AppConfig__["a" /* AppConfig */].EDGE_LENGTH_FACTOR + 2 * __WEBPACK_IMPORTED_MODULE_1__AppConfig__["a" /* AppConfig */].BLOCK_SPACING;
                 }
             }
             // recursion
@@ -236,7 +236,7 @@ var AbstractView = (function () {
             h: this.packer.root.h
         };
     };
-    AbstractView.prototype.createBlock = function (node, parent, color, currentCommitSize, bottom, height, isTransparent, metrics, commitType, changeTypes) {
+    AbstractView.prototype.createBlock = function (node, parent, color, edgeLength, bottom, height, isTransparent, metrics, commitType, changeTypes) {
         var finalX, finalY, finalZ;
         var finalWidth, finalHeight, finalDepth;
         var cube = this.createCubeGeometry(color, node.name);
@@ -246,9 +246,9 @@ var AbstractView = (function () {
         // save the rendered positions to draw children relative to their parent
         node.packerInfo.renderedX = finalX;
         node.packerInfo.renderedY = finalZ;
-        finalWidth = node.type === __WEBPACK_IMPORTED_MODULE_0_app_enum_NodeType__["a" /* NodeType */].FILE ? currentCommitSize : node.packerInfo.w - 2 * __WEBPACK_IMPORTED_MODULE_1__AppConfig__["a" /* AppConfig */].BLOCK_SPACING;
+        finalWidth = node.type === __WEBPACK_IMPORTED_MODULE_0_app_enum_NodeType__["a" /* NodeType */].FILE ? edgeLength : node.packerInfo.w - 2 * __WEBPACK_IMPORTED_MODULE_1__AppConfig__["a" /* AppConfig */].BLOCK_SPACING;
         finalHeight = height;
-        finalDepth = node.type === __WEBPACK_IMPORTED_MODULE_0_app_enum_NodeType__["a" /* NodeType */].FILE ? currentCommitSize : node.packerInfo.h - 2 * __WEBPACK_IMPORTED_MODULE_1__AppConfig__["a" /* AppConfig */].BLOCK_SPACING;
+        finalDepth = node.type === __WEBPACK_IMPORTED_MODULE_0_app_enum_NodeType__["a" /* NodeType */].FILE ? edgeLength : node.packerInfo.h - 2 * __WEBPACK_IMPORTED_MODULE_1__AppConfig__["a" /* AppConfig */].BLOCK_SPACING;
         if (isTransparent) {
             cube.material.transparent = true;
             cube.material.opacity = 0.4;
@@ -283,8 +283,9 @@ var AbstractView = (function () {
     AbstractView.prototype.getBlockElements = function () {
         return this.blockElements;
     };
-    AbstractView.prototype.getValueForGroundArea = function (commit1Metrics, commit2Metrics) {
-        return __WEBPACK_IMPORTED_MODULE_2__helper_element_analyzer__["a" /* ElementAnalyzer */].getMaxMetricValueByMetricName(commit1Metrics, commit2Metrics, this.metricMapping.groundAreaMetricName);
+    AbstractView.prototype.getEdgeLength = function (commit1Metrics, commit2Metrics) {
+        var groundAreaValue = __WEBPACK_IMPORTED_MODULE_2__helper_element_analyzer__["a" /* ElementAnalyzer */].getMaxMetricValueByMetricName(commit1Metrics, commit2Metrics, this.metricMapping.groundAreaMetricName);
+        return Math.sqrt(groundAreaValue);
     };
     return AbstractView;
 }());
@@ -297,7 +298,7 @@ var AbstractView = (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__environments_environment__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__environments_environment__ = __webpack_require__(35);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppConfig; });
 
 var AppConfig = (function () {
@@ -328,21 +329,18 @@ AppConfig.HEIGHT_METRIC_NAME = 'coderadar:size:loc:java';
 AppConfig.GROUND_AREA_METRIC_NAME = __WEBPACK_IMPORTED_MODULE_0__environments_environment__["a" /* environment */].demo ? 'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck' : 'coderadar:size:sloc:java';
 AppConfig.COLOR_METRIC_NAME = __WEBPACK_IMPORTED_MODULE_0__environments_environment__["a" /* environment */].demo ? 'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck' : 'coderadar:size:eloc:java';
 // VISUALIZATION SETTINGS
-AppConfig.GROUND_AREA_FACTOR = 0.1;
+AppConfig.EDGE_LENGTH_FACTOR = 2;
 AppConfig.HEIGHT_FACTOR = 0.1;
-AppConfig.GLOBAL_MAX_GROUND_AREA = 100;
-AppConfig.GLOBAL_MIN_GROUND_AREA = 1;
-AppConfig.GLOBAL_MAX_HEIGHT = 100;
-AppConfig.GLOBAL_MIN_HEIGHT = 1;
-AppConfig.BLOCK_SPACING = 20;
-AppConfig.MODULE_BLOCK_HEIGHT = 10;
+// static GLOBAL_MAX_GROUND_AREA: number = 100;
+// static GLOBAL_MIN_GROUND_AREA: number = 1;
+// static GLOBAL_MAX_HEIGHT: number = 100;
+// static GLOBAL_MIN_HEIGHT: number = 1;
+AppConfig.BLOCK_SPACING = 5;
+AppConfig.MODULE_BLOCK_HEIGHT = 5;
 // CAMERA SETTINGS
 AppConfig.CAMERA_NEAR = 0.1;
 AppConfig.CAMERA_FAR = 100000;
 AppConfig.CAMERA_DISTANCE_TO_FOCUSSED_ELEMENT = 100;
-AppConfig.CAMERA_START_POSITION = {
-    x: 100, y: 50, z: 200
-};
 AppConfig.CAMERA_ANIMATION_DURATION = 1500;
 // COLORS
 AppConfig.COLOR_HIERARCHY_RANGE = ['#cccccc', '#525252'];
@@ -357,7 +355,7 @@ AppConfig.COLOR_UNCHANGED_FILE = '#cccccc';
 
 /***/ }),
 
-/***/ 298:
+/***/ 300:
 /***/ (function(module, exports) {
 
 function webpackEmptyContext(req) {
@@ -366,20 +364,20 @@ function webpackEmptyContext(req) {
 webpackEmptyContext.keys = function() { return []; };
 webpackEmptyContext.resolve = webpackEmptyContext;
 module.exports = webpackEmptyContext;
-webpackEmptyContext.id = 298;
+webpackEmptyContext.id = 300;
 
 
 /***/ }),
 
-/***/ 299:
+/***/ 301:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__ = __webpack_require__(314);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_app_module__ = __webpack_require__(328);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__ = __webpack_require__(316);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_app_module__ = __webpack_require__(330);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__(35);
 
 
 
@@ -392,14 +390,14 @@ __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dyna
 
 /***/ }),
 
-/***/ 326:
+/***/ 328:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_http__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__service_mocks_mock_data__ = __webpack_require__(347);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angular_in_memory_web_api__ = __webpack_require__(364);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__service_mocks_mock_data__ = __webpack_require__(348);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angular_in_memory_web_api__ = __webpack_require__(365);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__(35);
 /* harmony export (immutable) */ __webpack_exports__["a"] = XHRBackendFactory;
 
 
@@ -417,7 +415,7 @@ function XHRBackendFactory(injector, browser, xsrf, options) {
 
 /***/ }),
 
-/***/ 327:
+/***/ 329:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -441,8 +439,8 @@ var AppComponent = (function () {
 AppComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-root',
-        template: __webpack_require__(450),
-        styles: [__webpack_require__(420)]
+        template: __webpack_require__(451),
+        styles: [__webpack_require__(421)]
     }),
     __metadata("design:paramtypes", [])
 ], AppComponent);
@@ -451,7 +449,22 @@ AppComponent = __decorate([
 
 /***/ }),
 
-/***/ 328:
+/***/ 33:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NodeType; });
+var NodeType;
+(function (NodeType) {
+    NodeType[NodeType["MODULE"] = 'MODULE'] = "MODULE";
+    NodeType[NodeType["FILE"] = 'FILE'] = "FILE";
+    NodeType[NodeType["CONNECTION"] = 'CONNECTION'] = "CONNECTION";
+})(NodeType || (NodeType = {}));
+//# sourceMappingURL=NodeType.js.map
+
+/***/ }),
+
+/***/ 330:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -459,18 +472,19 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(53);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__(327);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__control_panel_control_panel_module__ = __webpack_require__(332);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__visualization_visualization_module__ = __webpack_require__(359);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__shared_reducers__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__(329);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__control_panel_control_panel_module__ = __webpack_require__(334);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__visualization_visualization_module__ = __webpack_require__(360);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__shared_reducers__ = __webpack_require__(40);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ngrx_store__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ngrx_effects__ = __webpack_require__(115);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ngrx_store_devtools__ = __webpack_require__(322);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__shared_effects__ = __webpack_require__(349);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__XHRBackendFactory__ = __webpack_require__(326);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__service_screenshot_service__ = __webpack_require__(83);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__service_focus_service__ = __webpack_require__(57);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__service_tooltip_service__ = __webpack_require__(84);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ngrx_effects__ = __webpack_require__(117);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ngrx_store_devtools__ = __webpack_require__(324);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__shared_effects__ = __webpack_require__(350);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__XHRBackendFactory__ = __webpack_require__(328);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__service_screenshot_service__ = __webpack_require__(85);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__service_focus_service__ = __webpack_require__(84);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__service_tooltip_service__ = __webpack_require__(86);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__service_comparison_panel_service__ = __webpack_require__(57);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -478,6 +492,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -522,7 +537,8 @@ AppModule = __decorate([
             },
             __WEBPACK_IMPORTED_MODULE_13__service_screenshot_service__["a" /* ScreenShotService */],
             __WEBPACK_IMPORTED_MODULE_14__service_focus_service__["a" /* FocusService */],
-            __WEBPACK_IMPORTED_MODULE_15__service_tooltip_service__["a" /* TooltipService */]
+            __WEBPACK_IMPORTED_MODULE_15__service_tooltip_service__["a" /* TooltipService */],
+            __WEBPACK_IMPORTED_MODULE_16__service_comparison_panel_service__["a" /* ComparisonPanelService */]
         ],
         bootstrap: [__WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */]]
     })
@@ -532,7 +548,7 @@ AppModule = __decorate([
 
 /***/ }),
 
-/***/ 329:
+/***/ 331:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -610,8 +626,8 @@ __decorate([
 AutosuggestWrapperComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-autosuggest-wrapper',
-        template: __webpack_require__(451),
-        styles: [__webpack_require__(421)]
+        template: __webpack_require__(452),
+        styles: [__webpack_require__(422)]
     }),
     __metadata("design:paramtypes", [])
 ], AutosuggestWrapperComponent);
@@ -620,27 +636,12 @@ AutosuggestWrapperComponent = __decorate([
 
 /***/ }),
 
-/***/ 33:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NodeType; });
-var NodeType;
-(function (NodeType) {
-    NodeType[NodeType["MODULE"] = 'MODULE'] = "MODULE";
-    NodeType[NodeType["FILE"] = 'FILE'] = "FILE";
-    NodeType[NodeType["CONNECTION"] = 'CONNECTION'] = "CONNECTION";
-})(NodeType || (NodeType = {}));
-//# sourceMappingURL=NodeType.js.map
-
-/***/ }),
-
-/***/ 330:
+/***/ 332:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__interfaces_ICommit__ = __webpack_require__(342);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__interfaces_ICommit__ = __webpack_require__(131);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__interfaces_ICommit___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__interfaces_ICommit__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__enum_CommitType__ = __webpack_require__(82);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_moment__ = __webpack_require__(1);
@@ -697,8 +698,8 @@ __decorate([
 CommitChooserComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-commit-chooser',
-        template: __webpack_require__(452),
-        styles: [__webpack_require__(422)]
+        template: __webpack_require__(453),
+        styles: [__webpack_require__(423)]
     }),
     __metadata("design:paramtypes", [])
 ], CommitChooserComponent);
@@ -708,17 +709,17 @@ var _a, _b;
 
 /***/ }),
 
-/***/ 331:
+/***/ 333:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__enum_CommitType__ = __webpack_require__(82);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ngrx_store__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_reducers__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_reducers__ = __webpack_require__(40);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__control_panel_actions__ = __webpack_require__(55);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__service_screenshot_service__ = __webpack_require__(83);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__service_focus_service__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__service_screenshot_service__ = __webpack_require__(85);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__service_focus_service__ = __webpack_require__(84);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ControlPanelComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -748,12 +749,12 @@ var ControlPanelComponent = (function () {
     }
     ControlPanelComponent.prototype.ngOnInit = function () {
         this.store.dispatch(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__control_panel_actions__["k" /* loadCommits */])());
-        this.commits$ = this.store.select(__WEBPACK_IMPORTED_MODULE_3__shared_reducers__["k" /* getCommits */]);
-        this.commitsLoading$ = this.store.select(__WEBPACK_IMPORTED_MODULE_3__shared_reducers__["l" /* getCommitsLoading */]);
-        this.leftCommit$ = this.store.select(__WEBPACK_IMPORTED_MODULE_3__shared_reducers__["i" /* getLeftCommit */]);
-        this.rightCommit$ = this.store.select(__WEBPACK_IMPORTED_MODULE_3__shared_reducers__["j" /* getRightCommit */]);
-        this.uniqueFileList$ = this.store.select(__WEBPACK_IMPORTED_MODULE_3__shared_reducers__["m" /* getUniqueFileList */]);
-        this.activeViewType$ = this.store.select(__WEBPACK_IMPORTED_MODULE_3__shared_reducers__["g" /* getActiveViewType */]);
+        this.commits$ = this.store.select(__WEBPACK_IMPORTED_MODULE_3__shared_reducers__["j" /* getCommits */]);
+        this.commitsLoading$ = this.store.select(__WEBPACK_IMPORTED_MODULE_3__shared_reducers__["k" /* getCommitsLoading */]);
+        this.leftCommit$ = this.store.select(__WEBPACK_IMPORTED_MODULE_3__shared_reducers__["h" /* getLeftCommit */]);
+        this.rightCommit$ = this.store.select(__WEBPACK_IMPORTED_MODULE_3__shared_reducers__["i" /* getRightCommit */]);
+        this.uniqueFileList$ = this.store.select(__WEBPACK_IMPORTED_MODULE_3__shared_reducers__["l" /* getUniqueFileList */]);
+        this.activeViewType$ = this.store.select(__WEBPACK_IMPORTED_MODULE_3__shared_reducers__["d" /* getActiveViewType */]);
         this.screenShots$ = this.screenShotService.getScreenShots();
     };
     ControlPanelComponent.prototype.handleCommitChanged = function (payload) {
@@ -773,8 +774,8 @@ var ControlPanelComponent = (function () {
 ControlPanelComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-control-panel',
-        template: __webpack_require__(453),
-        styles: [__webpack_require__(423)]
+        template: __webpack_require__(454),
+        styles: [__webpack_require__(424)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__ngrx_store__["b" /* Store */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ngrx_store__["b" /* Store */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_5__service_screenshot_service__["a" /* ScreenShotService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__service_screenshot_service__["a" /* ScreenShotService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_6__service_focus_service__["a" /* FocusService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__service_focus_service__["a" /* FocusService */]) === "function" && _c || Object])
 ], ControlPanelComponent);
@@ -784,27 +785,27 @@ var _a, _b, _c;
 
 /***/ }),
 
-/***/ 332:
+/***/ 334:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__control_panel_component__ = __webpack_require__(331);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__settings_settings_component__ = __webpack_require__(338);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__settings_view_control_view_control_component__ = __webpack_require__(340);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__control_panel_component__ = __webpack_require__(333);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__settings_settings_component__ = __webpack_require__(340);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__settings_view_control_view_control_component__ = __webpack_require__(342);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_forms__ = __webpack_require__(53);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ngui_auto_complete__ = __webpack_require__(362);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ngui_auto_complete__ = __webpack_require__(363);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ngui_auto_complete___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__ngui_auto_complete__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__commit_chooser_commit_chooser_component__ = __webpack_require__(330);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__service_commit_service__ = __webpack_require__(131);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__environments_environment__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__service_mocks_commit_mock_service__ = __webpack_require__(345);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__search_search_component__ = __webpack_require__(335);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__settings_filter_filter_component__ = __webpack_require__(336);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__settings_metric_mapping_metric_mapping_component__ = __webpack_require__(337);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__screenshot_screenshot_component__ = __webpack_require__(334);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__autosuggest_wrapper_autosuggest_wrapper_component__ = __webpack_require__(329);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__commit_chooser_commit_chooser_component__ = __webpack_require__(332);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__service_commit_service__ = __webpack_require__(133);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__environments_environment__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__service_mocks_commit_mock_service__ = __webpack_require__(346);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__search_search_component__ = __webpack_require__(337);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__settings_filter_filter_component__ = __webpack_require__(338);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__settings_metric_mapping_metric_mapping_component__ = __webpack_require__(339);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__screenshot_screenshot_component__ = __webpack_require__(336);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__autosuggest_wrapper_autosuggest_wrapper_component__ = __webpack_require__(331);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ControlPanelModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -867,7 +868,7 @@ ControlPanelModule = __decorate([
 
 /***/ }),
 
-/***/ 333:
+/***/ 335:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -941,13 +942,13 @@ var getScreenshots = function (state) { return state.screenshots; };
 
 /***/ }),
 
-/***/ 334:
+/***/ 336:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__enum_ScreenType__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__enum_ViewType__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__enum_ViewType__ = __webpack_require__(38);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ScreenshotComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1033,8 +1034,8 @@ __decorate([
 ScreenshotComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-screenshot',
-        template: __webpack_require__(454),
-        styles: [__webpack_require__(424)]
+        template: __webpack_require__(455),
+        styles: [__webpack_require__(425)]
     })
 ], ScreenshotComponent);
 
@@ -1043,7 +1044,7 @@ var _a;
 
 /***/ }),
 
-/***/ 335:
+/***/ 337:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1085,8 +1086,8 @@ __decorate([
 SearchComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-search',
-        template: __webpack_require__(455),
-        styles: [__webpack_require__(425)]
+        template: __webpack_require__(456),
+        styles: [__webpack_require__(426)]
     }),
     __metadata("design:paramtypes", [])
 ], SearchComponent);
@@ -1095,12 +1096,12 @@ SearchComponent = __decorate([
 
 /***/ }),
 
-/***/ 336:
+/***/ 338:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_app_interfaces_IFilter__ = __webpack_require__(129);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_app_interfaces_IFilter__ = __webpack_require__(132);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_app_interfaces_IFilter___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_app_interfaces_IFilter__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FilterComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -1140,8 +1141,8 @@ __decorate([
 FilterComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-filter',
-        template: __webpack_require__(456),
-        styles: [__webpack_require__(426)]
+        template: __webpack_require__(457),
+        styles: [__webpack_require__(427)]
     }),
     __metadata("design:paramtypes", [])
 ], FilterComponent);
@@ -1151,12 +1152,12 @@ var _a;
 
 /***/ }),
 
-/***/ 337:
+/***/ 339:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__interfaces_IMetricMapping__ = __webpack_require__(130);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__interfaces_IMetricMapping__ = __webpack_require__(83);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__interfaces_IMetricMapping___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__interfaces_IMetricMapping__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__helper_metric_name_helper__ = __webpack_require__(56);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MetricMappingComponent; });
@@ -1202,8 +1203,8 @@ __decorate([
 MetricMappingComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-metric-mapping',
-        template: __webpack_require__(457),
-        styles: [__webpack_require__(427)]
+        template: __webpack_require__(458),
+        styles: [__webpack_require__(428)]
     }),
     __metadata("design:paramtypes", [])
 ], MetricMappingComponent);
@@ -1213,13 +1214,27 @@ var _a;
 
 /***/ }),
 
-/***/ 338:
+/***/ 34:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ScreenType; });
+var ScreenType;
+(function (ScreenType) {
+    ScreenType[ScreenType["LEFT"] = 0] = "LEFT";
+    ScreenType[ScreenType["RIGHT"] = 1] = "RIGHT";
+})(ScreenType || (ScreenType = {}));
+//# sourceMappingURL=ScreenType.js.map
+
+/***/ }),
+
+/***/ 340:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ngrx_store__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_reducers__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_reducers__ = __webpack_require__(40);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__settings_actions__ = __webpack_require__(80);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SettingsComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -1240,9 +1255,9 @@ var SettingsComponent = (function () {
         this.store = store;
     }
     SettingsComponent.prototype.ngOnInit = function () {
-        this.activeViewType$ = this.store.select(__WEBPACK_IMPORTED_MODULE_2__shared_reducers__["g" /* getActiveViewType */]);
-        this.activeFilter$ = this.store.select(__WEBPACK_IMPORTED_MODULE_2__shared_reducers__["h" /* getActiveFilter */]);
-        this.metricMapping$ = this.store.select(__WEBPACK_IMPORTED_MODULE_2__shared_reducers__["d" /* getMetricMapping */]);
+        this.activeViewType$ = this.store.select(__WEBPACK_IMPORTED_MODULE_2__shared_reducers__["d" /* getActiveViewType */]);
+        this.activeFilter$ = this.store.select(__WEBPACK_IMPORTED_MODULE_2__shared_reducers__["e" /* getActiveFilter */]);
+        this.metricMapping$ = this.store.select(__WEBPACK_IMPORTED_MODULE_2__shared_reducers__["g" /* getMetricMapping */]);
     };
     SettingsComponent.prototype.handleViewTypeChanged = function (viewType) {
         this.store.dispatch(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__settings_actions__["d" /* changeViewType */])(viewType));
@@ -1258,8 +1273,8 @@ var SettingsComponent = (function () {
 SettingsComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-settings',
-        template: __webpack_require__(458),
-        styles: [__webpack_require__(428)]
+        template: __webpack_require__(459),
+        styles: [__webpack_require__(429)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__ngrx_store__["b" /* Store */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__ngrx_store__["b" /* Store */]) === "function" && _a || Object])
 ], SettingsComponent);
@@ -1269,12 +1284,12 @@ var _a;
 
 /***/ }),
 
-/***/ 339:
+/***/ 341:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__settings_actions__ = __webpack_require__(80);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__enum_ViewType__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__enum_ViewType__ = __webpack_require__(38);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__AppConfig__ = __webpack_require__(20);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SettingsReducer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return getActiveViewType; });
@@ -1325,26 +1340,12 @@ var getMetricMapping = function (state) { return state.metricMapping; };
 
 /***/ }),
 
-/***/ 34:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ScreenType; });
-var ScreenType;
-(function (ScreenType) {
-    ScreenType[ScreenType["LEFT"] = 0] = "LEFT";
-    ScreenType[ScreenType["RIGHT"] = 1] = "RIGHT";
-})(ScreenType || (ScreenType = {}));
-//# sourceMappingURL=ScreenType.js.map
-
-/***/ }),
-
-/***/ 340:
+/***/ 342:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__enum_ViewType__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__enum_ViewType__ = __webpack_require__(38);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ViewControlComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1383,8 +1384,8 @@ __decorate([
 ViewControlComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-view-control',
-        template: __webpack_require__(459),
-        styles: [__webpack_require__(429)]
+        template: __webpack_require__(460),
+        styles: [__webpack_require__(430)]
     }),
     __metadata("design:paramtypes", [])
 ], ViewControlComponent);
@@ -1394,7 +1395,7 @@ var _a;
 
 /***/ }),
 
-/***/ 341:
+/***/ 343:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1443,21 +1444,14 @@ var BlockConnection = (function () {
 
 /***/ }),
 
-/***/ 342:
-/***/ (function(module, exports) {
-
-//# sourceMappingURL=ICommit.js.map
-
-/***/ }),
-
-/***/ 343:
+/***/ 344:
 /***/ (function(module, exports) {
 
 //# sourceMappingURL=INode.js.map
 
 /***/ }),
 
-/***/ 344:
+/***/ 345:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1496,7 +1490,7 @@ KeyValuePipe = __decorate([
 
 /***/ }),
 
-/***/ 345:
+/***/ 346:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1541,7 +1535,7 @@ var _a;
 
 /***/ }),
 
-/***/ 346:
+/***/ 347:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1584,7 +1578,7 @@ var _a;
 
 /***/ }),
 
-/***/ 347:
+/***/ 348:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1771,7 +1765,7 @@ var MockData = (function () {
 
 /***/ }),
 
-/***/ 348:
+/***/ 349:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1781,7 +1775,7 @@ var MockData = (function () {
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_0__control_panel_control_panel_actions__["j"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__control_panel_settings_settings_actions__ = __webpack_require__(80);
 /* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__visualization_visualization_actions__ = __webpack_require__(85);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__visualization_visualization_actions__ = __webpack_require__(87);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_2__visualization_visualization_actions__["a"]; });
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "e", function() { return __WEBPACK_IMPORTED_MODULE_2__visualization_visualization_actions__["e"]; });
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "f", function() { return __WEBPACK_IMPORTED_MODULE_2__visualization_visualization_actions__["f"]; });
@@ -1793,17 +1787,30 @@ var MockData = (function () {
 
 /***/ }),
 
-/***/ 349:
+/***/ 35:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return environment; });
+var environment = {
+    production: false,
+    demo: true
+};
+//# sourceMappingURL=environment.js.map
+
+/***/ }),
+
+/***/ 350:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ngrx_effects__ = __webpack_require__(115);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs__ = __webpack_require__(264);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ngrx_effects__ = __webpack_require__(117);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs__ = __webpack_require__(266);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_actions__ = __webpack_require__(348);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__service_commit_service__ = __webpack_require__(131);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__service_metric_service__ = __webpack_require__(132);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_actions__ = __webpack_require__(349);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__service_commit_service__ = __webpack_require__(133);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__service_metric_service__ = __webpack_require__(134);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppEffects; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1869,82 +1876,18 @@ var _a, _b, _c;
 
 /***/ }),
 
-/***/ 35:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_reselect__ = __webpack_require__(466);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_reselect___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_reselect__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ngrx_store__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__control_panel_control_panel_reducers__ = __webpack_require__(333);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__control_panel_settings_settings_reducers__ = __webpack_require__(339);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__visualization_visualization_reducers__ = __webpack_require__(360);
-/* harmony export (immutable) */ __webpack_exports__["a"] = reducer;
-/* unused harmony export getControlPanelState */
-/* unused harmony export getVisualizationState */
-/* unused harmony export getSettingsState */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return getCommitsLoading; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return getCommits; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return getLeftCommit; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return getRightCommit; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return getScreenshots; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return getMetricsLoading; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return getMetricTree; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return getUniqueFileList; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return getMetricMapping; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return getActiveFilter; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return getActiveViewType; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return getLeftAndRightCommit; });
-
-
-
-
-
-var reducers = {
-    controlPanelState: __WEBPACK_IMPORTED_MODULE_2__control_panel_control_panel_reducers__["a" /* ControlPanelReducer */],
-    settingsState: __WEBPACK_IMPORTED_MODULE_3__control_panel_settings_settings_reducers__["a" /* SettingsReducer */],
-    visualizationState: __WEBPACK_IMPORTED_MODULE_4__visualization_visualization_reducers__["a" /* VisualizationReducer */]
-};
-var combined = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__ngrx_store__["c" /* combineReducers */])(reducers);
-function reducer(state, action) {
-    return combined(state, action);
-}
-var getControlPanelState = function (state) { return state.controlPanelState; };
-var getVisualizationState = function (state) { return state.visualizationState; };
-var getSettingsState = function (state) { return state.settingsState; };
-var getCommitsLoading = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_reselect__["createSelector"])(getControlPanelState, __WEBPACK_IMPORTED_MODULE_2__control_panel_control_panel_reducers__["b" /* getCommitsLoading */]);
-var getCommits = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_reselect__["createSelector"])(getControlPanelState, __WEBPACK_IMPORTED_MODULE_2__control_panel_control_panel_reducers__["c" /* getCommits */]);
-var getLeftCommit = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_reselect__["createSelector"])(getControlPanelState, __WEBPACK_IMPORTED_MODULE_2__control_panel_control_panel_reducers__["d" /* getLeftCommit */]);
-var getRightCommit = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_reselect__["createSelector"])(getControlPanelState, __WEBPACK_IMPORTED_MODULE_2__control_panel_control_panel_reducers__["e" /* getRightCommit */]);
-var getScreenshots = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_reselect__["createSelector"])(getControlPanelState, __WEBPACK_IMPORTED_MODULE_2__control_panel_control_panel_reducers__["f" /* getScreenshots */]);
-var getMetricsLoading = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_reselect__["createSelector"])(getVisualizationState, __WEBPACK_IMPORTED_MODULE_4__visualization_visualization_reducers__["b" /* getMetricsLoading */]);
-var getMetricTree = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_reselect__["createSelector"])(getVisualizationState, __WEBPACK_IMPORTED_MODULE_4__visualization_visualization_reducers__["c" /* getMetricTree */]);
-var getUniqueFileList = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_reselect__["createSelector"])(getVisualizationState, __WEBPACK_IMPORTED_MODULE_4__visualization_visualization_reducers__["d" /* getUniqueFileList */]);
-var getMetricMapping = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_reselect__["createSelector"])(getSettingsState, __WEBPACK_IMPORTED_MODULE_3__control_panel_settings_settings_reducers__["b" /* getMetricMapping */]);
-var getActiveFilter = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_reselect__["createSelector"])(getSettingsState, __WEBPACK_IMPORTED_MODULE_3__control_panel_settings_settings_reducers__["c" /* getActiveFilter */]);
-var getActiveViewType = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_reselect__["createSelector"])(getSettingsState, __WEBPACK_IMPORTED_MODULE_3__control_panel_settings_settings_reducers__["d" /* getActiveViewType */]);
-var getLeftAndRightCommit = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_reselect__["createSelector"])(getLeftCommit, getRightCommit, function (leftCommit, rightCommit) {
-    if (leftCommit && rightCommit) {
-        return {
-            leftCommit: leftCommit,
-            rightCommit: rightCommit
-        };
-    }
-});
-//# sourceMappingURL=reducers.js.map
-
-/***/ }),
-
-/***/ 350:
+/***/ 351:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ngrx_store__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_reducers__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helper_element_analyzer__ = __webpack_require__(40);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__service_focus_service__ = __webpack_require__(57);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__helper_metric_name_helper__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__interfaces_ICommit__ = __webpack_require__(131);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__interfaces_ICommit___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__interfaces_ICommit__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__interfaces_IMetricMapping__ = __webpack_require__(83);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__interfaces_IMetricMapping___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__interfaces_IMetricMapping__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__helper_metric_name_helper__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__service_comparison_panel_service__ = __webpack_require__(57);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComparisonPanelComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1962,32 +1905,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var ComparisonPanelComponent = (function () {
-    function ComparisonPanelComponent(store, focusService) {
+    function ComparisonPanelComponent(store, comparisonPanelService) {
         this.store = store;
-        this.focusService = focusService;
+        this.comparisonPanelService = comparisonPanelService;
         this.subscriptions = [];
         this.tableRows = [];
     }
     ComparisonPanelComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.comparisonPanel = document.querySelector('#comparison-panel');
-        this.subscriptions.push(this.focusService.elementFocussed$.subscribe(function (elementName) {
-            _this.elementName = elementName;
-            _this.foundElement = __WEBPACK_IMPORTED_MODULE_3__helper_element_analyzer__["a" /* ElementAnalyzer */].findElementByName(_this.metricTree, elementName);
-            _this.prepareTableData();
+        this.subscriptions.push(this.comparisonPanelService.showComparisonPanel$.subscribe(function (params) {
+            _this.elementName = params.elementName;
+            _this.prepareTableData(params.foundElement);
             _this.show();
         }));
-        this.subscriptions.push(this.store.select(__WEBPACK_IMPORTED_MODULE_2__shared_reducers__["c" /* getLeftAndRightCommit */]).subscribe(function (result) {
-            if (result) {
-                _this.leftCommit = result.leftCommit;
-                _this.rightCommit = result.rightCommit;
-            }
-        }));
-        this.subscriptions.push(this.store.select(__WEBPACK_IMPORTED_MODULE_2__shared_reducers__["d" /* getMetricMapping */]).subscribe(function (metricMapping) {
-            _this.metricMapping = metricMapping;
-        }));
-        this.subscriptions.push(this.store.select(__WEBPACK_IMPORTED_MODULE_2__shared_reducers__["e" /* getMetricTree */]).subscribe(function (metricTree) {
-            _this.metricTree = metricTree;
+        this.subscriptions.push(this.comparisonPanelService.hideComparisonPanel$.subscribe(function () {
+            _this.hide();
         }));
     };
     ComparisonPanelComponent.prototype.ngOnDestroy = function () {
@@ -1998,25 +1931,25 @@ var ComparisonPanelComponent = (function () {
     ComparisonPanelComponent.prototype.handleClose = function () {
         this.hide();
     };
-    ComparisonPanelComponent.prototype.prepareTableData = function () {
+    ComparisonPanelComponent.prototype.prepareTableData = function (foundElement) {
         var rows = [];
         for (var _i = 0, _a = Object.keys(this.metricMapping); _i < _a.length; _i++) {
             var key = _a[_i];
             var metricName = this.metricMapping[key];
             var leftCommitValue = void 0;
-            if (this.foundElement.commit1Metrics && this.foundElement.commit1Metrics[metricName]) {
-                leftCommitValue = this.foundElement.commit1Metrics[metricName];
+            if (foundElement.commit1Metrics && foundElement.commit1Metrics[metricName]) {
+                leftCommitValue = foundElement.commit1Metrics[metricName];
             }
             var rightCommitValue = void 0;
-            if (this.foundElement.commit2Metrics && this.foundElement.commit2Metrics[metricName]) {
-                rightCommitValue = this.foundElement.commit2Metrics[metricName];
+            if (foundElement.commit2Metrics && foundElement.commit2Metrics[metricName]) {
+                rightCommitValue = foundElement.commit2Metrics[metricName];
             }
             var difference = 0;
             if (leftCommitValue && rightCommitValue) {
                 difference = rightCommitValue - leftCommitValue;
             }
             rows.push({
-                metricName: __WEBPACK_IMPORTED_MODULE_5__helper_metric_name_helper__["a" /* MetricNameHelper */].getShortNameByFullName(metricName),
+                metricName: __WEBPACK_IMPORTED_MODULE_4__helper_metric_name_helper__["a" /* MetricNameHelper */].getShortNameByFullName(metricName),
                 leftCommitValue: leftCommitValue || 'N/A',
                 rightCommitValue: rightCommitValue || 'N/A',
                 difference: difference
@@ -2032,21 +1965,33 @@ var ComparisonPanelComponent = (function () {
     };
     return ComparisonPanelComponent;
 }());
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__interfaces_IMetricMapping__["IMetricMapping"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__interfaces_IMetricMapping__["IMetricMapping"]) === "function" && _a || Object)
+], ComparisonPanelComponent.prototype, "metricMapping", void 0);
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+    __metadata("design:type", typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__interfaces_ICommit__["ICommit"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__interfaces_ICommit__["ICommit"]) === "function" && _b || Object)
+], ComparisonPanelComponent.prototype, "leftCommit", void 0);
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+    __metadata("design:type", typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__interfaces_ICommit__["ICommit"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__interfaces_ICommit__["ICommit"]) === "function" && _c || Object)
+], ComparisonPanelComponent.prototype, "rightCommit", void 0);
 ComparisonPanelComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-comparison-panel',
-        template: __webpack_require__(460),
-        styles: [__webpack_require__(430)]
+        template: __webpack_require__(461),
+        styles: [__webpack_require__(431)]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__ngrx_store__["b" /* Store */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__ngrx_store__["b" /* Store */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__service_focus_service__["a" /* FocusService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__service_focus_service__["a" /* FocusService */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1__ngrx_store__["b" /* Store */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__ngrx_store__["b" /* Store */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_5__service_comparison_panel_service__["a" /* ComparisonPanelService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__service_comparison_panel_service__["a" /* ComparisonPanelService */]) === "function" && _e || Object])
 ], ComparisonPanelComponent);
 
-var _a, _b;
+var _a, _b, _c, _d, _e;
 //# sourceMappingURL=comparison-panel.component.js.map
 
 /***/ }),
 
-/***/ 351:
+/***/ 352:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2179,12 +2124,12 @@ var InteractionHandler = (function () {
 
 /***/ }),
 
-/***/ 352:
+/***/ 353:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__enum_ViewType__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__enum_ViewType__ = __webpack_require__(38);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__AppConfig__ = __webpack_require__(20);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LegendComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -2232,8 +2177,8 @@ __decorate([
 LegendComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-legend',
-        template: __webpack_require__(461),
-        styles: [__webpack_require__(431)]
+        template: __webpack_require__(462),
+        styles: [__webpack_require__(432)]
     }),
     __metadata("design:paramtypes", [])
 ], LegendComponent);
@@ -2243,7 +2188,7 @@ var _a;
 
 /***/ }),
 
-/***/ 353:
+/***/ 354:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2269,8 +2214,8 @@ var LoadingIndicatorComponent = (function () {
 LoadingIndicatorComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-loading-indicator',
-        template: __webpack_require__(462),
-        styles: [__webpack_require__(432)]
+        template: __webpack_require__(463),
+        styles: [__webpack_require__(433)]
     }),
     __metadata("design:paramtypes", [])
 ], LoadingIndicatorComponent);
@@ -2279,7 +2224,7 @@ LoadingIndicatorComponent = __decorate([
 
 /***/ }),
 
-/***/ 354:
+/***/ 355:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2287,21 +2232,23 @@ LoadingIndicatorComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__enum_ScreenType__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_three__ = __webpack_require__(52);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_three___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_three__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__enum_ViewType__ = __webpack_require__(39);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__view_split_view__ = __webpack_require__(357);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__view_merged_view__ = __webpack_require__(356);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__interfaces_IFilter__ = __webpack_require__(129);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__enum_ViewType__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__view_split_view__ = __webpack_require__(358);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__view_merged_view__ = __webpack_require__(357);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__interfaces_IFilter__ = __webpack_require__(132);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__interfaces_IFilter___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__interfaces_IFilter__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__enum_NodeType__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__interaction_handler_interaction_handler__ = __webpack_require__(351);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__interaction_handler_interaction_handler__ = __webpack_require__(352);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__AppConfig__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__interfaces_INode__ = __webpack_require__(343);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__interfaces_INode__ = __webpack_require__(344);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__interfaces_INode___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__interfaces_INode__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__service_screenshot_service__ = __webpack_require__(83);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__service_focus_service__ = __webpack_require__(57);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__service_tooltip_service__ = __webpack_require__(84);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__interfaces_IMetricMapping__ = __webpack_require__(130);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__service_screenshot_service__ = __webpack_require__(85);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__service_focus_service__ = __webpack_require__(84);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__service_tooltip_service__ = __webpack_require__(86);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__interfaces_IMetricMapping__ = __webpack_require__(83);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__interfaces_IMetricMapping___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14__interfaces_IMetricMapping__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__service_comparison_panel_service__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16_app_helper_element_analyzer__ = __webpack_require__(39);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ScreenComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2327,15 +2274,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+
 var ScreenComponent = (function () {
-    function ScreenComponent(screenShotService, focusService, tooltipService) {
+    function ScreenComponent(screenShotService, focusService, tooltipService, comparisonPanelService) {
         this.screenShotService = screenShotService;
         this.focusService = focusService;
         this.tooltipService = tooltipService;
+        this.comparisonPanelService = comparisonPanelService;
         this.subscriptions = [];
         this.isMergedView = false;
         this.renderingIsPaused = false;
         this.scene = new __WEBPACK_IMPORTED_MODULE_2_three__["Scene"]();
+        this.doCameraReset = true;
     }
     ScreenComponent.prototype.ngOnChanges = function (changes) {
         if (this.activeViewType !== null && this.metricTree !== null && this.activeFilter !== null) {
@@ -2361,7 +2312,11 @@ var ScreenComponent = (function () {
             this.handleViewChanged();
         }
         if (changes.metricTree && changes.metricTree.currentValue) {
-            this.resetCameraAndControls();
+            if (this.doCameraReset) {
+                this.resetCamera();
+                this.doCameraReset = false;
+            }
+            this.resetControls();
         }
     };
     ScreenComponent.prototype.ngOnInit = function () {
@@ -2376,6 +2331,10 @@ var ScreenComponent = (function () {
         this.render();
         this.subscriptions.push(this.focusService.elementFocussed$.subscribe(function (elementName) {
             _this.focusElementByName(elementName);
+            _this.comparisonPanelService.show({
+                elementName: elementName,
+                foundElement: __WEBPACK_IMPORTED_MODULE_16_app_helper_element_analyzer__["a" /* ElementAnalyzer */].findElementByName(_this.metricTree, elementName)
+            });
         }));
         this.subscriptions.push(this.screenShotService.screenShotRequested$.subscribe(function () {
             var imgFromCanvas = _this.renderer.domElement.toDataURL('image/png');
@@ -2415,13 +2374,18 @@ var ScreenComponent = (function () {
         this.camera.aspect = (this.getScreenWidth() - 0) / window.innerHeight;
         this.camera.updateProjectionMatrix();
     };
+    ScreenComponent.prototype.resetCamera = function () {
+        var root = this.scene.getObjectByName('root');
+        // pythagoras
+        var diagonal = Math.sqrt(Math.pow(root.scale.x, 2) + Math.pow(root.scale.z, 2));
+        this.camera.position.x = root.scale.x * 2;
+        this.camera.position.y = diagonal * 1.5;
+        this.camera.position.z = root.scale.z * 2;
+    };
     ScreenComponent.prototype.createControls = function () {
         this.controls = new THREE.OrbitControls(this.camera, document.querySelector('#stage'));
     };
-    ScreenComponent.prototype.resetCameraAndControls = function () {
-        this.camera.position.x = __WEBPACK_IMPORTED_MODULE_9__AppConfig__["a" /* AppConfig */].CAMERA_START_POSITION.x;
-        this.camera.position.y = __WEBPACK_IMPORTED_MODULE_9__AppConfig__["a" /* AppConfig */].CAMERA_START_POSITION.y;
-        this.camera.position.z = __WEBPACK_IMPORTED_MODULE_9__AppConfig__["a" /* AppConfig */].CAMERA_START_POSITION.z;
+    ScreenComponent.prototype.resetControls = function () {
         var centralCoordinates = this.getCentralCoordinates();
         this.controls.target.x = centralCoordinates.x;
         this.controls.target.y = centralCoordinates.y;
@@ -2481,11 +2445,14 @@ var ScreenComponent = (function () {
         if (!element) {
             return;
         }
+        var root = this.scene.getObjectByName('root');
+        // pythagoras
+        var diagonal = Math.sqrt(Math.pow(root.scale.x, 2) + Math.pow(root.scale.z, 2));
         new TWEEN.Tween(this.camera.position)
             .to({
-            x: element.position.x + __WEBPACK_IMPORTED_MODULE_9__AppConfig__["a" /* AppConfig */].CAMERA_DISTANCE_TO_FOCUSSED_ELEMENT,
-            y: element.position.y + __WEBPACK_IMPORTED_MODULE_9__AppConfig__["a" /* AppConfig */].CAMERA_DISTANCE_TO_FOCUSSED_ELEMENT,
-            z: element.position.z + __WEBPACK_IMPORTED_MODULE_9__AppConfig__["a" /* AppConfig */].CAMERA_DISTANCE_TO_FOCUSSED_ELEMENT
+            x: element.position.x + root.scale.x / 5,
+            y: element.position.y + diagonal / 5,
+            z: element.position.z + root.scale.z / 5
         }, __WEBPACK_IMPORTED_MODULE_9__AppConfig__["a" /* AppConfig */].CAMERA_ANIMATION_DURATION)
             .easing(TWEEN.Easing.Sinusoidal.InOut)
             .start();
@@ -2506,7 +2473,7 @@ var ScreenComponent = (function () {
         }
         return {
             x: root.scale.x / 2,
-            y: __WEBPACK_IMPORTED_MODULE_9__AppConfig__["a" /* AppConfig */].CAMERA_START_POSITION.y,
+            y: 0,
             z: root.scale.z / 2
         };
     };
@@ -2576,23 +2543,23 @@ __decorate([
 ScreenComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-screen',
-        template: __webpack_require__(463),
-        styles: [__webpack_require__(433)]
+        template: __webpack_require__(464),
+        styles: [__webpack_require__(434)]
     }),
-    __metadata("design:paramtypes", [typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_11__service_screenshot_service__["a" /* ScreenShotService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_11__service_screenshot_service__["a" /* ScreenShotService */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_12__service_focus_service__["a" /* FocusService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_12__service_focus_service__["a" /* FocusService */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_13__service_tooltip_service__["a" /* TooltipService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_13__service_tooltip_service__["a" /* TooltipService */]) === "function" && _h || Object])
+    __metadata("design:paramtypes", [typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_11__service_screenshot_service__["a" /* ScreenShotService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_11__service_screenshot_service__["a" /* ScreenShotService */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_12__service_focus_service__["a" /* FocusService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_12__service_focus_service__["a" /* FocusService */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_13__service_tooltip_service__["a" /* TooltipService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_13__service_tooltip_service__["a" /* TooltipService */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_15__service_comparison_panel_service__["a" /* ComparisonPanelService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_15__service_comparison_panel_service__["a" /* ComparisonPanelService */]) === "function" && _j || Object])
 ], ScreenComponent);
 
-var _a, _b, _c, _d, _e, _f, _g, _h;
+var _a, _b, _c, _d, _e, _f, _g, _h, _j;
 //# sourceMappingURL=screen.component.js.map
 
 /***/ }),
 
-/***/ 355:
+/***/ 356:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__service_tooltip_service__ = __webpack_require__(84);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__service_tooltip_service__ = __webpack_require__(86);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__helper_metric_name_helper__ = __webpack_require__(56);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TooltipComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -2654,8 +2621,8 @@ var TooltipComponent = (function () {
 TooltipComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-tooltip',
-        template: __webpack_require__(464),
-        styles: [__webpack_require__(434)]
+        template: __webpack_require__(465),
+        styles: [__webpack_require__(435)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__service_tooltip_service__["a" /* TooltipService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__service_tooltip_service__["a" /* TooltipService */]) === "function" && _a || Object])
 ], TooltipComponent);
@@ -2665,17 +2632,17 @@ var _a;
 
 /***/ }),
 
-/***/ 356:
+/***/ 357:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__abstract_view__ = __webpack_require__(133);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helper_element_analyzer__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__abstract_view__ = __webpack_require__(135);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helper_element_analyzer__ = __webpack_require__(39);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__AppConfig__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__enum_NodeType__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__helper_color_helper__ = __webpack_require__(128);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__helper_color_helper__ = __webpack_require__(130);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__enum_CommitReferenceType__ = __webpack_require__(81);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_app_geometry_block_connection__ = __webpack_require__(341);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_app_geometry_block_connection__ = __webpack_require__(343);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MergedView; });
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -2732,48 +2699,48 @@ var MergedView = (function (_super) {
                     _b[_this.metricMapping.groundAreaMetricName] = orangeGroundAreaMetric,
                     _b[_this.metricMapping.colorMetricName] = orangeColorMetric,
                     _b);
-                blueHeight = blueHeightMetric * __WEBPACK_IMPORTED_MODULE_2__AppConfig__["a" /* AppConfig */].HEIGHT_FACTOR + __WEBPACK_IMPORTED_MODULE_2__AppConfig__["a" /* AppConfig */].GLOBAL_MIN_HEIGHT;
-                var orangeHeight = orangeHeightMetric * __WEBPACK_IMPORTED_MODULE_2__AppConfig__["a" /* AppConfig */].HEIGHT_FACTOR + __WEBPACK_IMPORTED_MODULE_2__AppConfig__["a" /* AppConfig */].GLOBAL_MIN_HEIGHT;
-                var blueGA = blueGroundAreaMetric * __WEBPACK_IMPORTED_MODULE_2__AppConfig__["a" /* AppConfig */].GROUND_AREA_FACTOR + __WEBPACK_IMPORTED_MODULE_2__AppConfig__["a" /* AppConfig */].GLOBAL_MIN_GROUND_AREA;
-                var orangeGA = orangeGroundAreaMetric * __WEBPACK_IMPORTED_MODULE_2__AppConfig__["a" /* AppConfig */].GROUND_AREA_FACTOR + __WEBPACK_IMPORTED_MODULE_2__AppConfig__["a" /* AppConfig */].GLOBAL_MIN_GROUND_AREA;
+                blueHeight = blueHeightMetric * __WEBPACK_IMPORTED_MODULE_2__AppConfig__["a" /* AppConfig */].HEIGHT_FACTOR;
+                var orangeHeight = orangeHeightMetric * __WEBPACK_IMPORTED_MODULE_2__AppConfig__["a" /* AppConfig */].HEIGHT_FACTOR;
+                var blueEdgeLength = Math.sqrt(blueGroundAreaMetric) * __WEBPACK_IMPORTED_MODULE_2__AppConfig__["a" /* AppConfig */].EDGE_LENGTH_FACTOR;
+                var orangeEdgeLength = Math.sqrt(orangeGroundAreaMetric) * __WEBPACK_IMPORTED_MODULE_2__AppConfig__["a" /* AppConfig */].EDGE_LENGTH_FACTOR;
                 var blueColor = __WEBPACK_IMPORTED_MODULE_4__helper_color_helper__["a" /* ColorHelper */].getColorByPosition(_this.screenType);
                 var orangeColor = __WEBPACK_IMPORTED_MODULE_4__helper_color_helper__["a" /* ColorHelper */].getContraryColorByColor(blueColor);
-                var blueTransparency = blueHeight >= orangeHeight && blueGA >= orangeGA;
-                var orangeTransparency = orangeHeight >= blueHeight && orangeGA >= blueGA;
-                if (!isNaN(blueGA) && !isNaN(orangeGA)) {
+                var blueTransparency = blueHeight >= orangeHeight && blueEdgeLength >= orangeEdgeLength;
+                var orangeTransparency = orangeHeight >= blueHeight && orangeEdgeLength >= blueEdgeLength;
+                if (!isNaN(blueEdgeLength) && !isNaN(orangeEdgeLength)) {
                     // both blocks
-                    if (blueGA < orangeGA) {
+                    if (blueEdgeLength < orangeEdgeLength) {
                         // draw the bigger block ...
-                        _this.createBlock(node, parent, orangeColor, orangeGA, bottom, orangeHeight, orangeTransparency, orangeMetrics, __WEBPACK_IMPORTED_MODULE_5__enum_CommitReferenceType__["a" /* CommitReferenceType */].OTHER, { modified: true });
+                        _this.createBlock(node, parent, orangeColor, orangeEdgeLength, bottom, orangeHeight, orangeTransparency, orangeMetrics, __WEBPACK_IMPORTED_MODULE_5__enum_CommitReferenceType__["a" /* CommitReferenceType */].OTHER, { modified: true });
                         // ... calculate the center position for the smaller block ...
-                        node.packerInfo.fit.x += (orangeGA - blueGA) / 2;
-                        node.packerInfo.fit.y += (orangeGA - blueGA) / 2;
+                        node.packerInfo.fit.x += (orangeEdgeLength - blueEdgeLength) / 2;
+                        node.packerInfo.fit.y += (orangeEdgeLength - blueEdgeLength) / 2;
                         // ... draw the smaller block
-                        _this.createBlock(node, parent, blueColor, blueGA, bottom, blueHeight, blueTransparency, blueMetrics, __WEBPACK_IMPORTED_MODULE_5__enum_CommitReferenceType__["a" /* CommitReferenceType */].THIS, { modified: true });
+                        _this.createBlock(node, parent, blueColor, blueEdgeLength, bottom, blueHeight, blueTransparency, blueMetrics, __WEBPACK_IMPORTED_MODULE_5__enum_CommitReferenceType__["a" /* CommitReferenceType */].THIS, { modified: true });
                     }
-                    else if (blueGA > orangeGA) {
+                    else if (blueEdgeLength > orangeEdgeLength) {
                         // draw the bigger block ...
-                        _this.createBlock(node, parent, blueColor, blueGA, bottom, blueHeight, blueTransparency, blueMetrics, __WEBPACK_IMPORTED_MODULE_5__enum_CommitReferenceType__["a" /* CommitReferenceType */].THIS, { modified: true });
+                        _this.createBlock(node, parent, blueColor, blueEdgeLength, bottom, blueHeight, blueTransparency, blueMetrics, __WEBPACK_IMPORTED_MODULE_5__enum_CommitReferenceType__["a" /* CommitReferenceType */].THIS, { modified: true });
                         // ... calculate the center position for the smaller block ...
-                        node.packerInfo.fit.x += (blueGA - orangeGA) / 2;
-                        node.packerInfo.fit.y += (blueGA - orangeGA) / 2;
+                        node.packerInfo.fit.x += (blueEdgeLength - orangeEdgeLength) / 2;
+                        node.packerInfo.fit.y += (blueEdgeLength - orangeEdgeLength) / 2;
                         // ... draw the smaller block
-                        _this.createBlock(node, parent, orangeColor, orangeGA, bottom, orangeHeight, orangeTransparency, orangeMetrics, __WEBPACK_IMPORTED_MODULE_5__enum_CommitReferenceType__["a" /* CommitReferenceType */].OTHER, { modified: true });
+                        _this.createBlock(node, parent, orangeColor, orangeEdgeLength, bottom, orangeHeight, orangeTransparency, orangeMetrics, __WEBPACK_IMPORTED_MODULE_5__enum_CommitReferenceType__["a" /* CommitReferenceType */].OTHER, { modified: true });
                     }
                     else {
                         // ground areas are the same
                         if (blueHeight != orangeHeight) {
                             // heights are different, so draw both blocks
-                            _this.createBlock(node, parent, blueColor, blueGA, bottom, blueHeight, blueTransparency, blueMetrics, __WEBPACK_IMPORTED_MODULE_5__enum_CommitReferenceType__["a" /* CommitReferenceType */].THIS, { modified: true });
-                            _this.createBlock(node, parent, orangeColor, orangeGA, bottom, orangeHeight, orangeTransparency, orangeMetrics, __WEBPACK_IMPORTED_MODULE_5__enum_CommitReferenceType__["a" /* CommitReferenceType */].OTHER, { modified: true });
+                            _this.createBlock(node, parent, blueColor, blueEdgeLength, bottom, blueHeight, blueTransparency, blueMetrics, __WEBPACK_IMPORTED_MODULE_5__enum_CommitReferenceType__["a" /* CommitReferenceType */].THIS, { modified: true });
+                            _this.createBlock(node, parent, orangeColor, orangeEdgeLength, bottom, orangeHeight, orangeTransparency, orangeMetrics, __WEBPACK_IMPORTED_MODULE_5__enum_CommitReferenceType__["a" /* CommitReferenceType */].OTHER, { modified: true });
                         }
                         else {
                             // heights are the same, so the file has not changed
-                            _this.createBlock(node, parent, __WEBPACK_IMPORTED_MODULE_2__AppConfig__["a" /* AppConfig */].COLOR_UNCHANGED_FILE, orangeGA, bottom, orangeHeight, false, orangeMetrics, undefined, { modified: false });
+                            _this.createBlock(node, parent, __WEBPACK_IMPORTED_MODULE_2__AppConfig__["a" /* AppConfig */].COLOR_UNCHANGED_FILE, orangeEdgeLength, bottom, orangeHeight, false, orangeMetrics, undefined, { modified: false });
                         }
                     }
                 }
-                else if (isNaN(orangeGA)) {
+                else if (isNaN(orangeEdgeLength)) {
                     // only blue block
                     var changeTypes = { added: false, deleted: true, moved: false };
                     // cache element to draw connections
@@ -2784,16 +2751,16 @@ var MergedView = (function (_super) {
                         });
                         changeTypes.moved = true;
                     }
-                    _this.createBlock(node, parent, __WEBPACK_IMPORTED_MODULE_2__AppConfig__["a" /* AppConfig */].COLOR_DELETED_FILE, blueGA, bottom, blueHeight, false, blueMetrics, __WEBPACK_IMPORTED_MODULE_5__enum_CommitReferenceType__["a" /* CommitReferenceType */].THIS, changeTypes);
+                    _this.createBlock(node, parent, __WEBPACK_IMPORTED_MODULE_2__AppConfig__["a" /* AppConfig */].COLOR_DELETED_FILE, blueEdgeLength, bottom, blueHeight, false, blueMetrics, __WEBPACK_IMPORTED_MODULE_5__enum_CommitReferenceType__["a" /* CommitReferenceType */].THIS, changeTypes);
                 }
-                else if (isNaN(blueGA)) {
+                else if (isNaN(blueEdgeLength)) {
                     // only orange block
                     var changeTypes = { added: true, deleted: false, moved: false };
                     if (_this.isNodeMoved(node)) {
                         // don't push to this.movedElements to avoid duplicates
                         changeTypes.moved = true;
                     }
-                    _this.createBlock(node, parent, __WEBPACK_IMPORTED_MODULE_2__AppConfig__["a" /* AppConfig */].COLOR_ADDED_FILE, orangeGA, bottom, orangeHeight, false, orangeMetrics, __WEBPACK_IMPORTED_MODULE_5__enum_CommitReferenceType__["a" /* CommitReferenceType */].OTHER, changeTypes);
+                    _this.createBlock(node, parent, __WEBPACK_IMPORTED_MODULE_2__AppConfig__["a" /* AppConfig */].COLOR_ADDED_FILE, orangeEdgeLength, bottom, orangeHeight, false, orangeMetrics, __WEBPACK_IMPORTED_MODULE_5__enum_CommitReferenceType__["a" /* CommitReferenceType */].OTHER, changeTypes);
                 }
                 // MODULE
             }
@@ -2838,16 +2805,16 @@ var MergedView = (function (_super) {
 
 /***/ }),
 
-/***/ 357:
+/***/ 358:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__abstract_view__ = __webpack_require__(133);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__abstract_view__ = __webpack_require__(135);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__enum_NodeType__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__AppConfig__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__enum_CommitReferenceType__ = __webpack_require__(81);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__helper_color_helper__ = __webpack_require__(128);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__helper_element_analyzer__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__helper_color_helper__ = __webpack_require__(130);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__helper_element_analyzer__ = __webpack_require__(39);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SplitView; });
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -2901,15 +2868,15 @@ var SplitView = (function (_super) {
                 if (!heightMetric || !groundAreaMetric) {
                     return;
                 }
-                myHeight = heightMetric * __WEBPACK_IMPORTED_MODULE_2__AppConfig__["a" /* AppConfig */].HEIGHT_FACTOR + __WEBPACK_IMPORTED_MODULE_2__AppConfig__["a" /* AppConfig */].GLOBAL_MIN_HEIGHT;
-                var myGA = groundAreaMetric * __WEBPACK_IMPORTED_MODULE_2__AppConfig__["a" /* AppConfig */].GROUND_AREA_FACTOR + __WEBPACK_IMPORTED_MODULE_2__AppConfig__["a" /* AppConfig */].GLOBAL_MIN_GROUND_AREA;
-                var otherGA = __WEBPACK_IMPORTED_MODULE_5__helper_element_analyzer__["a" /* ElementAnalyzer */].getMetricValueOfElementAndCommitReferenceType(node, _this.metricMapping.groundAreaMetricName, __WEBPACK_IMPORTED_MODULE_3__enum_CommitReferenceType__["a" /* CommitReferenceType */].OTHER, _this.screenType) * __WEBPACK_IMPORTED_MODULE_2__AppConfig__["a" /* AppConfig */].GROUND_AREA_FACTOR + __WEBPACK_IMPORTED_MODULE_2__AppConfig__["a" /* AppConfig */].GLOBAL_MIN_GROUND_AREA;
+                myHeight = heightMetric * __WEBPACK_IMPORTED_MODULE_2__AppConfig__["a" /* AppConfig */].HEIGHT_FACTOR;
+                var myEdgeLength = Math.sqrt(groundAreaMetric) * __WEBPACK_IMPORTED_MODULE_2__AppConfig__["a" /* AppConfig */].EDGE_LENGTH_FACTOR;
+                var otherEdgeLength = Math.sqrt(__WEBPACK_IMPORTED_MODULE_5__helper_element_analyzer__["a" /* ElementAnalyzer */].getMetricValueOfElementAndCommitReferenceType(node, _this.metricMapping.groundAreaMetricName, __WEBPACK_IMPORTED_MODULE_3__enum_CommitReferenceType__["a" /* CommitReferenceType */].OTHER, _this.screenType)) * __WEBPACK_IMPORTED_MODULE_2__AppConfig__["a" /* AppConfig */].EDGE_LENGTH_FACTOR;
                 var myColor = __WEBPACK_IMPORTED_MODULE_4__helper_color_helper__["a" /* ColorHelper */].getColorByMetricValue(colorMetric, _this.maxColorMetricValue, _this.minColorMetricValue);
-                if (myGA < otherGA) {
-                    node.packerInfo.fit.x += (otherGA - myGA) / 2;
-                    node.packerInfo.fit.y += (otherGA - myGA) / 2;
+                if (myEdgeLength < otherEdgeLength) {
+                    node.packerInfo.fit.x += (otherEdgeLength - myEdgeLength) / 2;
+                    node.packerInfo.fit.y += (otherEdgeLength - myEdgeLength) / 2;
                 }
-                _this.createBlock(node, parent, myColor, myGA, bottom, myHeight, false, metrics);
+                _this.createBlock(node, parent, myColor, myEdgeLength, bottom, myHeight, false, metrics);
             }
             else {
                 myHeight = __WEBPACK_IMPORTED_MODULE_2__AppConfig__["a" /* AppConfig */].MODULE_BLOCK_HEIGHT;
@@ -2930,18 +2897,19 @@ var SplitView = (function (_super) {
 
 /***/ }),
 
-/***/ 358:
+/***/ 359:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__enum_ScreenType__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs__ = __webpack_require__(264);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs__ = __webpack_require__(266);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ngrx_store__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_reducers__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__visualization_actions__ = __webpack_require__(85);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_reducers__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__visualization_actions__ = __webpack_require__(87);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__helper_metric_name_helper__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_app_service_comparison_panel_service__ = __webpack_require__(57);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return VisualizationComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2959,9 +2927,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var VisualizationComponent = (function () {
-    function VisualizationComponent(store) {
+    function VisualizationComponent(store, comparisonPanelService) {
         this.store = store;
+        this.comparisonPanelService = comparisonPanelService;
         this.subscriptions = [];
         this.screenTypes = {
             left: __WEBPACK_IMPORTED_MODULE_1__enum_ScreenType__["a" /* ScreenType */].LEFT,
@@ -2970,15 +2940,17 @@ var VisualizationComponent = (function () {
     }
     VisualizationComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.metricsLoading$ = this.store.select(__WEBPACK_IMPORTED_MODULE_4__shared_reducers__["f" /* getMetricsLoading */]);
-        this.activeViewType$ = this.store.select(__WEBPACK_IMPORTED_MODULE_4__shared_reducers__["g" /* getActiveViewType */]);
-        this.activeFilter$ = this.store.select(__WEBPACK_IMPORTED_MODULE_4__shared_reducers__["h" /* getActiveFilter */]);
-        this.metricTree$ = this.store.select(__WEBPACK_IMPORTED_MODULE_4__shared_reducers__["e" /* getMetricTree */]);
-        this.metricMapping$ = this.store.select(__WEBPACK_IMPORTED_MODULE_4__shared_reducers__["d" /* getMetricMapping */]);
-        this.colorMetricName$ = this.store.select(__WEBPACK_IMPORTED_MODULE_4__shared_reducers__["d" /* getMetricMapping */])
+        this.metricsLoading$ = this.store.select(__WEBPACK_IMPORTED_MODULE_4__shared_reducers__["c" /* getMetricsLoading */]);
+        this.activeViewType$ = this.store.select(__WEBPACK_IMPORTED_MODULE_4__shared_reducers__["d" /* getActiveViewType */]);
+        this.activeFilter$ = this.store.select(__WEBPACK_IMPORTED_MODULE_4__shared_reducers__["e" /* getActiveFilter */]);
+        this.metricTree$ = this.store.select(__WEBPACK_IMPORTED_MODULE_4__shared_reducers__["f" /* getMetricTree */]);
+        this.metricMapping$ = this.store.select(__WEBPACK_IMPORTED_MODULE_4__shared_reducers__["g" /* getMetricMapping */]);
+        this.leftCommit$ = this.store.select(__WEBPACK_IMPORTED_MODULE_4__shared_reducers__["h" /* getLeftCommit */]);
+        this.rightCommit$ = this.store.select(__WEBPACK_IMPORTED_MODULE_4__shared_reducers__["i" /* getRightCommit */]);
+        this.colorMetricName$ = this.store.select(__WEBPACK_IMPORTED_MODULE_4__shared_reducers__["g" /* getMetricMapping */])
             .map(function (metricMapping) { return metricMapping.colorMetricName; })
             .map(function (colorMetricName) { return __WEBPACK_IMPORTED_MODULE_6__helper_metric_name_helper__["a" /* MetricNameHelper */].getShortNameByFullName(colorMetricName); });
-        this.subscriptions.push(__WEBPACK_IMPORTED_MODULE_2_rxjs__["Observable"].combineLatest(this.store.select(__WEBPACK_IMPORTED_MODULE_4__shared_reducers__["i" /* getLeftCommit */]), this.store.select(__WEBPACK_IMPORTED_MODULE_4__shared_reducers__["j" /* getRightCommit */]), this.store.select(__WEBPACK_IMPORTED_MODULE_4__shared_reducers__["d" /* getMetricMapping */]))
+        this.subscriptions.push(__WEBPACK_IMPORTED_MODULE_2_rxjs__["Observable"].combineLatest(this.store.select(__WEBPACK_IMPORTED_MODULE_4__shared_reducers__["h" /* getLeftCommit */]), this.store.select(__WEBPACK_IMPORTED_MODULE_4__shared_reducers__["i" /* getRightCommit */]), this.store.select(__WEBPACK_IMPORTED_MODULE_4__shared_reducers__["g" /* getMetricMapping */]))
             .filter(function (_a) {
             var leftCommit = _a[0], rightCommit = _a[1], metricMapping = _a[2];
             return !!leftCommit && !!rightCommit;
@@ -2986,6 +2958,7 @@ var VisualizationComponent = (function () {
             .subscribe(function (_a) {
             var leftCommit = _a[0], rightCommit = _a[1], metricMapping = _a[2];
             _this.store.dispatch(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_5__visualization_actions__["h" /* loadMetricTree */])(leftCommit, rightCommit, metricMapping));
+            _this.comparisonPanelService.hide();
         }));
     };
     VisualizationComponent.prototype.ngOnDestroy = function () {
@@ -2998,33 +2971,33 @@ var VisualizationComponent = (function () {
 VisualizationComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-visualization',
-        template: __webpack_require__(465),
-        styles: [__webpack_require__(435)]
+        template: __webpack_require__(466),
+        styles: [__webpack_require__(436)]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__ngrx_store__["b" /* Store */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ngrx_store__["b" /* Store */]) === "function" && _a || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__ngrx_store__["b" /* Store */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ngrx_store__["b" /* Store */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_7_app_service_comparison_panel_service__["a" /* ComparisonPanelService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7_app_service_comparison_panel_service__["a" /* ComparisonPanelService */]) === "function" && _b || Object])
 ], VisualizationComponent);
 
-var _a;
+var _a, _b;
 //# sourceMappingURL=visualization.component.js.map
 
 /***/ }),
 
-/***/ 359:
+/***/ 360:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__visualization_component__ = __webpack_require__(358);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__screen_screen_component__ = __webpack_require__(354);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__service_metric_service__ = __webpack_require__(132);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__environments_environment__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__service_mocks_metric_mock_service__ = __webpack_require__(346);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__tooltip_tooltip_component__ = __webpack_require__(355);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__comparison_panel_comparison_panel_component__ = __webpack_require__(350);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__legend_legend_component__ = __webpack_require__(352);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pipes_key_value_pipe__ = __webpack_require__(344);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__loading_indicator_loading_indicator_component__ = __webpack_require__(353);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__visualization_component__ = __webpack_require__(359);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__screen_screen_component__ = __webpack_require__(355);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__service_metric_service__ = __webpack_require__(134);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__environments_environment__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__service_mocks_metric_mock_service__ = __webpack_require__(347);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__tooltip_tooltip_component__ = __webpack_require__(356);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__comparison_panel_comparison_panel_component__ = __webpack_require__(351);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__legend_legend_component__ = __webpack_require__(353);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pipes_key_value_pipe__ = __webpack_require__(345);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__loading_indicator_loading_indicator_component__ = __webpack_require__(354);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return VisualizationModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -3079,25 +3052,12 @@ VisualizationModule = __decorate([
 
 /***/ }),
 
-/***/ 36:
+/***/ 361:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return environment; });
-var environment = {
-    production: false,
-    demo: true
-};
-//# sourceMappingURL=environment.js.map
-
-/***/ }),
-
-/***/ 360:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__visualization_actions__ = __webpack_require__(85);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helper_element_analyzer__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__visualization_actions__ = __webpack_require__(87);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helper_element_analyzer__ = __webpack_require__(39);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return VisualizationReducer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return getMetricsLoading; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return getMetricTree; });
@@ -3144,7 +3104,7 @@ var getUniqueFileList = function (state) { return state.uniqueFileList; };
 
 /***/ }),
 
-/***/ 39:
+/***/ 38:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3158,7 +3118,7 @@ var ViewType;
 
 /***/ }),
 
-/***/ 40:
+/***/ 39:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3347,21 +3307,60 @@ var ElementAnalyzer = (function () {
 
 /***/ }),
 
-/***/ 420:
-/***/ (function(module, exports, __webpack_require__) {
+/***/ 40:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(8)();
-// imports
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_reselect__ = __webpack_require__(467);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_reselect___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_reselect__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ngrx_store__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__control_panel_control_panel_reducers__ = __webpack_require__(335);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__control_panel_settings_settings_reducers__ = __webpack_require__(341);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__visualization_visualization_reducers__ = __webpack_require__(361);
+/* harmony export (immutable) */ __webpack_exports__["a"] = reducer;
+/* unused harmony export getControlPanelState */
+/* unused harmony export getVisualizationState */
+/* unused harmony export getSettingsState */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return getCommitsLoading; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return getCommits; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return getLeftCommit; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return getRightCommit; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return getScreenshots; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return getMetricsLoading; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return getMetricTree; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return getUniqueFileList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return getMetricMapping; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return getActiveFilter; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return getActiveViewType; });
 
 
-// module
-exports.push([module.i, "", ""]);
-
-// exports
 
 
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
+
+var reducers = {
+    controlPanelState: __WEBPACK_IMPORTED_MODULE_2__control_panel_control_panel_reducers__["a" /* ControlPanelReducer */],
+    settingsState: __WEBPACK_IMPORTED_MODULE_3__control_panel_settings_settings_reducers__["a" /* SettingsReducer */],
+    visualizationState: __WEBPACK_IMPORTED_MODULE_4__visualization_visualization_reducers__["a" /* VisualizationReducer */]
+};
+var combined = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__ngrx_store__["c" /* combineReducers */])(reducers);
+function reducer(state, action) {
+    return combined(state, action);
+}
+var getControlPanelState = function (state) { return state.controlPanelState; };
+var getVisualizationState = function (state) { return state.visualizationState; };
+var getSettingsState = function (state) { return state.settingsState; };
+var getCommitsLoading = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_reselect__["createSelector"])(getControlPanelState, __WEBPACK_IMPORTED_MODULE_2__control_panel_control_panel_reducers__["b" /* getCommitsLoading */]);
+var getCommits = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_reselect__["createSelector"])(getControlPanelState, __WEBPACK_IMPORTED_MODULE_2__control_panel_control_panel_reducers__["c" /* getCommits */]);
+var getLeftCommit = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_reselect__["createSelector"])(getControlPanelState, __WEBPACK_IMPORTED_MODULE_2__control_panel_control_panel_reducers__["d" /* getLeftCommit */]);
+var getRightCommit = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_reselect__["createSelector"])(getControlPanelState, __WEBPACK_IMPORTED_MODULE_2__control_panel_control_panel_reducers__["e" /* getRightCommit */]);
+var getScreenshots = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_reselect__["createSelector"])(getControlPanelState, __WEBPACK_IMPORTED_MODULE_2__control_panel_control_panel_reducers__["f" /* getScreenshots */]);
+var getMetricsLoading = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_reselect__["createSelector"])(getVisualizationState, __WEBPACK_IMPORTED_MODULE_4__visualization_visualization_reducers__["b" /* getMetricsLoading */]);
+var getMetricTree = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_reselect__["createSelector"])(getVisualizationState, __WEBPACK_IMPORTED_MODULE_4__visualization_visualization_reducers__["c" /* getMetricTree */]);
+var getUniqueFileList = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_reselect__["createSelector"])(getVisualizationState, __WEBPACK_IMPORTED_MODULE_4__visualization_visualization_reducers__["d" /* getUniqueFileList */]);
+var getMetricMapping = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_reselect__["createSelector"])(getSettingsState, __WEBPACK_IMPORTED_MODULE_3__control_panel_settings_settings_reducers__["b" /* getMetricMapping */]);
+var getActiveFilter = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_reselect__["createSelector"])(getSettingsState, __WEBPACK_IMPORTED_MODULE_3__control_panel_settings_settings_reducers__["c" /* getActiveFilter */]);
+var getActiveViewType = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_reselect__["createSelector"])(getSettingsState, __WEBPACK_IMPORTED_MODULE_3__control_panel_settings_settings_reducers__["d" /* getActiveViewType */]);
+//# sourceMappingURL=reducers.js.map
 
 /***/ }),
 
@@ -3373,7 +3372,7 @@ exports = module.exports = __webpack_require__(8)();
 
 
 // module
-exports.push([module.i, ".autosuggest-wrapper-container {\n  position: relative; }\n  .autosuggest-wrapper-container button.close {\n    position: absolute;\n    top: 50%;\n    right: 2px;\n    -webkit-transform: translateY(-50%);\n            transform: translateY(-50%);\n    background: #fff;\n    padding: 5px;\n    opacity: 1;\n    outline: 0; }\n    .autosuggest-wrapper-container button.close > span {\n      color: #ccc; }\n      .autosuggest-wrapper-container button.close > span:hover {\n        color: #000; }\n", ""]);
+exports.push([module.i, "", ""]);
 
 // exports
 
@@ -3391,7 +3390,7 @@ exports = module.exports = __webpack_require__(8)();
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, ".autosuggest-wrapper-container {\n  position: relative; }\n  .autosuggest-wrapper-container button.close {\n    position: absolute;\n    top: 50%;\n    right: 2px;\n    -webkit-transform: translateY(-50%);\n            transform: translateY(-50%);\n    background: #fff;\n    padding: 5px;\n    opacity: 1;\n    outline: 0; }\n    .autosuggest-wrapper-container button.close > span {\n      color: #ccc; }\n      .autosuggest-wrapper-container button.close > span:hover {\n        color: #000; }\n", ""]);
 
 // exports
 
@@ -3409,7 +3408,7 @@ exports = module.exports = __webpack_require__(8)();
 
 
 // module
-exports.push([module.i, "#control-panel {\n  position: absolute;\n  top: 0;\n  width: 100%;\n  height: 80px;\n  background: #fff;\n  box-shadow: rgba(0, 0, 0, 0.2) 0 2px 6px 0;\n  z-index: 101; }\n  #control-panel > .control-container {\n    position: relative;\n    float: left;\n    margin: 10px;\n    height: 50px; }\n    #control-panel > .control-container:last-child {\n      float: right; }\n    #control-panel > .control-container .control-item {\n      display: inline-block;\n      padding: 5px; }\n    #control-panel > .control-container .control-label {\n      font-size: 12px;\n      display: block;\n      margin-top: 5px; }\n    #control-panel > .control-container .checkbox-container {\n      position: relative; }\n    #control-panel > .control-container .checkbox-icon {\n      position: absolute;\n      top: 0;\n      width: 30px;\n      height: 30px; }\n    #control-panel > .control-container .checkbox-icon.left {\n      left: 0; }\n    #control-panel > .control-container .checkbox-icon.right {\n      right: 0; }\n    #control-panel > .control-container #search-input {\n      padding-right: 30px; }\n    #control-panel > .control-container button {\n      height: 100%; }\n  #control-panel .divider {\n    height: 60px;\n    border-left: 1px solid #ccc;\n    float: left;\n    margin: 5px 10px; }\n  #control-panel #search-auto-complete-wrapper i {\n    position: absolute;\n    padding: 0 5px;\n    background: #fff;\n    line-height: 30px;\n    color: #ccc; }\n  #control-panel #search-auto-complete-wrapper input[type=text] {\n    text-indent: 28px; }\n  #control-panel #render-calls {\n    position: absolute;\n    top: 0;\n    right: 0;\n    font-size: 10px;\n    z-index: 10000; }\n", ""]);
+exports.push([module.i, "", ""]);
 
 // exports
 
@@ -3427,7 +3426,7 @@ exports = module.exports = __webpack_require__(8)();
 
 
 // module
-exports.push([module.i, "img#gif {\n  width: 100%;\n  margin-bottom: 1rem; }\n", ""]);
+exports.push([module.i, "#control-panel {\n  position: absolute;\n  top: 0;\n  width: 100%;\n  height: 80px;\n  background: #fff;\n  box-shadow: rgba(0, 0, 0, 0.2) 0 2px 6px 0;\n  z-index: 101; }\n  #control-panel > .control-container {\n    position: relative;\n    float: left;\n    margin: 10px;\n    height: 50px; }\n    #control-panel > .control-container:last-child {\n      float: right; }\n    #control-panel > .control-container .control-item {\n      display: inline-block;\n      padding: 5px; }\n    #control-panel > .control-container .control-label {\n      font-size: 12px;\n      display: block;\n      margin-top: 5px; }\n    #control-panel > .control-container .checkbox-container {\n      position: relative; }\n    #control-panel > .control-container .checkbox-icon {\n      position: absolute;\n      top: 0;\n      width: 30px;\n      height: 30px; }\n    #control-panel > .control-container .checkbox-icon.left {\n      left: 0; }\n    #control-panel > .control-container .checkbox-icon.right {\n      right: 0; }\n    #control-panel > .control-container #search-input {\n      padding-right: 30px; }\n    #control-panel > .control-container button {\n      height: 100%; }\n  #control-panel .divider {\n    height: 60px;\n    border-left: 1px solid #ccc;\n    float: left;\n    margin: 5px 10px; }\n  #control-panel #search-auto-complete-wrapper i {\n    position: absolute;\n    padding: 0 5px;\n    background: #fff;\n    line-height: 30px;\n    color: #ccc; }\n  #control-panel #search-auto-complete-wrapper input[type=text] {\n    text-indent: 28px; }\n  #control-panel #render-calls {\n    position: absolute;\n    top: 0;\n    right: 0;\n    font-size: 10px;\n    z-index: 10000; }\n", ""]);
 
 // exports
 
@@ -3445,7 +3444,7 @@ exports = module.exports = __webpack_require__(8)();
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "img#gif {\n  width: 100%;\n  margin-bottom: 1rem; }\n", ""]);
 
 // exports
 
@@ -3535,7 +3534,7 @@ exports = module.exports = __webpack_require__(8)();
 
 
 // module
-exports.push([module.i, "#comparison-panel {\n  position: absolute;\n  bottom: 0;\n  left: 50%;\n  -webkit-transform: translate3d(-50%, 100%, 0) scale(0.1);\n          transform: translate3d(-50%, 100%, 0) scale(0.1);\n  padding: 5px 20px;\n  max-width: 40%;\n  height: 190px;\n  background: #fff;\n  box-shadow: rgba(0, 0, 0, 0.2) 0 2px 6px 0;\n  z-index: 100;\n  transition: -webkit-transform 1.5s ease;\n  transition: transform 1.5s ease;\n  transition: transform 1.5s ease, -webkit-transform 1.5s ease; }\n  #comparison-panel.open {\n    -webkit-transform: translate3d(-50%, 0%, 0) scale(1);\n            transform: translate3d(-50%, 0%, 0) scale(1); }\n  #comparison-panel > .element-name {\n    display: block;\n    text-overflow: ellipsis;\n    text-align: center;\n    white-space: nowrap;\n    overflow: hidden;\n    direction: rtl;\n    margin: 10px auto;\n    padding: 0 10px; }\n  #comparison-panel table #first-commit-id, #comparison-panel table #second-commit-id {\n    max-width: 100px;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap; }\n  #comparison-panel button.close {\n    position: absolute;\n    top: 12px;\n    right: 12px; }\n", ""]);
+exports.push([module.i, "", ""]);
 
 // exports
 
@@ -3553,7 +3552,7 @@ exports = module.exports = __webpack_require__(8)();
 
 
 // module
-exports.push([module.i, "#legend-container {\n  position: absolute;\n  bottom: 0;\n  left: 10px;\n  background: #fff;\n  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.2);\n  z-index: 99; }\n  #legend-container .legend-item {\n    display: inline-block;\n    padding: 3px 10px; }\n    #legend-container .legend-item .legend-color {\n      display: inline-block;\n      width: 10px;\n      height: 10px; }\n\n#legend-item-color-code .legend-color {\n  width: 30px;\n  background: linear-gradient(to right, #ffffff, #ffc905, #f78400, #e92100, #9b1909, #4f1609, #5d0000); }\n", ""]);
+exports.push([module.i, "#comparison-panel {\n  position: absolute;\n  bottom: 0;\n  left: 50%;\n  -webkit-transform: translate3d(-50%, 100%, 0) scale(0.1);\n          transform: translate3d(-50%, 100%, 0) scale(0.1);\n  padding: 5px 20px;\n  max-width: 40%;\n  height: 190px;\n  background: #fff;\n  box-shadow: rgba(0, 0, 0, 0.2) 0 2px 6px 0;\n  z-index: 100;\n  transition: -webkit-transform 1.5s ease;\n  transition: transform 1.5s ease;\n  transition: transform 1.5s ease, -webkit-transform 1.5s ease; }\n  #comparison-panel.open {\n    -webkit-transform: translate3d(-50%, 0%, 0) scale(1);\n            transform: translate3d(-50%, 0%, 0) scale(1); }\n  #comparison-panel > .element-name {\n    display: block;\n    text-overflow: ellipsis;\n    text-align: center;\n    white-space: nowrap;\n    overflow: hidden;\n    direction: rtl;\n    margin: 10px auto;\n    padding: 0 10px; }\n  #comparison-panel table #first-commit-id, #comparison-panel table #second-commit-id {\n    max-width: 100px;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap; }\n  #comparison-panel button.close {\n    position: absolute;\n    top: 12px;\n    right: 12px; }\n", ""]);
 
 // exports
 
@@ -3571,7 +3570,7 @@ exports = module.exports = __webpack_require__(8)();
 
 
 // module
-exports.push([module.i, ".loading-indicator-container {\n  position: fixed;\n  width: 100%;\n  height: 100%;\n  background: rgba(0, 0, 0, 0.7);\n  top: 80px;\n  left: 0;\n  z-index: 1000; }\n  .loading-indicator-container .uil-cube-css {\n    background: none;\n    position: absolute;\n    width: 200px;\n    height: 200px;\n    -webkit-transform: translateX(-50%) scale(0.5);\n    top: calc(50% - 130px);\n    left: 50%; }\n    .loading-indicator-container .uil-cube-css > div {\n      position: absolute;\n      width: 80px;\n      height: 80px;\n      -webkit-animation: uil-cube-css 1s cubic-bezier(0.2, 0.8, 0.2, 0.8) infinite;\n      animation: uil-cube-css 1s cubic-bezier(0.2, 0.8, 0.2, 0.8) infinite; }\n    .loading-indicator-container .uil-cube-css > div:nth-of-type(1) {\n      top: 10px;\n      left: 10px;\n      background: #fff;\n      opacity: 0.9;\n      -webkit-animation-delay: 0s;\n      animation-delay: 0s; }\n    .loading-indicator-container .uil-cube-css > div:nth-of-type(2) {\n      top: 10px;\n      left: 110px;\n      background: #fff;\n      opacity: 0.8;\n      -webkit-animation-delay: 0.1s;\n      animation-delay: 0.1s; }\n    .loading-indicator-container .uil-cube-css > div:nth-of-type(3) {\n      top: 110px;\n      left: 10px;\n      background: #fff;\n      opacity: 0.7;\n      -webkit-animation-delay: 0.3s;\n      animation-delay: 0.3s; }\n    .loading-indicator-container .uil-cube-css > div:nth-of-type(4) {\n      top: 110px;\n      left: 110px;\n      background: #fff;\n      opacity: 0.6;\n      -webkit-animation-delay: 0.2s;\n      animation-delay: 0.2s; }\n\n@-webkit-keyframes uil-cube-css {\n  0% {\n    -webkit-transform: scale(1.4);\n    transform: scale(1.4); }\n  100% {\n    -webkit-transform: scale(1);\n    transform: scale(1); } }\n\n@-webkit-keyframes uil-cube-css {\n  0% {\n    -webkit-transform: scale(1.4);\n    transform: scale(1.4); }\n  100% {\n    -webkit-transform: scale(1);\n    transform: scale(1); } }\n\n@-webkit-keyframes uil-cube-css {\n  0% {\n    -webkit-transform: scale(1.4);\n    transform: scale(1.4); }\n  100% {\n    -webkit-transform: scale(1);\n    transform: scale(1); } }\n\n@keyframes uil-cube-css {\n  0% {\n    -webkit-transform: scale(1.4);\n    transform: scale(1.4); }\n  100% {\n    -webkit-transform: scale(1);\n    transform: scale(1); } }\n", ""]);
+exports.push([module.i, "#legend-container {\n  position: absolute;\n  bottom: 0;\n  left: 10px;\n  background: #fff;\n  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.2);\n  z-index: 99; }\n  #legend-container .legend-item {\n    display: inline-block;\n    padding: 3px 10px; }\n    #legend-container .legend-item .legend-color {\n      display: inline-block;\n      width: 10px;\n      height: 10px; }\n\n#legend-item-color-code .legend-color {\n  width: 30px;\n  background: linear-gradient(to right, #ffffff, #ffc905, #f78400, #e92100, #9b1909, #4f1609, #5d0000); }\n", ""]);
 
 // exports
 
@@ -3589,7 +3588,7 @@ exports = module.exports = __webpack_require__(8)();
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, ".loading-indicator-container {\n  position: fixed;\n  width: 100%;\n  height: 100%;\n  background: rgba(0, 0, 0, 0.7);\n  top: 80px;\n  left: 0;\n  z-index: 1000; }\n  .loading-indicator-container .uil-cube-css {\n    background: none;\n    position: absolute;\n    width: 200px;\n    height: 200px;\n    -webkit-transform: translateX(-50%) scale(0.5);\n    top: calc(50% - 130px);\n    left: 50%; }\n    .loading-indicator-container .uil-cube-css > div {\n      position: absolute;\n      width: 80px;\n      height: 80px;\n      -webkit-animation: uil-cube-css 1s cubic-bezier(0.2, 0.8, 0.2, 0.8) infinite;\n      animation: uil-cube-css 1s cubic-bezier(0.2, 0.8, 0.2, 0.8) infinite; }\n    .loading-indicator-container .uil-cube-css > div:nth-of-type(1) {\n      top: 10px;\n      left: 10px;\n      background: #fff;\n      opacity: 0.9;\n      -webkit-animation-delay: 0s;\n      animation-delay: 0s; }\n    .loading-indicator-container .uil-cube-css > div:nth-of-type(2) {\n      top: 10px;\n      left: 110px;\n      background: #fff;\n      opacity: 0.8;\n      -webkit-animation-delay: 0.1s;\n      animation-delay: 0.1s; }\n    .loading-indicator-container .uil-cube-css > div:nth-of-type(3) {\n      top: 110px;\n      left: 10px;\n      background: #fff;\n      opacity: 0.7;\n      -webkit-animation-delay: 0.3s;\n      animation-delay: 0.3s; }\n    .loading-indicator-container .uil-cube-css > div:nth-of-type(4) {\n      top: 110px;\n      left: 110px;\n      background: #fff;\n      opacity: 0.6;\n      -webkit-animation-delay: 0.2s;\n      animation-delay: 0.2s; }\n\n@-webkit-keyframes uil-cube-css {\n  0% {\n    -webkit-transform: scale(1.4);\n    transform: scale(1.4); }\n  100% {\n    -webkit-transform: scale(1);\n    transform: scale(1); } }\n\n@-webkit-keyframes uil-cube-css {\n  0% {\n    -webkit-transform: scale(1.4);\n    transform: scale(1.4); }\n  100% {\n    -webkit-transform: scale(1);\n    transform: scale(1); } }\n\n@-webkit-keyframes uil-cube-css {\n  0% {\n    -webkit-transform: scale(1.4);\n    transform: scale(1.4); }\n  100% {\n    -webkit-transform: scale(1);\n    transform: scale(1); } }\n\n@keyframes uil-cube-css {\n  0% {\n    -webkit-transform: scale(1.4);\n    transform: scale(1.4); }\n  100% {\n    -webkit-transform: scale(1);\n    transform: scale(1); } }\n", ""]);
 
 // exports
 
@@ -3607,7 +3606,7 @@ exports = module.exports = __webpack_require__(8)();
 
 
 // module
-exports.push([module.i, "#tooltip {\n  position: absolute;\n  top: 0;\n  left: 0;\n  background-color: #2B222A;\n  color: #fff;\n  padding: 10px;\n  font-size: 14px;\n  max-width: 300px;\n  z-index: 101;\n  opacity: 0;\n  transition: opacity 0.75s ease; }\n  #tooltip.visible {\n    opacity: 1; }\n  #tooltip > .element-name {\n    text-overflow: ellipsis;\n    text-align: left;\n    white-space: nowrap;\n    overflow: hidden;\n    direction: rtl;\n    padding-bottom: 5px; }\n  #tooltip table {\n    width: 100%; }\n    #tooltip table td.metric-value-column {\n      padding-left: 5px; }\n", ""]);
+exports.push([module.i, "", ""]);
 
 // exports
 
@@ -3625,6 +3624,24 @@ exports = module.exports = __webpack_require__(8)();
 
 
 // module
+exports.push([module.i, "#tooltip {\n  position: absolute;\n  top: 0;\n  left: 0;\n  background-color: #2B222A;\n  color: #fff;\n  padding: 10px;\n  font-size: 14px;\n  max-width: 300px;\n  z-index: 101;\n  opacity: 0;\n  transition: opacity 0.75s ease; }\n  #tooltip.visible {\n    opacity: 1; }\n  #tooltip > .element-name {\n    text-overflow: ellipsis;\n    text-align: left;\n    white-space: nowrap;\n    overflow: hidden;\n    direction: rtl;\n    padding-bottom: 5px; }\n  #tooltip table {\n    width: 100%; }\n    #tooltip table td.metric-value-column {\n      padding-left: 5px; }\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 436:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(8)();
+// imports
+
+
+// module
 exports.push([module.i, "#stage {\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  overflow: hidden; }\n  #stage > .vertical-line {\n    position: absolute;\n    top: 0;\n    left: 100%;\n    height: 100%;\n    width: 2px;\n    background: #535353;\n    z-index: 98;\n    transition: left 1s ease; }\n  #stage.split > .vertical-line {\n    left: 50%; }\n", ""]);
 
 // exports
@@ -3635,240 +3652,240 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 439:
+/***/ 440:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./af": 148,
-	"./af.js": 148,
-	"./ar": 155,
-	"./ar-dz": 149,
-	"./ar-dz.js": 149,
-	"./ar-kw": 150,
-	"./ar-kw.js": 150,
-	"./ar-ly": 151,
-	"./ar-ly.js": 151,
-	"./ar-ma": 152,
-	"./ar-ma.js": 152,
-	"./ar-sa": 153,
-	"./ar-sa.js": 153,
-	"./ar-tn": 154,
-	"./ar-tn.js": 154,
-	"./ar.js": 155,
-	"./az": 156,
-	"./az.js": 156,
-	"./be": 157,
-	"./be.js": 157,
-	"./bg": 158,
-	"./bg.js": 158,
-	"./bn": 159,
-	"./bn.js": 159,
-	"./bo": 160,
-	"./bo.js": 160,
-	"./br": 161,
-	"./br.js": 161,
-	"./bs": 162,
-	"./bs.js": 162,
-	"./ca": 163,
-	"./ca.js": 163,
-	"./cs": 164,
-	"./cs.js": 164,
-	"./cv": 165,
-	"./cv.js": 165,
-	"./cy": 166,
-	"./cy.js": 166,
-	"./da": 167,
-	"./da.js": 167,
-	"./de": 170,
-	"./de-at": 168,
-	"./de-at.js": 168,
-	"./de-ch": 169,
-	"./de-ch.js": 169,
-	"./de.js": 170,
-	"./dv": 171,
-	"./dv.js": 171,
-	"./el": 172,
-	"./el.js": 172,
-	"./en-au": 173,
-	"./en-au.js": 173,
-	"./en-ca": 174,
-	"./en-ca.js": 174,
-	"./en-gb": 175,
-	"./en-gb.js": 175,
-	"./en-ie": 176,
-	"./en-ie.js": 176,
-	"./en-nz": 177,
-	"./en-nz.js": 177,
-	"./eo": 178,
-	"./eo.js": 178,
-	"./es": 180,
-	"./es-do": 179,
-	"./es-do.js": 179,
-	"./es.js": 180,
-	"./et": 181,
-	"./et.js": 181,
-	"./eu": 182,
-	"./eu.js": 182,
-	"./fa": 183,
-	"./fa.js": 183,
-	"./fi": 184,
-	"./fi.js": 184,
-	"./fo": 185,
-	"./fo.js": 185,
-	"./fr": 188,
-	"./fr-ca": 186,
-	"./fr-ca.js": 186,
-	"./fr-ch": 187,
-	"./fr-ch.js": 187,
-	"./fr.js": 188,
-	"./fy": 189,
-	"./fy.js": 189,
-	"./gd": 190,
-	"./gd.js": 190,
-	"./gl": 191,
-	"./gl.js": 191,
-	"./gom-latn": 192,
-	"./gom-latn.js": 192,
-	"./he": 193,
-	"./he.js": 193,
-	"./hi": 194,
-	"./hi.js": 194,
-	"./hr": 195,
-	"./hr.js": 195,
-	"./hu": 196,
-	"./hu.js": 196,
-	"./hy-am": 197,
-	"./hy-am.js": 197,
-	"./id": 198,
-	"./id.js": 198,
-	"./is": 199,
-	"./is.js": 199,
-	"./it": 200,
-	"./it.js": 200,
-	"./ja": 201,
-	"./ja.js": 201,
-	"./jv": 202,
-	"./jv.js": 202,
-	"./ka": 203,
-	"./ka.js": 203,
-	"./kk": 204,
-	"./kk.js": 204,
-	"./km": 205,
-	"./km.js": 205,
-	"./kn": 206,
-	"./kn.js": 206,
-	"./ko": 207,
-	"./ko.js": 207,
-	"./ky": 208,
-	"./ky.js": 208,
-	"./lb": 209,
-	"./lb.js": 209,
-	"./lo": 210,
-	"./lo.js": 210,
-	"./lt": 211,
-	"./lt.js": 211,
-	"./lv": 212,
-	"./lv.js": 212,
-	"./me": 213,
-	"./me.js": 213,
-	"./mi": 214,
-	"./mi.js": 214,
-	"./mk": 215,
-	"./mk.js": 215,
-	"./ml": 216,
-	"./ml.js": 216,
-	"./mr": 217,
-	"./mr.js": 217,
-	"./ms": 219,
-	"./ms-my": 218,
-	"./ms-my.js": 218,
-	"./ms.js": 219,
-	"./my": 220,
-	"./my.js": 220,
-	"./nb": 221,
-	"./nb.js": 221,
-	"./ne": 222,
-	"./ne.js": 222,
-	"./nl": 224,
-	"./nl-be": 223,
-	"./nl-be.js": 223,
-	"./nl.js": 224,
-	"./nn": 225,
-	"./nn.js": 225,
-	"./pa-in": 226,
-	"./pa-in.js": 226,
-	"./pl": 227,
-	"./pl.js": 227,
-	"./pt": 229,
-	"./pt-br": 228,
-	"./pt-br.js": 228,
-	"./pt.js": 229,
-	"./ro": 230,
-	"./ro.js": 230,
-	"./ru": 231,
-	"./ru.js": 231,
-	"./sd": 232,
-	"./sd.js": 232,
-	"./se": 233,
-	"./se.js": 233,
-	"./si": 234,
-	"./si.js": 234,
-	"./sk": 235,
-	"./sk.js": 235,
-	"./sl": 236,
-	"./sl.js": 236,
-	"./sq": 237,
-	"./sq.js": 237,
-	"./sr": 239,
-	"./sr-cyrl": 238,
-	"./sr-cyrl.js": 238,
-	"./sr.js": 239,
-	"./ss": 240,
-	"./ss.js": 240,
-	"./sv": 241,
-	"./sv.js": 241,
-	"./sw": 242,
-	"./sw.js": 242,
-	"./ta": 243,
-	"./ta.js": 243,
-	"./te": 244,
-	"./te.js": 244,
-	"./tet": 245,
-	"./tet.js": 245,
-	"./th": 246,
-	"./th.js": 246,
-	"./tl-ph": 247,
-	"./tl-ph.js": 247,
-	"./tlh": 248,
-	"./tlh.js": 248,
-	"./tr": 249,
-	"./tr.js": 249,
-	"./tzl": 250,
-	"./tzl.js": 250,
-	"./tzm": 252,
-	"./tzm-latn": 251,
-	"./tzm-latn.js": 251,
-	"./tzm.js": 252,
-	"./uk": 253,
-	"./uk.js": 253,
-	"./ur": 254,
-	"./ur.js": 254,
-	"./uz": 256,
-	"./uz-latn": 255,
-	"./uz-latn.js": 255,
-	"./uz.js": 256,
-	"./vi": 257,
-	"./vi.js": 257,
-	"./x-pseudo": 258,
-	"./x-pseudo.js": 258,
-	"./yo": 259,
-	"./yo.js": 259,
-	"./zh-cn": 260,
-	"./zh-cn.js": 260,
-	"./zh-hk": 261,
-	"./zh-hk.js": 261,
-	"./zh-tw": 262,
-	"./zh-tw.js": 262
+	"./af": 150,
+	"./af.js": 150,
+	"./ar": 157,
+	"./ar-dz": 151,
+	"./ar-dz.js": 151,
+	"./ar-kw": 152,
+	"./ar-kw.js": 152,
+	"./ar-ly": 153,
+	"./ar-ly.js": 153,
+	"./ar-ma": 154,
+	"./ar-ma.js": 154,
+	"./ar-sa": 155,
+	"./ar-sa.js": 155,
+	"./ar-tn": 156,
+	"./ar-tn.js": 156,
+	"./ar.js": 157,
+	"./az": 158,
+	"./az.js": 158,
+	"./be": 159,
+	"./be.js": 159,
+	"./bg": 160,
+	"./bg.js": 160,
+	"./bn": 161,
+	"./bn.js": 161,
+	"./bo": 162,
+	"./bo.js": 162,
+	"./br": 163,
+	"./br.js": 163,
+	"./bs": 164,
+	"./bs.js": 164,
+	"./ca": 165,
+	"./ca.js": 165,
+	"./cs": 166,
+	"./cs.js": 166,
+	"./cv": 167,
+	"./cv.js": 167,
+	"./cy": 168,
+	"./cy.js": 168,
+	"./da": 169,
+	"./da.js": 169,
+	"./de": 172,
+	"./de-at": 170,
+	"./de-at.js": 170,
+	"./de-ch": 171,
+	"./de-ch.js": 171,
+	"./de.js": 172,
+	"./dv": 173,
+	"./dv.js": 173,
+	"./el": 174,
+	"./el.js": 174,
+	"./en-au": 175,
+	"./en-au.js": 175,
+	"./en-ca": 176,
+	"./en-ca.js": 176,
+	"./en-gb": 177,
+	"./en-gb.js": 177,
+	"./en-ie": 178,
+	"./en-ie.js": 178,
+	"./en-nz": 179,
+	"./en-nz.js": 179,
+	"./eo": 180,
+	"./eo.js": 180,
+	"./es": 182,
+	"./es-do": 181,
+	"./es-do.js": 181,
+	"./es.js": 182,
+	"./et": 183,
+	"./et.js": 183,
+	"./eu": 184,
+	"./eu.js": 184,
+	"./fa": 185,
+	"./fa.js": 185,
+	"./fi": 186,
+	"./fi.js": 186,
+	"./fo": 187,
+	"./fo.js": 187,
+	"./fr": 190,
+	"./fr-ca": 188,
+	"./fr-ca.js": 188,
+	"./fr-ch": 189,
+	"./fr-ch.js": 189,
+	"./fr.js": 190,
+	"./fy": 191,
+	"./fy.js": 191,
+	"./gd": 192,
+	"./gd.js": 192,
+	"./gl": 193,
+	"./gl.js": 193,
+	"./gom-latn": 194,
+	"./gom-latn.js": 194,
+	"./he": 195,
+	"./he.js": 195,
+	"./hi": 196,
+	"./hi.js": 196,
+	"./hr": 197,
+	"./hr.js": 197,
+	"./hu": 198,
+	"./hu.js": 198,
+	"./hy-am": 199,
+	"./hy-am.js": 199,
+	"./id": 200,
+	"./id.js": 200,
+	"./is": 201,
+	"./is.js": 201,
+	"./it": 202,
+	"./it.js": 202,
+	"./ja": 203,
+	"./ja.js": 203,
+	"./jv": 204,
+	"./jv.js": 204,
+	"./ka": 205,
+	"./ka.js": 205,
+	"./kk": 206,
+	"./kk.js": 206,
+	"./km": 207,
+	"./km.js": 207,
+	"./kn": 208,
+	"./kn.js": 208,
+	"./ko": 209,
+	"./ko.js": 209,
+	"./ky": 210,
+	"./ky.js": 210,
+	"./lb": 211,
+	"./lb.js": 211,
+	"./lo": 212,
+	"./lo.js": 212,
+	"./lt": 213,
+	"./lt.js": 213,
+	"./lv": 214,
+	"./lv.js": 214,
+	"./me": 215,
+	"./me.js": 215,
+	"./mi": 216,
+	"./mi.js": 216,
+	"./mk": 217,
+	"./mk.js": 217,
+	"./ml": 218,
+	"./ml.js": 218,
+	"./mr": 219,
+	"./mr.js": 219,
+	"./ms": 221,
+	"./ms-my": 220,
+	"./ms-my.js": 220,
+	"./ms.js": 221,
+	"./my": 222,
+	"./my.js": 222,
+	"./nb": 223,
+	"./nb.js": 223,
+	"./ne": 224,
+	"./ne.js": 224,
+	"./nl": 226,
+	"./nl-be": 225,
+	"./nl-be.js": 225,
+	"./nl.js": 226,
+	"./nn": 227,
+	"./nn.js": 227,
+	"./pa-in": 228,
+	"./pa-in.js": 228,
+	"./pl": 229,
+	"./pl.js": 229,
+	"./pt": 231,
+	"./pt-br": 230,
+	"./pt-br.js": 230,
+	"./pt.js": 231,
+	"./ro": 232,
+	"./ro.js": 232,
+	"./ru": 233,
+	"./ru.js": 233,
+	"./sd": 234,
+	"./sd.js": 234,
+	"./se": 235,
+	"./se.js": 235,
+	"./si": 236,
+	"./si.js": 236,
+	"./sk": 237,
+	"./sk.js": 237,
+	"./sl": 238,
+	"./sl.js": 238,
+	"./sq": 239,
+	"./sq.js": 239,
+	"./sr": 241,
+	"./sr-cyrl": 240,
+	"./sr-cyrl.js": 240,
+	"./sr.js": 241,
+	"./ss": 242,
+	"./ss.js": 242,
+	"./sv": 243,
+	"./sv.js": 243,
+	"./sw": 244,
+	"./sw.js": 244,
+	"./ta": 245,
+	"./ta.js": 245,
+	"./te": 246,
+	"./te.js": 246,
+	"./tet": 247,
+	"./tet.js": 247,
+	"./th": 248,
+	"./th.js": 248,
+	"./tl-ph": 249,
+	"./tl-ph.js": 249,
+	"./tlh": 250,
+	"./tlh.js": 250,
+	"./tr": 251,
+	"./tr.js": 251,
+	"./tzl": 252,
+	"./tzl.js": 252,
+	"./tzm": 254,
+	"./tzm-latn": 253,
+	"./tzm-latn.js": 253,
+	"./tzm.js": 254,
+	"./uk": 255,
+	"./uk.js": 255,
+	"./ur": 256,
+	"./ur.js": 256,
+	"./uz": 258,
+	"./uz-latn": 257,
+	"./uz-latn.js": 257,
+	"./uz.js": 258,
+	"./vi": 259,
+	"./vi.js": 259,
+	"./x-pseudo": 260,
+	"./x-pseudo.js": 260,
+	"./yo": 261,
+	"./yo.js": 261,
+	"./zh-cn": 262,
+	"./zh-cn.js": 262,
+	"./zh-hk": 263,
+	"./zh-hk.js": 263,
+	"./zh-tw": 264,
+	"./zh-tw.js": 264
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -3884,120 +3901,120 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 439;
+webpackContext.id = 440;
 
-
-/***/ }),
-
-/***/ 450:
-/***/ (function(module, exports) {
-
-module.exports = "<app-control-panel></app-control-panel>\n<app-visualization></app-visualization>"
 
 /***/ }),
 
 /***/ 451:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"autosuggest-wrapper-container\">\n    <input #inputElement class=\"form-control\"\n           [placeholder]=\"placeholder\"\n           ngui-auto-complete\n           [(ngModel)]=\"model\"\n           [source]=\"source\"\n           value-property-name=\"id\"\n           display-property-name=\"name\"\n           [value-formatter]=\"valueFormatter\"\n           [list-formatter]=\"listFormatter\"\n           [no-match-found-text]=\"noMatchFoundText\"\n           [match-formatted]=\"matchFormatted\"\n           (valueChanged)=\"handleValueChanged($event)\" />\n    <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"handleClearInputClicked()\">\n        <span aria-hidden=\"true\">&times;</span>\n    </button>\n</div>"
+module.exports = "<app-control-panel></app-control-panel>\n<app-visualization></app-visualization>"
 
 /***/ }),
 
 /***/ 452:
 /***/ (function(module, exports) {
 
-module.exports = "<app-autosuggest-wrapper\n        [placeholder]=\"'Datum, Commit-ID, Autor'\"\n        [(model)]=\"selected\"\n        [source]=\"commits\"\n        [valuePropertyName]=\"id\"\n        [displayPropertyName]=\"name\"\n        [noMatchFoundText]=\"'Nichts gefunden.'\"\n        [matchFormatted]=\"true\"\n        [valueFormatter]=\"formatCommit\"\n        [listFormatter]=\"formatCommit\"\n        (valueChanged)=\"handleCommitChanged($event)\">\n</app-autosuggest-wrapper>\n\n<p *ngIf=\"loading\">LADE</p>"
+module.exports = "<div class=\"autosuggest-wrapper-container\">\n    <input #inputElement class=\"form-control\"\n           [placeholder]=\"placeholder\"\n           ngui-auto-complete\n           [(ngModel)]=\"model\"\n           [source]=\"source\"\n           value-property-name=\"id\"\n           display-property-name=\"name\"\n           [value-formatter]=\"valueFormatter\"\n           [list-formatter]=\"listFormatter\"\n           [no-match-found-text]=\"noMatchFoundText\"\n           [match-formatted]=\"matchFormatted\"\n           (valueChanged)=\"handleValueChanged($event)\" />\n    <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"handleClearInputClicked()\">\n        <span aria-hidden=\"true\">&times;</span>\n    </button>\n</div>"
 
 /***/ }),
 
 /***/ 453:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\">\n    <form id=\"control-panel\" class=\"row align-items-center justify-content-between\">\n        <div class=\"col-4\">\n            <div class=\"row\">\n                <div class=\"col-6\">\n                    <small>Erste Revision</small>\n                    <app-commit-chooser\n                            [commitType]=\"commitTypes.left\"\n                            [commits]=\"commits$ | async\"\n                            [loading]=\"commitsLoading$ | async\"\n                            [selected]=\"leftCommit$ | async\"\n                            (changeCommit)=\"handleCommitChanged($event)\"></app-commit-chooser>\n                </div>\n\n                <div class=\"col-6\">\n                    <small>Zweite Revision</small>\n                    <app-commit-chooser\n                            [commitType]=\"commitTypes.right\"\n                            [commits]=\"commits$ | async\"\n                            [loading]=\"commitsLoading$ | async\"\n                            [selected]=\"rightCommit$ | async\"\n                            (changeCommit)=\"handleCommitChanged($event)\"></app-commit-chooser>\n                </div>\n            </div>\n        </div>\n        <div class=\"col-6\">\n            <app-settings></app-settings>\n            <app-screenshot\n                    [activeViewType]=\"activeViewType$ | async\"\n                    [screenShots]=\"screenShots$ | async\"\n                    (handleTakeScreenshot)=\"handleTakeScreenshot($event)\"\n                    (handleRemoveScreenshots)=\"handleRemoveScreenshots($event)\">\n            </app-screenshot>\n        </div>\n        <div class=\"col-2\">\n            <small>Suche</small>\n            <app-search [uniqueFileList]=\"uniqueFileList$ | async\" (startSearch)=\"handleSearchStarted($event)\"></app-search>\n        </div>\n    </form>\n</div>"
+module.exports = "<app-autosuggest-wrapper\n        [placeholder]=\"'Datum, Commit-ID, Autor'\"\n        [(model)]=\"selected\"\n        [source]=\"commits\"\n        [valuePropertyName]=\"id\"\n        [displayPropertyName]=\"name\"\n        [noMatchFoundText]=\"'Nichts gefunden.'\"\n        [matchFormatted]=\"true\"\n        [valueFormatter]=\"formatCommit\"\n        [listFormatter]=\"formatCommit\"\n        (valueChanged)=\"handleCommitChanged($event)\">\n</app-autosuggest-wrapper>\n\n<p *ngIf=\"loading\">LADE</p>"
 
 /***/ }),
 
 /***/ 454:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"btn-group\">\n    <button type=\"button\" class=\"btn btn-secondary\" (click)=\"takeScreenshot()\"><i class=\"fa fa-camera\" aria-hidden=\"true\"></i> Screenshot speichern</button>\n    <button type=\"button\" class=\"btn btn-secondary dropdown-toggle dropdown-toggle-split\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n        <span class=\"sr-only\">Toggle Dropdown</span>\n    </button>\n    <div id=\"screenshot-dropdown\" class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n        <div class=\"form-group\">\n            <label>GIF erstellen für:</label>\n            <div class=\"btn-group\">\n                <button type=\"button\" class=\"btn btn-secondary\" (click)=\"generateGif(screenTypes.left)\">{{activeViewType === viewTypes.split ? 'Erster Commit' : 'Kombinierte Ansicht'}}</button>\n                <button type=\"button\" class=\"btn btn-secondary\" (click)=\"generateGif(screenTypes.right)\" *ngIf=\"activeViewType === viewTypes.split\">Zweiter Commit</button>\n            </div>\n        </div>\n\n        <img *ngIf=\"gifSource && !isGenerating\" id=\"gif\" src=\"{{gifSource}}\">\n        <p *ngIf=\"isGenerating\">GIF wird erstellt ...</p>\n        <small *ngIf=\"!gifSource && !isGenerating\">Ein GIF wird aus gespeicherten Screenshots erzeugt (Button \"Screenshot speichern\")</small>\n\n        <div class=\"form-group\" *ngIf=\"gifSource\">\n            <button type=\"button\" class=\"btn btn-danger\" (click)=\"removeScreenshots()\">zurücksetzen</button>\n        </div>\n    </div>\n</div>"
+module.exports = "<div class=\"container-fluid\">\n    <form id=\"control-panel\" class=\"row align-items-center justify-content-between\">\n        <div class=\"col-4\">\n            <div class=\"row\">\n                <div class=\"col-6\">\n                    <small>Erste Revision</small>\n                    <app-commit-chooser\n                            [commitType]=\"commitTypes.left\"\n                            [commits]=\"commits$ | async\"\n                            [loading]=\"commitsLoading$ | async\"\n                            [selected]=\"leftCommit$ | async\"\n                            (changeCommit)=\"handleCommitChanged($event)\"></app-commit-chooser>\n                </div>\n\n                <div class=\"col-6\">\n                    <small>Zweite Revision</small>\n                    <app-commit-chooser\n                            [commitType]=\"commitTypes.right\"\n                            [commits]=\"commits$ | async\"\n                            [loading]=\"commitsLoading$ | async\"\n                            [selected]=\"rightCommit$ | async\"\n                            (changeCommit)=\"handleCommitChanged($event)\"></app-commit-chooser>\n                </div>\n            </div>\n        </div>\n        <div class=\"col-6\">\n            <app-settings></app-settings>\n            <app-screenshot\n                    [activeViewType]=\"activeViewType$ | async\"\n                    [screenShots]=\"screenShots$ | async\"\n                    (handleTakeScreenshot)=\"handleTakeScreenshot($event)\"\n                    (handleRemoveScreenshots)=\"handleRemoveScreenshots($event)\">\n            </app-screenshot>\n        </div>\n        <div class=\"col-2\">\n            <small>Suche</small>\n            <app-search [uniqueFileList]=\"uniqueFileList$ | async\" (startSearch)=\"handleSearchStarted($event)\"></app-search>\n        </div>\n    </form>\n</div>"
 
 /***/ }),
 
 /***/ 455:
 /***/ (function(module, exports) {
 
-module.exports = "<app-autosuggest-wrapper\n        [placeholder]=\"'Datei, Modul, ...'\"\n        [source]=\"uniqueFileList\"\n        [noMatchFoundText]=\"'Nichts gefunden.'\"\n        [listFormatter]=\"autocompleteListFormatter\"\n        (valueChanged)=\"handleSearchChanged($event)\">\n</app-autosuggest-wrapper>"
+module.exports = "<div class=\"btn-group\">\n    <button type=\"button\" class=\"btn btn-secondary\" (click)=\"takeScreenshot()\"><i class=\"fa fa-camera\" aria-hidden=\"true\"></i> Screenshot speichern</button>\n    <button type=\"button\" class=\"btn btn-secondary dropdown-toggle dropdown-toggle-split\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n        <span class=\"sr-only\">Toggle Dropdown</span>\n    </button>\n    <div id=\"screenshot-dropdown\" class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n        <div class=\"form-group\">\n            <label>GIF erstellen für:</label>\n            <div class=\"btn-group\">\n                <button type=\"button\" class=\"btn btn-secondary\" (click)=\"generateGif(screenTypes.left)\">{{activeViewType === viewTypes.split ? 'Erster Commit' : 'Kombinierte Ansicht'}}</button>\n                <button type=\"button\" class=\"btn btn-secondary\" (click)=\"generateGif(screenTypes.right)\" *ngIf=\"activeViewType === viewTypes.split\">Zweiter Commit</button>\n            </div>\n        </div>\n\n        <img *ngIf=\"gifSource && !isGenerating\" id=\"gif\" src=\"{{gifSource}}\">\n        <p *ngIf=\"isGenerating\">GIF wird erstellt ...</p>\n        <small *ngIf=\"!gifSource && !isGenerating\">Ein GIF wird aus gespeicherten Screenshots erzeugt (Button \"Screenshot speichern\")</small>\n\n        <div class=\"form-group\" *ngIf=\"gifSource\">\n            <button type=\"button\" class=\"btn btn-danger\" (click)=\"removeScreenshots()\">zurücksetzen</button>\n        </div>\n    </div>\n</div>"
 
 /***/ }),
 
 /***/ 456:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"btn-group\">\n    <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n        <i class=\"fa fa-filter\" aria-hidden=\"true\"></i> Filter\n    </button>\n    <div id=\"filter-dropdown\" class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n        <div class=\"custom-controls-stacked\">\n            <label class=\"custom-control custom-checkbox\">\n                <input type=\"checkbox\" class=\"custom-control-input\" [(ngModel)]=\"activeFilter.unchanged\" (change)=\"handleFilterChanged()\">\n                <span class=\"custom-control-indicator\"></span>\n                <span class=\"custom-control-description\">unverändert</span>\n            </label>\n            <label class=\"custom-control custom-checkbox\">\n                <input type=\"checkbox\" class=\"custom-control-input\" [(ngModel)]=\"activeFilter.changed\" (change)=\"handleFilterChanged()\">\n                <span class=\"custom-control-indicator\"></span>\n                <span class=\"custom-control-description\">verändert</span>\n            </label>\n            <label class=\"custom-control custom-checkbox\">\n                <input type=\"checkbox\" class=\"custom-control-input\" [(ngModel)]=\"activeFilter.deleted\" (change)=\"handleFilterChanged()\">\n                <span class=\"custom-control-indicator\"></span>\n                <span class=\"custom-control-description\">gelöscht</span>\n            </label>\n            <label class=\"custom-control custom-checkbox\">\n                <input type=\"checkbox\" class=\"custom-control-input\" [(ngModel)]=\"activeFilter.added\" (change)=\"handleFilterChanged()\">\n                <span class=\"custom-control-indicator\"></span>\n                <span class=\"custom-control-description\">hinzugefügt</span>\n            </label>\n            <label class=\"custom-control custom-checkbox\">\n                <input type=\"checkbox\" class=\"custom-control-input\" [(ngModel)]=\"activeFilter.moved\" (change)=\"handleFilterChanged()\">\n                <span class=\"custom-control-indicator\"></span>\n                <span class=\"custom-control-description\">umbenannt/verschoben</span>\n            </label>\n        </div>\n    </div>\n</div>"
+module.exports = "<app-autosuggest-wrapper\n        [placeholder]=\"'Datei, Modul, ...'\"\n        [source]=\"uniqueFileList\"\n        [noMatchFoundText]=\"'Nichts gefunden.'\"\n        [listFormatter]=\"autocompleteListFormatter\"\n        (valueChanged)=\"handleSearchChanged($event)\">\n</app-autosuggest-wrapper>"
 
 /***/ }),
 
 /***/ 457:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"btn-group\">\n    <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n        <i class=\"fa fa-bar-chart\" aria-hidden=\"true\"></i> Mapping\n    </button>\n    <div id=\"metric-mapping-dropdown\" class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n        <div class=\"form-group\">\n            <label for=\"height-metric-name\">Höhe</label>\n            <select id=\"height-metric-name\" class=\"custom-select\" [(ngModel)]=\"metricMapping.heightMetricName\">\n                <option *ngFor=\"let metricName of metricNames\" [ngValue]=\"metricName.name\">{{metricName.shortName}}</option>\n            </select>\n        </div>\n\n        <div class=\"form-group\">\n            <label for=\"groundarea-metric-name\">Grundfläche</label>\n            <select id=\"groundarea-metric-name\" class=\"custom-select\" [(ngModel)]=\"metricMapping.groundAreaMetricName\">\n                <option *ngFor=\"let metricName of metricNames\" [ngValue]=\"metricName.name\">{{metricName.shortName}}</option>\n            </select>\n        </div>\n\n        <div class=\"form-group\">\n            <label for=\"color-metric-name\">Farbe</label>\n            <select id=\"color-metric-name\" class=\"custom-select\" [(ngModel)]=\"metricMapping.colorMetricName\">\n                <option *ngFor=\"let metricName of metricNames\" [ngValue]=\"metricName.name\">{{metricName.shortName}}</option>\n            </select>\n        </div>\n\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"applyMetricMappings()\">übernehmen</button>\n    </div>\n</div>"
+module.exports = "<div class=\"btn-group\">\n    <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n        <i class=\"fa fa-filter\" aria-hidden=\"true\"></i> Filter\n    </button>\n    <div id=\"filter-dropdown\" class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n        <div class=\"custom-controls-stacked\">\n            <label class=\"custom-control custom-checkbox\">\n                <input type=\"checkbox\" class=\"custom-control-input\" [(ngModel)]=\"activeFilter.unchanged\" (change)=\"handleFilterChanged()\">\n                <span class=\"custom-control-indicator\"></span>\n                <span class=\"custom-control-description\">unverändert</span>\n            </label>\n            <label class=\"custom-control custom-checkbox\">\n                <input type=\"checkbox\" class=\"custom-control-input\" [(ngModel)]=\"activeFilter.changed\" (change)=\"handleFilterChanged()\">\n                <span class=\"custom-control-indicator\"></span>\n                <span class=\"custom-control-description\">verändert</span>\n            </label>\n            <label class=\"custom-control custom-checkbox\">\n                <input type=\"checkbox\" class=\"custom-control-input\" [(ngModel)]=\"activeFilter.deleted\" (change)=\"handleFilterChanged()\">\n                <span class=\"custom-control-indicator\"></span>\n                <span class=\"custom-control-description\">gelöscht</span>\n            </label>\n            <label class=\"custom-control custom-checkbox\">\n                <input type=\"checkbox\" class=\"custom-control-input\" [(ngModel)]=\"activeFilter.added\" (change)=\"handleFilterChanged()\">\n                <span class=\"custom-control-indicator\"></span>\n                <span class=\"custom-control-description\">hinzugefügt</span>\n            </label>\n            <label class=\"custom-control custom-checkbox\">\n                <input type=\"checkbox\" class=\"custom-control-input\" [(ngModel)]=\"activeFilter.moved\" (change)=\"handleFilterChanged()\">\n                <span class=\"custom-control-indicator\"></span>\n                <span class=\"custom-control-description\">umbenannt/verschoben</span>\n            </label>\n        </div>\n    </div>\n</div>"
 
 /***/ }),
 
 /***/ 458:
 /***/ (function(module, exports) {
 
-module.exports = "<div>\n    <small>Einstellungen</small>\n</div>\n<app-view-control [activeViewType]=\"activeViewType$ | async\" (viewTypeChanged)=\"handleViewTypeChanged($event)\"></app-view-control>\n<app-filter [activeFilter]=\"activeFilter$ | async\" (filterChanged)=\"handleFilterChanged($event)\"></app-filter>\n<app-metric-mapping [metricMapping]=\"metricMapping$ | async\" (metricMappingChanged)=\"handleMetricMappingChanged($event)\"></app-metric-mapping>"
+module.exports = "<div class=\"btn-group\">\n    <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n        <i class=\"fa fa-bar-chart\" aria-hidden=\"true\"></i> Mapping\n    </button>\n    <div id=\"metric-mapping-dropdown\" class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n        <div class=\"form-group\">\n            <label for=\"height-metric-name\">Höhe</label>\n            <select id=\"height-metric-name\" class=\"custom-select\" [(ngModel)]=\"metricMapping.heightMetricName\">\n                <option *ngFor=\"let metricName of metricNames\" [ngValue]=\"metricName.name\">{{metricName.shortName}}</option>\n            </select>\n        </div>\n\n        <div class=\"form-group\">\n            <label for=\"groundarea-metric-name\">Grundfläche</label>\n            <select id=\"groundarea-metric-name\" class=\"custom-select\" [(ngModel)]=\"metricMapping.groundAreaMetricName\">\n                <option *ngFor=\"let metricName of metricNames\" [ngValue]=\"metricName.name\">{{metricName.shortName}}</option>\n            </select>\n        </div>\n\n        <div class=\"form-group\">\n            <label for=\"color-metric-name\">Farbe</label>\n            <select id=\"color-metric-name\" class=\"custom-select\" [(ngModel)]=\"metricMapping.colorMetricName\">\n                <option *ngFor=\"let metricName of metricNames\" [ngValue]=\"metricName.name\">{{metricName.shortName}}</option>\n            </select>\n        </div>\n\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"applyMetricMappings()\">übernehmen</button>\n    </div>\n</div>"
 
 /***/ }),
 
 /***/ 459:
 /***/ (function(module, exports) {
 
-module.exports = "<label class=\"custom-control custom-radio\">\n    <input id=\"radio-splitscreen\" type=\"radio\" name=\"radio-group-screen\" class=\"custom-control-input\" [value]=\"viewTypes.split\" (click)=\"changeViewType(viewTypes.split)\" [checked]=\"activeViewType === viewTypes.split\" />\n    <span class=\"custom-control-indicator\"></span>\n    <span class=\"custom-control-description\">nebeneinander</span>\n</label>\n<label class=\"custom-control custom-radio\">\n    <input id=\"radio-fullscreen\" type=\"radio\" name=\"radio-group-screen\" class=\"custom-control-input\" [value]=\"viewTypes.merged\" (click)=\"changeViewType(viewTypes.merged)\" [checked]=\"activeViewType === viewTypes.merged\" />\n    <span class=\"custom-control-indicator\"></span>\n    <span class=\"custom-control-description\">kombiniert</span>\n</label>"
+module.exports = "<div>\n    <small>Einstellungen</small>\n</div>\n<app-view-control [activeViewType]=\"activeViewType$ | async\" (viewTypeChanged)=\"handleViewTypeChanged($event)\"></app-view-control>\n<app-filter [activeFilter]=\"activeFilter$ | async\" (filterChanged)=\"handleFilterChanged($event)\"></app-filter>\n<app-metric-mapping [metricMapping]=\"metricMapping$ | async\" (metricMappingChanged)=\"handleMetricMappingChanged($event)\"></app-metric-mapping>"
 
 /***/ }),
 
 /***/ 460:
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"comparison-panel\">\n    <strong class=\"element-name\">{{elementName}}</strong>\n    <div class=\"table-container\">\n        <table id=\"comparison-table\" class=\"table table-striped table-sm\">\n            <thead>\n            <tr>\n                <th>Metrik</th>\n                <th id=\"first-commit-id\">{{leftCommit?.name}}</th>\n                <th id=\"second-commit-id\">{{rightCommit?.name}}</th>\n                <th>Änderung</th>\n            </tr>\n            </thead>\n            <tbody>\n                <tr *ngFor=\"let row of tableRows\">\n                    <td>{{row.metricName}}</td>\n                    <td>{{row.leftCommitValue}}</td>\n                    <td>{{row.rightCommitValue}}</td>\n                    <td>\n                        <i *ngIf=\"row.difference > 0\" class=\"fa fa-caret-up\" aria-hidden=\"true\"></i>\n                        <i *ngIf=\"row.difference < 0\" class=\"fa fa-caret-down\" aria-hidden=\"true\"></i>\n                        <i *ngIf=\"row.difference === 0\" class=\"fa fa-caret-right\" aria-hidden=\"true\"></i>\n                        {{row.difference}}\n                    </td>\n                </tr>\n            </tbody>\n        </table>\n    </div>\n    <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"handleClose()\">\n        <span aria-hidden=\"true\">&times;</span>\n    </button>\n</div>"
+module.exports = "<label class=\"custom-control custom-radio\">\n    <input id=\"radio-splitscreen\" type=\"radio\" name=\"radio-group-screen\" class=\"custom-control-input\" [value]=\"viewTypes.split\" (click)=\"changeViewType(viewTypes.split)\" [checked]=\"activeViewType === viewTypes.split\" />\n    <span class=\"custom-control-indicator\"></span>\n    <span class=\"custom-control-description\">nebeneinander</span>\n</label>\n<label class=\"custom-control custom-radio\">\n    <input id=\"radio-fullscreen\" type=\"radio\" name=\"radio-group-screen\" class=\"custom-control-input\" [value]=\"viewTypes.merged\" (click)=\"changeViewType(viewTypes.merged)\" [checked]=\"activeViewType === viewTypes.merged\" />\n    <span class=\"custom-control-indicator\"></span>\n    <span class=\"custom-control-description\">kombiniert</span>\n</label>"
 
 /***/ }),
 
 /***/ 461:
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"legend-container\">\n    <div id=\"legend-item-color-code\" class=\"legend-item\" *ngIf=\"activeViewType === viewTypes.split\">\n        <span class=\"legend-color\"></span>\n        <small class=\"legend-label\">{{colorMetricName}}</small>\n    </div>\n    <div id=\"legend-item-commit-1\" class=\"legend-item\" *ngIf=\"activeViewType === viewTypes.merged\">\n        <span class=\"legend-color\" [ngStyle]=\"{'background': colorFirstCommit}\"></span>\n        <small class=\"legend-label\">Erste Revision</small>\n    </div>\n    <div id=\"legend-item-commit-2\" class=\"legend-item\" *ngIf=\"activeViewType === viewTypes.merged\">\n        <span class=\"legend-color\" [ngStyle]=\"{'background': colorSecondCommit}\"></span>\n        <small class=\"legend-label\">Zweite Revision</small>\n    </div>\n    <div id=\"legend-item-added-files\" class=\"legend-item\" *ngIf=\"activeViewType === viewTypes.merged\">\n        <span class=\"legend-color\" [ngStyle]=\"{'background': colorAddedFile}\"></span>\n        <small class=\"legend-label\">hinzugefügt</small>\n    </div>\n    <div id=\"legend-item-deleted-files\" class=\"legend-item\" *ngIf=\"activeViewType === viewTypes.merged\">\n        <span class=\"legend-color\" [ngStyle]=\"{'background': colorDeletedFile}\"></span>\n        <small class=\"legend-label\">gelöscht</small>\n    </div>\n    <div id=\"legend-item-unchanged-files\" class=\"legend-item\" *ngIf=\"activeViewType === viewTypes.merged\">\n        <span class=\"legend-color\" [ngStyle]=\"{'background': colorUnchangedFile}\"></span>\n        <small class=\"legend-label\">unverändert</small>\n    </div>\n</div>"
+module.exports = "<div id=\"comparison-panel\">\n    <strong class=\"element-name\">{{elementName}}</strong>\n    <div class=\"table-container\">\n        <table id=\"comparison-table\" class=\"table table-striped table-sm\">\n            <thead>\n            <tr>\n                <th>Metrik</th>\n                <th id=\"first-commit-id\">{{leftCommit?.name}}</th>\n                <th id=\"second-commit-id\">{{rightCommit?.name}}</th>\n                <th>Änderung</th>\n            </tr>\n            </thead>\n            <tbody>\n                <tr *ngFor=\"let row of tableRows\">\n                    <td>{{row.metricName}}</td>\n                    <td>{{row.leftCommitValue}}</td>\n                    <td>{{row.rightCommitValue}}</td>\n                    <td>\n                        <i *ngIf=\"row.difference > 0\" class=\"fa fa-caret-up\" aria-hidden=\"true\"></i>\n                        <i *ngIf=\"row.difference < 0\" class=\"fa fa-caret-down\" aria-hidden=\"true\"></i>\n                        <i *ngIf=\"row.difference === 0\" class=\"fa fa-caret-right\" aria-hidden=\"true\"></i>\n                        {{row.difference}}\n                    </td>\n                </tr>\n            </tbody>\n        </table>\n    </div>\n    <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"handleClose()\">\n        <span aria-hidden=\"true\">&times;</span>\n    </button>\n</div>"
 
 /***/ }),
 
 /***/ 462:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"loading-indicator-container\">\n    <div class=\"uil-cube-css\">\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n    </div>\n</div>"
+module.exports = "<div id=\"legend-container\">\n    <div id=\"legend-item-color-code\" class=\"legend-item\" *ngIf=\"activeViewType === viewTypes.split\">\n        <span class=\"legend-color\"></span>\n        <small class=\"legend-label\">{{colorMetricName}}</small>\n    </div>\n    <div id=\"legend-item-commit-1\" class=\"legend-item\" *ngIf=\"activeViewType === viewTypes.merged\">\n        <span class=\"legend-color\" [ngStyle]=\"{'background': colorFirstCommit}\"></span>\n        <small class=\"legend-label\">Erste Revision</small>\n    </div>\n    <div id=\"legend-item-commit-2\" class=\"legend-item\" *ngIf=\"activeViewType === viewTypes.merged\">\n        <span class=\"legend-color\" [ngStyle]=\"{'background': colorSecondCommit}\"></span>\n        <small class=\"legend-label\">Zweite Revision</small>\n    </div>\n    <div id=\"legend-item-added-files\" class=\"legend-item\" *ngIf=\"activeViewType === viewTypes.merged\">\n        <span class=\"legend-color\" [ngStyle]=\"{'background': colorAddedFile}\"></span>\n        <small class=\"legend-label\">hinzugefügt</small>\n    </div>\n    <div id=\"legend-item-deleted-files\" class=\"legend-item\" *ngIf=\"activeViewType === viewTypes.merged\">\n        <span class=\"legend-color\" [ngStyle]=\"{'background': colorDeletedFile}\"></span>\n        <small class=\"legend-label\">gelöscht</small>\n    </div>\n    <div id=\"legend-item-unchanged-files\" class=\"legend-item\" *ngIf=\"activeViewType === viewTypes.merged\">\n        <span class=\"legend-color\" [ngStyle]=\"{'background': colorUnchangedFile}\"></span>\n        <small class=\"legend-label\">unverändert</small>\n    </div>\n</div>"
 
 /***/ }),
 
 /***/ 463:
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "<div class=\"loading-indicator-container\">\n    <div class=\"uil-cube-css\">\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n    </div>\n</div>"
 
 /***/ }),
 
 /***/ 464:
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"tooltip\">\n    <div class=\"element-name\">{{(content$ | async)?.elementName}}</div>\n    <table>\n        <tr *ngFor=\"let metric of (content$ | async)?.metrics | keyValue\">\n            <td class=\"metric-name-column\"><small>{{metric.key}}</small></td>\n            <td class=\"metric-value-column\"><small>{{metric.value || 'N/A'}}</small></td>\n        </tr>\n    </table>\n</div>"
+module.exports = ""
 
 /***/ }),
 
 /***/ 465:
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"stage\" class=\"split\">\n    <div class=\"vertical-line\"></div>\n    <app-loading-indicator *ngIf=\"metricsLoading$ | async\"></app-loading-indicator>\n    <app-screen\n            [screenType]=\"screenTypes.left\"\n            [activeViewType]=\"activeViewType$ | async\"\n            [activeFilter]=\"activeFilter$ | async\"\n            [metricTree]=\"metricTree$ | async\"\n            [metricMapping]=\"metricMapping$ | async\">\n    </app-screen>\n    <app-screen\n            [screenType]=\"screenTypes.right\"\n            [activeViewType]=\"activeViewType$ | async\"\n            [activeFilter]=\"activeFilter$ | async\"\n            [metricTree]=\"metricTree$ | async\"\n            [metricMapping]=\"metricMapping$ | async\">\n    </app-screen>\n    <app-comparison-panel></app-comparison-panel>\n    <app-legend [activeViewType]=\"activeViewType$ | async\" [colorMetricName]=\"colorMetricName$ | async\"></app-legend>\n</div>\n<app-tooltip></app-tooltip>"
+module.exports = "<div id=\"tooltip\">\n    <div class=\"element-name\">{{(content$ | async)?.elementName}}</div>\n    <table>\n        <tr *ngFor=\"let metric of (content$ | async)?.metrics | keyValue\">\n            <td class=\"metric-name-column\"><small>{{metric.key}}</small></td>\n            <td class=\"metric-value-column\"><small>{{metric.value || 'N/A'}}</small></td>\n        </tr>\n    </table>\n</div>"
+
+/***/ }),
+
+/***/ 466:
+/***/ (function(module, exports) {
+
+module.exports = "<div id=\"stage\" class=\"split\">\n    <div class=\"vertical-line\"></div>\n    <app-loading-indicator *ngIf=\"metricsLoading$ | async\"></app-loading-indicator>\n\n    <app-screen\n            [screenType]=\"screenTypes.left\"\n            [activeViewType]=\"activeViewType$ | async\"\n            [activeFilter]=\"activeFilter$ | async\"\n            [metricTree]=\"metricTree$ | async\"\n            [metricMapping]=\"metricMapping$ | async\">\n    </app-screen>\n\n    <app-screen\n            [screenType]=\"screenTypes.right\"\n            [activeViewType]=\"activeViewType$ | async\"\n            [activeFilter]=\"activeFilter$ | async\"\n            [metricTree]=\"metricTree$ | async\"\n            [metricMapping]=\"metricMapping$ | async\">\n    </app-screen>\n\n    <app-comparison-panel\n            [metricMapping]=\"metricMapping$ | async\"\n            [leftCommit]=\"leftCommit$ | async\"\n            [rightCommit]=\"rightCommit$ | async\">\n    </app-comparison-panel>\n\n    <app-legend [activeViewType]=\"activeViewType$ | async\" [colorMetricName]=\"colorMetricName$ | async\"></app-legend>\n</div>\n<app-tooltip></app-tooltip>"
 
 /***/ }),
 
@@ -4069,7 +4086,7 @@ function clearScreenshots() {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__AppConfig__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__environments_environment__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__environments_environment__ = __webpack_require__(35);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MetricNameHelper; });
 
 
@@ -4108,37 +4125,46 @@ var MetricNameHelper = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FocusService; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComparisonPanelService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 
 
-var FocusService = (function () {
-    function FocusService() {
-        this.focusElementSource = new __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__["Subject"]();
-        this.elementFocussed$ = this.focusElementSource.asObservable();
+var ComparisonPanelService = (function () {
+    function ComparisonPanelService() {
+        this.showComparisonPanelSource = new __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__["Subject"]();
+        this.hideComparisonPanelSource = new __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__["Subject"]();
+        this.showComparisonPanel$ = this.showComparisonPanelSource.asObservable();
+        this.hideComparisonPanel$ = this.hideComparisonPanelSource.asObservable();
     }
-    FocusService.prototype.focusElement = function (elementName) {
-        this.focusElementSource.next(elementName);
+    ComparisonPanelService.prototype.hide = function () {
+        this.hideComparisonPanelSource.next();
     };
-    return FocusService;
+    ComparisonPanelService.prototype.show = function (params) {
+        this.showComparisonPanelSource.next(params);
+    };
+    return ComparisonPanelService;
 }());
-FocusService = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])()
-], FocusService);
+ComparisonPanelService = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+    __metadata("design:paramtypes", [])
+], ComparisonPanelService);
 
-//# sourceMappingURL=focus.service.js.map
+//# sourceMappingURL=comparison-panel.service.js.map
 
 /***/ }),
 
-/***/ 733:
+/***/ 734:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(299);
+module.exports = __webpack_require__(301);
 
 
 /***/ }),
@@ -4207,6 +4233,47 @@ var CommitType;
 /***/ }),
 
 /***/ 83:
+/***/ (function(module, exports) {
+
+//# sourceMappingURL=IMetricMapping.js.map
+
+/***/ }),
+
+/***/ 84:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FocusService; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+var FocusService = (function () {
+    function FocusService() {
+        this.focusElementSource = new __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__["Subject"]();
+        this.elementFocussed$ = this.focusElementSource.asObservable();
+    }
+    FocusService.prototype.focusElement = function (elementName) {
+        this.focusElementSource.next(elementName);
+    };
+    return FocusService;
+}());
+FocusService = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])()
+], FocusService);
+
+//# sourceMappingURL=focus.service.js.map
+
+/***/ }),
+
+/***/ 85:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4214,7 +4281,7 @@ var CommitType;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ngrx_store__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_reducers__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_reducers__ = __webpack_require__(40);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__control_panel_control_panel_actions__ = __webpack_require__(55);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ScreenShotService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -4261,7 +4328,7 @@ var _a;
 
 /***/ }),
 
-/***/ 84:
+/***/ 86:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4314,7 +4381,7 @@ TooltipService = __decorate([
 
 /***/ }),
 
-/***/ 85:
+/***/ 87:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4362,5 +4429,5 @@ function generateUniqueFileList(metricTree) {
 
 /***/ })
 
-},[733]);
+},[734]);
 //# sourceMappingURL=main.bundle.js.map
