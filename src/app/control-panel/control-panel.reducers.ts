@@ -2,6 +2,7 @@ import * as ControlPanelActions from "./control-panel.actions";
 import {Action, ActionReducer} from "@ngrx/store";
 import {ICommit} from "../interfaces/ICommit";
 import {CommitType} from "../enum/CommitType";
+import _ from "lodash";
 
 export interface ControlPanelState {
     commits: ICommit[];
@@ -29,7 +30,7 @@ export const ControlPanelReducer: ActionReducer<ControlPanelState> = (state = in
 
         case ControlPanelActions.LOAD_COMMITS_SUCCESS:
             newState = Object.assign({}, state);
-            newState.commits = action.payload;
+            newState.commits = _.sortBy(action.payload, (commit: ICommit) => commit.timestamp);
             newState.commitsLoading = false;
             newState.leftCommit = newState.commits[0];
             newState.rightCommit = newState.commits[1];
