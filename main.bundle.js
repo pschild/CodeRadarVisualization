@@ -1613,7 +1613,7 @@ var MockData = (function () {
             'changes': null,
             'children': [
                 {
-                    'name': 'AddedAndRemovedFiles.java',
+                    'name': 'root/ModuleA',
                     'type': 'MODULE',
                     'commit1Metrics': {
                         'coderadar:size:loc:java': 453,
@@ -1630,12 +1630,12 @@ var MockData = (function () {
                     'changes': null,
                     'children': [
                         {
-                            'name': 'OnlyLeft.java',
+                            'name': 'root/ModuleA/OnlyLeft.java',
                             'type': 'FILE',
                             'commit1Metrics': {
                                 'coderadar:size:loc:java': 453,
                                 'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck': 15,
-                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck': 5
+                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck': 25
                             },
                             'commit2Metrics': null,
                             'renamedFrom': null,
@@ -1649,13 +1649,13 @@ var MockData = (function () {
                             'children': []
                         },
                         {
-                            'name': 'OnlyRight.java',
+                            'name': 'root/ModuleA/OnlyRight.java',
                             'type': 'FILE',
                             'commit1Metrics': null,
                             'commit2Metrics': {
                                 'coderadar:size:loc:java': 155,
                                 'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck': 2,
-                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck': 4
+                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck': 24
                             },
                             'renamedFrom': null,
                             'renamedTo': null,
@@ -1666,11 +1666,30 @@ var MockData = (function () {
                                 'added': true
                             },
                             'children': []
+                        },
+                        {
+                            'name': 'root/ModuleA/MovedToModuleB.java',
+                            'type': 'FILE',
+                            'commit1Metrics': {
+                                'coderadar:size:loc:java': 255,
+                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck': 6,
+                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck': 12
+                            },
+                            'commit2Metrics': null,
+                            'renamedFrom': null,
+                            'renamedTo': 'root/ModuleB/MovedFromModuleA.java',
+                            'changes': {
+                                'renamed': true,
+                                'modified': false,
+                                'deleted': false,
+                                'added': false
+                            },
+                            'children': []
                         }
                     ]
                 },
                 {
-                    'name': 'ChangedAndUnchangedFiles.java',
+                    'name': 'root/ModuleB',
                     'type': 'MODULE',
                     'commit1Metrics': {
                         'coderadar:size:loc:java': 100,
@@ -1687,17 +1706,17 @@ var MockData = (function () {
                     'changes': null,
                     'children': [
                         {
-                            'name': 'Smaller.java',
+                            'name': 'root/ModuleB/Smaller.java',
                             'type': 'FILE',
                             'commit1Metrics': {
-                                'coderadar:size:loc:java': 475,
+                                'coderadar:size:loc:java': 875,
                                 'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck': 1,
-                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck': 1
+                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck': 58
                             },
                             'commit2Metrics': {
                                 'coderadar:size:loc:java': 345,
                                 'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck': 1,
-                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck': 1
+                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck': 45
                             },
                             'renamedFrom': null,
                             'renamedTo': null,
@@ -1710,17 +1729,17 @@ var MockData = (function () {
                             'children': []
                         },
                         {
-                            'name': 'Bigger.java',
+                            'name': 'root/ModuleB/Bigger.java',
                             'type': 'FILE',
                             'commit1Metrics': {
-                                'coderadar:size:loc:java': 75,
+                                'coderadar:size:loc:java': 175,
                                 'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck': 1,
-                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck': 1
+                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck': 13
                             },
                             'commit2Metrics': {
-                                'coderadar:size:loc:java': 121,
+                                'coderadar:size:loc:java': 645,
                                 'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck': 1,
-                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck': 2
+                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck': 42
                             },
                             'renamedFrom': null,
                             'renamedTo': null,
@@ -1733,22 +1752,41 @@ var MockData = (function () {
                             'children': []
                         },
                         {
-                            'name': 'Untouched.java',
+                            'name': 'root/ModuleB/Untouched.java',
                             'type': 'FILE',
                             'commit1Metrics': {
-                                'coderadar:size:loc:java': 51,
+                                'coderadar:size:loc:java': 151,
                                 'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck': 12,
-                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck': 1
+                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck': 46
                             },
                             'commit2Metrics': {
-                                'coderadar:size:loc:java': 51,
+                                'coderadar:size:loc:java': 151,
                                 'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck': 12,
-                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck': 1
+                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck': 46
                             },
                             'renamedFrom': null,
                             'renamedTo': null,
                             'changes': {
                                 'renamed': false,
+                                'modified': false,
+                                'deleted': false,
+                                'added': false
+                            },
+                            'children': []
+                        },
+                        {
+                            'name': 'root/ModuleB/MovedFromModuleA.java',
+                            'type': 'FILE',
+                            'commit1Metrics': null,
+                            'commit2Metrics': {
+                                'coderadar:size:loc:java': 255,
+                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck': 6,
+                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck': 12
+                            },
+                            'renamedFrom': 'root/ModuleA/MovedToModuleB.java',
+                            'renamedTo': null,
+                            'changes': {
+                                'renamed': true,
                                 'modified': false,
                                 'deleted': false,
                                 'added': false
@@ -3982,7 +4020,7 @@ module.exports = "<label class=\"custom-control custom-radio\">\n    <input id=\
 /***/ 463:
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"comparison-panel\">\n    <strong class=\"element-name\">{{elementName}}</strong>\n    <div class=\"table-container\">\n        <table id=\"comparison-table\" class=\"table table-striped table-sm\">\n            <thead>\n            <tr>\n                <th>Metrik</th>\n                <th id=\"first-commit-id\">{{leftCommit?.name}}</th>\n                <th id=\"second-commit-id\">{{rightCommit?.name}}</th>\n                <th>Änderung</th>\n            </tr>\n            </thead>\n            <tbody>\n                <tr *ngFor=\"let row of tableRows\">\n                    <td>{{row.metricName}}</td>\n                    <td>{{row.leftCommitValue}}</td>\n                    <td>{{row.rightCommitValue}}</td>\n                    <td>\n                        <i *ngIf=\"row.difference > 0\" class=\"fa fa-caret-up\" aria-hidden=\"true\"></i>\n                        <i *ngIf=\"row.difference < 0\" class=\"fa fa-caret-down\" aria-hidden=\"true\"></i>\n                        <i *ngIf=\"row.difference === 0\" class=\"fa fa-caret-right\" aria-hidden=\"true\"></i>\n                        {{row.difference}}\n                    </td>\n                </tr>\n            </tbody>\n        </table>\n    </div>\n    <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"handleClose()\">\n        <span aria-hidden=\"true\">&times;</span>\n    </button>\n</div>"
+module.exports = "<div id=\"comparison-panel\">\n    <strong title=\"{{elementName}}\" class=\"element-name\">{{elementName}}</strong>\n    <div class=\"table-container\">\n        <table id=\"comparison-table\" class=\"table table-striped table-sm\">\n            <thead>\n            <tr>\n                <th>Metrik</th>\n                <th id=\"first-commit-id\">{{leftCommit?.name}}</th>\n                <th id=\"second-commit-id\">{{rightCommit?.name}}</th>\n                <th>Änderung</th>\n            </tr>\n            </thead>\n            <tbody>\n                <tr *ngFor=\"let row of tableRows\">\n                    <td>{{row.metricName}}</td>\n                    <td>{{row.leftCommitValue}}</td>\n                    <td>{{row.rightCommitValue}}</td>\n                    <td>\n                        <i *ngIf=\"row.difference > 0\" class=\"fa fa-caret-up\" aria-hidden=\"true\"></i>\n                        <i *ngIf=\"row.difference < 0\" class=\"fa fa-caret-down\" aria-hidden=\"true\"></i>\n                        <i *ngIf=\"row.difference === 0\" class=\"fa fa-caret-right\" aria-hidden=\"true\"></i>\n                        {{row.difference}}\n                    </td>\n                </tr>\n            </tbody>\n        </table>\n    </div>\n    <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"handleClose()\">\n        <span aria-hidden=\"true\">&times;</span>\n    </button>\n</div>"
 
 /***/ }),
 
