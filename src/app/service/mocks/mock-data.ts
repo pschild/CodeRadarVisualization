@@ -27,7 +27,7 @@ export class MockData implements InMemoryDbService {
             'changes': null,
             'children': [
                 {
-                    'name': 'AddedAndRemovedFiles.java',
+                    'name': 'root/ModuleA',
                     'type': 'MODULE',
                     'commit1Metrics': {
                         'coderadar:size:loc:java': 453,
@@ -44,12 +44,12 @@ export class MockData implements InMemoryDbService {
                     'changes': null,
                     'children': [
                         {
-                            'name': 'OnlyLeft.java',
+                            'name': 'root/ModuleA/OnlyLeft.java',
                             'type': 'FILE',
                             'commit1Metrics': {
                                 'coderadar:size:loc:java': 453,
                                 'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck': 15,
-                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck': 5
+                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck': 25
                             },
                             'commit2Metrics': null,
                             'renamedFrom': null,
@@ -63,13 +63,13 @@ export class MockData implements InMemoryDbService {
                             'children': []
                         },
                         {
-                            'name': 'OnlyRight.java',
+                            'name': 'root/ModuleA/OnlyRight.java',
                             'type': 'FILE',
                             'commit1Metrics': null,
                             'commit2Metrics': {
                                 'coderadar:size:loc:java': 155,
                                 'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck': 2,
-                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck': 4
+                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck': 24
                             },
                             'renamedFrom': null,
                             'renamedTo': null,
@@ -80,11 +80,30 @@ export class MockData implements InMemoryDbService {
                                 'added': true
                             },
                             'children': []
+                        },
+                        {
+                            'name': 'root/ModuleA/MovedToModuleB.java',
+                            'type': 'FILE',
+                            'commit1Metrics': {
+                                'coderadar:size:loc:java': 255,
+                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck': 6,
+                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck': 12
+                            },
+                            'commit2Metrics': null,
+                            'renamedFrom': null,
+                            'renamedTo': 'root/ModuleB/MovedFromModuleA.java',
+                            'changes': {
+                                'renamed': true,
+                                'modified': false,
+                                'deleted': false,
+                                'added': false
+                            },
+                            'children': []
                         }
                     ]
                 },
                 {
-                    'name': 'ChangedAndUnchangedFiles.java',
+                    'name': 'root/ModuleB',
                     'type': 'MODULE',
                     'commit1Metrics': {
                         'coderadar:size:loc:java': 100,
@@ -101,17 +120,17 @@ export class MockData implements InMemoryDbService {
                     'changes': null,
                     'children': [
                         {
-                            'name': 'Smaller.java',
+                            'name': 'root/ModuleB/Smaller.java',
                             'type': 'FILE',
                             'commit1Metrics': {
-                                'coderadar:size:loc:java': 475,
+                                'coderadar:size:loc:java': 875,
                                 'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck': 1,
-                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck': 1
+                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck': 58
                             },
                             'commit2Metrics': {
                                 'coderadar:size:loc:java': 345,
                                 'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck': 1,
-                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck': 1
+                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck': 45
                             },
                             'renamedFrom': null,
                             'renamedTo': null,
@@ -124,17 +143,17 @@ export class MockData implements InMemoryDbService {
                             'children': []
                         },
                         {
-                            'name': 'Bigger.java',
+                            'name': 'root/ModuleB/Bigger.java',
                             'type': 'FILE',
                             'commit1Metrics': {
-                                'coderadar:size:loc:java': 75,
+                                'coderadar:size:loc:java': 175,
                                 'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck': 1,
-                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck': 1
+                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck': 13
                             },
                             'commit2Metrics': {
-                                'coderadar:size:loc:java': 121,
+                                'coderadar:size:loc:java': 645,
                                 'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck': 1,
-                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck': 2
+                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck': 42
                             },
                             'renamedFrom': null,
                             'renamedTo': null,
@@ -147,22 +166,41 @@ export class MockData implements InMemoryDbService {
                             'children': []
                         },
                         {
-                            'name': 'Untouched.java',
+                            'name': 'root/ModuleB/Untouched.java',
                             'type': 'FILE',
                             'commit1Metrics': {
-                                'coderadar:size:loc:java': 51,
+                                'coderadar:size:loc:java': 151,
                                 'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck': 12,
-                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck': 1
+                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck': 46
                             },
                             'commit2Metrics': {
-                                'coderadar:size:loc:java': 51,
+                                'coderadar:size:loc:java': 151,
                                 'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck': 12,
-                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck': 1
+                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck': 46
                             },
                             'renamedFrom': null,
                             'renamedTo': null,
                             'changes': {
                                 'renamed': false,
+                                'modified': false,
+                                'deleted': false,
+                                'added': false
+                            },
+                            'children': []
+                        },
+                        {
+                            'name': 'root/ModuleB/MovedFromModuleA.java',
+                            'type': 'FILE',
+                            'commit1Metrics': null,
+                            'commit2Metrics': {
+                                'coderadar:size:loc:java': 255,
+                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck': 6,
+                                'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck': 12
+                            },
+                            'renamedFrom': 'root/ModuleA/MovedToModuleB.java',
+                            'renamedTo': null,
+                            'changes': {
+                                'renamed': true,
                                 'modified': false,
                                 'deleted': false,
                                 'added': false
