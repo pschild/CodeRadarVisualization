@@ -355,7 +355,7 @@ AppConfig.COLOR_UNCHANGED_FILE = '#cccccc';
 
 /***/ }),
 
-/***/ 300:
+/***/ 301:
 /***/ (function(module, exports) {
 
 function webpackEmptyContext(req) {
@@ -364,19 +364,19 @@ function webpackEmptyContext(req) {
 webpackEmptyContext.keys = function() { return []; };
 webpackEmptyContext.resolve = webpackEmptyContext;
 module.exports = webpackEmptyContext;
-webpackEmptyContext.id = 300;
+webpackEmptyContext.id = 301;
 
 
 /***/ }),
 
-/***/ 301:
+/***/ 302:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__ = __webpack_require__(316);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_app_module__ = __webpack_require__(330);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__ = __webpack_require__(317);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_app_module__ = __webpack_require__(331);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__(35);
 
 
@@ -390,13 +390,13 @@ __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dyna
 
 /***/ }),
 
-/***/ 328:
+/***/ 329:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_http__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__service_mocks_mock_data__ = __webpack_require__(348);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angular_in_memory_web_api__ = __webpack_require__(365);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__service_mocks_mock_data__ = __webpack_require__(349);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angular_in_memory_web_api__ = __webpack_require__(366);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__(35);
 /* harmony export (immutable) */ __webpack_exports__["a"] = XHRBackendFactory;
 
@@ -415,7 +415,22 @@ function XHRBackendFactory(injector, browser, xsrf, options) {
 
 /***/ }),
 
-/***/ 329:
+/***/ 33:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NodeType; });
+var NodeType;
+(function (NodeType) {
+    NodeType[NodeType["MODULE"] = 'MODULE'] = "MODULE";
+    NodeType[NodeType["FILE"] = 'FILE'] = "FILE";
+    NodeType[NodeType["CONNECTION"] = 'CONNECTION'] = "CONNECTION";
+})(NodeType || (NodeType = {}));
+//# sourceMappingURL=NodeType.js.map
+
+/***/ }),
+
+/***/ 330:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -439,8 +454,8 @@ var AppComponent = (function () {
 AppComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-root',
-        template: __webpack_require__(451),
-        styles: [__webpack_require__(421)]
+        template: __webpack_require__(453),
+        styles: [__webpack_require__(422)]
     }),
     __metadata("design:paramtypes", [])
 ], AppComponent);
@@ -449,42 +464,27 @@ AppComponent = __decorate([
 
 /***/ }),
 
-/***/ 33:
+/***/ 331:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NodeType; });
-var NodeType;
-(function (NodeType) {
-    NodeType[NodeType["MODULE"] = 'MODULE'] = "MODULE";
-    NodeType[NodeType["FILE"] = 'FILE'] = "FILE";
-    NodeType[NodeType["CONNECTION"] = 'CONNECTION'] = "CONNECTION";
-})(NodeType || (NodeType = {}));
-//# sourceMappingURL=NodeType.js.map
-
-/***/ }),
-
-/***/ 330:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__(329);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__control_panel_control_panel_module__ = __webpack_require__(334);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__visualization_visualization_module__ = __webpack_require__(360);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__(330);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__control_panel_control_panel_module__ = __webpack_require__(335);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__visualization_visualization_module__ = __webpack_require__(361);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__shared_reducers__ = __webpack_require__(40);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ngrx_store__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ngrx_effects__ = __webpack_require__(117);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ngrx_store_devtools__ = __webpack_require__(324);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__shared_effects__ = __webpack_require__(350);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__XHRBackendFactory__ = __webpack_require__(328);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ngrx_store_devtools__ = __webpack_require__(325);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__shared_effects__ = __webpack_require__(351);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__XHRBackendFactory__ = __webpack_require__(329);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__service_screenshot_service__ = __webpack_require__(85);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__service_focus_service__ = __webpack_require__(84);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__service_tooltip_service__ = __webpack_require__(86);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__service_comparison_panel_service__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__service_comparison_panel_service__ = __webpack_require__(58);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -548,7 +548,7 @@ AppModule = __decorate([
 
 /***/ }),
 
-/***/ 331:
+/***/ 332:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -626,8 +626,8 @@ __decorate([
 AutosuggestWrapperComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-autosuggest-wrapper',
-        template: __webpack_require__(452),
-        styles: [__webpack_require__(422)]
+        template: __webpack_require__(454),
+        styles: [__webpack_require__(423)]
     }),
     __metadata("design:paramtypes", [])
 ], AutosuggestWrapperComponent);
@@ -636,7 +636,7 @@ AutosuggestWrapperComponent = __decorate([
 
 /***/ }),
 
-/***/ 332:
+/***/ 333:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -698,8 +698,8 @@ __decorate([
 CommitChooserComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-commit-chooser',
-        template: __webpack_require__(453),
-        styles: [__webpack_require__(423)]
+        template: __webpack_require__(455),
+        styles: [__webpack_require__(424)]
     }),
     __metadata("design:paramtypes", [])
 ], CommitChooserComponent);
@@ -709,7 +709,7 @@ var _a, _b;
 
 /***/ }),
 
-/***/ 333:
+/***/ 334:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -717,7 +717,7 @@ var _a, _b;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__enum_CommitType__ = __webpack_require__(82);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ngrx_store__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_reducers__ = __webpack_require__(40);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__control_panel_actions__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__control_panel_actions__ = __webpack_require__(56);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__service_screenshot_service__ = __webpack_require__(85);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__service_focus_service__ = __webpack_require__(84);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ControlPanelComponent; });
@@ -774,8 +774,8 @@ var ControlPanelComponent = (function () {
 ControlPanelComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-control-panel',
-        template: __webpack_require__(454),
-        styles: [__webpack_require__(424)]
+        template: __webpack_require__(456),
+        styles: [__webpack_require__(425)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__ngrx_store__["b" /* Store */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ngrx_store__["b" /* Store */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_5__service_screenshot_service__["a" /* ScreenShotService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__service_screenshot_service__["a" /* ScreenShotService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_6__service_focus_service__["a" /* FocusService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__service_focus_service__["a" /* FocusService */]) === "function" && _c || Object])
 ], ControlPanelComponent);
@@ -785,27 +785,27 @@ var _a, _b, _c;
 
 /***/ }),
 
-/***/ 334:
+/***/ 335:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(37);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__control_panel_component__ = __webpack_require__(333);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__settings_settings_component__ = __webpack_require__(340);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__settings_view_control_view_control_component__ = __webpack_require__(342);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_forms__ = __webpack_require__(53);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ngui_auto_complete__ = __webpack_require__(363);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__control_panel_component__ = __webpack_require__(334);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__settings_settings_component__ = __webpack_require__(341);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__settings_view_control_view_control_component__ = __webpack_require__(343);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_forms__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ngui_auto_complete__ = __webpack_require__(364);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ngui_auto_complete___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__ngui_auto_complete__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__commit_chooser_commit_chooser_component__ = __webpack_require__(332);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__commit_chooser_commit_chooser_component__ = __webpack_require__(333);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__service_commit_service__ = __webpack_require__(133);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__environments_environment__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__service_mocks_commit_mock_service__ = __webpack_require__(346);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__search_search_component__ = __webpack_require__(337);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__settings_filter_filter_component__ = __webpack_require__(338);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__settings_metric_mapping_metric_mapping_component__ = __webpack_require__(339);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__screenshot_screenshot_component__ = __webpack_require__(336);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__autosuggest_wrapper_autosuggest_wrapper_component__ = __webpack_require__(331);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__service_mocks_commit_mock_service__ = __webpack_require__(347);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__search_search_component__ = __webpack_require__(338);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__settings_filter_filter_component__ = __webpack_require__(339);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__settings_metric_mapping_metric_mapping_component__ = __webpack_require__(340);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__screenshot_screenshot_component__ = __webpack_require__(337);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__autosuggest_wrapper_autosuggest_wrapper_component__ = __webpack_require__(332);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ControlPanelModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -868,18 +868,21 @@ ControlPanelModule = __decorate([
 
 /***/ }),
 
-/***/ 335:
+/***/ 336:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__control_panel_actions__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__control_panel_actions__ = __webpack_require__(56);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__enum_CommitType__ = __webpack_require__(82);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash__ = __webpack_require__(441);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_lodash__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ControlPanelReducer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return getCommits; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return getCommitsLoading; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return getLeftCommit; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return getRightCommit; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return getScreenshots; });
+
 
 
 var initialState = {
@@ -899,7 +902,7 @@ var ControlPanelReducer = function (state, action) {
             return newState;
         case __WEBPACK_IMPORTED_MODULE_0__control_panel_actions__["d" /* LOAD_COMMITS_SUCCESS */]:
             newState = Object.assign({}, state);
-            newState.commits = action.payload;
+            newState.commits = __WEBPACK_IMPORTED_MODULE_2_lodash___default.a.sortBy(action.payload, function (commit) { return commit.timestamp; });
             newState.commitsLoading = false;
             newState.leftCommit = newState.commits[0];
             newState.rightCommit = newState.commits[1];
@@ -942,7 +945,7 @@ var getScreenshots = function (state) { return state.screenshots; };
 
 /***/ }),
 
-/***/ 336:
+/***/ 337:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1034,8 +1037,8 @@ __decorate([
 ScreenshotComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-screenshot',
-        template: __webpack_require__(455),
-        styles: [__webpack_require__(425)]
+        template: __webpack_require__(457),
+        styles: [__webpack_require__(426)]
     })
 ], ScreenshotComponent);
 
@@ -1044,7 +1047,7 @@ var _a;
 
 /***/ }),
 
-/***/ 337:
+/***/ 338:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1086,8 +1089,8 @@ __decorate([
 SearchComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-search',
-        template: __webpack_require__(456),
-        styles: [__webpack_require__(426)]
+        template: __webpack_require__(458),
+        styles: [__webpack_require__(427)]
     }),
     __metadata("design:paramtypes", [])
 ], SearchComponent);
@@ -1096,7 +1099,7 @@ SearchComponent = __decorate([
 
 /***/ }),
 
-/***/ 338:
+/***/ 339:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1141,8 +1144,8 @@ __decorate([
 FilterComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-filter',
-        template: __webpack_require__(457),
-        styles: [__webpack_require__(427)]
+        template: __webpack_require__(459),
+        styles: [__webpack_require__(428)]
     }),
     __metadata("design:paramtypes", [])
 ], FilterComponent);
@@ -1152,14 +1155,28 @@ var _a;
 
 /***/ }),
 
-/***/ 339:
+/***/ 34:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ScreenType; });
+var ScreenType;
+(function (ScreenType) {
+    ScreenType[ScreenType["LEFT"] = 0] = "LEFT";
+    ScreenType[ScreenType["RIGHT"] = 1] = "RIGHT";
+})(ScreenType || (ScreenType = {}));
+//# sourceMappingURL=ScreenType.js.map
+
+/***/ }),
+
+/***/ 340:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__interfaces_IMetricMapping__ = __webpack_require__(83);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__interfaces_IMetricMapping___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__interfaces_IMetricMapping__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__helper_metric_name_helper__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__helper_metric_name_helper__ = __webpack_require__(57);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MetricMappingComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1203,8 +1220,8 @@ __decorate([
 MetricMappingComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-metric-mapping',
-        template: __webpack_require__(458),
-        styles: [__webpack_require__(428)]
+        template: __webpack_require__(460),
+        styles: [__webpack_require__(429)]
     }),
     __metadata("design:paramtypes", [])
 ], MetricMappingComponent);
@@ -1214,21 +1231,7 @@ var _a;
 
 /***/ }),
 
-/***/ 34:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ScreenType; });
-var ScreenType;
-(function (ScreenType) {
-    ScreenType[ScreenType["LEFT"] = 0] = "LEFT";
-    ScreenType[ScreenType["RIGHT"] = 1] = "RIGHT";
-})(ScreenType || (ScreenType = {}));
-//# sourceMappingURL=ScreenType.js.map
-
-/***/ }),
-
-/***/ 340:
+/***/ 341:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1273,8 +1276,8 @@ var SettingsComponent = (function () {
 SettingsComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-settings',
-        template: __webpack_require__(459),
-        styles: [__webpack_require__(429)]
+        template: __webpack_require__(461),
+        styles: [__webpack_require__(430)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__ngrx_store__["b" /* Store */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__ngrx_store__["b" /* Store */]) === "function" && _a || Object])
 ], SettingsComponent);
@@ -1284,7 +1287,7 @@ var _a;
 
 /***/ }),
 
-/***/ 341:
+/***/ 342:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1340,7 +1343,7 @@ var getMetricMapping = function (state) { return state.metricMapping; };
 
 /***/ }),
 
-/***/ 342:
+/***/ 343:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1384,8 +1387,8 @@ __decorate([
 ViewControlComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-view-control',
-        template: __webpack_require__(460),
-        styles: [__webpack_require__(430)]
+        template: __webpack_require__(462),
+        styles: [__webpack_require__(431)]
     }),
     __metadata("design:paramtypes", [])
 ], ViewControlComponent);
@@ -1395,7 +1398,7 @@ var _a;
 
 /***/ }),
 
-/***/ 343:
+/***/ 344:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1444,14 +1447,14 @@ var BlockConnection = (function () {
 
 /***/ }),
 
-/***/ 344:
+/***/ 345:
 /***/ (function(module, exports) {
 
 //# sourceMappingURL=INode.js.map
 
 /***/ }),
 
-/***/ 345:
+/***/ 346:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1490,7 +1493,7 @@ KeyValuePipe = __decorate([
 
 /***/ }),
 
-/***/ 346:
+/***/ 347:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1535,7 +1538,7 @@ var _a;
 
 /***/ }),
 
-/***/ 347:
+/***/ 348:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1578,7 +1581,7 @@ var _a;
 
 /***/ }),
 
-/***/ 348:
+/***/ 349:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1765,28 +1768,6 @@ var MockData = (function () {
 
 /***/ }),
 
-/***/ 349:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__control_panel_control_panel_actions__ = __webpack_require__(55);
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__control_panel_control_panel_actions__["c"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_0__control_panel_control_panel_actions__["i"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_0__control_panel_control_panel_actions__["j"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__control_panel_settings_settings_actions__ = __webpack_require__(80);
-/* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__visualization_visualization_actions__ = __webpack_require__(87);
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_2__visualization_visualization_actions__["a"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "e", function() { return __WEBPACK_IMPORTED_MODULE_2__visualization_visualization_actions__["e"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "f", function() { return __WEBPACK_IMPORTED_MODULE_2__visualization_visualization_actions__["f"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "g", function() { return __WEBPACK_IMPORTED_MODULE_2__visualization_visualization_actions__["g"]; });
-
-
-
-//# sourceMappingURL=actions.js.map
-
-/***/ }),
-
 /***/ 35:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1804,11 +1785,33 @@ var environment = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__control_panel_control_panel_actions__ = __webpack_require__(56);
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__control_panel_control_panel_actions__["c"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_0__control_panel_control_panel_actions__["i"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_0__control_panel_control_panel_actions__["j"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__control_panel_settings_settings_actions__ = __webpack_require__(80);
+/* unused harmony namespace reexport */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__visualization_visualization_actions__ = __webpack_require__(87);
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_2__visualization_visualization_actions__["a"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "e", function() { return __WEBPACK_IMPORTED_MODULE_2__visualization_visualization_actions__["e"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "f", function() { return __WEBPACK_IMPORTED_MODULE_2__visualization_visualization_actions__["f"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "g", function() { return __WEBPACK_IMPORTED_MODULE_2__visualization_visualization_actions__["g"]; });
+
+
+
+//# sourceMappingURL=actions.js.map
+
+/***/ }),
+
+/***/ 351:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ngrx_effects__ = __webpack_require__(117);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs__ = __webpack_require__(266);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_actions__ = __webpack_require__(349);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_actions__ = __webpack_require__(350);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__service_commit_service__ = __webpack_require__(133);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__service_metric_service__ = __webpack_require__(134);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppEffects; });
@@ -1876,7 +1879,7 @@ var _a, _b, _c;
 
 /***/ }),
 
-/***/ 351:
+/***/ 352:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1886,8 +1889,8 @@ var _a, _b, _c;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__interfaces_ICommit___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__interfaces_ICommit__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__interfaces_IMetricMapping__ = __webpack_require__(83);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__interfaces_IMetricMapping___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__interfaces_IMetricMapping__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__helper_metric_name_helper__ = __webpack_require__(56);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__service_comparison_panel_service__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__helper_metric_name_helper__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__service_comparison_panel_service__ = __webpack_require__(58);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComparisonPanelComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1980,8 +1983,8 @@ __decorate([
 ComparisonPanelComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-comparison-panel',
-        template: __webpack_require__(461),
-        styles: [__webpack_require__(431)]
+        template: __webpack_require__(463),
+        styles: [__webpack_require__(432)]
     }),
     __metadata("design:paramtypes", [typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1__ngrx_store__["b" /* Store */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__ngrx_store__["b" /* Store */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_5__service_comparison_panel_service__["a" /* ComparisonPanelService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__service_comparison_panel_service__["a" /* ComparisonPanelService */]) === "function" && _e || Object])
 ], ComparisonPanelComponent);
@@ -1991,7 +1994,7 @@ var _a, _b, _c, _d, _e;
 
 /***/ }),
 
-/***/ 352:
+/***/ 353:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2124,7 +2127,7 @@ var InteractionHandler = (function () {
 
 /***/ }),
 
-/***/ 353:
+/***/ 354:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2177,8 +2180,8 @@ __decorate([
 LegendComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-legend',
-        template: __webpack_require__(462),
-        styles: [__webpack_require__(432)]
+        template: __webpack_require__(464),
+        styles: [__webpack_require__(433)]
     }),
     __metadata("design:paramtypes", [])
 ], LegendComponent);
@@ -2188,7 +2191,7 @@ var _a;
 
 /***/ }),
 
-/***/ 354:
+/***/ 355:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2214,8 +2217,8 @@ var LoadingIndicatorComponent = (function () {
 LoadingIndicatorComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-loading-indicator',
-        template: __webpack_require__(463),
-        styles: [__webpack_require__(433)]
+        template: __webpack_require__(465),
+        styles: [__webpack_require__(434)]
     }),
     __metadata("design:paramtypes", [])
 ], LoadingIndicatorComponent);
@@ -2224,7 +2227,7 @@ LoadingIndicatorComponent = __decorate([
 
 /***/ }),
 
-/***/ 355:
+/***/ 356:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2233,21 +2236,21 @@ LoadingIndicatorComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_three__ = __webpack_require__(52);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_three___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_three__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__enum_ViewType__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__view_split_view__ = __webpack_require__(358);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__view_merged_view__ = __webpack_require__(357);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__view_split_view__ = __webpack_require__(359);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__view_merged_view__ = __webpack_require__(358);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__interfaces_IFilter__ = __webpack_require__(132);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__interfaces_IFilter___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__interfaces_IFilter__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__enum_NodeType__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__interaction_handler_interaction_handler__ = __webpack_require__(352);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__interaction_handler_interaction_handler__ = __webpack_require__(353);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__AppConfig__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__interfaces_INode__ = __webpack_require__(344);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__interfaces_INode__ = __webpack_require__(345);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__interfaces_INode___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__interfaces_INode__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__service_screenshot_service__ = __webpack_require__(85);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__service_focus_service__ = __webpack_require__(84);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__service_tooltip_service__ = __webpack_require__(86);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__interfaces_IMetricMapping__ = __webpack_require__(83);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__interfaces_IMetricMapping___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14__interfaces_IMetricMapping__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__service_comparison_panel_service__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__service_comparison_panel_service__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16_app_helper_element_analyzer__ = __webpack_require__(39);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ScreenComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -2543,8 +2546,8 @@ __decorate([
 ScreenComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-screen',
-        template: __webpack_require__(464),
-        styles: [__webpack_require__(434)]
+        template: __webpack_require__(466),
+        styles: [__webpack_require__(435)]
     }),
     __metadata("design:paramtypes", [typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_11__service_screenshot_service__["a" /* ScreenShotService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_11__service_screenshot_service__["a" /* ScreenShotService */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_12__service_focus_service__["a" /* FocusService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_12__service_focus_service__["a" /* FocusService */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_13__service_tooltip_service__["a" /* TooltipService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_13__service_tooltip_service__["a" /* TooltipService */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_15__service_comparison_panel_service__["a" /* ComparisonPanelService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_15__service_comparison_panel_service__["a" /* ComparisonPanelService */]) === "function" && _j || Object])
 ], ScreenComponent);
@@ -2554,13 +2557,13 @@ var _a, _b, _c, _d, _e, _f, _g, _h, _j;
 
 /***/ }),
 
-/***/ 356:
+/***/ 357:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__service_tooltip_service__ = __webpack_require__(86);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__helper_metric_name_helper__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__helper_metric_name_helper__ = __webpack_require__(57);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TooltipComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2621,8 +2624,8 @@ var TooltipComponent = (function () {
 TooltipComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-tooltip',
-        template: __webpack_require__(465),
-        styles: [__webpack_require__(435)]
+        template: __webpack_require__(467),
+        styles: [__webpack_require__(436)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__service_tooltip_service__["a" /* TooltipService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__service_tooltip_service__["a" /* TooltipService */]) === "function" && _a || Object])
 ], TooltipComponent);
@@ -2632,7 +2635,7 @@ var _a;
 
 /***/ }),
 
-/***/ 357:
+/***/ 358:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2642,7 +2645,7 @@ var _a;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__enum_NodeType__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__helper_color_helper__ = __webpack_require__(130);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__enum_CommitReferenceType__ = __webpack_require__(81);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_app_geometry_block_connection__ = __webpack_require__(343);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_app_geometry_block_connection__ = __webpack_require__(344);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MergedView; });
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -2805,7 +2808,7 @@ var MergedView = (function (_super) {
 
 /***/ }),
 
-/***/ 358:
+/***/ 359:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2897,7 +2900,7 @@ var SplitView = (function (_super) {
 
 /***/ }),
 
-/***/ 359:
+/***/ 360:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2908,8 +2911,8 @@ var SplitView = (function (_super) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ngrx_store__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_reducers__ = __webpack_require__(40);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__visualization_actions__ = __webpack_require__(87);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__helper_metric_name_helper__ = __webpack_require__(56);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_app_service_comparison_panel_service__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__helper_metric_name_helper__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_app_service_comparison_panel_service__ = __webpack_require__(58);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return VisualizationComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2971,8 +2974,8 @@ var VisualizationComponent = (function () {
 VisualizationComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-visualization',
-        template: __webpack_require__(466),
-        styles: [__webpack_require__(436)]
+        template: __webpack_require__(468),
+        styles: [__webpack_require__(437)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__ngrx_store__["b" /* Store */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ngrx_store__["b" /* Store */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_7_app_service_comparison_panel_service__["a" /* ComparisonPanelService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7_app_service_comparison_panel_service__["a" /* ComparisonPanelService */]) === "function" && _b || Object])
 ], VisualizationComponent);
@@ -2982,22 +2985,22 @@ var _a, _b;
 
 /***/ }),
 
-/***/ 360:
+/***/ 361:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(37);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__visualization_component__ = __webpack_require__(359);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__screen_screen_component__ = __webpack_require__(355);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__visualization_component__ = __webpack_require__(360);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__screen_screen_component__ = __webpack_require__(356);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__service_metric_service__ = __webpack_require__(134);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__environments_environment__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__service_mocks_metric_mock_service__ = __webpack_require__(347);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__tooltip_tooltip_component__ = __webpack_require__(356);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__comparison_panel_comparison_panel_component__ = __webpack_require__(351);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__legend_legend_component__ = __webpack_require__(353);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pipes_key_value_pipe__ = __webpack_require__(345);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__loading_indicator_loading_indicator_component__ = __webpack_require__(354);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__service_mocks_metric_mock_service__ = __webpack_require__(348);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__tooltip_tooltip_component__ = __webpack_require__(357);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__comparison_panel_comparison_panel_component__ = __webpack_require__(352);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__legend_legend_component__ = __webpack_require__(354);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pipes_key_value_pipe__ = __webpack_require__(346);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__loading_indicator_loading_indicator_component__ = __webpack_require__(355);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return VisualizationModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -3052,7 +3055,7 @@ VisualizationModule = __decorate([
 
 /***/ }),
 
-/***/ 361:
+/***/ 362:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3311,12 +3314,12 @@ var ElementAnalyzer = (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_reselect__ = __webpack_require__(467);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_reselect__ = __webpack_require__(469);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_reselect___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_reselect__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ngrx_store__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__control_panel_control_panel_reducers__ = __webpack_require__(335);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__control_panel_settings_settings_reducers__ = __webpack_require__(341);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__visualization_visualization_reducers__ = __webpack_require__(361);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__control_panel_control_panel_reducers__ = __webpack_require__(336);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__control_panel_settings_settings_reducers__ = __webpack_require__(342);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__visualization_visualization_reducers__ = __webpack_require__(362);
 /* harmony export (immutable) */ __webpack_exports__["a"] = reducer;
 /* unused harmony export getControlPanelState */
 /* unused harmony export getVisualizationState */
@@ -3364,24 +3367,6 @@ var getActiveViewType = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_resele
 
 /***/ }),
 
-/***/ 421:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(8)();
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
 /***/ 422:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3390,7 +3375,7 @@ exports = module.exports = __webpack_require__(8)();
 
 
 // module
-exports.push([module.i, ".autosuggest-wrapper-container {\n  position: relative; }\n  .autosuggest-wrapper-container button.close {\n    position: absolute;\n    top: 50%;\n    right: 2px;\n    -webkit-transform: translateY(-50%);\n            transform: translateY(-50%);\n    background: #fff;\n    padding: 5px;\n    opacity: 1;\n    outline: 0; }\n    .autosuggest-wrapper-container button.close > span {\n      color: #ccc; }\n      .autosuggest-wrapper-container button.close > span:hover {\n        color: #000; }\n", ""]);
+exports.push([module.i, "", ""]);
 
 // exports
 
@@ -3408,7 +3393,7 @@ exports = module.exports = __webpack_require__(8)();
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, ".autosuggest-wrapper-container {\n  position: relative; }\n  .autosuggest-wrapper-container button.close {\n    position: absolute;\n    top: 50%;\n    right: 2px;\n    -webkit-transform: translateY(-50%);\n            transform: translateY(-50%);\n    background: #fff;\n    padding: 5px;\n    opacity: 1;\n    outline: 0; }\n    .autosuggest-wrapper-container button.close > span {\n      color: #ccc; }\n      .autosuggest-wrapper-container button.close > span:hover {\n        color: #000; }\n", ""]);
 
 // exports
 
@@ -3426,7 +3411,7 @@ exports = module.exports = __webpack_require__(8)();
 
 
 // module
-exports.push([module.i, "#control-panel {\n  position: absolute;\n  top: 0;\n  width: 100%;\n  height: 80px;\n  background: #fff;\n  box-shadow: rgba(0, 0, 0, 0.2) 0 2px 6px 0;\n  z-index: 101; }\n  #control-panel > .control-container {\n    position: relative;\n    float: left;\n    margin: 10px;\n    height: 50px; }\n    #control-panel > .control-container:last-child {\n      float: right; }\n    #control-panel > .control-container .control-item {\n      display: inline-block;\n      padding: 5px; }\n    #control-panel > .control-container .control-label {\n      font-size: 12px;\n      display: block;\n      margin-top: 5px; }\n    #control-panel > .control-container .checkbox-container {\n      position: relative; }\n    #control-panel > .control-container .checkbox-icon {\n      position: absolute;\n      top: 0;\n      width: 30px;\n      height: 30px; }\n    #control-panel > .control-container .checkbox-icon.left {\n      left: 0; }\n    #control-panel > .control-container .checkbox-icon.right {\n      right: 0; }\n    #control-panel > .control-container #search-input {\n      padding-right: 30px; }\n    #control-panel > .control-container button {\n      height: 100%; }\n  #control-panel .divider {\n    height: 60px;\n    border-left: 1px solid #ccc;\n    float: left;\n    margin: 5px 10px; }\n  #control-panel #search-auto-complete-wrapper i {\n    position: absolute;\n    padding: 0 5px;\n    background: #fff;\n    line-height: 30px;\n    color: #ccc; }\n  #control-panel #search-auto-complete-wrapper input[type=text] {\n    text-indent: 28px; }\n  #control-panel #render-calls {\n    position: absolute;\n    top: 0;\n    right: 0;\n    font-size: 10px;\n    z-index: 10000; }\n", ""]);
+exports.push([module.i, "", ""]);
 
 // exports
 
@@ -3444,7 +3429,7 @@ exports = module.exports = __webpack_require__(8)();
 
 
 // module
-exports.push([module.i, "img#gif {\n  width: 100%;\n  margin-bottom: 1rem; }\n", ""]);
+exports.push([module.i, "#control-panel {\n  position: absolute;\n  top: 0;\n  width: 100%;\n  height: 80px;\n  background: #fff;\n  box-shadow: rgba(0, 0, 0, 0.2) 0 2px 6px 0;\n  z-index: 101; }\n  #control-panel > .control-container {\n    position: relative;\n    float: left;\n    margin: 10px;\n    height: 50px; }\n    #control-panel > .control-container:last-child {\n      float: right; }\n    #control-panel > .control-container .control-item {\n      display: inline-block;\n      padding: 5px; }\n    #control-panel > .control-container .control-label {\n      font-size: 12px;\n      display: block;\n      margin-top: 5px; }\n    #control-panel > .control-container .checkbox-container {\n      position: relative; }\n    #control-panel > .control-container .checkbox-icon {\n      position: absolute;\n      top: 0;\n      width: 30px;\n      height: 30px; }\n    #control-panel > .control-container .checkbox-icon.left {\n      left: 0; }\n    #control-panel > .control-container .checkbox-icon.right {\n      right: 0; }\n    #control-panel > .control-container #search-input {\n      padding-right: 30px; }\n    #control-panel > .control-container button {\n      height: 100%; }\n  #control-panel .divider {\n    height: 60px;\n    border-left: 1px solid #ccc;\n    float: left;\n    margin: 5px 10px; }\n  #control-panel #search-auto-complete-wrapper i {\n    position: absolute;\n    padding: 0 5px;\n    background: #fff;\n    line-height: 30px;\n    color: #ccc; }\n  #control-panel #search-auto-complete-wrapper input[type=text] {\n    text-indent: 28px; }\n  #control-panel #render-calls {\n    position: absolute;\n    top: 0;\n    right: 0;\n    font-size: 10px;\n    z-index: 10000; }\n", ""]);
 
 // exports
 
@@ -3462,7 +3447,7 @@ exports = module.exports = __webpack_require__(8)();
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "img#gif {\n  width: 100%;\n  margin-bottom: 1rem; }\n", ""]);
 
 // exports
 
@@ -3552,7 +3537,7 @@ exports = module.exports = __webpack_require__(8)();
 
 
 // module
-exports.push([module.i, "#comparison-panel {\n  position: absolute;\n  bottom: 0;\n  left: 50%;\n  -webkit-transform: translate3d(-50%, 100%, 0) scale(0.1);\n          transform: translate3d(-50%, 100%, 0) scale(0.1);\n  padding: 5px 20px;\n  max-width: 40%;\n  height: 190px;\n  background: #fff;\n  box-shadow: rgba(0, 0, 0, 0.2) 0 2px 6px 0;\n  z-index: 100;\n  transition: -webkit-transform 1.5s ease;\n  transition: transform 1.5s ease;\n  transition: transform 1.5s ease, -webkit-transform 1.5s ease; }\n  #comparison-panel.open {\n    -webkit-transform: translate3d(-50%, 0%, 0) scale(1);\n            transform: translate3d(-50%, 0%, 0) scale(1); }\n  #comparison-panel > .element-name {\n    display: block;\n    text-overflow: ellipsis;\n    text-align: center;\n    white-space: nowrap;\n    overflow: hidden;\n    direction: rtl;\n    margin: 10px auto;\n    padding: 0 10px; }\n  #comparison-panel table #first-commit-id, #comparison-panel table #second-commit-id {\n    max-width: 100px;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap; }\n  #comparison-panel button.close {\n    position: absolute;\n    top: 12px;\n    right: 12px; }\n", ""]);
+exports.push([module.i, "", ""]);
 
 // exports
 
@@ -3570,7 +3555,7 @@ exports = module.exports = __webpack_require__(8)();
 
 
 // module
-exports.push([module.i, "#legend-container {\n  position: absolute;\n  bottom: 0;\n  left: 10px;\n  background: #fff;\n  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.2);\n  z-index: 99; }\n  #legend-container .legend-item {\n    display: inline-block;\n    padding: 3px 10px; }\n    #legend-container .legend-item .legend-color {\n      display: inline-block;\n      width: 10px;\n      height: 10px; }\n\n#legend-item-color-code .legend-color {\n  width: 30px;\n  background: linear-gradient(to right, #ffffff, #ffc905, #f78400, #e92100, #9b1909, #4f1609, #5d0000); }\n", ""]);
+exports.push([module.i, "#comparison-panel {\n  position: absolute;\n  bottom: 0;\n  left: 50%;\n  -webkit-transform: translate3d(-50%, 100%, 0) scale(0.1);\n          transform: translate3d(-50%, 100%, 0) scale(0.1);\n  padding: 5px 20px;\n  max-width: 40%;\n  height: 190px;\n  background: #fff;\n  box-shadow: rgba(0, 0, 0, 0.2) 0 2px 6px 0;\n  z-index: 100;\n  transition: -webkit-transform 1.5s ease;\n  transition: transform 1.5s ease;\n  transition: transform 1.5s ease, -webkit-transform 1.5s ease; }\n  #comparison-panel.open {\n    -webkit-transform: translate3d(-50%, 0%, 0) scale(1);\n            transform: translate3d(-50%, 0%, 0) scale(1); }\n  #comparison-panel > .element-name {\n    display: block;\n    text-overflow: ellipsis;\n    text-align: center;\n    white-space: nowrap;\n    overflow: hidden;\n    direction: rtl;\n    margin: 10px auto;\n    padding: 0 10px; }\n  #comparison-panel table #first-commit-id, #comparison-panel table #second-commit-id {\n    max-width: 100px;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap; }\n  #comparison-panel button.close {\n    position: absolute;\n    top: 12px;\n    right: 12px; }\n", ""]);
 
 // exports
 
@@ -3588,7 +3573,7 @@ exports = module.exports = __webpack_require__(8)();
 
 
 // module
-exports.push([module.i, ".loading-indicator-container {\n  position: fixed;\n  width: 100%;\n  height: 100%;\n  background: rgba(0, 0, 0, 0.7);\n  top: 80px;\n  left: 0;\n  z-index: 1000; }\n  .loading-indicator-container .uil-cube-css {\n    background: none;\n    position: absolute;\n    width: 200px;\n    height: 200px;\n    -webkit-transform: translateX(-50%) scale(0.5);\n    top: calc(50% - 130px);\n    left: 50%; }\n    .loading-indicator-container .uil-cube-css > div {\n      position: absolute;\n      width: 80px;\n      height: 80px;\n      -webkit-animation: uil-cube-css 1s cubic-bezier(0.2, 0.8, 0.2, 0.8) infinite;\n      animation: uil-cube-css 1s cubic-bezier(0.2, 0.8, 0.2, 0.8) infinite; }\n    .loading-indicator-container .uil-cube-css > div:nth-of-type(1) {\n      top: 10px;\n      left: 10px;\n      background: #fff;\n      opacity: 0.9;\n      -webkit-animation-delay: 0s;\n      animation-delay: 0s; }\n    .loading-indicator-container .uil-cube-css > div:nth-of-type(2) {\n      top: 10px;\n      left: 110px;\n      background: #fff;\n      opacity: 0.8;\n      -webkit-animation-delay: 0.1s;\n      animation-delay: 0.1s; }\n    .loading-indicator-container .uil-cube-css > div:nth-of-type(3) {\n      top: 110px;\n      left: 10px;\n      background: #fff;\n      opacity: 0.7;\n      -webkit-animation-delay: 0.3s;\n      animation-delay: 0.3s; }\n    .loading-indicator-container .uil-cube-css > div:nth-of-type(4) {\n      top: 110px;\n      left: 110px;\n      background: #fff;\n      opacity: 0.6;\n      -webkit-animation-delay: 0.2s;\n      animation-delay: 0.2s; }\n\n@-webkit-keyframes uil-cube-css {\n  0% {\n    -webkit-transform: scale(1.4);\n    transform: scale(1.4); }\n  100% {\n    -webkit-transform: scale(1);\n    transform: scale(1); } }\n\n@-webkit-keyframes uil-cube-css {\n  0% {\n    -webkit-transform: scale(1.4);\n    transform: scale(1.4); }\n  100% {\n    -webkit-transform: scale(1);\n    transform: scale(1); } }\n\n@-webkit-keyframes uil-cube-css {\n  0% {\n    -webkit-transform: scale(1.4);\n    transform: scale(1.4); }\n  100% {\n    -webkit-transform: scale(1);\n    transform: scale(1); } }\n\n@keyframes uil-cube-css {\n  0% {\n    -webkit-transform: scale(1.4);\n    transform: scale(1.4); }\n  100% {\n    -webkit-transform: scale(1);\n    transform: scale(1); } }\n", ""]);
+exports.push([module.i, "#legend-container {\n  position: absolute;\n  bottom: 0;\n  left: 10px;\n  background: #fff;\n  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.2);\n  z-index: 99; }\n  #legend-container .legend-item {\n    display: inline-block;\n    padding: 3px 10px; }\n    #legend-container .legend-item .legend-color {\n      display: inline-block;\n      width: 10px;\n      height: 10px; }\n\n#legend-item-color-code .legend-color {\n  width: 30px;\n  background: linear-gradient(to right, #ffffff, #ffc905, #f78400, #e92100, #9b1909, #4f1609, #5d0000); }\n", ""]);
 
 // exports
 
@@ -3606,7 +3591,7 @@ exports = module.exports = __webpack_require__(8)();
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, ".loading-indicator-container {\n  position: fixed;\n  width: 100%;\n  height: 100%;\n  background: rgba(0, 0, 0, 0.7);\n  top: 80px;\n  left: 0;\n  z-index: 1000; }\n  .loading-indicator-container .uil-cube-css {\n    background: none;\n    position: absolute;\n    width: 200px;\n    height: 200px;\n    -webkit-transform: translateX(-50%) scale(0.5);\n    top: calc(50% - 130px);\n    left: 50%; }\n    .loading-indicator-container .uil-cube-css > div {\n      position: absolute;\n      width: 80px;\n      height: 80px;\n      -webkit-animation: uil-cube-css 1s cubic-bezier(0.2, 0.8, 0.2, 0.8) infinite;\n      animation: uil-cube-css 1s cubic-bezier(0.2, 0.8, 0.2, 0.8) infinite; }\n    .loading-indicator-container .uil-cube-css > div:nth-of-type(1) {\n      top: 10px;\n      left: 10px;\n      background: #fff;\n      opacity: 0.9;\n      -webkit-animation-delay: 0s;\n      animation-delay: 0s; }\n    .loading-indicator-container .uil-cube-css > div:nth-of-type(2) {\n      top: 10px;\n      left: 110px;\n      background: #fff;\n      opacity: 0.8;\n      -webkit-animation-delay: 0.1s;\n      animation-delay: 0.1s; }\n    .loading-indicator-container .uil-cube-css > div:nth-of-type(3) {\n      top: 110px;\n      left: 10px;\n      background: #fff;\n      opacity: 0.7;\n      -webkit-animation-delay: 0.3s;\n      animation-delay: 0.3s; }\n    .loading-indicator-container .uil-cube-css > div:nth-of-type(4) {\n      top: 110px;\n      left: 110px;\n      background: #fff;\n      opacity: 0.6;\n      -webkit-animation-delay: 0.2s;\n      animation-delay: 0.2s; }\n\n@-webkit-keyframes uil-cube-css {\n  0% {\n    -webkit-transform: scale(1.4);\n    transform: scale(1.4); }\n  100% {\n    -webkit-transform: scale(1);\n    transform: scale(1); } }\n\n@-webkit-keyframes uil-cube-css {\n  0% {\n    -webkit-transform: scale(1.4);\n    transform: scale(1.4); }\n  100% {\n    -webkit-transform: scale(1);\n    transform: scale(1); } }\n\n@-webkit-keyframes uil-cube-css {\n  0% {\n    -webkit-transform: scale(1.4);\n    transform: scale(1.4); }\n  100% {\n    -webkit-transform: scale(1);\n    transform: scale(1); } }\n\n@keyframes uil-cube-css {\n  0% {\n    -webkit-transform: scale(1.4);\n    transform: scale(1.4); }\n  100% {\n    -webkit-transform: scale(1);\n    transform: scale(1); } }\n", ""]);
 
 // exports
 
@@ -3624,7 +3609,7 @@ exports = module.exports = __webpack_require__(8)();
 
 
 // module
-exports.push([module.i, "#tooltip {\n  position: absolute;\n  top: 0;\n  left: 0;\n  background-color: #2B222A;\n  color: #fff;\n  padding: 10px;\n  font-size: 14px;\n  max-width: 300px;\n  z-index: 101;\n  opacity: 0;\n  transition: opacity 0.75s ease; }\n  #tooltip.visible {\n    opacity: 1; }\n  #tooltip > .element-name {\n    text-overflow: ellipsis;\n    text-align: left;\n    white-space: nowrap;\n    overflow: hidden;\n    direction: rtl;\n    padding-bottom: 5px; }\n  #tooltip table {\n    width: 100%; }\n    #tooltip table td.metric-value-column {\n      padding-left: 5px; }\n", ""]);
+exports.push([module.i, "", ""]);
 
 // exports
 
@@ -3642,6 +3627,24 @@ exports = module.exports = __webpack_require__(8)();
 
 
 // module
+exports.push([module.i, "#tooltip {\n  position: absolute;\n  top: 0;\n  left: 0;\n  background-color: #2B222A;\n  color: #fff;\n  padding: 10px;\n  font-size: 14px;\n  max-width: 300px;\n  z-index: 101;\n  opacity: 0;\n  transition: opacity 0.75s ease; }\n  #tooltip.visible {\n    opacity: 1; }\n  #tooltip > .element-name {\n    text-overflow: ellipsis;\n    text-align: left;\n    white-space: nowrap;\n    overflow: hidden;\n    direction: rtl;\n    padding-bottom: 5px; }\n  #tooltip table {\n    width: 100%; }\n    #tooltip table td.metric-value-column {\n      padding-left: 5px; }\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 437:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(8)();
+// imports
+
+
+// module
 exports.push([module.i, "#stage {\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  overflow: hidden; }\n  #stage > .vertical-line {\n    position: absolute;\n    top: 0;\n    left: 100%;\n    height: 100%;\n    width: 2px;\n    background: #535353;\n    z-index: 98;\n    transition: left 1s ease; }\n  #stage.split > .vertical-line {\n    left: 50%; }\n", ""]);
 
 // exports
@@ -3652,7 +3655,7 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 440:
+/***/ 442:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
@@ -3901,124 +3904,124 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 440;
+webpackContext.id = 442;
 
-
-/***/ }),
-
-/***/ 451:
-/***/ (function(module, exports) {
-
-module.exports = "<app-control-panel></app-control-panel>\n<app-visualization></app-visualization>"
-
-/***/ }),
-
-/***/ 452:
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"autosuggest-wrapper-container\">\n    <input #inputElement class=\"form-control\"\n           [placeholder]=\"placeholder\"\n           ngui-auto-complete\n           [(ngModel)]=\"model\"\n           [source]=\"source\"\n           value-property-name=\"id\"\n           display-property-name=\"name\"\n           [value-formatter]=\"valueFormatter\"\n           [list-formatter]=\"listFormatter\"\n           [no-match-found-text]=\"noMatchFoundText\"\n           [match-formatted]=\"matchFormatted\"\n           (valueChanged)=\"handleValueChanged($event)\" />\n    <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"handleClearInputClicked()\">\n        <span aria-hidden=\"true\">&times;</span>\n    </button>\n</div>"
 
 /***/ }),
 
 /***/ 453:
 /***/ (function(module, exports) {
 
-module.exports = "<app-autosuggest-wrapper\n        [placeholder]=\"'Datum, Commit-ID, Autor'\"\n        [(model)]=\"selected\"\n        [source]=\"commits\"\n        [valuePropertyName]=\"id\"\n        [displayPropertyName]=\"name\"\n        [noMatchFoundText]=\"'Nichts gefunden.'\"\n        [matchFormatted]=\"true\"\n        [valueFormatter]=\"formatCommit\"\n        [listFormatter]=\"formatCommit\"\n        (valueChanged)=\"handleCommitChanged($event)\">\n</app-autosuggest-wrapper>\n\n<p *ngIf=\"loading\">LADE</p>"
+module.exports = "<app-control-panel></app-control-panel>\n<app-visualization></app-visualization>"
 
 /***/ }),
 
 /***/ 454:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\">\n    <form id=\"control-panel\" class=\"row align-items-center justify-content-between\">\n        <div class=\"col-4\">\n            <div class=\"row\">\n                <div class=\"col-6\">\n                    <small>Erste Revision</small>\n                    <app-commit-chooser\n                            [commitType]=\"commitTypes.left\"\n                            [commits]=\"commits$ | async\"\n                            [loading]=\"commitsLoading$ | async\"\n                            [selected]=\"leftCommit$ | async\"\n                            (changeCommit)=\"handleCommitChanged($event)\"></app-commit-chooser>\n                </div>\n\n                <div class=\"col-6\">\n                    <small>Zweite Revision</small>\n                    <app-commit-chooser\n                            [commitType]=\"commitTypes.right\"\n                            [commits]=\"commits$ | async\"\n                            [loading]=\"commitsLoading$ | async\"\n                            [selected]=\"rightCommit$ | async\"\n                            (changeCommit)=\"handleCommitChanged($event)\"></app-commit-chooser>\n                </div>\n            </div>\n        </div>\n        <div class=\"col-6\">\n            <app-settings></app-settings>\n            <app-screenshot\n                    [activeViewType]=\"activeViewType$ | async\"\n                    [screenShots]=\"screenShots$ | async\"\n                    (handleTakeScreenshot)=\"handleTakeScreenshot($event)\"\n                    (handleRemoveScreenshots)=\"handleRemoveScreenshots($event)\">\n            </app-screenshot>\n        </div>\n        <div class=\"col-2\">\n            <small>Suche</small>\n            <app-search [uniqueFileList]=\"uniqueFileList$ | async\" (startSearch)=\"handleSearchStarted($event)\"></app-search>\n        </div>\n    </form>\n</div>"
+module.exports = "<div class=\"autosuggest-wrapper-container\">\n    <input #inputElement class=\"form-control\"\n           [placeholder]=\"placeholder\"\n           ngui-auto-complete\n           [(ngModel)]=\"model\"\n           [source]=\"source\"\n           value-property-name=\"id\"\n           display-property-name=\"name\"\n           [value-formatter]=\"valueFormatter\"\n           [list-formatter]=\"listFormatter\"\n           [no-match-found-text]=\"noMatchFoundText\"\n           [match-formatted]=\"matchFormatted\"\n           (valueChanged)=\"handleValueChanged($event)\" />\n    <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"handleClearInputClicked()\">\n        <span aria-hidden=\"true\">&times;</span>\n    </button>\n</div>"
 
 /***/ }),
 
 /***/ 455:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"btn-group\">\n    <button type=\"button\" class=\"btn btn-secondary\" (click)=\"takeScreenshot()\"><i class=\"fa fa-camera\" aria-hidden=\"true\"></i></button>\n    <button type=\"button\" class=\"btn btn-secondary dropdown-toggle dropdown-toggle-split\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n        <span class=\"sr-only\">Toggle Dropdown</span>\n    </button>\n    <div id=\"screenshot-dropdown\" class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n        <div class=\"form-group\">\n            <label>GIF erstellen für:</label>\n            <div class=\"btn-group\">\n                <button type=\"button\" class=\"btn btn-secondary\" (click)=\"generateGif(screenTypes.left)\">{{activeViewType === viewTypes.split ? 'Erster Commit' : 'Kombinierte Ansicht'}}</button>\n                <button type=\"button\" class=\"btn btn-secondary\" (click)=\"generateGif(screenTypes.right)\" *ngIf=\"activeViewType === viewTypes.split\">Zweiter Commit</button>\n            </div>\n        </div>\n\n        <img *ngIf=\"gifSource && !isGenerating\" id=\"gif\" src=\"{{gifSource}}\">\n        <p *ngIf=\"isGenerating\">GIF wird erstellt ...</p>\n        <small *ngIf=\"!gifSource && !isGenerating\">Ein GIF wird aus gespeicherten Screenshots erzeugt (Button <i class=\"fa fa-camera\" aria-hidden=\"true\"></i> )</small>\n\n        <div class=\"form-group\" *ngIf=\"gifSource\">\n            <button type=\"button\" class=\"btn btn-danger\" (click)=\"removeScreenshots()\">zurücksetzen</button>\n        </div>\n    </div>\n</div>"
+module.exports = "<app-autosuggest-wrapper\n        [placeholder]=\"'Datum, Commit-ID, Autor'\"\n        [(model)]=\"selected\"\n        [source]=\"commits\"\n        [valuePropertyName]=\"id\"\n        [displayPropertyName]=\"name\"\n        [noMatchFoundText]=\"'Nichts gefunden.'\"\n        [matchFormatted]=\"true\"\n        [valueFormatter]=\"formatCommit\"\n        [listFormatter]=\"formatCommit\"\n        (valueChanged)=\"handleCommitChanged($event)\">\n</app-autosuggest-wrapper>\n\n<p *ngIf=\"loading\">LADE</p>"
 
 /***/ }),
 
 /***/ 456:
 /***/ (function(module, exports) {
 
-module.exports = "<app-autosuggest-wrapper\n        [placeholder]=\"'Datei, Modul, ...'\"\n        [source]=\"uniqueFileList\"\n        [noMatchFoundText]=\"'Nichts gefunden.'\"\n        [listFormatter]=\"autocompleteListFormatter\"\n        (valueChanged)=\"handleSearchChanged($event)\">\n</app-autosuggest-wrapper>"
+module.exports = "<div class=\"container-fluid\">\n    <form id=\"control-panel\" class=\"row align-items-center justify-content-between\">\n        <div class=\"col-4\">\n            <div class=\"row\">\n                <div class=\"col-6\">\n                    <small>Erste Revision</small>\n                    <app-commit-chooser\n                            [commitType]=\"commitTypes.left\"\n                            [commits]=\"commits$ | async\"\n                            [loading]=\"commitsLoading$ | async\"\n                            [selected]=\"leftCommit$ | async\"\n                            (changeCommit)=\"handleCommitChanged($event)\"></app-commit-chooser>\n                </div>\n\n                <div class=\"col-6\">\n                    <small>Zweite Revision</small>\n                    <app-commit-chooser\n                            [commitType]=\"commitTypes.right\"\n                            [commits]=\"commits$ | async\"\n                            [loading]=\"commitsLoading$ | async\"\n                            [selected]=\"rightCommit$ | async\"\n                            (changeCommit)=\"handleCommitChanged($event)\"></app-commit-chooser>\n                </div>\n            </div>\n        </div>\n        <div class=\"col-6\">\n            <app-settings></app-settings>\n            <app-screenshot\n                    [activeViewType]=\"activeViewType$ | async\"\n                    [screenShots]=\"screenShots$ | async\"\n                    (handleTakeScreenshot)=\"handleTakeScreenshot($event)\"\n                    (handleRemoveScreenshots)=\"handleRemoveScreenshots($event)\">\n            </app-screenshot>\n        </div>\n        <div class=\"col-2\">\n            <small>Suche</small>\n            <app-search [uniqueFileList]=\"uniqueFileList$ | async\" (startSearch)=\"handleSearchStarted($event)\"></app-search>\n        </div>\n    </form>\n</div>"
 
 /***/ }),
 
 /***/ 457:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"btn-group\">\n    <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n        <i class=\"fa fa-filter\" aria-hidden=\"true\"></i>\n    </button>\n    <div id=\"filter-dropdown\" class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n        <div class=\"custom-controls-stacked\">\n            <label class=\"custom-control custom-checkbox\">\n                <input type=\"checkbox\" class=\"custom-control-input\" [(ngModel)]=\"activeFilter.unchanged\" (change)=\"handleFilterChanged()\">\n                <span class=\"custom-control-indicator\"></span>\n                <span class=\"custom-control-description\">unverändert</span>\n            </label>\n            <label class=\"custom-control custom-checkbox\">\n                <input type=\"checkbox\" class=\"custom-control-input\" [(ngModel)]=\"activeFilter.changed\" (change)=\"handleFilterChanged()\">\n                <span class=\"custom-control-indicator\"></span>\n                <span class=\"custom-control-description\">verändert</span>\n            </label>\n            <label class=\"custom-control custom-checkbox\">\n                <input type=\"checkbox\" class=\"custom-control-input\" [(ngModel)]=\"activeFilter.deleted\" (change)=\"handleFilterChanged()\">\n                <span class=\"custom-control-indicator\"></span>\n                <span class=\"custom-control-description\">gelöscht</span>\n            </label>\n            <label class=\"custom-control custom-checkbox\">\n                <input type=\"checkbox\" class=\"custom-control-input\" [(ngModel)]=\"activeFilter.added\" (change)=\"handleFilterChanged()\">\n                <span class=\"custom-control-indicator\"></span>\n                <span class=\"custom-control-description\">hinzugefügt</span>\n            </label>\n            <label class=\"custom-control custom-checkbox\">\n                <input type=\"checkbox\" class=\"custom-control-input\" [(ngModel)]=\"activeFilter.moved\" (change)=\"handleFilterChanged()\">\n                <span class=\"custom-control-indicator\"></span>\n                <span class=\"custom-control-description\">umbenannt/verschoben</span>\n            </label>\n        </div>\n    </div>\n</div>"
+module.exports = "<div class=\"btn-group\">\n    <button type=\"button\" class=\"btn btn-secondary\" (click)=\"takeScreenshot()\"><i class=\"fa fa-camera\" aria-hidden=\"true\"></i></button>\n    <button type=\"button\" class=\"btn btn-secondary dropdown-toggle dropdown-toggle-split\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n        <span class=\"sr-only\">Toggle Dropdown</span>\n    </button>\n    <div id=\"screenshot-dropdown\" class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n        <div class=\"form-group\">\n            <label>GIF erstellen für:</label>\n            <div class=\"btn-group\">\n                <button type=\"button\" class=\"btn btn-secondary\" (click)=\"generateGif(screenTypes.left)\">{{activeViewType === viewTypes.split ? 'Erster Commit' : 'Kombinierte Ansicht'}}</button>\n                <button type=\"button\" class=\"btn btn-secondary\" (click)=\"generateGif(screenTypes.right)\" *ngIf=\"activeViewType === viewTypes.split\">Zweiter Commit</button>\n            </div>\n        </div>\n\n        <img *ngIf=\"gifSource && !isGenerating\" id=\"gif\" src=\"{{gifSource}}\">\n        <p *ngIf=\"isGenerating\">GIF wird erstellt ...</p>\n        <small *ngIf=\"!gifSource && !isGenerating\">Ein GIF wird aus gespeicherten Screenshots erzeugt (Button <i class=\"fa fa-camera\" aria-hidden=\"true\"></i> )</small>\n\n        <div class=\"form-group\" *ngIf=\"gifSource\">\n            <button type=\"button\" class=\"btn btn-danger\" (click)=\"removeScreenshots()\">zurücksetzen</button>\n        </div>\n    </div>\n</div>"
 
 /***/ }),
 
 /***/ 458:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"btn-group\">\n    <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n        <i class=\"fa fa-bar-chart\" aria-hidden=\"true\"></i>\n    </button>\n    <div id=\"metric-mapping-dropdown\" class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n        <div class=\"form-group\">\n            <label for=\"height-metric-name\">Höhe</label>\n            <select id=\"height-metric-name\" class=\"custom-select\" [(ngModel)]=\"metricMapping.heightMetricName\">\n                <option *ngFor=\"let metricName of metricNames\" [ngValue]=\"metricName.name\">{{metricName.shortName}}</option>\n            </select>\n        </div>\n\n        <div class=\"form-group\">\n            <label for=\"groundarea-metric-name\">Grundfläche</label>\n            <select id=\"groundarea-metric-name\" class=\"custom-select\" [(ngModel)]=\"metricMapping.groundAreaMetricName\">\n                <option *ngFor=\"let metricName of metricNames\" [ngValue]=\"metricName.name\">{{metricName.shortName}}</option>\n            </select>\n        </div>\n\n        <div class=\"form-group\">\n            <label for=\"color-metric-name\">Farbe</label>\n            <select id=\"color-metric-name\" class=\"custom-select\" [(ngModel)]=\"metricMapping.colorMetricName\">\n                <option *ngFor=\"let metricName of metricNames\" [ngValue]=\"metricName.name\">{{metricName.shortName}}</option>\n            </select>\n        </div>\n\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"applyMetricMappings()\">übernehmen</button>\n    </div>\n</div>"
+module.exports = "<app-autosuggest-wrapper\n        [placeholder]=\"'Datei, Modul, ...'\"\n        [source]=\"uniqueFileList\"\n        [noMatchFoundText]=\"'Nichts gefunden.'\"\n        [listFormatter]=\"autocompleteListFormatter\"\n        (valueChanged)=\"handleSearchChanged($event)\">\n</app-autosuggest-wrapper>"
 
 /***/ }),
 
 /***/ 459:
 /***/ (function(module, exports) {
 
-module.exports = "<div>\n    <small>Einstellungen</small>\n</div>\n<app-view-control [activeViewType]=\"activeViewType$ | async\" (viewTypeChanged)=\"handleViewTypeChanged($event)\"></app-view-control>\n<app-filter [activeFilter]=\"activeFilter$ | async\" (filterChanged)=\"handleFilterChanged($event)\"></app-filter>\n<app-metric-mapping [metricMapping]=\"metricMapping$ | async\" (metricMappingChanged)=\"handleMetricMappingChanged($event)\"></app-metric-mapping>"
+module.exports = "<div class=\"btn-group\">\n    <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n        <i class=\"fa fa-filter\" aria-hidden=\"true\"></i>\n    </button>\n    <div id=\"filter-dropdown\" class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n        <div class=\"custom-controls-stacked\">\n            <label class=\"custom-control custom-checkbox\">\n                <input type=\"checkbox\" class=\"custom-control-input\" [(ngModel)]=\"activeFilter.unchanged\" (change)=\"handleFilterChanged()\">\n                <span class=\"custom-control-indicator\"></span>\n                <span class=\"custom-control-description\">unverändert</span>\n            </label>\n            <label class=\"custom-control custom-checkbox\">\n                <input type=\"checkbox\" class=\"custom-control-input\" [(ngModel)]=\"activeFilter.changed\" (change)=\"handleFilterChanged()\">\n                <span class=\"custom-control-indicator\"></span>\n                <span class=\"custom-control-description\">verändert</span>\n            </label>\n            <label class=\"custom-control custom-checkbox\">\n                <input type=\"checkbox\" class=\"custom-control-input\" [(ngModel)]=\"activeFilter.deleted\" (change)=\"handleFilterChanged()\">\n                <span class=\"custom-control-indicator\"></span>\n                <span class=\"custom-control-description\">gelöscht</span>\n            </label>\n            <label class=\"custom-control custom-checkbox\">\n                <input type=\"checkbox\" class=\"custom-control-input\" [(ngModel)]=\"activeFilter.added\" (change)=\"handleFilterChanged()\">\n                <span class=\"custom-control-indicator\"></span>\n                <span class=\"custom-control-description\">hinzugefügt</span>\n            </label>\n            <label class=\"custom-control custom-checkbox\">\n                <input type=\"checkbox\" class=\"custom-control-input\" [(ngModel)]=\"activeFilter.moved\" (change)=\"handleFilterChanged()\">\n                <span class=\"custom-control-indicator\"></span>\n                <span class=\"custom-control-description\">umbenannt/verschoben</span>\n            </label>\n        </div>\n    </div>\n</div>"
 
 /***/ }),
 
 /***/ 460:
 /***/ (function(module, exports) {
 
-module.exports = "<label class=\"custom-control custom-radio\">\n    <input id=\"radio-splitscreen\" type=\"radio\" name=\"radio-group-screen\" class=\"custom-control-input\" [value]=\"viewTypes.split\" (click)=\"changeViewType(viewTypes.split)\" [checked]=\"activeViewType === viewTypes.split\" />\n    <span class=\"custom-control-indicator\"></span>\n    <span class=\"custom-control-description\">nebeneinander</span>\n</label>\n<label class=\"custom-control custom-radio\">\n    <input id=\"radio-fullscreen\" type=\"radio\" name=\"radio-group-screen\" class=\"custom-control-input\" [value]=\"viewTypes.merged\" (click)=\"changeViewType(viewTypes.merged)\" [checked]=\"activeViewType === viewTypes.merged\" />\n    <span class=\"custom-control-indicator\"></span>\n    <span class=\"custom-control-description\">kombiniert</span>\n</label>"
+module.exports = "<div class=\"btn-group\">\n    <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n        <i class=\"fa fa-bar-chart\" aria-hidden=\"true\"></i>\n    </button>\n    <div id=\"metric-mapping-dropdown\" class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n        <div class=\"form-group\">\n            <label for=\"height-metric-name\">Höhe</label>\n            <select id=\"height-metric-name\" class=\"custom-select\" [(ngModel)]=\"metricMapping.heightMetricName\">\n                <option *ngFor=\"let metricName of metricNames\" [ngValue]=\"metricName.name\">{{metricName.shortName}}</option>\n            </select>\n        </div>\n\n        <div class=\"form-group\">\n            <label for=\"groundarea-metric-name\">Grundfläche</label>\n            <select id=\"groundarea-metric-name\" class=\"custom-select\" [(ngModel)]=\"metricMapping.groundAreaMetricName\">\n                <option *ngFor=\"let metricName of metricNames\" [ngValue]=\"metricName.name\">{{metricName.shortName}}</option>\n            </select>\n        </div>\n\n        <div class=\"form-group\">\n            <label for=\"color-metric-name\">Farbe</label>\n            <select id=\"color-metric-name\" class=\"custom-select\" [(ngModel)]=\"metricMapping.colorMetricName\">\n                <option *ngFor=\"let metricName of metricNames\" [ngValue]=\"metricName.name\">{{metricName.shortName}}</option>\n            </select>\n        </div>\n\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"applyMetricMappings()\">übernehmen</button>\n    </div>\n</div>"
 
 /***/ }),
 
 /***/ 461:
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"comparison-panel\">\n    <strong class=\"element-name\">{{elementName}}</strong>\n    <div class=\"table-container\">\n        <table id=\"comparison-table\" class=\"table table-striped table-sm\">\n            <thead>\n            <tr>\n                <th>Metrik</th>\n                <th id=\"first-commit-id\">{{leftCommit?.name}}</th>\n                <th id=\"second-commit-id\">{{rightCommit?.name}}</th>\n                <th>Änderung</th>\n            </tr>\n            </thead>\n            <tbody>\n                <tr *ngFor=\"let row of tableRows\">\n                    <td>{{row.metricName}}</td>\n                    <td>{{row.leftCommitValue}}</td>\n                    <td>{{row.rightCommitValue}}</td>\n                    <td>\n                        <i *ngIf=\"row.difference > 0\" class=\"fa fa-caret-up\" aria-hidden=\"true\"></i>\n                        <i *ngIf=\"row.difference < 0\" class=\"fa fa-caret-down\" aria-hidden=\"true\"></i>\n                        <i *ngIf=\"row.difference === 0\" class=\"fa fa-caret-right\" aria-hidden=\"true\"></i>\n                        {{row.difference}}\n                    </td>\n                </tr>\n            </tbody>\n        </table>\n    </div>\n    <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"handleClose()\">\n        <span aria-hidden=\"true\">&times;</span>\n    </button>\n</div>"
+module.exports = "<div>\n    <small>Einstellungen</small>\n</div>\n<app-view-control [activeViewType]=\"activeViewType$ | async\" (viewTypeChanged)=\"handleViewTypeChanged($event)\"></app-view-control>\n<app-filter [activeFilter]=\"activeFilter$ | async\" (filterChanged)=\"handleFilterChanged($event)\"></app-filter>\n<app-metric-mapping [metricMapping]=\"metricMapping$ | async\" (metricMappingChanged)=\"handleMetricMappingChanged($event)\"></app-metric-mapping>"
 
 /***/ }),
 
 /***/ 462:
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"legend-container\">\n    <div id=\"legend-item-color-code\" class=\"legend-item\" *ngIf=\"activeViewType === viewTypes.split\">\n        <span class=\"legend-color\"></span>\n        <small class=\"legend-label\">{{colorMetricName}}</small>\n    </div>\n    <div id=\"legend-item-commit-1\" class=\"legend-item\" *ngIf=\"activeViewType === viewTypes.merged\">\n        <span class=\"legend-color\" [ngStyle]=\"{'background': colorFirstCommit}\"></span>\n        <small class=\"legend-label\">Erste Revision</small>\n    </div>\n    <div id=\"legend-item-commit-2\" class=\"legend-item\" *ngIf=\"activeViewType === viewTypes.merged\">\n        <span class=\"legend-color\" [ngStyle]=\"{'background': colorSecondCommit}\"></span>\n        <small class=\"legend-label\">Zweite Revision</small>\n    </div>\n    <div id=\"legend-item-added-files\" class=\"legend-item\" *ngIf=\"activeViewType === viewTypes.merged\">\n        <span class=\"legend-color\" [ngStyle]=\"{'background': colorAddedFile}\"></span>\n        <small class=\"legend-label\">hinzugefügt</small>\n    </div>\n    <div id=\"legend-item-deleted-files\" class=\"legend-item\" *ngIf=\"activeViewType === viewTypes.merged\">\n        <span class=\"legend-color\" [ngStyle]=\"{'background': colorDeletedFile}\"></span>\n        <small class=\"legend-label\">gelöscht</small>\n    </div>\n    <div id=\"legend-item-unchanged-files\" class=\"legend-item\" *ngIf=\"activeViewType === viewTypes.merged\">\n        <span class=\"legend-color\" [ngStyle]=\"{'background': colorUnchangedFile}\"></span>\n        <small class=\"legend-label\">unverändert</small>\n    </div>\n</div>"
+module.exports = "<label class=\"custom-control custom-radio\">\n    <input id=\"radio-splitscreen\" type=\"radio\" name=\"radio-group-screen\" class=\"custom-control-input\" [value]=\"viewTypes.split\" (click)=\"changeViewType(viewTypes.split)\" [checked]=\"activeViewType === viewTypes.split\" />\n    <span class=\"custom-control-indicator\"></span>\n    <span class=\"custom-control-description\">nebeneinander</span>\n</label>\n<label class=\"custom-control custom-radio\">\n    <input id=\"radio-fullscreen\" type=\"radio\" name=\"radio-group-screen\" class=\"custom-control-input\" [value]=\"viewTypes.merged\" (click)=\"changeViewType(viewTypes.merged)\" [checked]=\"activeViewType === viewTypes.merged\" />\n    <span class=\"custom-control-indicator\"></span>\n    <span class=\"custom-control-description\">kombiniert</span>\n</label>"
 
 /***/ }),
 
 /***/ 463:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"loading-indicator-container\">\n    <div class=\"uil-cube-css\">\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n    </div>\n</div>"
+module.exports = "<div id=\"comparison-panel\">\n    <strong class=\"element-name\">{{elementName}}</strong>\n    <div class=\"table-container\">\n        <table id=\"comparison-table\" class=\"table table-striped table-sm\">\n            <thead>\n            <tr>\n                <th>Metrik</th>\n                <th id=\"first-commit-id\">{{leftCommit?.name}}</th>\n                <th id=\"second-commit-id\">{{rightCommit?.name}}</th>\n                <th>Änderung</th>\n            </tr>\n            </thead>\n            <tbody>\n                <tr *ngFor=\"let row of tableRows\">\n                    <td>{{row.metricName}}</td>\n                    <td>{{row.leftCommitValue}}</td>\n                    <td>{{row.rightCommitValue}}</td>\n                    <td>\n                        <i *ngIf=\"row.difference > 0\" class=\"fa fa-caret-up\" aria-hidden=\"true\"></i>\n                        <i *ngIf=\"row.difference < 0\" class=\"fa fa-caret-down\" aria-hidden=\"true\"></i>\n                        <i *ngIf=\"row.difference === 0\" class=\"fa fa-caret-right\" aria-hidden=\"true\"></i>\n                        {{row.difference}}\n                    </td>\n                </tr>\n            </tbody>\n        </table>\n    </div>\n    <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"handleClose()\">\n        <span aria-hidden=\"true\">&times;</span>\n    </button>\n</div>"
 
 /***/ }),
 
 /***/ 464:
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "<div id=\"legend-container\">\n    <div id=\"legend-item-color-code\" class=\"legend-item\" *ngIf=\"activeViewType === viewTypes.split\">\n        <span class=\"legend-color\"></span>\n        <small class=\"legend-label\">{{colorMetricName}}</small>\n    </div>\n    <div id=\"legend-item-commit-1\" class=\"legend-item\" *ngIf=\"activeViewType === viewTypes.merged\">\n        <span class=\"legend-color\" [ngStyle]=\"{'background': colorFirstCommit}\"></span>\n        <small class=\"legend-label\">Erste Revision</small>\n    </div>\n    <div id=\"legend-item-commit-2\" class=\"legend-item\" *ngIf=\"activeViewType === viewTypes.merged\">\n        <span class=\"legend-color\" [ngStyle]=\"{'background': colorSecondCommit}\"></span>\n        <small class=\"legend-label\">Zweite Revision</small>\n    </div>\n    <div id=\"legend-item-added-files\" class=\"legend-item\" *ngIf=\"activeViewType === viewTypes.merged\">\n        <span class=\"legend-color\" [ngStyle]=\"{'background': colorAddedFile}\"></span>\n        <small class=\"legend-label\">hinzugefügt</small>\n    </div>\n    <div id=\"legend-item-deleted-files\" class=\"legend-item\" *ngIf=\"activeViewType === viewTypes.merged\">\n        <span class=\"legend-color\" [ngStyle]=\"{'background': colorDeletedFile}\"></span>\n        <small class=\"legend-label\">gelöscht</small>\n    </div>\n    <div id=\"legend-item-unchanged-files\" class=\"legend-item\" *ngIf=\"activeViewType === viewTypes.merged\">\n        <span class=\"legend-color\" [ngStyle]=\"{'background': colorUnchangedFile}\"></span>\n        <small class=\"legend-label\">unverändert</small>\n    </div>\n</div>"
 
 /***/ }),
 
 /***/ 465:
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"tooltip\">\n    <div class=\"element-name\">{{(content$ | async)?.elementName}}</div>\n    <table>\n        <tr *ngFor=\"let metric of (content$ | async)?.metrics | keyValue\">\n            <td class=\"metric-name-column\"><small>{{metric.key}}</small></td>\n            <td class=\"metric-value-column\"><small>{{metric.value || 'N/A'}}</small></td>\n        </tr>\n    </table>\n</div>"
+module.exports = "<div class=\"loading-indicator-container\">\n    <div class=\"uil-cube-css\">\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n    </div>\n</div>"
 
 /***/ }),
 
 /***/ 466:
 /***/ (function(module, exports) {
 
+module.exports = ""
+
+/***/ }),
+
+/***/ 467:
+/***/ (function(module, exports) {
+
+module.exports = "<div id=\"tooltip\">\n    <div class=\"element-name\">{{(content$ | async)?.elementName}}</div>\n    <table>\n        <tr *ngFor=\"let metric of (content$ | async)?.metrics | keyValue\">\n            <td class=\"metric-name-column\"><small>{{metric.key}}</small></td>\n            <td class=\"metric-value-column\"><small>{{metric.value || 'N/A'}}</small></td>\n        </tr>\n    </table>\n</div>"
+
+/***/ }),
+
+/***/ 468:
+/***/ (function(module, exports) {
+
 module.exports = "<div id=\"stage\" class=\"split\">\n    <div class=\"vertical-line\"></div>\n    <app-loading-indicator *ngIf=\"metricsLoading$ | async\"></app-loading-indicator>\n\n    <app-screen\n            [screenType]=\"screenTypes.left\"\n            [activeViewType]=\"activeViewType$ | async\"\n            [activeFilter]=\"activeFilter$ | async\"\n            [metricTree]=\"metricTree$ | async\"\n            [metricMapping]=\"metricMapping$ | async\">\n    </app-screen>\n\n    <app-screen\n            [screenType]=\"screenTypes.right\"\n            [activeViewType]=\"activeViewType$ | async\"\n            [activeFilter]=\"activeFilter$ | async\"\n            [metricTree]=\"metricTree$ | async\"\n            [metricMapping]=\"metricMapping$ | async\">\n    </app-screen>\n\n    <app-comparison-panel\n            [metricMapping]=\"metricMapping$ | async\"\n            [leftCommit]=\"leftCommit$ | async\"\n            [rightCommit]=\"rightCommit$ | async\">\n    </app-comparison-panel>\n\n    <app-legend [activeViewType]=\"activeViewType$ | async\" [colorMetricName]=\"colorMetricName$ | async\"></app-legend>\n</div>\n<app-tooltip></app-tooltip>"
 
 /***/ }),
 
-/***/ 55:
+/***/ 56:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4081,7 +4084,7 @@ function clearScreenshots() {
 
 /***/ }),
 
-/***/ 56:
+/***/ 57:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4118,7 +4121,7 @@ var MetricNameHelper = (function () {
 
 /***/ }),
 
-/***/ 57:
+/***/ 58:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4161,10 +4164,10 @@ ComparisonPanelService = __decorate([
 
 /***/ }),
 
-/***/ 734:
+/***/ 735:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(301);
+module.exports = __webpack_require__(302);
 
 
 /***/ }),
@@ -4282,7 +4285,7 @@ FocusService = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ngrx_store__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_reducers__ = __webpack_require__(40);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__control_panel_control_panel_actions__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__control_panel_control_panel_actions__ = __webpack_require__(56);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ScreenShotService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -4429,5 +4432,5 @@ function generateUniqueFileList(metricTree) {
 
 /***/ })
 
-},[734]);
+},[735]);
 //# sourceMappingURL=main.bundle.js.map
