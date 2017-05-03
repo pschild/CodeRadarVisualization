@@ -1,5 +1,5 @@
 <div class="btn-group">
-    <button type="button" class="btn btn-secondary" (click)="takeScreenshot()"><i class="fa fa-camera" aria-hidden="true"></i> Screenshot speichern</button>
+    <button type="button" class="btn btn-secondary" (click)="takeScreenshot()"><i class="fa fa-camera" aria-hidden="true"></i></button>
     <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <span class="sr-only">Toggle Dropdown</span>
     </button>
@@ -14,7 +14,7 @@
 
         <img *ngIf="gifSource && !isGenerating" id="gif" src="{{gifSource}}">
         <p *ngIf="isGenerating">GIF wird erstellt ...</p>
-        <small *ngIf="!gifSource && !isGenerating">Ein GIF wird aus gespeicherten Screenshots erzeugt (Button "Screenshot speichern")</small>
+        <small *ngIf="!gifSource && !isGenerating">Ein GIF wird aus gespeicherten Screenshots erzeugt (Button <i class="fa fa-camera" aria-hidden="true"></i> )</small>
 
         <div class="form-group" *ngIf="gifSource">
             <button type="button" class="btn btn-danger" (click)="removeScreenshots()">zurücksetzen</button>
