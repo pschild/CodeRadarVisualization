@@ -22,7 +22,7 @@ export class SearchComponent implements OnInit {
     }
 
     autocompleteListFormatter(data: string): string {
-        return data;
+        return `<span title="${data}">${data}</span>`;
     }
 
 }
