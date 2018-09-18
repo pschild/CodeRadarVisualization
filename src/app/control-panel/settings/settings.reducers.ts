@@ -1,9 +1,10 @@
 import * as SettingsActions from "./settings.actions";
-import {Action, ActionReducer} from "@ngrx/store";
+import {ActionReducer} from "@ngrx/store";
 import {ViewType} from "../../enum/ViewType";
 import {IFilter} from "../../interfaces/IFilter";
 import {IMetricMapping} from "../../interfaces/IMetricMapping";
 import {AppConfig} from "../../AppConfig";
+import {IActionWithPayload} from "../../interfaces/IActionWithPayload";
 
 export interface SettingsState {
     activeViewType: ViewType;
@@ -27,7 +28,7 @@ const initialState: SettingsState = {
     }
 };
 
-export const SettingsReducer: ActionReducer<SettingsState> = (state = initialState, action: Action) => {
+export const SettingsReducer: ActionReducer<SettingsState> = (state = initialState, action: IActionWithPayload<any>) => {
     let newState;
     switch (action.type) {
         case SettingsActions.CHANGE_VIEW_TYPE:

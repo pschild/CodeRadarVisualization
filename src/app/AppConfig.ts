@@ -23,8 +23,8 @@ export class AppConfig {
 
     // DEFAULT METRIC MAPPING
     static HEIGHT_METRIC_NAME: string = 'coderadar:size:loc:java';
-    static GROUND_AREA_METRIC_NAME: string = environment.demo ? 'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck' : 'coderadar:size:sloc:java';
-    static COLOR_METRIC_NAME: string = environment.demo ? 'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck' : 'coderadar:size:eloc:java';
+    static GROUND_AREA_METRIC_NAME: string = environment.development ? 'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck' : 'coderadar:size:sloc:java';
+    static COLOR_METRIC_NAME: string = environment.development ? 'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck' : 'coderadar:size:eloc:java';
 
     // VISUALIZATION SETTINGS
     static EDGE_LENGTH_FACTOR: number = 2;

@@ -1,6 +1,7 @@
-import {Action} from "@ngrx/store";
-import {CommitType} from "../enum/CommitType";
-import {ICommit} from "../interfaces/ICommit";
+import {Action} from '@ngrx/store';
+import {CommitType} from '../enum/CommitType';
+import {ICommit} from '../interfaces/ICommit';
+import {IActionWithPayload} from '../interfaces/IActionWithPayload';
 
 export const LOAD_COMMITS = 'LOAD_COMMITS';
 export const LOAD_COMMITS_SUCCESS = 'LOAD_COMMITS_SUCCESS';
@@ -15,21 +16,21 @@ export function loadCommits(): Action {
     };
 }
 
-export function loadCommitsSuccess(commits: ICommit[]): Action {
+export function loadCommitsSuccess(commits: ICommit[]): IActionWithPayload<ICommit[]> {
     return {
         type: LOAD_COMMITS_SUCCESS,
         payload: commits
     };
 }
 
-export function loadCommitsError(error: string): Action {
+export function loadCommitsError(error: string): IActionWithPayload<string> {
     return {
         type: LOAD_COMMITS_ERROR,
         payload: error
     };
 }
 
-export function changeCommit(commitType: CommitType, commit: ICommit): Action {
+export function changeCommit(commitType: CommitType, commit: ICommit): IActionWithPayload<{commitType: CommitType, commit: ICommit}> {
     return {
         type: CHANGE_COMMIT,
         payload: {
@@ -39,7 +40,7 @@ export function changeCommit(commitType: CommitType, commit: ICommit): Action {
     };
 }
 
-export function addScreenshot(screenshotObject: any): Action {
+export function addScreenshot(screenshotObject: any): IActionWithPayload<any> {
     return {
         type: ADD_SCREENSHOT,
         payload: screenshotObject

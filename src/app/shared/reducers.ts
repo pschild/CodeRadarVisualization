@@ -1,5 +1,5 @@
 import {createSelector} from 'reselect';
-import {combineReducers} from '@ngrx/store';
+import {ActionReducerMap} from '@ngrx/store';
 import * as fromControlPanel from '../control-panel/control-panel.reducers';
 import * as fromSettings from '../control-panel/settings/settings.reducers';
 import * as fromVisualization from '../visualization/visualization.reducers';
@@ -10,17 +10,11 @@ export interface AppState {
     visualizationState: fromVisualization.VisualizationState;
 }
 
-const reducers = {
+export const reducers: ActionReducerMap<AppState> = {
     controlPanelState: fromControlPanel.ControlPanelReducer,
     settingsState: fromSettings.SettingsReducer,
     visualizationState: fromVisualization.VisualizationReducer
 };
-
-const combined = combineReducers(reducers);
-
-export function reducer(state: any, action: any) {
-    return combined(state, action);
-}
 
 export const getControlPanelState = (state: AppState) => state.controlPanelState;
 

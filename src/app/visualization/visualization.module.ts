@@ -4,7 +4,6 @@ import {VisualizationComponent} from './visualization.component';
 import {ScreenComponent} from './screen/screen.component';
 import {MetricService} from "../service/metric.service";
 import {environment} from "../../environments/environment";
-import {MetricMockService} from "../service/mocks/metric-mock.service";
 import {TooltipComponent} from './tooltip/tooltip.component';
 import {ComparisonPanelComponent} from './comparison-panel/comparison-panel.component';
 import {LegendComponent} from './legend/legend.component';
@@ -28,10 +27,7 @@ import {LoadingIndicatorComponent} from './loading-indicator/loading-indicator.c
         VisualizationComponent
     ],
     providers: [
-        {
-            provide: MetricService,
-            useClass: environment.demo ? MetricMockService : MetricService
-        }
+        MetricService
     ]
 })
 export class VisualizationModule {

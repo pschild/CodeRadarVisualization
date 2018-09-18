@@ -27,12 +27,21 @@ To see how this works, just have a look at the [GitHub project](https://github.c
 
 ## How to develop
 ### Development server
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files. Add `--environment demo` to run the demo mode.
-
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ### Build
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-Use the `-prod` flag for a production build or `--environment demo` for the demo mode.
+
+### Environments
+To run the app in production mode, use the `--prod` flag (or ```--configuration production```).
+
+To run the app in development mode, use no configuration flag at all or use ```--configuration development```. You can also run in development mode by calling ```npm run dev```.
+
+#### production
+Data will be loaded from the endpoint specified by ```BASE_URL``` in ```AppConfig.ts```.
+
+#### development
+Data will be loaded from static JSON files, located in ```assets/*.json```.
 
 ### Running unit tests
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).

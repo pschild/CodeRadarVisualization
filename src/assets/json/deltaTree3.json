@@ -3,13 +3,13 @@
   "type": "MODULE",
   "commit1Metrics": {
     "coderadar:size:loc:java": 800,
-    "coderadar:size:eloc:java": 4,
-    "coderadar:size:sloc:java": 8
+    "checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck": 4,
+    "checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck": 8
   },
   "commit2Metrics": {
     "coderadar:size:loc:java": 800,
-    "coderadar:size:eloc:java": 4,
-    "coderadar:size:sloc:java": 8
+    "checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck": 4,
+    "checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck": 8
   },
   "renamedFrom": null,
   "renamedTo": null,
@@ -19,14 +19,14 @@
       "name": "moduleB",
       "type": "MODULE",
       "commit1Metrics": {
-        "coderadar:size:loc:java": 4,
-        "coderadar:size:eloc:java": 2,
-        "coderadar:size:sloc:java": 4
+        "coderadar:size:loc:java": 40,
+        "checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck": 2,
+        "checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck": 4
       },
       "commit2Metrics": {
-        "coderadar:size:loc:java": 6,
-        "coderadar:size:eloc:java": 3,
-        "coderadar:size:sloc:java": 6
+        "coderadar:size:loc:java": 60,
+        "checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck": 3,
+        "checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck": 6
       },
       "renamedFrom": null,
       "renamedTo": null,
@@ -37,9 +37,9 @@
           "type": "FILE",
           "commit1Metrics": null,
           "commit2Metrics": {
-            "coderadar:size:loc:java": 2,
-            "coderadar:size:eloc:java": 1,
-            "coderadar:size:sloc:java": 2
+            "coderadar:size:loc:java": 20,
+            "checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck": 1,
+            "checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck": 2
           },
           "renamedFrom": null,
           "renamedTo": null,
@@ -56,13 +56,13 @@
           "type": "FILE",
           "commit1Metrics": {
             "coderadar:size:loc:java": 100,
-            "coderadar:size:eloc:java": 100,
-            "coderadar:size:sloc:java": 100
+            "checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck": 5,
+            "checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck": 10
           },
           "commit2Metrics": {
             "coderadar:size:loc:java": 200,
-            "coderadar:size:eloc:java": 200,
-            "coderadar:size:sloc:java": 200
+            "checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck": 8,
+            "checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck": 11
           },
           "renamedFrom": null,
           "renamedTo": null,
@@ -79,13 +79,13 @@
           "type": "FILE",
           "commit1Metrics": {
             "coderadar:size:loc:java": 200,
-            "coderadar:size:eloc:java": 200,
-            "coderadar:size:sloc:java": 200
+            "checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck": 4,
+            "checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck": 3
           },
           "commit2Metrics": {
             "coderadar:size:loc:java": 100,
-            "coderadar:size:eloc:java": 100,
-            "coderadar:size:sloc:java": 100
+            "checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck": 5,
+            "checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck": 3
           },
           "renamedFrom": null,
           "renamedTo": null,
@@ -102,9 +102,9 @@
           "type": "FILE",
           "commit1Metrics": null,
           "commit2Metrics": {
-            "coderadar:size:loc:java": 2,
-            "coderadar:size:eloc:java": 1,
-            "coderadar:size:sloc:java": 2
+            "coderadar:size:loc:java": 20,
+            "checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck": 1,
+            "checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck": 2
           },
           "renamedFrom": "moduleA/src/main/java/MovedClassFromAToB.java",
           "renamedTo": null,

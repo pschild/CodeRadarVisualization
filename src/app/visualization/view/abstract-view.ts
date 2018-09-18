@@ -100,8 +100,9 @@ export abstract class AbstractView {
         finalDepth = node.type === NodeType.FILE ? edgeLength : node.packerInfo.h - 2 * AppConfig.BLOCK_SPACING;
 
         if (isTransparent) {
-            cube.material.transparent = true;
-            cube.material.opacity = 0.4;
+            // TODO: enable
+            // cube.material.transparent = true;
+            // cube.material.opacity = 0.4;
         }
 
         cube.position.x = finalX;
@@ -117,7 +118,7 @@ export abstract class AbstractView {
         this.blockElements.push(cube);
     }
 
-    createCubeGeometry(color: string, name: string) {
+    createCubeGeometry(color: string, name: string): Mesh {
         let material = new MeshLambertMaterial({color: color});
 
         let block = new Mesh(this.geometry, material);

@@ -1,25 +1,25 @@
 <div class="btn-group">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <i class="fa fa-bar-chart" aria-hidden="true"></i>
     </button>
     <div id="metric-mapping-dropdown" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <div class="form-group">
             <label for="height-metric-name">Höhe</label>
-            <select id="height-metric-name" class="custom-select" [(ngModel)]="metricMapping.heightMetricName">
+            <select id="height-metric-name" class="custom-select w-auto" [(ngModel)]="metricMapping.heightMetricName">
                 <option *ngFor="let metricName of metricNames" [ngValue]="metricName.name">{{metricName.shortName}}</option>
             </select>
         </div>
 
         <div class="form-group">
             <label for="groundarea-metric-name">Grundfläche</label>
-            <select id="groundarea-metric-name" class="custom-select" [(ngModel)]="metricMapping.groundAreaMetricName">
+            <select id="groundarea-metric-name" class="custom-select w-auto" [(ngModel)]="metricMapping.groundAreaMetricName">
                 <option *ngFor="let metricName of metricNames" [ngValue]="metricName.name">{{metricName.shortName}}</option>
             </select>
         </div>
 
         <div class="form-group">
             <label for="color-metric-name">Farbe</label>
-            <select id="color-metric-name" class="custom-select" [(ngModel)]="metricMapping.colorMetricName">
+            <select id="color-metric-name" class="custom-select w-auto" [(ngModel)]="metricMapping.colorMetricName">
                 <option *ngFor="let metricName of metricNames" [ngValue]="metricName.name">{{metricName.shortName}}</option>
             </select>
         </div>

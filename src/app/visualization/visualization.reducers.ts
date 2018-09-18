@@ -1,7 +1,8 @@
 import * as VisualizationActions from "./visualization.actions";
-import {Action, ActionReducer} from "@ngrx/store";
+import {ActionReducer} from "@ngrx/store";
 import {ElementAnalyzer} from "../helper/element-analyzer";
 import {INode} from "../interfaces/INode";
+import { IActionWithPayload } from "../interfaces/IActionWithPayload";
 
 export interface VisualizationState {
     metricsLoading: boolean;
@@ -15,7 +16,7 @@ const initialState: VisualizationState = {
     uniqueFileList: []
 };
 
-export const VisualizationReducer: ActionReducer<VisualizationState> = (state = initialState, action: Action) => {
+export const VisualizationReducer: ActionReducer<VisualizationState> = (state = initialState, action: IActionWithPayload<any>) => {
     let newState;
     switch (action.type) {
         case VisualizationActions.LOAD_METRIC_TREE:

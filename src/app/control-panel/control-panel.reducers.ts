@@ -1,8 +1,9 @@
 import * as ControlPanelActions from "./control-panel.actions";
-import {Action, ActionReducer} from "@ngrx/store";
+import {ActionReducer} from "@ngrx/store";
 import {ICommit} from "../interfaces/ICommit";
 import {CommitType} from "../enum/CommitType";
 import _ from "lodash";
+import {IActionWithPayload} from "../interfaces/IActionWithPayload";
 
 export interface ControlPanelState {
     commits: ICommit[];
@@ -20,7 +21,7 @@ const initialState: ControlPanelState = {
     screenshots: []
 };
 
-export const ControlPanelReducer: ActionReducer<ControlPanelState> = (state = initialState, action: Action) => {
+export const ControlPanelReducer: ActionReducer<ControlPanelState> = (state = initialState, action: IActionWithPayload<any>) => {
     let newState;
     switch (action.type) {
         case ControlPanelActions.LOAD_COMMITS:

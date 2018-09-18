@@ -1,34 +1,29 @@
 <div class="btn-group">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <i class="fa fa-filter" aria-hidden="true"></i>
     </button>
     <div id="filter-dropdown" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <div class="custom-controls-stacked">
-            <label class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" [(ngModel)]="activeFilter.unchanged" (change)="handleFilterChanged()">
-                <span class="custom-control-indicator"></span>
-                <span class="custom-control-description">unverändert</span>
-            </label>
-            <label class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" [(ngModel)]="activeFilter.changed" (change)="handleFilterChanged()">
-                <span class="custom-control-indicator"></span>
-                <span class="custom-control-description">verändert</span>
-            </label>
-            <label class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" [(ngModel)]="activeFilter.deleted" (change)="handleFilterChanged()">
-                <span class="custom-control-indicator"></span>
-                <span class="custom-control-description">gelöscht</span>
-            </label>
-            <label class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" [(ngModel)]="activeFilter.added" (change)="handleFilterChanged()">
-                <span class="custom-control-indicator"></span>
-                <span class="custom-control-description">hinzugefügt</span>
-            </label>
-            <label class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" [(ngModel)]="activeFilter.moved" (change)="handleFilterChanged()">
-                <span class="custom-control-indicator"></span>
-                <span class="custom-control-description">umbenannt/verschoben</span>
-            </label>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" id="checkbox-unchanged" class="custom-control-input" [(ngModel)]="activeFilter.unchanged" (change)="handleFilterChanged()">
+                <label class="custom-control-label" for="checkbox-unchanged">unverändert</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" id="checkbox-changed" class="custom-control-input" [(ngModel)]="activeFilter.changed" (change)="handleFilterChanged()">
+                <label class="custom-control-label" for="checkbox-changed">verändert</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" id="checkbox-deleted" class="custom-control-input" [(ngModel)]="activeFilter.deleted" (change)="handleFilterChanged()">
+                <label class="custom-control-label" for="checkbox-deleted">gelöscht</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" id="checkbox-added" class="custom-control-input" [(ngModel)]="activeFilter.added" (change)="handleFilterChanged()">
+                <label class="custom-control-label" for="checkbox-added">hinzugefügt</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" id="checkbox-moved" class="custom-control-input" [(ngModel)]="activeFilter.moved" (change)="handleFilterChanged()">
+                <label class="custom-control-label" for="checkbox-moved">umbenannt/verschoben</label>
+            </div>
         </div>
     </div>
 </div>

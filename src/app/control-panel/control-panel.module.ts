@@ -8,7 +8,6 @@ import {NguiAutoCompleteModule} from "@ngui/auto-complete";
 import {CommitChooserComponent} from "./commit-chooser/commit-chooser.component";
 import {CommitService} from "../service/commit.service";
 import {environment} from "../../environments/environment";
-import {CommitMockService} from "../service/mocks/commit-mock.service";
 import {SearchComponent} from './search/search.component';
 import {FilterComponent} from './settings/filter/filter.component';
 import {MetricMappingComponent} from './settings/metric-mapping/metric-mapping.component';
@@ -36,10 +35,7 @@ import {AutosuggestWrapperComponent} from "../autosuggest-wrapper/autosuggest-wr
         ControlPanelComponent
     ],
     providers: [
-        {
-            provide: CommitService,
-            useClass: environment.demo ? CommitMockService : CommitService
-        }
+        CommitService
     ]
 })
 export class ControlPanelModule {
