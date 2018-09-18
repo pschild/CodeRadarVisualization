@@ -34,7 +34,7 @@
     "@ngrx/effects": "^6.1.0",
     "@ngrx/store": "^6.1.0",
     "@ngrx/store-devtools": "^6.1.0",
-    "@ngui/auto-complete": "^0.13.1",
+    "@ngui/auto-complete": "^2.0.0",
     "@types/three": "^0.84.3",
     "@types/tweenjs": "^0.6.27",
     "axios": "^0.15.2",

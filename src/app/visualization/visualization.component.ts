@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ScreenType} from "../enum/ScreenType";
 import {Observable, Subscription, combineLatest} from "rxjs";
-import {filter} from 'rxjs/operators';
+import {filter, map} from 'rxjs/operators';
 import {Store} from "@ngrx/store";
 import * as fromRoot from "../shared/reducers";
 import {loadMetricTree} from "./visualization.actions";
@@ -48,18 +48,23 @@ export class VisualizationComponent implements OnInit {
         this.leftCommit$ = this.store.select(fromRoot.getLeftCommit);
         this.rightCommit$ = this.store.select(fromRoot.getRightCommit);
         this.colorMetricName$ = this.store.select(fromRoot.getMetricMapping)
-            .map(metricMapping => metricMapping.colorMetricName)
-            .map(colorMetricName => MetricNameHelper.getShortNameByFullName(colorMetricName));
+            .pipe(
+                map(metricMapping => metricMapping.colorMetricName),
+                map(colorMetricName => MetricNameHelper.getShortNameByFullName(colorMetricName))
+            );
 
         this.subscriptions.push(
-            combineLatest(this.store.select(fromRoot.getLeftCommit), this.store.select(fromRoot.getRightCommit), this.store.select(fromRoot.getMetricMapping))
-                .pipe(
-                    filter(([leftCommit, rightCommit, metricMapping]) => !!leftCommit && !!rightCommit)
-                )
-                .subscribe(([leftCommit, rightCommit, metricMapping]) => {
-                    this.store.dispatch(loadMetricTree(leftCommit, rightCommit, metricMapping));
-                    this.comparisonPanelService.hide();
-                })
+            combineLatest(
+                this.store.select(fromRoot.getLeftCommit),
+                this.store.select(fromRoot.getRightCommit),
+                this.store.select(fromRoot.getMetricMapping)
+            ).pipe(
+                filter(([leftCommit, rightCommit, metricMapping]) => !!leftCommit && !!rightCommit)
+            )
+            .subscribe(([leftCommit, rightCommit, metricMapping]) => {
+                this.store.dispatch(loadMetricTree(leftCommit, rightCommit, metricMapping));
+                this.comparisonPanelService.hide();
+            })
         );
     }
 

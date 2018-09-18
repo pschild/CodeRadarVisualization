@@ -10,6 +10,7 @@
            [list-formatter]="listFormatter"
            [no-match-found-text]="noMatchFoundText"
            [match-formatted]="matchFormatted"
+           [accept-user-input]=false
            (valueChanged)="handleValueChanged($event)" />
     <button type="button" class="close" aria-label="Close" (click)="handleClearInputClicked()">
         <span aria-hidden="true">&times;</span>

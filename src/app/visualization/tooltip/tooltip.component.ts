@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {TooltipService} from "../../service/tooltip.service";
 import {Observable} from "rxjs/Observable";
 import {MetricNameHelper} from "../../helper/metric-name-helper";
+import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'app-tooltip',
@@ -21,20 +22,22 @@ export class TooltipComponent implements OnInit {
         this.tooltipElement = <HTMLElement>document.querySelector('#tooltip');
 
         this.content$ = this.tooltipService.tooltipContent$
-            .map((tooltipObject) => {
-                let readableMetrics = {};
+            .pipe(
+                map((tooltipObject) => {
+                    let readableMetrics = {};
 
-                if (tooltipObject.metrics) {
-                    Object.keys(tooltipObject.metrics).map((key) => {
-                        readableMetrics[MetricNameHelper.getShortNameByFullName(key)] = tooltipObject.metrics[key];
-                    });
-                }
+                    if (tooltipObject.metrics) {
+                        Object.keys(tooltipObject.metrics).map((key) => {
+                            readableMetrics[MetricNameHelper.getShortNameByFullName(key)] = tooltipObject.metrics[key];
+                        });
+                    }
 
-                return {
-                    elementName: tooltipObject.elementName,
-                    metrics: readableMetrics
-                };
-            });
+                    return {
+                        elementName: tooltipObject.elementName,
+                        metrics: readableMetrics
+                    };
+                })
+            );
 
         this.tooltipService.hideTooltip$.subscribe(() => {
             this.hide();

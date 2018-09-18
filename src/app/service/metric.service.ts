@@ -6,7 +6,7 @@ import {ICommit} from "../interfaces/ICommit";
 import {INode} from "../interfaces/INode";
 import {IMetricMapping} from "../interfaces/IMetricMapping";
 import {AppConfig} from "../AppConfig";
-import {delay} from 'rxjs/operators';
+import {delay, map} from 'rxjs/operators';
 import { environment } from 'environments/environment';
 
 @Injectable()
@@ -34,12 +34,14 @@ export class MetricService {
             }
 
             return this.http.get<INode>(`http://localhost:4200/assets/json/deltaTree${id}.json`)
-                .pipe(delay(1500))
-                .map((res) => {
-                    return {
-                        rootNode: res
-                    };
-                });
+                .pipe(
+                    delay(1500),
+                    map((res) => {
+                        return {
+                            rootNode: res
+                        };
+                    })
+                );
         } else {
             let body = {
                 'commit1': leftCommit.name,
@@ -48,11 +50,13 @@ export class MetricService {
             };
 
             return this.http.post<INode>(`${AppConfig.BASE_URL}/projects/1/metricvalues/deltaTree`, body)
-                .map((res) => {
-                    return {
-                        rootNode: res
-                    };
-                });
+                .pipe(
+                    map((res) => {
+                        return {
+                            rootNode: res
+                        };
+                    })
+                );
         }
     }
 
