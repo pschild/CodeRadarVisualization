@@ -1,5 +1,8 @@
 <div class="btn-group">
-    <button type="button" class="btn btn-outline-secondary" (click)="takeScreenshot()"><i class="fa fa-camera" aria-hidden="true"></i></button>
+    <button type="button" class="btn btn-outline-secondary" (click)="takeScreenshot()">
+        <i class="fa fa-camera" aria-hidden="true"></i>
+        <span *ngIf="screenShots.length" class="badge badge-pill badge-secondary ml-1">{{screenShots.length}}</span>
+    </button>
     <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <span class="sr-only">Toggle Dropdown</span>
     </button>
