@@ -33,18 +33,22 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
 ### Environments
-To run the app in production mode, use the `--prod` flag (or ```--configuration production```).
+To run the app in production mode, use the `--prod` flag (or `--configuration production`).
 
-To run the app in development mode, use no configuration flag at all or use ```--configuration development```. You can also run in development mode by calling ```npm run dev```.
+To run the app in development mode, use no configuration flag at all or use `--configuration development`. You can also run in development mode by calling `npm run dev`.
 
 #### production
-Data will be loaded from the endpoint specified by ```BASE_URL``` in ```AppConfig.ts```.
+Data will be loaded from the endpoint specified by `BASE_URL` in `AppConfig.ts`.
 
 #### development
-Data will be loaded from static JSON files, located in ```assets/*.json```.
+Data will be loaded from static JSON files, located in `assets/*.json`.
 
 ### Running unit tests
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+### Special hints
+#### Version of @types/three
+As TypeScript is used in version `~2.7.2`, we must use `@types/three` in version `^0.92.22`. See `https://www.npmjs.com/package/@types/three` (tab *Versions*) for an overview for which version can be used with which TypeScript version.
 
 ## Demo
 The latest state of the angular-ui branch will always be automatically deployed to the [demo](https://pschild.github.io/CodeRadarVisualization/).
