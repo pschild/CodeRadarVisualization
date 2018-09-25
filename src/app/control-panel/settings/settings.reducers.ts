@@ -1,10 +1,10 @@
-import * as SettingsActions from "./settings.actions";
-import {ActionReducer} from "@ngrx/store";
-import {ViewType} from "../../enum/ViewType";
-import {IFilter} from "../../interfaces/IFilter";
-import {IMetricMapping} from "../../interfaces/IMetricMapping";
-import {AppConfig} from "../../AppConfig";
-import {IActionWithPayload} from "../../interfaces/IActionWithPayload";
+import * as SettingsActions from './settings.actions';
+import {ActionReducer} from '@ngrx/store';
+import {ViewType} from '../../enum/ViewType';
+import {IFilter} from '../../interfaces/IFilter';
+import {IMetricMapping} from '../../interfaces/IMetricMapping';
+import {AppConfig} from '../../AppConfig';
+import {IActionWithPayload} from '../../interfaces/IActionWithPayload';
 
 export interface SettingsState {
     activeViewType: ViewType;

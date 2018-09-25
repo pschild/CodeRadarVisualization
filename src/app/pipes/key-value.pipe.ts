@@ -11,9 +11,11 @@ export class KeyValuePipe implements PipeTransform {
             return undefined;
         }
 
-        let keys = [];
-        for (let key in value) {
-            keys.push({key: key, value: value[key]});
+        const keys = [];
+        for (const key in value) {
+            if (value.hasOwnProperty(key)) {
+                keys.push({key: key, value: value[key]});
+            }
         }
         return keys;
     }

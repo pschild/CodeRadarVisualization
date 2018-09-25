@@ -1,12 +1,12 @@
-import {AbstractView} from "./abstract-view";
-import {INode} from "../../interfaces/INode";
-import {NodeType} from "../../enum/NodeType";
-import {AppConfig} from "../../AppConfig";
-import {CommitReferenceType} from "../../enum/CommitReferenceType";
-import {ColorHelper} from "../../helper/color-helper";
-import {ElementAnalyzer} from "../../helper/element-analyzer";
-import {ScreenType} from "../../enum/ScreenType";
-import {IMetricMapping} from "../../interfaces/IMetricMapping";
+import {AbstractView} from './abstract-view';
+import {INode} from '../../interfaces/INode';
+import {NodeType} from '../../enum/NodeType';
+import {AppConfig} from '../../AppConfig';
+import {CommitReferenceType} from '../../enum/CommitReferenceType';
+import {ColorHelper} from '../../helper/color-helper';
+import {ElementAnalyzer} from '../../helper/element-analyzer';
+import {ScreenType} from '../../enum/ScreenType';
+import {IMetricMapping} from '../../interfaces/IMetricMapping';
 
 export class SplitView extends AbstractView {
 
@@ -18,7 +18,10 @@ export class SplitView extends AbstractView {
     }
 
     calculateElements(nodes: INode[], parent: INode, bottom: number, level: number = 1) {
-        let minMaxColorValuePair = ElementAnalyzer.findSmallestAndBiggestMetricValueByMetricName(this.rootNode.children, this.metricMapping.colorMetricName);
+        const minMaxColorValuePair = ElementAnalyzer.findSmallestAndBiggestMetricValueByMetricName(
+            this.rootNode.children,
+            this.metricMapping.colorMetricName
+        );
         this.minColorMetricValue = minMaxColorValuePair.min;
         this.maxColorMetricValue = minMaxColorValuePair.max;
 
@@ -28,20 +31,36 @@ export class SplitView extends AbstractView {
 
         nodes.forEach((node) => {
             // don't draw empty modules
-            if (node.type == NodeType.MODULE && !ElementAnalyzer.hasChildrenForCurrentCommit(node, false, this.screenType)) {
+            if (node.type === NodeType.MODULE && !ElementAnalyzer.hasChildrenForCurrentCommit(node, false, this.screenType)) {
                 return;
             }
 
             if (!node.packerInfo.fit) {
+                // tslint:disable-next-line:no-console
                 console.info(`node ${node.name} at position ${this.screenType} has no fit!`);
                 return;
             }
 
-            let heightMetric = ElementAnalyzer.getMetricValueOfElementAndCommitReferenceType(node, this.metricMapping.heightMetricName, CommitReferenceType.THIS, this.screenType);
-            let groundAreaMetric = ElementAnalyzer.getMetricValueOfElementAndCommitReferenceType(node, this.metricMapping.groundAreaMetricName, CommitReferenceType.THIS, this.screenType);
-            let colorMetric = ElementAnalyzer.getMetricValueOfElementAndCommitReferenceType(node, this.metricMapping.colorMetricName, CommitReferenceType.THIS, this.screenType);
+            const heightMetric = ElementAnalyzer.getMetricValueOfElementAndCommitReferenceType(
+                node,
+                this.metricMapping.heightMetricName,
+                CommitReferenceType.THIS,
+                this.screenType
+            );
+            const groundAreaMetric = ElementAnalyzer.getMetricValueOfElementAndCommitReferenceType(
+                node,
+                this.metricMapping.groundAreaMetricName,
+                CommitReferenceType.THIS,
+                this.screenType
+            );
+            const colorMetric = ElementAnalyzer.getMetricValueOfElementAndCommitReferenceType(
+                node,
+                this.metricMapping.colorMetricName,
+                CommitReferenceType.THIS,
+                this.screenType
+            );
 
-            let metrics = {
+            const metrics = {
                 [this.metricMapping.heightMetricName]: heightMetric,
                 [this.metricMapping.groundAreaMetricName]: groundAreaMetric,
                 [this.metricMapping.colorMetricName]: colorMetric
@@ -55,10 +74,17 @@ export class SplitView extends AbstractView {
 
                 myHeight = heightMetric * AppConfig.HEIGHT_FACTOR;
 
-                let myEdgeLength = Math.sqrt(groundAreaMetric) * AppConfig.EDGE_LENGTH_FACTOR;
-                let otherEdgeLength = Math.sqrt(ElementAnalyzer.getMetricValueOfElementAndCommitReferenceType(node, this.metricMapping.groundAreaMetricName, CommitReferenceType.OTHER, this.screenType)) * AppConfig.EDGE_LENGTH_FACTOR;
+                const myEdgeLength = Math.sqrt(groundAreaMetric) * AppConfig.EDGE_LENGTH_FACTOR;
 
-                let myColor = ColorHelper.getColorByMetricValue(colorMetric, this.maxColorMetricValue, this.minColorMetricValue);
+                const otherGroundAreaMetric = ElementAnalyzer.getMetricValueOfElementAndCommitReferenceType(
+                    node,
+                    this.metricMapping.groundAreaMetricName,
+                    CommitReferenceType.OTHER,
+                    this.screenType
+                );
+                const otherEdgeLength = Math.sqrt(otherGroundAreaMetric) * AppConfig.EDGE_LENGTH_FACTOR;
+
+                const myColor = ColorHelper.getColorByMetricValue(colorMetric, this.maxColorMetricValue, this.minColorMetricValue);
 
                 if (myEdgeLength < otherEdgeLength) {
                     node.packerInfo.fit.x += (otherEdgeLength - myEdgeLength) / 2;
@@ -68,7 +94,7 @@ export class SplitView extends AbstractView {
 
             } else {
                 myHeight = AppConfig.MODULE_BLOCK_HEIGHT;
-                let moduleColor = ColorHelper.getColorByLevelValue(level, this.minModuleLevel, this.maxModuleLevel);
+                const moduleColor = ColorHelper.getColorByLevelValue(level, this.minModuleLevel, this.maxModuleLevel);
                 this.createBlock(node, parent, moduleColor, undefined, bottom, myHeight, false, metrics);
             }
 

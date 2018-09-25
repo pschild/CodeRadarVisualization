@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {ICommitsGetResponse} from "../interfaces/ICommitsGetResponse";
-import {Observable} from "rxjs";
-import {AppConfig} from "../AppConfig";
+import {HttpClient} from '@angular/common/http';
+import {ICommitsGetResponse} from '../interfaces/ICommitsGetResponse';
+import {Observable} from 'rxjs';
+import {AppConfig} from '../AppConfig';
 import {environment} from 'environments/environment';
 
 @Injectable()

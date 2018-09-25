@@ -1,14 +1,18 @@
-import {ICommit} from "../interfaces/ICommit";
-import {IMetricMapping} from "../interfaces/IMetricMapping";
-import {INode} from "../interfaces/INode";
-import { IActionWithPayload } from "../interfaces/IActionWithPayload";
+import {ICommit} from '../interfaces/ICommit';
+import {IMetricMapping} from '../interfaces/IMetricMapping';
+import {INode} from '../interfaces/INode';
+import { IActionWithPayload } from '../interfaces/IActionWithPayload';
 
 export const LOAD_METRIC_TREE = 'LOAD_METRIC_TREE';
 export const LOAD_METRIC_TREE_SUCCESS = 'LOAD_METRIC_TREE_SUCCESS';
 export const LOAD_METRIC_TREE_ERROR = 'LOAD_METRIC_TREE_ERROR';
 export const GENERATE_UNIQUE_FILE_LIST = 'GENERATE_UNIQUE_FILE_LIST';
 
-export function loadMetricTree(leftCommit: ICommit, rightCommit: ICommit, metricMapping: IMetricMapping): IActionWithPayload<{leftCommit: ICommit, rightCommit: ICommit, metricMapping: IMetricMapping}> {
+export function loadMetricTree(
+    leftCommit: ICommit,
+    rightCommit: ICommit,
+    metricMapping: IMetricMapping
+): IActionWithPayload<{leftCommit: ICommit, rightCommit: ICommit, metricMapping: IMetricMapping}> {
     return {
         type: LOAD_METRIC_TREE,
         payload: {

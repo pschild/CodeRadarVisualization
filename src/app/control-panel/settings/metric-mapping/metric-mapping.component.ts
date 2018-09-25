@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {IMetricMapping} from "../../../interfaces/IMetricMapping";
-import {MetricNameHelper} from "../../../helper/metric-name-helper";
+import {IMetricMapping} from '../../../interfaces/IMetricMapping';
+import {MetricNameHelper} from '../../../helper/metric-name-helper';
 declare var $: any;
 
 @Component({

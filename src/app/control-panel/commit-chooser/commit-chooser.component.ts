@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ICommit} from "../../interfaces/ICommit";
-import {CommitType} from "../../enum/CommitType";
+import {ICommit} from '../../interfaces/ICommit';
+import {CommitType} from '../../enum/CommitType';
 import * as moment from 'moment';
 
 @Component({
@@ -28,7 +28,7 @@ export class CommitChooserComponent implements OnInit {
     }
 
     formatCommit(data: any): string {
-        let formattedDateAndTime = moment(data.timestamp).format('DD.MM.YYYY HH:mm');
+        const formattedDateAndTime = moment(data.timestamp).format('DD.MM.YYYY HH:mm');
         return `${formattedDateAndTime}, ${data.author}, ${data.name.substr(0, 7)}`;
     }
 

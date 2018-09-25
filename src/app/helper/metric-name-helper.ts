@@ -1,5 +1,5 @@
-import {AppConfig} from "../AppConfig";
-import {environment} from "../../environments/environment";
+import {AppConfig} from '../AppConfig';
+import {environment} from '../../environments/environment';
 
 export class MetricNameHelper {
 

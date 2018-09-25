@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
-import {Subject} from "rxjs/Subject";
-import {ScreenType} from "../enum/ScreenType";
-import {Store} from "@ngrx/store";
-import * as fromRoot from "../shared/reducers";
-import {addScreenshot, clearScreenshots} from "../control-panel/control-panel.actions";
+import {Subject} from 'rxjs/Subject';
+import {ScreenType} from '../enum/ScreenType';
+import {Store} from '@ngrx/store';
+import * as fromRoot from '../shared/reducers';
+import {addScreenshot, clearScreenshots} from '../control-panel/control-panel.actions';
 
 @Injectable()
 export class ScreenShotService {

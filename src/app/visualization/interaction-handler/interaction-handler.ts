@@ -1,11 +1,11 @@
-import {Scene, WebGLRenderer, Raycaster, Vector2, PerspectiveCamera, Intersection, Object3D} from "three";
-import {ScreenType} from "../../enum/ScreenType";
-import {FocusService} from "../../service/focus.service";
-import {TooltipService} from "../../service/tooltip.service";
+import {Scene, WebGLRenderer, Raycaster, Vector2, PerspectiveCamera, Intersection, Object3D} from 'three';
+import {ScreenType} from '../../enum/ScreenType';
+import {FocusService} from '../../service/focus.service';
+import {TooltipService} from '../../service/tooltip.service';
 
 export class InteractionHandler {
 
-    enabled: boolean = false;
+    enabled = false;
 
     raycaster: Raycaster = new Raycaster();
     mouse: Vector2 = new Vector2();
@@ -37,8 +37,8 @@ export class InteractionHandler {
         }
 
         this.raycaster.setFromCamera(this.mouseForRaycaster, camera);
-        let intersects = this.raycaster.intersectObjects(this.scene.children);
-        let target = this.findFirstNonHelperBlock(intersects);
+        const intersects = this.raycaster.intersectObjects(this.scene.children);
+        const target = this.findFirstNonHelperBlock(intersects);
 
         this.updateTooltip(target);
     }
@@ -59,7 +59,7 @@ export class InteractionHandler {
 
     updateTooltip(target: Object3D) {
         if (target) {
-            if (target.uuid != this.hoveredElementUuid) {
+            if (target.uuid !== this.hoveredElementUuid) {
                 this.tooltipService.setContent({
                     elementName: target.userData.elementName,
                     metrics: target.userData.metrics
@@ -91,7 +91,7 @@ export class InteractionHandler {
         this.mouse.x = event.clientX;
         this.mouse.y = event.clientY;
 
-        let screenOffset = this.screenType === ScreenType.LEFT ? 0 : this.getScreenWidth();
+        const screenOffset = this.screenType === ScreenType.LEFT ? 0 : this.getScreenWidth();
 
         this.mouseForRaycaster.x = ((event.clientX - screenOffset) / this.getScreenWidth()) * 2 - 1;
         this.mouseForRaycaster.y = -(event.clientY / window.innerHeight) * 2 + 1;
@@ -117,11 +117,11 @@ export class InteractionHandler {
             return;
         }
 
-        let intersects = this.raycaster.intersectObjects(this.scene.children);
-        let target = this.findFirstNonHelperBlock(intersects);
+        const intersects = this.raycaster.intersectObjects(this.scene.children);
+        const target = this.findFirstNonHelperBlock(intersects);
         if (target) {
-            if (event.which == 1) { // left mouse button
-                if (target.uuid != this.clickedElementUuid) {
+            if (event.which === 1) { // left mouse button
+                if (target.uuid !== this.clickedElementUuid) {
                     this.clickedElementUuid = target.uuid;
                 } else {
                     this.clickedElementUuid = undefined;

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {Subject} from "rxjs/Subject";
-import {INode} from "app/interfaces/INode";
+import {Subject} from 'rxjs/Subject';
+import {INode} from 'app/interfaces/INode';
 
 @Injectable()
 export class ComparisonPanelService {

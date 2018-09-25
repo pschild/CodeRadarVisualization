@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ScreenType} from "../../enum/ScreenType";
-import {ViewType} from "../../enum/ViewType";
+import {ScreenType} from '../../enum/ScreenType';
+import {ViewType} from '../../enum/ViewType';
 declare var gifshot: any;
 declare var $: any;
 
@@ -28,7 +28,7 @@ export class ScreenshotComponent implements OnInit {
     };
 
     gifSource: string;
-    isGenerating: boolean = false;
+    isGenerating = false;
 
     ngOnInit() {
         // prevent bootstrap dropdown from being closed by clicking on its content
@@ -43,7 +43,9 @@ export class ScreenshotComponent implements OnInit {
 
     generateGif(screenType: ScreenType) {
         if (this.screenShots.length > 0) {
-            let images = this.screenShots.filter(screenShotObject => screenShotObject.screenType === screenType).map(screenShotObject => screenShotObject.file);
+            const images = this.screenShots
+                .filter(screenShotObject => screenShotObject.screenType === screenType)
+                .map(screenShotObject => screenShotObject.file);
             if (!images.length) {
                 return;
             }

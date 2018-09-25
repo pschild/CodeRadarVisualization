@@ -1,19 +1,19 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Store} from "@ngrx/store";
-import * as fromRoot from "../../shared/reducers";
-import {Subscription} from "rxjs/Subscription";
-import {ICommit} from "../../interfaces/ICommit";
-import {IMetricMapping} from "../../interfaces/IMetricMapping";
-import {INode} from "../../interfaces/INode";
-import {MetricNameHelper} from "../../helper/metric-name-helper";
-import {ComparisonPanelService} from "../../service/comparison-panel.service";
+import {Component, Input, OnInit, OnDestroy} from '@angular/core';
+import {Store} from '@ngrx/store';
+import * as fromRoot from '../../shared/reducers';
+import {Subscription} from 'rxjs/Subscription';
+import {ICommit} from '../../interfaces/ICommit';
+import {IMetricMapping} from '../../interfaces/IMetricMapping';
+import {INode} from '../../interfaces/INode';
+import {MetricNameHelper} from '../../helper/metric-name-helper';
+import {ComparisonPanelService} from '../../service/comparison-panel.service';
 
 @Component({
     selector: 'app-comparison-panel',
     templateUrl: './comparison-panel.component.html',
     styleUrls: ['./comparison-panel.component.scss']
 })
-export class ComparisonPanelComponent implements OnInit {
+export class ComparisonPanelComponent implements OnInit, OnDestroy {
 
     @Input() metricMapping: IMetricMapping;
     @Input() leftCommit: ICommit;
@@ -61,9 +61,9 @@ export class ComparisonPanelComponent implements OnInit {
     }
 
     prepareTableData(foundElement: INode) {
-        let rows = [];
-        for (let key of Object.keys(this.metricMapping)) {
-            let metricName = this.metricMapping[key];
+        const rows = [];
+        for (const key of Object.keys(this.metricMapping)) {
+            const metricName = this.metricMapping[key];
 
             let leftCommitValue;
             if (foundElement.commit1Metrics && foundElement.commit1Metrics[metricName]) {
@@ -75,7 +75,7 @@ export class ComparisonPanelComponent implements OnInit {
                 rightCommitValue = foundElement.commit2Metrics[metricName];
             }
 
-            let difference: number = 0;
+            let difference = 0;
             if (leftCommitValue && rightCommitValue) {
                 difference = rightCommitValue - leftCommitValue;
             }

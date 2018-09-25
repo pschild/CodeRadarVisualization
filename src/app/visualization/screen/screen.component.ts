@@ -1,23 +1,23 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {ScreenType} from "../../enum/ScreenType";
-import {WebGLRenderer, Scene, AmbientLight, DirectionalLight} from "three";
-import {Subscription} from "rxjs";
-import {ViewType} from "../../enum/ViewType";
-import {AbstractView} from "../view/abstract-view";
-import {SplitView} from "../view/split-view";
-import {MergedView} from "../view/merged-view";
-import {BlockConnection} from "../../geometry/block-connection";
-import {IFilter} from "../../interfaces/IFilter";
-import {NodeType} from "../../enum/NodeType";
-import {InteractionHandler} from "../interaction-handler/interaction-handler";
-import {AppConfig} from "../../AppConfig";
-import {INode} from "../../interfaces/INode";
-import {ScreenShotService} from "../../service/screenshot.service";
-import {FocusService} from "../../service/focus.service";
-import {TooltipService} from "../../service/tooltip.service";
-import {IMetricMapping} from "../../interfaces/IMetricMapping";
-import {ComparisonPanelService} from "../../service/comparison-panel.service";
-import {ElementAnalyzer} from "app/helper/element-analyzer";
+import {Component, Input, OnChanges, OnInit, SimpleChanges, OnDestroy} from '@angular/core';
+import {ScreenType} from '../../enum/ScreenType';
+import {WebGLRenderer, Scene, AmbientLight, DirectionalLight} from 'three';
+import {Subscription} from 'rxjs';
+import {ViewType} from '../../enum/ViewType';
+import {AbstractView} from '../view/abstract-view';
+import {SplitView} from '../view/split-view';
+import {MergedView} from '../view/merged-view';
+import {BlockConnection} from '../../geometry/block-connection';
+import {IFilter} from '../../interfaces/IFilter';
+import {NodeType} from '../../enum/NodeType';
+import {InteractionHandler} from '../interaction-handler/interaction-handler';
+import {AppConfig} from '../../AppConfig';
+import {INode} from '../../interfaces/INode';
+import {ScreenShotService} from '../../service/screenshot.service';
+import {FocusService} from '../../service/focus.service';
+import {TooltipService} from '../../service/tooltip.service';
+import {IMetricMapping} from '../../interfaces/IMetricMapping';
+import {ComparisonPanelService} from '../../service/comparison-panel.service';
+import {ElementAnalyzer} from 'app/helper/element-analyzer';
 declare var TWEEN: any;
 declare var THREE: any;
 
@@ -26,7 +26,7 @@ declare var THREE: any;
     templateUrl: './screen.component.html',
     styleUrls: ['./screen.component.scss']
 })
-export class ScreenComponent implements OnInit, OnChanges {
+export class ScreenComponent implements OnInit, OnChanges, OnDestroy {
 
     @Input() screenType: ScreenType;
     @Input() activeViewType: ViewType;
@@ -36,14 +36,15 @@ export class ScreenComponent implements OnInit, OnChanges {
 
     subscriptions: Subscription[] = [];
 
-    private isMergedView: boolean = false;
+    private isMergedView = false;
     private requestAnimationFrameId: number;
-    private renderingIsPaused: boolean = false;
+    private renderingIsPaused = false;
 
     renderer: WebGLRenderer;
     scene: Scene = new Scene();
 
-    // use THREE.PerspectiveCamera instead of importing PerspectiveCamera to avoid warning for panning and zooming are disabled (see https://github.com/nicolaspanel/three-orbitcontrols-ts/issues/1)
+    // use THREE.PerspectiveCamera instead of importing PerspectiveCamera to avoid warning for panning and zooming are disabled
+    // (see https://github.com/nicolaspanel/three-orbitcontrols-ts/issues/1)
     camera: THREE.PerspectiveCamera;
     controls: THREE.OrbitControls;
 
@@ -51,7 +52,7 @@ export class ScreenComponent implements OnInit, OnChanges {
 
     view: AbstractView;
 
-    doCameraReset: boolean = true;
+    doCameraReset = true;
 
     constructor(
         private screenShotService: ScreenShotService,
@@ -121,8 +122,8 @@ export class ScreenComponent implements OnInit, OnChanges {
 
         this.subscriptions.push(
             this.screenShotService.screenShotRequested$.subscribe(() => {
-                let imgFromCanvas = this.renderer.domElement.toDataURL('image/png');
-                let pngFile = imgFromCanvas.replace(/^data:image\/png/, 'data:application/octet-stream');
+                const imgFromCanvas = this.renderer.domElement.toDataURL('image/png');
+                const pngFile = imgFromCanvas.replace(/^data:image\/png/, 'data:application/octet-stream');
                 this.screenShotService.addScreenShot({
                     screenType: this.screenType,
                     file: pngFile
@@ -150,16 +151,21 @@ export class ScreenComponent implements OnInit, OnChanges {
     }
 
     createLight() {
-        let ambientLight = new AmbientLight(0xcccccc, 0.5);
+        const ambientLight = new AmbientLight(0xcccccc, 0.5);
         this.scene.add(ambientLight);
 
-        let directionalLight = new DirectionalLight(0xffffff, 0.4);
+        const directionalLight = new DirectionalLight(0xffffff, 0.4);
         directionalLight.position.set(0, 1, 0);
         this.scene.add(directionalLight);
     }
 
     createCamera() {
-        this.camera = new THREE.PerspectiveCamera(45, (this.getScreenWidth() - 0) / window.innerHeight, AppConfig.CAMERA_NEAR, AppConfig.CAMERA_FAR);
+        this.camera = new THREE.PerspectiveCamera(
+            45,
+            (this.getScreenWidth() - 0) / window.innerHeight,
+            AppConfig.CAMERA_NEAR,
+            AppConfig.CAMERA_FAR
+        );
         this.scene.add(this.camera);
     }
 
@@ -169,9 +175,9 @@ export class ScreenComponent implements OnInit, OnChanges {
     }
 
     resetCamera() {
-        let root = this.scene.getObjectByName('root');
+        const root = this.scene.getObjectByName('root');
         // pythagoras
-        let diagonal = Math.sqrt(Math.pow(root.scale.x, 2) + Math.pow(root.scale.z, 2));
+        const diagonal = Math.sqrt(Math.pow(root.scale.x, 2) + Math.pow(root.scale.z, 2));
         this.camera.position.x = root.scale.x * 2;
         this.camera.position.y = diagonal * 1.5;
         this.camera.position.z = root.scale.z * 2;
@@ -182,7 +188,7 @@ export class ScreenComponent implements OnInit, OnChanges {
     }
 
     resetControls() {
-        let centralCoordinates = this.getCentralCoordinates();
+        const centralCoordinates = this.getCentralCoordinates();
         this.controls.target.x = centralCoordinates.x;
         this.controls.target.y = centralCoordinates.y;
         this.controls.target.z = centralCoordinates.z;
@@ -230,12 +236,19 @@ export class ScreenComponent implements OnInit, OnChanges {
     }
 
     createInteractionHandler() {
-        this.interactionHandler = new InteractionHandler(this.scene, this.renderer, this.screenType, this.isMergedView, this.focusService, this.tooltipService);
+        this.interactionHandler = new InteractionHandler(
+            this.scene,
+            this.renderer,
+            this.screenType,
+            this.isMergedView,
+            this.focusService,
+            this.tooltipService
+        );
     }
 
     resetScene() {
         for (let i = this.scene.children.length - 1; i >= 0; i--) {
-            let child = this.scene.children[i];
+            const child = this.scene.children[i];
 
             // only remove Blocks and Lines. Don't remove lights, cameras etc.
             if (child.type === 'Mesh' || child.type === 'Line') {
@@ -245,14 +258,14 @@ export class ScreenComponent implements OnInit, OnChanges {
     }
 
     focusElementByName(elementName) {
-        let element = this.scene.getObjectByName(elementName);
+        const element = this.scene.getObjectByName(elementName);
         if (!element) {
             return;
         }
 
-        let root = this.scene.getObjectByName('root');
+        const root = this.scene.getObjectByName('root');
         // pythagoras
-        let diagonal = Math.sqrt(Math.pow(root.scale.x, 2) + Math.pow(root.scale.z, 2));
+        const diagonal = Math.sqrt(Math.pow(root.scale.x, 2) + Math.pow(root.scale.z, 2));
 
         new TWEEN.Tween(this.camera.position)
             .to({
@@ -274,7 +287,7 @@ export class ScreenComponent implements OnInit, OnChanges {
     }
 
     private getCentralCoordinates() {
-        let root = this.scene.getObjectByName('root');
+        const root = this.scene.getObjectByName('root');
         if (!root) {
             console.warn(`no root found in screen #${this.screenType}`);
             return;
@@ -309,28 +322,28 @@ export class ScreenComponent implements OnInit, OnChanges {
         }
 
         for (let i = this.scene.children.length - 1; i >= 0; i--) {
-            let node = this.scene.children[i];
+            const node = this.scene.children[i];
 
             if (node.userData && (node.userData.type === NodeType.FILE || node.userData.type === NodeType.CONNECTION)) {
                 node.visible = true;
                 if (this.isMergedView) {
-                    if (activeFilter.unchanged === false && node.userData.changeTypes && node.userData.changeTypes.modified == false) {
+                    if (activeFilter.unchanged === false && node.userData.changeTypes && node.userData.changeTypes.modified === false) {
                         node.visible = false;
                     }
 
-                    if (activeFilter.changed === false && node.userData.changeTypes && node.userData.changeTypes.modified == true) {
+                    if (activeFilter.changed === false && node.userData.changeTypes && node.userData.changeTypes.modified === true) {
                         node.visible = false;
                     }
 
-                    if (activeFilter.deleted === false && node.userData.changeTypes && node.userData.changeTypes.deleted == true) {
+                    if (activeFilter.deleted === false && node.userData.changeTypes && node.userData.changeTypes.deleted === true) {
                         node.visible = false;
                     }
 
-                    if (activeFilter.added === false && node.userData.changeTypes && node.userData.changeTypes.added == true) {
+                    if (activeFilter.added === false && node.userData.changeTypes && node.userData.changeTypes.added === true) {
                         node.visible = false;
                     }
 
-                    if (activeFilter.moved === false && node.userData.changeTypes && node.userData.changeTypes.moved == true) {
+                    if (activeFilter.moved === false && node.userData.changeTypes && node.userData.changeTypes.moved === true) {
                         node.visible = false;
                     }
                 }

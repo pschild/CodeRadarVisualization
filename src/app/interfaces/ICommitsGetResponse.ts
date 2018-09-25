@@ -1,4 +1,4 @@
-import {ICommit} from "./ICommit";
+import {ICommit} from './ICommit';
 
 export interface ICommitsGetResponse {
     _embedded: {

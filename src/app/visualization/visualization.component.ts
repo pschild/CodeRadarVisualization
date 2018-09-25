@@ -1,24 +1,24 @@
-import {Component, OnInit} from '@angular/core';
-import {ScreenType} from "../enum/ScreenType";
-import {Observable, Subscription, combineLatest} from "rxjs";
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {ScreenType} from '../enum/ScreenType';
+import {Observable, Subscription, combineLatest} from 'rxjs';
 import {filter, map} from 'rxjs/operators';
-import {Store} from "@ngrx/store";
-import * as fromRoot from "../shared/reducers";
-import {loadMetricTree} from "./visualization.actions";
-import {ViewType} from "../enum/ViewType";
-import {IFilter} from "../interfaces/IFilter";
-import {INode} from "../interfaces/INode";
-import {IMetricMapping} from "../interfaces/IMetricMapping";
-import {MetricNameHelper} from "../helper/metric-name-helper";
-import {ComparisonPanelService} from "app/service/comparison-panel.service";
-import {ICommit} from "../interfaces/ICommit";
+import {Store} from '@ngrx/store';
+import * as fromRoot from '../shared/reducers';
+import {loadMetricTree} from './visualization.actions';
+import {ViewType} from '../enum/ViewType';
+import {IFilter} from '../interfaces/IFilter';
+import {INode} from '../interfaces/INode';
+import {IMetricMapping} from '../interfaces/IMetricMapping';
+import {MetricNameHelper} from '../helper/metric-name-helper';
+import {ComparisonPanelService} from 'app/service/comparison-panel.service';
+import {ICommit} from '../interfaces/ICommit';
 
 @Component({
     selector: 'app-visualization',
     templateUrl: './visualization.component.html',
     styleUrls: ['./visualization.component.scss']
 })
-export class VisualizationComponent implements OnInit {
+export class VisualizationComponent implements OnInit, OnDestroy {
 
     metricsLoading$: Observable<boolean>;
     activeViewType$: Observable<ViewType>;

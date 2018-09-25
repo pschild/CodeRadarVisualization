@@ -1,9 +1,9 @@
-import * as ControlPanelActions from "./control-panel.actions";
-import {ActionReducer} from "@ngrx/store";
-import {ICommit} from "../interfaces/ICommit";
-import {CommitType} from "../enum/CommitType";
-import _ from "lodash";
-import {IActionWithPayload} from "../interfaces/IActionWithPayload";
+import * as ControlPanelActions from './control-panel.actions';
+import {ActionReducer} from '@ngrx/store';
+import {ICommit} from '../interfaces/ICommit';
+import {CommitType} from '../enum/CommitType';
+import _ from 'lodash';
+import {IActionWithPayload} from '../interfaces/IActionWithPayload';
 
 export interface ControlPanelState {
     commits: ICommit[];

@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ViewType} from "../../enum/ViewType";
-import {AppConfig} from "../../AppConfig";
+import {ViewType} from '../../enum/ViewType';
+import {AppConfig} from '../../AppConfig';
 
 @Component({
     selector: 'app-legend',

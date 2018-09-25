@@ -1,20 +1,18 @@
 import {Injectable} from '@angular/core';
 import {Actions, Effect} from '@ngrx/effects';
-import {of} from "rxjs";
+import {of} from 'rxjs';
 import * as actions from '../shared/actions';
-import {CommitService} from "../service/commit.service";
-import {ICommitsGetResponse} from "../interfaces/ICommitsGetResponse";
-import {ICommitsGetErrorResponse} from "../interfaces/ICommitsGetErrorResponse";
-import {IDeltaTreeGetErrorResponse} from "../interfaces/IDeltaTreeGetErrorResponse";
-import {IDeltaTreeGetResponse} from "../interfaces/IDeltaTreeGetResponse";
-import {MetricService} from "../service/metric.service";
+import {CommitService} from '../service/commit.service';
+import {ICommitsGetResponse} from '../interfaces/ICommitsGetResponse';
+import {ICommitsGetErrorResponse} from '../interfaces/ICommitsGetErrorResponse';
+import {IDeltaTreeGetErrorResponse} from '../interfaces/IDeltaTreeGetErrorResponse';
+import {IDeltaTreeGetResponse} from '../interfaces/IDeltaTreeGetResponse';
+import {MetricService} from '../service/metric.service';
 import {catchError, map, switchMap, mergeMap} from 'rxjs/operators';
 import { IActionWithPayload } from '../interfaces/IActionWithPayload';
 
 @Injectable()
 export class AppEffects {
-
-    constructor(private actions$: Actions<IActionWithPayload<any>>, private commitService: CommitService, private metricService: MetricService) { }
 
     @Effect() loadCommitsEffects$ = this.actions$
         .ofType(actions.LOAD_COMMITS)
@@ -51,4 +49,10 @@ export class AppEffects {
                     )
             )
         );
+
+    constructor(
+        private actions$: Actions<IActionWithPayload<any>>,
+        private commitService: CommitService,
+        private metricService: MetricService
+    ) { }
 }

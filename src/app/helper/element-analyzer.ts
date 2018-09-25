@@ -1,7 +1,7 @@
-import {CommitReferenceType} from "../enum/CommitReferenceType";
-import {INode} from "../interfaces/INode";
-import {ScreenType} from "../enum/ScreenType";
-import {NodeType} from "../enum/NodeType";
+import {CommitReferenceType} from '../enum/CommitReferenceType';
+import {INode} from '../interfaces/INode';
+import {ScreenType} from '../enum/ScreenType';
+import {NodeType} from '../enum/NodeType';
 
 export class ElementAnalyzer {
 
@@ -12,7 +12,7 @@ export class ElementAnalyzer {
 
         let foundElement: INode;
 
-        for (let node of nodes) {
+        for (const node of nodes) {
             if (node.name === elementName) {
                 foundElement = node;
             }
@@ -31,7 +31,7 @@ export class ElementAnalyzer {
             nodes = [nodes];
         }
 
-        for (let node of nodes) {
+        for (const node of nodes) {
             if (uniqueElements.indexOf(node.name) < 0) {
                 uniqueElements.push(node.name);
             }
@@ -67,18 +67,18 @@ export class ElementAnalyzer {
         let min = Number.MAX_VALUE;
         let max = Number.MIN_VALUE;
 
-        for (let node of nodes) {
+        for (const node of nodes) {
             // investigate only FILEs, because only files can have different sizes and colors
-            if (node.type == NodeType.FILE) {
-                let commit1Metrics = node.commit1Metrics || null;
-                let commit2Metrics = node.commit2Metrics || null;
+            if (node.type === NodeType.FILE) {
+                const commit1Metrics = node.commit1Metrics || null;
+                const commit2Metrics = node.commit2Metrics || null;
 
-                let big = this.getMaxMetricValueByMetricName(commit1Metrics, commit2Metrics, metricName);
+                const big = this.getMaxMetricValueByMetricName(commit1Metrics, commit2Metrics, metricName);
                 if (big > max) {
                     max = big;
                 }
 
-                let small = this.getMinMetricValueByMetricName(commit1Metrics, commit2Metrics, metricName);
+                const small = this.getMinMetricValueByMetricName(commit1Metrics, commit2Metrics, metricName);
                 if (small < min) {
                     min = small;
                 }
@@ -86,7 +86,7 @@ export class ElementAnalyzer {
 
             // recursion
             if (node.children && node.children.length > 0) {
-                let result = this.findSmallestAndBiggestMetricValueByMetricName(node.children, metricName);
+                const result = this.findSmallestAndBiggestMetricValueByMetricName(node.children, metricName);
                 if (result.max > max) {
                     max = result.max;
                 }
@@ -133,7 +133,7 @@ export class ElementAnalyzer {
     static hasChildrenForCurrentCommit(node: INode, isFullScreen: boolean, screenType: ScreenType): boolean {
         let found = false;
 
-        for (let child of node.children) {
+        for (const child of node.children) {
             if (this.hasMetricValuesForCurrentCommit(child, isFullScreen, screenType)) {
                 found = true;
             }
@@ -153,29 +153,34 @@ export class ElementAnalyzer {
             return node.commit1Metrics != null || node.commit2Metrics != null;
         }
 
-        if (screenType == ScreenType.LEFT) {
+        if (screenType === ScreenType.LEFT) {
             return node.commit1Metrics != null;
-        } else if (screenType == ScreenType.RIGHT) {
+        } else if (screenType === ScreenType.RIGHT) {
             return node.commit2Metrics != null;
         } else {
             throw new Error(`Unknown screenType ${screenType}!`);
         }
     }
 
-    static getMetricValueOfElementAndCommitReferenceType(node: INode, metricName: string, commitReferenceType: CommitReferenceType, screenType: ScreenType): number {
-        if (screenType == ScreenType.LEFT) {
-            if (commitReferenceType == CommitReferenceType.THIS) {
+    static getMetricValueOfElementAndCommitReferenceType(
+        node: INode,
+        metricName: string,
+        commitReferenceType: CommitReferenceType,
+        screenType: ScreenType
+    ): number {
+        if (screenType === ScreenType.LEFT) {
+            if (commitReferenceType === CommitReferenceType.THIS) {
                 return node.commit1Metrics ? node.commit1Metrics[metricName] : undefined;
-            } else if (commitReferenceType == CommitReferenceType.OTHER) {
+            } else if (commitReferenceType === CommitReferenceType.OTHER) {
                 return node.commit2Metrics ? node.commit2Metrics[metricName] : undefined;
             } else {
                 throw new Error(`Unknown commitReferenceType ${commitReferenceType}!`);
             }
 
-        } else if (screenType == ScreenType.RIGHT) {
-            if (commitReferenceType == CommitReferenceType.THIS) {
+        } else if (screenType === ScreenType.RIGHT) {
+            if (commitReferenceType === CommitReferenceType.THIS) {
                 return node.commit2Metrics ? node.commit2Metrics[metricName] : undefined;
-            } else if (commitReferenceType == CommitReferenceType.OTHER) {
+            } else if (commitReferenceType === CommitReferenceType.OTHER) {
                 return node.commit1Metrics ? node.commit1Metrics[metricName] : undefined;
             } else {
                 throw new Error(`Unknown commitReferenceType ${commitReferenceType}!`);

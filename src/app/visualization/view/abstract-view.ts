@@ -1,12 +1,12 @@
-import {INode} from "../../interfaces/INode";
-import {NodeType} from "app/enum/NodeType";
-import {IPackerElement} from "../../interfaces/IPackerElement";
-import {AppConfig} from "../../AppConfig";
-import {ElementAnalyzer} from "../../helper/element-analyzer";
-import {ScreenType} from "../../enum/ScreenType";
-import {CommitReferenceType} from "../../enum/CommitReferenceType";
-import {BoxGeometry, Mesh, MeshLambertMaterial, Geometry} from "three";
-import {IMetricMapping} from "../../interfaces/IMetricMapping";
+import {INode} from '../../interfaces/INode';
+import {NodeType} from 'app/enum/NodeType';
+import {IPackerElement} from '../../interfaces/IPackerElement';
+import {AppConfig} from '../../AppConfig';
+import {ElementAnalyzer} from '../../helper/element-analyzer';
+import {ScreenType} from '../../enum/ScreenType';
+import {CommitReferenceType} from '../../enum/CommitReferenceType';
+import {BoxGeometry, Mesh, MeshLambertMaterial, Geometry} from 'three';
+import {IMetricMapping} from '../../interfaces/IMetricMapping';
 declare var GrowingPacker: any;
 
 export abstract class AbstractView {
@@ -15,7 +15,7 @@ export abstract class AbstractView {
     blockElements: Mesh[] = [];
     packer = new GrowingPacker();
 
-    minModuleLevel: number = 1;
+    minModuleLevel = 1;
     maxModuleLevel: number;
 
     geometry: Geometry;
@@ -45,11 +45,11 @@ export abstract class AbstractView {
             nodes = [nodes];
         }
 
-        for (let node of nodes) {
-            let element: IPackerElement = { w: 0, h: 0 };
+        for (const node of nodes) {
+            const element: IPackerElement = { w: 0, h: 0 };
 
             if (node.type === NodeType.FILE) {
-                let edgeLength = this.getEdgeLength(node.commit1Metrics, node.commit2Metrics);
+                const edgeLength = this.getEdgeLength(node.commit1Metrics, node.commit2Metrics);
                 if (!edgeLength) {
                     element.w = element.h = 0;
                 } else {
@@ -60,7 +60,7 @@ export abstract class AbstractView {
 
             // recursion
             if (node.children && node.children.length > 0) {
-                let result = this.calculateGroundAreas(node.children);
+                const result = this.calculateGroundAreas(node.children);
                 element.w = result.w + 2 * AppConfig.BLOCK_SPACING;
                 element.h = result.h + 2 * AppConfig.BLOCK_SPACING;
             }
@@ -82,11 +82,22 @@ export abstract class AbstractView {
 
     abstract calculateElements(nodes: INode[], parent: INode, bottom: number);
 
-    createBlock(node: INode, parent: INode, color: any, edgeLength: number, bottom: number, height: number, isTransparent: boolean, metrics?: any, commitType?: CommitReferenceType, changeTypes?: any) {
+    createBlock(
+        node: INode,
+        parent: INode,
+        color: any,
+        edgeLength: number,
+        bottom: number,
+        height: number,
+        isTransparent: boolean,
+        metrics?: any,
+        commitType?: CommitReferenceType,
+        changeTypes?: any
+    ) {
         let finalX, finalY, finalZ;
         let finalWidth, finalHeight, finalDepth;
 
-        let cube = this.createCubeGeometry(color, isTransparent, node.name);
+        const cube = this.createCubeGeometry(color, isTransparent, node.name);
         finalX = node.packerInfo.fit.x + (parent ? parent.packerInfo.renderedX : 0) + AppConfig.BLOCK_SPACING;
         finalY = bottom;
         finalZ = node.packerInfo.fit.y + (parent ? parent.packerInfo.renderedY : 0) + AppConfig.BLOCK_SPACING;
@@ -113,19 +124,27 @@ export abstract class AbstractView {
     }
 
     createCubeGeometry(color: string, isTransparent: boolean, name: string): Mesh {
-        let material = new MeshLambertMaterial({color: color});
+        const material = new MeshLambertMaterial({color: color});
 
         if (isTransparent) {
             material.transparent = true;
             material.opacity = 0.4;
         }
 
-        let block = new Mesh(this.geometry, material);
+        const block = new Mesh(this.geometry, material);
         block.name = name;
         return block;
     }
 
-    createUserData(node: INode, parent: INode, bottom: number, isTransparent: boolean, metrics: any, commitType?: CommitReferenceType, changeTypes?: any) {
+    createUserData(
+        node: INode,
+        parent: INode,
+        bottom: number,
+        isTransparent: boolean,
+        metrics: any,
+        commitType?: CommitReferenceType,
+        changeTypes?: any
+    ) {
         return {
             parentName: parent ? parent.name : undefined,
             bottom: bottom,
@@ -143,7 +162,11 @@ export abstract class AbstractView {
     }
 
     private getEdgeLength(commit1Metrics: any, commit2Metrics: any): number {
-        let groundAreaValue = ElementAnalyzer.getMaxMetricValueByMetricName(commit1Metrics, commit2Metrics, this.metricMapping.groundAreaMetricName);
+        const groundAreaValue = ElementAnalyzer.getMaxMetricValueByMetricName(
+            commit1Metrics,
+            commit2Metrics,
+            this.metricMapping.groundAreaMetricName
+        );
         return Math.sqrt(groundAreaValue);
     }
 }

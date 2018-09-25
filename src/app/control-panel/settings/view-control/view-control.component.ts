@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ViewType} from "../../../enum/ViewType";
+import {ViewType} from '../../../enum/ViewType';
 
 @Component({
     selector: 'app-view-control',

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {TooltipService} from "../../service/tooltip.service";
-import {Observable} from "rxjs/Observable";
-import {MetricNameHelper} from "../../helper/metric-name-helper";
+import {TooltipService} from '../../service/tooltip.service';
+import {Observable} from 'rxjs/Observable';
+import {MetricNameHelper} from '../../helper/metric-name-helper';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -24,7 +24,7 @@ export class TooltipComponent implements OnInit {
         this.content$ = this.tooltipService.tooltipContent$
             .pipe(
                 map((tooltipObject) => {
-                    let readableMetrics = {};
+                    const readableMetrics = {};
 
                     if (tooltipObject.metrics) {
                         Object.keys(tooltipObject.metrics).map((key) => {

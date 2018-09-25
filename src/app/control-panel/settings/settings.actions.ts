@@ -1,6 +1,6 @@
-import {ViewType} from "../../enum/ViewType";
-import {IFilter} from "../../interfaces/IFilter";
-import {IMetricMapping} from "../../interfaces/IMetricMapping";
+import {ViewType} from '../../enum/ViewType';
+import {IFilter} from '../../interfaces/IFilter';
+import {IMetricMapping} from '../../interfaces/IMetricMapping';
 import {IActionWithPayload} from '../../interfaces/IActionWithPayload';
 
 export const CHANGE_VIEW_TYPE = 'CHANGE_VIEW_TYPE';

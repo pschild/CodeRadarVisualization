@@ -1,5 +1,5 @@
-import {NodeType} from "../enum/NodeType";
-import {IPackerElement} from "./IPackerElement";
+import {NodeType} from '../enum/NodeType';
+import {IPackerElement} from './IPackerElement';
 
 export interface INode {
     name: string;
