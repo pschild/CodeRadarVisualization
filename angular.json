@@ -34,7 +34,7 @@
               "node_modules/three/build/three.js",
               "node_modules/tween.js/src/Tween.js",
               "node_modules/three/examples/js/controls/OrbitControls.js",
-              "node_modules/gifshot/build/gifshot.js"
+              "node_modules/gifshot/dist/gifshot.js"
             ]
           },
           "configurations": {
