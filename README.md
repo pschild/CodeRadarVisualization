@@ -48,7 +48,7 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 ### Special hints
 #### Version of @types/three
-As TypeScript is used in version `~2.7.2`, we must use `@types/three` in version `^0.92.22`. See `https://www.npmjs.com/package/@types/three` (tab *Versions*) for an overview for which version can be used with which TypeScript version.
+As TypeScript is used in version `~2.7.2`, we must use `@types/three` in version `^0.92.22`. See <https://www.npmjs.com/package/@types/three> (tab *Versions*) for an overview for which version can be used with which TypeScript version.
 
 ## Demo
 The latest state of the angular-ui branch will always be automatically deployed to the [demo](https://pschild.github.io/CodeRadarVisualization/).
