@@ -33,15 +33,11 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
 ### Environments
-To run the app in production mode, use the `--prod` flag (or `--configuration production`).
-
-To run the app in development mode, use no configuration flag at all or use `--configuration development`. You can also run in development mode by calling `npm run dev`.
-
-#### production
-Data will be loaded from the endpoint specified by `BASE_URL` in `AppConfig.ts`.
-
-#### development
-Data will be loaded from static JSON files, located in `assets/*.json`.
+| environment | command              | optimized | endpoint                                      |
+|-------------|----------------------|-----------|-----------------------------------------------|
+| production  | `npm run serve:prod` | Yes       | `BASE_URL` in `AppConfig.ts`                  |
+| dev         | `npm run serve:dev`  | No        | `BASE_URL` in `AppConfig.ts`                  |
+| demo        | `npm run serve:demo` | No        | static JSON files, located in `assets/*.json` |
 
 ### Running unit tests
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
