@@ -88,7 +88,15 @@ export class ScreenComponent implements OnInit, OnChanges, OnDestroy {
             this.handleViewChanged();
         }
 
-        if (changes.metricTree && changes.metricTree.currentValue) {
+        if (
+            changes.metricTree
+            && changes.metricTree.currentValue
+            && ElementAnalyzer.hasMetricValuesForCurrentCommit(
+                changes.metricTree.currentValue,
+                this.activeViewType === ViewType.MERGED,
+                this.screenType
+            )
+        ) {
             if (this.doCameraReset) {
                 this.resetCamera();
                 this.doCameraReset = false;
@@ -221,6 +229,9 @@ export class ScreenComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     prepareView(metricTree) {
+        if (metricTree.children.length === 0) {
+            return;
+        }
         this.view.setMetricTree(metricTree);
         this.view.recalculate();
         this.view.getBlockElements().forEach((element) => {

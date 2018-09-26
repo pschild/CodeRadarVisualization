@@ -150,13 +150,15 @@ export class ElementAnalyzer {
     static hasMetricValuesForCurrentCommit(node: INode, isFullScreen: boolean, screenType: ScreenType) {
         // when in fullScreen mode, metrics for at least one commit should be present
         if (isFullScreen) {
-            return node.commit1Metrics != null || node.commit2Metrics != null;
+            return (node.commit1Metrics != null && Object.keys(node.commit1Metrics).length > 0)
+                || (node.commit2Metrics != null && Object.keys(node.commit2Metrics).length > 0)
+            ;
         }
 
         if (screenType === ScreenType.LEFT) {
-            return node.commit1Metrics != null;
+            return node.commit1Metrics != null && Object.keys(node.commit1Metrics).length > 0;
         } else if (screenType === ScreenType.RIGHT) {
-            return node.commit2Metrics != null;
+            return node.commit2Metrics != null && Object.keys(node.commit2Metrics).length > 0;
         } else {
             throw new Error(`Unknown screenType ${screenType}!`);
         }
