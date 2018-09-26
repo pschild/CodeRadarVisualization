@@ -29,6 +29,6 @@ deployment:
   demo:
     branch: angular-ui
     commands:
-      - ng build --configuration development --base-href 'https://pschild.github.io/CodeRadarVisualization/'
+      - ng build -c demo --base-href 'https://pschild.github.io/CodeRadarVisualization/'
       - cp circle.yml dist/circle.yml
       - angular-cli-ghpages --name=${GH_NAME} --email=${GH_EMAIL}

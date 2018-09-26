@@ -12,10 +12,10 @@ export class CommitService {
     }
 
     loadCommits(): Observable<ICommitsGetResponse> {
-        if (environment.development) {
-            return this.http.get<ICommitsGetResponse>('http://localhost:4200/assets/json/commits.json');
-        } else {
+        if (environment.useCoderadarEndpoint) {
             return this.http.get<ICommitsGetResponse>(`${AppConfig.BASE_URL}/projects/1/commits?page=0&size=999`);
+        } else {
+            return this.http.get<ICommitsGetResponse>('http://localhost:4200/assets/json/commits.json');
         }
     }
 

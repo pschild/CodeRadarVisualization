@@ -55,11 +55,19 @@
                 }
               ]
             },
-            "development": {
+            "dev": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.development.ts"
+                  "with": "src/environments/environment.dev.ts"
+                }
+              ]
+            },
+            "demo": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.demo.ts"
                 }
               ]
             }
@@ -74,8 +82,11 @@
             "production": {
               "browserTarget": "CodeRadarVisualization:build:production"
             },
-            "development": {
-              "browserTarget": "CodeRadarVisualization:build:development"
+            "dev": {
+              "browserTarget": "CodeRadarVisualization:build:dev"
+            },
+            "demo": {
+              "browserTarget": "CodeRadarVisualization:build:demo"
             }
           }
         },

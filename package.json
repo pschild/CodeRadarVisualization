@@ -15,8 +15,12 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "dev": "ng serve --configuration development",
-    "notest": "echo No tests at the moment ..."
+    "build:prod": "ng build --prod",
+    "build:dev": "ng build -c dev",
+    "build:demo": "ng build -c demo",
+    "serve:prod": "ng serve --prod",
+    "serve:dev": "ng serve -c dev",
+    "serve:demo": "ng serve -c demo"
   },
   "private": true,
   "dependencies": {

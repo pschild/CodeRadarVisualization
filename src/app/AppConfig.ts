@@ -1,10 +1,8 @@
 import {environment} from '../environments/environment';
 
 export class AppConfig {
-    static DEBUG_MODE_ENABLED = false;
-
     // CODERADAR SERVER CONFIG
-    static BASE_URL = 'http://192.168.1.37:8080';
+    static BASE_URL = 'http://localhost:8080';
     static USERNAME = 'radar';
     static PASSWORD = 'Password12!';
 
@@ -24,12 +22,12 @@ export class AppConfig {
 
     // DEFAULT METRIC MAPPING
     static HEIGHT_METRIC_NAME = 'coderadar:size:loc:java';
-    static GROUND_AREA_METRIC_NAME: string = environment.development
-        ? 'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck'
-        : 'coderadar:size:sloc:java';
-    static COLOR_METRIC_NAME: string = environment.development
-        ? 'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck'
-        : 'coderadar:size:eloc:java';
+    static GROUND_AREA_METRIC_NAME = environment.useCoderadarEndpoint
+        ? 'coderadar:size:sloc:java'
+        : 'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck';
+    static COLOR_METRIC_NAME = environment.useCoderadarEndpoint
+        ? 'coderadar:size:eloc:java'
+        : 'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck';
 
     // VISUALIZATION SETTINGS
     static EDGE_LENGTH_FACTOR = 2;

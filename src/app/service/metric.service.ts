@@ -16,7 +16,22 @@ export class MetricService {
     }
 
     loadDeltaTree(leftCommit: ICommit, rightCommit: ICommit, metricMapping: IMetricMapping): Observable<IDeltaTreeGetResponse> {
-        if (environment.development) {
+        if (environment.useCoderadarEndpoint) {
+            const body = {
+                'commit1': leftCommit.name,
+                'commit2': rightCommit.name,
+                'metrics': [metricMapping.heightMetricName, metricMapping.groundAreaMetricName, metricMapping.colorMetricName]
+            };
+
+            return this.http.post<INode>(`${AppConfig.BASE_URL}/projects/1/metricvalues/deltaTree`, body)
+                .pipe(
+                    map((res) => {
+                        return {
+                            rootNode: res
+                        };
+                    })
+                );
+        } else {
             let id;
             switch (rightCommit.name) {
                 case 'b152859ca8d73f5c974c2264107fd0092af310d0':
@@ -36,21 +51,6 @@ export class MetricService {
             return this.http.get<INode>(`http://localhost:4200/assets/json/deltaTree${id}.json`)
                 .pipe(
                     delay(1500),
-                    map((res) => {
-                        return {
-                            rootNode: res
-                        };
-                    })
-                );
-        } else {
-            const body = {
-                'commit1': leftCommit.name,
-                'commit2': rightCommit.name,
-                'metrics': [metricMapping.heightMetricName, metricMapping.groundAreaMetricName, metricMapping.colorMetricName]
-            };
-
-            return this.http.post<INode>(`${AppConfig.BASE_URL}/projects/1/metricvalues/deltaTree`, body)
-                .pipe(
                     map((res) => {
                         return {
                             rootNode: res

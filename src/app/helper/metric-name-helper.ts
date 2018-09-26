@@ -4,14 +4,15 @@ import {environment} from '../../environments/environment';
 export class MetricNameHelper {
 
     static getAll() {
-        if (environment.development) {
+        if (environment.useCoderadarEndpoint) {
+            return AppConfig.AVAILABLE_METRICS;
+        } else {
+            // filter metric names for demo
             return AppConfig.AVAILABLE_METRICS.filter((metric) => {
                 return metric.name === 'coderadar:size:loc:java'
                     || metric.name === 'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck'
                     || metric.name === 'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck';
             });
-        } else {
-            return AppConfig.AVAILABLE_METRICS;
         }
     }
 
