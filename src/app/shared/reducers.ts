@@ -3,6 +3,7 @@ import {ActionReducerMap} from '@ngrx/store';
 import * as fromControlPanel from '../control-panel/control-panel.reducers';
 import * as fromSettings from '../control-panel/settings/settings.reducers';
 import * as fromVisualization from '../visualization/visualization.reducers';
+import { InjectionToken } from '@angular/core';
 
 export interface AppState {
     controlPanelState: fromControlPanel.ControlPanelState;
@@ -10,11 +11,15 @@ export interface AppState {
     visualizationState: fromVisualization.VisualizationState;
 }
 
-export const reducers: ActionReducerMap<AppState> = {
-    controlPanelState: fromControlPanel.ControlPanelReducer,
-    settingsState: fromSettings.SettingsReducer,
-    visualizationState: fromVisualization.VisualizationReducer
-};
+export const REDUCER_TOKEN = new InjectionToken<ActionReducerMap<AppState>>('Registered Reducers');
+
+export function getReducers() {
+    return {
+        controlPanelState: fromControlPanel.ControlPanelReducer,
+        settingsState: fromSettings.SettingsReducer,
+        visualizationState: fromVisualization.VisualizationReducer
+    };
+}
 
 export const getControlPanelState = (state: AppState) => state.controlPanelState;
 

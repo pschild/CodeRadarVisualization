@@ -7,7 +7,7 @@ import {environment} from '../environments/environment';
 import {AppComponent} from './app.component';
 import {ControlPanelModule} from './control-panel/control-panel.module';
 import {VisualizationModule} from './visualization/visualization.module';
-import {reducers} from './shared/reducers';
+import {REDUCER_TOKEN, getReducers} from './shared/reducers';
 import {StoreModule} from '@ngrx/store';
 import {EffectsModule} from '@ngrx/effects';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
@@ -27,7 +27,7 @@ import {ComparisonPanelService} from './service/comparison-panel.service';
         HttpClientModule,
         ControlPanelModule,
         VisualizationModule,
-        StoreModule.forRoot(reducers),
+        StoreModule.forRoot(REDUCER_TOKEN),
         EffectsModule.forRoot([AppEffects]),
         environment.production ? [] : StoreDevtoolsModule.instrument({ maxAge: 50 })
     ],
@@ -35,7 +35,11 @@ import {ComparisonPanelService} from './service/comparison-panel.service';
         ScreenShotService,
         FocusService,
         TooltipService,
-        ComparisonPanelService
+        ComparisonPanelService,
+        {
+            provide: REDUCER_TOKEN,
+            useFactory: getReducers,
+        }
     ],
     bootstrap: [AppComponent]
 })
