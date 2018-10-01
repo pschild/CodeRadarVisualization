@@ -32,23 +32,8 @@ export class MetricService {
                     })
                 );
         } else {
-            let id;
-            switch (rightCommit.name) {
-                case 'b152859ca8d73f5c974c2264107fd0092af310d0':
-                    id = 1;
-                    break;
-                case '2beb1d1d720c1256cedfdf483331f65861079705':
-                    id = 2;
-                    break;
-                case 'cbba0662f48f139da4973cc610bd4caa6213ed08':
-                    id = 3;
-                    break;
-                case '6ffebfad9e79dfa4ddfa7d043d84eb424a28c0cd':
-                    id = 4;
-                    break;
-            }
-
-            return this.http.get<INode>(`http://localhost:4200/assets/json/deltaTree${id}.json`)
+            const deltaTreeId = leftCommit.name.charAt(0);
+            return this.http.get<INode>(`http://localhost:4200/assets/json/deltaTree${deltaTreeId}.json`)
                 .pipe(
                     delay(1500),
                     map((res) => {

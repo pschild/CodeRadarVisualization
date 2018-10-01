@@ -2,9 +2,9 @@
   "_embedded": {
     "commitResourceList": [
       {
-        "name": "b152859ca8d73f5c974c2264107fd0092af310d0",
+        "name": "1) No changes",
         "author": "John Doe",
-        "timestamp": 1485813773000,
+        "timestamp": 1514797000000,
         "analyzed": true,
         "_links": {
           "project": {
@@ -13,9 +13,9 @@
         }
       },
       {
-        "name": "2beb1d1d720c1256cedfdf483331f65861079705",
-        "author": "John Doe",
-        "timestamp": 1485726067000,
+        "name": "2) Changed files",
+        "author": "Max Power",
+        "timestamp": 1514963270000,
         "analyzed": true,
         "_links": {
           "project": {
@@ -24,9 +24,9 @@
         }
       },
       {
-        "name": "cbba0662f48f139da4973cc610bd4caa6213ed08",
+        "name": "3) Added file",
         "author": "John Doe",
-        "timestamp": 1485633721000,
+        "timestamp": 1515163190000,
         "analyzed": true,
         "_links": {
           "project": {
@@ -35,9 +35,31 @@
         }
       },
       {
-        "name": "6ffebfad9e79dfa4ddfa7d043d84eb424a28c0cd",
+        "name": "4) Removed file",
         "author": "John Doe",
-        "timestamp": 1485561434000,
+        "timestamp": 1515669830000,
+        "analyzed": true,
+        "_links": {
+          "project": {
+            "href": "http://localhost:8080/projects/1"
+          }
+        }
+      },
+      {
+        "name": "5) Moved file",
+        "author": "Max Power",
+        "timestamp": 1516118870000,
+        "analyzed": true,
+        "_links": {
+          "project": {
+            "href": "http://localhost:8080/projects/1"
+          }
+        }
+      },
+      {
+        "name": "6) Renamed file",
+        "author": "John Doe",
+        "timestamp": 1516444610000,
         "analyzed": true,
         "_links": {
           "project": {
