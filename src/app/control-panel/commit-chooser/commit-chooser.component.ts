@@ -14,6 +14,7 @@ export class CommitChooserComponent implements OnInit {
     @Input() commits: ICommit[];
     @Input() selected: ICommit;
     @Input() loading: boolean;
+    @Input() isDisabled: boolean;
 
     @Output() changeCommit = new EventEmitter();
 

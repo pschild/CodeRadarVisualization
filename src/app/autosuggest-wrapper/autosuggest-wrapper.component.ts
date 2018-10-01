@@ -18,6 +18,7 @@ export class AutosuggestWrapperComponent implements OnInit {
     @Input() displayPropertyName: string;
     @Input() valueFormatter: any;
     @Input() listFormatter: any;
+    @Input() isDisabled: boolean;
 
     @Output() valueChanged = new EventEmitter();
 

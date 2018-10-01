@@ -8,6 +8,7 @@ import {Observable} from 'rxjs/Observable';
 import {ViewType} from '../enum/ViewType';
 import {ScreenShotService} from '../service/screenshot.service';
 import {FocusService} from '../service/focus.service';
+import { environment } from 'environments/environment';
 
 @Component({
     selector: 'app-control-panel',
@@ -30,6 +31,9 @@ export class ControlPanelComponent implements OnInit {
 
     activeViewType$: Observable<ViewType>;
     screenShots$: Observable<any[]>;
+
+    // disable the second commit chooser for demo purposes
+    disableRightSelect: boolean = !environment.useCoderadarEndpoint;
 
     constructor(private store: Store<fromRoot.AppState>, private screenShotService: ScreenShotService, private focusService: FocusService) {
     }

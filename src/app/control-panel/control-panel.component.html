@@ -19,6 +19,7 @@
                             [commits]="commits$ | async"
                             [loading]="commitsLoading$ | async"
                             [selected]="rightCommit$ | async"
+                            [isDisabled]="disableRightSelect"
                             (changeCommit)="handleCommitChanged($event)"></app-commit-chooser>
                 </div>
             </div>
