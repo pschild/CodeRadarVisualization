@@ -29,8 +29,8 @@
             <app-screenshot
                     [activeViewType]="activeViewType$ | async"
                     [screenShots]="screenShots$ | async"
-                    (handleTakeScreenshot)="handleTakeScreenshot($event)"
-                    (handleRemoveScreenshots)="handleRemoveScreenshots($event)">
+                    (handleTakeScreenshot)="handleTakeScreenshot()"
+                    (handleRemoveScreenshots)="handleRemoveScreenshots()">
             </app-screenshot>
         </div>
         <div class="col-2">
