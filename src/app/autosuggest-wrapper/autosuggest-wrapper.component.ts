@@ -1,7 +1,8 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation} from '@angular/core';
 
 @Component({
     selector: 'app-autosuggest-wrapper',
+    encapsulation: ViewEncapsulation.None,
     templateUrl: './autosuggest-wrapper.component.html',
     styleUrls: ['./autosuggest-wrapper.component.scss']
 })
@@ -19,6 +20,7 @@ export class AutosuggestWrapperComponent implements OnInit {
     @Input() valueFormatter: any;
     @Input() listFormatter: any;
     @Input() isDisabled: boolean;
+    @Input() alignRight = false;
 
     @Output() valueChanged = new EventEmitter();
 

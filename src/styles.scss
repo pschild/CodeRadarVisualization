@@ -32,6 +32,8 @@
 
 /* Overwrite styles of ng2-auto-complete */
 .ngui-auto-complete {
+  width: auto;
+  
   & > ul {
     min-width: 100%;
     box-shadow: rgba(0,0,0,0.2) 0 2px 6px 0;
@@ -41,7 +43,7 @@
     & li {
       cursor: pointer;
       padding: 10px 15px !important;
-      max-width: 400px;
+      max-width: 500px;
       overflow: hidden;
       text-overflow: ellipsis;
 

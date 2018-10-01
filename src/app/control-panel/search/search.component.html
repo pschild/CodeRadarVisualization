@@ -3,5 +3,6 @@
         [source]="uniqueFileList"
         [noMatchFoundText]="'Nichts gefunden.'"
         [listFormatter]="autocompleteListFormatter"
-        (valueChanged)="handleSearchChanged($event)">
+        (valueChanged)="handleSearchChanged($event)"
+        [alignRight]="true">
 </app-autosuggest-wrapper>

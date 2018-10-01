@@ -30,7 +30,7 @@ export class CommitChooserComponent implements OnInit {
 
     formatCommit(data: any): string {
         const formattedDateAndTime = moment(data.timestamp).format('DD.MM.YYYY HH:mm');
-        return `${formattedDateAndTime}, ${data.author}, ${data.name.substr(0, 7)}`;
+        return `${formattedDateAndTime} ${data.author}, ${data.name}`;
     }
 
 }

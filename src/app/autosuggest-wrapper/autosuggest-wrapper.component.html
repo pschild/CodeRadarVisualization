@@ -1,7 +1,8 @@
-<div class="autosuggest-wrapper-container">
+<div class="autosuggest-wrapper-container" [ngClass]="{'align-right': alignRight}">
     <input #inputElement class="form-control"
            [placeholder]="placeholder"
            ngui-auto-complete
+           [close-on-focusout]="false"
            [(ngModel)]="model"
            [source]="source"
            value-property-name="id"
@@ -13,7 +14,7 @@
            [accept-user-input]=false
            [disabled]="isDisabled"
            (valueChanged)="handleValueChanged($event)" />
-    <button type="button" class="close" aria-label="Close" (click)="handleClearInputClicked()">
+    <button type="button" class="close" aria-label="Close" (click)="handleClearInputClicked()" [disabled]="isDisabled">
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
