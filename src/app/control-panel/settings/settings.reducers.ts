@@ -15,11 +15,11 @@ export interface SettingsState {
 const initialState: SettingsState = {
     activeViewType: ViewType.SPLIT,
     activeFilter: {
-        unchanged: true,
-        changed: true,
+        unmodified: true,
+        modified: true,
         deleted: true,
         added: true,
-        moved: true
+        renamed: true
     },
     metricMapping: {
         heightMetricName: AppConfig.HEIGHT_METRIC_NAME,

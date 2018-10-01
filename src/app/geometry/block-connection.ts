@@ -31,7 +31,7 @@ export class BlockConnection {
         this.curveObject.userData = {
             type: NodeType.CONNECTION,
             changeTypes: {
-                moved: true
+                renamed: true
             }
         };
     }

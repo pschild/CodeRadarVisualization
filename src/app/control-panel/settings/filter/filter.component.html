@@ -5,11 +5,11 @@
     <div id="filter-dropdown" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <div class="custom-controls-stacked">
             <div class="custom-control custom-checkbox">
-                <input type="checkbox" id="checkbox-unchanged" class="custom-control-input" [(ngModel)]="activeFilter.unchanged" (change)="handleFilterChanged()">
+                <input type="checkbox" id="checkbox-unchanged" class="custom-control-input" [(ngModel)]="activeFilter.unmodified" (change)="handleFilterChanged()">
                 <label class="custom-control-label" for="checkbox-unchanged">unverändert</label>
             </div>
             <div class="custom-control custom-checkbox">
-                <input type="checkbox" id="checkbox-changed" class="custom-control-input" [(ngModel)]="activeFilter.changed" (change)="handleFilterChanged()">
+                <input type="checkbox" id="checkbox-changed" class="custom-control-input" [(ngModel)]="activeFilter.modified" (change)="handleFilterChanged()">
                 <label class="custom-control-label" for="checkbox-changed">verändert</label>
             </div>
             <div class="custom-control custom-checkbox">
@@ -21,7 +21,7 @@
                 <label class="custom-control-label" for="checkbox-added">hinzugefügt</label>
             </div>
             <div class="custom-control custom-checkbox">
-                <input type="checkbox" id="checkbox-moved" class="custom-control-input" [(ngModel)]="activeFilter.moved" (change)="handleFilterChanged()">
+                <input type="checkbox" id="checkbox-moved" class="custom-control-input" [(ngModel)]="activeFilter.renamed" (change)="handleFilterChanged()">
                 <label class="custom-control-label" for="checkbox-moved">umbenannt/verschoben</label>
             </div>
         </div>

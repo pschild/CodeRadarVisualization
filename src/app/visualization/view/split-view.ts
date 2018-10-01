@@ -90,7 +90,7 @@ export class SplitView extends AbstractView {
                     node.packerInfo.fit.x += (otherEdgeLength - myEdgeLength) / 2;
                     node.packerInfo.fit.y += (otherEdgeLength - myEdgeLength) / 2;
                 }
-                this.createBlock(node, parent, myColor, myEdgeLength, bottom, myHeight, false, metrics);
+                this.createBlock(node, parent, myColor, myEdgeLength, bottom, myHeight, false, metrics, null, node.changes);
 
             } else {
                 myHeight = AppConfig.MODULE_BLOCK_HEIGHT;

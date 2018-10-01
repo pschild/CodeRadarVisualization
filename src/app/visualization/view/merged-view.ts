@@ -93,7 +93,7 @@ export class MergedView extends AbstractView {
                             orangeTransparency,
                             orangeMetrics,
                             CommitReferenceType.OTHER,
-                            { modified: true }
+                            node.changes
                         );
 
                         // ... calculate the center position for the smaller block ...
@@ -111,7 +111,7 @@ export class MergedView extends AbstractView {
                             blueTransparency,
                             blueMetrics,
                             CommitReferenceType.THIS,
-                            { modified: true }
+                            node.changes
                         );
                     } else if (blueEdgeLength > orangeEdgeLength) {
                         // draw the bigger block ...
@@ -125,7 +125,7 @@ export class MergedView extends AbstractView {
                             blueTransparency,
                             blueMetrics,
                             CommitReferenceType.THIS,
-                            { modified: true }
+                            node.changes
                         );
 
                         // ... calculate the center position for the smaller block ...
@@ -143,7 +143,7 @@ export class MergedView extends AbstractView {
                             orangeTransparency,
                             orangeMetrics,
                             CommitReferenceType.OTHER,
-                            { modified: true }
+                            node.changes
                         );
                     } else {
                         // ground areas are the same
@@ -159,7 +159,7 @@ export class MergedView extends AbstractView {
                                 blueTransparency,
                                 blueMetrics,
                                 CommitReferenceType.THIS,
-                                { modified: true }
+                                node.changes
                             );
                             this.createBlock(
                                 node,
@@ -171,7 +171,7 @@ export class MergedView extends AbstractView {
                                 orangeTransparency,
                                 orangeMetrics,
                                 CommitReferenceType.OTHER,
-                                { modified: true }
+                                node.changes
                             );
                         } else {
                             // heights are the same, so the file has not changed
@@ -185,7 +185,7 @@ export class MergedView extends AbstractView {
                                 false,
                                 orangeMetrics,
                                 undefined,
-                                { modified: false }
+                                node.changes
                             );
                         }
                     }
@@ -193,15 +193,12 @@ export class MergedView extends AbstractView {
                 } else if (isNaN(orangeEdgeLength)) {
                     // only blue block
 
-                    const changeTypes = { added: false, deleted: true, moved: false };
                     // cache element to draw connections
                     if (this.isNodeMoved(node)) {
                         this.movedElements.push({
                             fromElementName: node.name,
                             toElementName: node.renamedTo
                         });
-
-                        changeTypes.moved = true;
                     }
 
                     this.createBlock(
@@ -214,17 +211,11 @@ export class MergedView extends AbstractView {
                         false,
                         blueMetrics,
                         CommitReferenceType.THIS,
-                        changeTypes
+                        node.changes
                     );
 
                 } else if (isNaN(blueEdgeLength)) {
                     // only orange block
-
-                    const changeTypes = { added: true, deleted: false, moved: false };
-                    if (this.isNodeMoved(node)) {
-                        // don't push to this.movedElements to avoid duplicates
-                        changeTypes.moved = true;
-                    }
 
                     this.createBlock(
                         node,
@@ -236,7 +227,7 @@ export class MergedView extends AbstractView {
                         false,
                         orangeMetrics,
                         CommitReferenceType.OTHER,
-                        changeTypes
+                        node.changes
                     );
                 }
 

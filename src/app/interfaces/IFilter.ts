@@ -1,7 +1,7 @@
 export interface IFilter {
-    unchanged: boolean;
-    changed: boolean;
+    unmodified: boolean;
+    modified: boolean;
     deleted: boolean;
     added: boolean;
-    moved: boolean;
+    renamed: boolean;
 }

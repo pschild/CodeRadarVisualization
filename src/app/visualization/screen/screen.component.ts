@@ -328,35 +328,36 @@ export class ScreenComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     private applyFilter(activeFilter: IFilter) {
-        if (!this.isMergedView) {
-            return;
-        }
-
         for (let i = this.scene.children.length - 1; i >= 0; i--) {
             const node = this.scene.children[i];
-
             if (node.userData && (node.userData.type === NodeType.FILE || node.userData.type === NodeType.CONNECTION)) {
                 node.visible = true;
-                if (this.isMergedView) {
-                    if (activeFilter.unchanged === false && node.userData.changeTypes && node.userData.changeTypes.modified === false) {
-                        node.visible = false;
-                    }
 
-                    if (activeFilter.changed === false && node.userData.changeTypes && node.userData.changeTypes.modified === true) {
-                        node.visible = false;
-                    }
+                if (
+                    activeFilter.unmodified === false
+                    && node.userData.changeTypes
+                    && node.userData.changeTypes.modified === false
+                    && node.userData.changeTypes.deleted === false
+                    && node.userData.changeTypes.added === false
+                    && node.userData.changeTypes.renamed === false
+                ) {
+                    node.visible = false;
+                }
 
-                    if (activeFilter.deleted === false && node.userData.changeTypes && node.userData.changeTypes.deleted === true) {
-                        node.visible = false;
-                    }
+                if (activeFilter.modified === false && node.userData.changeTypes && node.userData.changeTypes.modified === true) {
+                    node.visible = false;
+                }
 
-                    if (activeFilter.added === false && node.userData.changeTypes && node.userData.changeTypes.added === true) {
-                        node.visible = false;
-                    }
+                if (activeFilter.deleted === false && node.userData.changeTypes && node.userData.changeTypes.deleted === true) {
+                    node.visible = false;
+                }
 
-                    if (activeFilter.moved === false && node.userData.changeTypes && node.userData.changeTypes.moved === true) {
-                        node.visible = false;
-                    }
+                if (activeFilter.added === false && node.userData.changeTypes && node.userData.changeTypes.added === true) {
+                    node.visible = false;
+                }
+
+                if (activeFilter.renamed === false && node.userData.changeTypes && node.userData.changeTypes.renamed === true) {
+                    node.visible = false;
                 }
             }
         }
