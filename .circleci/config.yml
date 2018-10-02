@@ -8,6 +8,9 @@ jobs:
     docker:
       - image: circleci/node:10-browsers
     steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "3a:6c:7a:59:8c:9b:51:ad:c8:cd:33:1c:8f:6b:cf:86"
       - checkout
       - restore_cache:
           key: dependency-cache-{{ checksum "yarn.lock" }}
