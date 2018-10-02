@@ -33,7 +33,7 @@ export class MetricService {
                 );
         } else {
             const deltaTreeId = leftCommit.name.charAt(0);
-            return this.http.get<INode>(`http://localhost:4200/assets/json/deltaTree${deltaTreeId}.json`)
+            return this.http.get<INode>(`assets/json/deltaTree${deltaTreeId}.json`)
                 .pipe(
                     delay(1500),
                     map((res) => {
