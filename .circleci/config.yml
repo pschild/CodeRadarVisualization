@@ -1,0 +1,33 @@
+version: 2
+jobs:
+  build:
+    branches:
+      only:
+        - angular-ui
+    working_directory: ~/code-radar-visualization-demo
+    docker:
+      - image: circleci/node:10-browsers
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "3a:6c:7a:59:8c:9b:51:ad:c8:cd:33:1c:8f:6b:cf:86"
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "yarn.lock" }}
+      - run:
+          name: install-dependencies
+          command: yarn install
+      - save_cache:
+          key: dependency-cache-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+            - ./node_modules
+      - run:
+          name: angular-test
+          command: yarn run notest
+      - run:
+          name: angular-build
+          command: yarn run build:demo --no-progress
+      - run:
+          name: ghpages-publish-demo
+          command: yarn run ghpages:demo
