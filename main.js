@@ -2232,7 +2232,7 @@ var CommitService = /** @class */ (function () {
             return this.http.get(_AppConfig__WEBPACK_IMPORTED_MODULE_2__["AppConfig"].BASE_URL + "/projects/1/commits?page=0&size=999");
         }
         else {
-            return this.http.get('http://localhost:4200/assets/json/commits.json');
+            return this.http.get('assets/json/commits.json');
         }
     };
     CommitService = __decorate([
@@ -2380,7 +2380,7 @@ var MetricService = /** @class */ (function () {
         }
         else {
             var deltaTreeId = leftCommit.name.charAt(0);
-            return this.http.get("http://localhost:4200/assets/json/deltaTree" + deltaTreeId + ".json")
+            return this.http.get("assets/json/deltaTree" + deltaTreeId + ".json")
                 .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["delay"])(1500), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) {
                 return {
                     rootNode: res
