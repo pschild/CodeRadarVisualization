@@ -21,7 +21,7 @@
     "serve:prod": "ng serve --prod",
     "serve:dev": "ng serve -c dev",
     "serve:demo": "ng serve -c demo",
-    "ghpages:demo": "yarn run build:demo --base-href 'https://pschild.github.io/CodeRadarVisualization/' && ngh --dir=dist/ --name=${GH_NAME} --email=${GH_EMAIL}",
+    "ghpages:demo": "yarn run build:demo --base-href 'https://pschild.github.io/CodeRadarVisualization/' && ngh --dir=dist/ --name=${GH_NAME} --email=${GH_EMAIL}  --no-silent",
     "notest": "echo No tests at the moment ..."
   },
   "private": true,
