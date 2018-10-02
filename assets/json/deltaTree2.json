@@ -2,14 +2,14 @@
   "name": "root",
   "type": "MODULE",
   "commit1Metrics": {
-    "coderadar:size:loc:java": 800,
-    "coderadar:size:eloc:java": 4,
-    "coderadar:size:sloc:java": 8
+    "coderadar:size:loc:java": 470,
+    "checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck": 21,
+    "checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck": 25
   },
   "commit2Metrics": {
-    "coderadar:size:loc:java": 800,
-    "coderadar:size:eloc:java": 4,
-    "coderadar:size:sloc:java": 8
+    "coderadar:size:loc:java": 480,
+    "checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck": 22,
+    "checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck": 43
   },
   "renamedFrom": null,
   "renamedTo": null,
@@ -19,31 +19,54 @@
       "name": "moduleA",
       "type": "MODULE",
       "commit1Metrics": {
-        "coderadar:size:loc:java": 4,
-        "coderadar:size:eloc:java": 2,
-        "coderadar:size:sloc:java": 4
+        "coderadar:size:loc:java": 250,
+        "checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck": 8,
+        "checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck": 13
       },
       "commit2Metrics": {
-        "coderadar:size:loc:java": 2,
-        "coderadar:size:eloc:java": 1,
-        "coderadar:size:sloc:java": 2
+        "coderadar:size:loc:java": 380,
+        "checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck": 12,
+        "checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck": 31
       },
       "renamedFrom": null,
       "renamedTo": null,
       "changes": null,
       "children": [
         {
-          "name": "moduleA/src/main/java/UnchangedClass.java",
+          "name": "moduleA/src/main/java/A1.java",
           "type": "FILE",
           "commit1Metrics": {
-            "coderadar:size:loc:java": 2,
-            "coderadar:size:eloc:java": 1,
-            "coderadar:size:sloc:java": 2
+            "coderadar:size:loc:java": 20,
+            "checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck": 1,
+            "checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck": 2
           },
           "commit2Metrics": {
-            "coderadar:size:loc:java": 2,
-            "coderadar:size:eloc:java": 1,
-            "coderadar:size:sloc:java": 2
+            "coderadar:size:loc:java": 150,
+            "checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck": 5,
+            "checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck": 20
+          },
+          "renamedFrom": null,
+          "renamedTo": null,
+          "changes": {
+            "renamed": false,
+            "modified": true,
+            "deleted": false,
+            "added": false
+          },
+          "children": []
+        },
+        {
+          "name": "moduleA/src/main/java/A2.java",
+          "type": "FILE",
+          "commit1Metrics": {
+            "coderadar:size:loc:java": 150,
+            "checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck": 5,
+            "checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck": 10
+          },
+          "commit2Metrics": {
+            "coderadar:size:loc:java": 150,
+            "checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck": 5,
+            "checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck": 10
           },
           "renamedFrom": null,
           "renamedTo": null,
@@ -56,18 +79,22 @@
           "children": []
         },
         {
-          "name": "moduleA/src/main/java/MovedClassFromAToB.java",
+          "name": "moduleA/src/main/java/A3.java",
           "type": "FILE",
           "commit1Metrics": {
-            "coderadar:size:loc:java": 2,
-            "coderadar:size:eloc:java": 1,
-            "coderadar:size:sloc:java": 2
+            "coderadar:size:loc:java": 80,
+            "checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck": 2,
+            "checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck": 1
           },
-          "commit2Metrics": null,
+          "commit2Metrics": {
+            "coderadar:size:loc:java": 80,
+            "checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck": 2,
+            "checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck": 1
+          },
           "renamedFrom": null,
-          "renamedTo": "moduleB/src/main/java/MovedClassFromAToB.java",
+          "renamedTo": null,
           "changes": {
-            "renamed": true,
+            "renamed": false,
             "modified": false,
             "deleted": false,
             "added": false
@@ -80,52 +107,60 @@
       "name": "moduleB",
       "type": "MODULE",
       "commit1Metrics": {
-        "coderadar:size:loc:java": 40,
-        "coderadar:size:eloc:java": 20,
-        "coderadar:size:sloc:java": 40
+        "coderadar:size:loc:java": 220,
+        "checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck": 13,
+        "checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck": 12
       },
       "commit2Metrics": {
-        "coderadar:size:loc:java": 20,
-        "coderadar:size:eloc:java": 10,
-        "coderadar:size:sloc:java": 20
+        "coderadar:size:loc:java": 100,
+        "checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck": 10,
+        "checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck": 12
       },
       "renamedFrom": null,
       "renamedTo": null,
       "changes": null,
       "children": [
         {
-          "name": "moduleB/src/main/java/RemovedClass.java",
+          "name": "moduleB/src/main/java/B1.java",
           "type": "FILE",
           "commit1Metrics": {
-            "coderadar:size:loc:java": 2,
-            "coderadar:size:eloc:java": 1,
-            "coderadar:size:sloc:java": 2
+            "coderadar:size:loc:java": 20,
+            "checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck": 8,
+            "checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck": 2
           },
-          "commit2Metrics": null,
+          "commit2Metrics": {
+            "coderadar:size:loc:java": 20,
+            "checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck": 8,
+            "checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck": 2
+          },
           "renamedFrom": null,
           "renamedTo": null,
           "changes": {
             "renamed": false,
             "modified": false,
             "deleted": false,
-            "added": true
+            "added": false
           },
           "children": []
         },
         {
-          "name": "moduleB/src/main/java/MovedClassFromAToB.java",
+          "name": "moduleB/src/main/java/B2.java",
           "type": "FILE",
           "commit1Metrics": {
-            "coderadar:size:loc:java": 2,
-            "coderadar:size:eloc:java": 1,
-            "coderadar:size:sloc:java": 2
+            "coderadar:size:loc:java": 200,
+            "checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck": 5,
+            "checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck": 10
           },
-          "commit2Metrics": null,
+          "commit2Metrics": {
+            "coderadar:size:loc:java": 80,
+            "checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck": 2,
+            "checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck": 10
+          },
           "renamedFrom": null,
           "renamedTo": null,
           "changes": {
-            "renamed": true,
-            "modified": false,
+            "renamed": false,
+            "modified": true,
             "deleted": false,
             "added": false
           },
