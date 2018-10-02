@@ -11,14 +11,11 @@ Therefore, **results of static code analyses are visualized** in the form of a c
 
 ## How to install
 ### Checkout and install dependencies
-As the project was generated with [Angular CLI](https://github.com/angular/angular-cli), it's recommended to install that tool globally:
-```
-npm install -g @angular/cli
-```
+As the project was generated with [Angular CLI](https://github.com/angular/angular-cli).
 
-After checking out the project to your local harddrive, you can install all needed dependencies with npm:
+After checking out the project to your local harddrive, you can install all needed dependencies with yarn:
 ```
-npm install
+yarn install
 ```
 
 ### Coderadar
@@ -33,11 +30,11 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
 ### Environments
-| environment | command              | optimized | endpoint                                      |
-|-------------|----------------------|-----------|-----------------------------------------------|
-| production  | `npm run serve:prod` | Yes       | `BASE_URL` in `AppConfig.ts`                  |
-| dev         | `npm run serve:dev`  | No        | `BASE_URL` in `AppConfig.ts`                  |
-| demo        | `npm run serve:demo` | No        | static JSON files, located in `assets/*.json` |
+| environment | command               | optimized | endpoint                                      |
+|-------------|-----------------------|-----------|-----------------------------------------------|
+| production  | `yarn run serve:prod` | Yes       | `BASE_URL` in `AppConfig.ts`                  |
+| dev         | `yarn run serve:dev`  | No        | `BASE_URL` in `AppConfig.ts`                  |
+| demo        | `yarn run serve:demo` | No        | static JSON files, located in `assets/*.json` |
 
 ### Running unit tests
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
