@@ -20,7 +20,9 @@
     "build:demo": "ng build -c demo",
     "serve:prod": "ng serve --prod",
     "serve:dev": "ng serve -c dev",
-    "serve:demo": "ng serve -c demo"
+    "serve:demo": "ng serve -c demo",
+    "ghpages:demo": "yarn run build:demo --base-href 'https://pschild.github.io/CodeRadarVisualization/' && ngh --dir=dist/ --name=${GH_NAME} --email=${GH_EMAIL}",
+    "notest": "echo No tests at the moment ..."
   },
   "private": true,
   "dependencies": {
@@ -67,6 +69,7 @@
     "@angular/compiler-cli": "^6.1.7",
     "@types/jasmine": "2.5.38",
     "@types/node": "~6.0.60",
+    "angular-cli-ghpages": "^0.5.3",
     "codelyzer": "~4.3.0",
     "jasmine-core": "~2.5.2",
     "jasmine-spec-reporter": "~3.2.0",
