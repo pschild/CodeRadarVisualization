@@ -12,7 +12,6 @@ import {IMetricMapping} from '../interfaces/IMetricMapping';
 import {ComparisonPanelService} from 'app/service/comparison-panel.service';
 import {ICommit} from '../interfaces/ICommit';
 import { IMetric } from '../interfaces/IMetric';
-import { AppConfig } from '../AppConfig';
 
 @Component({
     selector: 'app-visualization',
@@ -50,11 +49,6 @@ export class VisualizationComponent implements OnInit, OnDestroy {
         this.metricMapping$ = this.store.select(fromRoot.getMetricMapping);
         this.leftCommit$ = this.store.select(fromRoot.getLeftCommit);
         this.rightCommit$ = this.store.select(fromRoot.getRightCommit);
-        this.colorMetric$ = this.store.select(fromRoot.getMetricMapping)
-            .pipe(
-                map(metricMapping => metricMapping.colorMetricName),
-                map(colorMetricName => AppConfig.getShortNameByMetricName(colorMetricName))
-            );
 
         this.store.dispatch(loadAvailableMetrics());
 

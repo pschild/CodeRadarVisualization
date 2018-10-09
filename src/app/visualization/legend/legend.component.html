@@ -1,6 +1,20 @@
 <div id="legend-container">
-    <div id="legend-item-color-code" class="legend-item" *ngIf="activeViewType === viewTypes.split">
-        <span class="legend-color"></span>
+    <div class="legend-item">
+        <span class="legend-icon">
+            <fa-icon [icon]="faArrowsAltV"></fa-icon>
+        </span>
+        <small class="legend-label">{{heightMetric?.shortName}}</small>
+    </div>
+    <div class="legend-item">
+        <span class="legend-icon">
+            <fa-icon [icon]="faArrowsAlt"></fa-icon>
+        </span>
+        <small class="legend-label">{{groundAreaMetric?.shortName}}</small>
+    </div>
+    <div class="legend-item" *ngIf="activeViewType === viewTypes.split">
+            <span class="legend-icon">
+                    <fa-icon [icon]="faPalette"></fa-icon>
+                </span>
         <small class="legend-label">{{colorMetric?.shortName}}</small>
     </div>
     <div id="legend-item-commit-1" class="legend-item" *ngIf="activeViewType === viewTypes.merged">

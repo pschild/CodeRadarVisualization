@@ -2,6 +2,12 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ViewType} from '../../enum/ViewType';
 import {AppConfig} from '../../AppConfig';
 import { IMetric } from '../../interfaces/IMetric';
+import {faArrowsAltV, faArrowsAlt, faPalette} from '@fortawesome/free-solid-svg-icons';
+import { Store } from '@ngrx/store';
+import * as fromRoot from '../../shared/reducers';
+import { IMetricMapping } from '../../interfaces/IMetricMapping';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'app-legend',
@@ -11,7 +17,15 @@ import { IMetric } from '../../interfaces/IMetric';
 export class LegendComponent implements OnInit {
 
     @Input() activeViewType: ViewType;
-    @Input() colorMetric: IMetric;
+    
+    metricMapping$: Observable<IMetricMapping>;
+    heightMetric: IMetric;
+    groundAreaMetric: IMetric;
+    colorMetric: IMetric;
+
+    faArrowsAltV = faArrowsAltV;
+    faArrowsAlt = faArrowsAlt;
+    faPalette = faPalette;
 
     colorFirstCommit: string;
     colorSecondCommit: string;
@@ -31,10 +45,17 @@ export class LegendComponent implements OnInit {
     legendItemDeletedFiles: HTMLElement;
     legendItemUnchangedFiles: HTMLElement;
 
-    constructor() {
+    constructor(private store: Store<fromRoot.AppState>) {
     }
 
     ngOnInit() {
+        this.metricMapping$ = this.store.select(fromRoot.getMetricMapping);
+        this.metricMapping$.subscribe(metricMapping => {
+            this.heightMetric = AppConfig.getShortNameByMetricName(metricMapping.heightMetricName);
+            this.groundAreaMetric = AppConfig.getShortNameByMetricName(metricMapping.groundAreaMetricName);
+            this.colorMetric = AppConfig.getShortNameByMetricName(metricMapping.colorMetricName);
+        });
+
         this.colorFirstCommit = AppConfig.COLOR_FIRST_COMMIT;
         this.colorSecondCommit = AppConfig.COLOR_SECOND_COMMIT;
         this.colorAddedFile = AppConfig.COLOR_ADDED_FILE;

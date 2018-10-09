@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {IMetricMapping} from '../../../interfaces/IMetricMapping';
-import {faChartBar} from '@fortawesome/free-solid-svg-icons';
+import {faChartBar, faArrowsAltV, faArrowsAlt, faPalette} from '@fortawesome/free-solid-svg-icons';
 import { Observable } from 'rxjs';
 import { IMetric } from '../../../interfaces/IMetric';
 import { Store } from '@ngrx/store';
@@ -15,6 +15,9 @@ declare var $: any;
 export class MetricMappingComponent implements OnInit {
 
     faChartBar = faChartBar;
+    faArrowsAltV = faArrowsAltV;
+    faArrowsAlt = faArrowsAlt;
+    faPalette = faPalette;
 
     @Input() metricMapping: IMetricMapping;
     @Input() availableMetrics: IMetric[];

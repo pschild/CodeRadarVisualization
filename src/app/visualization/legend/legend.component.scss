@@ -16,14 +16,10 @@
       display: inline-block;
       width: 10px;
       height: 10px;
+    }
+
+    & .legend-color, & .legend-icon {
       margin-right: 5px;
     }
-  }
-}
-
-#legend-item-color-code {
-  & .legend-color {
-    width: 30px;
-    background: linear-gradient(to right, #ffffff,#ffc905,#f78400,#e92100,#9b1909,#4f1609,#5d0000);
   }
 }

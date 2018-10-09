@@ -4,21 +4,21 @@
     </button>
     <div id="metric-mapping-dropdown" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <div class="form-group">
-            <label for="height-metric-name">Höhe</label>
+            <label for="height-metric-name"><fa-icon [icon]="faArrowsAltV"></fa-icon> Höhe</label>
             <select id="height-metric-name" class="custom-select w-auto" [(ngModel)]="metricMapping.heightMetricName">
                 <option *ngFor="let metric of availableMetrics" [ngValue]="metric.metricName">{{metric.shortName}}</option>
             </select>
         </div>
 
         <div class="form-group">
-            <label for="groundarea-metric-name">Grundfläche</label>
+            <label for="groundarea-metric-name"><fa-icon [icon]="faArrowsAlt"></fa-icon> Grundfläche</label>
             <select id="groundarea-metric-name" class="custom-select w-auto" [(ngModel)]="metricMapping.groundAreaMetricName">
                 <option *ngFor="let metric of availableMetrics" [ngValue]="metric.metricName">{{metric.shortName}}</option>
             </select>
         </div>
 
         <div class="form-group">
-            <label for="color-metric-name">Farbe</label>
+            <label for="color-metric-name"><fa-icon [icon]="faPalette"></fa-icon> Farbe</label>
             <select id="color-metric-name" class="custom-select w-auto" [(ngModel)]="metricMapping.colorMetricName">
                 <option *ngFor="let metric of availableMetrics" [ngValue]="metric.metricName">{{metric.shortName}}</option>
             </select>

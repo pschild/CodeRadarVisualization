@@ -51,7 +51,7 @@ export class AppConfig {
     static COLOR_DELETED_FILE = '#d90206';
     static COLOR_UNCHANGED_FILE = '#cccccc';
 
-    static getShortNameByMetricName(metricName: string): {shortName: string, metricName: string} {
+    static getShortNameByMetricName(metricName: string): IMetric {
         return this.METRIC_NAME_MAPPING.find(namePair => namePair.metricName === metricName);
     }
 }

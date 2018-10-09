@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild, ElementRef} from '@angular/core';
 import {ViewType} from '../../../enum/ViewType';
-import {faSquare} from '@fortawesome/free-regular-svg-icons';
+import {faSquare, faClone} from '@fortawesome/free-regular-svg-icons';
 
 declare var $: any;
 
@@ -12,6 +12,7 @@ declare var $: any;
 export class ViewControlComponent implements OnInit {
 
     faSquare = faSquare;
+    faClone = faClone;
 
     viewTypes: any = {
         split: ViewType.SPLIT,
