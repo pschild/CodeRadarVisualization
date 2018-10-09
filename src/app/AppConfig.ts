@@ -1,4 +1,5 @@
 import {environment} from '../environments/environment';
+import { IMetric } from './interfaces/IMetric';
 
 export class AppConfig {
     // CODERADAR SERVER CONFIG
@@ -7,7 +8,7 @@ export class AppConfig {
     static PASSWORD = 'Password12!';
 
     // METRIC NAME MAPPING
-    static METRIC_NAME_MAPPING = [
+    static METRIC_NAME_MAPPING: IMetric[] = [
         { shortName: 'Lines of Code (LOC)', metricName: 'coderadar:size:loc:java' },
         { shortName: 'Comment Lines of Code (CLOC)', metricName: 'coderadar:size:cloc:java' },
         { shortName: 'Source Lines of Code (SLOC)', metricName: 'coderadar:size:sloc:java' },

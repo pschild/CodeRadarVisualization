@@ -13,6 +13,7 @@ import { IActionWithPayload } from '../interfaces/IActionWithPayload';
 import { IAvailableMetricsGetResponse } from '../interfaces/IAvailableMetricsGetResponse';
 import { IAvailableMetricsGetErrorResponse } from '../interfaces/IAvailableMetricsGetErrorResponse';
 import { IMetric } from '../interfaces/IMetric';
+import { AppConfig } from '../AppConfig';
 
 @Injectable()
 export class AppEffects {
@@ -40,7 +41,9 @@ export class AppEffects {
                 () => this.metricService.loadAvailableMetrics()
                     .pipe(
                         mergeMap((result: IAvailableMetricsGetResponse) => {
-                            const availableMetrics = result._embedded.metricResourceList;
+                            const availableMetrics = result._embedded.metricResourceList.map(
+                                metric => AppConfig.getShortNameByMetricName(metric.metricName)
+                            );
                             // TODO: Error handling when less than three metrics are available
                             return [
                                 actions.loadAvailableMetricsSuccess(availableMetrics),
