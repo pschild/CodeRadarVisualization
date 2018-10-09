@@ -1382,7 +1382,7 @@ var FilterComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"btn-group\">\n    <button class=\"btn btn-outline-secondary dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n        <fa-icon [icon]=\"faChartBar\"></fa-icon>\n    </button>\n    <div id=\"metric-mapping-dropdown\" class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n        <div class=\"form-group\">\n            <label for=\"height-metric-name\">Höhe</label>\n            <select id=\"height-metric-name\" class=\"custom-select w-auto\" [(ngModel)]=\"metricMapping.heightMetricName\">\n                <option *ngFor=\"let metric of availableMetrics\" [ngValue]=\"metric.metricName\">{{metric.shortName}}</option>\n            </select>\n        </div>\n\n        <div class=\"form-group\">\n            <label for=\"groundarea-metric-name\">Grundfläche</label>\n            <select id=\"groundarea-metric-name\" class=\"custom-select w-auto\" [(ngModel)]=\"metricMapping.groundAreaMetricName\">\n                <option *ngFor=\"let metric of availableMetrics\" [ngValue]=\"metric.metricName\">{{metric.shortName}}</option>\n            </select>\n        </div>\n\n        <div class=\"form-group\">\n            <label for=\"color-metric-name\">Farbe</label>\n            <select id=\"color-metric-name\" class=\"custom-select w-auto\" [(ngModel)]=\"metricMapping.colorMetricName\">\n                <option *ngFor=\"let metric of availableMetrics\" [ngValue]=\"metric.metricName\">{{metric.shortName}}</option>\n            </select>\n        </div>\n\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"applyMetricMappings()\">übernehmen</button>\n    </div>\n</div>"
+module.exports = "<div class=\"btn-group\">\n    <button class=\"btn btn-outline-secondary dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n        <fa-icon [icon]=\"faChartBar\"></fa-icon>\n    </button>\n    <div id=\"metric-mapping-dropdown\" class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n        <div class=\"form-group\">\n            <label for=\"height-metric-name\"><fa-icon [icon]=\"faArrowsAltV\"></fa-icon> Höhe</label>\n            <select id=\"height-metric-name\" class=\"custom-select w-auto\" [(ngModel)]=\"metricMapping.heightMetricName\">\n                <option *ngFor=\"let metric of availableMetrics\" [ngValue]=\"metric.metricName\">{{metric.shortName}}</option>\n            </select>\n        </div>\n\n        <div class=\"form-group\">\n            <label for=\"groundarea-metric-name\"><fa-icon [icon]=\"faArrowsAlt\"></fa-icon> Grundfläche</label>\n            <select id=\"groundarea-metric-name\" class=\"custom-select w-auto\" [(ngModel)]=\"metricMapping.groundAreaMetricName\">\n                <option *ngFor=\"let metric of availableMetrics\" [ngValue]=\"metric.metricName\">{{metric.shortName}}</option>\n            </select>\n        </div>\n\n        <div class=\"form-group\">\n            <label for=\"color-metric-name\"><fa-icon [icon]=\"faPalette\"></fa-icon> Farbe</label>\n            <select id=\"color-metric-name\" class=\"custom-select w-auto\" [(ngModel)]=\"metricMapping.colorMetricName\">\n                <option *ngFor=\"let metric of availableMetrics\" [ngValue]=\"metric.metricName\">{{metric.shortName}}</option>\n            </select>\n        </div>\n\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"applyMetricMappings()\">übernehmen</button>\n    </div>\n</div>"
 
 /***/ }),
 
@@ -1426,6 +1426,9 @@ var MetricMappingComponent = /** @class */ (function () {
     function MetricMappingComponent(store) {
         this.store = store;
         this.faChartBar = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faChartBar"];
+        this.faArrowsAltV = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faArrowsAltV"];
+        this.faArrowsAlt = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faArrowsAlt"];
+        this.faPalette = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faPalette"];
         this.metricMappingChanged = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
     }
     MetricMappingComponent.prototype.ngOnInit = function () {
@@ -1656,7 +1659,7 @@ var getMetricMapping = function (state) { return state.metricMapping; };
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"custom-control custom-radio custom-control-inline\">\n    <input type=\"radio\" id=\"radio-splitscreen\" name=\"radio-group-screen\" class=\"custom-control-input\" [value]=\"viewTypes.split\" (click)=\"changeViewType(viewTypes.split)\" [checked]=\"activeViewType === viewTypes.split\" />\n    <label class=\"custom-control-label\" for=\"radio-splitscreen\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Geteilte Ansicht\" #splitScreenLabel>\n        <fa-icon [icon]=\"faSquare\" size=\"lg\"></fa-icon>\n        <fa-icon [icon]=\"faSquare\" size=\"lg\"></fa-icon>\n    </label>\n</div>\n<div class=\"custom-control custom-radio custom-control-inline\">\n    <input type=\"radio\" id=\"radio-fullscreen\" name=\"radio-group-screen\" class=\"custom-control-input\" [value]=\"viewTypes.merged\" (click)=\"changeViewType(viewTypes.merged)\" [checked]=\"activeViewType === viewTypes.merged\" />\n    <label class=\"custom-control-label\" for=\"radio-fullscreen\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Kombinierte Ansicht\" #fullScreenLabel>\n        <fa-icon [icon]=\"faSquare\" size=\"lg\"></fa-icon>\n    </label>\n</div>"
+module.exports = "<div class=\"custom-control custom-radio custom-control-inline\">\n    <input type=\"radio\" id=\"radio-splitscreen\" name=\"radio-group-screen\" class=\"custom-control-input\" [value]=\"viewTypes.split\" (click)=\"changeViewType(viewTypes.split)\" [checked]=\"activeViewType === viewTypes.split\" />\n    <label class=\"custom-control-label\" for=\"radio-splitscreen\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Geteilte Ansicht\" #splitScreenLabel>\n        <fa-icon [icon]=\"faSquare\" size=\"lg\"></fa-icon>\n        <fa-icon [icon]=\"faSquare\" size=\"lg\"></fa-icon>\n    </label>\n</div>\n<div class=\"custom-control custom-radio custom-control-inline\">\n    <input type=\"radio\" id=\"radio-fullscreen\" name=\"radio-group-screen\" class=\"custom-control-input\" [value]=\"viewTypes.merged\" (click)=\"changeViewType(viewTypes.merged)\" [checked]=\"activeViewType === viewTypes.merged\" />\n    <label class=\"custom-control-label\" for=\"radio-fullscreen\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Kombinierte Ansicht\" #fullScreenLabel>\n        <fa-icon [icon]=\"faClone\" size=\"lg\"></fa-icon>\n    </label>\n</div>"
 
 /***/ }),
 
@@ -1699,6 +1702,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var ViewControlComponent = /** @class */ (function () {
     function ViewControlComponent() {
         this.faSquare = _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faSquare"];
+        this.faClone = _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faClone"];
         this.viewTypes = {
             split: _enum_ViewType__WEBPACK_IMPORTED_MODULE_1__["ViewType"].SPLIT,
             merged: _enum_ViewType__WEBPACK_IMPORTED_MODULE_1__["ViewType"].MERGED
@@ -3037,7 +3041,7 @@ var InteractionHandler = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"legend-container\">\n    <div id=\"legend-item-color-code\" class=\"legend-item\" *ngIf=\"activeViewType === viewTypes.split\">\n        <span class=\"legend-color\"></span>\n        <small class=\"legend-label\">{{colorMetric?.shortName}}</small>\n    </div>\n    <div id=\"legend-item-commit-1\" class=\"legend-item\" *ngIf=\"activeViewType === viewTypes.merged\">\n        <span class=\"legend-color\" [ngStyle]=\"{'background': colorFirstCommit}\"></span>\n        <small class=\"legend-label\">Erste Revision</small>\n    </div>\n    <div id=\"legend-item-commit-2\" class=\"legend-item\" *ngIf=\"activeViewType === viewTypes.merged\">\n        <span class=\"legend-color\" [ngStyle]=\"{'background': colorSecondCommit}\"></span>\n        <small class=\"legend-label\">Zweite Revision</small>\n    </div>\n    <div id=\"legend-item-added-files\" class=\"legend-item\" *ngIf=\"activeViewType === viewTypes.merged\">\n        <span class=\"legend-color\" [ngStyle]=\"{'background': colorAddedFile}\"></span>\n        <small class=\"legend-label\">hinzugefügt</small>\n    </div>\n    <div id=\"legend-item-deleted-files\" class=\"legend-item\" *ngIf=\"activeViewType === viewTypes.merged\">\n        <span class=\"legend-color\" [ngStyle]=\"{'background': colorDeletedFile}\"></span>\n        <small class=\"legend-label\">gelöscht</small>\n    </div>\n    <div id=\"legend-item-unchanged-files\" class=\"legend-item\" *ngIf=\"activeViewType === viewTypes.merged\">\n        <span class=\"legend-color\" [ngStyle]=\"{'background': colorUnchangedFile}\"></span>\n        <small class=\"legend-label\">unverändert</small>\n    </div>\n</div>"
+module.exports = "<div id=\"legend-container\">\n    <div class=\"legend-item\">\n        <span class=\"legend-icon\">\n            <fa-icon [icon]=\"faArrowsAltV\"></fa-icon>\n        </span>\n        <small class=\"legend-label\">{{heightMetric?.shortName}}</small>\n    </div>\n    <div class=\"legend-item\">\n        <span class=\"legend-icon\">\n            <fa-icon [icon]=\"faArrowsAlt\"></fa-icon>\n        </span>\n        <small class=\"legend-label\">{{groundAreaMetric?.shortName}}</small>\n    </div>\n    <div class=\"legend-item\" *ngIf=\"activeViewType === viewTypes.split\">\n            <span class=\"legend-icon\">\n                    <fa-icon [icon]=\"faPalette\"></fa-icon>\n                </span>\n        <small class=\"legend-label\">{{colorMetric?.shortName}}</small>\n    </div>\n    <div id=\"legend-item-commit-1\" class=\"legend-item\" *ngIf=\"activeViewType === viewTypes.merged\">\n        <span class=\"legend-color\" [ngStyle]=\"{'background': colorFirstCommit}\"></span>\n        <small class=\"legend-label\">Erste Revision</small>\n    </div>\n    <div id=\"legend-item-commit-2\" class=\"legend-item\" *ngIf=\"activeViewType === viewTypes.merged\">\n        <span class=\"legend-color\" [ngStyle]=\"{'background': colorSecondCommit}\"></span>\n        <small class=\"legend-label\">Zweite Revision</small>\n    </div>\n    <div id=\"legend-item-added-files\" class=\"legend-item\" *ngIf=\"activeViewType === viewTypes.merged\">\n        <span class=\"legend-color\" [ngStyle]=\"{'background': colorAddedFile}\"></span>\n        <small class=\"legend-label\">hinzugefügt</small>\n    </div>\n    <div id=\"legend-item-deleted-files\" class=\"legend-item\" *ngIf=\"activeViewType === viewTypes.merged\">\n        <span class=\"legend-color\" [ngStyle]=\"{'background': colorDeletedFile}\"></span>\n        <small class=\"legend-label\">gelöscht</small>\n    </div>\n    <div id=\"legend-item-unchanged-files\" class=\"legend-item\" *ngIf=\"activeViewType === viewTypes.merged\">\n        <span class=\"legend-color\" [ngStyle]=\"{'background': colorUnchangedFile}\"></span>\n        <small class=\"legend-label\">unverändert</small>\n    </div>\n</div>"
 
 /***/ }),
 
@@ -3048,7 +3052,7 @@ module.exports = "<div id=\"legend-container\">\n    <div id=\"legend-item-color
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "#legend-container {\n  position: absolute;\n  bottom: 0;\n  left: 10px;\n  background: #fff;\n  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.2);\n  z-index: 99; }\n  #legend-container .legend-item {\n    display: inline-block;\n    padding: 3px 10px; }\n  #legend-container .legend-item .legend-color {\n      display: inline-block;\n      width: 10px;\n      height: 10px;\n      margin-right: 5px; }\n  #legend-item-color-code .legend-color {\n  width: 30px;\n  background: linear-gradient(to right, #ffffff, #ffc905, #f78400, #e92100, #9b1909, #4f1609, #5d0000); }\n"
+module.exports = "#legend-container {\n  position: absolute;\n  bottom: 0;\n  left: 10px;\n  background: #fff;\n  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.2);\n  z-index: 99; }\n  #legend-container .legend-item {\n    display: inline-block;\n    padding: 3px 10px; }\n  #legend-container .legend-item .legend-color {\n      display: inline-block;\n      width: 10px;\n      height: 10px; }\n  #legend-container .legend-item .legend-color, #legend-container .legend-item .legend-icon {\n      margin-right: 5px; }\n"
 
 /***/ }),
 
@@ -3065,6 +3069,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _enum_ViewType__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../enum/ViewType */ "./src/app/enum/ViewType.ts");
 /* harmony import */ var _AppConfig__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../AppConfig */ "./src/app/AppConfig.ts");
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+/* harmony import */ var _ngrx_store__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ngrx/store */ "./node_modules/@ngrx/store/fesm5/store.js");
+/* harmony import */ var _shared_reducers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../shared/reducers */ "./src/app/shared/reducers.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3077,14 +3084,28 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
+
 var LegendComponent = /** @class */ (function () {
-    function LegendComponent() {
+    function LegendComponent(store) {
+        this.store = store;
+        this.faArrowsAltV = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faArrowsAltV"];
+        this.faArrowsAlt = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faArrowsAlt"];
+        this.faPalette = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faPalette"];
         this.viewTypes = {
             split: _enum_ViewType__WEBPACK_IMPORTED_MODULE_1__["ViewType"].SPLIT,
             merged: _enum_ViewType__WEBPACK_IMPORTED_MODULE_1__["ViewType"].MERGED
         };
     }
     LegendComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.metricMapping$ = this.store.select(_shared_reducers__WEBPACK_IMPORTED_MODULE_5__["getMetricMapping"]);
+        this.metricMapping$.subscribe(function (metricMapping) {
+            _this.heightMetric = _AppConfig__WEBPACK_IMPORTED_MODULE_2__["AppConfig"].getShortNameByMetricName(metricMapping.heightMetricName);
+            _this.groundAreaMetric = _AppConfig__WEBPACK_IMPORTED_MODULE_2__["AppConfig"].getShortNameByMetricName(metricMapping.groundAreaMetricName);
+            _this.colorMetric = _AppConfig__WEBPACK_IMPORTED_MODULE_2__["AppConfig"].getShortNameByMetricName(metricMapping.colorMetricName);
+        });
         this.colorFirstCommit = _AppConfig__WEBPACK_IMPORTED_MODULE_2__["AppConfig"].COLOR_FIRST_COMMIT;
         this.colorSecondCommit = _AppConfig__WEBPACK_IMPORTED_MODULE_2__["AppConfig"].COLOR_SECOND_COMMIT;
         this.colorAddedFile = _AppConfig__WEBPACK_IMPORTED_MODULE_2__["AppConfig"].COLOR_ADDED_FILE;
@@ -3101,17 +3122,13 @@ var LegendComponent = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
         __metadata("design:type", Number)
     ], LegendComponent.prototype, "activeViewType", void 0);
-    __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
-        __metadata("design:type", Object)
-    ], LegendComponent.prototype, "colorMetric", void 0);
     LegendComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-legend',
             template: __webpack_require__(/*! ./legend.component.html */ "./src/app/visualization/legend/legend.component.html"),
             styles: [__webpack_require__(/*! ./legend.component.scss */ "./src/app/visualization/legend/legend.component.scss")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_ngrx_store__WEBPACK_IMPORTED_MODULE_4__["Store"]])
     ], LegendComponent);
     return LegendComponent;
 }());
@@ -4127,7 +4144,7 @@ function generateUniqueFileList(metricTree) {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"stage\" class=\"split\">\n    <div class=\"vertical-line\"></div>\n    <app-loading-indicator *ngIf=\"metricsLoading$ | async\"></app-loading-indicator>\n\n    <app-screen\n            [screenType]=\"screenTypes.left\"\n            [activeViewType]=\"activeViewType$ | async\"\n            [activeFilter]=\"activeFilter$ | async\"\n            [metricTree]=\"metricTree$ | async\"\n            [metricMapping]=\"metricMapping$ | async\">\n    </app-screen>\n\n    <app-screen\n            [screenType]=\"screenTypes.right\"\n            [activeViewType]=\"activeViewType$ | async\"\n            [activeFilter]=\"activeFilter$ | async\"\n            [metricTree]=\"metricTree$ | async\"\n            [metricMapping]=\"metricMapping$ | async\">\n    </app-screen>\n\n    <app-comparison-panel\n            [metricMapping]=\"metricMapping$ | async\"\n            [leftCommit]=\"leftCommit$ | async\"\n            [rightCommit]=\"rightCommit$ | async\">\n    </app-comparison-panel>\n\n    <app-legend [activeViewType]=\"activeViewType$ | async\" [colorMetric]=\"colorMetric$ | async\"></app-legend>\n</div>\n<app-tooltip></app-tooltip>"
+module.exports = "<div id=\"stage\" class=\"split\">\n    <div class=\"vertical-line\"></div>\n    <app-loading-indicator *ngIf=\"metricsLoading$ | async\"></app-loading-indicator>\n\n    <app-screen\n            [screenType]=\"screenTypes.left\"\n            [activeViewType]=\"activeViewType$ | async\"\n            [activeFilter]=\"activeFilter$ | async\"\n            [metricTree]=\"metricTree$ | async\"\n            [metricMapping]=\"metricMapping$ | async\">\n    </app-screen>\n\n    <app-screen\n            [screenType]=\"screenTypes.right\"\n            [activeViewType]=\"activeViewType$ | async\"\n            [activeFilter]=\"activeFilter$ | async\"\n            [metricTree]=\"metricTree$ | async\"\n            [metricMapping]=\"metricMapping$ | async\">\n    </app-screen>\n\n    <app-comparison-panel\n            [metricMapping]=\"metricMapping$ | async\"\n            [leftCommit]=\"leftCommit$ | async\"\n            [rightCommit]=\"rightCommit$ | async\">\n    </app-comparison-panel>\n\n    <app-legend [activeViewType]=\"activeViewType$ | async\"></app-legend>\n</div>\n<app-tooltip></app-tooltip>"
 
 /***/ }),
 
@@ -4160,7 +4177,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _shared_reducers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../shared/reducers */ "./src/app/shared/reducers.ts");
 /* harmony import */ var _visualization_actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./visualization.actions */ "./src/app/visualization/visualization.actions.ts");
 /* harmony import */ var app_service_comparison_panel_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! app/service/comparison-panel.service */ "./src/app/service/comparison-panel.service.ts");
-/* harmony import */ var _AppConfig__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../AppConfig */ "./src/app/AppConfig.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4170,7 +4186,6 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
 
 
 
@@ -4199,8 +4214,6 @@ var VisualizationComponent = /** @class */ (function () {
         this.metricMapping$ = this.store.select(_shared_reducers__WEBPACK_IMPORTED_MODULE_5__["getMetricMapping"]);
         this.leftCommit$ = this.store.select(_shared_reducers__WEBPACK_IMPORTED_MODULE_5__["getLeftCommit"]);
         this.rightCommit$ = this.store.select(_shared_reducers__WEBPACK_IMPORTED_MODULE_5__["getRightCommit"]);
-        this.colorMetric$ = this.store.select(_shared_reducers__WEBPACK_IMPORTED_MODULE_5__["getMetricMapping"])
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (metricMapping) { return metricMapping.colorMetricName; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (colorMetricName) { return _AppConfig__WEBPACK_IMPORTED_MODULE_8__["AppConfig"].getShortNameByMetricName(colorMetricName); }));
         this.store.dispatch(Object(_visualization_actions__WEBPACK_IMPORTED_MODULE_6__["loadAvailableMetrics"])());
         this.subscriptions.push(Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["combineLatest"])(this.store.select(_shared_reducers__WEBPACK_IMPORTED_MODULE_5__["getLeftCommit"]), this.store.select(_shared_reducers__WEBPACK_IMPORTED_MODULE_5__["getRightCommit"]), this.store.select(_shared_reducers__WEBPACK_IMPORTED_MODULE_5__["getMetricMapping"])).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["filter"])(function (_a) {
             var leftCommit = _a[0], rightCommit = _a[1], metricMapping = _a[2];
