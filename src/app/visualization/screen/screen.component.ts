@@ -52,8 +52,6 @@ export class ScreenComponent implements OnInit, OnChanges, OnDestroy {
 
     view: AbstractView;
 
-    doCameraReset = true;
-
     constructor(
         private screenShotService: ScreenShotService,
         private focusService: FocusService,
@@ -97,10 +95,7 @@ export class ScreenComponent implements OnInit, OnChanges, OnDestroy {
                 this.screenType
             )
         ) {
-            if (this.doCameraReset) {
-                this.resetCamera();
-                this.doCameraReset = false;
-            }
+            this.resetCamera();
             this.resetControls();
         }
     }
