@@ -1382,7 +1382,7 @@ var FilterComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"btn-group\">\n    <button class=\"btn btn-outline-secondary dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n        <fa-icon [icon]=\"faChartBar\"></fa-icon>\n    </button>\n    <div id=\"metric-mapping-dropdown\" class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n        <div class=\"form-group\">\n            <label for=\"height-metric-name\">Höhe</label>\n            <select id=\"height-metric-name\" class=\"custom-select w-auto\" [(ngModel)]=\"metricMapping.heightMetricName\">\n                <option *ngFor=\"let metric of availableMetrics\" [ngValue]=\"metric.metricName\">{{metric.metricName}}</option>\n            </select>\n        </div>\n\n        <div class=\"form-group\">\n            <label for=\"groundarea-metric-name\">Grundfläche</label>\n            <select id=\"groundarea-metric-name\" class=\"custom-select w-auto\" [(ngModel)]=\"metricMapping.groundAreaMetricName\">\n                <option *ngFor=\"let metric of availableMetrics\" [ngValue]=\"metric.metricName\">{{metric.metricName}}</option>\n            </select>\n        </div>\n\n        <div class=\"form-group\">\n            <label for=\"color-metric-name\">Farbe</label>\n            <select id=\"color-metric-name\" class=\"custom-select w-auto\" [(ngModel)]=\"metricMapping.colorMetricName\">\n                <option *ngFor=\"let metric of availableMetrics\" [ngValue]=\"metric.metricName\">{{metric.metricName}}</option>\n            </select>\n        </div>\n\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"applyMetricMappings()\">übernehmen</button>\n    </div>\n</div>"
+module.exports = "<div class=\"btn-group\">\n    <button class=\"btn btn-outline-secondary dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n        <fa-icon [icon]=\"faChartBar\"></fa-icon>\n    </button>\n    <div id=\"metric-mapping-dropdown\" class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n        <div class=\"form-group\">\n            <label for=\"height-metric-name\">Höhe</label>\n            <select id=\"height-metric-name\" class=\"custom-select w-auto\" [(ngModel)]=\"metricMapping.heightMetricName\">\n                <option *ngFor=\"let metric of availableMetrics\" [ngValue]=\"metric.metricName\">{{metric.shortName}}</option>\n            </select>\n        </div>\n\n        <div class=\"form-group\">\n            <label for=\"groundarea-metric-name\">Grundfläche</label>\n            <select id=\"groundarea-metric-name\" class=\"custom-select w-auto\" [(ngModel)]=\"metricMapping.groundAreaMetricName\">\n                <option *ngFor=\"let metric of availableMetrics\" [ngValue]=\"metric.metricName\">{{metric.shortName}}</option>\n            </select>\n        </div>\n\n        <div class=\"form-group\">\n            <label for=\"color-metric-name\">Farbe</label>\n            <select id=\"color-metric-name\" class=\"custom-select w-auto\" [(ngModel)]=\"metricMapping.colorMetricName\">\n                <option *ngFor=\"let metric of availableMetrics\" [ngValue]=\"metric.metricName\">{{metric.shortName}}</option>\n            </select>\n        </div>\n\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"applyMetricMappings()\">übernehmen</button>\n    </div>\n</div>"
 
 /***/ }),
 
@@ -2602,6 +2602,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _service_commit_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../service/commit.service */ "./src/app/service/commit.service.ts");
 /* harmony import */ var _service_metric_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../service/metric.service */ "./src/app/service/metric.service.ts");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _AppConfig__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../AppConfig */ "./src/app/AppConfig.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2611,6 +2612,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -2636,7 +2638,7 @@ var AppEffects = /** @class */ (function () {
             .ofType(_shared_actions__WEBPACK_IMPORTED_MODULE_3__["LOAD_AVAILABLE_METRICS"])
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["switchMap"])(function () { return _this.metricService.loadAvailableMetrics()
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["mergeMap"])(function (result) {
-            var availableMetrics = result._embedded.metricResourceList;
+            var availableMetrics = result._embedded.metricResourceList.map(function (metric) { return _AppConfig__WEBPACK_IMPORTED_MODULE_7__["AppConfig"].getShortNameByMetricName(metric.metricName); });
             // TODO: Error handling when less than three metrics are available
             return [
                 _shared_actions__WEBPACK_IMPORTED_MODULE_3__["loadAvailableMetricsSuccess"](availableMetrics),
