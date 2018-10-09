@@ -1,7 +1,10 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {IMetricMapping} from '../../../interfaces/IMetricMapping';
-import {MetricNameHelper} from '../../../helper/metric-name-helper';
 import {faChartBar} from '@fortawesome/free-solid-svg-icons';
+import { Observable } from 'rxjs';
+import { IMetric } from '../../../interfaces/IMetric';
+import { Store } from '@ngrx/store';
+import * as fromRoot from '../../../shared/reducers';
 declare var $: any;
 
 @Component({
@@ -14,17 +17,14 @@ export class MetricMappingComponent implements OnInit {
     faChartBar = faChartBar;
 
     @Input() metricMapping: IMetricMapping;
+    @Input() availableMetrics: IMetric[];
 
     @Output() metricMappingChanged = new EventEmitter();
 
-    metricNames: Object;
-
-    constructor() {
+    constructor(private store: Store<fromRoot.AppState>) {
     }
 
     ngOnInit() {
-        this.metricNames = MetricNameHelper.getAll();
-
         // prevent bootstrap dropdown from being closed by clicking on its content
         $(document).on('click', '#metric-mapping-dropdown', function (e) {
             // if the button is clicked, the popup does need to be closed, so exclude the button from this exception...

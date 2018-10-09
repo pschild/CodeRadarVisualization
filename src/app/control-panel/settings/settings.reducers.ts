@@ -22,9 +22,9 @@ const initialState: SettingsState = {
         renamed: true
     },
     metricMapping: {
-        heightMetricName: AppConfig.HEIGHT_METRIC_NAME,
-        groundAreaMetricName: AppConfig.GROUND_AREA_METRIC_NAME,
-        colorMetricName: AppConfig.COLOR_METRIC_NAME
+        heightMetricName: null,
+        groundAreaMetricName: null,
+        colorMetricName: null
     }
 };
 

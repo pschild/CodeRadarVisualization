@@ -6,21 +6,21 @@
         <div class="form-group">
             <label for="height-metric-name">Höhe</label>
             <select id="height-metric-name" class="custom-select w-auto" [(ngModel)]="metricMapping.heightMetricName">
-                <option *ngFor="let metricName of metricNames" [ngValue]="metricName.name">{{metricName.shortName}}</option>
+                <option *ngFor="let metric of availableMetrics" [ngValue]="metric.metricName">{{metric.metricName}}</option>
             </select>
         </div>
 
         <div class="form-group">
             <label for="groundarea-metric-name">Grundfläche</label>
             <select id="groundarea-metric-name" class="custom-select w-auto" [(ngModel)]="metricMapping.groundAreaMetricName">
-                <option *ngFor="let metricName of metricNames" [ngValue]="metricName.name">{{metricName.shortName}}</option>
+                <option *ngFor="let metric of availableMetrics" [ngValue]="metric.metricName">{{metric.metricName}}</option>
             </select>
         </div>
 
         <div class="form-group">
             <label for="color-metric-name">Farbe</label>
             <select id="color-metric-name" class="custom-select w-auto" [(ngModel)]="metricMapping.colorMetricName">
-                <option *ngFor="let metricName of metricNames" [ngValue]="metricName.name">{{metricName.shortName}}</option>
+                <option *ngFor="let metric of availableMetrics" [ngValue]="metric.metricName">{{metric.metricName}}</option>
             </select>
         </div>
 

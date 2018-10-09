@@ -8,11 +8,20 @@ import {IMetricMapping} from '../interfaces/IMetricMapping';
 import {AppConfig} from '../AppConfig';
 import {delay, map} from 'rxjs/operators';
 import { environment } from 'environments/environment';
+import { IAvailableMetricsGetResponse } from '../interfaces/IAvailableMetricsGetResponse';
 
 @Injectable()
 export class MetricService {
 
     constructor(private http: HttpClient) {
+    }
+
+    loadAvailableMetrics(): Observable<IAvailableMetricsGetResponse> {
+        if (environment.useCoderadarEndpoint) {
+            return this.http.get<IAvailableMetricsGetResponse>(`${AppConfig.BASE_URL}/projects/1/metrics`);
+        } else {
+            return this.http.get<IAvailableMetricsGetResponse>('assets/json/metrics.json');
+        }
     }
 
     loadDeltaTree(leftCommit: ICommit, rightCommit: ICommit, metricMapping: IMetricMapping): Observable<IDeltaTreeGetResponse> {

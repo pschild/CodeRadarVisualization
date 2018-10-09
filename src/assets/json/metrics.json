@@ -1,0 +1,26 @@
+{
+  "_embedded": {
+      "metricResourceList": [
+          {
+              "metricName": "coderadar:size:loc:java"
+          },
+          {
+              "metricName": "checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"
+          },
+          {
+              "metricName": "checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck"
+          }
+      ]
+  },
+  "_links": {
+      "self": {
+          "href": "http://localhost:8080/projects/1/metrics"
+      }
+  },
+  "page": {
+      "size": 10,
+      "totalElements": 3,
+      "totalPages": 1,
+      "number": 0
+  }
+}

@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ViewType} from '../../enum/ViewType';
 import {AppConfig} from '../../AppConfig';
+import { IMetric } from '../../interfaces/IMetric';
 
 @Component({
     selector: 'app-legend',
@@ -10,7 +11,7 @@ import {AppConfig} from '../../AppConfig';
 export class LegendComponent implements OnInit {
 
     @Input() activeViewType: ViewType;
-    @Input() colorMetricName: string;
+    @Input() colorMetric: IMetric;
 
     colorFirstCommit: string;
     colorSecondCommit: string;

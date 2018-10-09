@@ -4,14 +4,15 @@ import {Observable, Subscription, combineLatest} from 'rxjs';
 import {filter, map} from 'rxjs/operators';
 import {Store} from '@ngrx/store';
 import * as fromRoot from '../shared/reducers';
-import {loadMetricTree} from './visualization.actions';
+import {loadMetricTree, loadAvailableMetrics} from './visualization.actions';
 import {ViewType} from '../enum/ViewType';
 import {IFilter} from '../interfaces/IFilter';
 import {INode} from '../interfaces/INode';
 import {IMetricMapping} from '../interfaces/IMetricMapping';
-import {MetricNameHelper} from '../helper/metric-name-helper';
 import {ComparisonPanelService} from 'app/service/comparison-panel.service';
 import {ICommit} from '../interfaces/ICommit';
+import { IMetric } from '../interfaces/IMetric';
+import { AppConfig } from '../AppConfig';
 
 @Component({
     selector: 'app-visualization',
@@ -24,10 +25,11 @@ export class VisualizationComponent implements OnInit, OnDestroy {
     activeViewType$: Observable<ViewType>;
     activeFilter$: Observable<IFilter>;
     metricTree$: Observable<INode>;
+    availableMetrics$: Observable<IMetric[]>;
     metricMapping$: Observable<IMetricMapping>;
     leftCommit$: Observable<ICommit>;
     rightCommit$: Observable<ICommit>;
-    colorMetricName$: Observable<string>;
+    colorMetric$: Observable<IMetric>;
 
     subscriptions: Subscription[] = [];
 
@@ -44,14 +46,17 @@ export class VisualizationComponent implements OnInit, OnDestroy {
         this.activeViewType$ = this.store.select(fromRoot.getActiveViewType);
         this.activeFilter$ = this.store.select(fromRoot.getActiveFilter);
         this.metricTree$ = this.store.select(fromRoot.getMetricTree);
+        this.availableMetrics$ = this.store.select(fromRoot.getAvailableMetrics);
         this.metricMapping$ = this.store.select(fromRoot.getMetricMapping);
         this.leftCommit$ = this.store.select(fromRoot.getLeftCommit);
         this.rightCommit$ = this.store.select(fromRoot.getRightCommit);
-        this.colorMetricName$ = this.store.select(fromRoot.getMetricMapping)
+        this.colorMetric$ = this.store.select(fromRoot.getMetricMapping)
             .pipe(
                 map(metricMapping => metricMapping.colorMetricName),
-                map(colorMetricName => MetricNameHelper.getShortNameByFullName(colorMetricName))
+                map(colorMetricName => AppConfig.getShortNameByMetricName(colorMetricName))
             );
+
+        this.store.dispatch(loadAvailableMetrics());
 
         this.subscriptions.push(
             combineLatest(

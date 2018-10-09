@@ -10,6 +10,9 @@ import {IDeltaTreeGetResponse} from '../interfaces/IDeltaTreeGetResponse';
 import {MetricService} from '../service/metric.service';
 import {catchError, map, switchMap, mergeMap} from 'rxjs/operators';
 import { IActionWithPayload } from '../interfaces/IActionWithPayload';
+import { IAvailableMetricsGetResponse } from '../interfaces/IAvailableMetricsGetResponse';
+import { IAvailableMetricsGetErrorResponse } from '../interfaces/IAvailableMetricsGetErrorResponse';
+import { IMetric } from '../interfaces/IMetric';
 
 @Injectable()
 export class AppEffects {
@@ -25,6 +28,31 @@ export class AppEffects {
                         }),
                         catchError((response: ICommitsGetErrorResponse) => {
                             return of(actions.loadCommitsError(response.error));
+                        })
+                    )
+            )
+        );
+
+    @Effect() loadAvailableMetricsEffects$ = this.actions$
+        .ofType(actions.LOAD_AVAILABLE_METRICS)
+        .pipe(
+            switchMap(
+                () => this.metricService.loadAvailableMetrics()
+                    .pipe(
+                        mergeMap((result: IAvailableMetricsGetResponse) => {
+                            const availableMetrics = result._embedded.metricResourceList;
+                            // TODO: Error handling when less than three metrics are available
+                            return [
+                                actions.loadAvailableMetricsSuccess(availableMetrics),
+                                actions.setMetricMapping({
+                                    heightMetricName: availableMetrics[0].metricName,
+                                    groundAreaMetricName: availableMetrics[1].metricName,
+                                    colorMetricName: availableMetrics[2].metricName
+                                })
+                            ];
+                        }),
+                        catchError((response: IAvailableMetricsGetErrorResponse) => {
+                            return of(actions.loadAvailableMetricsError(response.error));
                         })
                     )
             )

@@ -43,6 +43,8 @@ export const getMetricTree = createSelector(getVisualizationState, fromVisualiza
 
 export const getUniqueFileList = createSelector(getVisualizationState, fromVisualization.getUniqueFileList);
 
+export const getAvailableMetrics = createSelector(getVisualizationState, fromVisualization.getAvailableMetrics);
+
 export const getMetricMapping = createSelector(getSettingsState, fromSettings.getMetricMapping);
 
 export const getActiveFilter = createSelector(getSettingsState, fromSettings.getActiveFilter);

@@ -6,6 +6,7 @@ import * as fromRoot from '../../shared/reducers';
 import {changeActiveFilter, changeViewType, setMetricMapping} from './settings.actions';
 import {IFilter} from '../../interfaces/IFilter';
 import {IMetricMapping} from '../../interfaces/IMetricMapping';
+import { IMetric } from '../../interfaces/IMetric';
 
 @Component({
     selector: 'app-settings',
@@ -16,6 +17,7 @@ export class SettingsComponent implements OnInit {
 
     activeViewType$: Observable<ViewType>;
     activeFilter$: Observable<IFilter>;
+    availableMetrics$: Observable<IMetric[]>;
     metricMapping$: Observable<IMetricMapping>;
 
     constructor(private store: Store<fromRoot.AppState>) {
@@ -24,6 +26,7 @@ export class SettingsComponent implements OnInit {
     ngOnInit() {
         this.activeViewType$ = this.store.select(fromRoot.getActiveViewType);
         this.activeFilter$ = this.store.select(fromRoot.getActiveFilter);
+        this.availableMetrics$ = this.store.select(fromRoot.getAvailableMetrics);
         this.metricMapping$ = this.store.select(fromRoot.getMetricMapping);
     }
 

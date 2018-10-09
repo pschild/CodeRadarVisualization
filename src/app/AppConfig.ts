@@ -6,28 +6,21 @@ export class AppConfig {
     static USERNAME = 'radar';
     static PASSWORD = 'Password12!';
 
-    // ALL AVAILABLE METRICS
-    static AVAILABLE_METRICS = [
-        { shortName: 'Lines of Code (LOC)', name: 'coderadar:size:loc:java' },
-        { shortName: 'Source Lines of Code (SLOC)', name: 'coderadar:size:sloc:java' },
-        { shortName: 'Effective Lines of Code (ELOC)', name: 'coderadar:size:eloc:java' },
-        { shortName: 'MagicNumber', name: 'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck' },
-        { shortName: 'ReturnCount', name: 'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.ReturnCountCheck' },
-        { shortName: 'CyclomaticComplexity', name: 'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck' },
-        { shortName: 'JavaNCSS', name: 'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.JavaNCSSCheck' },
-        { shortName: 'NPathComplexity', name: 'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.NPathComplexityCheck' },
+    // METRIC NAME MAPPING
+    static METRIC_NAME_MAPPING = [
+        { shortName: 'Lines of Code (LOC)', metricName: 'coderadar:size:loc:java' },
+        { shortName: 'Comment Lines of Code (CLOC)', metricName: 'coderadar:size:cloc:java' },
+        { shortName: 'Source Lines of Code (SLOC)', metricName: 'coderadar:size:sloc:java' },
+        { shortName: 'Effective Lines of Code (ELOC)', metricName: 'coderadar:size:eloc:java' },
+        { shortName: 'MagicNumber', metricName: 'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck' },
+        { shortName: 'ReturnCount', metricName: 'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.ReturnCountCheck' },
         // tslint:disable-next-line:max-line-length
-        { shortName: 'ExecutableStatementCount', name: 'checkstyle:com.puppycrawl.tools.checkstyle.checks.sizes.ExecutableStatementCountCheck' },
+        { shortName: 'CyclomaticComplexity', metricName: 'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck' },
+        { shortName: 'JavaNCSS', metricName: 'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.JavaNCSSCheck' },
+        { shortName: 'NPathComplexity', metricName: 'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.NPathComplexityCheck' },
+        // tslint:disable-next-line:max-line-length
+        { shortName: 'ExecutableStatementCount', metricName: 'checkstyle:com.puppycrawl.tools.checkstyle.checks.sizes.ExecutableStatementCountCheck' }
     ];
-
-    // DEFAULT METRIC MAPPING
-    static HEIGHT_METRIC_NAME = 'coderadar:size:loc:java';
-    static GROUND_AREA_METRIC_NAME = environment.useCoderadarEndpoint
-        ? 'coderadar:size:sloc:java'
-        : 'checkstyle:com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck';
-    static COLOR_METRIC_NAME = environment.useCoderadarEndpoint
-        ? 'coderadar:size:eloc:java'
-        : 'checkstyle:com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck';
 
     // VISUALIZATION SETTINGS
     static EDGE_LENGTH_FACTOR = 2;
@@ -55,5 +48,9 @@ export class AppConfig {
 
     static COLOR_ADDED_FILE = '#49c35c';
     static COLOR_DELETED_FILE = '#d90206';
-    static COLOR_UNCHANGED_FILE = '#cccccc'
+    static COLOR_UNCHANGED_FILE = '#cccccc';
+
+    static getShortNameByMetricName(metricName: string): {shortName: string, metricName: string} {
+        return this.METRIC_NAME_MAPPING.find(namePair => namePair.metricName === metricName);
+    }
 }

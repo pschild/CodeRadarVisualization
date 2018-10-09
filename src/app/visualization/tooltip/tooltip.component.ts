@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {TooltipService} from '../../service/tooltip.service';
 import {Observable} from 'rxjs/Observable';
-import {MetricNameHelper} from '../../helper/metric-name-helper';
 import { map } from 'rxjs/operators';
+import { AppConfig } from '../../AppConfig';
 
 @Component({
     selector: 'app-tooltip',
@@ -28,7 +28,7 @@ export class TooltipComponent implements OnInit {
 
                     if (tooltipObject.metrics) {
                         Object.keys(tooltipObject.metrics).map((key) => {
-                            readableMetrics[MetricNameHelper.getShortNameByFullName(key)] = tooltipObject.metrics[key];
+                            readableMetrics[AppConfig.getShortNameByMetricName(key).shortName] = tooltipObject.metrics[key];
                         });
                     }
 

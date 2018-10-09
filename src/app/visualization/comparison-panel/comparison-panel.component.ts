@@ -5,9 +5,9 @@ import {Subscription} from 'rxjs/Subscription';
 import {ICommit} from '../../interfaces/ICommit';
 import {IMetricMapping} from '../../interfaces/IMetricMapping';
 import {INode} from '../../interfaces/INode';
-import {MetricNameHelper} from '../../helper/metric-name-helper';
 import {faCaretDown, faCaretUp, faCaretRight} from '@fortawesome/free-solid-svg-icons';
 import {ComparisonPanelService} from '../../service/comparison-panel.service';
+import { AppConfig } from '../../AppConfig';
 
 @Component({
     selector: 'app-comparison-panel',
@@ -86,7 +86,7 @@ export class ComparisonPanelComponent implements OnInit, OnDestroy {
             }
 
             rows.push({
-                metricName: MetricNameHelper.getShortNameByFullName(metricName),
+                metricName: AppConfig.getShortNameByMetricName(metricName).shortName,
                 leftCommitValue: leftCommitValue || 'N/A',
                 rightCommitValue: rightCommitValue || 'N/A',
                 difference: difference
