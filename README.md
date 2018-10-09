@@ -1,6 +1,5 @@
 ## Preface
-Currently, I'm about to rewrite the whole application using [Angular 4.0](http://angularjs.blogspot.de/2017/03/angular-400-now-available.html) with [Angular CLI](https://github.com/angular/angular-cli). Checkout the [angular-ui](https://github.com/pschild/CodeRadarVisualization/tree/angular-ui) branch to see progress and feel free to contribute :-)
-**[There's also a demo available](https://pschild.github.io/CodeRadarVisualization/)**, showing the latest state.
+The whole application was rewritten using **Angular 6** - checkout the [angular-ui](https://github.com/pschild/CodeRadarVisualization/tree/angular-ui) branch and the **[demo](https://pschild.github.io/CodeRadarVisualization/)** Feel free to contribute :-)
 
 # Visualization of software quality and evolution
 
