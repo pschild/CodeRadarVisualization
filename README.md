@@ -1,5 +1,6 @@
 ## Preface
-The whole application was rewritten using **Angular 6** - checkout the [angular-ui](https://github.com/pschild/CodeRadarVisualization/tree/angular-ui) branch and the **[demo](https://pschild.github.io/CodeRadarVisualization/)** Feel free to contribute :-)
+The whole application was rewritten using **Angular 6** - checkout the [angular-ui](https://github.com/pschild/CodeRadarVisualization/tree/angular-ui) branch and the **[demo](https://pschild.github.io/CodeRadarVisualization/)**.  
+Feel free to contribute :-)
 
 # Visualization of software quality and evolution
 
