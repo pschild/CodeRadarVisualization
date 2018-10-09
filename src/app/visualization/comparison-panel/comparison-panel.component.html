@@ -16,9 +16,9 @@
                     <td>{{row.leftCommitValue}}</td>
                     <td>{{row.rightCommitValue}}</td>
                     <td>
-                        <i *ngIf="row.difference > 0" class="fa fa-caret-up" aria-hidden="true"></i>
-                        <i *ngIf="row.difference < 0" class="fa fa-caret-down" aria-hidden="true"></i>
-                        <i *ngIf="row.difference === 0" class="fa fa-caret-right" aria-hidden="true"></i>
+                        <fa-icon *ngIf="row.difference > 0" [icon]="faCaretUp"></fa-icon>
+                        <fa-icon *ngIf="row.difference < 0" [icon]="faCaretDown"></fa-icon>
+                        <fa-icon *ngIf="row.difference === 0" [icon]="faCaretRight"></fa-icon>
                         {{row.difference}}
                     </td>
                 </tr>

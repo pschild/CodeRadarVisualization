@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ScreenType} from '../../enum/ScreenType';
 import {ViewType} from '../../enum/ViewType';
+import {faCamera} from '@fortawesome/free-solid-svg-icons';
 declare var gifshot: any;
 declare var $: any;
 
@@ -10,6 +11,8 @@ declare var $: any;
     styleUrls: ['./screenshot.component.scss']
 })
 export class ScreenshotComponent implements OnInit {
+
+    faCamera = faCamera;
 
     @Input() activeViewType: ViewType;
     @Input() screenShots: any[];

@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {IFilter} from 'app/interfaces/IFilter';
+import {faFilter} from '@fortawesome/free-solid-svg-icons';
 declare var $: any;
 
 @Component({
@@ -8,6 +9,8 @@ declare var $: any;
     styleUrls: ['./filter.component.scss']
 })
 export class FilterComponent implements OnInit {
+
+    faFilter = faFilter;
 
     @Input() activeFilter: IFilter;
 

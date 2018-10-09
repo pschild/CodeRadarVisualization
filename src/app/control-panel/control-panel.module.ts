@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {ControlPanelComponent} from './control-panel.component';
 import {SettingsComponent} from './settings/settings.component';
 import {ViewControlComponent} from './settings/view-control/view-control.component';
@@ -18,7 +19,8 @@ import {AutosuggestWrapperComponent} from '../autosuggest-wrapper/autosuggest-wr
     imports: [
         CommonModule,
         FormsModule,
-        NguiAutoCompleteModule
+        NguiAutoCompleteModule,
+        FontAwesomeModule
     ],
     declarations: [
         ControlPanelComponent,

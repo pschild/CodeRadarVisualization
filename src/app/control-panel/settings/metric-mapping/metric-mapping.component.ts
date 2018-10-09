@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {IMetricMapping} from '../../../interfaces/IMetricMapping';
 import {MetricNameHelper} from '../../../helper/metric-name-helper';
+import {faChartBar} from '@fortawesome/free-solid-svg-icons';
 declare var $: any;
 
 @Component({
@@ -9,6 +10,8 @@ declare var $: any;
     styleUrls: ['./metric-mapping.component.scss']
 })
 export class MetricMappingComponent implements OnInit {
+
+    faChartBar = faChartBar;
 
     @Input() metricMapping: IMetricMapping;
 

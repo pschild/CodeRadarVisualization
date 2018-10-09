@@ -6,6 +6,7 @@ import {ICommit} from '../../interfaces/ICommit';
 import {IMetricMapping} from '../../interfaces/IMetricMapping';
 import {INode} from '../../interfaces/INode';
 import {MetricNameHelper} from '../../helper/metric-name-helper';
+import {faCaretDown, faCaretUp, faCaretRight} from '@fortawesome/free-solid-svg-icons';
 import {ComparisonPanelService} from '../../service/comparison-panel.service';
 
 @Component({
@@ -14,6 +15,10 @@ import {ComparisonPanelService} from '../../service/comparison-panel.service';
     styleUrls: ['./comparison-panel.component.scss']
 })
 export class ComparisonPanelComponent implements OnInit, OnDestroy {
+
+    faCaretDown = faCaretDown;
+    faCaretUp = faCaretUp;
+    faCaretRight = faCaretRight;
 
     @Input() metricMapping: IMetricMapping;
     @Input() leftCommit: ICommit;

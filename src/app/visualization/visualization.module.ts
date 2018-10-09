@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {VisualizationComponent} from './visualization.component';
 import {ScreenComponent} from './screen/screen.component';
 import {MetricService} from '../service/metric.service';
@@ -12,7 +13,8 @@ import {LoadingIndicatorComponent} from './loading-indicator/loading-indicator.c
 
 @NgModule({
     imports: [
-        CommonModule
+        CommonModule,
+        FontAwesomeModule
     ],
     declarations: [
         VisualizationComponent,
